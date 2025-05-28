@@ -116,6 +116,40 @@
             border-radius: 4px;
         }
 
+        .dialogue-message {
+            margin: 12px 0;
+            padding: 12px 16px;
+            border-radius: 18px;
+            max-width: 85%;
+            word-wrap: break-word;
+        }
+        
+        .dialogue-message.user {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-left: auto;
+            text-align: right;
+        }
+        
+        .dialogue-message.other {
+            background: #f3f4f6;
+            color: #374151;
+            margin-right: auto;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .dialogue-message .name {
+            font-weight: 600;
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-bottom: 2px;
+        }
+        
+        .dialogue-message .text {
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
         .feedback-area {
             font-size: 1.125rem; 
             font-weight: 600; 
@@ -227,6 +261,10 @@
                     ⚡ Speed Learning
                     <div class="text-sm opacity-90 mt-1">Quick multiple choice</div>
                 </button>
+                <button id="dialogue-mode-btn" class="btn bg-purple-600 hover:bg-purple-700 mode-btn">
+                    💬 Dialogue Mode
+                    <div class="text-sm opacity-90 mt-1">Interactive conversations</div>
+                </button>
             </div>
         </div>
 
@@ -285,6 +323,51 @@
                 <p class="text-xl font-bold text-purple-600 mb-6">Final Score: <span id="speed-final-score">0</span> / 50</p>
                 <button id="speed-restart-btn" class="btn btn-success mr-4">🔄 Restart Speed Round</button>
                 <button id="speed-back-to-menu-btn" class="btn btn-secondary">Back to Menu</button>
+            </div>
+        </div>
+
+        <!-- Dialogue Mode -->
+        <div id="dialogue-mode-screen" class="hidden">
+            <h1 class="text-2xl sm:text-3xl font-bold text-violet-700 mb-6 text-center">Dialogue Mode</h1>
+            
+            <div id="dialogue-container" class="bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-xl mb-6">
+                <div id="dialogue-story" class="text-center mb-4">
+                    <h3 id="dialogue-title" class="text-xl font-bold text-gray-800 mb-2">Meeting New Friends</h3>
+                    <p id="dialogue-context" class="text-sm text-gray-600 italic">You are at a café and want to learn about someone new...</p>
+                </div>
+                
+                <div id="dialogue-conversation" class="space-y-4 mb-6">
+                    <div id="dialogue-messages" class="min-h-[200px]">
+                        <!-- Dialogue messages will appear here -->
+                    </div>
+                </div>
+                
+                <div id="dialogue-question-area" class="bg-white p-4 rounded-lg shadow-sm border-2 border-blue-200">
+                    <p id="dialogue-instruction" class="text-sm text-blue-600 mb-2">Complete the question:</p>
+                    <p id="dialogue-sentence" class="text-lg font-semibold mb-4 text-center">
+                        <span id="dialogue-prefix">Du:</span> 
+                        <span id="dialogue-blank">____</span> 
+                        <span id="dialogue-suffix">heißt du?</span>
+                    </p>
+                    
+                    <div id="dialogue-choices" class="grid grid-cols-2 gap-3">
+                        <!-- Choice buttons will be inserted here -->
+                    </div>
+                    
+                    <div id="dialogue-feedback" class="mt-4 text-center hidden">
+                        <!-- Feedback will appear here -->
+                    </div>
+                </div>
+            </div>
+            
+            <div id="dialogue-controls" class="text-center">
+                <button id="dialogue-continue-btn" class="btn btn-primary hidden mr-4">Continue Dialogue</button>
+                <button id="dialogue-restart-btn" class="btn btn-secondary mr-4">New Dialogue</button>
+                <button id="dialogue-back-to-menu-btn" class="btn btn-secondary">Back to Menu</button>
+            </div>
+            
+            <div id="dialogue-progress" class="text-center mt-4">
+                <span id="dialogue-score" class="text-sm text-gray-600">Questions: 0 / 0 correct</span>
             </div>
         </div>
     </div>
@@ -505,13 +588,22 @@
         let speedScore = 0;
         let speedAnswered = false;
 
+        // Dialogue Mode Variables
+        let dialogueScenarios = [];
+        let currentDialogue = null;
+        let dialogueStep = 0;
+        let dialogueScore = 0;
+        let dialogueAnswered = false;
+
         // Elements
         const modeSelectionScreen = document.getElementById('mode-selection-screen');
         const quizModeScreen = document.getElementById('quiz-mode-screen');
         const speedModeScreen = document.getElementById('speed-mode-screen');
+        const dialogueModeScreen = document.getElementById('dialogue-mode-screen');
         
         const quizModeBtn = document.getElementById('quiz-mode-btn');
         const speedModeBtn = document.getElementById('speed-mode-btn');
+        const dialogueModeBtn = document.getElementById('dialogue-mode-btn');
         
         // Quiz elements
         const sentenceDisplayEl = document.getElementById('sentence-display');
@@ -538,6 +630,21 @@
         const speedBackToMenuBtn = document.getElementById('speed-back-to-menu-btn');
         const speedFinalScoreEl = document.getElementById('speed-final-score');
 
+        // Dialogue elements
+        const dialogueTitleEl = document.getElementById('dialogue-title');
+        const dialogueContextEl = document.getElementById('dialogue-context');
+        const dialogueMessagesEl = document.getElementById('dialogue-messages');
+        const dialogueSentenceEl = document.getElementById('dialogue-sentence');
+        const dialoguePrefixEl = document.getElementById('dialogue-prefix');
+        const dialogueBlankEl = document.getElementById('dialogue-blank');
+        const dialogueSuffixEl = document.getElementById('dialogue-suffix');
+        const dialogueChoicesEl = document.getElementById('dialogue-choices');
+        const dialogueFeedbackEl = document.getElementById('dialogue-feedback');
+        const dialogueContinueBtn = document.getElementById('dialogue-continue-btn');
+        const dialogueRestartBtn = document.getElementById('dialogue-restart-btn');
+        const dialogueBackToMenuBtn = document.getElementById('dialogue-back-to-menu-btn');
+        const dialogueScoreEl = document.getElementById('dialogue-score');
+
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -556,12 +663,14 @@
             modeSelectionScreen.classList.remove('hidden');
             quizModeScreen.classList.add('hidden');
             speedModeScreen.classList.add('hidden');
+            dialogueModeScreen.classList.add('hidden');
         }
 
         function showQuizMode() {
             modeSelectionScreen.classList.add('hidden');
             quizModeScreen.classList.remove('hidden');
             speedModeScreen.classList.add('hidden');
+            dialogueModeScreen.classList.add('hidden');
             startQuiz();
         }
 
@@ -569,7 +678,20 @@
             modeSelectionScreen.classList.add('hidden');
             quizModeScreen.classList.add('hidden');
             speedModeScreen.classList.remove('hidden');
+            dialogueModeScreen.classList.add('hidden');
             startSpeedRound();
+        }
+
+        function showDialogueMode() {
+            modeSelectionScreen.classList.add('hidden');
+            quizModeScreen.classList.add('hidden');
+            speedModeScreen.classList.add('hidden');
+            dialogueModeScreen.classList.remove('hidden');
+            
+            // Small delay to ensure DOM is ready
+            setTimeout(() => {
+                startDialogue();
+            }, 100);
         }
 
         // Quiz Mode Functions
@@ -896,9 +1018,327 @@
             triggerConfetti();
         }
 
+        // Dialogue Mode Functions
+        function initializeDialogueScenarios() {
+            dialogueScenarios = [
+                {
+                    title: "Meeting New Friends",
+                    context: "You are at a café and want to learn about someone new...",
+                    character: "Anna",
+                    questions: [
+                        {
+                            prefix: "Du:",
+                            suffix: "heißt du?",
+                            correct: "WIE",
+                            response: "Ich heiße Anna. Und du?"
+                        },
+                        {
+                            prefix: "Du:",
+                            suffix: "kommst du?",
+                            correct: "WOHER",
+                            response: "Ich komme aus Berlin."
+                        },
+                        {
+                            prefix: "Du:",
+                            suffix: "wohnst du jetzt?",
+                            correct: "WO",
+                            response: "Ich wohne in München."
+                        },
+                        {
+                            prefix: "Du:",
+                            suffix: "machst du beruflich?",
+                            correct: "WAS",
+                            response: "Ich bin Lehrerin."
+                        },
+                        {
+                            prefix: "Du:",
+                            suffix: "ist dein Lieblingscafé?",
+                            correct: "WELCHE/R/S",
+                            response: "Das Café Mozart ist mein Lieblingscafé."
+                        }
+                    ]
+                },
+                {
+                    title: "At the Market",
+                    context: "You are shopping and need to ask the vendor questions...",
+                    character: "Herr Schmidt",
+                    questions: [
+                        {
+                            prefix: "Du:",
+                            suffix: "kostet das?",
+                            correct: "WAS",
+                            response: "Das kostet 3 Euro."
+                        },
+                        {
+                            prefix: "Du:",
+                            suffix: "sind die Äpfel?",
+                            correct: "WO",
+                            response: "Die Äpfel sind dort drüben."
+                        },
+                        {
+                            prefix: "Du:",
+                            suffix: "frisch sind die Tomaten?",
+                            correct: "WIE",
+                            response: "Die Tomaten sind sehr frisch."
+                        },
+                        {
+                            prefix: "Du:",
+                            suffix: "Gemüse ist am besten?",
+                            correct: "WELCHE/R/S",
+                            response: "Die Karotten sind heute am besten."
+                        },
+                        {
+                            prefix: "Du:",
+                            suffix: "kommen die Orangen?",
+                            correct: "WOHER",
+                            response: "Die Orangen kommen aus Spanien."
+                        }
+                    ]
+                },
+                {
+                    title: "Planning a Trip",
+                    context: "You are talking to a friend about vacation plans...",
+                    character: "Lisa",
+                    questions: [
+                        {
+                            prefix: "Du:",
+                            suffix: "fahren wir?",
+                            correct: "WO",
+                            response: "Wir fahren nach Italien."
+                        },
+                        {
+                            prefix: "Du:",
+                            suffix: "lange bleiben wir?",
+                            correct: "WIE",
+                            response: "Wir bleiben eine Woche."
+                        },
+                        {
+                            prefix: "Du:",
+                            suffix: "machen wir dort?",
+                            correct: "WAS",
+                            response: "Wir besuchen Museen und gehen schwimmen."
+                        },
+                        {
+                            prefix: "Du:",
+                            suffix: "Hotel ist das beste?",
+                            correct: "WELCHE/R/S",
+                            response: "Das Hotel Bella Vista ist sehr gut."
+                        },
+                        {
+                            prefix: "Du:",
+                            suffix: "kommt mit uns?",
+                            correct: "WER",
+                            response: "Mein Bruder kommt auch mit."
+                        }
+                    ]
+                },
+                {
+                    title: "At the Restaurant",
+                    context: "You are dining out and talking to the waiter...",
+                    character: "Der Kellner",
+                    questions: [
+                        {
+                            prefix: "Du:",
+                            suffix: "empfehlen Sie?",
+                            correct: "WAS",
+                            response: "Ich empfehle das Schnitzel."
+                        },
+                        {
+                            prefix: "Du:",
+                            suffix: "ist die Toilette?",
+                            correct: "WO",
+                            response: "Die Toilette ist dort hinten."
+                        },
+                        {
+                            prefix: "Du:",
+                            suffix: "lange dauert das?",
+                            correct: "WIE",
+                            response: "Das dauert 15 Minuten."
+                        },
+                        {
+                            prefix: "Du:",
+                            suffix: "Getränk passt dazu?",
+                            correct: "WELCHE/R/S",
+                            response: "Ein Bier passt sehr gut dazu."
+                        },
+                        {
+                            prefix: "Du:",
+                            suffix: "kommt der Koch?",
+                            correct: "WOHER",
+                            response: "Der Koch kommt aus Österreich."
+                        }
+                    ]
+                }
+            ];
+        }
+
+        function startDialogue() {
+            initializeDialogueScenarios();
+            // Pick random scenario
+            currentDialogue = dialogueScenarios[Math.floor(Math.random() * dialogueScenarios.length)];
+            // Shuffle questions
+            shuffleArray(currentDialogue.questions);
+            
+            dialogueStep = 0;
+            dialogueScore = 0;
+            dialogueAnswered = false;
+            
+            // Set up dialogue
+            dialogueTitleEl.textContent = currentDialogue.title;
+            dialogueContextEl.textContent = currentDialogue.context;
+            dialogueMessagesEl.innerHTML = '';
+            
+            // Add opening message
+            addDialogueMessage('other', currentDialogue.character, 'Hallo! Schön, dich zu treffen!');
+            
+            showNextDialogueQuestion();
+        }
+
+        function addDialogueMessage(type, name, text) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `dialogue-message ${type}`;
+            
+            const nameSpan = document.createElement('div');
+            nameSpan.className = 'name';
+            nameSpan.textContent = name;
+            
+            const textSpan = document.createElement('div');
+            textSpan.className = 'text';
+            textSpan.textContent = text;
+            
+            messageDiv.appendChild(nameSpan);
+            messageDiv.appendChild(textSpan);
+            
+            dialogueMessagesEl.appendChild(messageDiv);
+            dialogueMessagesEl.scrollTop = dialogueMessagesEl.scrollHeight;
+        }
+
+        function showNextDialogueQuestion() {
+            if (dialogueStep >= currentDialogue.questions.length) {
+                completeDialogue();
+                return;
+            }
+
+            dialogueAnswered = false;
+            const question = currentDialogue.questions[dialogueStep];
+            
+            // Update question display
+            dialoguePrefixEl.textContent = question.prefix;
+            dialogueBlankEl.textContent = '____';
+            dialogueSuffixEl.textContent = question.suffix;
+            
+            // Hide feedback and continue button
+            dialogueFeedbackEl.classList.add('hidden');
+            dialogueContinueBtn.classList.add('hidden');
+            
+            // Create choice buttons (all 6 W-Fragen)
+            const allChoices = ["WER", "WIE", "WO", "WOHER", "WAS", "WELCHE/R/S"];
+            shuffleArray(allChoices);
+            
+            dialogueChoicesEl.innerHTML = '';
+            allChoices.forEach(choice => {
+                const button = document.createElement('button');
+                button.className = 'btn btn-primary text-sm py-2 px-3';
+                button.textContent = choice;
+                button.onclick = () => handleDialogueAnswer(choice);
+                dialogueChoicesEl.appendChild(button);
+            });
+            
+            updateDialogueScore();
+        }
+
+        function handleDialogueAnswer(selectedAnswer) {
+            if (dialogueAnswered) return;
+            dialogueAnswered = true;
+            
+            const question = currentDialogue.questions[dialogueStep];
+            const isCorrect = selectedAnswer === question.correct;
+            
+            // Fill in the blank with selected answer
+            dialogueBlankEl.textContent = selectedAnswer;
+            dialogueBlankEl.className = isCorrect ? 'text-green-600 font-bold' : 'text-red-600 font-bold';
+            
+            // Show feedback
+            if (isCorrect) {
+                dialogueScore++;
+                dialogueFeedbackEl.innerHTML = '✅ Richtig! Perfect question!';
+                dialogueFeedbackEl.className = 'mt-4 text-center text-green-600 font-semibold';
+                
+                // Add user's question to dialogue
+                addDialogueMessage('user', 'Du', `${question.prefix} ${selectedAnswer} ${question.suffix}`);
+                
+                // Add character's response
+                setTimeout(() => {
+                    addDialogueMessage('other', currentDialogue.character, question.response);
+                }, 800);
+                
+            } else {
+                dialogueFeedbackEl.innerHTML = `❌ Not quite. The correct answer is: <strong>${question.correct}</strong>`;
+                dialogueFeedbackEl.className = 'mt-4 text-center text-red-600 font-semibold';
+            }
+            
+            dialogueFeedbackEl.classList.remove('hidden');
+            
+            // Disable all buttons and show visual feedback
+            const buttons = dialogueChoicesEl.querySelectorAll('button');
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                if (btn.textContent === selectedAnswer) {
+                    btn.className = isCorrect ? 'btn bg-green-600 text-sm py-2 px-3' : 'btn bg-red-600 text-sm py-2 px-3';
+                } else if (btn.textContent === question.correct && !isCorrect) {
+                    btn.className = 'btn bg-green-400 text-sm py-2 px-3';
+                } else {
+                    btn.className = 'btn bg-gray-400 text-sm py-2 px-3 opacity-50';
+                }
+            });
+            
+            // Show continue button
+            setTimeout(() => {
+                dialogueContinueBtn.classList.remove('hidden');
+            }, isCorrect ? 1500 : 1000);
+            
+            updateDialogueScore();
+        }
+
+        function continueDialogue() {
+            dialogueStep++;
+            dialogueBlankEl.className = '';
+            showNextDialogueQuestion();
+        }
+
+        function completeDialogue() {
+            // Add final message
+            addDialogueMessage('other', currentDialogue.character, 'Danke für das schöne Gespräch!');
+            
+            // Hide question area
+            document.getElementById('dialogue-question-area').classList.add('hidden');
+            
+            // Show completion message
+            setTimeout(() => {
+                dialogueFeedbackEl.innerHTML = `🎉 Dialogue Complete!<br>You got <strong>${dialogueScore}</strong> out of <strong>${currentDialogue.questions.length}</strong> questions correct!`;
+                dialogueFeedbackEl.className = 'mt-4 text-center text-purple-600 font-bold text-lg';
+                dialogueFeedbackEl.classList.remove('hidden');
+                
+                dialogueRestartBtn.textContent = 'Start New Dialogue';
+                triggerConfetti();
+            }, 1000);
+        }
+
+        function restartDialogue() {
+            document.getElementById('dialogue-question-area').classList.remove('hidden');
+            dialogueRestartBtn.textContent = 'New Dialogue';
+            startDialogue();
+        }
+
+        function updateDialogueScore() {
+            const totalQuestions = currentDialogue ? currentDialogue.questions.length : 0;
+            dialogueScoreEl.textContent = `Questions: ${dialogueScore} / ${totalQuestions} correct`;
+        }
+
         // Event Listeners
         quizModeBtn.addEventListener('click', showQuizMode);
         speedModeBtn.addEventListener('click', showSpeedMode);
+        dialogueModeBtn.addEventListener('click', showDialogueMode);
         
         nextQuestionBtn.addEventListener('click', () => {
             currentQuestionIndex++;
@@ -911,8 +1351,17 @@
         speedPauseBtn.addEventListener('click', toggleSpeedPause);
         speedRestartBtn.addEventListener('click', startSpeedRound);
         speedBackToMenuBtn.addEventListener('click', showModeSelection);
+        
+        dialogueContinueBtn.addEventListener('click', continueDialogue);
+        dialogueRestartBtn.addEventListener('click', restartDialogue);
+        dialogueBackToMenuBtn.addEventListener('click', showModeSelection);
 
-        // Initial Load
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            showModeSelection();
+        });
+
+        // Initial Load (fallback)
         showModeSelection();
     </script>
 </body>
