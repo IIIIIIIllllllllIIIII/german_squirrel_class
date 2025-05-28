@@ -296,8 +296,7 @@
             { word: "WAS", en: "What", es: "Qué", color: "bg-emerald-500 hover:bg-emerald-600" },
             { word: "WO", en: "Where", es: "Dónde", color: "bg-rose-500 hover:bg-rose-600" },
             { word: "WOHER", en: "Where from", es: "De dónde", color: "bg-indigo-500 hover:bg-indigo-600" },
-            { word: "WELCHE/R/S", en: "Which", es: "Cuál, Qué", color: "bg-pink-500 hover:bg-pink-600" },
-            { word: "WIESO", en: "Why", es: "Por qué", color: "bg-lime-500 hover:bg-lime-600" }
+            { word: "WELCHE/R/S", en: "Which", es: "Cuál, Qué", color: "bg-pink-500 hover:bg-pink-600" }
         ];
 
         const quizQuestions = [
@@ -488,35 +487,6 @@
                 correct_w_frage: "WELCHE/R/S",
                 translation_en: "Which car did you come with? <span class='hint'>(With the big silver one.)</span>",
                 translation_es: "¿Con qué coche vinieron? <span class='hint'>(Con el grande plateado.)</span>"
-            },
-            // WIESO
-            {
-                id: 8,
-                sentence_german: "____ sind Sie so spät gekommen? <span class='hint'>(Wegen des Verkehrs.)</span>",
-                correct_w_frage: "WIESO",
-                translation_en: "Why did you arrive so late? <span class='hint'>(Because of the traffic.)</span>",
-                translation_es: "¿Por qué llegó tan tarde? <span class='hint'>(Por el tráfico.)</span>"
-            },
-            {
-                id: 28,
-                sentence_german: "____ lernst du Spanisch? <span class='hint'>(Weil ich nach Mexiko reisen möchte.)</span>",
-                correct_w_frage: "WIESO",
-                translation_en: "Why are you learning Spanish? <span class='hint'>(Because I want to travel to Mexico.)</span>",
-                translation_es: "¿Por qué aprendes español? <span class='hint'>(Porque quiero viajar a México.)</span>"
-            },
-            {
-                id: 29,
-                sentence_german: "____ funktioniert mein Computer nicht mehr? <span class='hint'>(Vielleicht ist er überhitzt.)</span>",
-                correct_w_frage: "WIESO",
-                translation_en: "Why isn't my computer working anymore? <span class='hint'>(Maybe it's overheated.)</span>",
-                translation_es: "¿Por qué ya no funciona mi computadora? <span class='hint'>(Quizás se sobrecalentó.)</span>"
-            },
-            {
-                id: 30,
-                sentence_german: "____ weinst du? <span class='hint'>(Ich habe einen traurigen Film gesehen.)</span>",
-                correct_w_frage: "WIESO",
-                translation_en: "Why are you crying? <span class='hint'>(I watched a sad movie.)</span>",
-                translation_es: "¿Por qué lloras? <span class='hint'>(Vi una película triste.)</span>"
             }
         ];
 
@@ -748,8 +718,8 @@
         // Speed Mode Functions
         function generateSpeedQuestions() {
             speedQuestions = [];
-            // Generate 50 random questions from all 7 W-Fragen
-            const wFragenList = ["WER", "WIE", "WO", "WOHER", "WAS", "WELCHE/R/S", "WIESO"];
+            // Generate 50 random questions from all 6 W-Fragen
+            const wFragenList = ["WER", "WIE", "WO", "WOHER", "WAS", "WELCHE/R/S"];
             
             for (let i = 0; i < 50; i++) {
                 const randomWFrageWord = wFragenList[Math.floor(Math.random() * wFragenList.length)];
@@ -790,13 +760,13 @@
             // Hide feedback
             speedFeedbackEl.classList.add('hidden');
             
-            // Create answer choices - always show all 7 W-Fragen in random order
-            const allChoices = ["WER", "WIE", "WO", "WOHER", "WAS", "WELCHE/R/S", "WIESO"];
+            // Create answer choices - always show all 6 W-Fragen in random order
+            const allChoices = ["WER", "WIE", "WO", "WOHER", "WAS", "WELCHE/R/S"];
             shuffleArray(allChoices);
             
             // Create choice buttons
             speedChoicesEl.innerHTML = '';
-            speedChoicesEl.className = 'grid grid-cols-2 gap-3 mt-6 mb-4'; // Adjusted for better layout
+            speedChoicesEl.className = 'grid grid-cols-2 gap-3 mt-6 mb-4';
             
             allChoices.forEach(choice => {
                 const button = document.createElement('button');
@@ -805,12 +775,6 @@
                 button.onclick = () => handleSpeedAnswer(choice);
                 speedChoicesEl.appendChild(button);
             });
-            
-            // Add one more button in a new row if needed for better layout (7 buttons)
-            if (allChoices.length === 7) {
-                speedChoicesEl.className = 'grid grid-cols-2 gap-3 mt-6 mb-4';
-                // The 7th button will naturally wrap to next row
-            }
             
             // Change background color for variety
             const colors = [
