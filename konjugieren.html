@@ -175,7 +175,6 @@
         #feedback-gender {
             font-size: 1.125rem; font-weight: 600; padding: 0.75rem; 
             border-radius: 0.5rem; min-height: 50px;
-            /* display: none; by default, managed by JS or specific classes */
         }
         #feedback-gender.correct { 
             background-color: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; display: block !important;
@@ -183,7 +182,6 @@
         #feedback-gender.incorrect { 
             background-color: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; display: block !important;
         }
-
 
         @media (max-width: 640px) {
             .card, .stats-card, #mode-selection-card, #lego-mode-card, #gender-mode-card { padding: 20px; }
@@ -303,52 +301,12 @@
     </div>
 
     <script>
-        const globalVerbsList = [ 
-            { id: "sein", infinitive: "sein", translation: "to be", conjugations: { ich: "bin", du: "bist", "er/sie/es": "ist", wir: "sind", ihr: "seid", "sie/Sie": "sind" }},
-            { id: "haben", infinitive: "haben", translation: "to have", conjugations: { ich: "habe", du: "hast", "er/sie/es": "hat", wir: "haben", ihr: "habt", "sie/Sie": "haben" }},
-            { id: "sprechen", infinitive: "sprechen", translation: "to speak", conjugations: { ich: "spreche", du: "sprichst", "er/sie/es": "spricht", wir: "sprechen", ihr: "sprecht", "sie/Sie": "sprechen" }},
-            { id: "leben", infinitive: "leben", translation: "to live", conjugations: { ich: "lebe", du: "lebst", "er/sie/es": "lebt", wir: "leben", ihr: "lebt", "sie/Sie": "leben" }},
-            { id: "lernen", infinitive: "lernen", translation: "to learn", conjugations: { ich: "lerne", du: "lernst", "er/sie/es": "lernt", wir: "lernen", ihr: "lernt", "sie/Sie": "lernen" }},
-            { id: "wohnen", infinitive: "wohnen", translation: "to reside", conjugations: { ich: "wohne", du: "wohnst", "er/sie/es": "wohnt", wir: "wohnen", ihr: "wohnt", "sie/Sie": "wohnen" }},
-            { id: "heißen", infinitive: "heißen", translation: "to be called", conjugations: { ich: "heiße", du: "heißt", "er/sie/es": "heißt", wir: "heißen", ihr: "heißt", "sie/Sie": "heißen" }},
-            { id: "kommen", infinitive: "kommen", translation: "to come", conjugations: { ich: "komme", du: "kommst", "er/sie/es": "kommt", wir: "kommen", ihr: "kommt", "sie/Sie": "kommen" }},
-            { id: "machen", infinitive: "machen", translation: "to do/make", conjugations: { ich: "mache", du: "machst", "er/sie/es": "macht", wir: "machen", ihr: "macht", "sie/Sie": "machen" }},
-            { id: "gehen", infinitive: "gehen", translation: "to go", conjugations: { ich: "gehe", du: "gehst", "er/sie/es": "geht", wir: "gehen", ihr: "geht", "sie/Sie": "gehen" }},
-            { id: "trinken", infinitive: "trinken", translation: "to drink", conjugations: { ich: "trinke", du: "trinkst", "er/sie/es": "trinkt", wir: "trinken", ihr: "trinkt", "sie/Sie": "trinken" }},
-            { id: "schreiben", infinitive: "schreiben", translation: "to write", conjugations: { ich: "schreibe", du: "schreibst", "er/sie/es": "schreibt", wir: "schreiben", ihr: "schreibt", "sie/Sie": "schreiben" }},
-            { id: "lesen", infinitive: "lesen", translation: "to read", conjugations: { ich: "lese", du: "liest", "er/sie/es": "liest", wir: "lesen", ihr: "lest", "sie/Sie": "lesen" }},
-            { id: "sehen", infinitive: "sehen", translation: "to see", conjugations: { ich: "sehe", du: "siehst", "er/sie/es": "sieht", wir: "sehen", ihr: "seht", "sie/Sie": "sehen" }},
-            { id: "essen", infinitive: "essen", translation: "to eat", conjugations: { ich: "esse", du: "isst", "er/sie/es": "isst", wir: "essen", ihr: "esst", "sie/Sie": "essen" }}
-        ];
-        const pronouns = ["ich", "du", "er/sie/es", "wir", "ihr", "sie/Sie"]; 
+        // Global data stores - will be populated from JSON
+        let globalVerbsList = [];
+        let globalNounsList = [];
+        let dataLoaded = false; // Flag to track if data is loaded
 
-        const globalNounsList = [
-            { noun: "Hund", article: "der", gender: "male", translation: "dog" }, { noun: "Katze", article: "die", gender: "female", translation: "cat" },
-            { noun: "Haus", article: "das", gender: "neuter", translation: "house" }, { noun: "Mann", article: "der", gender: "male", translation: "man" },
-            { noun: "Frau", article: "die", gender: "female", translation: "woman" }, { noun: "Kind", article: "das", gender: "neuter", translation: "child" },
-            { noun: "Tisch", article: "der", gender: "male", translation: "table" }, { noun: "Tür", article: "die", gender: "female", translation: "door" },
-            { noun: "Buch", article: "das", gender: "neuter", translation: "book" }, { noun: "Apfel", article: "der", gender: "male", translation: "apple" },
-            { noun: "Banane", article: "die", gender: "female", translation: "banana" }, { noun: "Auto", article: "das", gender: "neuter", translation: "car" },
-            { noun: "Stuhl", article: "der", gender: "male", translation: "chair" }, { noun: "Lampe", article: "die", gender: "female", translation: "lamp" },
-            { noun: "Fenster", article: "das", gender: "neuter", translation: "window" }, { noun: "Kaffee", article: "der", gender: "male", translation: "coffee" },
-            { noun: "Milch", article: "die", gender: "female", translation: "milk" }, { noun: "Brot", article: "das", gender: "neuter", translation: "bread" },
-            { noun: "Lehrer", article: "der", gender: "male", translation: "teacher (m)" }, { noun: "Schule", article: "die", gender: "female", translation: "school" },
-            { noun: "Wasser", article: "das", gender: "neuter", translation: "water" }, { noun: "Freund", article: "der", gender: "male", translation: "friend (m)" },
-            { noun: "Blume", article: "die", gender: "female", translation: "flower" }, { noun: "Bild", article: "das", gender: "neuter", translation: "picture" },
-            { noun: "Tag", article: "der", gender: "male", translation: "day" }, { noun: "Nacht", article: "die", gender: "female", translation: "night" },
-            { noun: "Bett", article: "das", gender: "neuter", translation: "bed" }, { noun: "Name", article: "der", gender: "male", translation: "name" },
-            { noun: "Stadt", article: "die", gender: "female", translation: "city" }, { noun: "Land", article: "das", gender: "neuter", translation: "country/land" },
-            { noun: "Zug", article: "der", gender: "male", translation: "train" }, { noun: "Straße", article: "die", gender: "female", translation: "street" },
-            { noun: "Flugzeug", article: "das", gender: "neuter", translation: "airplane" }, { noun: "Sohn", article: "der", gender: "male", translation: "son" },
-            { noun: "Tochter", article: "die", gender: "female", translation: "daughter" }, { noun: "Mädchen", article: "das", gender: "neuter", translation: "girl" },
-            { noun: "Junge", article: "der", gender: "male", translation: "boy" }, { noun: "Hand", article: "die", gender: "female", translation: "hand" },
-            { noun: "Auge", article: "das", gender: "neuter", translation: "eye" }, { noun: "Fuß", article: "der", gender: "male", translation: "foot" },
-            { noun: "Zeit", article: "die", gender: "female", translation: "time" }, { noun: "Geld", article: "das", gender: "neuter", translation: "money" },
-            { noun: "Kopf", article: "der", gender: "male", translation: "head" }, { noun: "Musik", article: "die", gender: "female", translation: "music" },
-            { noun: "Spiel", article: "das", gender: "neuter", translation: "game" }, { noun: "Garten", article: "der", gender: "male", translation: "garden" },
-            { noun: "Küche", article: "die", gender: "female", translation: "kitchen" }, { noun: "Zimmer", article: "das", gender: "neuter", translation: "room" },
-            { noun: "Schlüssel", article: "der", gender: "male", translation: "key" }, { noun: "Tasche", article: "die", gender: "female", translation: "bag" }
-        ];
+        const pronouns = ["ich", "du", "er/sie/es", "wir", "ihr", "sie/Sie"]; 
 
         // DOM Elements (Main)
         const modeSelectionCardEl = document.getElementById('mode-selection-card');
@@ -362,7 +320,6 @@
         const quizSelectVerbsRadio = document.getElementById('quiz-select-verbs');
         const verbBoxSelectionAreaEl = document.getElementById('verb-box-selection-area'); 
         const inputModeTypingRadio = document.getElementById('input-mode-typing');
-        const inputModeMentalRadio = document.getElementById('input-mode-mental'); // Added this for completeness
         const startQuizButton = document.getElementById('start-quiz-button');
         const modeSelectionMessageEl = document.getElementById('mode-selection-message');
 
@@ -378,12 +335,10 @@
         const incorrectButton = document.getElementById('incorrect-button');
         const answerRevealContainerEl = document.getElementById('answer-reveal-container');
         const progressIndicatorEl = document.getElementById('progress-indicator');
-        const classicInputMethodTitleEl = document.getElementById('classic-input-method-title'); // Added this
-        const classicInputMethodGroupEl = document.getElementById('classic-input-method-group'); // Added this
 
         // DOM Elements (Stats)
         const statsDisplayCardEl = document.getElementById('stats-display-card');
-        const statsTitleEl = document.getElementById('stats-title'); // Added this
+        const statsTitleEl = document.getElementById('stats-title'); 
         const statsSummaryEl = document.getElementById('stats-summary');
         const roundReviewContainerEl = document.getElementById('round-review-container');
         const reviewUlEl = document.getElementById('review-ul');
@@ -428,53 +383,155 @@
         let gender_availableNouns = []; let gender_currentNounData = null;
         let gender_choiceMade = false;
 
-
+        // --- Utility Functions ---
         function shuffleArray(array) { for (let i = array.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [array[i], array[j]] = [array[j], array[i]]; } }
         function triggerConfetti() { if (typeof confetti === 'function') { confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } }); } }
-        function populateVerbSelectionBoxes() { verbBoxSelectionAreaEl.innerHTML = ''; globalVerbsList.forEach(verb => { const box = document.createElement('div'); box.classList.add('verb-select-box'); box.textContent = verb.infinitive; box.dataset.verbId = verb.id; box.classList.add('selected'); box.addEventListener('click', () => { box.classList.toggle('selected'); modeSelectionMessageEl.classList.add('hidden'); }); verbBoxSelectionAreaEl.appendChild(box); }); }
 
-        function handleQuizTypeChange() {
-            currentQuizType = document.querySelector('input[name="quiz-type"]:checked').value;
-            const showVerbBoxes = quizSelectVerbsRadio.checked;
-            verbSelectionOptionsEl.classList.toggle('hidden', currentQuizType === 'gender');
-            classicQuizSpecificOptionsEl.classList.toggle('hidden', currentQuizType !== 'classic');
-            genderModeSpecificOptionsEl.classList.toggle('hidden', currentQuizType !== 'gender');
-            if (currentQuizType !== 'gender') { verbBoxSelectionAreaEl.classList.toggle('hidden', !showVerbBoxes); } 
-            else { verbBoxSelectionAreaEl.classList.add('hidden'); }
-            modeSelectionMessageEl.classList.add('hidden');
+        // --- Data Loading and Initialization ---
+        async function loadAppData() {
+            try {
+                const verbsResponse = await fetch('verbs.json');
+                if (!verbsResponse.ok) throw new Error(`HTTP error! Status: ${verbsResponse.status} for verbs.json`);
+                globalVerbsList = await verbsResponse.json();
+
+                const nounsResponse = await fetch('nouns.json');
+                if (!nounsResponse.ok) throw new Error(`HTTP error! Status: ${nounsResponse.status} for nouns.json`);
+                globalNounsList = await nounsResponse.json();
+
+                dataLoaded = true;
+                console.log("App data loaded successfully:", globalVerbsList.length, "verbs,", globalNounsList.length, "nouns.");
+                initializeAppUI(); 
+            } catch (error) {
+                console.error("Could not load application data:", error);
+                modeSelectionCardEl.innerHTML = `<h2 class="mode-title text-red-500">Error Loading Data</h2><p class="text-gray-700">Could not load quiz data (verbs.json or nouns.json). Please ensure the files are present and correctly formatted.</p><p class="text-sm text-gray-500 mt-2">Details: ${error.message}</p><button onclick="location.reload()" class="btn btn-primary mt-4">Try Reloading</button>`;
+                modeSelectionCardEl.classList.remove('hidden');
+            }
         }
         
-        function handleVerbSelectionModeChange() { if (currentQuizType !== 'gender') { const showVerbBoxes = quizSelectVerbsRadio.checked; verbBoxSelectionAreaEl.classList.toggle('hidden', !showVerbBoxes); } modeSelectionMessageEl.classList.add('hidden'); }
+        function initializeAppUI() { // Called after data is successfully loaded
+            if (!dataLoaded) return; 
+            populateVerbSelectionBoxes(); 
+            handleQuizTypeChange(); // Initial UI setup based on defaults
+            startQuizButton.disabled = false;
+            startQuizButton.textContent = "Start Quiz";
+            showModeSelectionScreen(); // Display the main setup screen
+        }
 
-        function initializeApp() {
-            populateVerbSelectionBoxes(); handleQuizTypeChange(); 
+        function showModeSelectionScreen() {
             modeSelectionCardEl.classList.remove('hidden');
-            trainerCardEl.classList.add('hidden'); statsDisplayCardEl.classList.add('hidden');
-            legoModeCardEl.classList.add('hidden'); genderModeCardEl.classList.add('hidden');
+            trainerCardEl.classList.add('hidden');
+            statsDisplayCardEl.classList.add('hidden');
+            legoModeCardEl.classList.add('hidden');
+            genderModeCardEl.classList.add('hidden');
+
+            // Reset states
             activeVerbsForQuiz = []; allPossiblePairs = []; shuffledPairs = []; lastShuffledPairs = [];
             userRoundData = []; currentIndex = 0; answerRevealedForMental = false;
             lego_availableVerbs = []; lego_correctlyPlacedCount = 0;
             gender_availableNouns = []; gender_choiceMade = false;
+            
+            // Reset UI elements in mode selection
+            if (dataLoaded && globalVerbsList.length > 0) { populateVerbSelectionBoxes(); }
+            quizAllVerbsRadio.checked = true;
+            quizSelectVerbsRadio.checked = false;
+            verbBoxSelectionAreaEl.classList.add('hidden'); // Default to hidden
+            quizTypeClassicRadio.checked = true;
+            inputModeTypingRadio.checked = true;
+            handleQuizTypeChange(); // Ensure correct sections are visible
+            modeSelectionMessageEl.classList.add('hidden');
+            modeSelectionMessageEl.textContent = '';
+        }
+
+
+        function populateVerbSelectionBoxes() {
+            verbBoxSelectionAreaEl.innerHTML = '';
+            if (!dataLoaded || globalVerbsList.length === 0) {
+                verbBoxSelectionAreaEl.innerHTML = '<p class="text-sm text-gray-500">Verbs not loaded or empty list.</p>';
+                return;
+            }
+            globalVerbsList.forEach(verb => {
+                const box = document.createElement('div');
+                box.classList.add('verb-select-box');
+                box.textContent = verb.infinitive;
+                box.dataset.verbId = verb.id;
+                box.classList.add('selected'); // Default to selected, actual use depends on radio button
+                box.addEventListener('click', () => {
+                    box.classList.toggle('selected');
+                    modeSelectionMessageEl.classList.add('hidden');
+                    quizSelectVerbsRadio.checked = true; // Switch to "select" mode if user interacts
+                    handleVerbSelectionModeChange(); 
+                });
+                verbBoxSelectionAreaEl.appendChild(box);
+            });
+        }
+
+        function handleQuizTypeChange() {
+            currentQuizType = document.querySelector('input[name="quiz-type"]:checked').value;
+            const showVerbSelectArea = quizSelectVerbsRadio.checked && (currentQuizType === 'classic' || currentQuizType === 'lego');
+            
+            verbSelectionOptionsEl.classList.toggle('hidden', currentQuizType === 'gender');
+            classicQuizSpecificOptionsEl.classList.toggle('hidden', currentQuizType !== 'classic');
+            genderModeSpecificOptionsEl.classList.toggle('hidden', currentQuizType !== 'gender');
+            
+            if (currentQuizType !== 'gender') {
+                verbBoxSelectionAreaEl.classList.toggle('hidden', !showVerbSelectArea);
+            } else {
+                verbBoxSelectionAreaEl.classList.add('hidden'); // Always hide for gender mode
+            }
+            modeSelectionMessageEl.classList.add('hidden');
         }
         
-        startQuizButton.addEventListener('click', () => {
-            modeSelectionMessageEl.classList.add('hidden');
-            if (currentQuizType === 'classic' || currentQuizType === 'lego') {
-                if (quizAllVerbsRadio.checked) { activeVerbsForQuiz = [...globalVerbsList]; } 
-                else { const selectedBoxes = verbBoxSelectionAreaEl.querySelectorAll('.verb-select-box.selected'); activeVerbsForQuiz = Array.from(selectedBoxes).map(box => globalVerbsList.find(v => v.id === box.dataset.verbId)).filter(v => v); }
-                if (activeVerbsForQuiz.length === 0) { modeSelectionMessageEl.textContent = "Please select at least one verb for Classic/LEGO mode!"; modeSelectionMessageEl.classList.remove('hidden'); return; }
+        function handleVerbSelectionModeChange() {
+            if (currentQuizType !== 'gender') {
+                const showVerbBoxes = quizSelectVerbsRadio.checked;
+                verbBoxSelectionAreaEl.classList.toggle('hidden', !showVerbBoxes);
             }
+            modeSelectionMessageEl.classList.add('hidden');
+        }
+
+        function handleStartQuiz() {
+            if (!dataLoaded) {
+                modeSelectionMessageEl.textContent = "Data is still loading. Please wait.";
+                modeSelectionMessageEl.classList.remove('hidden');
+                return;
+            }
+            modeSelectionMessageEl.classList.add('hidden');
+
+            if (currentQuizType === 'classic' || currentQuizType === 'lego') {
+                if (quizAllVerbsRadio.checked) {
+                    activeVerbsForQuiz = [...globalVerbsList];
+                } else {
+                    const selectedBoxes = verbBoxSelectionAreaEl.querySelectorAll('.verb-select-box.selected');
+                    activeVerbsForQuiz = Array.from(selectedBoxes)
+                        .map(box => globalVerbsList.find(v => v.id === box.dataset.verbId))
+                        .filter(v => v); // Filter out undefined if any
+                }
+                if (activeVerbsForQuiz.length === 0) {
+                    modeSelectionMessageEl.textContent = "Please select at least one verb for Classic/LEGO mode!";
+                    modeSelectionMessageEl.classList.remove('hidden');
+                    return;
+                }
+            }
+
             modeSelectionCardEl.classList.add('hidden');
-            statsDisplayCardEl.classList.add('hidden'); trainerCardEl.classList.add('hidden');
-            legoModeCardEl.classList.add('hidden'); genderModeCardEl.classList.add('hidden');
-            if (currentQuizType === 'classic') { currentInputMethod = inputModeTypingRadio.checked ? 'typing' : 'mental'; prepareAndStartClassicQuiz(); } 
-            else if (currentQuizType === 'lego') { initializeLegoMode(); } 
-            else if (currentQuizType === 'gender') { initializeGenderMode(); }
-        });
+            statsDisplayCardEl.classList.add('hidden');
+            trainerCardEl.classList.add('hidden');
+            legoModeCardEl.classList.add('hidden');
+            genderModeCardEl.classList.add('hidden');
+
+            if (currentQuizType === 'classic') {
+                currentInputMethod = inputModeTypingRadio.checked ? 'typing' : 'mental';
+                prepareAndStartClassicQuiz();
+            } else if (currentQuizType === 'lego') {
+                initializeLegoMode();
+            } else if (currentQuizType === 'gender') {
+                initializeGenderMode();
+            }
+        }
 
         // --- Classic Quiz Functions ---
-        function prepareAndStartClassicQuiz() { generateAllPairs(activeVerbsForQuiz); if (allPossiblePairs.length === 0) { initializeApp(); modeSelectionMessageEl.textContent = "No questions for selected verbs."; modeSelectionMessageEl.classList.remove('hidden'); return; } shuffledPairs = [...allPossiblePairs]; shuffleArray(shuffledPairs); lastShuffledPairs = [...shuffledPairs]; userRoundData = []; currentIndex = 0; trainerCardEl.classList.remove('hidden'); displayClassicChallenge(); }
-        function repeatClassicRound() { if (activeVerbsForQuiz.length === 0) { initializeApp(); return; } generateAllPairs(activeVerbsForQuiz); if (allPossiblePairs.length === 0) { initializeApp(); return; } shuffledPairs = [...allPossiblePairs]; shuffleArray(shuffledPairs); lastShuffledPairs = [...shuffledPairs]; userRoundData = []; currentIndex = 0; statsDisplayCardEl.classList.add('hidden'); trainerCardEl.classList.remove('hidden'); displayClassicChallenge(); }
+        function prepareAndStartClassicQuiz() { generateAllPairs(activeVerbsForQuiz); if (allPossiblePairs.length === 0) { showModeSelectionScreen(); modeSelectionMessageEl.textContent = "No questions for selected verbs."; modeSelectionMessageEl.classList.remove('hidden'); return; } shuffledPairs = [...allPossiblePairs]; shuffleArray(shuffledPairs); lastShuffledPairs = [...shuffledPairs]; userRoundData = []; currentIndex = 0; trainerCardEl.classList.remove('hidden'); displayClassicChallenge(); }
+        function repeatClassicRound() { if (!dataLoaded || activeVerbsForQuiz.length === 0) { showModeSelectionScreen(); return; } generateAllPairs(activeVerbsForQuiz); if (allPossiblePairs.length === 0) { showModeSelectionScreen(); return; } shuffledPairs = [...allPossiblePairs]; shuffleArray(shuffledPairs); lastShuffledPairs = [...shuffledPairs]; userRoundData = []; currentIndex = 0; statsDisplayCardEl.classList.add('hidden'); trainerCardEl.classList.remove('hidden'); displayClassicChallenge(); }
         function generateAllPairs(verbsToUse) { allPossiblePairs = []; verbsToUse.forEach(verb => { pronouns.forEach(pronoun => { allPossiblePairs.push({ verb: verb, pronoun: pronoun }); }); }); }
         function displayClassicChallenge() { if (shuffledPairs.length === 0 || currentIndex >= shuffledPairs.length) { showRoundStatistics(); return; } const currentPair = shuffledPairs[currentIndex]; currentVerbData = currentPair.verb; currentPronoun = currentPair.pronoun; correctAnswerForm = currentVerbData.conjugations[currentPronoun]; answerRevealedForMental = false; verbInfinitiveEl.textContent = `Verb: ${currentVerbData.infinitive.toUpperCase()}`; pronounEl.textContent = currentPronoun; answerRevealContainerEl.classList.add('hidden'); answerRevealContainerEl.innerHTML = ''; feedbackButtonsContainerEl.classList.add('hidden'); if (currentInputMethod === 'typing') { trainerInstructionsEl.textContent = "Type the correct verb form below."; answerInputEl.value = ''; answerInputEl.disabled = false; answerInputEl.classList.remove('hidden'); answerInputEl.focus(); actionButton.textContent = "Show Answer / Skip"; actionButton.classList.remove('btn-primary', 'hidden'); actionButton.classList.add('btn-warning'); actionButton.dataset.action = "skip_typing"; } else { trainerInstructionsEl.textContent = "Think of the conjugation, then click 'Show Answer'."; answerInputEl.classList.add('hidden'); actionButton.textContent = "Show Answer"; actionButton.classList.remove('btn-warning', 'hidden'); actionButton.classList.add('btn-primary'); actionButton.dataset.action = "show_mental"; } updateClassicProgress(); }
         function updateClassicProgress() { progressIndicatorEl.textContent = `Question: ${currentIndex + 1} / ${shuffledPairs.length}`; }
@@ -483,12 +540,12 @@
         function handleMentalFeedback(wasCorrect) { if (!answerRevealedForMental || currentQuizType !== 'classic') return; recordClassicAttempt(wasCorrect, null); proceedToNextClassicChallenge(); }
         function recordClassicAttempt(wasCorrect, typedAnswer) { userRoundData.push({ pair: shuffledPairs[currentIndex], correctAnswer: correctAnswerForm, markedCorrect: wasCorrect, inputMethodDuringAttempt: currentInputMethod, userTypedAnswer: currentInputMethod === 'typing' ? typedAnswer : null }); }
         function proceedToNextClassicChallenge() { currentIndex++; if (currentIndex >= shuffledPairs.length) { showRoundStatistics(); } else { displayClassicChallenge(); }}
-        function showRoundStatistics() { trainerCardEl.classList.add('hidden'); statsDisplayCardEl.classList.remove('hidden'); let correctCount = 0; userRoundData.forEach(entry => { if (entry.markedCorrect) correctCount++; }); statsSummaryEl.textContent = `You got ${correctCount} out of ${shuffledPairs.length} correct.`; reviewUlEl.innerHTML = ''; if (userRoundData.length > 0) { roundReviewContainerEl.classList.remove('hidden'); const attemptsByVerbThenPronoun = {}; userRoundData.forEach(entry => { const verbName = entry.pair.verb.infinitive; const pronoun = entry.pair.pronoun; if (!attemptsByVerbThenPronoun[verbName]) { attemptsByVerbThenPronoun[verbName] = {}; } attemptsByVerbThenPronoun[verbName][pronoun] = entry; }); activeVerbsForQuiz.forEach(verbObj => { const verbName = verbObj.infinitive; if (attemptsByVerbThenPronoun[verbName]) { const verbTitleLi = document.createElement('li'); verbTitleLi.className = 'verb-review-title'; verbTitleLi.textContent = `VERB: ${verbName.toUpperCase()}`; reviewUlEl.appendChild(verbTitleLi); pronouns.forEach(pronounKey => { const entry = attemptsByVerbThenPronoun[verbName][pronounKey]; if (entry) { const li = document.createElement('li'); li.className = 'pronoun-review-item'; let attemptHtml = ''; if (entry.inputMethodDuringAttempt === 'typing') { if (entry.markedCorrect) { attemptHtml = `Your answer: <span class="user-answer-correct">${entry.userTypedAnswer || 'N/A'} ✔️</span>`; } else { if (entry.userTypedAnswer) { attemptHtml = `Your answer: <span class="user-answer-incorrect">${entry.userTypedAnswer}</span> ❌. Correct: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; } else { attemptHtml = `<span class="skipped-text">Skipped.</span> Correct: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; }}} else { if (entry.markedCorrect) { attemptHtml = `You marked: <span class="mental-mark-correct">Right 👍</span>. Answer: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; } else { attemptHtml = `You marked: <span class="mental-mark-incorrect">Wrong 👎</span>. Correct: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; }} li.innerHTML = `<span class="pronoun-name">${pronounKey}:</span><span class="attempt-details">${attemptHtml}</span>`; reviewUlEl.appendChild(li);}});}}); } else { roundReviewContainerEl.classList.add('hidden'); statsSummaryEl.textContent = "No questions presented."; } repeatRoundButton.disabled = activeVerbsForQuiz.length === 0; }
+        function showRoundStatistics() { trainerCardEl.classList.add('hidden'); statsDisplayCardEl.classList.remove('hidden'); statsTitleEl.textContent = "Round Complete!"; let correctCount = 0; userRoundData.forEach(entry => { if (entry.markedCorrect) correctCount++; }); statsSummaryEl.textContent = `You got ${correctCount} out of ${shuffledPairs.length} correct.`; reviewUlEl.innerHTML = ''; if (userRoundData.length > 0) { roundReviewContainerEl.classList.remove('hidden'); const attemptsByVerbThenPronoun = {}; userRoundData.forEach(entry => { const verbName = entry.pair.verb.infinitive; const pronoun = entry.pair.pronoun; if (!attemptsByVerbThenPronoun[verbName]) { attemptsByVerbThenPronoun[verbName] = {}; } attemptsByVerbThenPronoun[verbName][pronoun] = entry; }); activeVerbsForQuiz.forEach(verbObj => { const verbName = verbObj.infinitive; if (attemptsByVerbThenPronoun[verbName]) { const verbTitleLi = document.createElement('li'); verbTitleLi.className = 'verb-review-title'; verbTitleLi.textContent = `VERB: ${verbName.toUpperCase()}`; reviewUlEl.appendChild(verbTitleLi); pronouns.forEach(pronounKey => { const entry = attemptsByVerbThenPronoun[verbName][pronounKey]; if (entry) { const li = document.createElement('li'); li.className = 'pronoun-review-item'; let attemptHtml = ''; if (entry.inputMethodDuringAttempt === 'typing') { if (entry.markedCorrect) { attemptHtml = `Your answer: <span class="user-answer-correct">${entry.userTypedAnswer || 'N/A'} ✔️</span>`; } else { if (entry.userTypedAnswer) { attemptHtml = `Your answer: <span class="user-answer-incorrect">${entry.userTypedAnswer}</span> ❌. Correct: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; } else { attemptHtml = `<span class="skipped-text">Skipped.</span> Correct: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; }}} else { if (entry.markedCorrect) { attemptHtml = `You marked: <span class="mental-mark-correct">Right 👍</span>. Answer: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; } else { attemptHtml = `You marked: <span class="mental-mark-incorrect">Wrong 👎</span>. Correct: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; }} li.innerHTML = `<span class="pronoun-name">${pronounKey}:</span><span class="attempt-details">${attemptHtml}</span>`; reviewUlEl.appendChild(li);}});}}); } else { roundReviewContainerEl.classList.add('hidden'); statsSummaryEl.textContent = "No questions presented."; } repeatRoundButton.disabled = !dataLoaded || activeVerbsForQuiz.length === 0; }
 
-        // --- LEGO MODUS Functions ---
-        function initializeLegoMode() { legoModeCardEl.classList.remove('hidden'); lego_availableVerbs = [...activeVerbsForQuiz]; shuffleArray(lego_availableVerbs); lego_loadNextVerb(); }
+        // --- LEGO MODUS Functions (assumes globalVerbsList is populated) ---
+        function initializeLegoMode() { if (!dataLoaded) { showModeSelectionScreen(); modeSelectionMessageEl.textContent = "LEGO mode needs verb data."; modeSelectionMessageEl.classList.remove('hidden'); return; } legoModeCardEl.classList.remove('hidden'); lego_availableVerbs = [...activeVerbsForQuiz]; shuffleArray(lego_availableVerbs); lego_loadNextVerb(); }
         function lego_setupPronounSlots() { legoPronounSlotsContainerEl.innerHTML = ''; legoPronounsOrder.forEach(pronounKey => { const slotDiv = document.createElement('div'); slotDiv.className = 'lego-pronoun-slot'; const labelSpan = document.createElement('span'); labelSpan.className = 'lego-pronoun-label'; labelSpan.textContent = pronounKey; const dropBoxDiv = document.createElement('div'); dropBoxDiv.className = 'lego-drop-box'; dropBoxDiv.dataset.pronoun = pronounKey; dropBoxDiv.addEventListener('dragover', lego_handleDragOver); dropBoxDiv.addEventListener('dragenter', lego_handleDragEnter); dropBoxDiv.addEventListener('dragleave', lego_handleDragLeave); dropBoxDiv.addEventListener('drop', lego_handleDrop); slotDiv.appendChild(labelSpan); slotDiv.appendChild(dropBoxDiv); legoPronounSlotsContainerEl.appendChild(slotDiv); }); }
-        function lego_loadNextVerb() { legoFeedbackEl.style.display = 'none'; legoFeedbackEl.className = 'text-center font-semibold p-3 rounded-md min-h-[24px] mb-6'; legoNextVerbBtn.disabled = true; lego_correctlyPlacedCount = 0; if (lego_availableVerbs.length === 0) { lego_availableVerbs = [...activeVerbsForQuiz]; shuffleArray(lego_availableVerbs); legoVerbInfinitiveEl.textContent = "Super!"; legoVerbTranslationEl.textContent = "Alle LEGO Verben durchgespielt!"; legoFormsPoolEl.innerHTML = '<p class="placeholder-text-lego text-slate-500 italic">🎉 Gut gemacht! 🎉</p>'; legoPronounSlotsContainerEl.innerHTML = ''; legoNextVerbBtn.textContent = "LEGO Runde wiederholen"; legoNextVerbBtn.disabled = false; lego_currentVerbData = null; return; } if (legoNextVerbBtn.textContent === "LEGO Runde wiederholen") { legoNextVerbBtn.textContent = "Nächstes Verb"; } lego_currentVerbData = lego_availableVerbs.shift(); legoVerbInfinitiveEl.textContent = lego_currentVerbData.infinitive.toUpperCase(); legoVerbTranslationEl.textContent = lego_currentVerbData.translation ? `(${lego_currentVerbData.translation})` : ""; legoFormsPoolEl.innerHTML = ''; const conjugatedForms = []; for (const pronounKey of legoPronounsOrder) { conjugatedForms.push(lego_currentVerbData.conjugations[pronounKey]); } shuffleArray(conjugatedForms); conjugatedForms.forEach(formText => { const formDiv = document.createElement('div'); formDiv.className = 'lego-draggable-form'; formDiv.textContent = formText; formDiv.draggable = true; formDiv.dataset.formText = formText; formDiv.addEventListener('dragstart', lego_handleDragStart); formDiv.addEventListener('dragend', lego_handleDragEnd); formDiv.addEventListener('touchstart', lego_handleTouchStart, { passive: false }); legoFormsPoolEl.appendChild(formDiv); }); if (conjugatedForms.length === 0){ legoFormsPoolEl.innerHTML = '<p class="placeholder-text-lego text-slate-500 italic">Formen werden geladen...</p>';} lego_setupPronounSlots(); }
+        function lego_loadNextVerb() { legoFeedbackEl.style.display = 'none'; legoFeedbackEl.className = 'text-center font-semibold p-3 rounded-md min-h-[24px] mb-6'; legoNextVerbBtn.disabled = true; lego_correctlyPlacedCount = 0; if (lego_availableVerbs.length === 0) { lego_availableVerbs = [...activeVerbsForQuiz]; shuffleArray(lego_availableVerbs); if (activeVerbsForQuiz.length === 0) { legoVerbInfinitiveEl.textContent = "Keine Verben!"; legoVerbTranslationEl.textContent = "Bitte wähle Verben im Setup."; legoFormsPoolEl.innerHTML = ''; legoNextVerbBtn.textContent = "Zurück zum Setup"; legoNextVerbBtn.disabled = false; lego_currentVerbData = null; return; } legoVerbInfinitiveEl.textContent = "Super!"; legoVerbTranslationEl.textContent = "Alle LEGO Verben durchgespielt!"; legoFormsPoolEl.innerHTML = '<p class="placeholder-text-lego text-slate-500 italic">🎉 Gut gemacht! 🎉</p>'; legoPronounSlotsContainerEl.innerHTML = ''; legoNextVerbBtn.textContent = "LEGO Runde wiederholen"; legoNextVerbBtn.disabled = false; lego_currentVerbData = null; return; } if (legoNextVerbBtn.textContent === "LEGO Runde wiederholen" || legoNextVerbBtn.textContent === "Zurück zum Setup") { legoNextVerbBtn.textContent = "Nächstes Verb"; } lego_currentVerbData = lego_availableVerbs.shift(); legoVerbInfinitiveEl.textContent = lego_currentVerbData.infinitive.toUpperCase(); legoVerbTranslationEl.textContent = lego_currentVerbData.translation ? `(${lego_currentVerbData.translation})` : ""; legoFormsPoolEl.innerHTML = ''; const conjugatedForms = []; for (const pronounKey of legoPronounsOrder) { conjugatedForms.push(lego_currentVerbData.conjugations[pronounKey]); } shuffleArray(conjugatedForms); conjugatedForms.forEach(formText => { const formDiv = document.createElement('div'); formDiv.className = 'lego-draggable-form'; formDiv.textContent = formText; formDiv.draggable = true; formDiv.dataset.formText = formText; formDiv.addEventListener('dragstart', lego_handleDragStart); formDiv.addEventListener('dragend', lego_handleDragEnd); formDiv.addEventListener('touchstart', lego_handleTouchStart, { passive: false }); legoFormsPoolEl.appendChild(formDiv); }); if (conjugatedForms.length === 0){ legoFormsPoolEl.innerHTML = '<p class="placeholder-text-lego text-slate-500 italic">Formen werden geladen...</p>';} lego_setupPronounSlots(); }
         function lego_handleDragStart(e) { lego_draggedFormElement = e.target; e.target.classList.add('dragging'); e.dataTransfer.setData('text/plain', e.target.dataset.formText); }
         function lego_handleDragEnd(e) { if(lego_draggedFormElement) lego_draggedFormElement.classList.remove('dragging'); lego_draggedFormElement = null; document.querySelectorAll('.lego-drop-box.drag-over').forEach(box => box.classList.remove('drag-over')); }
         function lego_handleDragOver(e) { e.preventDefault(); }
@@ -500,108 +557,57 @@
         function lego_handleTouchEnd(e) { document.removeEventListener('touchmove', lego_handleTouchMove); if (lego_activeTouchClone && lego_draggedTouchElement) { lego_activeTouchClone.style.display = 'none'; const dropTargetElement = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY); let droppedOnValidBoxAndCorrect = false; if (dropTargetElement) { const dropBox = dropTargetElement.closest('.lego-drop-box'); if (dropBox && !dropBox.hasChildNodes()) { const targetPronounKey = dropBox.dataset.pronoun; const droppedFormText = lego_draggedTouchElement.dataset.formText; if (lego_currentVerbData.conjugations[targetPronounKey] === droppedFormText) { dropBox.appendChild(lego_draggedTouchElement); lego_draggedTouchElement.style.opacity = '1'; lego_draggedTouchElement.classList.remove('dragging'); lego_draggedTouchElement.draggable = false; dropBox.classList.add('filled', 'correct'); lego_correctlyPlacedCount++; lego_showFeedback(`"${droppedFormText}" ist richtig für "${targetPronounKey}"!`, 'success'); triggerConfetti(); if (lego_correctlyPlacedCount === legoPronounsOrder.length) { lego_showFeedback(`🎉 Super! "${lego_currentVerbData.infinitive}" komplett richtig gebaut!`, 'success'); legoNextVerbBtn.disabled = false; } droppedOnValidBoxAndCorrect = true; } else { lego_showFeedback(`"${droppedFormText}" passt nicht zu "${targetPronounKey}". Versuch's nochmal!`, 'error'); dropBox.classList.add('lego-incorrect-flash'); setTimeout(() => dropBox.classList.remove('lego-incorrect-flash'), 600); } dropBox.classList.remove('drag-over'); } } if (!droppedOnValidBoxAndCorrect) { lego_draggedTouchElement.style.opacity = '1'; } document.body.removeChild(lego_activeTouchClone); } lego_activeTouchClone = null; lego_draggedTouchElement = null; lego_touchOffsetX = 0; lego_touchOffsetY = 0; document.querySelectorAll('.lego-drop-box.drag-over').forEach(box => box.classList.remove('drag-over')); }
         function lego_showFeedback(message, type) { legoFeedbackEl.textContent = message; legoFeedbackEl.className = `text-center font-semibold p-3 rounded-md min-h-[24px] mb-6 ${type}`; legoFeedbackEl.style.display = 'block'; if (type === 'error') { setTimeout(() => { if (legoFeedbackEl.textContent === message) legoFeedbackEl.style.display = 'none'; }, 2500); } else if (type === 'success' && !message.startsWith("🎉")) { setTimeout(() => { if (legoFeedbackEl.textContent === message) legoFeedbackEl.style.display = 'none'; }, 2000); } }
         
-        // --- GENDER MODE Functions ---
-        function initializeGenderMode() {
-            genderModeCardEl.classList.remove('hidden');
-            gender_availableNouns = [...globalNounsList];
-            shuffleArray(gender_availableNouns);
-            gender_loadNextNoun();
-        }
-
-        function gender_loadNextNoun() {
-            genderFeedbackEl.textContent = '';
-            genderFeedbackEl.className = 'text-center my-4 text-lg font-semibold p-3 rounded-md min-h-[50px]'; // Reset feedback style, remove .correct/.incorrect
-            genderFeedbackEl.style.display = 'none'; // Hide feedback initially
-            genderNextNounBtn.classList.add('hidden');
-            genderNounDisplayCardEl.className = 'bg-gray-100 p-8 rounded-xl mb-6 border-4 border-transparent transition-colors duration-300 min-h-[120px] flex justify-center items-center';
-            gender_choiceMade = false;
+        // --- GENDER MODE Functions (assumes globalNounsList is populated) ---
+        function initializeGenderMode() { if (!dataLoaded) { showModeSelectionScreen(); modeSelectionMessageEl.textContent = "Gender mode needs noun data."; modeSelectionMessageEl.classList.remove('hidden'); return; } genderModeCardEl.classList.remove('hidden'); gender_availableNouns = [...globalNounsList]; shuffleArray(gender_availableNouns); gender_loadNextNoun(); }
+        function gender_loadNextNoun() { genderFeedbackEl.textContent = ''; genderFeedbackEl.className = 'text-center my-4 text-lg font-semibold p-3 rounded-md min-h-[50px]'; genderFeedbackEl.style.display = 'none'; genderNextNounBtn.classList.add('hidden'); genderNounDisplayCardEl.className = 'bg-gray-100 p-8 rounded-xl mb-6 border-4 border-transparent transition-colors duration-300 min-h-[120px] flex justify-center items-center'; gender_choiceMade = false; genderDerButton.disabled = false; genderDieButton.disabled = false; genderDasButton.disabled = false; if (gender_availableNouns.length === 0) { genderNounTextEl.textContent = "Super!"; genderFeedbackEl.textContent = "Alle Nomen geübt!"; genderFeedbackEl.classList.add('correct'); genderFeedbackEl.style.display = 'block'; genderNextNounBtn.textContent = "Gender Runde wiederholen"; genderNextNounBtn.classList.remove('hidden'); genderDerButton.disabled = true; genderDieButton.disabled = true; genderDasButton.disabled = true; gender_currentNounData = null; return; } if (genderNextNounBtn.textContent === "Gender Runde wiederholen") { genderNextNounBtn.textContent = "Next Noun"; } gender_currentNounData = gender_availableNouns.shift(); genderNounTextEl.textContent = gender_currentNounData.noun; }
+        function gender_handleChoice(chosenGender) { if (gender_choiceMade || !gender_currentNounData) return; gender_choiceMade = true; genderDerButton.disabled = true; genderDieButton.disabled = true; genderDasButton.disabled = true; genderNounDisplayCardEl.classList.remove('border-transparent', 'chosen-der', 'chosen-die', 'chosen-das'); if (chosenGender === 'male') genderNounDisplayCardEl.classList.add('chosen-der'); else if (chosenGender === 'female') genderNounDisplayCardEl.classList.add('chosen-die'); else if (chosenGender === 'neuter') genderNounDisplayCardEl.classList.add('chosen-das'); const correctGender = gender_currentNounData.gender; const correctArticle = gender_currentNounData.article; let feedbackMessage = ''; genderFeedbackEl.classList.remove('correct', 'incorrect'); if (chosenGender === correctGender) { feedbackMessage = `Richtig! ${correctArticle.toUpperCase()} ${gender_currentNounData.noun}`; genderFeedbackEl.classList.add('correct'); triggerConfetti(); } else { feedbackMessage = `Falsch. Es ist ${correctArticle.toUpperCase()} ${gender_currentNounData.noun}.`; genderFeedbackEl.classList.add('incorrect'); } genderFeedbackEl.textContent = feedbackMessage; genderNextNounBtn.classList.remove('hidden'); }
+        
+        // --- Event Listeners Setup ---
+        function setupEventListeners() {
+            quizTypeClassicRadio.addEventListener('change', handleQuizTypeChange);
+            quizTypeLegoRadio.addEventListener('change', handleQuizTypeChange);
+            quizTypeGenderRadio.addEventListener('change', handleQuizTypeChange);
+            quizAllVerbsRadio.addEventListener('change', handleVerbSelectionModeChange);
+            quizSelectVerbsRadio.addEventListener('change', handleVerbSelectionModeChange);
+            startQuizButton.addEventListener('click', handleStartQuiz);
             
-            genderDerButton.disabled = false;
-            genderDieButton.disabled = false;
-            genderDasButton.disabled = false;
+            backToMenuLegoBtn.addEventListener('click', showModeSelectionScreen);
+            backToMenuGenderBtn.addEventListener('click', showModeSelectionScreen);
+            newRoundButton.addEventListener('click', showModeSelectionScreen);
+            repeatRoundButton.addEventListener('click', repeatClassicRound); 
 
-            if (gender_availableNouns.length === 0) {
-                genderNounTextEl.textContent = "Super!";
-                genderFeedbackEl.textContent = "Alle Nomen geübt!";
-                genderFeedbackEl.classList.add('correct'); // Add class for styling
-                genderFeedbackEl.style.display = 'block'; // Make sure it's visible
-                genderNextNounBtn.textContent = "Gender Runde wiederholen";
-                genderNextNounBtn.classList.remove('hidden');
-                genderDerButton.disabled = true;
-                genderDieButton.disabled = true;
-                genderDasButton.disabled = true;
-                gender_currentNounData = null; 
-                return;
-            }
-             if (genderNextNounBtn.textContent === "Gender Runde wiederholen") {
-                genderNextNounBtn.textContent = "Next Noun";
-            }
-
-            gender_currentNounData = gender_availableNouns.shift();
-            genderNounTextEl.textContent = gender_currentNounData.noun;
-        }
-
-        function gender_handleChoice(chosenGender) {
-            if (gender_choiceMade || !gender_currentNounData) return;
-            gender_choiceMade = true;
+            answerInputEl.addEventListener('input', handleAnswerInput_Typing);
+            answerInputEl.addEventListener('keypress', function(event) { if (event.key === 'Enter' && currentInputMethod === 'typing' && currentQuizType === 'classic') { event.preventDefault(); const userAnswer = answerInputEl.value.trim().toLowerCase(); if (userAnswer !== correctAnswerForm.toLowerCase()) { if (actionButton.dataset.action === "skip_typing") { handleClassicActionButtonClick(); }} else { handleAnswerInput_Typing(); } } });
+            actionButton.addEventListener('click', handleClassicActionButtonClick);
+            correctButton.addEventListener('click', () => handleMentalFeedback(true));
+            incorrectButton.addEventListener('click', () => handleMentalFeedback(false));
             
-            genderDerButton.disabled = true;
-            genderDieButton.disabled = true;
-            genderDasButton.disabled = true;
+            legoNextVerbBtn.addEventListener('click', lego_loadNextVerb);
 
-            genderNounDisplayCardEl.classList.remove('border-transparent', 'chosen-der', 'chosen-die', 'chosen-das'); // Clear previous dynamic borders
-            if (chosenGender === 'male') genderNounDisplayCardEl.classList.add('chosen-der');
-            else if (chosenGender === 'female') genderNounDisplayCardEl.classList.add('chosen-die');
-            else if (chosenGender === 'neuter') genderNounDisplayCardEl.classList.add('chosen-das');
-
-            const correctGender = gender_currentNounData.gender;
-            const correctArticle = gender_currentNounData.article;
-            let feedbackMessage = '';
-            
-            genderFeedbackEl.classList.remove('correct', 'incorrect'); 
-
-            if (chosenGender === correctGender) {
-                feedbackMessage = `Richtig! ${correctArticle.toUpperCase()} ${gender_currentNounData.noun}`;
-                genderFeedbackEl.classList.add('correct');
-                triggerConfetti();
-            } else {
-                feedbackMessage = `Falsch. Es ist ${correctArticle.toUpperCase()} ${gender_currentNounData.noun}.`;
-                genderFeedbackEl.classList.add('incorrect');
-            }
-            genderFeedbackEl.textContent = feedbackMessage;
-            // The .correct or .incorrect class (which now includes display:block !important) will make it visible.
-            genderNextNounBtn.classList.remove('hidden');
+            genderNextNounBtn.addEventListener('click', gender_loadNextNoun);
+            genderDerButton.addEventListener('click', () => gender_handleChoice('male'));
+            genderDieButton.addEventListener('click', () => gender_handleChoice('female'));
+            genderDasButton.addEventListener('click', () => gender_handleChoice('neuter'));
         }
         
-        // Event Listeners (Main Setup)
-        quizTypeClassicRadio.addEventListener('change', handleQuizTypeChange);
-        quizTypeLegoRadio.addEventListener('change', handleQuizTypeChange);
-        quizTypeGenderRadio.addEventListener('change', handleQuizTypeChange);
-        quizAllVerbsRadio.addEventListener('change', handleVerbSelectionModeChange);
-        quizSelectVerbsRadio.addEventListener('change', handleVerbSelectionModeChange);
-        
-        // Event Listeners (Classic Quiz)
-        answerInputEl.addEventListener('input', handleAnswerInput_Typing);
-        answerInputEl.addEventListener('keypress', function(event) { if (event.key === 'Enter' && currentInputMethod === 'typing' && currentQuizType === 'classic') { event.preventDefault(); const userAnswer = answerInputEl.value.trim().toLowerCase(); if (userAnswer !== correctAnswerForm.toLowerCase()) { if (actionButton.dataset.action === "skip_typing") { handleClassicActionButtonClick(); }} else { handleAnswerInput_Typing(); } } });
-        actionButton.addEventListener('click', handleClassicActionButtonClick);
-        correctButton.addEventListener('click', () => handleMentalFeedback(true));
-        incorrectButton.addEventListener('click', () => handleMentalFeedback(false));
-        newRoundButton.addEventListener('click', initializeApp);
-        repeatRoundButton.addEventListener('click', repeatClassicRound); 
+        // --- Initial Application Start ---
+        document.addEventListener('DOMContentLoaded', () => {
+            setupEventListeners();
+            // Show loading state or initial mode selection screen without data-dependent elements
+            modeSelectionCardEl.classList.remove('hidden');
+            trainerCardEl.classList.add('hidden');
+            statsDisplayCardEl.classList.add('hidden');
+            legoModeCardEl.classList.add('hidden');
+            genderModeCardEl.classList.add('hidden');
 
-        // Event Listeners (LEGO Mode)
-        backToMenuLegoBtn.addEventListener('click', initializeApp);
-        legoNextVerbBtn.addEventListener('click', lego_loadNextVerb);
+            startQuizButton.disabled = true;
+            startQuizButton.textContent = "Loading Data...";
+            verbBoxSelectionAreaEl.innerHTML = '<p class="text-sm text-gray-500">Loading verbs...</p>';
 
-        // Event Listeners (Gender Mode)
-        backToMenuGenderBtn.addEventListener('click', initializeApp);
-        genderNextNounBtn.addEventListener('click', gender_loadNextNoun);
-        genderDerButton.addEventListener('click', () => gender_handleChoice('male'));
-        genderDieButton.addEventListener('click', () => gender_handleChoice('female'));
-        genderDasButton.addEventListener('click', () => gender_handleChoice('neuter'));
-        
-        // Initial Load
-        initializeApp();
+
+            loadAppData(); // Fetch data and then initialize UI further
+        });
+
     </script>
 </body>
 </html>
