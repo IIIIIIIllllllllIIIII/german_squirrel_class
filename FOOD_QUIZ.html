@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Deutsche Artikel Quiz (Der, Die, Das, Mein, Ein, Kein)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: linear-gradient(to right top, #d928a9, #f65ce0, #fa8bf5, #fdb5fa, #fed6fe);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 16px;
+            color: #374151;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .card {
+            background-color: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            text-align: center;
+            width: 100%;
+            max-width: 700px;
+        }
+        .btn {
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease, border-color 0.3s ease, opacity 0.3s ease;
+            border: none;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            margin-top: 8px;
+        }
+        .btn:disabled {
+            background-color: #d1d5db !important;
+            color: #6b7280 !important;
+            border-color: #d1d5db !important;
+            cursor: not-allowed;
+            box-shadow: none;
+            opacity: 0.7;
+        }
+        .btn:active:not(:disabled) { transform: translateY(1px); }
+        .btn-primary { background-color: #6d28d9; }
+        .btn-primary:hover:not(:disabled) { background-color: #5b21b6; }
+        .btn-secondary { background-color: #4f46e5; }
+        .btn-secondary:hover:not(:disabled) { background-color: #4338ca; }
+        .btn-success { background-color: #059669; }
+        .btn-success:hover:not(:disabled) { background-color: #047857; }
+        .btn-warning { background-color: #f59e0b; } /* Amber 500 */
+        .btn-warning:hover:not(:disabled) { background-color: #d97706; } /* Amber 600 */
+
+
+        .artikel-option-btn { /* Applies to both DerDieDas and MEK buttons */
+            padding: 18px 12px;
+            font-size: 1.2rem; /* Adjusted for potentially longer text like MEINEN */
+            line-height: 1.3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80px;
+            flex-basis: calc(33.333% - 12px);
+            min-width: 120px;
+            word-break: break-word; /* In case a very long declined form appears */
+        }
+        .btn-der { background-color: #2563eb; } .btn-der:hover:not(:disabled) { background-color: #1d4ed8; }
+        .btn-die { background-color: #dc2626; } .btn-die:hover:not(:disabled) { background-color: #b91c1c; }
+        .btn-das { background-color: #16a34a; } .btn-das:hover:not(:disabled) { background-color: #15803d; }
+
+        /* MEK Buttons */
+        .btn-mein { background-color: #fb923c; } /* Orange 400 */
+        .btn-mein:hover:not(:disabled) { background-color: #f97316; } /* Orange 500 */
+        .btn-ein { background-color: #a855f7; } /* Purple 500 */
+        .btn-ein:hover:not(:disabled) { background-color: #9333ea; } /* Purple 600 */
+        .btn-kein { background-color: #71717a; } /* Zinc 500 */
+        .btn-kein:hover:not(:disabled) { background-color: #52525b; } /* Zinc 600 */
+
+
+        .speed-round-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .speed-round-word {
+            font-size: 4rem;
+            font-weight: 800;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .speed-round-meaning {
+            font-size: 1.5rem;
+            margin: 10px 0;
+            opacity: 0.9;
+        }
+
+        .timer-bar {
+            width: 100%;
+            height: 8px;
+            background-color: rgba(255,255,255,0.3);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .timer-fill {
+            height: 100%;
+            background-color: #10b981;
+            transition: width 0.1s linear;
+            border-radius: 4px;
+        }
+
+        .feedback-area {
+            font-size: 0.95rem; /* Adjusted for more text */
+            font-weight: 500; /* Adjusted for more text */
+            padding: 12px;
+            border-radius: 8px;
+            min-height: 100px; /* Increased for more text */
+            margin-bottom: 1.5rem;
+            text-align: left; /* Better for paragraphs of feedback */
+        }
+        .feedback-area p { margin-bottom: 0.5em; }
+        .feedback-area hr { border-top: 1px solid #e5e7eb; margin-top:0.5rem; margin-bottom:0.5rem;}
+
+        .feedback-area.correct {
+            color: #047857; background-color: #d1fae5; border: 1px solid #a7f3d0; display: block !important;
+        }
+        .feedback-area.incorrect {
+            color: #b91c1c; background-color: #fee2e2; border: 1px solid #fecaca; display: block !important;
+        }
+        .feedback-area .correct-answer-text, .feedback-area strong { /* For inline strong tags */
+            font-weight: 700;
+        }
+
+
+        .progress-text { margin-top: 12px; font-size: 0.875rem; color: #6b7280; }
+        .hidden { display: none !important; }
+
+        #noun-display { /* For DerDieDas Quiz */
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #4a044e; /* Dark Purple */
+            margin-bottom: 0.5rem;
+        }
+
+        #translation-display { /* For DerDieDas Quiz */
+            font-size: 1rem;
+            color: #6b7280;
+            font-style: italic;
+            margin-bottom: 2rem;
+            min-height: 40px;
+        }
+
+        #mek-sentence-display { /* For MEK Quiz */
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #4a044e;
+            margin-bottom: 0.5rem;
+            min-height: 60px;
+        }
+        #mek-sentence-display .context-hint {
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #52525b; /* zinc-600 */
+        }
+
+
+        #mek-sentence-translation-display { /* For MEK Quiz */
+            font-size: 0.9rem;
+            color: #6b7280;
+            font-style: italic;
+            margin-bottom: 2rem;
+            min-height: 30px;
+        }
+         #mek-sentence-translation-display .context-hint-es {
+            font-size: 0.8rem;
+            font-style: italic;
+            color: #52525b;
+        }
+
+
+        #artikel-choices-container, #mek-choices-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .mode-selection {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .mode-btn {
+            padding: 16px 24px;
+            font-size: 1.1rem;
+            border-radius: 12px;
+            min-width: 200px;
+        }
+
+        kbd {
+            font-family: monospace;
+            background-color: #e2e8f0;
+            color: #4a5568;
+            padding: 3px 6px;
+            border-radius: 4px;
+            border: 1px solid #cbd5e0;
+            font-size: 0.85em;
+            box-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+        }
+
+         @media (max-width: 768px) {
+            #artikel-choices-container .btn, #mek-choices-container .btn {
+                flex-basis: calc(33.333% - 10px);
+                 font-size: 1.1rem; /* Adjust for smaller screens */
+            }
+            .mode-selection {
+                flex-direction: column;
+                align-items: center;
+            }
+            .speed-round-word { font-size: 3rem; }
+            #noun-display { font-size: 2rem; }
+            #mek-sentence-display { font-size: 1.3rem; }
+        }
+
+         @media (max-width: 640px) {
+            .card { padding: 20px; }
+            .btn { padding: 10px 16px; font-size: 0.9rem; }
+            .artikel-option-btn { font-size: 1rem; min-height: 70px; } /* Further adjust for smallest screens */
+            #noun-display { font-size: 1.8rem; }
+            #mek-sentence-display { font-size: 1.1rem; }
+            #mek-sentence-translation-display { font-size: 0.8rem;}
+            .feedback-area { font-size: 0.9rem; }
+             #artikel-choices-container .btn, #mek-choices-container .btn {
+                flex-basis: calc(100% - 8px);
+                min-width: 100px;
+            }
+            .speed-round-word { font-size: 2.5rem; }
+            .speed-round-meaning { font-size: 1.2rem; }
+        }
+
+    </style>
+</head>
+<body>
+    <div id="main-container" class="card">
+        <div id="mode-selection-screen" class="">
+            <h1 class="text-2xl sm:text-3xl font-bold text-purple-700 mb-6 text-center">Deutsche Nomen Artikel</h1>
+            <div class="mode-selection">
+                <button id="quiz-mode-btn" class="btn btn-primary mode-btn">
+                    📝 Der/Die/Das Quiz
+                    <div class="text-sm opacity-90 mt-1">Teste dein Wissen</div>
+                </button>
+                 <button id="mek-quiz-mode-btn" class="btn btn-warning mode-btn">
+                    💡 Mein/Ein/Kein Quiz
+                    <div class="text-sm opacity-90 mt-1">Wähle den Artikel</div>
+                </button>
+                <button id="speed-mode-btn" class="btn btn-success mode-btn">
+                    ⚡ Speed Learning
+                    <div class="text-sm opacity-90 mt-1">Schnelle Karteikarten</div>
+                </button>
+            </div>
+        </div>
+
+        <div id="quiz-mode-screen" class="hidden"> <h1 class="text-2xl sm:text-3xl font-bold text-purple-700 mb-6 text-center">Der, Die, oder Das?</h1>
+
+            <div id="question-area" class="mb-6">
+                 <p id="noun-display" class="text-center" style="min-height: 60px;"></p>
+                 <p id="translation-display" class="text-center"></p>
+            </div>
+
+            <div id="artikel-choices-container" class="mb-6">
+                <button id="der-btn" class="btn artikel-option-btn btn-der" data-artikel="der">DER</button>
+                <button id="die-btn" class="btn artikel-option-btn btn-die" data-artikel="die">DIE</button>
+                <button id="das-btn" class="btn artikel-option-btn btn-das" data-artikel="das">DAS</button>
+            </div>
+
+            <div id="feedback-area" class="feedback-area hidden"></div>
+
+            <div id="quiz-controls-area" class="text-center">
+                <button id="next-question-btn" class="btn btn-primary hidden">Nächste Frage</button>
+                <button id="restart-quiz-btn" class="btn btn-secondary hidden">Quiz neu starten</button>
+                <button id="back-to-menu-btn" class="btn btn-secondary">Zurück zum Menü</button>
+            </div>
+
+            <div id="progress-indicator" class="progress-text mt-4 text-center">Frage 0 / 0</div>
+            <div id="score-indicator" class="progress-text mt-1 text-center">Punkte: 0 / 0</div>
+            <div id="hint-area" class="progress-text mt-3 text-center hidden"></div>
+        </div>
+
+        <div id="mek-quiz-mode-screen" class="hidden"> <h1 id="mek-title" class="text-2xl sm:text-3xl font-bold text-yellow-600 mb-6 text-center">Mein, Ein, oder Kein?</h1>
+            <div id="mek-question-area" class="mb-6">
+                 <p id="mek-sentence-display" class="text-center"></p>
+                 <p id="mek-sentence-translation-display" class="text-center"></p>
+            </div>
+            <div id="mek-choices-container" class="mb-6">
+                <button id="mek-mein-btn" class="btn artikel-option-btn btn-mein" data-artikel-base="mein" title=""></button>
+                <button id="mek-ein-btn" class="btn artikel-option-btn btn-ein" data-artikel-base="ein" title=""></button>
+                <button id="mek-kein-btn" class="btn artikel-option-btn btn-kein" data-artikel-base="kein" title=""></button>
+            </div>
+            <div id="mek-feedback-area" class="feedback-area hidden"></div>
+            <div id="mek-controls-area" class="text-center">
+                <button id="mek-next-question-btn" class="btn btn-primary hidden">Nächste Frage</button>
+                <button id="mek-restart-quiz-btn" class="btn btn-secondary hidden">Quiz neu starten</button>
+                <button id="mek-back-to-menu-btn" class="btn btn-secondary">Zurück zum Menü</button>
+            </div>
+            <div id="mek-progress-indicator" class="progress-text mt-4 text-center">Frage 0 / 0</div>
+            <div id="mek-score-indicator" class="progress-text mt-1 text-center">Punkte: 0 / 0</div>
+            <div id="mek-hint-area" class="progress-text mt-3 text-center hidden"></div>
+        </div>
+
+
+         <div id="speed-mode-screen" class="hidden">
+            <div id="speed-round-container" class="speed-round-card">
+                <div id="speed-question-text" class="text-xl mb-4 opacity-90">Welcher Artikel?</div>
+                <div id="speed-word-de" class="speed-round-word text-yellow-200">Haus</div>
+                <div id="speed-word-trans" class="speed-round-meaning text-yellow-100">House / Casa</div>
+
+                <div class="timer-bar">
+                    <div id="timer-fill" class="timer-fill" style="width: 100%;"></div>
+                </div>
+
+                <div id="speed-choices" class="grid grid-cols-3 gap-4 mt-6 mb-4">
+                    </div>
+
+                <div id="speed-feedback" class="text-lg font-bold mb-4 hidden"></div>
+
+                <div id="speed-progress" class="text-lg opacity-90">1 / 100</div>
+
+                <div id="speed-controls" class="mt-6">
+                     <button id="speed-pause-btn" class="btn btn-secondary mr-4">⏸️ Pause</button>
+                     <button id="speed-back-to-menu-btn-ingame" class="btn btn-secondary">Zurück</button>
+                </div>
+            </div>
+
+            <div id="speed-complete" class="hidden text-center">
+                <h2 class="text-2xl font-bold text-green-600 mb-4">🎉 Speed Runde geschafft!</h2>
+                <p class="text-lg mb-2">Du hast <span id="speed-total-qs">100</span> Fragen beantwortet!</p>
+                <p class="text-xl font-bold text-purple-600 mb-6">Endstand: <span id="speed-final-score">0</span> / <span id="speed-final-total">100</span></p>
+                <button id="speed-restart-btn" class="btn btn-success mr-4">🔄 Neu starten</button>
+                <button id="speed-back-to-menu-btn" class="btn btn-secondary">Zurück zum Menü</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+       // Global variables to hold the fetched data
+       let foodNouns = [];
+       let mekQuizQuestions = [];
+
+        // Quiz Mode (DerDieDas) Variables
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let shuffledQuestions = [];
+        let answerSelected = false; // For DerDieDas Quiz
+        let autoAdvanceTimeout; // For DerDieDas Quiz
+
+        // MEK Quiz Mode Variables
+        let mekCurrentQuestionIndex = 0;
+        let mekScore = 0;
+        let mekShuffledQuestions = [];
+        let mekAnswerSelected = false; // For MEK Quiz
+
+        // Speed Mode Variables
+        let speedCurrentIndex = 0;
+        let speedInterval;
+        let speedPaused = false;
+        let speedTimePerCard = 5000; // ms
+        let speedQuestions = []; // Will be populated from foodNouns
+        let speedScore = 0;
+        let speedAnswered = false;
+
+
+        // Elements
+        const modeSelectionScreen = document.getElementById('mode-selection-screen');
+        const quizModeScreen = document.getElementById('quiz-mode-screen');
+        const speedModeScreen = document.getElementById('speed-mode-screen');
+        const mekQuizModeScreen = document.getElementById('mek-quiz-mode-screen');
+
+        const quizModeBtn = document.getElementById('quiz-mode-btn');
+        const speedModeBtn = document.getElementById('speed-mode-btn');
+        const mekQuizModeBtn = document.getElementById('mek-quiz-mode-btn');
+
+        // Quiz (DerDieDas) elements
+        const nounDisplayEl = document.getElementById('noun-display');
+        const translationDisplayEl = document.getElementById('translation-display');
+        const choicesContainerEl = document.getElementById('artikel-choices-container');
+        const feedbackAreaEl = document.getElementById('feedback-area');
+        const nextQuestionBtn = document.getElementById('next-question-btn');
+        const restartQuizBtn = document.getElementById('restart-quiz-btn');
+        const backToMenuBtn = document.getElementById('back-to-menu-btn');
+        const progressIndicatorEl = document.getElementById('progress-indicator');
+        const scoreIndicatorEl = document.getElementById('score-indicator');
+        const hintAreaEl = document.getElementById('hint-area');
+        const artikelButtons = choicesContainerEl.querySelectorAll('.artikel-option-btn');
+
+        // MEK Quiz elements
+        const mekSentenceDisplayEl = document.getElementById('mek-sentence-display');
+        const mekSentenceTranslationDisplayEl = document.getElementById('mek-sentence-translation-display');
+        const mekChoicesContainerEl = document.getElementById('mek-choices-container');
+        const mekFeedbackAreaEl = document.getElementById('mek-feedback-area');
+        const mekNextQuestionBtnEl = document.getElementById('mek-next-question-btn');
+        const mekRestartQuizBtn = document.getElementById('mek-restart-quiz-btn');
+        const mekBackToMenuBtn = document.getElementById('mek-back-to-menu-btn');
+        const mekProgressIndicatorEl = document.getElementById('mek-progress-indicator');
+        const mekScoreIndicatorEl = document.getElementById('mek-score-indicator');
+        const mekHintAreaEl = document.getElementById('mek-hint-area');
+        const mekMeinBtn = document.getElementById('mek-mein-btn');
+        const mekEinBtn = document.getElementById('mek-ein-btn');
+        const mekKeinBtn = document.getElementById('mek-kein-btn');
+        const mekArtikelButtons = [mekMeinBtn, mekEinBtn, mekKeinBtn];
+
+        // Speed elements
+        const speedWordDeEl = document.getElementById('speed-word-de');
+        const speedWordTransEl = document.getElementById('speed-word-trans');
+        const speedChoicesEl = document.getElementById('speed-choices');
+        const speedFeedbackEl = document.getElementById('speed-feedback');
+        const timerFillEl = document.getElementById('timer-fill');
+        const speedProgressEl = document.getElementById('speed-progress');
+        const speedPauseBtn = document.getElementById('speed-pause-btn');
+        const speedCompleteEl = document.getElementById('speed-complete');
+        const speedRestartBtn = document.getElementById('speed-restart-btn');
+        const speedBackToMenuBtn = document.getElementById('speed-back-to-menu-btn'); // From results screen
+        const speedBackToMenuBtnIngame = document.getElementById('speed-back-to-menu-btn-ingame'); // From in-game
+        const speedFinalScoreEl = document.getElementById('speed-final-score');
+        const speedTotalQsEl = document.getElementById('speed-total-qs');
+        const speedFinalTotalEl = document.getElementById('speed-final-total');
+        const speedRoundContainer = document.getElementById('speed-round-container');
+
+        // Function to fetch data
+        async function loadQuizData() {
+            try {
+                const foodNounsResponse = await fetch('food_nouns.json');
+                if (!foodNounsResponse.ok) {
+                    throw new Error(`HTTP error! status: ${foodNounsResponse.status} for food_nouns.json`);
+                }
+                foodNouns = await foodNounsResponse.json();
+
+                const mekQuestionsResponse = await fetch('mek_questions.json');
+                if (!mekQuestionsResponse.ok) {
+                    throw new Error(`HTTP error! status: ${mekQuestionsResponse.status} for mek_questions.json`);
+                }
+                mekQuizQuestions = await mekQuestionsResponse.json();
+
+                console.log("Quiz data loaded successfully!", foodNouns.length, "nouns,", mekQuizQuestions.length, "MEK questions.");
+                initializeUI();
+
+            } catch (error) {
+                console.error("Could not load quiz data:", error);
+                const mainContainer = document.getElementById('main-container');
+                if (mainContainer) {
+                    mainContainer.innerHTML = `
+                        <div class="text-center">
+                            <h1 class="text-2xl font-bold text-red-600 mb-4">Fehler beim Laden der Quizdaten</h1>
+                            <p class="mb-2">Die Quizfragen konnten nicht geladen werden. Bitte überprüfe, ob die Dateien <code>food_nouns.json</code> und <code>mek_questions.json</code> im selben Verzeichnis wie die HTML-Datei vorhanden und korrekt formatiert sind.</p>
+                            <p class="text-sm text-gray-700 mb-4">Details: ${error.message}</p>
+                            <button onclick="location.reload()" class="btn btn-primary">Seite neu laden</button>
+                        </div>`;
+                } else {
+                    alert("Schwerwiegender Fehler: Quizdaten konnten nicht geladen werden und Hauptcontainer nicht gefunden.");
+                }
+            }
+        }
+
+        function initializeUI() {
+            quizModeBtn.disabled = false;
+            speedModeBtn.disabled = false;
+            mekQuizModeBtn.disabled = false;
+            // Ensure mode selection is visible if it wasn't already
+            showModeSelection();
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function triggerConfetti() {
+            if (typeof confetti === 'function') {
+                confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
+            }
+        }
+
+        function clearAutoAdvance(timeoutVar) {
+            clearTimeout(timeoutVar);
+        }
+
+        // Mode Selection Functions
+        function showModeSelection() {
+            modeSelectionScreen.classList.remove('hidden');
+            quizModeScreen.classList.add('hidden');
+            speedModeScreen.classList.add('hidden');
+            mekQuizModeScreen.classList.add('hidden');
+            clearInterval(speedInterval);
+            clearAutoAdvance(autoAdvanceTimeout);
+            hintAreaEl.classList.add('hidden');
+            mekHintAreaEl.classList.add('hidden');
+            mekNextQuestionBtnEl.classList.add('hidden');
+        }
+
+        function showQuizMode() { // DerDieDas
+            if (foodNouns.length === 0) { alert("Keine Fragen für Der/Die/Das Quiz geladen."); return; }
+            modeSelectionScreen.classList.add('hidden');
+            quizModeScreen.classList.remove('hidden');
+            speedModeScreen.classList.add('hidden');
+            mekQuizModeScreen.classList.add('hidden');
+            startQuiz();
+        }
+
+        function showMekQuizMode() { // MeinEinKein
+            if (mekQuizQuestions.length === 0) { alert("Keine Fragen für Mein/Ein/Kein Quiz geladen."); return; }
+            modeSelectionScreen.classList.add('hidden');
+            quizModeScreen.classList.add('hidden');
+            speedModeScreen.classList.add('hidden');
+            mekQuizModeScreen.classList.remove('hidden');
+            startMekQuiz();
+        }
+
+        function showSpeedMode() {
+            if (foodNouns.length === 0) { alert("Keine Fragen für Speed Learning geladen."); return; }
+            modeSelectionScreen.classList.add('hidden');
+            quizModeScreen.classList.add('hidden');
+            mekQuizModeScreen.classList.add('hidden');
+            speedModeScreen.classList.remove('hidden');
+            startSpeedRound();
+        }
+
+        // Quiz Mode (DerDieDas) Functions
+        function startQuiz() {
+            shuffledQuestions = [...foodNouns];
+            shuffleArray(shuffledQuestions);
+            currentQuestionIndex = 0;
+            score = 0;
+            answerSelected = false;
+            clearAutoAdvance(autoAdvanceTimeout);
+            feedbackAreaEl.classList.add('hidden');
+            nextQuestionBtn.classList.add('hidden');
+            restartQuizBtn.classList.add('hidden');
+            hintAreaEl.classList.add('hidden');
+            document.getElementById('question-area').classList.remove('hidden');
+            choicesContainerEl.classList.remove('hidden');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            answerSelected = false;
+            clearAutoAdvance(autoAdvanceTimeout);
+            if (currentQuestionIndex < shuffledQuestions.length) {
+                const question = shuffledQuestions[currentQuestionIndex];
+                nounDisplayEl.textContent = question.noun;
+                translationDisplayEl.textContent = `${question.en} / ${question.es}`;
+                feedbackAreaEl.classList.add('hidden','correct','incorrect');
+                feedbackAreaEl.textContent = '';
+                nextQuestionBtn.classList.add('hidden');
+                hintAreaEl.classList.add('hidden');
+                enableChoiceButtons();
+                updateProgress();
+            } else {
+                showResults();
+            }
+        }
+
+       function enableChoiceButtons(enable = true) {
+            artikelButtons.forEach(button => {
+                button.disabled = !enable;
+                button.classList.remove('opacity-50', 'bg-green-600', 'bg-red-600', 'bg-green-400');
+                // Re-apply base color
+                const baseClass = `btn-${button.dataset.artikel}`; // e.g., btn-der
+                button.classList.add(baseClass);
+            });
+        }
+
+        function handleAnswer(selectedArtikel) {
+            if (answerSelected) return;
+            answerSelected = true;
+            // enableChoiceButtons(false); // Buttons get specific styling below
+
+            const question = shuffledQuestions[currentQuestionIndex];
+            const isCorrect = selectedArtikel === question.article;
+
+            feedbackAreaEl.classList.remove('hidden', 'correct', 'incorrect');
+            if (isCorrect) {
+                score++;
+                feedbackAreaEl.innerHTML = `Richtig! <span class="correct-answer-text">${question.article} ${question.noun}</span>`;
+                feedbackAreaEl.classList.add('correct');
+                triggerConfetti();
+            } else {
+                feedbackAreaEl.innerHTML = `Falsch. Richtig ist: <span class="correct-answer-text">${question.article} ${question.noun}</span>`;
+                feedbackAreaEl.classList.add('incorrect');
+            }
+
+            artikelButtons.forEach(btn => {
+                const isSelectedButton = btn.dataset.artikel === selectedArtikel;
+                const isCorrectButton = btn.dataset.artikel === question.article;
+                btn.classList.remove('btn-der', 'btn-die', 'btn-das', 'opacity-50');
+                if (isSelectedButton) {
+                    btn.classList.add(isCorrect ? 'bg-green-600' : 'bg-red-600');
+                } else if (isCorrectButton) {
+                    btn.classList.add('bg-green-400'); // Highlight correct one if user was wrong
+                } else {
+                    btn.classList.add('opacity-50');
+                     // Re-apply base color for non-selected, non-correct, to maintain some visibility
+                     const baseClass = `btn-${btn.dataset.artikel}`;
+                     btn.classList.add(baseClass);
+                }
+                 btn.disabled = true;
+            });
+            updateProgress();
+            if (currentQuestionIndex < shuffledQuestions.length - 1) {
+                 autoAdvanceTimeout = setTimeout(() => {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                 }, 1500);
+            } else {
+                  autoAdvanceTimeout = setTimeout(() => {
+                    restartQuizBtn.textContent = "Ergebnisse anzeigen";
+                    restartQuizBtn.classList.remove('hidden');
+                    restartQuizBtn.onclick = showResults;
+                    hintAreaEl.innerHTML = `Drücke <kbd>Leertaste</kbd> für Ergebnisse`;
+                    hintAreaEl.classList.remove('hidden');
+                 }, 1500);
+            }
+        }
+
+        function updateProgress() {
+            progressIndicatorEl.textContent = `Frage: ${Math.min(currentQuestionIndex + 1, shuffledQuestions.length)} / ${shuffledQuestions.length}`;
+            scoreIndicatorEl.textContent = `Punkte: ${score} / ${shuffledQuestions.length}`;
+        }
+
+        function showResults() {
+            clearAutoAdvance(autoAdvanceTimeout);
+            document.getElementById('question-area').classList.add('hidden');
+            choicesContainerEl.classList.add('hidden');
+            nextQuestionBtn.classList.add('hidden');
+            feedbackAreaEl.classList.remove('hidden', 'incorrect');
+            feedbackAreaEl.classList.add('correct');
+            feedbackAreaEl.innerHTML = `Quiz beendet! Dein Endergebnis: <br><span class="text-2xl font-bold">${score} von ${shuffledQuestions.length}</span>`;
+            progressIndicatorEl.textContent = `Quiz beendet!`;
+            scoreIndicatorEl.textContent = `Endstand: ${score} / ${shuffledQuestions.length}`;
+            restartQuizBtn.textContent = "Quiz neu starten";
+            restartQuizBtn.classList.remove('hidden');
+            restartQuizBtn.onclick = startQuiz;
+            hintAreaEl.innerHTML = `Drücke <kbd>Leertaste</kbd> zum Neustarten`;
+            hintAreaEl.classList.remove('hidden');
+        }
+
+        // MEIN/EIN/KEIN Quiz Functions
+        function startMekQuiz() {
+            mekShuffledQuestions = [...mekQuizQuestions];
+            shuffleArray(mekShuffledQuestions);
+            mekCurrentQuestionIndex = 0;
+            mekScore = 0;
+            mekAnswerSelected = false;
+            mekFeedbackAreaEl.classList.add('hidden');
+            mekRestartQuizBtn.classList.add('hidden');
+            mekNextQuestionBtnEl.classList.add('hidden');
+            mekHintAreaEl.classList.add('hidden');
+            document.getElementById('mek-question-area').classList.remove('hidden');
+            mekChoicesContainerEl.classList.remove('hidden');
+            loadMekQuestion();
+        }
+
+        function getTooltipText(baseChoice, declinedForm, genderNoun, caseNoun, noun, exampleDe, exampleEs, grammarDe, grammarEs) {
+            let conceptDe = "";
+            let conceptEs = "";
+            let emoji = "🤔";
+
+            if (baseChoice === "mein") {
+                conceptDe = "POSSESSIV"; conceptEs = "POSESIVO"; emoji = "🧸";
+            } else if (baseChoice === "ein") {
+                conceptDe = "INDEFINIT"; conceptEs = "INDEFINIDO"; emoji = "❔";
+            } else if (baseChoice === "kein") {
+                conceptDe = "NEGATION"; conceptEs = "NEGACIÓN"; emoji = "🚫";
+            }
+            return `${emoji} ${conceptDe.toUpperCase()} (${declinedForm.toUpperCase()}) - Zeigt ${baseChoice === 'mein' ? 'Besitz' : (baseChoice === 'ein' ? 'ein unbestimmtes Nomen' : 'Negation')} an.
+Form für "${noun}" (${grammarDe}).
+🇩🇪 ${exampleDe || ''}
+🇪🇸 ${conceptEs.toUpperCase()} - ${exampleEs || ''}`;
+        }
+
+
+        function loadMekQuestion() {
+            mekAnswerSelected = false;
+            mekNextQuestionBtnEl.classList.add('hidden');
+            mekHintAreaEl.classList.add('hidden');
+
+
+            if (mekCurrentQuestionIndex < mekShuffledQuestions.length) {
+                const question = mekShuffledQuestions[mekCurrentQuestionIndex];
+
+                let sentenceHtmlDe = question.sentence_template_de.replace("__", "<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>");
+                if(question.extra_context_de) sentenceHtmlDe += question.extra_context_de;
+                mekSentenceDisplayEl.innerHTML = sentenceHtmlDe;
+
+                let sentenceHtmlEs = question.spanish_sentence_template.replace("__", "<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>");
+                if(question.extra_context_es) sentenceHtmlEs += question.extra_context_es;
+                mekSentenceTranslationDisplayEl.innerHTML = sentenceHtmlEs;
+
+
+                mekMeinBtn.textContent = question.declined_options.mein.toUpperCase();
+                mekMeinBtn.title = getTooltipText("mein", question.declined_options.mein, question.noun_gender, question.noun_case, question.noun_de, question.example_context_de, question.example_context_es, question.feedback_grammar_de, question.feedback_grammar_es);
+
+                mekEinBtn.textContent = question.declined_options.ein.toUpperCase();
+                mekEinBtn.title = getTooltipText("ein", question.declined_options.ein, question.noun_gender, question.noun_case, question.noun_de, question.example_context_de, question.example_context_es, question.feedback_grammar_de, question.feedback_grammar_es);
+
+                mekKeinBtn.textContent = question.declined_options.kein.toUpperCase();
+                mekKeinBtn.title = getTooltipText("kein", question.declined_options.kein, question.noun_gender, question.noun_case, question.noun_de, question.example_context_de, question.example_context_es, question.feedback_grammar_de, question.feedback_grammar_es);
+
+
+                mekFeedbackAreaEl.classList.add('hidden','correct','incorrect');
+                mekFeedbackAreaEl.innerHTML = '';
+
+                enableMekChoiceButtons(true);
+                updateMekProgress();
+            } else {
+                showMekResults();
+            }
+        }
+
+        function enableMekChoiceButtons(enable = true) {
+            mekArtikelButtons.forEach(button => {
+                button.disabled = !enable;
+                button.classList.remove('opacity-50', 'bg-green-600', 'bg-red-600', 'bg-green-400');
+                const base = button.dataset.artikelBase;
+                if (base === 'mein') button.classList.add('btn-mein');
+                else if (base === 'ein') button.classList.add('btn-ein');
+                else if (base === 'kein') button.classList.add('btn-kein');
+            });
+        }
+
+        function handleMekAnswer(selectedBaseArtikel) {
+            if (mekAnswerSelected) return;
+            mekAnswerSelected = true;
+            // enableMekChoiceButtons(false); // Buttons get specific styling below
+
+            const question = mekShuffledQuestions[mekCurrentQuestionIndex];
+            const isCorrect = selectedBaseArtikel === question.correct_choice_base;
+
+            const correctDeclinedForm = question.declined_options[question.correct_choice_base];
+            const fullCorrectSentenceDe = question.sentence_template_de.replace("__", `<strong class="correct-answer-text">${correctDeclinedForm}</strong>`);
+            const userSelectedDeclinedForm = question.declined_options[selectedBaseArtikel];
+
+
+            let feedbackHTML = '';
+            if (isCorrect) {
+                mekScore++;
+                feedbackHTML = `
+                    <div>
+                        <p class="font-bold text-lg">Richtig! ✅</p>
+                        <p>Die korrekte Antwort ist '<b>${correctDeclinedForm}</b>'.</p>
+                        <p>Satz: <i>${fullCorrectSentenceDe}</i></p>
+                        <p class="text-sm mt-1">Das ist ${question.feedback_grammar_de} für "<i>${question.noun_de}</i>".</p>
+                        <hr>
+                        <p class="text-sm text-gray-600">¡Correcto! ✅ La forma correcta es '<b>${correctDeclinedForm}</b>'.</p>
+                        <p class="text-sm text-gray-600">Oración: <i>${question.spanish_sentence_template.replace("__", `(${correctDeclinedForm})`)}</i></p>
+                        <p class="text-xs text-gray-500">(Esto es ${question.feedback_grammar_es} para "<i>${question.noun_es}</i>".)</p>
+                    </div>`;
+                triggerConfetti();
+            } else {
+                feedbackHTML = `
+                    <div>
+                        <p class="font-bold text-lg">Leider falsch. 😟</p>
+                        <p>Du hast '${userSelectedDeclinedForm}' (Konzept: ${selectedBaseArtikel.toUpperCase()}) gewählt.</p>
+                        <p>Die korrekte Antwort ist '<b>${correctDeclinedForm}</b>' (Konzept: ${question.correct_choice_base.toUpperCase()}).</p>
+                        <p>Satz: <i>${fullCorrectSentenceDe}</i></p>
+                        <p class="text-sm mt-1">Das ist ${question.feedback_grammar_de} für "<i>${question.noun_de}</i>".</p>
+                        <hr>
+                        <p class="text-sm text-gray-600">Incorrecto. 😟 La forma correcta es '<b>${correctDeclinedForm}</b>'. </p>
+                        <p class="text-sm text-gray-600">Oración: <i>${question.spanish_sentence_template.replace("__", `(${correctDeclinedForm})`)}</i></p>
+                        <p class="text-xs text-gray-500">(Esto es ${question.feedback_grammar_es} para "<i>${question.noun_es}</i>".)</p>
+                    </div>`;
+            }
+            mekFeedbackAreaEl.innerHTML = feedbackHTML;
+            mekFeedbackAreaEl.classList.remove('hidden');
+            mekFeedbackAreaEl.className = isCorrect ? 'feedback-area correct' : 'feedback-area incorrect';
+
+
+             mekArtikelButtons.forEach(btn => {
+                const btnBase = btn.dataset.artikelBase;
+                const isSelectedButton = btnBase === selectedBaseArtikel;
+                const isCorrectChoiceButton = btnBase === question.correct_choice_base;
+
+                btn.classList.remove('btn-mein', 'btn-ein', 'btn-kein', 'opacity-50');
+
+                if (isSelectedButton) {
+                    btn.classList.add(isCorrect ? 'bg-green-600' : 'bg-red-600');
+                } else if (isCorrectChoiceButton) {
+                    btn.classList.add('bg-green-400');
+                } else {
+                    btn.classList.add('opacity-50');
+                    // Re-apply base class for non-selected, non-correct
+                    if (btnBase === 'mein') btn.classList.add('btn-mein');
+                    else if (btnBase === 'ein') btn.classList.add('btn-ein');
+                    else if (btnBase === 'kein') btn.classList.add('btn-kein');
+                }
+                btn.disabled = true;
+            });
+
+            updateMekProgress();
+
+            if (mekCurrentQuestionIndex < mekShuffledQuestions.length - 1) {
+                mekNextQuestionBtnEl.textContent = "Nächste Frage";
+                mekNextQuestionBtnEl.onclick = () => { mekCurrentQuestionIndex++; loadMekQuestion(); };
+            } else {
+                mekNextQuestionBtnEl.textContent = "Ergebnisse anzeigen";
+                mekNextQuestionBtnEl.onclick = showMekResults;
+            }
+            mekNextQuestionBtnEl.classList.remove('hidden');
+            mekHintAreaEl.innerHTML = `Drücke <kbd>Leertaste</kbd> oder klicke '${mekNextQuestionBtnEl.textContent}'.`;
+            mekHintAreaEl.classList.remove('hidden');
+        }
+
+        function updateMekProgress() {
+            mekProgressIndicatorEl.textContent = `Frage: ${Math.min(mekCurrentQuestionIndex + 1, mekShuffledQuestions.length)} / ${mekShuffledQuestions.length}`;
+            mekScoreIndicatorEl.textContent = `Punkte: ${mekScore} / ${mekShuffledQuestions.length}`;
+        }
+
+        function showMekResults() {
+            mekNextQuestionBtnEl.classList.add('hidden');
+            mekHintAreaEl.classList.add('hidden');
+            document.getElementById('mek-question-area').classList.add('hidden');
+            mekChoicesContainerEl.classList.add('hidden');
+
+            mekFeedbackAreaEl.classList.remove('hidden', 'incorrect');
+            mekFeedbackAreaEl.classList.add('correct');
+            mekFeedbackAreaEl.innerHTML = `<p class="text-xl font-bold">Quiz beendet!</p> Dein Endergebnis: <br><strong class="text-2xl">${mekScore} von ${mekShuffledQuestions.length}</strong>`;
+
+            mekProgressIndicatorEl.textContent = `Quiz beendet!`;
+            mekScoreIndicatorEl.textContent = `Endstand: ${mekScore} / ${mekShuffledQuestions.length}`;
+
+            mekRestartQuizBtn.textContent = "Quiz neu starten";
+            mekRestartQuizBtn.classList.remove('hidden');
+            mekRestartQuizBtn.onclick = startMekQuiz;
+            mekHintAreaEl.innerHTML = `Drücke <kbd>Leertaste</kbd> zum Neustarten.`;
+            mekHintAreaEl.classList.remove('hidden');
+        }
+
+
+        // Speed Mode Functions
+         function startSpeedRound() {
+            speedQuestions = [...foodNouns]; // Use the loaded foodNouns
+            shuffleArray(speedQuestions);
+            speedCurrentIndex = 0;
+            speedScore = 0;
+            speedPaused = false;
+            speedAnswered = false;
+            speedCompleteEl.classList.add('hidden');
+            speedRoundContainer.classList.remove('hidden');
+            speedPauseBtn.textContent = '⏸️ Pause';
+            speedTotalQsEl.textContent = speedQuestions.length;
+            speedFinalTotalEl.textContent = speedQuestions.length; // Set this once
+            showSpeedQuestion();
+        }
+
+        function showSpeedQuestion() {
+            if (speedCurrentIndex >= speedQuestions.length) {
+                completeSpeedRound(); return;
+            }
+            speedAnswered = false;
+            const currentQuestion = speedQuestions[speedCurrentIndex];
+            speedWordDeEl.textContent = currentQuestion.noun;
+            speedWordTransEl.textContent = `${currentQuestion.en} / ${currentQuestion.es}`;
+            speedProgressEl.textContent = `${speedCurrentIndex + 1} / ${speedQuestions.length}`;
+            speedFeedbackEl.classList.add('hidden');
+            speedChoicesEl.innerHTML = ''; // Clear previous buttons
+            const articles = ["der", "die", "das"];
+            const colors = { der: "btn-der", die: "btn-die", das: "btn-das" }; // Use original button colors for consistency
+            articles.forEach(article => {
+                const button = document.createElement('button');
+                button.className = `btn ${colors[article]} text-lg py-4 px-5`;
+                button.textContent = article.toUpperCase();
+                button.onclick = () => handleSpeedAnswer(article);
+                speedChoicesEl.appendChild(button);
+            });
+            // Dynamic background for speed round card
+            const bgColors = ['linear-gradient(135deg, #667eea 0%, #764ba2 100%)', 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)', 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)', 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)', 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'];
+            speedRoundContainer.style.background = bgColors[speedCurrentIndex % bgColors.length];
+            startSpeedTimer();
+        }
+
+        function handleSpeedAnswer(selectedAnswer) {
+            if (speedAnswered) return;
+            speedAnswered = true;
+            clearInterval(speedInterval);
+            const currentQuestion = speedQuestions[speedCurrentIndex];
+            const isCorrect = selectedAnswer === currentQuestion.article;
+            if (isCorrect) {
+                speedScore++;
+                speedFeedbackEl.textContent = '✅ Richtig!';
+                speedFeedbackEl.className = 'text-lg font-bold mb-4 text-green-300'; // Green feedback for correct
+            } else {
+                speedFeedbackEl.textContent = `❌ Falsch! Richtig: ${currentQuestion.article.toUpperCase()}`;
+                speedFeedbackEl.className = 'text-lg font-bold mb-4 text-red-300'; // Red feedback for incorrect
+            }
+            speedFeedbackEl.classList.remove('hidden');
+
+            const buttons = speedChoicesEl.querySelectorAll('button');
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                const btnArticle = btn.textContent.toLowerCase();
+                 if (btnArticle === selectedAnswer) { // The button the user clicked
+                    btn.className = isCorrect ? 'btn bg-green-600 text-lg py-4 px-5' : 'btn bg-red-600 text-lg py-4 px-5';
+                } else if (btnArticle === currentQuestion.article && !isCorrect) { // The correct button, if user was wrong
+                    btn.className = 'btn bg-green-400 text-lg py-4 px-5'; // Softer green for correct answer not chosen
+                } else { // Other buttons
+                    btn.className = 'btn bg-gray-500 text-lg py-4 px-5 opacity-50';
+                }
+            });
+
+            setTimeout(() => {
+                speedCurrentIndex++;
+                showSpeedQuestion();
+            }, 1500); // Time to see feedback
+        }
+
+        function startSpeedTimer() {
+            if (speedPaused || speedAnswered) return;
+            clearInterval(speedInterval);
+            let timeLeft = speedTimePerCard;
+            timerFillEl.style.transition = 'none'; // Reset transition for instant width change
+            timerFillEl.style.width = '100%';
+            // Force reflow/repaint to apply the 100% width before starting the transition
+            timerFillEl.offsetHeight;
+            // Now set the transition and target width
+            timerFillEl.style.transition = `width ${speedTimePerCard / 1000}s linear`;
+            timerFillEl.style.width = '0%';
+
+            speedInterval = setTimeout(() => {
+                if (speedPaused || speedAnswered) return; // Check again in case paused right before timeout
+                speedAnswered = true; // Mark as answered due to time out
+                const currentQuestion = speedQuestions[speedCurrentIndex];
+                speedFeedbackEl.textContent = `⏰ Zeit um! Richtig: ${currentQuestion.article.toUpperCase()}`;
+                speedFeedbackEl.className = 'text-lg font-bold mb-4 text-orange-300'; // Orange for timeout
+                speedFeedbackEl.classList.remove('hidden');
+                const buttons = speedChoicesEl.querySelectorAll('button');
+                buttons.forEach(btn => {
+                    btn.disabled = true;
+                    if (btn.textContent.toLowerCase() === currentQuestion.article) {
+                        btn.className = 'btn bg-green-400 text-lg py-4 px-5'; // Highlight correct answer
+                    } else {
+                        btn.className = 'btn bg-gray-500 text-lg py-4 px-5 opacity-50';
+                    }
+                });
+                setTimeout(() => {
+                    speedCurrentIndex++;
+                    showSpeedQuestion();
+                }, 1500); // Time to see feedback
+            }, speedTimePerCard);
+        }
+
+
+        function toggleSpeedPause() {
+            speedPaused = !speedPaused;
+            speedPauseBtn.textContent = speedPaused ? '▶️ Weiter' : '⏸️ Pause';
+            if (speedPaused) {
+                clearInterval(speedInterval);
+                // Capture current width of timer bar
+                const computedStyle = getComputedStyle(timerFillEl);
+                timerFillEl.style.width = computedStyle.width;
+                timerFillEl.style.transition = 'none'; // Stop any ongoing transition
+            } else {
+                // Resume timer if not answered and not at the end
+                if (speedCurrentIndex < speedQuestions.length && !speedAnswered) {
+                    // Calculate remaining time based on current width percentage
+                    const currentWidthPx = parseFloat(timerFillEl.style.width || '0');
+                    const parentWidthPx = timerFillEl.parentNode.offsetWidth;
+                    const currentWidthPercentage = (currentWidthPx / parentWidthPx) * 100;
+                    const remainingTime = (currentWidthPercentage / 100) * speedTimePerCard;
+
+                    timerFillEl.style.transition = `width ${remainingTime / 1000}s linear`;
+                    timerFillEl.style.width = '0%'; // Animate to 0% over remaining time
+
+                    clearInterval(speedInterval); // Clear any old interval
+                    speedInterval = setTimeout(() => {
+                        if (speedPaused || speedAnswered) return;
+                        speedAnswered = true;
+                        const currentQuestion = speedQuestions[speedCurrentIndex];
+                        speedFeedbackEl.textContent = `⏰ Zeit um! Richtig: ${currentQuestion.article.toUpperCase()}`;
+                        speedFeedbackEl.className = 'text-lg font-bold mb-4 text-orange-300';
+                        speedFeedbackEl.classList.remove('hidden');
+                        setTimeout(() => { speedCurrentIndex++; showSpeedQuestion(); }, 1500);
+                    }, remainingTime);
+                }
+            }
+        }
+
+
+        function completeSpeedRound() {
+            clearInterval(speedInterval);
+            speedRoundContainer.classList.add('hidden');
+            speedCompleteEl.classList.remove('hidden');
+            speedFinalScoreEl.textContent = speedScore;
+            // speedFinalTotalEl is already set in startSpeedRound
+            triggerConfetti();
+        }
+
+        // Handle Spacebar Press
+        function handleSpacebar(event) {
+            if (event.code !== 'Space' && event.keyCode !== 32) { return; }
+
+            // Check if the active element is a button or input, if so, let default behavior happen
+            if (document.activeElement && (document.activeElement.tagName === 'BUTTON' || document.activeElement.tagName === 'INPUT')) {
+                 // Allow space to "click" a focused button if it's not one of our specific control buttons
+                const activeId = document.activeElement.id;
+                const mainControlButtonsIds = [
+                    'next-question-btn', 'restart-quiz-btn',
+                    'mek-next-question-btn', 'mek-restart-quiz-btn'
+                    // Add other buttons you want spacebar to explicitly control through the logic below
+                ];
+                // If space is pressed on a button that isn't one of our main quiz flow buttons,
+                // let the default action (click) occur and don't proceed with custom logic.
+                if (!mainControlButtonsIds.includes(activeId)) {
+                    return;
+                }
+            }
+            event.preventDefault(); // Prevent page scroll only if not on a generic button/input
+
+            if (!quizModeScreen.classList.contains('hidden')) {
+                if (!restartQuizBtn.classList.contains('hidden')) {
+                     clearAutoAdvance(autoAdvanceTimeout); restartQuizBtn.click();
+                } else if (!nextQuestionBtn.classList.contains('hidden')) { // Though usually auto-advances
+                     clearAutoAdvance(autoAdvanceTimeout); nextQuestionBtn.click();
+                }
+            } else if (!mekQuizModeScreen.classList.contains('hidden')) {
+                if (!mekNextQuestionBtnEl.classList.contains('hidden')) {
+                     mekNextQuestionBtnEl.click();
+                } else if (!mekRestartQuizBtn.classList.contains('hidden')) {
+                     mekRestartQuizBtn.click();
+                }
+            }
+            // No specific spacebar action for Speed Mode or Mode Selection Screen in this iteration
+        }
+
+
+        // Event Listeners
+        quizModeBtn.addEventListener('click', showQuizMode);
+        speedModeBtn.addEventListener('click', showSpeedMode);
+        mekQuizModeBtn.addEventListener('click', showMekQuizMode);
+
+        restartQuizBtn.addEventListener('click', () => { clearAutoAdvance(autoAdvanceTimeout); /* onclick is dynamic */ });
+        backToMenuBtn.addEventListener('click', showModeSelection);
+        artikelButtons.forEach(button => {
+            button.addEventListener('click', () => handleAnswer(button.dataset.artikel));
+        });
+
+        // mekNextQuestionBtnEl onclick is dynamic
+        // mekRestartQuizBtn onclick is dynamic
+        mekBackToMenuBtn.addEventListener('click', showModeSelection);
+        mekArtikelButtons.forEach(button => {
+            button.addEventListener('click', () => handleMekAnswer(button.dataset.artikelBase));
+        });
+
+        speedPauseBtn.addEventListener('click', toggleSpeedPause);
+        speedRestartBtn.addEventListener('click', startSpeedRound);
+        speedBackToMenuBtn.addEventListener('click', showModeSelection);
+        speedBackToMenuBtnIngame.addEventListener('click', showModeSelection);
+
+        document.addEventListener('keydown', handleSpacebar);
+
+        // Initial Load
+        async function initialSetup() {
+            // Disable mode buttons until data is loaded
+            quizModeBtn.disabled = true;
+            speedModeBtn.disabled = true;
+            mekQuizModeBtn.disabled = true;
+
+            // Optionally show a loading message within the mode selection screen
+            const loadingMsg = document.createElement('p');
+            loadingMsg.id = "loading-data-msg";
+            loadingMsg.textContent = "Lade Quizdaten...";
+            loadingMsg.className = "text-center text-purple-700 mb-4";
+            // Insert after title (h1) and before the mode-selection div
+            const modeSelectionDiv = modeSelectionScreen.querySelector('.mode-selection');
+            if (modeSelectionDiv) {
+                modeSelectionScreen.insertBefore(loadingMsg, modeSelectionDiv);
+            } else { // Fallback if structure is slightly different
+                 modeSelectionScreen.appendChild(loadingMsg);
+            }
+
+
+            await loadQuizData(); // This will call initializeUI on success
+
+            // Remove loading message if it exists, regardless of success/failure (failure handles UI)
+            const existingLoadingMsg = document.getElementById('loading-data-msg');
+            if(existingLoadingMsg) existingLoadingMsg.remove();
+        }
+
+        initialSetup();
+    </script>
+</body>
+</html>

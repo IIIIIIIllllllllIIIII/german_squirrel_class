@@ -1,0 +1,162 @@
+[
+    {
+        "sentence_template_de": "Das ist __ Banane.", "noun_de": "Banane", "noun_gender": "die", "noun_case": "nominative",
+        "spanish_sentence_template": "Esto es __ plátano.", "noun_es": "plátano",
+        "correct_choice_base": "ein",
+        "declined_options": { "mein": "meine", "ein": "eine", "kein": "keine" },
+        "feedback_grammar_de": "Femininum, Nominativ", "feedback_grammar_es": "Femenino, Nominativo",
+        "example_context_de": "(z.B. Das ist meine Tasche.)", "example_context_es": "(ej. Ésta es mi bolsa.)"
+    },
+    {
+        "sentence_template_de": "Ich möchte __ Apfel.", "noun_de": "Apfel", "noun_gender": "der", "noun_case": "accusative",
+        "spanish_sentence_template": "Quisiera __ manzana.", "noun_es": "manzana",
+        "correct_choice_base": "ein",
+        "declined_options": { "mein": "meinen", "ein": "einen", "kein": "keinen" },
+        "feedback_grammar_de": "Maskulinum, Akkusativ", "feedback_grammar_es": "Masculino, Acusativo",
+        "example_context_de": "(z.B. Ich sehe meinen Hund.)", "example_context_es": "(ej. Veo a mi perro.)"
+    },
+    {
+        "sentence_template_de": "Hast du __ Brot für mich?", "noun_de": "Brot", "noun_gender": "das", "noun_case": "accusative",
+        "spanish_sentence_template": "¿Tienes __ pan para mí?", "noun_es": "pan",
+        "correct_choice_base": "ein",
+        "declined_options": { "mein": "mein", "ein": "ein", "kein": "kein" },
+        "feedback_grammar_de": "Neutrum, Akkusativ", "feedback_grammar_es": "Neutro, Acusativo",
+        "example_context_de": "(z.B. Ich habe mein Auto.)", "example_context_es": "(ej. Tengo mi coche.)"
+    },
+    {
+        "sentence_template_de": "Im Kühlschrank ist __ Milch mehr.", "noun_de": "Milch", "noun_gender": "die", "noun_case": "nominative",
+        "extra_context_de": "<br><span class='context-hint'>(Wir müssen neue kaufen.)</span>",
+        "spanish_sentence_template": "En el refrigerador no hay más __ leche.", "noun_es": "leche",
+        "extra_context_es": "<br><span class='context-hint-es'>(Tenemos que comprar nueva.)</span>",
+        "correct_choice_base": "kein",
+        "declined_options": { "mein": "meine", "ein": "eine", "kein": "keine" },
+        "feedback_grammar_de": "Femininum, Nominativ", "feedback_grammar_es": "Femenino, Nominativo",
+        "example_context_de": "(z.B. Hier ist keine Katze.)", "example_context_es": "(ej. Aquí no hay ningún gato.)"
+    },
+    {
+        "sentence_template_de": "Er trinkt __ Saft zum Frühstück.", "noun_de": "Saft", "noun_gender": "der", "noun_case": "accusative",
+        "spanish_sentence_template": "Él bebe __ jugo para el desayuno.", "noun_es": "jugo",
+        "correct_choice_base": "kein",
+        "extra_context_de": "<br><span class='context-hint'>(Er mag nur Wasser.)</span>",
+        "extra_context_es": "<br><span class='context-hint-es'>(Solo le gusta el agua.)</span>",
+        "declined_options": { "mein": "meinen", "ein": "einen", "kein": "keinen" },
+        "feedback_grammar_de": "Maskulinum, Akkusativ", "feedback_grammar_es": "Masculino, Acusativo",
+        "example_context_de": "(z.B. Er hat keinen Hunger.)", "example_context_es": "(ej. Él no tiene hambre.)"
+    },
+    {
+        "sentence_template_de": "Ist das __ Ei? Es ist so klein!", "noun_de": "Ei", "noun_gender": "das", "noun_case": "nominative",
+        "spanish_sentence_template": "¿Es eso __ huevo? ¡Es tan pequeño!", "noun_es": "huevo",
+        "correct_choice_base": "ein",
+        "declined_options": { "mein": "mein", "ein": "ein", "kein": "kein" },
+        "feedback_grammar_de": "Neutrum, Nominativ", "feedback_grammar_es": "Neutro, Nominativo",
+        "example_context_de": "(z.B. Das ist ein Haus.)", "example_context_es": "(ej. Ésta es una casa.)"
+    },
+     {
+        "sentence_template_de": "Ich suche __ Schlüssel. Hast du ihn gesehen?", "noun_de": "Schlüssel", "noun_gender": "der", "noun_case": "accusative",
+        "spanish_sentence_template": "Busco __ llave. ¿La has visto?", "noun_es": "llave",
+        "correct_choice_base": "mein",
+        "declined_options": { "mein": "meinen", "ein": "einen", "kein": "keinen" },
+        "feedback_grammar_de": "Maskulinum, Akkusativ", "feedback_grammar_es": "Masculino, Acusativo",
+        "example_context_de": "(z.B. Das ist mein Stuhl.)", "example_context_es": "(ej. Ésta es mi silla.)"
+    },
+    {
+        "sentence_template_de": "Sie hat __ Schwester in Berlin.", "noun_de": "Schwester", "noun_gender": "die", "noun_case": "accusative",
+        "spanish_sentence_template": "Ella tiene __ hermana en Berlín.", "noun_es": "hermana",
+        "correct_choice_base": "ein",
+        "declined_options": { "mein": "meine", "ein": "eine", "kein": "keine" },
+        "feedback_grammar_de": "Femininum, Akkusativ", "feedback_grammar_es": "Femenino, Acusativo",
+        "example_context_de": "(z.B. Sie hat eine Idee.)", "example_context_es": "(ej. Ella tiene una idea.)"
+    },
+    {
+        "sentence_template_de": "Wir haben heute __ Zeit für einen Film.", "noun_de": "Zeit", "noun_gender": "die", "noun_case": "accusative",
+        "spanish_sentence_template": "Hoy no tenemos __ tiempo para una película.", "noun_es": "tiempo",
+        "correct_choice_base": "kein",
+        "declined_options": { "mein": "meine", "ein": "eine", "kein": "keine" },
+        "feedback_grammar_de": "Femininum, Akkusativ", "feedback_grammar_es": "Femenino, Acusativo",
+        "example_context_de": "(z.B. Ich habe keine Geschwister.)", "example_context_es": "(ej. No tengo hermanos.)"
+    },
+    {
+        "sentence_template_de": "Das Auto dort ist __ Auto.", "noun_de": "Auto", "noun_gender": "das", "noun_case": "nominative",
+        "extra_context_de": "<br><span class='context-hint'>(Es gehört mir!)</span>",
+        "spanish_sentence_template": "El coche de allí es __ coche.", "noun_es": "coche",
+        "extra_context_es": "<br><span class='context-hint-es'>(¡Me pertenece!)</span>",
+        "correct_choice_base": "mein",
+        "declined_options": { "mein": "mein", "ein": "ein", "kein": "kein" },
+        "feedback_grammar_de": "Neutrum, Nominativ", "feedback_grammar_es": "Neutro, Nominativo",
+        "example_context_de": "(z.B. Das ist mein Buch.)", "example_context_es": "(ej. Éste es mi libro.)"
+    },
+    {
+        "sentence_template_de": "Ich gebe __ Mann das Buch.", "noun_de": "Mann", "noun_gender": "der", "noun_case": "dative",
+        "spanish_sentence_template": "Le doy el libro a __ hombre.", "noun_es": "hombre",
+        "correct_choice_base": "ein",
+        "declined_options": { "mein": "meinem", "ein": "einem", "kein": "keinem" },
+        "feedback_grammar_de": "Maskulinum, Dativ", "feedback_grammar_es": "Masculino, Dativo",
+        "example_context_de": "(z.B. Ich helfe meinem Freund.)", "example_context_es": "(ej. Ayudo a mi amigo.)"
+    },
+    {
+        "sentence_template_de": "Das ist das Haus __ Frau.", "noun_de": "Frau", "noun_gender": "die", "noun_case": "genitive",
+        "spanish_sentence_template": "Esta es la casa de __ mujer.", "noun_es": "mujer",
+        "correct_choice_base": "mein",
+        "declined_options": { "mein": "meiner", "ein": "einer", "kein": "keiner" },
+        "feedback_grammar_de": "Femininum, Genitiv", "feedback_grammar_es": "Femenino, Genitivo",
+        "example_context_de": "(z.B. Das ist das Spielzeug meines Kindes.)", "example_context_es": "(ej. Este es el juguete de mi niño.)"
+    },
+    {
+        "sentence_template_de": "Er spielt mit __ Ball.", "noun_de": "Ball", "noun_gender": "der", "noun_case": "dative",
+        "spanish_sentence_template": "Él juega con __ pelota.", "noun_es": "pelota",
+        "correct_choice_base": "mein",
+        "declined_options": { "mein": "meinem", "ein": "einem", "kein": "keinem" },
+        "feedback_grammar_de": "Maskulinum, Dativ (für 'mein', 'ein', 'kein')", "feedback_grammar_es": "Masculino, Dativo (para 'mi', 'un', 'ningún')",
+        "example_context_de": "(z.B. Ich spiele mit meinem Hund.)", "example_context_es": "(ej. Juego con mi perro.)"
+    },
+    {
+        "sentence_template_de": "Sie braucht __ neuen Computer.", "noun_de": "Computer", "noun_gender": "der", "noun_case": "accusative",
+        "spanish_sentence_template": "Ella necesita __ nueva computadora.", "noun_es": "computadora",
+        "correct_choice_base": "ein",
+        "declined_options": { "mein": "meinen", "ein": "einen", "kein": "keinen" },
+        "feedback_grammar_de": "Maskulinum, Akkusativ", "feedback_grammar_es": "Masculino, Acusativo",
+        "example_context_de": "(z.B. Sie kauft einen Tisch.)", "example_context_es": "(ej. Ella compra una mesa.)"
+    },
+    {
+        "sentence_template_de": "Das Geschenk ist für __ Kind.", "noun_de": "Kind", "noun_gender": "das", "noun_case": "accusative",
+        "spanish_sentence_template": "El regalo es para __ niño.", "noun_es": "niño",
+        "correct_choice_base": "mein",
+        "declined_options": { "mein": "mein", "ein": "ein", "kein": "kein" },
+        "feedback_grammar_de": "Neutrum, Akkusativ", "feedback_grammar_es": "Neutro, Acusativo",
+        "example_context_de": "(z.B. Das ist für mein Team.)", "example_context_es": "(ej. Esto es para mi equipo.)"
+    },
+    {
+        "sentence_template_de": "Wir fahren ohne __ Plan los.", "noun_de": "Plan", "noun_gender": "der", "noun_case": "accusative",
+        "spanish_sentence_template": "Salimos sin __ plan.", "noun_es": "plan",
+        "correct_choice_base": "kein",
+        "declined_options": { "mein": "meinen", "ein": "einen", "kein": "keinen" },
+        "feedback_grammar_de": "Maskulinum, Akkusativ (nach 'ohne')", "feedback_grammar_es": "Masculino, Acusativo (después de 'sin')",
+        "example_context_de": "(z.B. Er geht ohne seinen Mantel.)", "example_context_es": "(ej. Él va sin su abrigo.)"
+    },
+    {
+        "sentence_template_de": "Kannst du mir mit __ Aufgabe helfen?", "noun_de": "Aufgabe", "noun_gender": "die", "noun_case": "dative",
+        "spanish_sentence_template": "¿Puedes ayudarme con __ tarea?", "noun_es": "tarea",
+        "correct_choice_base": "mein",
+        "declined_options": { "mein": "meiner", "ein": "einer", "kein": "keiner" },
+        "feedback_grammar_de": "Femininum, Dativ (nach 'mit')", "feedback_grammar_es": "Femenino, Dativo (después de 'con')",
+        "example_context_de": "(z.B. Ich spreche mit meiner Freundin.)", "example_context_es": "(ej. Hablo con mi amiga.)"
+    },
+    {
+        "sentence_template_de": "Das ist nicht __ Problem.", "noun_de": "Problem", "noun_gender": "das", "noun_case": "nominative",
+        "extra_context_de": "<br><span class='context-hint'>(Sondern deins!)</span>",
+        "spanish_sentence_template": "Eso no es __ problema.", "noun_es": "problema",
+        "extra_context_es": "<br><span class='context-hint-es'>(¡Sino el tuyo!)</span>",
+        "correct_choice_base": "mein",
+        "declined_options": { "mein": "mein", "ein": "ein", "kein": "kein" },
+        "feedback_grammar_de": "Neutrum, Nominativ", "feedback_grammar_es": "Neutro, Nominativo",
+        "example_context_de": "(z.B. Das ist mein Fahrrad.)", "example_context_es": "(ej. Ésta es mi bicicleta.)"
+    },
+    {
+        "sentence_template_de": "Er hat __ Idee, was er tun soll.", "noun_de": "Idee", "noun_gender": "die", "noun_case": "accusative",
+        "spanish_sentence_template": "Él no tiene __ idea de qué hacer.", "noun_es": "idea",
+        "correct_choice_base": "kein",
+        "declined_options": { "mein": "meine", "ein": "eine", "kein": "keine" },
+        "feedback_grammar_de": "Femininum, Akkusativ", "feedback_grammar_es": "Femenino, Acusativo",
+        "example_context_de": "(z.B. Sie hat keine Angst.)", "example_context_es": "(ej. Ella no tiene miedo.)"
+    }
+]
