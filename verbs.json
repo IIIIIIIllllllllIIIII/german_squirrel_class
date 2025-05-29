@@ -1,0 +1,17 @@
+[
+    { "id": "sein", "infinitive": "sein", "translation": "to be", "conjugations": { "ich": "bin", "du": "bist", "er/sie/es": "ist", "wir": "sind", "ihr": "seid", "sie/Sie": "sind" }},
+    { "id": "haben", "infinitive": "haben", "translation": "to have", "conjugations": { "ich": "habe", "du": "hast", "er/sie/es": "hat", "wir": "haben", "ihr": "habt", "sie/Sie": "haben" }},
+    { "id": "sprechen", "infinitive": "sprechen", "translation": "to speak", "conjugations": { "ich": "spreche", "du": "sprichst", "er/sie/es": "spricht", "wir": "sprechen", "ihr": "sprecht", "sie/Sie": "sprechen" }},
+    { "id": "leben", "infinitive": "leben", "translation": "to live", "conjugations": { "ich": "lebe", "du": "lebst", "er/sie/es": "lebt", "wir": "leben", "ihr": "lebt", "sie/Sie": "leben" }},
+    { "id": "lernen", "infinitive": "lernen", "translation": "to learn", "conjugations": { "ich": "lerne", "du": "lernst", "er/sie/es": "lernt", "wir": "lernen", "ihr": "lernt", "sie/Sie": "lernen" }},
+    { "id": "wohnen", "infinitive": "wohnen", "translation": "to reside", "conjugations": { "ich": "wohne", "du": "wohnst", "er/sie/es": "wohnt", "wir": "wohnen", "ihr": "wohnt", "sie/Sie": "wohnen" }},
+    { "id": "heißen", "infinitive": "heißen", "translation": "to be called", "conjugations": { "ich": "heiße", "du": "heißt", "er/sie/es": "heißt", "wir": "heißen", "ihr": "heißt", "sie/Sie": "heißen" }},
+    { "id": "kommen", "infinitive": "kommen", "translation": "to come", "conjugations": { "ich": "komme", "du": "kommst", "er/sie/es": "kommt", "wir": "kommen", "ihr": "kommt", "sie/Sie": "kommen" }},
+    { "id": "machen", "infinitive": "machen", "translation": "to do/make", "conjugations": { "ich": "mache", "du": "machst", "er/sie/es": "macht", "wir": "machen", "ihr": "macht", "sie/Sie": "machen" }},
+    { "id": "gehen", "infinitive": "gehen", "translation": "to go", "conjugations": { "ich": "gehe", "du": "gehst", "er/sie/es": "geht", "wir": "gehen", "ihr": "geht", "sie/Sie": "gehen" }},
+    { "id": "trinken", "infinitive": "trinken", "translation": "to drink", "conjugations": { "ich": "trinke", "du": "trinkst", "er/sie/es": "trinkt", "wir": "trinken", "ihr": "trinkt", "sie/Sie": "trinken" }},
+    { "id": "schreiben", "infinitive": "schreiben", "translation": "to write", "conjugations": { "ich": "schreibe", "du": "schreibst", "er/sie/es": "schreibt", "wir": "schreiben", "ihr": "schreibt", "sie/Sie": "schreiben" }},
+    { "id": "lesen", "infinitive": "lesen", "translation": "to read", "conjugations": { "ich": "lese", "du": "liest", "er/sie/es": "liest", "wir": "lesen", "ihr": "lest", "sie/Sie": "lesen" }},
+    { "id": "sehen", "infinitive": "sehen", "translation": "to see", "conjugations": { "ich": "sehe", "du": "siehst", "er/sie/es": "sieht", "wir": "sehen", "ihr": "seht", "sie/Sie": "sehen" }},
+    { "id": "essen", "infinitive": "essen", "translation": "to eat", "conjugations": { "ich": "esse", "du": "isst", "er/sie/es": "isst", "wir": "essen", "ihr": "esst", "sie/Sie": "essen" }}
+]
