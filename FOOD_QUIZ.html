@@ -129,137 +129,116 @@
         }
 
         .feedback-area {
-            font-size: 0.95rem; /* Adjusted for more text */
-            font-weight: 500; /* Adjusted for more text */
+            font-size: 0.95rem;
+            font-weight: 500;
             padding: 12px;
             border-radius: 8px;
-            min-height: 100px; /* Increased for more text */
-            margin-bottom: 1.5rem;
-            text-align: left; /* Better for paragraphs of feedback */
+            min-height: 60px; /* Adjusted as detailed results are separate */
+            margin-bottom: 1rem; /* Adjusted */
+            text-align: center; /* Overall score can be centered */
         }
         .feedback-area p { margin-bottom: 0.5em; }
         .feedback-area hr { border-top: 1px solid #e5e7eb; margin-top:0.5rem; margin-bottom:0.5rem;}
 
-        .feedback-area.correct {
-            color: #047857; background-color: #d1fae5; border: 1px solid #a7f3d0; display: block !important;
+        .feedback-area.correct { /* General summary style */
+            color: #065f46; background-color: #dcfce7; border: 1px solid #bbf7d0; display: block !important;
         }
-        .feedback-area.incorrect {
+        .feedback-area.incorrect { /* For individual question feedback if needed (not primary use here) */
             color: #b91c1c; background-color: #fee2e2; border: 1px solid #fecaca; display: block !important;
         }
-        .feedback-area .correct-answer-text, .feedback-area strong { /* For inline strong tags */
+        .feedback-area .correct-answer-text, .feedback-area strong {
             font-weight: 700;
         }
+
+        .detailed-results-list {
+            margin-top: 1rem;
+            text-align: left;
+            max-height: 200px; /* Adjust as needed */
+            overflow-y: auto;
+            padding: 0.75rem;
+            border: 1px solid #e5e7eb; /* Tailwind gray-200 */
+            border-radius: 8px;
+            background-color: #f9fafb; /* Tailwind gray-50 */
+        }
+        .detailed-results-list h3 {
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 600; /* semibold */
+            margin-bottom: 0.75rem;
+        }
+        .detailed-results-list ul { list-style: none; padding: 0; }
+        .detailed-results-list li {
+            margin-bottom: 0.75rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            font-size: 0.875rem; /* text-sm */
+        }
+        .result-correct { background-color: #ecfdf5; border-left: 4px solid #10b981; } /* Tailwind green-50, green-500 */
+        .result-incorrect { background-color: #fff1f2; border-left: 4px solid #f43f5e; } /* Tailwind rose-50, rose-500 */
 
 
         .progress-text { margin-top: 12px; font-size: 0.875rem; color: #6b7280; }
         .hidden { display: none !important; }
 
-        #noun-display { /* For DerDieDas Quiz */
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #4a044e; /* Dark Purple */
-            margin-bottom: 0.5rem;
+        #noun-display {
+            font-size: 2.5rem; font-weight: 700; color: #4a044e; margin-bottom: 0.5rem;
         }
-
-        #translation-display { /* For DerDieDas Quiz */
-            font-size: 1rem;
-            color: #6b7280;
-            font-style: italic;
-            margin-bottom: 2rem;
-            min-height: 40px;
+        #translation-display {
+            font-size: 1rem; color: #6b7280; font-style: italic; margin-bottom: 2rem; min-height: 40px;
         }
-
-        #mek-sentence-display { /* For MEK Quiz */
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #4a044e;
-            margin-bottom: 0.5rem;
-            min-height: 60px;
+        #mek-sentence-display {
+            font-size: 1.5rem; font-weight: 600; color: #4a044e; margin-bottom: 0.5rem; min-height: 60px;
         }
         #mek-sentence-display .context-hint {
-            font-size: 0.9rem;
-            font-style: italic;
-            color: #52525b; /* zinc-600 */
+            font-size: 0.9rem; font-style: italic; color: #52525b;
         }
-
-
-        #mek-sentence-translation-display { /* For MEK Quiz */
-            font-size: 0.9rem;
-            color: #6b7280;
-            font-style: italic;
-            margin-bottom: 2rem;
-            min-height: 30px;
+        #mek-sentence-translation-display {
+            font-size: 0.9rem; color: #6b7280; font-style: italic; margin-bottom: 2rem; min-height: 30px;
         }
          #mek-sentence-translation-display .context-hint-es {
-            font-size: 0.8rem;
-            font-style: italic;
-            color: #52525b;
+            font-size: 0.8rem; font-style: italic; color: #52525b;
         }
-
 
         #artikel-choices-container, #mek-choices-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 16px;
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;
         }
-
         .mode-selection {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
+            display: flex; gap: 16px; justify-content: center; margin-bottom: 24px; flex-wrap: wrap;
         }
-
         .mode-btn {
-            padding: 16px 24px;
-            font-size: 1.1rem;
-            border-radius: 12px;
-            min-width: 200px;
+            padding: 16px 24px; font-size: 1.1rem; border-radius: 12px; min-width: 200px;
         }
-
         kbd {
-            font-family: monospace;
-            background-color: #e2e8f0;
-            color: #4a5568;
-            padding: 3px 6px;
-            border-radius: 4px;
-            border: 1px solid #cbd5e0;
-            font-size: 0.85em;
-            box-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+            font-family: monospace; background-color: #e2e8f0; color: #4a5568; padding: 3px 6px;
+            border-radius: 4px; border: 1px solid #cbd5e0; font-size: 0.85em; box-shadow: 1px 1px 1px rgba(0,0,0,0.1);
         }
 
          @media (max-width: 768px) {
             #artikel-choices-container .btn, #mek-choices-container .btn {
-                flex-basis: calc(33.333% - 10px);
-                 font-size: 1.1rem; /* Adjust for smaller screens */
+                flex-basis: calc(33.333% - 10px); font-size: 1.1rem;
             }
-            .mode-selection {
-                flex-direction: column;
-                align-items: center;
-            }
+            .mode-selection { flex-direction: column; align-items: center; }
             .speed-round-word { font-size: 3rem; }
             #noun-display { font-size: 2rem; }
             #mek-sentence-display { font-size: 1.3rem; }
+            .detailed-results-list { max-height: 180px; }
         }
 
          @media (max-width: 640px) {
             .card { padding: 20px; }
             .btn { padding: 10px 16px; font-size: 0.9rem; }
-            .artikel-option-btn { font-size: 1rem; min-height: 70px; } /* Further adjust for smallest screens */
+            .artikel-option-btn { font-size: 1rem; min-height: 70px; }
             #noun-display { font-size: 1.8rem; }
             #mek-sentence-display { font-size: 1.1rem; }
             #mek-sentence-translation-display { font-size: 0.8rem;}
-            .feedback-area { font-size: 0.9rem; }
+            .feedback-area { font-size: 0.9rem; min-height: 50px; }
              #artikel-choices-container .btn, #mek-choices-container .btn {
-                flex-basis: calc(100% - 8px);
-                min-width: 100px;
+                flex-basis: calc(100% - 8px); min-width: 100px;
             }
             .speed-round-word { font-size: 2.5rem; }
             .speed-round-meaning { font-size: 1.2rem; }
+            .detailed-results-list { max-height: 150px; font-size: 0.8rem;}
+            .detailed-results-list li { font-size: 0.8rem; }
         }
-
     </style>
 </head>
 <body>
@@ -282,33 +261,30 @@
             </div>
         </div>
 
-        <div id="quiz-mode-screen" class="hidden"> <h1 class="text-2xl sm:text-3xl font-bold text-purple-700 mb-6 text-center">Der, Die, oder Das?</h1>
-
+        <div id="quiz-mode-screen" class="hidden">
+            <h1 class="text-2xl sm:text-3xl font-bold text-purple-700 mb-6 text-center">Der, Die, oder Das?</h1>
             <div id="question-area" class="mb-6">
                  <p id="noun-display" class="text-center" style="min-height: 60px;"></p>
                  <p id="translation-display" class="text-center"></p>
             </div>
-
             <div id="artikel-choices-container" class="mb-6">
                 <button id="der-btn" class="btn artikel-option-btn btn-der" data-artikel="der">DER</button>
                 <button id="die-btn" class="btn artikel-option-btn btn-die" data-artikel="die">DIE</button>
                 <button id="das-btn" class="btn artikel-option-btn btn-das" data-artikel="das">DAS</button>
             </div>
-
             <div id="feedback-area" class="feedback-area hidden"></div>
-
-            <div id="quiz-controls-area" class="text-center">
+            <div id="detailed-results-list" class="detailed-results-list hidden"></div> <div id="quiz-controls-area" class="text-center mt-4">
                 <button id="next-question-btn" class="btn btn-primary hidden">Nächste Frage</button>
                 <button id="restart-quiz-btn" class="btn btn-secondary hidden">Quiz neu starten</button>
                 <button id="back-to-menu-btn" class="btn btn-secondary">Zurück zum Menü</button>
             </div>
-
             <div id="progress-indicator" class="progress-text mt-4 text-center">Frage 0 / 0</div>
             <div id="score-indicator" class="progress-text mt-1 text-center">Punkte: 0 / 0</div>
             <div id="hint-area" class="progress-text mt-3 text-center hidden"></div>
         </div>
 
-        <div id="mek-quiz-mode-screen" class="hidden"> <h1 id="mek-title" class="text-2xl sm:text-3xl font-bold text-yellow-600 mb-6 text-center">Mein, Ein, oder Kein?</h1>
+        <div id="mek-quiz-mode-screen" class="hidden">
+            <h1 id="mek-title" class="text-2xl sm:text-3xl font-bold text-yellow-600 mb-6 text-center">Mein, Ein, oder Kein?</h1>
             <div id="mek-question-area" class="mb-6">
                  <p id="mek-sentence-display" class="text-center"></p>
                  <p id="mek-sentence-translation-display" class="text-center"></p>
@@ -319,7 +295,7 @@
                 <button id="mek-kein-btn" class="btn artikel-option-btn btn-kein" data-artikel-base="kein" title=""></button>
             </div>
             <div id="mek-feedback-area" class="feedback-area hidden"></div>
-            <div id="mek-controls-area" class="text-center">
+            <div id="mek-detailed-results-list" class="detailed-results-list hidden"></div> <div id="mek-controls-area" class="text-center mt-4">
                 <button id="mek-next-question-btn" class="btn btn-primary hidden">Nächste Frage</button>
                 <button id="mek-restart-quiz-btn" class="btn btn-secondary hidden">Quiz neu starten</button>
                 <button id="mek-back-to-menu-btn" class="btn btn-secondary">Zurück zum Menü</button>
@@ -329,30 +305,22 @@
             <div id="mek-hint-area" class="progress-text mt-3 text-center hidden"></div>
         </div>
 
-
          <div id="speed-mode-screen" class="hidden">
             <div id="speed-round-container" class="speed-round-card">
                 <div id="speed-question-text" class="text-xl mb-4 opacity-90">Welcher Artikel?</div>
                 <div id="speed-word-de" class="speed-round-word text-yellow-200">Haus</div>
                 <div id="speed-word-trans" class="speed-round-meaning text-yellow-100">House / Casa</div>
-
                 <div class="timer-bar">
                     <div id="timer-fill" class="timer-fill" style="width: 100%;"></div>
                 </div>
-
-                <div id="speed-choices" class="grid grid-cols-3 gap-4 mt-6 mb-4">
-                    </div>
-
+                <div id="speed-choices" class="grid grid-cols-3 gap-4 mt-6 mb-4"></div>
                 <div id="speed-feedback" class="text-lg font-bold mb-4 hidden"></div>
-
                 <div id="speed-progress" class="text-lg opacity-90">1 / 100</div>
-
                 <div id="speed-controls" class="mt-6">
                      <button id="speed-pause-btn" class="btn btn-secondary mr-4">⏸️ Pause</button>
                      <button id="speed-back-to-menu-btn-ingame" class="btn btn-secondary">Zurück</button>
                 </div>
             </div>
-
             <div id="speed-complete" class="hidden text-center">
                 <h2 class="text-2xl font-bold text-green-600 mb-4">🎉 Speed Runde geschafft!</h2>
                 <p class="text-lg mb-2">Du hast <span id="speed-total-qs">100</span> Fragen beantwortet!</p>
@@ -368,28 +336,31 @@
        let foodNouns = [];
        let mekQuizQuestions = [];
 
+       // Variables to store user answers for detailed results
+       let derDieDasUserAnswers = [];
+       let mekUserAnswers = [];
+
         // Quiz Mode (DerDieDas) Variables
         let currentQuestionIndex = 0;
         let score = 0;
         let shuffledQuestions = [];
-        let answerSelected = false; // For DerDieDas Quiz
-        let autoAdvanceTimeout; // For DerDieDas Quiz
+        let answerSelected = false;
+        let autoAdvanceTimeout;
 
         // MEK Quiz Mode Variables
         let mekCurrentQuestionIndex = 0;
         let mekScore = 0;
         let mekShuffledQuestions = [];
-        let mekAnswerSelected = false; // For MEK Quiz
+        let mekAnswerSelected = false;
 
         // Speed Mode Variables
         let speedCurrentIndex = 0;
         let speedInterval;
         let speedPaused = false;
-        let speedTimePerCard = 5000; // ms
-        let speedQuestions = []; // Will be populated from foodNouns
+        let speedTimePerCard = 5000;
+        let speedQuestions = [];
         let speedScore = 0;
         let speedAnswered = false;
-
 
         // Elements
         const modeSelectionScreen = document.getElementById('mode-selection-screen');
@@ -406,6 +377,7 @@
         const translationDisplayEl = document.getElementById('translation-display');
         const choicesContainerEl = document.getElementById('artikel-choices-container');
         const feedbackAreaEl = document.getElementById('feedback-area');
+        const detailedResultsListEl = document.getElementById('detailed-results-list'); // New
         const nextQuestionBtn = document.getElementById('next-question-btn');
         const restartQuizBtn = document.getElementById('restart-quiz-btn');
         const backToMenuBtn = document.getElementById('back-to-menu-btn');
@@ -419,6 +391,7 @@
         const mekSentenceTranslationDisplayEl = document.getElementById('mek-sentence-translation-display');
         const mekChoicesContainerEl = document.getElementById('mek-choices-container');
         const mekFeedbackAreaEl = document.getElementById('mek-feedback-area');
+        const mekDetailedResultsListEl = document.getElementById('mek-detailed-results-list'); // New
         const mekNextQuestionBtnEl = document.getElementById('mek-next-question-btn');
         const mekRestartQuizBtn = document.getElementById('mek-restart-quiz-btn');
         const mekBackToMenuBtn = document.getElementById('mek-back-to-menu-btn');
@@ -430,7 +403,7 @@
         const mekKeinBtn = document.getElementById('mek-kein-btn');
         const mekArtikelButtons = [mekMeinBtn, mekEinBtn, mekKeinBtn];
 
-        // Speed elements
+        // Speed elements (unchanged for this request)
         const speedWordDeEl = document.getElementById('speed-word-de');
         const speedWordTransEl = document.getElementById('speed-word-trans');
         const speedChoicesEl = document.getElementById('speed-choices');
@@ -440,45 +413,28 @@
         const speedPauseBtn = document.getElementById('speed-pause-btn');
         const speedCompleteEl = document.getElementById('speed-complete');
         const speedRestartBtn = document.getElementById('speed-restart-btn');
-        const speedBackToMenuBtn = document.getElementById('speed-back-to-menu-btn'); // From results screen
-        const speedBackToMenuBtnIngame = document.getElementById('speed-back-to-menu-btn-ingame'); // From in-game
+        const speedBackToMenuBtn = document.getElementById('speed-back-to-menu-btn');
+        const speedBackToMenuBtnIngame = document.getElementById('speed-back-to-menu-btn-ingame');
         const speedFinalScoreEl = document.getElementById('speed-final-score');
         const speedTotalQsEl = document.getElementById('speed-total-qs');
         const speedFinalTotalEl = document.getElementById('speed-final-total');
         const speedRoundContainer = document.getElementById('speed-round-container');
 
-        // Function to fetch data
+
         async function loadQuizData() {
             try {
                 const foodNounsResponse = await fetch('food_nouns.json');
-                if (!foodNounsResponse.ok) {
-                    throw new Error(`HTTP error! status: ${foodNounsResponse.status} for food_nouns.json`);
-                }
+                if (!foodNounsResponse.ok) throw new Error(`HTTP error! status: ${foodNounsResponse.status} for food_nouns.json`);
                 foodNouns = await foodNounsResponse.json();
 
                 const mekQuestionsResponse = await fetch('mek_questions.json');
-                if (!mekQuestionsResponse.ok) {
-                    throw new Error(`HTTP error! status: ${mekQuestionsResponse.status} for mek_questions.json`);
-                }
+                if (!mekQuestionsResponse.ok) throw new Error(`HTTP error! status: ${mekQuestionsResponse.status} for mek_questions.json`);
                 mekQuizQuestions = await mekQuestionsResponse.json();
-
-                console.log("Quiz data loaded successfully!", foodNouns.length, "nouns,", mekQuizQuestions.length, "MEK questions.");
                 initializeUI();
-
             } catch (error) {
                 console.error("Could not load quiz data:", error);
                 const mainContainer = document.getElementById('main-container');
-                if (mainContainer) {
-                    mainContainer.innerHTML = `
-                        <div class="text-center">
-                            <h1 class="text-2xl font-bold text-red-600 mb-4">Fehler beim Laden der Quizdaten</h1>
-                            <p class="mb-2">Die Quizfragen konnten nicht geladen werden. Bitte überprüfe, ob die Dateien <code>food_nouns.json</code> und <code>mek_questions.json</code> im selben Verzeichnis wie die HTML-Datei vorhanden und korrekt formatiert sind.</p>
-                            <p class="text-sm text-gray-700 mb-4">Details: ${error.message}</p>
-                            <button onclick="location.reload()" class="btn btn-primary">Seite neu laden</button>
-                        </div>`;
-                } else {
-                    alert("Schwerwiegender Fehler: Quizdaten konnten nicht geladen werden und Hauptcontainer nicht gefunden.");
-                }
+                mainContainer.innerHTML = `<div class="text-center"><h1 class="text-2xl font-bold text-red-600 mb-4">Fehler beim Laden</h1><p class="mb-2">Quizdaten (JSON) nicht gefunden oder fehlerhaft.</p><p class="text-sm text-gray-700 mb-4">Details: ${error.message}</p><button onclick="location.reload()" class="btn btn-primary">Neu laden</button></div>`;
             }
         }
 
@@ -486,7 +442,6 @@
             quizModeBtn.disabled = false;
             speedModeBtn.disabled = false;
             mekQuizModeBtn.disabled = false;
-            // Ensure mode selection is visible if it wasn't already
             showModeSelection();
         }
 
@@ -498,16 +453,11 @@
         }
 
         function triggerConfetti() {
-            if (typeof confetti === 'function') {
-                confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
-            }
+            if (typeof confetti === 'function') confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
         }
 
-        function clearAutoAdvance(timeoutVar) {
-            clearTimeout(timeoutVar);
-        }
+        function clearAutoAdvance(timeoutVar) { clearTimeout(timeoutVar); }
 
-        // Mode Selection Functions
         function showModeSelection() {
             modeSelectionScreen.classList.remove('hidden');
             quizModeScreen.classList.add('hidden');
@@ -518,22 +468,20 @@
             hintAreaEl.classList.add('hidden');
             mekHintAreaEl.classList.add('hidden');
             mekNextQuestionBtnEl.classList.add('hidden');
+            detailedResultsListEl.classList.add('hidden'); // Hide detailed results
+            mekDetailedResultsListEl.classList.add('hidden'); // Hide detailed results
         }
 
-        function showQuizMode() { // DerDieDas
+        function showQuizMode() {
             if (foodNouns.length === 0) { alert("Keine Fragen für Der/Die/Das Quiz geladen."); return; }
             modeSelectionScreen.classList.add('hidden');
             quizModeScreen.classList.remove('hidden');
-            speedModeScreen.classList.add('hidden');
-            mekQuizModeScreen.classList.add('hidden');
             startQuiz();
         }
 
-        function showMekQuizMode() { // MeinEinKein
+        function showMekQuizMode() {
             if (mekQuizQuestions.length === 0) { alert("Keine Fragen für Mein/Ein/Kein Quiz geladen."); return; }
             modeSelectionScreen.classList.add('hidden');
-            quizModeScreen.classList.add('hidden');
-            speedModeScreen.classList.add('hidden');
             mekQuizModeScreen.classList.remove('hidden');
             startMekQuiz();
         }
@@ -541,21 +489,22 @@
         function showSpeedMode() {
             if (foodNouns.length === 0) { alert("Keine Fragen für Speed Learning geladen."); return; }
             modeSelectionScreen.classList.add('hidden');
-            quizModeScreen.classList.add('hidden');
-            mekQuizModeScreen.classList.add('hidden');
             speedModeScreen.classList.remove('hidden');
             startSpeedRound();
         }
 
-        // Quiz Mode (DerDieDas) Functions
+        // --- DerDieDas Quiz Functions ---
         function startQuiz() {
             shuffledQuestions = [...foodNouns];
             shuffleArray(shuffledQuestions);
             currentQuestionIndex = 0;
             score = 0;
             answerSelected = false;
+            derDieDasUserAnswers = []; // Reset user answers
+            detailedResultsListEl.classList.add('hidden'); // Hide previous results
             clearAutoAdvance(autoAdvanceTimeout);
             feedbackAreaEl.classList.add('hidden');
+            feedbackAreaEl.className = 'feedback-area hidden'; // Reset feedback class
             nextQuestionBtn.classList.add('hidden');
             restartQuizBtn.classList.add('hidden');
             hintAreaEl.classList.add('hidden');
@@ -582,12 +531,11 @@
             }
         }
 
-       function enableChoiceButtons(enable = true) {
+        function enableChoiceButtons(enable = true) {
             artikelButtons.forEach(button => {
                 button.disabled = !enable;
                 button.classList.remove('opacity-50', 'bg-green-600', 'bg-red-600', 'bg-green-400');
-                // Re-apply base color
-                const baseClass = `btn-${button.dataset.artikel}`; // e.g., btn-der
+                const baseClass = `btn-${button.dataset.artikel}`;
                 button.classList.add(baseClass);
             });
         }
@@ -595,52 +543,48 @@
         function handleAnswer(selectedArtikel) {
             if (answerSelected) return;
             answerSelected = true;
-            // enableChoiceButtons(false); // Buttons get specific styling below
 
             const question = shuffledQuestions[currentQuestionIndex];
             const isCorrect = selectedArtikel === question.article;
 
-            feedbackAreaEl.classList.remove('hidden', 'correct', 'incorrect');
+            derDieDasUserAnswers.push({ // Store answer
+                question: JSON.parse(JSON.stringify(question)),
+                userAnswer: selectedArtikel,
+                isCorrect: isCorrect
+            });
+
+            feedbackAreaEl.classList.remove('hidden');
             if (isCorrect) {
                 score++;
                 feedbackAreaEl.innerHTML = `Richtig! <span class="correct-answer-text">${question.article} ${question.noun}</span>`;
-                feedbackAreaEl.classList.add('correct');
+                feedbackAreaEl.className = 'feedback-area correct'; // Use specific correct style for immediate feedback
                 triggerConfetti();
             } else {
                 feedbackAreaEl.innerHTML = `Falsch. Richtig ist: <span class="correct-answer-text">${question.article} ${question.noun}</span>`;
-                feedbackAreaEl.classList.add('incorrect');
+                feedbackAreaEl.className = 'feedback-area incorrect'; // Use specific incorrect style for immediate feedback
             }
 
             artikelButtons.forEach(btn => {
                 const isSelectedButton = btn.dataset.artikel === selectedArtikel;
                 const isCorrectButton = btn.dataset.artikel === question.article;
                 btn.classList.remove('btn-der', 'btn-die', 'btn-das', 'opacity-50');
-                if (isSelectedButton) {
-                    btn.classList.add(isCorrect ? 'bg-green-600' : 'bg-red-600');
-                } else if (isCorrectButton) {
-                    btn.classList.add('bg-green-400'); // Highlight correct one if user was wrong
-                } else {
+                if (isSelectedButton) btn.classList.add(isCorrect ? 'bg-green-600' : 'bg-red-600');
+                else if (isCorrectButton) btn.classList.add('bg-green-400');
+                else {
                     btn.classList.add('opacity-50');
-                     // Re-apply base color for non-selected, non-correct, to maintain some visibility
-                     const baseClass = `btn-${btn.dataset.artikel}`;
-                     btn.classList.add(baseClass);
+                    const baseClass = `btn-${btn.dataset.artikel}`;
+                    btn.classList.add(baseClass);
                 }
-                 btn.disabled = true;
+                btn.disabled = true;
             });
             updateProgress();
             if (currentQuestionIndex < shuffledQuestions.length - 1) {
-                 autoAdvanceTimeout = setTimeout(() => {
-                    currentQuestionIndex++;
-                    loadQuestion();
-                 }, 1500);
+                 autoAdvanceTimeout = setTimeout(() => { currentQuestionIndex++; loadQuestion(); }, 2000); // Increased time to see feedback
             } else {
                   autoAdvanceTimeout = setTimeout(() => {
-                    restartQuizBtn.textContent = "Ergebnisse anzeigen";
-                    restartQuizBtn.classList.remove('hidden');
-                    restartQuizBtn.onclick = showResults;
-                    hintAreaEl.innerHTML = `Drücke <kbd>Leertaste</kbd> für Ergebnisse`;
-                    hintAreaEl.classList.remove('hidden');
-                 }, 1500);
+                    feedbackAreaEl.classList.add('hidden'); // Hide immediate feedback before showing results
+                    showResults();
+                  }, 2000);
             }
         }
 
@@ -654,9 +598,29 @@
             document.getElementById('question-area').classList.add('hidden');
             choicesContainerEl.classList.add('hidden');
             nextQuestionBtn.classList.add('hidden');
-            feedbackAreaEl.classList.remove('hidden', 'incorrect');
-            feedbackAreaEl.classList.add('correct');
-            feedbackAreaEl.innerHTML = `Quiz beendet! Dein Endergebnis: <br><span class="text-2xl font-bold">${score} von ${shuffledQuestions.length}</span>`;
+
+            // Overall score summary
+            feedbackAreaEl.classList.remove('hidden');
+            feedbackAreaEl.className = 'feedback-area correct'; // General summary style
+            feedbackAreaEl.innerHTML = `Quiz beendet! Endergebnis: <strong class="text-2xl">${score}</strong> / ${shuffledQuestions.length}`;
+
+            // Detailed results
+            detailedResultsListEl.innerHTML = ''; // Clear previous
+            let resultsHTML = '<h3 class="text-purple-700">Deine Antworten im Detail:</h3><ul>';
+            derDieDasUserAnswers.forEach(ans => {
+                resultsHTML += `<li class="mb-2 p-2 rounded-md ${ans.isCorrect ? 'result-correct' : 'result-incorrect'}">`;
+                resultsHTML += `<strong>${ans.question.noun}</strong> (${ans.question.en} / ${ans.question.es}): `;
+                if (ans.isCorrect) {
+                    resultsHTML += `<span class="text-green-700 font-semibold">Richtig als "${ans.userAnswer.toUpperCase()}"</span>`;
+                } else {
+                    resultsHTML += `<span class="text-red-700">Du: "${ans.userAnswer.toUpperCase()}". Richtig:</span> <strong class="text-blue-600">"${ans.question.article.toUpperCase()}"</strong>.`;
+                }
+                resultsHTML += `</li>`;
+            });
+            resultsHTML += '</ul>';
+            detailedResultsListEl.innerHTML = resultsHTML;
+            detailedResultsListEl.classList.remove('hidden');
+
             progressIndicatorEl.textContent = `Quiz beendet!`;
             scoreIndicatorEl.textContent = `Endstand: ${score} / ${shuffledQuestions.length}`;
             restartQuizBtn.textContent = "Quiz neu starten";
@@ -666,14 +630,17 @@
             hintAreaEl.classList.remove('hidden');
         }
 
-        // MEIN/EIN/KEIN Quiz Functions
+        // --- Mein/Ein/Kein Quiz Functions ---
         function startMekQuiz() {
             mekShuffledQuestions = [...mekQuizQuestions];
             shuffleArray(mekShuffledQuestions);
             mekCurrentQuestionIndex = 0;
             mekScore = 0;
             mekAnswerSelected = false;
+            mekUserAnswers = []; // Reset user answers
+            mekDetailedResultsListEl.classList.add('hidden'); // Hide previous results
             mekFeedbackAreaEl.classList.add('hidden');
+            mekFeedbackAreaEl.className = 'feedback-area hidden'; // Reset feedback class
             mekRestartQuizBtn.classList.add('hidden');
             mekNextQuestionBtnEl.classList.add('hidden');
             mekHintAreaEl.classList.add('hidden');
@@ -683,55 +650,35 @@
         }
 
         function getTooltipText(baseChoice, declinedForm, genderNoun, caseNoun, noun, exampleDe, exampleEs, grammarDe, grammarEs) {
-            let conceptDe = "";
-            let conceptEs = "";
-            let emoji = "🤔";
-
-            if (baseChoice === "mein") {
-                conceptDe = "POSSESSIV"; conceptEs = "POSESIVO"; emoji = "🧸";
-            } else if (baseChoice === "ein") {
-                conceptDe = "INDEFINIT"; conceptEs = "INDEFINIDO"; emoji = "❔";
-            } else if (baseChoice === "kein") {
-                conceptDe = "NEGATION"; conceptEs = "NEGACIÓN"; emoji = "🚫";
-            }
-            return `${emoji} ${conceptDe.toUpperCase()} (${declinedForm.toUpperCase()}) - Zeigt ${baseChoice === 'mein' ? 'Besitz' : (baseChoice === 'ein' ? 'ein unbestimmtes Nomen' : 'Negation')} an.
-Form für "${noun}" (${grammarDe}).
-🇩🇪 ${exampleDe || ''}
-🇪🇸 ${conceptEs.toUpperCase()} - ${exampleEs || ''}`;
+            let cDe="", cEs="", emj="🤔";
+            if(baseChoice==="mein"){cDe="POSSESSIV";cEs="POSESIVO";emj="🧸";}
+            else if(baseChoice==="ein"){cDe="INDEFINIT";cEs="INDEFINIDO";emj="❔";}
+            else if(baseChoice==="kein"){cDe="NEGATION";cEs="NEGACIÓN";emj="🚫";}
+            return `${emj} ${cDe} (${declinedForm.toUpperCase()})\nFür "${noun}" (${grammarDe}).\n🇩🇪 ${exampleDe||""}\n🇪🇸 ${cEs} - ${exampleEs||""}`;
         }
-
 
         function loadMekQuestion() {
             mekAnswerSelected = false;
             mekNextQuestionBtnEl.classList.add('hidden');
             mekHintAreaEl.classList.add('hidden');
-
-
             if (mekCurrentQuestionIndex < mekShuffledQuestions.length) {
-                const question = mekShuffledQuestions[mekCurrentQuestionIndex];
+                const q = mekShuffledQuestions[mekCurrentQuestionIndex];
+                let sHtmlDe = q.sentence_template_de.replace("__", "<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>");
+                if(q.extra_context_de) sHtmlDe += q.extra_context_de;
+                mekSentenceDisplayEl.innerHTML = sHtmlDe;
+                let sHtmlEs = q.spanish_sentence_template.replace("__", "<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>");
+                if(q.extra_context_es) sHtmlEs += q.extra_context_es;
+                mekSentenceTranslationDisplayEl.innerHTML = sHtmlEs;
 
-                let sentenceHtmlDe = question.sentence_template_de.replace("__", "<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>");
-                if(question.extra_context_de) sentenceHtmlDe += question.extra_context_de;
-                mekSentenceDisplayEl.innerHTML = sentenceHtmlDe;
-
-                let sentenceHtmlEs = question.spanish_sentence_template.replace("__", "<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>");
-                if(question.extra_context_es) sentenceHtmlEs += question.extra_context_es;
-                mekSentenceTranslationDisplayEl.innerHTML = sentenceHtmlEs;
-
-
-                mekMeinBtn.textContent = question.declined_options.mein.toUpperCase();
-                mekMeinBtn.title = getTooltipText("mein", question.declined_options.mein, question.noun_gender, question.noun_case, question.noun_de, question.example_context_de, question.example_context_es, question.feedback_grammar_de, question.feedback_grammar_es);
-
-                mekEinBtn.textContent = question.declined_options.ein.toUpperCase();
-                mekEinBtn.title = getTooltipText("ein", question.declined_options.ein, question.noun_gender, question.noun_case, question.noun_de, question.example_context_de, question.example_context_es, question.feedback_grammar_de, question.feedback_grammar_es);
-
-                mekKeinBtn.textContent = question.declined_options.kein.toUpperCase();
-                mekKeinBtn.title = getTooltipText("kein", question.declined_options.kein, question.noun_gender, question.noun_case, question.noun_de, question.example_context_de, question.example_context_es, question.feedback_grammar_de, question.feedback_grammar_es);
-
+                mekMeinBtn.textContent = q.declined_options.mein.toUpperCase();
+                mekMeinBtn.title = getTooltipText("mein", q.declined_options.mein, q.noun_gender, q.noun_case, q.noun_de, q.example_context_de, q.example_context_es, q.feedback_grammar_de, q.feedback_grammar_es);
+                mekEinBtn.textContent = q.declined_options.ein.toUpperCase();
+                mekEinBtn.title = getTooltipText("ein", q.declined_options.ein, q.noun_gender, q.noun_case, q.noun_de, q.example_context_de, q.example_context_es, q.feedback_grammar_de, q.feedback_grammar_es);
+                mekKeinBtn.textContent = q.declined_options.kein.toUpperCase();
+                mekKeinBtn.title = getTooltipText("kein", q.declined_options.kein, q.noun_gender, q.noun_case, q.noun_de, q.example_context_de, q.example_context_es, q.feedback_grammar_de, q.feedback_grammar_es);
 
                 mekFeedbackAreaEl.classList.add('hidden','correct','incorrect');
                 mekFeedbackAreaEl.innerHTML = '';
-
                 enableMekChoiceButtons(true);
                 updateMekProgress();
             } else {
@@ -753,71 +700,49 @@ Form für "${noun}" (${grammarDe}).
         function handleMekAnswer(selectedBaseArtikel) {
             if (mekAnswerSelected) return;
             mekAnswerSelected = true;
-            // enableMekChoiceButtons(false); // Buttons get specific styling below
 
             const question = mekShuffledQuestions[mekCurrentQuestionIndex];
             const isCorrect = selectedBaseArtikel === question.correct_choice_base;
-
             const correctDeclinedForm = question.declined_options[question.correct_choice_base];
-            const fullCorrectSentenceDe = question.sentence_template_de.replace("__", `<strong class="correct-answer-text">${correctDeclinedForm}</strong>`);
             const userSelectedDeclinedForm = question.declined_options[selectedBaseArtikel];
+            const fullCorrectSentenceDe = question.sentence_template_de.replace("__", `<strong class="correct-answer-text">${correctDeclinedForm}</strong>`);
 
+            mekUserAnswers.push({ // Store MEK answer
+                question: JSON.parse(JSON.stringify(question)),
+                userAnswerBase: selectedBaseArtikel,
+                userAnswerDeclined: userSelectedDeclinedForm,
+                correctAnswerDeclined: correctDeclinedForm,
+                isCorrect: isCorrect
+            });
 
             let feedbackHTML = '';
             if (isCorrect) {
                 mekScore++;
-                feedbackHTML = `
-                    <div>
-                        <p class="font-bold text-lg">Richtig! ✅</p>
-                        <p>Die korrekte Antwort ist '<b>${correctDeclinedForm}</b>'.</p>
-                        <p>Satz: <i>${fullCorrectSentenceDe}</i></p>
-                        <p class="text-sm mt-1">Das ist ${question.feedback_grammar_de} für "<i>${question.noun_de}</i>".</p>
-                        <hr>
-                        <p class="text-sm text-gray-600">¡Correcto! ✅ La forma correcta es '<b>${correctDeclinedForm}</b>'.</p>
-                        <p class="text-sm text-gray-600">Oración: <i>${question.spanish_sentence_template.replace("__", `(${correctDeclinedForm})`)}</i></p>
-                        <p class="text-xs text-gray-500">(Esto es ${question.feedback_grammar_es} para "<i>${question.noun_es}</i>".)</p>
-                    </div>`;
+                feedbackHTML = `<div><p class="font-bold text-lg">Richtig! ✅</p><p><i>${fullCorrectSentenceDe}</i></p></div>`;
                 triggerConfetti();
             } else {
-                feedbackHTML = `
-                    <div>
-                        <p class="font-bold text-lg">Leider falsch. 😟</p>
-                        <p>Du hast '${userSelectedDeclinedForm}' (Konzept: ${selectedBaseArtikel.toUpperCase()}) gewählt.</p>
-                        <p>Die korrekte Antwort ist '<b>${correctDeclinedForm}</b>' (Konzept: ${question.correct_choice_base.toUpperCase()}).</p>
-                        <p>Satz: <i>${fullCorrectSentenceDe}</i></p>
-                        <p class="text-sm mt-1">Das ist ${question.feedback_grammar_de} für "<i>${question.noun_de}</i>".</p>
-                        <hr>
-                        <p class="text-sm text-gray-600">Incorrecto. 😟 La forma correcta es '<b>${correctDeclinedForm}</b>'. </p>
-                        <p class="text-sm text-gray-600">Oración: <i>${question.spanish_sentence_template.replace("__", `(${correctDeclinedForm})`)}</i></p>
-                        <p class="text-xs text-gray-500">(Esto es ${question.feedback_grammar_es} para "<i>${question.noun_es}</i>".)</p>
-                    </div>`;
+                feedbackHTML = `<div><p class="font-bold text-lg">Leider falsch. 😟</p><p>Deine Wahl: '${userSelectedDeclinedForm}'. Richtig: '<b>${correctDeclinedForm}</b>'.</p><p>Satz: <i>${fullCorrectSentenceDe}</i></p></div>`;
             }
             mekFeedbackAreaEl.innerHTML = feedbackHTML;
             mekFeedbackAreaEl.classList.remove('hidden');
             mekFeedbackAreaEl.className = isCorrect ? 'feedback-area correct' : 'feedback-area incorrect';
 
 
-             mekArtikelButtons.forEach(btn => {
+            mekArtikelButtons.forEach(btn => {
                 const btnBase = btn.dataset.artikelBase;
                 const isSelectedButton = btnBase === selectedBaseArtikel;
                 const isCorrectChoiceButton = btnBase === question.correct_choice_base;
-
                 btn.classList.remove('btn-mein', 'btn-ein', 'btn-kein', 'opacity-50');
-
-                if (isSelectedButton) {
-                    btn.classList.add(isCorrect ? 'bg-green-600' : 'bg-red-600');
-                } else if (isCorrectChoiceButton) {
-                    btn.classList.add('bg-green-400');
-                } else {
+                if (isSelectedButton) btn.classList.add(isCorrect ? 'bg-green-600' : 'bg-red-600');
+                else if (isCorrectChoiceButton) btn.classList.add('bg-green-400');
+                else {
                     btn.classList.add('opacity-50');
-                    // Re-apply base class for non-selected, non-correct
                     if (btnBase === 'mein') btn.classList.add('btn-mein');
                     else if (btnBase === 'ein') btn.classList.add('btn-ein');
                     else if (btnBase === 'kein') btn.classList.add('btn-kein');
                 }
                 btn.disabled = true;
             });
-
             updateMekProgress();
 
             if (mekCurrentQuestionIndex < mekShuffledQuestions.length - 1) {
@@ -842,14 +767,38 @@ Form für "${noun}" (${grammarDe}).
             mekHintAreaEl.classList.add('hidden');
             document.getElementById('mek-question-area').classList.add('hidden');
             mekChoicesContainerEl.classList.add('hidden');
+            mekFeedbackAreaEl.classList.add('hidden'); // Hide immediate feedback area before showing summary
 
-            mekFeedbackAreaEl.classList.remove('hidden', 'incorrect');
-            mekFeedbackAreaEl.classList.add('correct');
-            mekFeedbackAreaEl.innerHTML = `<p class="text-xl font-bold">Quiz beendet!</p> Dein Endergebnis: <br><strong class="text-2xl">${mekScore} von ${mekShuffledQuestions.length}</strong>`;
+            // Overall score summary
+            mekFeedbackAreaEl.classList.remove('hidden');
+            mekFeedbackAreaEl.className = 'feedback-area correct'; // General summary style
+            mekFeedbackAreaEl.innerHTML = `<p class="text-xl font-bold">Quiz beendet!</p> Endergebnis: <strong class="text-2xl">${mekScore}</strong> / ${mekShuffledQuestions.length}`;
+
+            // Detailed results
+            mekDetailedResultsListEl.innerHTML = ''; // Clear previous
+            let mekResultsHTML = '<h3 class="text-yellow-700">Deine Antworten im Detail:</h3><ul>';
+            mekUserAnswers.forEach(ans => {
+                const q = ans.question;
+                const sentenceDeWithUser = q.sentence_template_de.replace("__", `<span class="font-bold ${ans.isCorrect ? 'text-green-700' : 'text-red-700'}">${ans.userAnswerDeclined}</span>`);
+                const sentenceDeWithCorrect = q.sentence_template_de.replace("__", `<strong class="text-blue-600">${ans.correctAnswerDeclined}</strong>`);
+
+                mekResultsHTML += `<li class="mb-3 p-2 rounded-md ${ans.isCorrect ? 'result-correct' : 'result-incorrect'}">`;
+                mekResultsHTML += `<p class="text-sm text-gray-600">${q.sentence_template_de.replace("__", "___")} (${q.noun_de})</p>`;
+                if (ans.isCorrect) {
+                    mekResultsHTML += `<p>Richtig: <i>${sentenceDeWithUser}</i></p>`;
+                } else {
+                    mekResultsHTML += `<p class="text-red-700">Deine Antwort: <i>${sentenceDeWithUser}</i></p>`;
+                    mekResultsHTML += `<p>Korrekte Antwort: <i>${sentenceDeWithCorrect}</i></p>`;
+                    mekResultsHTML += `<p class="text-xs text-gray-500">(${q.feedback_grammar_de} für "${q.noun_de}")</p>`;
+                }
+                mekResultsHTML += `</li>`;
+            });
+            mekResultsHTML += '</ul>';
+            mekDetailedResultsListEl.innerHTML = mekResultsHTML;
+            mekDetailedResultsListEl.classList.remove('hidden');
 
             mekProgressIndicatorEl.textContent = `Quiz beendet!`;
             mekScoreIndicatorEl.textContent = `Endstand: ${mekScore} / ${mekShuffledQuestions.length}`;
-
             mekRestartQuizBtn.textContent = "Quiz neu starten";
             mekRestartQuizBtn.classList.remove('hidden');
             mekRestartQuizBtn.onclick = startMekQuiz;
@@ -858,255 +807,119 @@ Form für "${noun}" (${grammarDe}).
         }
 
 
-        // Speed Mode Functions
-         function startSpeedRound() {
-            speedQuestions = [...foodNouns]; // Use the loaded foodNouns
-            shuffleArray(speedQuestions);
-            speedCurrentIndex = 0;
-            speedScore = 0;
-            speedPaused = false;
-            speedAnswered = false;
-            speedCompleteEl.classList.add('hidden');
-            speedRoundContainer.classList.remove('hidden');
-            speedPauseBtn.textContent = '⏸️ Pause';
-            speedTotalQsEl.textContent = speedQuestions.length;
-            speedFinalTotalEl.textContent = speedQuestions.length; // Set this once
+        // --- Speed Mode Functions (Unchanged) ---
+        function startSpeedRound() {
+            speedQuestions = [...foodNouns]; shuffleArray(speedQuestions); speedCurrentIndex = 0; speedScore = 0;
+            speedPaused = false; speedAnswered = false; speedCompleteEl.classList.add('hidden');
+            speedRoundContainer.classList.remove('hidden'); speedPauseBtn.textContent = '⏸️ Pause';
+            speedTotalQsEl.textContent = speedQuestions.length; speedFinalTotalEl.textContent = speedQuestions.length;
             showSpeedQuestion();
         }
-
         function showSpeedQuestion() {
-            if (speedCurrentIndex >= speedQuestions.length) {
-                completeSpeedRound(); return;
-            }
-            speedAnswered = false;
-            const currentQuestion = speedQuestions[speedCurrentIndex];
-            speedWordDeEl.textContent = currentQuestion.noun;
-            speedWordTransEl.textContent = `${currentQuestion.en} / ${currentQuestion.es}`;
+            if (speedCurrentIndex >= speedQuestions.length) { completeSpeedRound(); return; }
+            speedAnswered = false; const q = speedQuestions[speedCurrentIndex];
+            speedWordDeEl.textContent = q.noun; speedWordTransEl.textContent = `${q.en} / ${q.es}`;
             speedProgressEl.textContent = `${speedCurrentIndex + 1} / ${speedQuestions.length}`;
-            speedFeedbackEl.classList.add('hidden');
-            speedChoicesEl.innerHTML = ''; // Clear previous buttons
-            const articles = ["der", "die", "das"];
-            const colors = { der: "btn-der", die: "btn-die", das: "btn-das" }; // Use original button colors for consistency
-            articles.forEach(article => {
-                const button = document.createElement('button');
-                button.className = `btn ${colors[article]} text-lg py-4 px-5`;
-                button.textContent = article.toUpperCase();
-                button.onclick = () => handleSpeedAnswer(article);
-                speedChoicesEl.appendChild(button);
+            speedFeedbackEl.classList.add('hidden'); speedChoicesEl.innerHTML = '';
+            const articles = ["der", "die", "das"]; const colors = { der: "btn-der", die: "btn-die", das: "btn-das" };
+            articles.forEach(art => {
+                const btn = document.createElement('button');
+                btn.className = `btn ${colors[art]} text-lg py-4 px-5`; btn.textContent = art.toUpperCase();
+                btn.onclick = () => handleSpeedAnswer(art); speedChoicesEl.appendChild(btn);
             });
-            // Dynamic background for speed round card
             const bgColors = ['linear-gradient(135deg, #667eea 0%, #764ba2 100%)', 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)', 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)', 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)', 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'];
             speedRoundContainer.style.background = bgColors[speedCurrentIndex % bgColors.length];
             startSpeedTimer();
         }
-
         function handleSpeedAnswer(selectedAnswer) {
-            if (speedAnswered) return;
-            speedAnswered = true;
-            clearInterval(speedInterval);
-            const currentQuestion = speedQuestions[speedCurrentIndex];
-            const isCorrect = selectedAnswer === currentQuestion.article;
-            if (isCorrect) {
-                speedScore++;
-                speedFeedbackEl.textContent = '✅ Richtig!';
-                speedFeedbackEl.className = 'text-lg font-bold mb-4 text-green-300'; // Green feedback for correct
-            } else {
-                speedFeedbackEl.textContent = `❌ Falsch! Richtig: ${currentQuestion.article.toUpperCase()}`;
-                speedFeedbackEl.className = 'text-lg font-bold mb-4 text-red-300'; // Red feedback for incorrect
-            }
+            if (speedAnswered) return; speedAnswered = true; clearInterval(speedInterval);
+            const q = speedQuestions[speedCurrentIndex]; const isCorrect = selectedAnswer === q.article;
+            if (isCorrect) { speedScore++; speedFeedbackEl.textContent = '✅ Richtig!'; speedFeedbackEl.className = 'text-lg font-bold mb-4 text-green-300';
+            } else { speedFeedbackEl.textContent = `❌ Falsch! Richtig: ${q.article.toUpperCase()}`; speedFeedbackEl.className = 'text-lg font-bold mb-4 text-red-300'; }
             speedFeedbackEl.classList.remove('hidden');
-
             const buttons = speedChoicesEl.querySelectorAll('button');
-            buttons.forEach(btn => {
-                btn.disabled = true;
-                const btnArticle = btn.textContent.toLowerCase();
-                 if (btnArticle === selectedAnswer) { // The button the user clicked
-                    btn.className = isCorrect ? 'btn bg-green-600 text-lg py-4 px-5' : 'btn bg-red-600 text-lg py-4 px-5';
-                } else if (btnArticle === currentQuestion.article && !isCorrect) { // The correct button, if user was wrong
-                    btn.className = 'btn bg-green-400 text-lg py-4 px-5'; // Softer green for correct answer not chosen
-                } else { // Other buttons
-                    btn.className = 'btn bg-gray-500 text-lg py-4 px-5 opacity-50';
-                }
+            buttons.forEach(btn => { btn.disabled = true; const btnArt = btn.textContent.toLowerCase();
+                if (btnArt === selectedAnswer) btn.className = isCorrect ? 'btn bg-green-600 text-lg py-4 px-5' : 'btn bg-red-600 text-lg py-4 px-5';
+                else if (btnArt === q.article && !isCorrect) btn.className = 'btn bg-green-400 text-lg py-4 px-5';
+                else btn.className = 'btn bg-gray-500 text-lg py-4 px-5 opacity-50';
             });
-
-            setTimeout(() => {
-                speedCurrentIndex++;
-                showSpeedQuestion();
-            }, 1500); // Time to see feedback
+            setTimeout(() => { speedCurrentIndex++; showSpeedQuestion(); }, 1500);
         }
-
         function startSpeedTimer() {
-            if (speedPaused || speedAnswered) return;
-            clearInterval(speedInterval);
-            let timeLeft = speedTimePerCard;
-            timerFillEl.style.transition = 'none'; // Reset transition for instant width change
-            timerFillEl.style.width = '100%';
-            // Force reflow/repaint to apply the 100% width before starting the transition
-            timerFillEl.offsetHeight;
-            // Now set the transition and target width
-            timerFillEl.style.transition = `width ${speedTimePerCard / 1000}s linear`;
-            timerFillEl.style.width = '0%';
-
+            if (speedPaused || speedAnswered) return; clearInterval(speedInterval);
+            timerFillEl.style.transition = 'none'; timerFillEl.style.width = '100%'; timerFillEl.offsetHeight;
+            timerFillEl.style.transition = `width ${speedTimePerCard / 1000}s linear`; timerFillEl.style.width = '0%';
             speedInterval = setTimeout(() => {
-                if (speedPaused || speedAnswered) return; // Check again in case paused right before timeout
-                speedAnswered = true; // Mark as answered due to time out
-                const currentQuestion = speedQuestions[speedCurrentIndex];
-                speedFeedbackEl.textContent = `⏰ Zeit um! Richtig: ${currentQuestion.article.toUpperCase()}`;
-                speedFeedbackEl.className = 'text-lg font-bold mb-4 text-orange-300'; // Orange for timeout
-                speedFeedbackEl.classList.remove('hidden');
-                const buttons = speedChoicesEl.querySelectorAll('button');
-                buttons.forEach(btn => {
-                    btn.disabled = true;
-                    if (btn.textContent.toLowerCase() === currentQuestion.article) {
-                        btn.className = 'btn bg-green-400 text-lg py-4 px-5'; // Highlight correct answer
-                    } else {
-                        btn.className = 'btn bg-gray-500 text-lg py-4 px-5 opacity-50';
-                    }
-                });
-                setTimeout(() => {
-                    speedCurrentIndex++;
-                    showSpeedQuestion();
-                }, 1500); // Time to see feedback
+                if (speedPaused || speedAnswered) return; speedAnswered = true; const q = speedQuestions[speedCurrentIndex];
+                speedFeedbackEl.textContent = `⏰ Zeit um! Richtig: ${q.article.toUpperCase()}`; speedFeedbackEl.className = 'text-lg font-bold mb-4 text-orange-300';
+                speedFeedbackEl.classList.remove('hidden'); speedChoicesEl.querySelectorAll('button').forEach(btn => { btn.disabled = true;
+                    if (btn.textContent.toLowerCase() === q.article) btn.className = 'btn bg-green-400 text-lg py-4 px-5';
+                    else btn.className = 'btn bg-gray-500 text-lg py-4 px-5 opacity-50';});
+                setTimeout(() => { speedCurrentIndex++; showSpeedQuestion(); }, 1500);
             }, speedTimePerCard);
         }
-
-
         function toggleSpeedPause() {
-            speedPaused = !speedPaused;
-            speedPauseBtn.textContent = speedPaused ? '▶️ Weiter' : '⏸️ Pause';
-            if (speedPaused) {
-                clearInterval(speedInterval);
-                // Capture current width of timer bar
-                const computedStyle = getComputedStyle(timerFillEl);
-                timerFillEl.style.width = computedStyle.width;
-                timerFillEl.style.transition = 'none'; // Stop any ongoing transition
-            } else {
-                // Resume timer if not answered and not at the end
-                if (speedCurrentIndex < speedQuestions.length && !speedAnswered) {
-                    // Calculate remaining time based on current width percentage
-                    const currentWidthPx = parseFloat(timerFillEl.style.width || '0');
-                    const parentWidthPx = timerFillEl.parentNode.offsetWidth;
-                    const currentWidthPercentage = (currentWidthPx / parentWidthPx) * 100;
-                    const remainingTime = (currentWidthPercentage / 100) * speedTimePerCard;
-
-                    timerFillEl.style.transition = `width ${remainingTime / 1000}s linear`;
-                    timerFillEl.style.width = '0%'; // Animate to 0% over remaining time
-
-                    clearInterval(speedInterval); // Clear any old interval
-                    speedInterval = setTimeout(() => {
-                        if (speedPaused || speedAnswered) return;
-                        speedAnswered = true;
-                        const currentQuestion = speedQuestions[speedCurrentIndex];
-                        speedFeedbackEl.textContent = `⏰ Zeit um! Richtig: ${currentQuestion.article.toUpperCase()}`;
-                        speedFeedbackEl.className = 'text-lg font-bold mb-4 text-orange-300';
-                        speedFeedbackEl.classList.remove('hidden');
+            speedPaused = !speedPaused; speedPauseBtn.textContent = speedPaused ? '▶️ Weiter' : '⏸️ Pause';
+            if (speedPaused) { clearInterval(speedInterval); const compStyle = getComputedStyle(timerFillEl);
+                timerFillEl.style.width = compStyle.width; timerFillEl.style.transition = 'none';
+            } else { if (speedCurrentIndex < speedQuestions.length && !speedAnswered) {
+                    const currWidthPx = parseFloat(timerFillEl.style.width||'0'); const parWidthPx = timerFillEl.parentNode.offsetWidth;
+                    const currWidthPerc = (currWidthPx / parWidthPx) * 100; const remTime = (currWidthPerc / 100) * speedTimePerCard;
+                    timerFillEl.style.transition = `width ${remTime / 1000}s linear`; timerFillEl.style.width = '0%';
+                    clearInterval(speedInterval); speedInterval = setTimeout(() => { if (speedPaused || speedAnswered) return; speedAnswered = true;
+                        const q = speedQuestions[speedCurrentIndex]; speedFeedbackEl.textContent = `⏰ Zeit um! Richtig: ${q.article.toUpperCase()}`;
+                        speedFeedbackEl.className = 'text-lg font-bold mb-4 text-orange-300'; speedFeedbackEl.classList.remove('hidden');
                         setTimeout(() => { speedCurrentIndex++; showSpeedQuestion(); }, 1500);
-                    }, remainingTime);
-                }
-            }
+                    }, remTime); } }
         }
-
-
         function completeSpeedRound() {
-            clearInterval(speedInterval);
-            speedRoundContainer.classList.add('hidden');
-            speedCompleteEl.classList.remove('hidden');
-            speedFinalScoreEl.textContent = speedScore;
-            // speedFinalTotalEl is already set in startSpeedRound
-            triggerConfetti();
+            clearInterval(speedInterval); speedRoundContainer.classList.add('hidden');
+            speedCompleteEl.classList.remove('hidden'); speedFinalScoreEl.textContent = speedScore; triggerConfetti();
         }
 
-        // Handle Spacebar Press
+        // --- Event Listeners & Initial Load ---
         function handleSpacebar(event) {
-            if (event.code !== 'Space' && event.keyCode !== 32) { return; }
-
-            // Check if the active element is a button or input, if so, let default behavior happen
+            if (event.code !== 'Space' && event.keyCode !== 32) return;
             if (document.activeElement && (document.activeElement.tagName === 'BUTTON' || document.activeElement.tagName === 'INPUT')) {
-                 // Allow space to "click" a focused button if it's not one of our specific control buttons
                 const activeId = document.activeElement.id;
-                const mainControlButtonsIds = [
-                    'next-question-btn', 'restart-quiz-btn',
-                    'mek-next-question-btn', 'mek-restart-quiz-btn'
-                    // Add other buttons you want spacebar to explicitly control through the logic below
-                ];
-                // If space is pressed on a button that isn't one of our main quiz flow buttons,
-                // let the default action (click) occur and don't proceed with custom logic.
-                if (!mainControlButtonsIds.includes(activeId)) {
-                    return;
-                }
+                const mainCtrlIds = ['next-question-btn', 'restart-quiz-btn', 'mek-next-question-btn', 'mek-restart-quiz-btn'];
+                if (!mainCtrlIds.includes(activeId)) return;
             }
-            event.preventDefault(); // Prevent page scroll only if not on a generic button/input
-
+            event.preventDefault();
             if (!quizModeScreen.classList.contains('hidden')) {
-                if (!restartQuizBtn.classList.contains('hidden')) {
-                     clearAutoAdvance(autoAdvanceTimeout); restartQuizBtn.click();
-                } else if (!nextQuestionBtn.classList.contains('hidden')) { // Though usually auto-advances
-                     clearAutoAdvance(autoAdvanceTimeout); nextQuestionBtn.click();
-                }
+                if (!restartQuizBtn.classList.contains('hidden')) { clearAutoAdvance(autoAdvanceTimeout); restartQuizBtn.click(); }
+                else if (!nextQuestionBtn.classList.contains('hidden')) { clearAutoAdvance(autoAdvanceTimeout); nextQuestionBtn.click(); }
             } else if (!mekQuizModeScreen.classList.contains('hidden')) {
-                if (!mekNextQuestionBtnEl.classList.contains('hidden')) {
-                     mekNextQuestionBtnEl.click();
-                } else if (!mekRestartQuizBtn.classList.contains('hidden')) {
-                     mekRestartQuizBtn.click();
-                }
+                if (!mekNextQuestionBtnEl.classList.contains('hidden')) mekNextQuestionBtnEl.click();
+                else if (!mekRestartQuizBtn.classList.contains('hidden')) mekRestartQuizBtn.click();
             }
-            // No specific spacebar action for Speed Mode or Mode Selection Screen in this iteration
         }
 
-
-        // Event Listeners
         quizModeBtn.addEventListener('click', showQuizMode);
         speedModeBtn.addEventListener('click', showSpeedMode);
         mekQuizModeBtn.addEventListener('click', showMekQuizMode);
-
-        restartQuizBtn.addEventListener('click', () => { clearAutoAdvance(autoAdvanceTimeout); /* onclick is dynamic */ });
-        backToMenuBtn.addEventListener('click', showModeSelection);
-        artikelButtons.forEach(button => {
-            button.addEventListener('click', () => handleAnswer(button.dataset.artikel));
-        });
-
-        // mekNextQuestionBtnEl onclick is dynamic
-        // mekRestartQuizBtn onclick is dynamic
-        mekBackToMenuBtn.addEventListener('click', showModeSelection);
-        mekArtikelButtons.forEach(button => {
-            button.addEventListener('click', () => handleMekAnswer(button.dataset.artikelBase));
-        });
-
+        backToMenuBtn.addEventListener('click', showModeSelection); // DerDieDas back button
+        artikelButtons.forEach(button => button.addEventListener('click', () => handleAnswer(button.dataset.artikel)));
+        mekBackToMenuBtn.addEventListener('click', showModeSelection); // MEK back button
+        mekArtikelButtons.forEach(button => button.addEventListener('click', () => handleMekAnswer(button.dataset.artikelBase)));
         speedPauseBtn.addEventListener('click', toggleSpeedPause);
         speedRestartBtn.addEventListener('click', startSpeedRound);
         speedBackToMenuBtn.addEventListener('click', showModeSelection);
         speedBackToMenuBtnIngame.addEventListener('click', showModeSelection);
-
         document.addEventListener('keydown', handleSpacebar);
+        // restartQuizBtn & mekRestartQuizBtn onclicks are set dynamically.
 
-        // Initial Load
         async function initialSetup() {
-            // Disable mode buttons until data is loaded
-            quizModeBtn.disabled = true;
-            speedModeBtn.disabled = true;
-            mekQuizModeBtn.disabled = true;
-
-            // Optionally show a loading message within the mode selection screen
-            const loadingMsg = document.createElement('p');
-            loadingMsg.id = "loading-data-msg";
-            loadingMsg.textContent = "Lade Quizdaten...";
-            loadingMsg.className = "text-center text-purple-700 mb-4";
-            // Insert after title (h1) and before the mode-selection div
-            const modeSelectionDiv = modeSelectionScreen.querySelector('.mode-selection');
-            if (modeSelectionDiv) {
-                modeSelectionScreen.insertBefore(loadingMsg, modeSelectionDiv);
-            } else { // Fallback if structure is slightly different
-                 modeSelectionScreen.appendChild(loadingMsg);
-            }
-
-
-            await loadQuizData(); // This will call initializeUI on success
-
-            // Remove loading message if it exists, regardless of success/failure (failure handles UI)
-            const existingLoadingMsg = document.getElementById('loading-data-msg');
-            if(existingLoadingMsg) existingLoadingMsg.remove();
+            quizModeBtn.disabled = true; speedModeBtn.disabled = true; mekQuizModeBtn.disabled = true;
+            const loadingMsg = document.createElement('p'); loadingMsg.id = "loading-data-msg";
+            loadingMsg.textContent = "Lade Quizdaten..."; loadingMsg.className = "text-center text-purple-700 mb-4";
+            const modeSelDiv = modeSelectionScreen.querySelector('.mode-selection');
+            if (modeSelDiv) modeSelectionScreen.insertBefore(loadingMsg, modeSelDiv);
+            else modeSelectionScreen.appendChild(loadingMsg);
+            await loadQuizData();
+            const existingMsg = document.getElementById('loading-data-msg');
+            if(existingMsg) existingMsg.remove();
         }
-
         initialSetup();
     </script>
 </body>
