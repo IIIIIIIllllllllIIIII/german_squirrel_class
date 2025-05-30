@@ -1,0 +1,92 @@
+[
+    {
+        "id": "wf1",
+        "wFrage": "Was",
+        "questionStem": "___ ist das?",
+        "fullQuestionExample": "Was ist das?",
+        "answer": "ein Auto",
+        "answerCategory": "object",
+        "translation": "What is that? - A car"
+    },
+    {
+        "id": "wf2",
+        "wFrage": "Wer",
+        "questionStem": "___ kommt heute?",
+        "fullQuestionExample": "Wer kommt heute?",
+        "answer": "Maria",
+        "answerCategory": "person",
+        "translation": "Who is coming today? - Maria"
+    },
+    {
+        "id": "wf3",
+        "wFrage": "Wo",
+        "questionStem": "___ ist der Schlüssel?",
+        "fullQuestionExample": "Wo ist der Schlüssel?",
+        "answer": "in der Küche",
+        "answerCategory": "location",
+        "translation": "Where is the key? - In the kitchen"
+    },
+    {
+        "id": "wf4",
+        "wFrage": "Wann",
+        "questionStem": "___ beginnt der Film?",
+        "fullQuestionExample": "Wann beginnt der Film?",
+        "answer": "um 8 Uhr",
+        "answerCategory": "time",
+        "translation": "When does the film start? - At 8 o'clock"
+    },
+    {
+        "id": "wf5",
+        "wFrage": "Wie",
+        "questionStem": "___ geht es dir?",
+        "fullQuestionExample": "Wie geht es dir?",
+        "answer": "gut, danke",
+        "answerCategory": "manner/condition",
+        "translation": "How are you? - Fine, thank you"
+    },
+    {
+        "id": "wf6",
+        "wFrage": "Woher",
+        "questionStem": "___ kommst du?",
+        "fullQuestionExample": "Woher kommst du?",
+        "answer": "aus Spanien",
+        "answerCategory": "origin",
+        "translation": "Where do you come from? - From Spain"
+    },
+    {
+        "id": "wf7",
+        "wFrage": "Wieviel",
+        "questionStem": "___ kostet das?",
+        "fullQuestionExample": "Wieviel kostet das?",
+        "answer": "10 Euro",
+        "answerCategory": "amount",
+        "translation": "How much does that cost? - 10 Euros"
+    },
+    {
+        "id": "wf8",
+        "wFrage": "Warum",
+        "questionStem": "___ lernst du Deutsch?",
+        "fullQuestionExample": "Warum lernst du Deutsch?",
+        "answer": "für meine Arbeit",
+        "answerCategory": "reason",
+        "translation": "Why are you learning German? - For my work"
+    },
+    {
+        "id": "wf9",
+        "wFrage": "Wohin",
+        "questionStem": "___ gehst du?",
+        "fullQuestionExample": "Wohin gehst du?",
+        "answer": "ins Kino",
+        "answerCategory": "destination",
+        "translation": "Where are you going (to)? - To the cinema"
+    },
+    {
+        "id": "wf10",
+        "wFrage": "Welche",
+        "questionStem": "___ Farbe magst du?",
+        "fullQuestionExample": "Welche Farbe magst du?",
+        "answer": "Blau",
+        "answerCategory": "choice",
+        "translation": "Which color do you like? - Blue"
+    }
+]

@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>W-Fragen LEGO Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: linear-gradient(to right top, #2dd4bf, #4ade80, #86efac, #a7f3d0, #ccfbf1); /* Teal/Green Gradient */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to top for longer content */
+            min-height: 100vh;
+            margin: 0;
+            padding: 24px; /* Increased padding */
+            color: #374151; 
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent; 
+        }
+        .card {
+            background-color: white;
+            padding: 24px; /* Default padding */
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            text-align: center;
+            width: 100%;
+            max-width: 900px; /* Allow wider card for this mode */
+        }
+        @media (min-width: 768px) { /* md breakpoint */
+            .card { padding: 32px; }
+        }
+
+        .mode-title {
+            font-size: 1.75rem; font-weight: 700; color: #0d9488; /* Teal-700 */
+            margin-bottom: 4px;
+        }
+        .mode-title-subtitle { font-size: 1rem; color: #0f766e; margin-bottom: 24px; } /* Teal-600 */
+
+        .pools-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem; /* Increased gap */
+            margin-bottom: 2rem; /* Increased margin */
+        }
+        @media (min-width: 768px) { /* md breakpoint */
+            .pools-container {
+                flex-direction: row;
+                justify-content: space-around;
+            }
+        }
+
+        .items-pool {
+            background-color: #f0fdfa; /* Teal-50 */
+            border: 2px dashed #5eead4; /* Teal-300 */
+            border-radius: 0.75rem;
+            padding: 1rem;
+            min-height: 100px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem; /* Increased gap */
+            justify-content: center;
+            align-items: flex-start; /* Align items to top */
+            flex: 1; /* Allow flex grow */
+        }
+        .items-pool h3 {
+            width: 100%;
+            text-align: center;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #115e59; /* Teal-800 */
+            margin-bottom: 0.75rem;
+        }
+        .draggable-item {
+            background-image: linear-gradient(to right, #5eead4 0%, #2dd4bf 100%); /* Teal shades */
+            color: #134e4a; /* Teal-900 */
+            padding: 10px 18px; /* Adjusted padding */
+            border-radius: 9999px; 
+            cursor: grab; 
+            font-weight: 600; 
+            font-size: 1rem; /* Adjusted font size */
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); 
+            transition: all 0.2s ease-out; 
+            border: 2px solid transparent; 
+            user-select: none; 
+            -webkit-user-select: none; -ms-user-select: none;
+        }
+        .draggable-item:hover { 
+            transform: translateY(-2px) scale(1.05); 
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); 
+        }
+        .draggable-item.dragging { 
+            opacity: 0.6; 
+            transform: rotate(3deg) scale(0.95); 
+            cursor: grabbing; 
+        }
+
+        #question-slots-container {
+            display: grid;
+            grid-template-columns: 1fr; /* Single column for mobile */
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .question-slot-row {
+            background-color: #f8fafc; /* Slate-50 */
+            border-radius: 0.75rem;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column; /* Stack on mobile */
+            align-items: stretch; /* Stretch children */
+            gap: 0.75rem;
+            border: 1px solid #e2e8f0; /* Slate-200 */
+        }
+        @media (min-width: 768px) { /* md breakpoint */
+            .question-slot-row {
+                flex-direction: row;
+                align-items: center;
+            }
+        }
+        
+        .drop-box {
+            min-height: 50px; 
+            background-color: #eef2ff; /* Indigo-50 */
+            border-radius: 0.5rem; 
+            border: 2px dashed #a5b4fc; /* Indigo-300 */
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            transition: all 0.25s ease-in-out;
+            padding: 0.5rem;
+            flex-basis: 120px; /* Give a base width */
+            flex-grow: 1; /* Allow to grow */
+        }
+        @media (min-width: 768px) { /* md breakpoint */
+           .drop-box { flex-basis: 150px; } /* Slightly wider on desktop */
+        }
+
+        .drop-box.drag-over { 
+            background-color: #ccfbf1; /* Teal-100 */
+            border-color: #5eead4; /* Teal-300 */
+            transform: scale(1.02); 
+        }
+        .question-stem-text {
+            font-size: 1rem;
+            color: #475569; /* Slate-600 */
+            text-align: center;
+            padding: 0 0.5rem; /* Add some padding */
+            flex-grow: 2; /* Allow stem to take more space */
+        }
+        @media (min-width: 768px) { /* md breakpoint */
+             .question-stem-text { font-size: 1.125rem; }
+        }
+
+
+        .drop-box.filled .draggable-item { cursor: default; }
+        .drop-box.correct .draggable-item {
+             background-image: linear-gradient(to right, #86efac 0%, #34d399 100%); color: white; border-color: #10b981; 
+        }
+        .drop-box.incorrect .draggable-item {
+            background-image: linear-gradient(to right, #fca5a5 0%, #f87171 100%); color: white; border-color: #ef4444;
+        }
+        .correct-answer-reveal {
+            font-size: 0.875rem;
+            color: #059669; /* Green-600 */
+            margin-top: 0.25rem;
+        }
+
+        .btn {
+            padding: 12px 24px; border-radius: 8px; font-size: 1rem; font-weight: 600;
+            color: white; cursor: pointer; transition: all 0.3s ease;
+            border: none; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            margin-top: 16px;
+        }
+        .btn:disabled { background-color: #d1d5db !important; color: #6b7280 !important; cursor: not-allowed; opacity: 0.7; }
+        .btn-primary { background-color: #14b8a6; } /* Teal-500 */
+        .btn-primary:hover:not(:disabled) { background-color: #0d9488; } /* Teal-600 */
+        .btn-secondary { background-color: #64748b; } /* Slate-500 */
+        .btn-secondary:hover:not(:disabled) { background-color: #475569; } /* Slate-600 */
+        .hidden { display: none !important; }
+        .feedback-area {
+            margin-top: 1.5rem;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+        }
+        .feedback-area.success { background-color: #dcfce7; color: #166534; border: 1px solid #6ee7b7;} /* Green */
+        .feedback-area.some-correct { background-color: #fef3c7; color: #b45309; border: 1px solid #fcd34d;} /* Amber */
+        .bottom-controls { margin-top: 1.5rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;}
+
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1 class="mode-title">W-Fragen LEGO-Style</h1>
+        <p class="mode-title-subtitle">Modo LEGO de Preguntas-W</p>
+
+        <div class="pools-container">
+            <div id="wfragen-pool" class="items-pool">
+                <h3>W-Fragen / Preguntas-W</h3>
+                </div>
+            <div id="answers-pool" class="items-pool">
+                <h3>Antworten / Respuestas</h3>
+                </div>
+        </div>
+
+        <div id="question-slots-container">
+            </div>
+        
+        <div id="feedback-message" class="feedback-area hidden"></div>
+
+        <div class="bottom-controls">
+            <button id="check-answers-btn" class="btn btn-primary">Check Answers / Verificar Respuestas</button>
+            <button id="next-set-btn" class="btn btn-secondary hidden">Next Set / Siguiente Grupo</button>
+            <a href="index.html" class="btn btn-secondary">Menu / Menú</a>
+        </div>
+    </div>
+
+    <script>
+        let allWFragenData = [];
+        let currentQuestionSet = [];
+        let questionsPerRound = 4;
+
+        let draggedItem = null;
+        let touchOffsetX = 0, touchOffsetY = 0;
+        let activeTouchClone = null;
+
+        const wFragenPoolEl = document.getElementById('wfragen-pool');
+        const answersPoolEl = document.getElementById('answers-pool');
+        const questionSlotsContainerEl = document.getElementById('question-slots-container');
+        const checkAnswersBtn = document.getElementById('check-answers-btn');
+        const nextSetBtn = document.getElementById('next-set-btn');
+        const feedbackMessageEl = document.getElementById('feedback-message');
+
+        async function loadWFragenData() {
+            try {
+                const response = await fetch('wfragen.json');
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                allWFragenData = await response.json();
+                if (allWFragenData.length === 0) throw new Error("wfragen.json is empty or not found.");
+                initializeWFragenMode();
+            } catch (error) {
+                console.error("Could not load W-Fragen data:", error);
+                questionSlotsContainerEl.innerHTML = `<p class="text-red-500 font-semibold">Error: Could not load questions. Please check console and wfragen.json file. Details: ${error.message}</p>`;
+            }
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function createDraggableItem(text, type, id) {
+            const item = document.createElement('div');
+            item.classList.add('draggable-item');
+            item.textContent = text;
+            item.draggable = true;
+            item.dataset.type = type; // 'wfrage' or 'answer'
+            item.dataset.id = id; // original id from JSON for answer matching
+            item.dataset.text = text; // store the text for easy access
+            item.addEventListener('dragstart', handleDragStart);
+            item.addEventListener('dragend', handleDragEnd);
+            // Touch events
+            item.addEventListener('touchstart', handleTouchStart, { passive: false });
+            return item;
+        }
+        
+        function initializeWFragenMode() {
+            shuffleArray(allWFragenData);
+            currentQuestionSet = allWFragenData.slice(0, Math.min(questionsPerRound, allWFragenData.length));
+
+            if (currentQuestionSet.length === 0) {
+                 questionSlotsContainerEl.innerHTML = `<p class="text-slate-500 font-semibold">Alle Fragen geübt! Lade die Seite neu für mehr.</p>`;
+                 checkAnswersBtn.classList.add('hidden');
+                 nextSetBtn.classList.add('hidden');
+                 wFragenPoolEl.innerHTML = '<h3>W-Fragen / Preguntas-W</h3>';
+                 answersPoolEl.innerHTML = '<h3>Antworten / Respuestas</h3>';
+                 return;
+            }
+
+            // Populate W-Fragen Pool
+            wFragenPoolEl.innerHTML = '<h3>W-Fragen / Preguntas-W</h3>'; // Clear previous, keep title
+            const wFragenForPool = [...new Set(currentQuestionSet.map(q => q.wFrage))]; // Unique W-Fragen
+            shuffleArray(wFragenForPool);
+            wFragenForPool.forEach(wfrageText => {
+                // For wFragen, the ID for dragging can just be its text as it's unique enough for this context
+                wFragenPoolEl.appendChild(createDraggableItem(wfrageText, 'wfrage', wfrageText));
+            });
+
+            // Populate Answers Pool
+            answersPoolEl.innerHTML = '<h3>Antworten / Respuestas</h3>'; // Clear previous, keep title
+            const answersForPool = currentQuestionSet.map(q => ({ text: q.answer, id: q.id }));
+            shuffleArray(answersForPool);
+            answersForPool.forEach(ans => {
+                answersPoolEl.appendChild(createDraggableItem(ans.text, 'answer', ans.id));
+            });
+            
+            // Create Question Slots
+            questionSlotsContainerEl.innerHTML = '';
+            currentQuestionSet.forEach(qData => {
+                const slotRow = document.createElement('div');
+                slotRow.classList.add('question-slot-row');
+                slotRow.dataset.correctWfrage = qData.wFrage;
+                slotRow.dataset.correctAnswerId = qData.id; // Use original ID to match answer
+
+                const wFrageDropBox = document.createElement('div');
+                wFrageDropBox.classList.add('drop-box', 'wfrage-drop-target');
+                wFrageDropBox.dataset.targetType = 'wfrage';
+
+                const stemText = document.createElement('span');
+                stemText.classList.add('question-stem-text');
+                stemText.textContent = qData.questionStem.replace('___', '...'); // Visual placeholder
+
+                const answerDropBox = document.createElement('div');
+                answerDropBox.classList.add('drop-box', 'answer-drop-target');
+                answerDropBox.dataset.targetType = 'answer';
+
+                [wFrageDropBox, answerDropBox].forEach(box => {
+                    box.addEventListener('dragover', handleDragOver);
+                    box.addEventListener('dragenter', handleDragEnter);
+                    box.addEventListener('dragleave', handleDragLeave);
+                    box.addEventListener('drop', handleDrop);
+                });
+                
+                slotRow.appendChild(wFrageDropBox);
+                slotRow.appendChild(stemText);
+                slotRow.appendChild(answerDropBox);
+                questionSlotsContainerEl.appendChild(slotRow);
+            });
+
+            checkAnswersBtn.classList.remove('hidden');
+            nextSetBtn.classList.add('hidden');
+            feedbackMessageEl.classList.add('hidden');
+        }
+
+        function handleDragStart(e) {
+            draggedItem = e.target;
+            e.dataTransfer.setData('text/plain', draggedItem.dataset.id); // Use ID for transfer
+            e.dataTransfer.effectAllowed = 'move';
+            setTimeout(() => e.target.classList.add('dragging'), 0);
+        }
+
+        function handleDragEnd(e) {
+            if (draggedItem) {
+                draggedItem.classList.remove('dragging');
+            }
+            draggedItem = null;
+             // Clean up any lingering drag-over classes
+            document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+        }
+
+        function handleDragEnter(e) {
+            e.preventDefault();
+            const dropTarget = e.target.closest('.drop-box');
+            if (dropTarget && dropTarget.dataset.targetType === draggedItem.dataset.type && !dropTarget.firstChild) {
+                dropTarget.classList.add('drag-over');
+            }
+        }
+
+        function handleDragLeave(e) {
+            const dropTarget = e.target.closest('.drop-box');
+            if (dropTarget) {
+                dropTarget.classList.remove('drag-over');
+            }
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            const dropTarget = e.target.closest('.drop-box');
+            if (dropTarget && draggedItem && dropTarget.dataset.targetType === draggedItem.dataset.type) {
+                if (!dropTarget.firstChild) { // Allow drop only if empty
+                    dropTarget.appendChild(draggedItem);
+                    draggedItem.classList.remove('dragging');
+                } else {
+                    // If slot is filled, return item to original pool or do nothing
+                    // For simplicity, we can just not allow dropping on filled slots
+                }
+            }
+             if (dropTarget) dropTarget.classList.remove('drag-over');
+            draggedItem = null;
+        }
+        
+        // Basic Touch Support (simplified from LEGO mode)
+        function handleTouchStart(e) {
+            if (e.target.classList.contains('draggable-item')) {
+                draggedItem = e.target;
+                if (e.cancelable) e.preventDefault();
+
+                activeTouchClone = draggedItem.cloneNode(true);
+                activeTouchClone.classList.add('dragging');
+                activeTouchClone.style.position = 'fixed';
+                activeTouchClone.style.pointerEvents = 'none'; 
+                activeTouchClone.style.zIndex = '1000';
+                activeTouchClone.style.width = draggedItem.offsetWidth + 'px';
+                activeTouchClone.style.height = draggedItem.offsetHeight + 'px';
+                document.body.appendChild(activeTouchClone);
+
+                const rect = draggedItem.getBoundingClientRect();
+                touchOffsetX = e.touches[0].clientX - rect.left;
+                touchOffsetY = e.touches[0].clientY - rect.top;
+                
+                activeTouchClone.style.left = (e.touches[0].clientX - touchOffsetX) + 'px';
+                activeTouchClone.style.top = (e.touches[0].clientY - touchOffsetY) + 'px';
+                draggedItem.style.opacity = '0.4';
+
+                document.addEventListener('touchmove', handleTouchMove, { passive: false });
+                document.addEventListener('touchend', handleTouchEnd, { once: true });
+            }
+        }
+
+        function handleTouchMove(e) {
+            if (activeTouchClone) {
+                if (e.cancelable) e.preventDefault();
+                let currentX = e.touches[0].clientX;
+                let currentY = e.touches[0].clientY;
+                activeTouchClone.style.left = (currentX - touchOffsetX) + 'px';
+                activeTouchClone.style.top = (currentY - touchOffsetY) + 'px';
+                
+                document.querySelectorAll('.drop-box.drag-over').forEach(box => box.classList.remove('drag-over'));
+                activeTouchClone.style.display = 'none'; 
+                const elementBelow = document.elementFromPoint(currentX, currentY);
+                activeTouchClone.style.display = ''; 
+
+                if (elementBelow) {
+                    const dropBoxBelow = elementBelow.closest('.drop-box');
+                    if (dropBoxBelow && dropBoxBelow.dataset.targetType === draggedItem.dataset.type && !dropBoxBelow.firstChild) {
+                        dropBoxBelow.classList.add('drag-over');
+                    }
+                }
+            }
+        }
+
+        function handleTouchEnd(e) {
+            document.removeEventListener('touchmove', handleTouchMove);
+            if (activeTouchClone && draggedItem) {
+                activeTouchClone.style.display = 'none';
+                const dropTargetElement = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+                let droppedSuccessfully = false;
+
+                if (dropTargetElement) {
+                    const dropBox = dropTargetElement.closest('.drop-box');
+                    if (dropBox && dropBox.dataset.targetType === draggedItem.dataset.type && !dropBox.firstChild) {
+                        dropBox.appendChild(draggedItem);
+                        droppedSuccessfully = true;
+                    }
+                }
+                
+                if (!droppedSuccessfully) { // Return to original pool if not dropped in a valid empty slot
+                     if(draggedItem.dataset.type === 'wfrage') wFragenPoolEl.appendChild(draggedItem);
+                     else answersPoolEl.appendChild(draggedItem);
+                }
+
+                draggedItem.style.opacity = '1';
+                draggedItem.classList.remove('dragging');
+                document.body.removeChild(activeTouchClone);
+            }
+            activeTouchClone = null;
+            draggedItem = null;
+            touchOffsetX = 0;
+            touchOffsetY = 0;
+            document.querySelectorAll('.drop-box.drag-over').forEach(box => box.classList.remove('drag-over'));
+        }
+
+
+        checkAnswersBtn.addEventListener('click', () => {
+            let allCorrect = true;
+            let anyCorrect = false;
+            let totalSlots = 0;
+            let correctSlots = 0;
+
+            questionSlotsContainerEl.querySelectorAll('.question-slot-row').forEach(slotRow => {
+                totalSlots++;
+                const wFrageDropBox = slotRow.querySelector('.wfrage-drop-target');
+                const answerDropBox = slotRow.querySelector('.answer-drop-target');
+                
+                const placedWFrageEl = wFrageDropBox.querySelector('.draggable-item');
+                const placedAnswerEl = answerDropBox.querySelector('.draggable-item');
+
+                let wFrageCorrect = false;
+                let answerCorrect = false;
+
+                // Clear previous feedback visuals
+                wFrageDropBox.classList.remove('correct', 'incorrect');
+                answerDropBox.classList.remove('correct', 'incorrect');
+                const oldReveal = slotRow.querySelector('.correct-answer-reveal');
+                if(oldReveal) oldReveal.remove();
+
+                if (placedWFrageEl) {
+                    if (placedWFrageEl.dataset.text === slotRow.dataset.correctWfrage) {
+                        wFrageDropBox.classList.add('correct');
+                        wFrageCorrect = true;
+                    } else {
+                        wFrageDropBox.classList.add('incorrect');
+                        allCorrect = false;
+                    }
+                } else { allCorrect = false; /* Not filled */ }
+
+                if (placedAnswerEl) {
+                    // Answers are matched by original ID from JSON
+                    if (placedAnswerEl.dataset.id === slotRow.dataset.correctAnswerId) {
+                        answerDropBox.classList.add('correct');
+                        answerCorrect = true;
+                    } else {
+                        answerDropBox.classList.add('incorrect');
+                        allCorrect = false;
+                    }
+                } else { allCorrect = false; /* Not filled */ }
+
+                if (wFrageCorrect && answerCorrect) {
+                    anyCorrect = true;
+                    correctSlots++;
+                } else {
+                    // Show correct answer if any part is wrong
+                    const correctAnswerForSlot = allWFragenData.find(q => q.id === slotRow.dataset.correctAnswerId);
+                    if (correctAnswerForSlot) {
+                        const revealText = document.createElement('div');
+                        revealText.classList.add('correct-answer-reveal');
+                        revealText.innerHTML = `Richtig: <strong>${slotRow.dataset.correctWfrage}</strong> ... <strong>${correctAnswerForSlot.answer}</strong>`;
+                        slotRow.appendChild(revealText);
+                    }
+                }
+            });
+
+            feedbackMessageEl.classList.remove('hidden', 'success', 'some-correct');
+            if (allCorrect && totalSlots > 0) {
+                feedbackMessageEl.textContent = "Super! Alles richtig! / Excellent! Everything is correct!";
+                feedbackMessageEl.classList.add('success');
+                triggerConfetti();
+            } else if (anyCorrect && totalSlots > 0) {
+                feedbackMessageEl.textContent = `Einige richtig (${correctSlots}/${totalSlots}). Schau dir die Korrekturen an. / Some correct (${correctSlots}/${totalSlots}). Check the corrections.`;
+                feedbackMessageEl.classList.add('some-correct');
+            } else if (totalSlots > 0) {
+                feedbackMessageEl.textContent = "Leider nicht richtig. Versuch es nochmal! / Not quite. Try again!";
+                 feedbackMessageEl.classList.add('some-correct'); // Use 'some-correct' style for neutral/try-again
+            } else {
+                 feedbackMessageEl.textContent = "Bitte fülle die Lücken aus. / Please fill in the blanks.";
+                 feedbackMessageEl.classList.add('some-correct');
+            }
+
+            checkAnswersBtn.classList.add('hidden');
+            nextSetBtn.classList.remove('hidden');
+        });
+
+        nextSetBtn.addEventListener('click', () => {
+            // Remove the used questions from allWFragenData to avoid repetition until all are used
+            currentQuestionSet.forEach(usedQuestion => {
+                allWFragenData = allWFragenData.filter(item => item.id !== usedQuestion.id);
+            });
+            initializeWFragenMode();
+        });
+        
+        function triggerConfetti() { if (typeof confetti === 'function') { confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } }); } }
+
+        loadWFragenData();
+    </script>
+</body>
+</html>
