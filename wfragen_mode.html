@@ -166,7 +166,12 @@
             font-size: 0.875rem;
             color: #059669; /* Green-600 */
             margin-top: 0.25rem;
+            text-align: center; /* Center the reveal text */
         }
+        @media (min-width: 768px) { /* md breakpoint */
+            .correct-answer-reveal { margin-left: 10px; text-align: left; } /* Align left on larger screens if needed */
+        }
+
 
         .btn {
             padding: 12px 24px; border-radius: 8px; font-size: 1rem; font-weight: 600;
@@ -259,14 +264,33 @@
             item.classList.add('draggable-item');
             item.textContent = text;
             item.draggable = true;
-            item.dataset.type = type; // 'wfrage' or 'answer'
-            item.dataset.id = id; // original id from JSON for answer matching
-            item.dataset.text = text; // store the text for easy access
+            item.dataset.type = type; 
+            item.dataset.id = id; 
+            item.dataset.text = text; 
             item.addEventListener('dragstart', handleDragStart);
             item.addEventListener('dragend', handleDragEnd);
-            // Touch events
             item.addEventListener('touchstart', handleTouchStart, { passive: false });
+            item.addEventListener('click', handleClickOnPlacedItem);
             return item;
+        }
+
+        function handleClickOnPlacedItem(e) {
+            const item = e.target.closest('.draggable-item');
+            if (item && item.parentElement && item.parentElement.classList.contains('drop-box')) {
+                const originalPool = item.dataset.type === 'wfrage' ? wFragenPoolEl : answersPoolEl;
+                
+                // Remove correctness styling from the drop-box before moving the item
+                item.parentElement.classList.remove('correct', 'incorrect');
+                // Also remove any reveal text associated with this slot row
+                const slotRow = item.closest('.question-slot-row');
+                if (slotRow) {
+                    const oldReveal = slotRow.querySelector('.correct-answer-reveal');
+                    if (oldReveal) oldReveal.remove();
+                }
+                
+                originalPool.appendChild(item); // Add to pool first
+                item.draggable = true; 
+            }
         }
         
         function initializeWFragenMode() {
@@ -282,17 +306,19 @@
                  return;
             }
 
-            // Populate W-Fragen Pool
-            wFragenPoolEl.innerHTML = '<h3>W-Fragen / Preguntas-W</h3>'; // Clear previous, keep title
-            const wFragenForPool = [...new Set(currentQuestionSet.map(q => q.wFrage))]; // Unique W-Fragen
-            shuffleArray(wFragenForPool);
-            wFragenForPool.forEach(wfrageText => {
-                // For wFragen, the ID for dragging can just be its text as it's unique enough for this context
-                wFragenPoolEl.appendChild(createDraggableItem(wfrageText, 'wfrage', wfrageText));
+            // Populate W-Fragen Pool - Fixed Logic
+            wFragenPoolEl.innerHTML = '<h3>W-Fragen / Preguntas-W</h3>'; 
+            const wFragenRequiredForRound = currentQuestionSet.map(q => q.wFrage);
+            shuffleArray(wFragenRequiredForRound);
+            wFragenRequiredForRound.forEach((wfrageText, index) => {
+                // Use a unique identifier if multiple identical W-Fragen are needed, 
+                // but for matching, the text itself is fine. The dataset.id is mostly for answers.
+                wFragenPoolEl.appendChild(createDraggableItem(wfrageText, 'wfrage', wfrageText + "_" + index)); // Added index for unique ID if needed
             });
 
+
             // Populate Answers Pool
-            answersPoolEl.innerHTML = '<h3>Antworten / Respuestas</h3>'; // Clear previous, keep title
+            answersPoolEl.innerHTML = '<h3>Antworten / Respuestas</h3>'; 
             const answersForPool = currentQuestionSet.map(q => ({ text: q.answer, id: q.id }));
             shuffleArray(answersForPool);
             answersForPool.forEach(ans => {
@@ -305,7 +331,7 @@
                 const slotRow = document.createElement('div');
                 slotRow.classList.add('question-slot-row');
                 slotRow.dataset.correctWfrage = qData.wFrage;
-                slotRow.dataset.correctAnswerId = qData.id; // Use original ID to match answer
+                slotRow.dataset.correctAnswerId = qData.id;
 
                 const wFrageDropBox = document.createElement('div');
                 wFrageDropBox.classList.add('drop-box', 'wfrage-drop-target');
@@ -313,7 +339,7 @@
 
                 const stemText = document.createElement('span');
                 stemText.classList.add('question-stem-text');
-                stemText.textContent = qData.questionStem.replace('___', '...'); // Visual placeholder
+                stemText.textContent = qData.questionStem.replace('___', '...'); 
 
                 const answerDropBox = document.createElement('div');
                 answerDropBox.classList.add('drop-box', 'answer-drop-target');
@@ -332,14 +358,16 @@
                 questionSlotsContainerEl.appendChild(slotRow);
             });
 
+            checkAnswersBtn.disabled = false; // Enable check answers button
             checkAnswersBtn.classList.remove('hidden');
             nextSetBtn.classList.add('hidden');
             feedbackMessageEl.classList.add('hidden');
+            feedbackMessageEl.textContent = '';
         }
 
         function handleDragStart(e) {
             draggedItem = e.target;
-            e.dataTransfer.setData('text/plain', draggedItem.dataset.id); // Use ID for transfer
+            e.dataTransfer.setData('text/plain', draggedItem.dataset.id); 
             e.dataTransfer.effectAllowed = 'move';
             setTimeout(() => e.target.classList.add('dragging'), 0);
         }
@@ -349,7 +377,6 @@
                 draggedItem.classList.remove('dragging');
             }
             draggedItem = null;
-             // Clean up any lingering drag-over classes
             document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
         }
 
@@ -360,7 +387,7 @@
         function handleDragEnter(e) {
             e.preventDefault();
             const dropTarget = e.target.closest('.drop-box');
-            if (dropTarget && dropTarget.dataset.targetType === draggedItem.dataset.type && !dropTarget.firstChild) {
+            if (draggedItem && dropTarget && dropTarget.dataset.targetType === draggedItem.dataset.type && !dropTarget.firstChild) {
                 dropTarget.classList.add('drag-over');
             }
         }
@@ -376,19 +403,16 @@
             e.preventDefault();
             const dropTarget = e.target.closest('.drop-box');
             if (dropTarget && draggedItem && dropTarget.dataset.targetType === draggedItem.dataset.type) {
-                if (!dropTarget.firstChild) { // Allow drop only if empty
+                if (!dropTarget.firstChild) { 
                     dropTarget.appendChild(draggedItem);
                     draggedItem.classList.remove('dragging');
-                } else {
-                    // If slot is filled, return item to original pool or do nothing
-                    // For simplicity, we can just not allow dropping on filled slots
+                     // Listener is already on the item from createDraggableItem
                 }
             }
-             if (dropTarget) dropTarget.classList.remove('drag-over');
+            if (dropTarget) dropTarget.classList.remove('drag-over');
             draggedItem = null;
         }
         
-        // Basic Touch Support (simplified from LEGO mode)
         function handleTouchStart(e) {
             if (e.target.classList.contains('draggable-item')) {
                 draggedItem = e.target;
@@ -450,17 +474,18 @@
                     if (dropBox && dropBox.dataset.targetType === draggedItem.dataset.type && !dropBox.firstChild) {
                         dropBox.appendChild(draggedItem);
                         droppedSuccessfully = true;
+                        // Listener is already on item
                     }
                 }
                 
-                if (!droppedSuccessfully) { // Return to original pool if not dropped in a valid empty slot
+                if (!droppedSuccessfully) { 
                      if(draggedItem.dataset.type === 'wfrage') wFragenPoolEl.appendChild(draggedItem);
                      else answersPoolEl.appendChild(draggedItem);
                 }
 
                 draggedItem.style.opacity = '1';
                 draggedItem.classList.remove('dragging');
-                document.body.removeChild(activeTouchClone);
+                if(activeTouchClone.parentNode) document.body.removeChild(activeTouchClone);
             }
             activeTouchClone = null;
             draggedItem = null;
@@ -471,13 +496,12 @@
 
 
         checkAnswersBtn.addEventListener('click', () => {
-            let allCorrect = true;
-            let anyCorrect = false;
-            let totalSlots = 0;
-            let correctSlots = 0;
+            let allCorrectOverall = true; 
+            let anyCorrectOverall = false; 
+            let filledSlots = 0;
+            let correctSlotsCount = 0; 
 
             questionSlotsContainerEl.querySelectorAll('.question-slot-row').forEach(slotRow => {
-                totalSlots++;
                 const wFrageDropBox = slotRow.querySelector('.wfrage-drop-target');
                 const answerDropBox = slotRow.querySelector('.answer-drop-target');
                 
@@ -487,11 +511,14 @@
                 let wFrageCorrect = false;
                 let answerCorrect = false;
 
-                // Clear previous feedback visuals
                 wFrageDropBox.classList.remove('correct', 'incorrect');
                 answerDropBox.classList.remove('correct', 'incorrect');
                 const oldReveal = slotRow.querySelector('.correct-answer-reveal');
                 if(oldReveal) oldReveal.remove();
+
+                if (placedWFrageEl || placedAnswerEl) { // Count as an attempted slot if at least one part is filled
+                    filledSlots++;
+                }
 
                 if (placedWFrageEl) {
                     if (placedWFrageEl.dataset.text === slotRow.dataset.correctWfrage) {
@@ -499,61 +526,74 @@
                         wFrageCorrect = true;
                     } else {
                         wFrageDropBox.classList.add('incorrect');
-                        allCorrect = false;
+                        allCorrectOverall = false;
                     }
-                } else { allCorrect = false; /* Not filled */ }
+                } else { allCorrectOverall = false; }
 
                 if (placedAnswerEl) {
-                    // Answers are matched by original ID from JSON
                     if (placedAnswerEl.dataset.id === slotRow.dataset.correctAnswerId) {
                         answerDropBox.classList.add('correct');
                         answerCorrect = true;
                     } else {
                         answerDropBox.classList.add('incorrect');
-                        allCorrect = false;
+                        allCorrectOverall = false;
                     }
-                } else { allCorrect = false; /* Not filled */ }
+                } else { allCorrectOverall = false; }
 
                 if (wFrageCorrect && answerCorrect) {
-                    anyCorrect = true;
-                    correctSlots++;
-                } else {
-                    // Show correct answer if any part is wrong
-                    const correctAnswerForSlot = allWFragenData.find(q => q.id === slotRow.dataset.correctAnswerId);
-                    if (correctAnswerForSlot) {
+                    anyCorrectOverall = true;
+                    correctSlotsCount++;
+                } else if (placedWFrageEl || placedAnswerEl) { 
+                    const questionData = currentQuestionSet.find(q => q.id === slotRow.dataset.correctAnswerId);
+                    if (questionData) {
                         const revealText = document.createElement('div');
                         revealText.classList.add('correct-answer-reveal');
-                        revealText.innerHTML = `Richtig: <strong>${slotRow.dataset.correctWfrage}</strong> ... <strong>${correctAnswerForSlot.answer}</strong>`;
-                        slotRow.appendChild(revealText);
+                        revealText.innerHTML = `Richtig: <strong>${questionData.wFrage}</strong> ${questionData.questionStem.replace('___', '')} <strong>${questionData.answer}</strong>`;
+                        
+                        if(answerDropBox.nextSibling) { // Insert after answer box, or at end of row
+                           slotRow.insertBefore(revealText, answerDropBox.nextSibling);
+                        } else {
+                           slotRow.appendChild(revealText);
+                        }
                     }
                 }
             });
+            
+            checkAnswersBtn.disabled = true; // Disable after checking
 
             feedbackMessageEl.classList.remove('hidden', 'success', 'some-correct');
-            if (allCorrect && totalSlots > 0) {
+            if (allCorrectOverall && correctSlotsCount === currentQuestionSet.length && currentQuestionSet.length > 0) {
                 feedbackMessageEl.textContent = "Super! Alles richtig! / Excellent! Everything is correct!";
                 feedbackMessageEl.classList.add('success');
                 triggerConfetti();
-            } else if (anyCorrect && totalSlots > 0) {
-                feedbackMessageEl.textContent = `Einige richtig (${correctSlots}/${totalSlots}). Schau dir die Korrekturen an. / Some correct (${correctSlots}/${totalSlots}). Check the corrections.`;
+            } else if (anyCorrectOverall && currentQuestionSet.length > 0) {
+                feedbackMessageEl.textContent = `Einige richtig (${correctSlotsCount}/${currentQuestionSet.length}). Schau dir die Korrekturen an. / Some correct (${correctSlotsCount}/${currentQuestionSet.length}). Check the corrections.`;
                 feedbackMessageEl.classList.add('some-correct');
-            } else if (totalSlots > 0) {
-                feedbackMessageEl.textContent = "Leider nicht richtig. Versuch es nochmal! / Not quite. Try again!";
-                 feedbackMessageEl.classList.add('some-correct'); // Use 'some-correct' style for neutral/try-again
-            } else {
+            } else if (currentQuestionSet.length > 0 && filledSlots > 0) { // Some attempt but nothing correct
+                feedbackMessageEl.textContent = "Leider nicht richtig. Versuch es nochmal oder schau dir die Lösungen an. / Not quite. Try again or check the solutions.";
+                feedbackMessageEl.classList.add('some-correct'); 
+            } else if (currentQuestionSet.length > 0 && filledSlots === 0) { // No attempts made
                  feedbackMessageEl.textContent = "Bitte fülle die Lücken aus. / Please fill in the blanks.";
+                 feedbackMessageEl.classList.add('some-correct');
+                 checkAnswersBtn.disabled = false; // Re-enable if nothing was filled
+            } else { // Should not happen if currentQuestionSet has items
+                 feedbackMessageEl.textContent = "Keine Fragen zu prüfen. / No questions to check.";
                  feedbackMessageEl.classList.add('some-correct');
             }
 
-            checkAnswersBtn.classList.add('hidden');
-            nextSetBtn.classList.remove('hidden');
+            if (currentQuestionSet.length > 0 && (anyCorrectOverall || filledSlots > 0)) {
+                nextSetBtn.classList.remove('hidden');
+            }
         });
 
         nextSetBtn.addEventListener('click', () => {
-            // Remove the used questions from allWFragenData to avoid repetition until all are used
             currentQuestionSet.forEach(usedQuestion => {
                 allWFragenData = allWFragenData.filter(item => item.id !== usedQuestion.id);
             });
+            if (allWFragenData.length < questionsPerRound && allWFragenData.length > 0) {
+                // If fewer than questionsPerRound remain, adjust questionsPerRound for the last set
+                questionsPerRound = allWFragenData.length;
+            }
             initializeWFragenMode();
         });
         
