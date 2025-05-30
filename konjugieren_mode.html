@@ -217,6 +217,7 @@
         <div class="radio-group">
             <div> <input type="radio" id="quiz-type-classic" name="quiz-type" value="classic" checked> <label for="quiz-type-classic">Classic Quiz (Verb Forms)</label> </div>
             <div class="mt-2"> <input type="radio" id="quiz-type-lego" name="quiz-type" value="lego"> <label for="quiz-type-lego">LEGO MODUS (Verb Conjugation - Drag & Drop)</label> </div>
+            <div class="mt-2"> <input type="radio" id="quiz-type-gender" name="quiz-type" value="gender"> <label for="quiz-type-gender">Noun Gender (Der, Die, Das)</label> </div>
         </div>
         <div id="verb-selection-options">
             <h3 class="mode-subtitle">2. Choose Verbs (for Classic/LEGO):</h3>
@@ -592,7 +593,6 @@
         // --- Initial Application Start ---
         document.addEventListener('DOMContentLoaded', () => {
             setupEventListeners();
-            // Show loading state or initial mode selection screen without data-dependent elements
             modeSelectionCardEl.classList.remove('hidden');
             trainerCardEl.classList.add('hidden');
             statsDisplayCardEl.classList.add('hidden');
@@ -603,8 +603,7 @@
             startQuizButton.textContent = "Loading Data...";
             verbBoxSelectionAreaEl.innerHTML = '<p class="text-sm text-gray-500">Loading verbs...</p>';
 
-
-            loadAppData(); // Fetch data and then initialize UI further
+            loadAppData();
         });
 
     </script>
