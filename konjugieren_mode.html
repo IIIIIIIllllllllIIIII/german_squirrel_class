@@ -34,7 +34,6 @@
         .trainer-card-base { max-width: 500px; } /* Base for classic trainer */
         .stats-card { max-width: 650px; }
         #lego-mode-card { max-width: 900px; }
-        #gender-mode-card { max-width: 550px; }
 
         .mode-title {
             font-size: 1.75rem; font-weight: 700; color: #6d28d9; margin-bottom: 24px;
@@ -88,6 +87,7 @@
             margin-top: 16px;
         }
         .btn-sm { padding: 8px 16px; font-size: 0.875rem; }
+        .btn-link { display: inline-block; text-decoration: none; }
         .btn:disabled {
             background-color: #d1d5db !important; 
             color: #6b7280 !important;
@@ -168,28 +168,6 @@
         #feedback-lego.error { background-color: #fee2e2; color: #991b1b; display: block; border: 1px solid #fca5a5; }
         #lego-buttons-container {display: flex; justify-content: space-between; align-items: center; margin-top: 24px; flex-wrap: wrap; gap: 10px;}
 
-
-        #gender-mode-card h1 {font-size: 1.5rem;}
-        #gender-noun-display-card {
-            background-color: #f3f4f6; padding: 2rem 1rem; border-radius: 0.75rem; 
-            margin-bottom: 1.5rem; border: 4px solid transparent; 
-            transition: border-color 0.3s ease-out; min-height: 120px; 
-            display: flex; justify-content: center; align-items: center;
-        }
-        #gender-noun-display-card.chosen-der { border-color: #3b82f6; }
-        #gender-noun-display-card.chosen-die { border-color: #ec4899; }
-        #gender-noun-display-card.chosen-das { border-color: #6b7280; }
-
-        #gender-noun-text { font-size: 2.5rem; font-weight: 700; color: #4f46e5; }
-        #gender-choice-buttons-container button { margin-top: 0.5rem; }
-        #feedback-gender {
-            font-size: 1.125rem; font-weight: 600; padding: 0.75rem; 
-            border-radius: 0.5rem; min-height: 50px;
-        }
-        #feedback-gender.correct { background-color: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; display: block !important;}
-        #feedback-gender.incorrect { background-color: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; display: block !important;}
-        .gender-bottom-controls {display: flex; justify-content: space-between; align-items: center; margin-top: 24px; flex-wrap: wrap; gap: 10px;}
-
         /* Settings Panel Styles (copied from artikel_mode) */
         #settings-btn-konjugieren { /* Unique ID for this page's settings button */
             position: absolute; top: 16px; right: 16px; background: none; border: none;
@@ -224,7 +202,7 @@
 
 
         @media (max-width: 640px) {
-            .card, .stats-card, #mode-selection-card, #lego-mode-card, #gender-mode-card { padding: 20px; }
+            .card, .stats-card, #mode-selection-card, #lego-mode-card { padding: 20px; }
             .mode-title { font-size: 1.5rem; } .mode-subtitle { font-size: 1rem; }
             #verb-box-selection-area { gap: 8px; max-height: 150px; }
             .verb-select-box { padding: 8px 12px; font-size: 0.9rem;}
@@ -247,12 +225,6 @@
             #pronoun-slots-lego { grid-template-columns: 1fr; }
             #lego-buttons-container {flex-direction: column;}
             #lego-buttons-container .btn {width: 100%;}
-
-            #gender-mode-card h1 { font-size: 1.25rem; }
-            #gender-noun-text { font-size: 1.75rem; }
-            #gender-choice-buttons-container { grid-template-columns: 1fr; gap: 0.5rem; } 
-            .gender-bottom-controls {flex-direction: column;}
-            .gender-bottom-controls .btn {width: 100%;}
         }
     </style>
 </head>
@@ -264,10 +236,8 @@
         <div class="radio-group">
             <div> <input type="radio" id="quiz-type-classic" name="quiz-type" value="classic" checked> <label for="quiz-type-classic">Classic Quiz (Verb Forms)</label> </div>
             <div class="mt-2"> <input type="radio" id="quiz-type-lego" name="quiz-type" value="lego"> <label for="quiz-type-lego">LEGO MODUS (Verb Conjugation - Drag & Drop)</label> </div>
-            <div class="mt-2"> <input type="radio" id="quiz-type-gender" name="quiz-type" value="gender"> <label for="quiz-type-gender">Noun Gender (Der, Die, Das)</label> </div>
         </div>
-        <div id="verb-selection-options">
-            <h3 class="mode-subtitle">2. Choose Verbs (for Classic/LEGO):</h3>
+        <div id="verb-selection-options"> <h3 class="mode-subtitle">2. Choose Verbs:</h3>
             <div class="verb-selection-controls">
                 <button id="select-all-verbs-btn" class="btn btn-sm btn-secondary">Select All</button>
                 <button id="deselect-all-verbs-btn" class="btn btn-sm btn-secondary">Deselect All</button>
@@ -280,10 +250,6 @@
                 <div> <input type="radio" id="input-mode-typing" name="input-method-mode" value="typing" checked> <label for="input-mode-typing">Typing Mode</label> </div>
                 <div class="mt-2"> <input type="radio" id="input-mode-mental" name="input-method-mode" value="mental"> <label for="input-mode-mental">Mental Mode</label> </div>
             </div>
-        </div>
-        <div id="gender-mode-specific-options" class="hidden">
-             <h3 class="mode-subtitle">Noun Gender Practice:</h3>
-             <p class="text-sm text-gray-600 mb-2 text-left p-2">A list of common A1 nouns will be used. Click the correct article for the displayed noun.</p>
         </div>
         <button id="start-quiz-button" class="btn btn-primary w-full sm:w-auto mt-6">Start Quiz</button>
         <p id="quiz-summary-konjugieren" class="text-sm text-gray-500 mt-2"></p>
@@ -330,31 +296,7 @@
             <button id="next-verb-btn-lego" class="btn btn-primary" disabled>Nächstes Verb</button> 
         </div>
     </div>
-
-    <div id="gender-mode-card" class="card hidden">
-        <div class="flex justify-between items-center mb-6">
-            <h1 class="text-xl sm:text-2xl font-bold text-violet-700">Gender Mode - DER, DIE, DAS?</h1>
-            <button id="back-to-menu-gender" class="btn btn-secondary btn-sm py-2 px-4">Back to Menu</button>
-        </div>
-        
-        <div id="gender-noun-display-card">
-            <span id="gender-noun-text" class="text-4xl font-bold text-indigo-600">Noun</span>
-        </div>
-
-        <div id="gender-choice-buttons-container" class="grid grid-cols-3 gap-2 sm:gap-4 mb-6">
-            <button id="gender-der-button" data-gender="male" class="btn bg-blue-500 hover:bg-blue-600 w-full text-lg">DER</button>
-            <button id="gender-die-button" data-gender="female" class="btn bg-pink-500 hover:bg-pink-600 w-full text-lg">DIE</button>
-            <button id="gender-das-button" data-gender="neuter" class="btn bg-gray-500 hover:bg-gray-600 w-full text-lg">DAS</button>
-        </div>
-        
-        <div id="feedback-gender" class="text-center my-4 text-lg font-semibold p-3 rounded-md min-h-[50px]"></div>
-        
-        <div class="gender-bottom-controls">
-            <button id="stop-gender-quiz-btn" class="btn btn-danger btn-sm">End Quiz & Show Stats</button>
-            <button id="next-noun-btn" class="btn btn-primary hidden">Next Noun</button>
-        </div>
-    </div>
-
+    
     <div id="settings-overlay-konjugieren" class="hidden">
         <div id="settings-modal-content-konjugieren">
             <div>
@@ -383,7 +325,6 @@
     <script>
         // Global data stores
         let globalVerbsList = [];
-        let globalNounsList = [];
         let dataLoaded = false;
         let konjugierenSettings = {};
 
@@ -393,10 +334,10 @@
         const modeSelectionCardEl = document.getElementById('mode-selection-card');
         const quizTypeClassicRadio = document.getElementById('quiz-type-classic');
         const quizTypeLegoRadio = document.getElementById('quiz-type-lego');
-        const quizTypeGenderRadio = document.getElementById('quiz-type-gender');
+        // Removed: quizTypeGenderRadio 
         const verbSelectionOptionsEl = document.getElementById('verb-selection-options');
         const classicQuizSpecificOptionsEl = document.getElementById('classic-quiz-specific-options');
-        const genderModeSpecificOptionsEl = document.getElementById('gender-mode-specific-options');
+        // Removed: genderModeSpecificOptionsEl
         const verbBoxSelectionAreaEl = document.getElementById('verb-box-selection-area'); 
         const selectAllVerbsBtn = document.getElementById('select-all-verbs-btn');
         const deselectAllVerbsBtn = document.getElementById('deselect-all-verbs-btn');
@@ -404,6 +345,7 @@
         const startQuizButton = document.getElementById('start-quiz-button');
         const modeSelectionMessageEl = document.getElementById('mode-selection-message');
         const quizSummaryKonjugierenEl = document.getElementById('quiz-summary-konjugieren');
+
 
         // DOM Elements (Classic Quiz)
         const trainerCardEl = document.getElementById('trainer-card');
@@ -439,18 +381,6 @@
         const legoNextVerbBtn = document.getElementById('next-verb-btn-lego');
         const stopLegoRoundBtn = document.getElementById('stop-lego-round-btn');
         
-        // DOM Elements (Gender Mode)
-        const genderModeCardEl = document.getElementById('gender-mode-card');
-        const backToMenuGenderBtn = document.getElementById('back-to-menu-gender');
-        const genderNounDisplayCardEl = document.getElementById('gender-noun-display-card');
-        const genderNounTextEl = document.getElementById('gender-noun-text');
-        const genderDerButton = document.getElementById('gender-der-button');
-        const genderDieButton = document.getElementById('gender-die-button');
-        const genderDasButton = document.getElementById('gender-das-button');
-        const genderFeedbackEl = document.getElementById('feedback-gender');
-        const genderNextNounBtn = document.getElementById('next-noun-btn');
-        const stopGenderQuizBtn = document.getElementById('stop-gender-quiz-btn');
-
         // DOM Elements (Settings)
         const settingsBtnKonjugieren = document.getElementById('settings-btn-konjugieren');
         const settingsOverlayKonjugieren = document.getElementById('settings-overlay-konjugieren');
@@ -470,13 +400,9 @@
         const legoPronounsOrder = ["ich", "du", "er/sie/es", "wir", "ihr", "sie/Sie"];
         let lego_currentVerbData; let lego_draggedFormElement = null; 
         let lego_correctlyPlacedCount = 0; let lego_availableVerbsFullList = []; let lego_currentQuizVerbs = [];
-        let lego_completedVerbsData = []; // For stats
+        let lego_completedVerbsData = []; 
         let lego_activeTouchClone = null; let lego_draggedTouchElement = null; 
         let lego_touchOffsetX = 0, lego_touchOffsetY = 0;
-
-        let gender_availableNounsFullList = []; let gender_currentQuizNouns = [];
-        let gender_currentNounData = null; let gender_choiceMade = false;
-        let gender_userAnswers = [];
 
         // --- Settings Functions ---
         function loadKonjugierenSettings() {
@@ -490,18 +416,21 @@
             updateKonjugierenQuizSummary();
         }
         function openKonjugierenSettings() {
-            let maxItems = 10; // Default
-            if (currentQuizType === 'classic') maxItems = globalVerbsList.length * pronouns.length;
-            else if (currentQuizType === 'lego') maxItems = globalVerbsList.length;
-            else if (currentQuizType === 'gender') maxItems = globalNounsList.length;
-            numItemsSliderKonjugieren.max = Math.max(1, maxItems); // Ensure max is at least 1
+            let maxItems = 10; 
+            if (currentQuizType === 'classic') maxItems = globalVerbsList.length > 0 ? globalVerbsList.length * pronouns.length : 10;
+            else if (currentQuizType === 'lego') maxItems = globalVerbsList.length > 0 ? globalVerbsList.length : 10;
+            
+            numItemsSliderKonjugieren.max = Math.max(1, maxItems); 
             
             let currentNumItems = konjugierenSettings.numItems;
-            if (currentNumItems > numItemsSliderKonjugieren.max) {
-                currentNumItems = numItemsSliderKonjugieren.max;
+            if (parseInt(numItemsSliderKonjugieren.value) > maxItems) {
+                numItemsSliderKonjugieren.value = maxItems;
             }
-            if (currentNumItems < numItemsSliderKonjugieren.min && maxItems > 0) {
-                currentNumItems = numItemsSliderKonjugieren.min;
+             if (currentNumItems > parseInt(numItemsSliderKonjugieren.max)) {
+                currentNumItems = parseInt(numItemsSliderKonjugieren.max);
+            }
+            if (currentNumItems < parseInt(numItemsSliderKonjugieren.min) && maxItems > 0) {
+                currentNumItems = parseInt(numItemsSliderKonjugieren.min);
             }
             
             numItemsSliderKonjugieren.value = currentNumItems;
@@ -518,7 +447,10 @@
         }
         function updateKonjugierenQuizSummary() {
             const numText = konjugierenSettings.useAllItems ? "Alle" : konjugierenSettings.numItems;
-            quizSummaryKonjugierenEl.textContent = `Aktuell: ${numText} Aufgaben.`;
+            let itemTypeText = "Aufgaben";
+            if (currentQuizType === 'classic') itemTypeText = "Verb-Paare";
+            else if (currentQuizType === 'lego') itemTypeText = "Verben";
+            quizSummaryKonjugierenEl.textContent = `Aktuell: ${numText} ${itemTypeText}.`;
         }
 
         // --- Utility Functions ---
@@ -531,17 +463,13 @@
                 const verbsResponse = await fetch('verbs.json');
                 if (!verbsResponse.ok) throw new Error(`HTTP error! Status: ${verbsResponse.status} for verbs.json`);
                 globalVerbsList = await verbsResponse.json();
-
-                const nounsResponse = await fetch('nouns.json');
-                if (!nounsResponse.ok) throw new Error(`HTTP error! Status: ${nounsResponse.status} for nouns.json`);
-                globalNounsList = await nounsResponse.json();
-
+                // Nouns list is no longer fetched here
                 dataLoaded = true;
-                console.log("App data loaded successfully:", globalVerbsList.length, "verbs,", globalNounsList.length, "nouns.");
+                console.log("App data loaded successfully:", globalVerbsList.length, "verbs.");
                 initializeAppUI(); 
             } catch (error) {
                 console.error("Could not load application data:", error);
-                modeSelectionCardEl.innerHTML = `<h2 class="mode-title text-red-500">Error Loading Data</h2><p class="text-gray-700">Could not load quiz data (verbs.json or nouns.json). Please ensure the files are present and correctly formatted.</p><p class="text-sm text-gray-500 mt-2">Details: ${error.message}</p><button onclick="location.reload()" class="btn btn-primary mt-4">Try Reloading</button>`;
+                modeSelectionCardEl.innerHTML = `<h2 class="mode-title text-red-500">Error Loading Data</h2><p class="text-gray-700">Could not load quiz data (verbs.json). Please ensure the file is present and correctly formatted.</p><p class="text-sm text-gray-500 mt-2">Details: ${error.message}</p><button onclick="location.reload()" class="btn btn-primary mt-4">Try Reloading</button>`;
                 modeSelectionCardEl.classList.remove('hidden');
             }
         }
@@ -561,22 +489,22 @@
             trainerCardEl.classList.add('hidden');
             statsDisplayCardEl.classList.add('hidden');
             legoModeCardEl.classList.add('hidden');
-            genderModeCardEl.classList.add('hidden');
+            // Removed: genderModeCardEl.classList.add('hidden');
             settingsOverlayKonjugieren.classList.add('hidden');
 
             activeVerbsForQuiz = []; allPossiblePairs = []; shuffledPairs = []; 
             userRoundData = []; currentIndex = 0; answerRevealedForMental = false;
             lego_availableVerbsFullList = []; lego_currentQuizVerbs = []; lego_completedVerbsData = []; lego_correctlyPlacedCount = 0;
-            gender_availableNounsFullList = []; gender_currentQuizNouns = []; gender_userAnswers = []; gender_choiceMade = false;
             
-            if (dataLoaded && globalVerbsList.length > 0) { populateVerbSelectionBoxes(); } // Repopulate and set default selection
-            quizTypeClassicRadio.checked = true; // Default selection
+            if (dataLoaded && globalVerbsList.length > 0) { populateVerbSelectionBoxes(); } 
+            quizTypeClassicRadio.checked = true; 
             inputModeTypingRadio.checked = true;
             handleQuizTypeChange(); 
             modeSelectionMessageEl.classList.add('hidden');
             modeSelectionMessageEl.textContent = '';
             updateKonjugierenQuizSummary();
         }
+
 
         function populateVerbSelectionBoxes() {
             verbBoxSelectionAreaEl.innerHTML = '';
@@ -586,7 +514,7 @@
             }
             globalVerbsList.forEach(verb => {
                 const box = document.createElement('div');
-                box.classList.add('verb-select-box', 'selected'); // Default to selected
+                box.classList.add('verb-select-box', 'selected'); 
                 box.textContent = verb.infinitive;
                 box.dataset.verbId = verb.id;
                 box.addEventListener('click', () => {
@@ -600,12 +528,13 @@
         function handleQuizTypeChange() {
             currentQuizType = document.querySelector('input[name="quiz-type"]:checked').value;
             
-            verbSelectionOptionsEl.classList.toggle('hidden', currentQuizType === 'gender');
+            // verbSelectionOptionsEl is always visible now unless gender mode was selected (which is removed)
+            verbSelectionOptionsEl.classList.remove('hidden'); 
             classicQuizSpecificOptionsEl.classList.toggle('hidden', currentQuizType !== 'classic');
-            genderModeSpecificOptionsEl.classList.toggle('hidden', currentQuizType !== 'gender');
-            
+            // Removed: genderModeSpecificOptionsEl and its logic
+
             modeSelectionMessageEl.classList.add('hidden');
-            updateKonjugierenQuizSummary(); // Update summary based on new mode
+            updateKonjugierenQuizSummary();
         }
         
         function handleStartQuiz() {
@@ -616,33 +545,31 @@
             }
             modeSelectionMessageEl.classList.add('hidden');
 
-            if (currentQuizType === 'classic' || currentQuizType === 'lego') {
-                const selectedBoxes = verbBoxSelectionAreaEl.querySelectorAll('.verb-select-box.selected');
-                activeVerbsForQuiz = Array.from(selectedBoxes)
-                    .map(box => globalVerbsList.find(v => v.id === box.dataset.verbId))
-                    .filter(v => v); 
-                
-                if (activeVerbsForQuiz.length === 0) {
-                    modeSelectionMessageEl.textContent = "Please select at least one verb, or click 'Select All'.";
-                    modeSelectionMessageEl.classList.remove('hidden');
-                    return;
-                }
+            // Verb selection logic is always active for classic and lego
+            const selectedBoxes = verbBoxSelectionAreaEl.querySelectorAll('.verb-select-box.selected');
+            activeVerbsForQuiz = Array.from(selectedBoxes)
+                .map(box => globalVerbsList.find(v => v.id === box.dataset.verbId))
+                .filter(v => v); 
+            
+            if (activeVerbsForQuiz.length === 0) {
+                modeSelectionMessageEl.textContent = "Please select at least one verb, or click 'Select All'.";
+                modeSelectionMessageEl.classList.remove('hidden');
+                return;
             }
 
             modeSelectionCardEl.classList.add('hidden');
             statsDisplayCardEl.classList.add('hidden');
             trainerCardEl.classList.add('hidden');
             legoModeCardEl.classList.add('hidden');
-            genderModeCardEl.classList.add('hidden');
+            // Removed: genderModeCardEl.classList.add('hidden');
 
             if (currentQuizType === 'classic') {
                 currentInputMethod = inputModeTypingRadio.checked ? 'typing' : 'mental';
                 prepareAndStartClassicQuiz();
             } else if (currentQuizType === 'lego') {
                 initializeLegoMode();
-            } else if (currentQuizType === 'gender') {
-                initializeGenderMode();
             }
+            // Removed: else if (currentQuizType === 'gender')
         }
 
         // --- Classic Quiz Functions ---
@@ -670,7 +597,7 @@
         function repeatClassicQuiz() { 
             if (!dataLoaded || activeVerbsForQuiz.length === 0) { showModeSelectionScreen(); return; } 
             
-            let itemsToQuiz = [...allPossiblePairs]; // Uses pairs from originally selected verbs
+            let itemsToQuiz = [...allPossiblePairs]; 
             shuffleArray(itemsToQuiz);
             if (!konjugierenSettings.useAllItems && konjugierenSettings.numItems < itemsToQuiz.length) {
                 itemsToQuiz = itemsToQuiz.slice(0, konjugierenSettings.numItems);
@@ -692,7 +619,7 @@
         function handleMentalFeedback(wasCorrect) { if (!answerRevealedForMental || currentQuizType !== 'classic') return; recordClassicAttempt(wasCorrect, null); proceedToNextClassicChallenge(); }
         function recordClassicAttempt(wasCorrect, typedAnswer) { userRoundData.push({ pair: shuffledPairs[currentIndex], correctAnswer: correctAnswerForm, markedCorrect: wasCorrect, inputMethodDuringAttempt: currentInputMethod, userTypedAnswer: currentInputMethod === 'typing' ? typedAnswer : null }); }
         function proceedToNextClassicChallenge() { currentIndex++; if (currentIndex >= shuffledPairs.length) { showRoundStatistics(); } else { displayClassicChallenge(); }}
-        function showRoundStatistics() { trainerCardEl.classList.add('hidden'); statsDisplayCardEl.classList.remove('hidden'); stopClassicQuizBtn.classList.add('hidden'); statsTitleEl.textContent = userRoundData.length < shuffledPairs.length && shuffledPairs.length > 0 ? "Quiz Ended Early!" : "Round Complete!"; let correctCount = 0; userRoundData.forEach(entry => { if (entry.markedCorrect) correctCount++; }); const totalAnswered = userRoundData.length; statsSummaryEl.textContent = `You got ${correctCount} out of ${totalAnswered} correct.`; reviewUlEl.innerHTML = ''; if (userRoundData.length > 0) { roundReviewContainerEl.classList.remove('hidden'); const attemptsByVerbThenPronoun = {}; userRoundData.forEach(entry => { const verbName = entry.pair.verb.infinitive; const pronoun = entry.pair.pronoun; if (!attemptsByVerbThenPronoun[verbName]) { attemptsByVerbThenPronoun[verbName] = {}; } attemptsByVerbThenPronoun[verbName][pronoun] = entry; }); activeVerbsForQuiz.filter(v => attemptsByVerbThenPronoun[v.infinitive]).forEach(verbObj => { const verbName = verbObj.infinitive; if (attemptsByVerbThenPronoun[verbName]) { const verbTitleLi = document.createElement('li'); verbTitleLi.className = 'verb-review-title'; verbTitleLi.textContent = `VERB: ${verbName.toUpperCase()}`; reviewUlEl.appendChild(verbTitleLi); pronouns.forEach(pronounKey => { const entry = attemptsByVerbThenPronoun[verbName][pronounKey]; if (entry) { const li = document.createElement('li'); li.className = 'pronoun-review-item'; let attemptHtml = ''; if (entry.inputMethodDuringAttempt === 'typing') { if (entry.markedCorrect) { attemptHtml = `Your answer: <span class="user-answer-correct">${entry.userTypedAnswer || 'N/A'} ✔️</span>`; } else { if (entry.userTypedAnswer) { attemptHtml = `Your answer: <span class="user-answer-incorrect">${entry.userTypedAnswer}</span> ❌. Correct: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; } else { attemptHtml = `<span class="skipped-text">Skipped.</span> Correct: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; }}} else { if (entry.markedCorrect) { attemptHtml = `You marked: <span class="mental-mark-correct">Right 👍</span>. Answer: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; } else { attemptHtml = `You marked: <span class="mental-mark-incorrect">Wrong 👎</span>. Correct: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; }} li.innerHTML = `<span class="pronoun-name">${pronounKey}:</span><span class="attempt-details">${attemptHtml}</span>`; reviewUlEl.appendChild(li);}});}}); } else { roundReviewContainerEl.classList.add('hidden'); statsSummaryEl.textContent = "No questions answered."; } repeatRoundButton.disabled = !dataLoaded || activeVerbsForQuiz.length === 0; }
+        function showRoundStatistics() { trainerCardEl.classList.add('hidden'); statsDisplayCardEl.classList.remove('hidden'); stopClassicQuizBtn.classList.add('hidden'); statsTitleEl.textContent = userRoundData.length < shuffledPairs.length && shuffledPairs.length > 0 ? "Quiz Ended Early!" : "Round Complete!"; let correctCount = 0; userRoundData.forEach(entry => { if (entry.markedCorrect) correctCount++; }); const totalAnswered = userRoundData.length; statsSummaryEl.textContent = `You got ${correctCount} out of ${totalAnswered} correct.`; reviewUlEl.innerHTML = ''; if (userRoundData.length > 0) { roundReviewContainerEl.classList.remove('hidden'); const attemptsByVerbThenPronoun = {}; userRoundData.forEach(entry => { const verbName = entry.pair.verb.infinitive; const pronoun = entry.pair.pronoun; if (!attemptsByVerbThenPronoun[verbName]) { attemptsByVerbThenPronoun[verbName] = {}; } attemptsByVerbThenPronoun[verbName][pronoun] = entry; }); activeVerbsForQuiz.filter(v => attemptsByVerbThenPronoun[v.infinitive]).forEach(verbObj => { const verbName = verbObj.infinitive; if (attemptsByVerbThenPronoun[verbName]) { const verbTitleLi = document.createElement('li'); verbTitleLi.className = 'verb-review-title'; verbTitleLi.textContent = `VERB: ${verbName.toUpperCase()}`; reviewUlEl.appendChild(verbTitleLi); pronouns.forEach(pronounKey => { const entry = attemptsByVerbThenPronoun[verbName][pronounKey]; if (entry) { const li = document.createElement('li'); li.className = 'pronoun-review-item'; let attemptHtml = ''; if (entry.inputMethodDuringAttempt === 'typing') { if (entry.markedCorrect) { attemptHtml = `Your answer: <span class="user-answer-correct">${entry.userTypedAnswer || 'N/A'} ✔️</span>`; } else { if (entry.userTypedAnswer) { attemptHtml = `Your answer: <span class="user-answer-incorrect">${entry.userTypedAnswer}</span> ❌. Correct: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; } else { attemptHtml = `<span class="skipped-text">Skipped.</span> Correct: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; }}} else { if (entry.markedCorrect) { attemptHtml = `You marked: <span class="mental-mark-correct">Right 👍</span>. Answer: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; } else { attemptHtml = `You marked: <span class="mental-mark-incorrect">Wrong 👎</span>. Correct: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; }} li.innerHTML = `<span class="pronoun-name">${pronounKey}:</span><span class="attempt-details">${attemptHtml}</span>`; reviewUlEl.appendChild(li);}});}}); } else { roundReviewContainerEl.classList.add('hidden'); statsSummaryEl.textContent = "No questions answered."; } repeatRoundButton.onclick = repeatClassicQuiz; repeatRoundButton.disabled = !dataLoaded || activeVerbsForQuiz.length === 0; }
 
         // --- LEGO MODUS Functions ---
         function initializeLegoMode() { if (!dataLoaded) { showModeSelectionScreen(); modeSelectionMessageEl.textContent = "LEGO mode needs verb data."; modeSelectionMessageEl.classList.remove('hidden'); return; } legoModeCardEl.classList.remove('hidden'); stopLegoRoundBtn.classList.remove('hidden'); lego_availableVerbsFullList = [...activeVerbsForQuiz]; shuffleArray(lego_availableVerbsFullList); lego_currentQuizVerbs = konjugierenSettings.useAllItems ? [...lego_availableVerbsFullList] : lego_availableVerbsFullList.slice(0, konjugierenSettings.numItems); lego_completedVerbsData = []; lego_loadNextVerb(); }
@@ -713,10 +640,13 @@
             statsDisplayCardEl.classList.remove('hidden');
             stopLegoRoundBtn.classList.add('hidden');
 
-            statsTitleEl.textContent = lego_completedVerbsData.length < (konjugierenSettings.useAllItems ? lego_availableVerbsFullList.length : konjugierenSettings.numItems) ? "LEGO Round Ended Early!" : "LEGO Round Complete!";
-            const totalAttemptedVerbs = lego_completedVerbsData.length + (lego_currentVerbData && lego_correctlyPlacedCount > 0 ? 1 : 0) - (lego_currentVerbData && lego_correctlyPlacedCount === legoPronounsOrder.length ? 1:0) ; // approximation
+            const totalVerbsInQuiz = (konjugierenSettings.useAllItems ? lego_availableVerbsFullList.length : konjugierenSettings.numItems);
+            const verbsAttemptedOrCompleted = lego_completedVerbsData.length + (lego_currentVerbData && lego_correctlyPlacedCount > 0 && !lego_completedVerbsData.find(v => v.verb === lego_currentVerbData.infinitive) ? 1:0) ;
+
+
+            statsTitleEl.textContent = lego_completedVerbsData.length < totalVerbsInQuiz && totalVerbsInQuiz > 0 ? "LEGO Round Ended Early!" : "LEGO Round Complete!";
             const correctVerbs = lego_completedVerbsData.filter(v => v.correct).length;
-            statsSummaryEl.textContent = `You fully conjugated ${correctVerbs} out of ${totalAttemptedVerbs || lego_completedVerbsData.length} verbs presented.`;
+            statsSummaryEl.textContent = `You fully conjugated ${correctVerbs} out of ${verbsAttemptedOrCompleted} verbs presented.`;
 
             reviewUlEl.innerHTML = '';
             if (lego_completedVerbsData.length > 0) {
@@ -729,63 +659,17 @@
                 reviewUlEl.innerHTML = reviewHTML;
             } else {
                 roundReviewContainerEl.classList.add('hidden');
-                statsSummaryEl.textContent = "No verbs fully conjugated.";
+                statsSummaryEl.textContent = "No verbs fully conjugated in this session.";
             }
-            repeatRoundButton.onclick = () => { initializeLegoMode(); }; // Lego repeat
-            repeatRoundButton.disabled = false;
+            repeatRoundButton.onclick = () => { initializeLegoMode(); }; 
+            repeatRoundButton.disabled = !dataLoaded || activeVerbsForQuiz.length === 0;
         }
-        
-        // --- GENDER MODE Functions ---
-        function initializeGenderMode() { if (!dataLoaded) { showModeSelectionScreen(); modeSelectionMessageEl.textContent = "Gender mode needs noun data."; modeSelectionMessageEl.classList.remove('hidden'); return; } genderModeCardEl.classList.remove('hidden'); stopGenderQuizBtn.classList.remove('hidden'); gender_availableNounsFullList = [...globalNounsList]; shuffleArray(gender_availableNounsFullList); gender_currentQuizNouns = konjugierenSettings.useAllItems ? [...gender_availableNounsFullList] : gender_availableNounsFullList.slice(0, konjugierenSettings.numItems); gender_userAnswers = []; gender_loadNextNoun(); }
-        function gender_loadNextNoun() { genderFeedbackEl.textContent = ''; genderFeedbackEl.className = 'text-center my-4 text-lg font-semibold p-3 rounded-md min-h-[50px]'; genderFeedbackEl.style.display = 'none'; genderNextNounBtn.classList.add('hidden'); genderNounDisplayCardEl.className = 'bg-gray-100 p-8 rounded-xl mb-6 border-4 border-transparent transition-colors duration-300 min-h-[120px] flex justify-center items-center'; gender_choiceMade = false; genderDerButton.disabled = false; genderDieButton.disabled = false; genderDasButton.disabled = false; if (gender_currentQuizNouns.length === 0) { gender_showStats(); return; } if (genderNextNounBtn.textContent.includes("wiederholen")) { genderNextNounBtn.textContent = "Next Noun"; } gender_currentNounData = gender_currentQuizNouns.shift(); genderNounTextEl.textContent = gender_currentNounData.noun; }
-        function gender_handleChoice(chosenGender) { if (gender_choiceMade || !gender_currentNounData) return; gender_choiceMade = true; genderDerButton.disabled = true; genderDieButton.disabled = true; genderDasButton.disabled = true; genderNounDisplayCardEl.classList.remove('border-transparent', 'chosen-der', 'chosen-die', 'chosen-das'); if (chosenGender === 'male') genderNounDisplayCardEl.classList.add('chosen-der'); else if (chosenGender === 'female') genderNounDisplayCardEl.classList.add('chosen-die'); else if (chosenGender === 'neuter') genderNounDisplayCardEl.classList.add('chosen-das'); const correctArticle = gender_currentNounData.article; // Nouns JSON has 'article' and 'gender'
-            const correctGenderDb = globalNounsList.find(n=>n.noun === gender_currentNounData.noun)?.gender || (correctArticle === 'der' ? 'male' : correctArticle === 'die' ? 'female' : 'neuter');
-            const isCorrect = chosenGender === correctGenderDb;
-            let feedbackMessage = ''; genderFeedbackEl.classList.remove('correct', 'incorrect'); 
-            if (isCorrect) { feedbackMessage = `Richtig! ${correctArticle.toUpperCase()} ${gender_currentNounData.noun}`; genderFeedbackEl.classList.add('correct'); triggerConfetti(); } else { feedbackMessage = `Falsch. Es ist ${correctArticle.toUpperCase()} ${gender_currentNounData.noun}.`; genderFeedbackEl.classList.add('incorrect'); } 
-            gender_userAnswers.push({ noun: gender_currentNounData.noun, article: correctArticle, chosenArticle: (chosenGender === 'male' ? 'der' : chosenGender === 'female' ? 'die' : 'das'), isCorrect: isCorrect });
-            genderFeedbackEl.textContent = feedbackMessage; genderFeedbackEl.style.display='block'; genderNextNounBtn.classList.remove('hidden'); 
-        }
-        function gender_showStats() {
-            genderModeCardEl.classList.add('hidden');
-            statsDisplayCardEl.classList.remove('hidden');
-            stopGenderQuizBtn.classList.add('hidden');
-            
-            statsTitleEl.textContent = gender_userAnswers.length < (konjugierenSettings.useAllItems ? gender_availableNounsFullList.length : konjugierenSettings.numItems) && gender_availableNounsFullList.length > 0 ? "Gender Quiz Ended Early!" : "Gender Quiz Complete!";
-            const correctCount = gender_userAnswers.filter(ans => ans.isCorrect).length;
-            const totalAnswered = gender_userAnswers.length;
-            statsSummaryEl.textContent = `You got ${correctCount} out of ${totalAnswered} correct.`;
-
-            reviewUlEl.innerHTML = '';
-            if (gender_userAnswers.length > 0) {
-                roundReviewContainerEl.classList.remove('hidden');
-                let reviewHTML = '<h3>Detailed Results:</h3><ul>';
-                gender_userAnswers.forEach(ans => {
-                    reviewHTML += `<li class="pronoun-review-item ${ans.isCorrect ? 'mental-mark-correct' : 'mental-mark-incorrect'}">`;
-                    reviewHTML += `<span class="pronoun-name">${ans.noun}</span> <span class="attempt-details">`;
-                    if (ans.isCorrect) {
-                        reviewHTML += `Your answer: <span class="user-answer-correct">${ans.chosenArticle.toUpperCase()} ✔️</span>`;
-                    } else {
-                        reviewHTML += `Your answer: <span class="user-answer-incorrect">${ans.chosenArticle.toUpperCase()}</span> ❌. Correct: <span class="correct-answer-stats">${ans.article.toUpperCase()}</span>`;
-                    }
-                    reviewHTML += `</span></li>`;
-                });
-                reviewHTML += '</ul>';
-                reviewUlEl.innerHTML = reviewHTML;
-            } else {
-                roundReviewContainerEl.classList.add('hidden');
-                statsSummaryEl.textContent = "No nouns practiced.";
-            }
-            repeatRoundButton.onclick = () => { initializeGenderMode(); }; // Gender repeat
-            repeatRoundButton.disabled = false;
-        }
-
         
         // --- Event Listeners Setup ---
         function setupEventListeners() {
             quizTypeClassicRadio.addEventListener('change', handleQuizTypeChange);
             quizTypeLegoRadio.addEventListener('change', handleQuizTypeChange);
-            quizTypeGenderRadio.addEventListener('change', handleQuizTypeChange);
+            // Removed: quizTypeGenderRadio listener
             startQuizButton.addEventListener('click', handleStartQuiz);
             
             selectAllVerbsBtn.addEventListener('click', () => {
@@ -796,9 +680,9 @@
             });
 
             backToMenuLegoBtn.addEventListener('click', showModeSelectionScreen);
-            backToMenuGenderBtn.addEventListener('click', showModeSelectionScreen);
+            // Removed: backToMenuGenderBtn listener
             newRoundButton.addEventListener('click', showModeSelectionScreen);
-            // repeatRoundButton specific onclick is set in showRoundStatistics / lego_showLegoStats / gender_showStats
+            // repeatRoundButton specific onclick is set in showRoundStatistics / lego_showLegoStats
 
             answerInputEl.addEventListener('input', handleAnswerInput_Typing);
             answerInputEl.addEventListener('keypress', function(event) { if (event.key === 'Enter' && currentInputMethod === 'typing' && currentQuizType === 'classic') { event.preventDefault(); const userAnswer = answerInputEl.value.trim().toLowerCase(); if (userAnswer !== correctAnswerForm.toLowerCase()) { if (actionButton.dataset.action === "skip_typing") { handleClassicActionButtonClick(); }} else { handleAnswerInput_Typing(); } } });
@@ -810,11 +694,7 @@
             legoNextVerbBtn.addEventListener('click', lego_loadNextVerb);
             stopLegoRoundBtn.addEventListener('click', lego_showLegoStats);
 
-            genderNextNounBtn.addEventListener('click', gender_loadNextNoun);
-            genderDerButton.addEventListener('click', () => gender_handleChoice('male'));
-            genderDieButton.addEventListener('click', () => gender_handleChoice('female'));
-            genderDasButton.addEventListener('click', () => gender_handleChoice('neuter'));
-            stopGenderQuizBtn.addEventListener('click', gender_showStats);
+            // Removed: Gender Mode Listeners
 
             // Settings Listeners
             settingsBtnKonjugieren.addEventListener('click', openKonjugierenSettings);
@@ -836,8 +716,8 @@
             settingsBtnKonjugieren.disabled = true;
             verbBoxSelectionAreaEl.innerHTML = '<p class="text-sm text-gray-500">Loading verbs...</p>';
             
-            loadKonjugierenSettings(); // Load settings first
-            loadAppData(); // Fetch data and then initialize UI further
+            loadKonjugierenSettings(); 
+            loadAppData(); 
         });
 
     </script>
