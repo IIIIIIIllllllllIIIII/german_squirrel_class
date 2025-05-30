@@ -421,10 +421,6 @@
                 const foodNounsResponse = await fetch('food_nouns.json');
                 if (!foodNounsResponse.ok) throw new Error(`HTTP error! status: ${foodNounsResponse.status} for food_nouns.json`);
                 foodNouns = await foodNounsResponse.json();
-
-                const mekQuestionsResponse = await fetch('mek_questions.json');
-                if (!mekQuestionsResponse.ok) throw new Error(`HTTP error! status: ${mekQuestionsResponse.status} for mek_questions.json`);
-                mekQuizQuestions = await mekQuestionsResponse.json();
                 initializeUI();
             } catch (error) {
                 console.error("Could not load quiz data:", error);
