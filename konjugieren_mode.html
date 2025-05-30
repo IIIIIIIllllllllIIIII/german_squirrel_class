@@ -36,8 +36,10 @@
         #lego-mode-card { max-width: 900px; }
 
         .mode-title {
-            font-size: 1.75rem; font-weight: 700; color: #6d28d9; margin-bottom: 24px;
+            font-size: 1.75rem; font-weight: 700; color: #6d28d9; margin-bottom: 4px;
         }
+        .mode-title-subtitle { font-size: 1rem; color: #4f46e5; margin-bottom: 24px; }
+
         .mode-subtitle {
             font-size: 1.125rem; font-weight: 600; color: #4f46e5; 
             margin-top: 20px; margin-bottom: 12px; text-align: left;
@@ -46,6 +48,7 @@
         .radio-group { text-align: left; margin-bottom: 16px; padding-left: 8px; }
         .radio-group label { margin-left: 8px; font-size: 1rem; color: #374151; cursor:pointer;}
         .radio-group input[type="radio"] { accent-color: #6d28d9; cursor:pointer;}
+        .radio-label-description { font-size: 0.8rem; color: #6b7280; margin-left: 28px; margin-top: 2px; }
         
         .verb-selection-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
         .verb-selection-controls button { font-size: 0.8rem; padding: 6px 10px; margin-top: 0;}
@@ -200,7 +203,6 @@
             #settings-btn-konjugieren:hover { color: #d1d5db; }
         }
 
-
         @media (max-width: 640px) {
             .card, .stats-card, #mode-selection-card, #lego-mode-card { padding: 20px; }
             .mode-title { font-size: 1.5rem; } .mode-subtitle { font-size: 1rem; }
@@ -231,69 +233,97 @@
 <body>
     <div id="mode-selection-card" class="card">
         <button id="settings-btn-konjugieren" title="Einstellungen / Settings / Ajustes">⚙️</button>
-        <h2 class="mode-title">Setup Your German Learning</h2>
-        <h3 class="mode-subtitle">1. Choose Quiz Type:</h3>
+        <h2 class="mode-title">Verb Conjugation Setup</h2>
+        <p class="mode-title-subtitle">Configuración de Conjugación de Verbos</p>
+
+        <h3 class="mode-subtitle">1. Choose Quiz Type: / Elige el Tipo de Práctica:</h3>
         <div class="radio-group">
-            <div> <input type="radio" id="quiz-type-classic" name="quiz-type" value="classic" checked> <label for="quiz-type-classic">Classic Quiz (Verb Forms)</label> </div>
-            <div class="mt-2"> <input type="radio" id="quiz-type-lego" name="quiz-type" value="lego"> <label for="quiz-type-lego">LEGO MODUS (Verb Conjugation - Drag & Drop)</label> </div>
+            <div> 
+                <input type="radio" id="quiz-type-classic" name="quiz-type" value="classic" checked> 
+                <label for="quiz-type-classic">Classic Conjugation Quiz / Práctica Clásica (Formas Verbales)</label> 
+            </div>
+            <div class="mt-2"> 
+                <input type="radio" id="quiz-type-lego" name="quiz-type" value="lego"> 
+                <label for="quiz-type-lego">LEGO Mode (Drag & Drop) / Modo LEGO (Arrastrar y Soltar)</label> 
+            </div>
         </div>
-        <div id="verb-selection-options"> <h3 class="mode-subtitle">2. Choose Verbs:</h3>
+
+        <div id="verb-selection-options"> 
+            <h3 class="mode-subtitle">2. Choose Verbs: / Elige los Verbos:</h3>
             <div class="verb-selection-controls">
-                <button id="select-all-verbs-btn" class="btn btn-sm btn-secondary">Select All</button>
-                <button id="deselect-all-verbs-btn" class="btn btn-sm btn-secondary">Deselect All</button>
+                <button id="select-all-verbs-btn" class="btn btn-sm btn-secondary">Select All / Seleccionar Todos</button>
+                <button id="deselect-all-verbs-btn" class="btn btn-sm btn-secondary">Deselect All / Deseleccionar Todos</button>
             </div>
             <div id="verb-box-selection-area"></div>
         </div>
+
         <div id="classic-quiz-specific-options">
-            <h3 class="mode-subtitle" id="classic-input-method-title">3. Choose Input Method (for Classic Quiz):</h3>
+            <h3 class="mode-subtitle" id="classic-input-method-title">3. Input Method: / Método de Entrada (para Práctica Clásica):</h3>
             <div class="radio-group" id="classic-input-method-group">
-                <div> <input type="radio" id="input-mode-typing" name="input-method-mode" value="typing" checked> <label for="input-mode-typing">Typing Mode</label> </div>
-                <div class="mt-2"> <input type="radio" id="input-mode-mental" name="input-method-mode" value="mental"> <label for="input-mode-mental">Mental Mode</label> </div>
+                <div> 
+                    <input type="radio" id="input-mode-typing" name="input-method-mode" value="typing" checked> 
+                    <label for="input-mode-typing">Typing Mode / Modo de Escritura</label> 
+                    <div class="radio-label-description">Type the conjugated verb. / Escribe el verbo conjugado.</div>
+                </div>
+                <div class="mt-2"> 
+                    <input type="radio" id="input-mode-mental" name="input-method-mode" value="mental"> 
+                    <label for="input-mode-mental">Mental Mode / Modo Mental</label> 
+                    <div class="radio-label-description">Think of the answer, then self-assess. / Piensa en la respuesta, luego autoevalúa.</div>
+                </div>
             </div>
         </div>
-        <button id="start-quiz-button" class="btn btn-primary w-full sm:w-auto mt-6">Start Quiz</button>
+
+        <button id="start-quiz-button" class="btn btn-primary w-full sm:w-auto mt-6">Start Practice / Empezar Práctica</button>
         <p id="quiz-summary-konjugieren" class="text-sm text-gray-500 mt-2"></p>
+        <p class="text-xs text-gray-400 mt-4 italic">
+            Tip: Number of items can be set in Settings (⚙️).
+            <br>
+            Consejo: El número de tareas se puede ajustar en Configuración (⚙️).
+        </p>
         <p id="mode-selection-message" class="message hidden"></p>
+        <div class="mt-10 pt-6 border-t border-gray-200">
+             <a href="index.html" class="btn btn-secondary btn-sm btn-link">← Back to Main Menu / Volver al Menú Principal</a>
+        </div>
     </div>
 
     <div id="trainer-card" class="card trainer-card-base hidden">
-        <h1 class="text-2xl sm:text-3xl font-bold text-violet-700 mb-4">German Verb Trainer</h1>
+        <h1 class="text-2xl sm:text-3xl font-bold text-violet-700 mb-4">Verb Conjugation Practice</h1>
         <p id="trainer-instructions" class="text-gray-600 mb-6">Instructions</p>
         <div id="verb-container">
             <div class="verb-display" id="verb-infinitive">Verb</div>
             <div class="pronoun-display"> <span id="pronoun">Pronoun</span> <input type="text" id="answer-input" class="answer-input-field" placeholder="Type here..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"> </div>
         </div>
         <div id="answer-reveal-container" class="answer-reveal hidden">Reveal</div>
-        <button id="action-button" class="btn btn-warning w-full sm:w-auto">Show Answer / Skip</button>
+        <button id="action-button" class="btn btn-warning w-full sm:w-auto">Show Answer / Skip | Mostrar / Saltar</button>
         <div id="feedback-buttons-container" class="feedback-buttons-container hidden">
-            <button id="correct-button" class="btn btn-success">👍 I was Right</button>
-            <button id="incorrect-button" class="btn btn-danger">👎 I was Wrong</button>
+            <button id="correct-button" class="btn btn-success">👍 Correct / Correcto</button>
+            <button id="incorrect-button" class="btn btn-danger">👎 Incorrect / Incorrecto</button>
         </div>
         <div id="progress-indicator" class="progress-text">Progress</div>
         <div class="mt-4">
-            <button id="stop-classic-quiz-btn" class="btn btn-danger btn-sm">End Quiz & Show Stats</button>
+            <button id="stop-classic-quiz-btn" class="btn btn-danger btn-sm">End & Stats / Terminar y Ver</button>
         </div>
     </div>
 
     <div id="stats-display-card" class="card stats-card hidden">
-        <h2 id="stats-title" class="stats-title">Round Complete!</h2>
+        <h2 id="stats-title" class="stats-title">Round Complete! / ¡Ronda Completa!</h2>
         <p id="stats-summary" class="stats-summary">Summary</p>
-        <div id="round-review-container" class="round-review-container hidden"> <h3>Round Review:</h3> <ul id="review-ul"></ul> </div>
+        <div id="round-review-container" class="round-review-container hidden"> <h3>Round Review: / Revisión de la Ronda:</h3> <ul id="review-ul"></ul> </div>
         <div class="stats-buttons-container">
-            <button id="repeat-round-button" class="btn btn-secondary w-full sm:w-auto">Repeat This Round</button>
-            <button id="new-round-button" class="btn btn-primary w-full sm:w-auto">Start New Round (Setup)</button>
+            <button id="repeat-round-button" class="btn btn-secondary w-full sm:w-auto">Repeat Round / Repetir Ronda</button>
+            <button id="new-round-button" class="btn btn-primary w-full sm:w-auto">New Round (Setup) / Nueva Ronda (Config.)</button>
         </div>
     </div>
 
     <div id="lego-mode-card" class="card hidden">
-        <div class="flex justify-between items-center mb-6"> <h1 class="text-xl sm:text-2xl font-bold text-violet-700">LEGO MODUS - Verben bauen!</h1> <button id="back-to-menu-lego" class="btn btn-secondary btn-sm py-2 px-4">Back to Menu</button> </div>
+        <div class="flex justify-between items-center mb-6"> <h1 class="text-xl sm:text-2xl font-bold text-violet-700">LEGO Mode - Build Verbs! / Modo LEGO - ¡Construye Verbos!</h1> <button id="back-to-menu-lego" class="btn btn-secondary btn-sm py-2 px-4">Menu / Menú</button> </div>
         <div id="verb-task-area-lego" class="text-center mb-6 p-4 bg-indigo-50 rounded-lg border border-indigo-200"> <h2 id="current-verb-infinitive-lego" class="text-2xl sm:text-3xl font-bold text-indigo-700 mb-1">Verb</h2> <p id="current-verb-translation-lego" class="text-md text-indigo-500 italic">(Übersetzung)</p> </div>
-        <div id="forms-pool-lego" class="mb-8 p-4 bg-slate-100 rounded-lg min-h-[80px] flex flex-wrap gap-4 justify-center items-center border-2 border-dashed border-slate-300"> <p class="placeholder-text-lego text-slate-500 italic">Ziehe die konjugierten Formen von hier...</p> </div>
+        <div id="forms-pool-lego" class="mb-8 p-4 bg-slate-100 rounded-lg min-h-[80px] flex flex-wrap gap-4 justify-center items-center border-2 border-dashed border-slate-300"> <p class="placeholder-text-lego text-slate-500 italic">Drag conjugated forms from here... / Arrastra las formas conjugadas desde aquí...</p> </div>
         <div id="pronoun-slots-lego" class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 mb-6"> </div>
         <div id="feedback-lego" class="text-center font-semibold p-3 rounded-md min-h-[24px] mb-6"></div>
         <div id="lego-buttons-container"> 
-            <button id="stop-lego-round-btn" class="btn btn-danger btn-sm">End Round & Show Stats</button>
-            <button id="next-verb-btn-lego" class="btn btn-primary" disabled>Nächstes Verb</button> 
+            <button id="stop-lego-round-btn" class="btn btn-danger btn-sm">End & Stats / Terminar y Ver</button>
+            <button id="next-verb-btn-lego" class="btn btn-primary" disabled>Next Verb / Siguiente Verbo</button> 
         </div>
     </div>
     
@@ -321,7 +351,6 @@
         </div>
     </div>
 
-
     <script>
         // Global data stores
         let globalVerbsList = [];
@@ -334,10 +363,8 @@
         const modeSelectionCardEl = document.getElementById('mode-selection-card');
         const quizTypeClassicRadio = document.getElementById('quiz-type-classic');
         const quizTypeLegoRadio = document.getElementById('quiz-type-lego');
-        // Removed: quizTypeGenderRadio 
         const verbSelectionOptionsEl = document.getElementById('verb-selection-options');
         const classicQuizSpecificOptionsEl = document.getElementById('classic-quiz-specific-options');
-        // Removed: genderModeSpecificOptionsEl
         const verbBoxSelectionAreaEl = document.getElementById('verb-box-selection-area'); 
         const selectAllVerbsBtn = document.getElementById('select-all-verbs-btn');
         const deselectAllVerbsBtn = document.getElementById('deselect-all-verbs-btn');
@@ -345,7 +372,6 @@
         const startQuizButton = document.getElementById('start-quiz-button');
         const modeSelectionMessageEl = document.getElementById('mode-selection-message');
         const quizSummaryKonjugierenEl = document.getElementById('quiz-summary-konjugieren');
-
 
         // DOM Elements (Classic Quiz)
         const trainerCardEl = document.getElementById('trainer-card');
@@ -404,6 +430,7 @@
         let lego_activeTouchClone = null; let lego_draggedTouchElement = null; 
         let lego_touchOffsetX = 0, lego_touchOffsetY = 0;
 
+
         // --- Settings Functions ---
         function loadKonjugierenSettings() {
             const savedSettings = localStorage.getItem('konjugierenSettings');
@@ -423,13 +450,13 @@
             numItemsSliderKonjugieren.max = Math.max(1, maxItems); 
             
             let currentNumItems = konjugierenSettings.numItems;
-            if (parseInt(numItemsSliderKonjugieren.value) > maxItems) {
+            if (parseInt(numItemsSliderKonjugieren.value) > maxItems) { // Ensure current slider val isn't over new max
                 numItemsSliderKonjugieren.value = maxItems;
             }
-             if (currentNumItems > parseInt(numItemsSliderKonjugieren.max)) {
+             if (currentNumItems > parseInt(numItemsSliderKonjugieren.max)) { // Ensure setting val isn't over new max
                 currentNumItems = parseInt(numItemsSliderKonjugieren.max);
             }
-            if (currentNumItems < parseInt(numItemsSliderKonjugieren.min) && maxItems > 0) {
+            if (currentNumItems < parseInt(numItemsSliderKonjugieren.min) && maxItems > 0) { // Ensure not below min
                 currentNumItems = parseInt(numItemsSliderKonjugieren.min);
             }
             
@@ -447,10 +474,10 @@
         }
         function updateKonjugierenQuizSummary() {
             const numText = konjugierenSettings.useAllItems ? "Alle" : konjugierenSettings.numItems;
-            let itemTypeText = "Aufgaben";
-            if (currentQuizType === 'classic') itemTypeText = "Verb-Paare";
-            else if (currentQuizType === 'lego') itemTypeText = "Verben";
-            quizSummaryKonjugierenEl.textContent = `Aktuell: ${numText} ${itemTypeText}.`;
+            let itemTypeText = "Aufgaben / Items";
+            if (currentQuizType === 'classic') itemTypeText = "Verb-Paare / Verb Pairs";
+            else if (currentQuizType === 'lego') itemTypeText = "Verben / Verbs";
+            quizSummaryKonjugierenEl.textContent = `Aktuell / Current: ${numText} ${itemTypeText}.`;
         }
 
         // --- Utility Functions ---
@@ -463,7 +490,6 @@
                 const verbsResponse = await fetch('verbs.json');
                 if (!verbsResponse.ok) throw new Error(`HTTP error! Status: ${verbsResponse.status} for verbs.json`);
                 globalVerbsList = await verbsResponse.json();
-                // Nouns list is no longer fetched here
                 dataLoaded = true;
                 console.log("App data loaded successfully:", globalVerbsList.length, "verbs.");
                 initializeAppUI(); 
@@ -479,7 +505,7 @@
             populateVerbSelectionBoxes(); 
             handleQuizTypeChange(); 
             startQuizButton.disabled = false;
-            startQuizButton.textContent = "Start Quiz";
+            startQuizButton.textContent = "Start Practice / Empezar Práctica";
             settingsBtnKonjugieren.disabled = false;
             showModeSelectionScreen(); 
         }
@@ -489,7 +515,6 @@
             trainerCardEl.classList.add('hidden');
             statsDisplayCardEl.classList.add('hidden');
             legoModeCardEl.classList.add('hidden');
-            // Removed: genderModeCardEl.classList.add('hidden');
             settingsOverlayKonjugieren.classList.add('hidden');
 
             activeVerbsForQuiz = []; allPossiblePairs = []; shuffledPairs = []; 
@@ -509,7 +534,7 @@
         function populateVerbSelectionBoxes() {
             verbBoxSelectionAreaEl.innerHTML = '';
             if (!dataLoaded || globalVerbsList.length === 0) {
-                verbBoxSelectionAreaEl.innerHTML = '<p class="text-sm text-gray-500">Verbs not loaded or empty list.</p>';
+                verbBoxSelectionAreaEl.innerHTML = '<p class="text-sm text-gray-500">Verbs not loaded or empty list. / Verbos no cargados o lista vacía.</p>';
                 return;
             }
             globalVerbsList.forEach(verb => {
@@ -527,32 +552,27 @@
 
         function handleQuizTypeChange() {
             currentQuizType = document.querySelector('input[name="quiz-type"]:checked').value;
-            
-            // verbSelectionOptionsEl is always visible now unless gender mode was selected (which is removed)
             verbSelectionOptionsEl.classList.remove('hidden'); 
             classicQuizSpecificOptionsEl.classList.toggle('hidden', currentQuizType !== 'classic');
-            // Removed: genderModeSpecificOptionsEl and its logic
-
             modeSelectionMessageEl.classList.add('hidden');
             updateKonjugierenQuizSummary();
         }
         
         function handleStartQuiz() {
             if (!dataLoaded) {
-                modeSelectionMessageEl.textContent = "Data is still loading. Please wait.";
+                modeSelectionMessageEl.textContent = "Data is still loading. Please wait. / Los datos aún se están cargando. Por favor espera.";
                 modeSelectionMessageEl.classList.remove('hidden');
                 return;
             }
             modeSelectionMessageEl.classList.add('hidden');
 
-            // Verb selection logic is always active for classic and lego
             const selectedBoxes = verbBoxSelectionAreaEl.querySelectorAll('.verb-select-box.selected');
             activeVerbsForQuiz = Array.from(selectedBoxes)
                 .map(box => globalVerbsList.find(v => v.id === box.dataset.verbId))
                 .filter(v => v); 
             
             if (activeVerbsForQuiz.length === 0) {
-                modeSelectionMessageEl.textContent = "Please select at least one verb, or click 'Select All'.";
+                modeSelectionMessageEl.textContent = "Please select at least one verb, or click 'Select All'. / Por favor, selecciona al menos un verbo, o haz clic en 'Seleccionar Todos'.";
                 modeSelectionMessageEl.classList.remove('hidden');
                 return;
             }
@@ -561,7 +581,6 @@
             statsDisplayCardEl.classList.add('hidden');
             trainerCardEl.classList.add('hidden');
             legoModeCardEl.classList.add('hidden');
-            // Removed: genderModeCardEl.classList.add('hidden');
 
             if (currentQuizType === 'classic') {
                 currentInputMethod = inputModeTypingRadio.checked ? 'typing' : 'mental';
@@ -569,7 +588,6 @@
             } else if (currentQuizType === 'lego') {
                 initializeLegoMode();
             }
-            // Removed: else if (currentQuizType === 'gender')
         }
 
         // --- Classic Quiz Functions ---
@@ -577,7 +595,7 @@
             generateAllPairs(activeVerbsForQuiz); 
             if (allPossiblePairs.length === 0) { 
                 showModeSelectionScreen(); 
-                modeSelectionMessageEl.textContent = "No questions for selected verbs."; 
+                modeSelectionMessageEl.textContent = "No questions for selected verbs. / No hay preguntas para los verbos seleccionados."; 
                 modeSelectionMessageEl.classList.remove('hidden'); return; 
             } 
             
@@ -612,28 +630,28 @@
             displayClassicChallenge(); 
         }
         function generateAllPairs(verbsToUse) { allPossiblePairs = []; verbsToUse.forEach(verb => { pronouns.forEach(pronoun => { allPossiblePairs.push({ verb: verb, pronoun: pronoun }); }); }); }
-        function displayClassicChallenge() { if (shuffledPairs.length === 0 || currentIndex >= shuffledPairs.length) { showRoundStatistics(); return; } const currentPair = shuffledPairs[currentIndex]; currentVerbData = currentPair.verb; currentPronoun = currentPair.pronoun; correctAnswerForm = currentVerbData.conjugations[currentPronoun]; answerRevealedForMental = false; verbInfinitiveEl.textContent = `Verb: ${currentVerbData.infinitive.toUpperCase()}`; pronounEl.textContent = currentPronoun; answerRevealContainerEl.classList.add('hidden'); answerRevealContainerEl.innerHTML = ''; feedbackButtonsContainerEl.classList.add('hidden'); if (currentInputMethod === 'typing') { trainerInstructionsEl.textContent = "Type the correct verb form below."; answerInputEl.value = ''; answerInputEl.disabled = false; answerInputEl.classList.remove('hidden'); answerInputEl.focus(); actionButton.textContent = "Show Answer / Skip"; actionButton.classList.remove('btn-primary', 'hidden'); actionButton.classList.add('btn-warning'); actionButton.dataset.action = "skip_typing"; } else { trainerInstructionsEl.textContent = "Think of the conjugation, then click 'Show Answer'."; answerInputEl.classList.add('hidden'); actionButton.textContent = "Show Answer"; actionButton.classList.remove('btn-warning', 'hidden'); actionButton.classList.add('btn-primary'); actionButton.dataset.action = "show_mental"; } updateClassicProgress(); }
-        function updateClassicProgress() { progressIndicatorEl.textContent = `Question: ${currentIndex + 1} / ${shuffledPairs.length}`; }
+        function displayClassicChallenge() { if (shuffledPairs.length === 0 || currentIndex >= shuffledPairs.length) { showRoundStatistics(); return; } const currentPair = shuffledPairs[currentIndex]; currentVerbData = currentPair.verb; currentPronoun = currentPair.pronoun; correctAnswerForm = currentVerbData.conjugations[currentPronoun]; answerRevealedForMental = false; verbInfinitiveEl.textContent = `Verb: ${currentVerbData.infinitive.toUpperCase()}`; pronounEl.textContent = currentPronoun; answerRevealContainerEl.classList.add('hidden'); answerRevealContainerEl.innerHTML = ''; feedbackButtonsContainerEl.classList.add('hidden'); if (currentInputMethod === 'typing') { trainerInstructionsEl.textContent = "Type the correct verb form below. / Escribe la forma verbal correcta."; answerInputEl.value = ''; answerInputEl.disabled = false; answerInputEl.classList.remove('hidden'); answerInputEl.focus(); actionButton.textContent = "Show / Skip | Mostrar / Saltar"; actionButton.classList.remove('btn-primary', 'hidden'); actionButton.classList.add('btn-warning'); actionButton.dataset.action = "skip_typing"; } else { trainerInstructionsEl.textContent = "Think of the conjugation, then click 'Show Answer'. / Piensa en la conjugación, luego haz clic en 'Mostrar Respuesta'."; answerInputEl.classList.add('hidden'); actionButton.textContent = "Show Answer / Mostrar Respuesta"; actionButton.classList.remove('btn-warning', 'hidden'); actionButton.classList.add('btn-primary'); actionButton.dataset.action = "show_mental"; } updateClassicProgress(); }
+        function updateClassicProgress() { progressIndicatorEl.textContent = `Question / Pregunta: ${currentIndex + 1} / ${shuffledPairs.length}`; }
         function handleAnswerInput_Typing() { if (currentInputMethod !== 'typing' || currentQuizType !== 'classic') return; const userAnswer = answerInputEl.value.trim().toLowerCase(); if (userAnswer === correctAnswerForm.toLowerCase()) { triggerConfetti(); recordClassicAttempt(true, userAnswer); proceedToNextClassicChallenge(); } }
-        function handleClassicActionButtonClick() { const currentAction = actionButton.dataset.action; if (currentInputMethod === 'typing') { if (currentAction === "skip_typing") { answerInputEl.disabled = true; recordClassicAttempt(false, answerInputEl.value.trim() || null); answerRevealContainerEl.innerHTML = `The correct answer was: <strong class="correct-form">${correctAnswerForm}</strong>`; answerRevealContainerEl.classList.remove('hidden', 'correct'); answerRevealContainerEl.classList.add('incorrect'); actionButton.textContent = "Next Question"; actionButton.classList.remove('btn-warning'); actionButton.classList.add('btn-primary'); actionButton.dataset.action = "next_question"; } else if (currentAction === "next_question") { proceedToNextClassicChallenge(); } } else { if (currentAction === "show_mental") { answerRevealContainerEl.innerHTML = `The answer is: <strong class="correct-form">${correctAnswerForm}</strong>`; answerRevealContainerEl.classList.remove('hidden', 'incorrect'); answerRevealContainerEl.classList.add('correct'); actionButton.classList.add('hidden'); feedbackButtonsContainerEl.classList.remove('hidden'); answerRevealedForMental = true; } } }
+        function handleClassicActionButtonClick() { const currentAction = actionButton.dataset.action; if (currentInputMethod === 'typing') { if (currentAction === "skip_typing") { answerInputEl.disabled = true; recordClassicAttempt(false, answerInputEl.value.trim() || null); answerRevealContainerEl.innerHTML = `The correct answer was: <strong class="correct-form">${correctAnswerForm}</strong> / La respuesta correcta era: <strong class="correct-form">${correctAnswerForm}</strong>`; answerRevealContainerEl.classList.remove('hidden', 'correct'); answerRevealContainerEl.classList.add('incorrect'); actionButton.textContent = "Next / Siguiente"; actionButton.classList.remove('btn-warning'); actionButton.classList.add('btn-primary'); actionButton.dataset.action = "next_question"; } else if (currentAction === "next_question") { proceedToNextClassicChallenge(); } } else { if (currentAction === "show_mental") { answerRevealContainerEl.innerHTML = `The answer is: <strong class="correct-form">${correctAnswerForm}</strong> / La respuesta es: <strong class="correct-form">${correctAnswerForm}</strong>`; answerRevealContainerEl.classList.remove('hidden', 'incorrect'); answerRevealContainerEl.classList.add('correct'); actionButton.classList.add('hidden'); feedbackButtonsContainerEl.classList.remove('hidden'); answerRevealedForMental = true; } } }
         function handleMentalFeedback(wasCorrect) { if (!answerRevealedForMental || currentQuizType !== 'classic') return; recordClassicAttempt(wasCorrect, null); proceedToNextClassicChallenge(); }
         function recordClassicAttempt(wasCorrect, typedAnswer) { userRoundData.push({ pair: shuffledPairs[currentIndex], correctAnswer: correctAnswerForm, markedCorrect: wasCorrect, inputMethodDuringAttempt: currentInputMethod, userTypedAnswer: currentInputMethod === 'typing' ? typedAnswer : null }); }
         function proceedToNextClassicChallenge() { currentIndex++; if (currentIndex >= shuffledPairs.length) { showRoundStatistics(); } else { displayClassicChallenge(); }}
-        function showRoundStatistics() { trainerCardEl.classList.add('hidden'); statsDisplayCardEl.classList.remove('hidden'); stopClassicQuizBtn.classList.add('hidden'); statsTitleEl.textContent = userRoundData.length < shuffledPairs.length && shuffledPairs.length > 0 ? "Quiz Ended Early!" : "Round Complete!"; let correctCount = 0; userRoundData.forEach(entry => { if (entry.markedCorrect) correctCount++; }); const totalAnswered = userRoundData.length; statsSummaryEl.textContent = `You got ${correctCount} out of ${totalAnswered} correct.`; reviewUlEl.innerHTML = ''; if (userRoundData.length > 0) { roundReviewContainerEl.classList.remove('hidden'); const attemptsByVerbThenPronoun = {}; userRoundData.forEach(entry => { const verbName = entry.pair.verb.infinitive; const pronoun = entry.pair.pronoun; if (!attemptsByVerbThenPronoun[verbName]) { attemptsByVerbThenPronoun[verbName] = {}; } attemptsByVerbThenPronoun[verbName][pronoun] = entry; }); activeVerbsForQuiz.filter(v => attemptsByVerbThenPronoun[v.infinitive]).forEach(verbObj => { const verbName = verbObj.infinitive; if (attemptsByVerbThenPronoun[verbName]) { const verbTitleLi = document.createElement('li'); verbTitleLi.className = 'verb-review-title'; verbTitleLi.textContent = `VERB: ${verbName.toUpperCase()}`; reviewUlEl.appendChild(verbTitleLi); pronouns.forEach(pronounKey => { const entry = attemptsByVerbThenPronoun[verbName][pronounKey]; if (entry) { const li = document.createElement('li'); li.className = 'pronoun-review-item'; let attemptHtml = ''; if (entry.inputMethodDuringAttempt === 'typing') { if (entry.markedCorrect) { attemptHtml = `Your answer: <span class="user-answer-correct">${entry.userTypedAnswer || 'N/A'} ✔️</span>`; } else { if (entry.userTypedAnswer) { attemptHtml = `Your answer: <span class="user-answer-incorrect">${entry.userTypedAnswer}</span> ❌. Correct: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; } else { attemptHtml = `<span class="skipped-text">Skipped.</span> Correct: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; }}} else { if (entry.markedCorrect) { attemptHtml = `You marked: <span class="mental-mark-correct">Right 👍</span>. Answer: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; } else { attemptHtml = `You marked: <span class="mental-mark-incorrect">Wrong 👎</span>. Correct: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; }} li.innerHTML = `<span class="pronoun-name">${pronounKey}:</span><span class="attempt-details">${attemptHtml}</span>`; reviewUlEl.appendChild(li);}});}}); } else { roundReviewContainerEl.classList.add('hidden'); statsSummaryEl.textContent = "No questions answered."; } repeatRoundButton.onclick = repeatClassicQuiz; repeatRoundButton.disabled = !dataLoaded || activeVerbsForQuiz.length === 0; }
+        function showRoundStatistics() { trainerCardEl.classList.add('hidden'); statsDisplayCardEl.classList.remove('hidden'); stopClassicQuizBtn.classList.add('hidden'); statsTitleEl.textContent = userRoundData.length < shuffledPairs.length && shuffledPairs.length > 0 ? "Quiz Ended Early! / ¡Práctica Terminada Temprano!" : "Round Complete! / ¡Ronda Completa!"; let correctCount = 0; userRoundData.forEach(entry => { if (entry.markedCorrect) correctCount++; }); const totalAnswered = userRoundData.length; statsSummaryEl.textContent = `You got ${correctCount} out of ${totalAnswered} correct. / Acertaste ${correctCount} de ${totalAnswered}.`; reviewUlEl.innerHTML = ''; if (userRoundData.length > 0) { roundReviewContainerEl.classList.remove('hidden'); const attemptsByVerbThenPronoun = {}; userRoundData.forEach(entry => { const verbName = entry.pair.verb.infinitive; const pronoun = entry.pair.pronoun; if (!attemptsByVerbThenPronoun[verbName]) { attemptsByVerbThenPronoun[verbName] = {}; } attemptsByVerbThenPronoun[verbName][pronoun] = entry; }); activeVerbsForQuiz.filter(v => attemptsByVerbThenPronoun[v.infinitive]).forEach(verbObj => { const verbName = verbObj.infinitive; if (attemptsByVerbThenPronoun[verbName]) { const verbTitleLi = document.createElement('li'); verbTitleLi.className = 'verb-review-title'; verbTitleLi.textContent = `VERB: ${verbName.toUpperCase()}`; reviewUlEl.appendChild(verbTitleLi); pronouns.forEach(pronounKey => { const entry = attemptsByVerbThenPronoun[verbName][pronounKey]; if (entry) { const li = document.createElement('li'); li.className = 'pronoun-review-item'; let attemptHtml = ''; if (entry.inputMethodDuringAttempt === 'typing') { if (entry.markedCorrect) { attemptHtml = `Your answer: <span class="user-answer-correct">${entry.userTypedAnswer || 'N/A'} ✔️</span>`; } else { if (entry.userTypedAnswer) { attemptHtml = `Your answer: <span class="user-answer-incorrect">${entry.userTypedAnswer}</span> ❌. Correct: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; } else { attemptHtml = `<span class="skipped-text">Skipped.</span> Correct: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; }}} else { if (entry.markedCorrect) { attemptHtml = `You marked: <span class="mental-mark-correct">Right 👍</span>. Answer: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; } else { attemptHtml = `You marked: <span class="mental-mark-incorrect">Wrong 👎</span>. Correct: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; }} li.innerHTML = `<span class="pronoun-name">${pronounKey}:</span><span class="attempt-details">${attemptHtml}</span>`; reviewUlEl.appendChild(li);}});}}); } else { roundReviewContainerEl.classList.add('hidden'); statsSummaryEl.textContent = "No questions answered. / Ninguna pregunta respondida."; } repeatRoundButton.onclick = repeatClassicQuiz; repeatRoundButton.disabled = !dataLoaded || activeVerbsForQuiz.length === 0; }
 
         // --- LEGO MODUS Functions ---
-        function initializeLegoMode() { if (!dataLoaded) { showModeSelectionScreen(); modeSelectionMessageEl.textContent = "LEGO mode needs verb data."; modeSelectionMessageEl.classList.remove('hidden'); return; } legoModeCardEl.classList.remove('hidden'); stopLegoRoundBtn.classList.remove('hidden'); lego_availableVerbsFullList = [...activeVerbsForQuiz]; shuffleArray(lego_availableVerbsFullList); lego_currentQuizVerbs = konjugierenSettings.useAllItems ? [...lego_availableVerbsFullList] : lego_availableVerbsFullList.slice(0, konjugierenSettings.numItems); lego_completedVerbsData = []; lego_loadNextVerb(); }
+        function initializeLegoMode() { if (!dataLoaded) { showModeSelectionScreen(); modeSelectionMessageEl.textContent = "LEGO mode needs verb data. / Modo LEGO necesita datos de verbos."; modeSelectionMessageEl.classList.remove('hidden'); return; } legoModeCardEl.classList.remove('hidden'); stopLegoRoundBtn.classList.remove('hidden'); lego_availableVerbsFullList = [...activeVerbsForQuiz]; shuffleArray(lego_availableVerbsFullList); lego_currentQuizVerbs = konjugierenSettings.useAllItems ? [...lego_availableVerbsFullList] : lego_availableVerbsFullList.slice(0, konjugierenSettings.numItems); lego_completedVerbsData = []; lego_loadNextVerb(); }
         function lego_setupPronounSlots() { legoPronounSlotsContainerEl.innerHTML = ''; legoPronounsOrder.forEach(pronounKey => { const slotDiv = document.createElement('div'); slotDiv.className = 'lego-pronoun-slot'; const labelSpan = document.createElement('span'); labelSpan.className = 'lego-pronoun-label'; labelSpan.textContent = pronounKey; const dropBoxDiv = document.createElement('div'); dropBoxDiv.className = 'lego-drop-box'; dropBoxDiv.dataset.pronoun = pronounKey; dropBoxDiv.addEventListener('dragover', lego_handleDragOver); dropBoxDiv.addEventListener('dragenter', lego_handleDragEnter); dropBoxDiv.addEventListener('dragleave', lego_handleDragLeave); dropBoxDiv.addEventListener('drop', lego_handleDrop); slotDiv.appendChild(labelSpan); slotDiv.appendChild(dropBoxDiv); legoPronounSlotsContainerEl.appendChild(slotDiv); }); }
-        function lego_loadNextVerb() { legoFeedbackEl.style.display = 'none'; legoFeedbackEl.className = 'text-center font-semibold p-3 rounded-md min-h-[24px] mb-6'; legoNextVerbBtn.disabled = true; lego_correctlyPlacedCount = 0; if (lego_currentQuizVerbs.length === 0) { lego_showLegoStats(); return; } if (legoNextVerbBtn.textContent.includes("wiederholen") || legoNextVerbBtn.textContent.includes("Setup")) { legoNextVerbBtn.textContent = "Nächstes Verb"; } lego_currentVerbData = lego_currentQuizVerbs.shift(); legoVerbInfinitiveEl.textContent = lego_currentVerbData.infinitive.toUpperCase(); legoVerbTranslationEl.textContent = lego_currentVerbData.translation ? `(${lego_currentVerbData.translation})` : ""; legoFormsPoolEl.innerHTML = ''; const conjugatedForms = []; for (const pronounKey of legoPronounsOrder) { conjugatedForms.push(lego_currentVerbData.conjugations[pronounKey]); } shuffleArray(conjugatedForms); conjugatedForms.forEach(formText => { const formDiv = document.createElement('div'); formDiv.className = 'lego-draggable-form'; formDiv.textContent = formText; formDiv.draggable = true; formDiv.dataset.formText = formText; formDiv.addEventListener('dragstart', lego_handleDragStart); formDiv.addEventListener('dragend', lego_handleDragEnd); formDiv.addEventListener('touchstart', lego_handleTouchStart, { passive: false }); legoFormsPoolEl.appendChild(formDiv); }); if (conjugatedForms.length === 0){ legoFormsPoolEl.innerHTML = '<p class="placeholder-text-lego text-slate-500 italic">Formen werden geladen...</p>';} lego_setupPronounSlots(); }
+        function lego_loadNextVerb() { legoFeedbackEl.style.display = 'none'; legoFeedbackEl.className = 'text-center font-semibold p-3 rounded-md min-h-[24px] mb-6'; legoNextVerbBtn.disabled = true; lego_correctlyPlacedCount = 0; if (lego_currentQuizVerbs.length === 0) { lego_showLegoStats(); return; } if (legoNextVerbBtn.textContent.includes("wiederholen") || legoNextVerbBtn.textContent.includes("Setup")) { legoNextVerbBtn.textContent = "Next Verb / Siguiente Verbo"; } lego_currentVerbData = lego_currentQuizVerbs.shift(); legoVerbInfinitiveEl.textContent = lego_currentVerbData.infinitive.toUpperCase(); legoVerbTranslationEl.textContent = lego_currentVerbData.translation ? `(${lego_currentVerbData.translation})` : ""; legoFormsPoolEl.innerHTML = ''; const conjugatedForms = []; for (const pronounKey of legoPronounsOrder) { conjugatedForms.push(lego_currentVerbData.conjugations[pronounKey]); } shuffleArray(conjugatedForms); conjugatedForms.forEach(formText => { const formDiv = document.createElement('div'); formDiv.className = 'lego-draggable-form'; formDiv.textContent = formText; formDiv.draggable = true; formDiv.dataset.formText = formText; formDiv.addEventListener('dragstart', lego_handleDragStart); formDiv.addEventListener('dragend', lego_handleDragEnd); formDiv.addEventListener('touchstart', lego_handleTouchStart, { passive: false }); legoFormsPoolEl.appendChild(formDiv); }); if (conjugatedForms.length === 0){ legoFormsPoolEl.innerHTML = '<p class="placeholder-text-lego text-slate-500 italic">Loading forms... / Cargando formas...</p>';} lego_setupPronounSlots(); }
         function lego_handleDragStart(e) { lego_draggedFormElement = e.target; e.target.classList.add('dragging'); e.dataTransfer.setData('text/plain', e.target.dataset.formText); }
         function lego_handleDragEnd(e) { if(lego_draggedFormElement) lego_draggedFormElement.classList.remove('dragging'); lego_draggedFormElement = null; document.querySelectorAll('.lego-drop-box.drag-over').forEach(box => box.classList.remove('drag-over')); }
         function lego_handleDragOver(e) { e.preventDefault(); }
         function lego_handleDragEnter(e) { e.preventDefault(); const dropBox = e.target.closest('.lego-drop-box'); if (dropBox && !dropBox.hasChildNodes()) { dropBox.classList.add('drag-over');}}
         function lego_handleDragLeave(e) { const dropBox = e.target.closest('.lego-drop-box'); if (dropBox) {dropBox.classList.remove('drag-over');}}
-        function lego_handleDrop(e) { e.preventDefault(); const dropBox = e.target.closest('.lego-drop-box'); if (!dropBox || dropBox.hasChildNodes() || !lego_draggedFormElement) { if(lego_draggedFormElement) lego_draggedFormElement.classList.remove('dragging'); lego_draggedFormElement = null; return; } dropBox.classList.remove('drag-over'); const targetPronounKey = dropBox.dataset.pronoun; const droppedFormText = lego_draggedFormElement.dataset.formText; if (lego_currentVerbData.conjugations[targetPronounKey] === droppedFormText) { dropBox.appendChild(lego_draggedFormElement); lego_draggedFormElement.classList.remove('dragging'); lego_draggedFormElement.draggable = false; dropBox.classList.add('filled', 'correct'); lego_correctlyPlacedCount++; lego_showFeedback(`"${droppedFormText}" ist richtig für "${targetPronounKey}"!`, 'success'); triggerConfetti(); if (lego_correctlyPlacedCount === legoPronounsOrder.length) { lego_completedVerbsData.push({ verb: lego_currentVerbData.infinitive, correct: true }); lego_showFeedback(`🎉 Super! "${lego_currentVerbData.infinitive}" komplett richtig gebaut!`, 'success'); legoNextVerbBtn.disabled = false; } } else { lego_showFeedback(`"${droppedFormText}" passt nicht zu "${targetPronounKey}". Versuch's nochmal!`, 'error'); lego_draggedFormElement.classList.remove('dragging'); dropBox.classList.add('lego-incorrect-flash'); setTimeout(() => dropBox.classList.remove('lego-incorrect-flash'), 600); } lego_draggedFormElement = null; }
+        function lego_handleDrop(e) { e.preventDefault(); const dropBox = e.target.closest('.lego-drop-box'); if (!dropBox || dropBox.hasChildNodes() || !lego_draggedFormElement) { if(lego_draggedFormElement) lego_draggedFormElement.classList.remove('dragging'); lego_draggedFormElement = null; return; } dropBox.classList.remove('drag-over'); const targetPronounKey = dropBox.dataset.pronoun; const droppedFormText = lego_draggedFormElement.dataset.formText; if (lego_currentVerbData.conjugations[targetPronounKey] === droppedFormText) { dropBox.appendChild(lego_draggedFormElement); lego_draggedFormElement.classList.remove('dragging'); lego_draggedFormElement.draggable = false; dropBox.classList.add('filled', 'correct'); lego_correctlyPlacedCount++; lego_showFeedback(`"${droppedFormText}" is correct for "${targetPronounKey}"! / ¡"${droppedFormText}" es correcto para "${targetPronounKey}"!`, 'success'); triggerConfetti(); if (lego_correctlyPlacedCount === legoPronounsOrder.length) { lego_completedVerbsData.push({ verb: lego_currentVerbData.infinitive, correct: true }); lego_showFeedback(`🎉 Awesome! "${lego_currentVerbData.infinitive}" fully built! / ¡Genial! ¡"${lego_currentVerbData.infinitive}" completado correctamente!`, 'success'); legoNextVerbBtn.disabled = false; } } else { lego_showFeedback(`"${droppedFormText}" doesn't fit "${targetPronounKey}". Try again! / "${droppedFormText}" no corresponde a "${targetPronounKey}". ¡Intenta de nuevo!`, 'error'); lego_draggedFormElement.classList.remove('dragging'); dropBox.classList.add('lego-incorrect-flash'); setTimeout(() => dropBox.classList.remove('lego-incorrect-flash'), 600); } lego_draggedFormElement = null; }
         function lego_handleTouchStart(e) { if (e.target.classList.contains('lego-draggable-form') && e.target.draggable !== false) { lego_draggedTouchElement = e.target; if (e.cancelable) e.preventDefault(); lego_activeTouchClone = lego_draggedTouchElement.cloneNode(true); lego_activeTouchClone.classList.add('dragging'); lego_activeTouchClone.style.position = 'fixed'; lego_activeTouchClone.style.pointerEvents = 'none'; lego_activeTouchClone.style.zIndex = '1000'; lego_activeTouchClone.style.width = lego_draggedTouchElement.offsetWidth + 'px'; lego_activeTouchClone.style.height = lego_draggedTouchElement.offsetHeight + 'px'; document.body.appendChild(lego_activeTouchClone); const rect = lego_draggedTouchElement.getBoundingClientRect(); lego_touchOffsetX = e.touches[0].clientX - rect.left; lego_touchOffsetY = e.touches[0].clientY - rect.top; lego_activeTouchClone.style.left = (e.touches[0].clientX - lego_touchOffsetX) + 'px'; lego_activeTouchClone.style.top = (e.touches[0].clientY - lego_touchOffsetY) + 'px'; lego_draggedTouchElement.style.opacity = '0.4'; document.addEventListener('touchmove', lego_handleTouchMove, { passive: false }); document.addEventListener('touchend', lego_handleTouchEnd, { once: true }); } }
         function lego_handleTouchMove(e) { if (lego_activeTouchClone) { if (e.cancelable) e.preventDefault(); let currentX = e.touches[0].clientX; let currentY = e.touches[0].clientY; lego_activeTouchClone.style.left = (currentX - lego_touchOffsetX) + 'px'; lego_activeTouchClone.style.top = (currentY - lego_touchOffsetY) + 'px'; document.querySelectorAll('.lego-drop-box').forEach(box => box.classList.remove('drag-over')); lego_activeTouchClone.style.display = 'none'; const elementBelow = document.elementFromPoint(currentX, currentY); lego_activeTouchClone.style.display = ''; if (elementBelow) { const dropBoxBelow = elementBelow.closest('.lego-drop-box'); if (dropBoxBelow && !dropBoxBelow.hasChildNodes()) { dropBoxBelow.classList.add('drag-over'); }}} }
-        function lego_handleTouchEnd(e) { document.removeEventListener('touchmove', lego_handleTouchMove); if (lego_activeTouchClone && lego_draggedTouchElement) { lego_activeTouchClone.style.display = 'none'; const dropTargetElement = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY); let droppedOnValidBoxAndCorrect = false; if (dropTargetElement) { const dropBox = dropTargetElement.closest('.lego-drop-box'); if (dropBox && !dropBox.hasChildNodes()) { const targetPronounKey = dropBox.dataset.pronoun; const droppedFormText = lego_draggedTouchElement.dataset.formText; if (lego_currentVerbData.conjugations[targetPronounKey] === droppedFormText) { dropBox.appendChild(lego_draggedTouchElement); lego_draggedTouchElement.style.opacity = '1'; lego_draggedTouchElement.classList.remove('dragging'); lego_draggedTouchElement.draggable = false; dropBox.classList.add('filled', 'correct'); lego_correctlyPlacedCount++; lego_showFeedback(`"${droppedFormText}" ist richtig für "${targetPronounKey}"!`, 'success'); triggerConfetti(); if (lego_correctlyPlacedCount === legoPronounsOrder.length) { lego_completedVerbsData.push({ verb: lego_currentVerbData.infinitive, correct: true }); lego_showFeedback(`🎉 Super! "${lego_currentVerbData.infinitive}" komplett richtig gebaut!`, 'success'); legoNextVerbBtn.disabled = false; } droppedOnValidBoxAndCorrect = true; } else { lego_showFeedback(`"${droppedFormText}" passt nicht zu "${targetPronounKey}". Versuch's nochmal!`, 'error'); dropBox.classList.add('lego-incorrect-flash'); setTimeout(() => dropBox.classList.remove('lego-incorrect-flash'), 600); } dropBox.classList.remove('drag-over'); } } if (!droppedOnValidBoxAndCorrect) { lego_draggedTouchElement.style.opacity = '1'; } document.body.removeChild(lego_activeTouchClone); } lego_activeTouchClone = null; lego_draggedTouchElement = null; lego_touchOffsetX = 0; lego_touchOffsetY = 0; document.querySelectorAll('.lego-drop-box.drag-over').forEach(box => box.classList.remove('drag-over')); }
+        function lego_handleTouchEnd(e) { document.removeEventListener('touchmove', lego_handleTouchMove); if (lego_activeTouchClone && lego_draggedTouchElement) { lego_activeTouchClone.style.display = 'none'; const dropTargetElement = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY); let droppedOnValidBoxAndCorrect = false; if (dropTargetElement) { const dropBox = dropTargetElement.closest('.lego-drop-box'); if (dropBox && !dropBox.hasChildNodes()) { const targetPronounKey = dropBox.dataset.pronoun; const droppedFormText = lego_draggedTouchElement.dataset.formText; if (lego_currentVerbData.conjugations[targetPronounKey] === droppedFormText) { dropBox.appendChild(lego_draggedTouchElement); lego_draggedTouchElement.style.opacity = '1'; lego_draggedTouchElement.classList.remove('dragging'); lego_draggedTouchElement.draggable = false; dropBox.classList.add('filled', 'correct'); lego_correctlyPlacedCount++; lego_showFeedback(`"${droppedFormText}" is correct for "${targetPronounKey}"! / ¡"${droppedFormText}" es correcto para "${targetPronounKey}"!`, 'success'); triggerConfetti(); if (lego_correctlyPlacedCount === legoPronounsOrder.length) { lego_completedVerbsData.push({ verb: lego_currentVerbData.infinitive, correct: true }); lego_showFeedback(`🎉 Awesome! "${lego_currentVerbData.infinitive}" fully built! / ¡Genial! ¡"${lego_currentVerbData.infinitive}" completado correctamente!`, 'success'); legoNextVerbBtn.disabled = false; } droppedOnValidBoxAndCorrect = true; } else { lego_showFeedback(`"${droppedFormText}" doesn't fit "${targetPronounKey}". Try again! / "${droppedFormText}" no corresponde a "${targetPronounKey}". ¡Intenta de nuevo!`, 'error'); dropBox.classList.add('lego-incorrect-flash'); setTimeout(() => dropBox.classList.remove('lego-incorrect-flash'), 600); } dropBox.classList.remove('drag-over'); } } if (!droppedOnValidBoxAndCorrect) { lego_draggedTouchElement.style.opacity = '1'; } document.body.removeChild(lego_activeTouchClone); } lego_activeTouchClone = null; lego_draggedTouchElement = null; lego_touchOffsetX = 0; lego_touchOffsetY = 0; document.querySelectorAll('.lego-drop-box.drag-over').forEach(box => box.classList.remove('drag-over')); }
         function lego_showFeedback(message, type) { legoFeedbackEl.textContent = message; legoFeedbackEl.className = `text-center font-semibold p-3 rounded-md min-h-[24px] mb-6 ${type}`; legoFeedbackEl.style.display = 'block'; if (type === 'error') { setTimeout(() => { if (legoFeedbackEl.textContent === message) legoFeedbackEl.style.display = 'none'; }, 2500); } else if (type === 'success' && !message.startsWith("🎉")) { setTimeout(() => { if (legoFeedbackEl.textContent === message) legoFeedbackEl.style.display = 'none'; }, 2000); } }
         function lego_showLegoStats() {
             legoModeCardEl.classList.add('hidden');
@@ -641,25 +659,25 @@
             stopLegoRoundBtn.classList.add('hidden');
 
             const totalVerbsInQuiz = (konjugierenSettings.useAllItems ? lego_availableVerbsFullList.length : konjugierenSettings.numItems);
-            const verbsAttemptedOrCompleted = lego_completedVerbsData.length + (lego_currentVerbData && lego_correctlyPlacedCount > 0 && !lego_completedVerbsData.find(v => v.verb === lego_currentVerbData.infinitive) ? 1:0) ;
+            const verbsAttemptedOrCompleted = lego_completedVerbsData.length + 
+                (lego_currentVerbData && lego_correctlyPlacedCount > 0 && !lego_completedVerbsData.find(v => v.verb === lego_currentVerbData.infinitive) ? 1:0);
 
-
-            statsTitleEl.textContent = lego_completedVerbsData.length < totalVerbsInQuiz && totalVerbsInQuiz > 0 ? "LEGO Round Ended Early!" : "LEGO Round Complete!";
+            statsTitleEl.textContent = lego_completedVerbsData.length < totalVerbsInQuiz && totalVerbsInQuiz > 0 ? "LEGO Round Ended Early! / Ronda LEGO Terminada Temprano!" : "LEGO Round Complete! / ¡Ronda LEGO Completa!";
             const correctVerbs = lego_completedVerbsData.filter(v => v.correct).length;
-            statsSummaryEl.textContent = `You fully conjugated ${correctVerbs} out of ${verbsAttemptedOrCompleted} verbs presented.`;
+            statsSummaryEl.textContent = `You fully conjugated ${correctVerbs} out of ${verbsAttemptedOrCompleted || lego_completedVerbsData.length} verbs presented. / Conjugaste completamente ${correctVerbs} de ${verbsAttemptedOrCompleted || lego_completedVerbsData.length} verbos presentados.`;
 
             reviewUlEl.innerHTML = '';
             if (lego_completedVerbsData.length > 0) {
                 roundReviewContainerEl.classList.remove('hidden');
-                let reviewHTML = '<h3>Completed Verbs:</h3><ul>';
+                let reviewHTML = '<h3>Completed Verbs: / Verbos Completados:</h3><ul>';
                 lego_completedVerbsData.forEach(entry => {
-                    reviewHTML += `<li class="pronoun-review-item"><span class="pronoun-name">${entry.verb.toUpperCase()}</span> <span class="user-answer-correct">✔️ Completed</span></li>`;
+                    reviewHTML += `<li class="pronoun-review-item"><span class="pronoun-name">${entry.verb.toUpperCase()}</span> <span class="user-answer-correct">✔️ Completed / Completado</span></li>`;
                 });
                 reviewHTML += '</ul>';
                 reviewUlEl.innerHTML = reviewHTML;
             } else {
                 roundReviewContainerEl.classList.add('hidden');
-                statsSummaryEl.textContent = "No verbs fully conjugated in this session.";
+                statsSummaryEl.textContent = "No verbs fully conjugated in this session. / Ningún verbo conjugado completamente en esta sesión.";
             }
             repeatRoundButton.onclick = () => { initializeLegoMode(); }; 
             repeatRoundButton.disabled = !dataLoaded || activeVerbsForQuiz.length === 0;
@@ -669,7 +687,6 @@
         function setupEventListeners() {
             quizTypeClassicRadio.addEventListener('change', handleQuizTypeChange);
             quizTypeLegoRadio.addEventListener('change', handleQuizTypeChange);
-            // Removed: quizTypeGenderRadio listener
             startQuizButton.addEventListener('click', handleStartQuiz);
             
             selectAllVerbsBtn.addEventListener('click', () => {
@@ -680,9 +697,8 @@
             });
 
             backToMenuLegoBtn.addEventListener('click', showModeSelectionScreen);
-            // Removed: backToMenuGenderBtn listener
             newRoundButton.addEventListener('click', showModeSelectionScreen);
-            // repeatRoundButton specific onclick is set in showRoundStatistics / lego_showLegoStats
+            // repeatRoundButton specific onclick is set in showRoundStatistics / lego_showLegoStats 
 
             answerInputEl.addEventListener('input', handleAnswerInput_Typing);
             answerInputEl.addEventListener('keypress', function(event) { if (event.key === 'Enter' && currentInputMethod === 'typing' && currentQuizType === 'classic') { event.preventDefault(); const userAnswer = answerInputEl.value.trim().toLowerCase(); if (userAnswer !== correctAnswerForm.toLowerCase()) { if (actionButton.dataset.action === "skip_typing") { handleClassicActionButtonClick(); }} else { handleAnswerInput_Typing(); } } });
@@ -693,8 +709,6 @@
             
             legoNextVerbBtn.addEventListener('click', lego_loadNextVerb);
             stopLegoRoundBtn.addEventListener('click', lego_showLegoStats);
-
-            // Removed: Gender Mode Listeners
 
             // Settings Listeners
             settingsBtnKonjugieren.addEventListener('click', openKonjugierenSettings);
@@ -712,9 +726,9 @@
             setupEventListeners();
             modeSelectionCardEl.classList.remove('hidden');
             startQuizButton.disabled = true;
-            startQuizButton.textContent = "Loading Data...";
+            startQuizButton.textContent = "Loading Data... / Cargando Datos...";
             settingsBtnKonjugieren.disabled = true;
-            verbBoxSelectionAreaEl.innerHTML = '<p class="text-sm text-gray-500">Loading verbs...</p>';
+            verbBoxSelectionAreaEl.innerHTML = '<p class="text-sm text-gray-500">Loading verbs... / Cargando verbos...</p>';
             
             loadKonjugierenSettings(); 
             loadAppData(); 
