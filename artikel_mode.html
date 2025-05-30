@@ -316,7 +316,8 @@
             
             // Add event listeners for the new checkboxes
             const allCatCheckbox = categoryCheckboxesContainer.querySelector('input[value="all"]');
-            const specificCatCheckboxes = [...categoryCheckboxesContainer.querySelectorAll('input[value!="all"]')];
+            // FIX: The selector 'input[value!="all"]' is invalid. Use :not().
+            const specificCatCheckboxes = [...categoryCheckboxesContainer.querySelectorAll('input:not([value="all"])')];
             
             allCatCheckbox.addEventListener('change', () => {
                 specificCatCheckboxes.forEach(cb => {
