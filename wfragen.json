@@ -1,92 +1,722 @@
 [
     {
-        "id": "wf1",
+        "id": "was1",
         "wFrage": "Was",
         "questionStem": "___ ist das?",
         "fullQuestionExample": "Was ist das?",
-        "answer": "ein Auto",
-        "answerCategory": "object",
-        "translation": "What is that? - A car"
+        "answer": "Das ist ein Apfel.",
+        "answerCategory": "object_identification",
+        "translation": "What is that? - That is an apple."
     },
     {
-        "id": "wf2",
-        "wFrage": "Wer",
-        "questionStem": "___ kommt heute?",
-        "fullQuestionExample": "Wer kommt heute?",
-        "answer": "Maria",
-        "answerCategory": "person",
-        "translation": "Who is coming today? - Maria"
+        "id": "was2",
+        "wFrage": "Was",
+        "questionStem": "___ machst du heute?",
+        "fullQuestionExample": "Was machst du heute?",
+        "answer": "Ich gehe ins Kino.",
+        "answerCategory": "activity_today",
+        "translation": "What are you doing today? - I am going to the cinema."
     },
     {
-        "id": "wf3",
-        "wFrage": "Wo",
-        "questionStem": "___ ist der Schlüssel?",
-        "fullQuestionExample": "Wo ist der Schlüssel?",
-        "answer": "in der Küche",
-        "answerCategory": "location",
-        "translation": "Where is the key? - In the kitchen"
+        "id": "was3",
+        "wFrage": "Was",
+        "questionStem": "___ ist dein Beruf?",
+        "fullQuestionExample": "Was ist dein Beruf?",
+        "answer": "Ich bin Lehrer von Beruf.",
+        "answerCategory": "profession",
+        "translation": "What is your profession? - I am a teacher by profession."
     },
     {
-        "id": "wf4",
-        "wFrage": "Wann",
-        "questionStem": "___ beginnt der Film?",
-        "fullQuestionExample": "Wann beginnt der Film?",
-        "answer": "um 8 Uhr",
-        "answerCategory": "time",
-        "translation": "When does the film start? - At 8 o'clock"
+        "id": "was4",
+        "wFrage": "Was",
+        "questionStem": "___ möchten Sie trinken?",
+        "fullQuestionExample": "Was möchten Sie trinken?",
+        "answer": "Ich möchte einen Kaffee.",
+        "answerCategory": "drink_order",
+        "translation": "What would you like to drink? - I would like a coffee."
     },
     {
-        "id": "wf5",
-        "wFrage": "Wie",
-        "questionStem": "___ geht es dir?",
-        "fullQuestionExample": "Wie geht es dir?",
-        "answer": "gut, danke",
-        "answerCategory": "manner/condition",
-        "translation": "How are you? - Fine, thank you"
-    },
-    {
-        "id": "wf6",
-        "wFrage": "Woher",
-        "questionStem": "___ kommst du?",
-        "fullQuestionExample": "Woher kommst du?",
-        "answer": "aus Spanien",
-        "answerCategory": "origin",
-        "translation": "Where do you come from? - From Spain"
-    },
-    {
-        "id": "wf7",
-        "wFrage": "Wieviel",
+        "id": "was5",
+        "wFrage": "Was",
         "questionStem": "___ kostet das?",
-        "fullQuestionExample": "Wieviel kostet das?",
-        "answer": "10 Euro",
-        "answerCategory": "amount",
-        "translation": "How much does that cost? - 10 Euros"
+        "fullQuestionExample": "Was kostet das?",
+        "answer": "Das kostet zehn Euro.",
+        "answerCategory": "price_general",
+        "translation": "What does that cost? - That costs ten euros."
     },
     {
-        "id": "wf8",
+        "id": "was6",
+        "wFrage": "Was",
+        "questionStem": "___ ist die Hauptstadt von Deutschland?",
+        "fullQuestionExample": "Was ist die Hauptstadt von Deutschland?",
+        "answer": "Die Hauptstadt ist Berlin.",
+        "answerCategory": "fact_general",
+        "translation": "What is the capital of Germany? - The capital is Berlin."
+    },
+    {
+        "id": "was7",
+        "wFrage": "Was",
+        "questionStem": "___ gibt es zum Abendessen?",
+        "fullQuestionExample": "Was gibt es zum Abendessen?",
+        "answer": "Es gibt Suppe und Brot.",
+        "answerCategory": "food_meal",
+        "translation": "What is for dinner? - There is soup and bread."
+    },
+    {
+        "id": "was8",
+        "wFrage": "Was",
+        "questionStem": "___ ist Ihre Telefonnummer?",
+        "fullQuestionExample": "Was ist Ihre Telefonnummer?",
+        "answer": "Meine Telefonnummer ist 12345.",
+        "answerCategory": "personal_info",
+        "translation": "What is your phone number? - My phone number is 12345."
+    },
+    {
+        "id": "wer1",
+        "wFrage": "Wer",
+        "questionStem": "___ ist das?",
+        "fullQuestionExample": "Wer ist das?",
+        "answer": "Das ist meine Schwester Anna.",
+        "answerCategory": "person_identification",
+        "translation": "Who is that? - That is my sister Anna."
+    },
+    {
+        "id": "wer2",
+        "wFrage": "Wer",
+        "questionStem": "___ hat das Buch geschrieben?",
+        "fullQuestionExample": "Wer hat das Buch geschrieben?",
+        "answer": "Ein berühmter Autor hat es geschrieben.",
+        "answerCategory": "person_action",
+        "translation": "Who wrote the book? - A famous author wrote it."
+    },
+    {
+        "id": "wer3",
+        "wFrage": "Wer",
+        "questionStem": "___ kommt zur Party?",
+        "fullQuestionExample": "Wer kommt zur Party?",
+        "answer": "Viele Freunde kommen zur Party.",
+        "answerCategory": "person_event",
+        "translation": "Who is coming to the party? - Many friends are coming to the party."
+    },
+    {
+        "id": "wer4",
+        "wFrage": "Wer",
+        "questionStem": "___ kann mir helfen?",
+        "fullQuestionExample": "Wer kann mir helfen?",
+        "answer": "Ich kann dir helfen.",
+        "answerCategory": "person_ability",
+        "translation": "Who can help me? - I can help you."
+    },
+    {
+        "id": "wer5",
+        "wFrage": "Wer",
+        "questionStem": "___ ist der Präsident?",
+        "fullQuestionExample": "Wer ist der Präsident?",
+        "answer": "Der Präsident ist Herr Müller.",
+        "answerCategory": "person_role",
+        "translation": "Who is the president? - The president is Mr. Müller."
+    },
+    {
+        "id": "wer6",
+        "wFrage": "Wer",
+        "questionStem": "___ singt dieses Lied?",
+        "fullQuestionExample": "Wer singt dieses Lied?",
+        "answer": "Eine bekannte Sängerin singt es.",
+        "answerCategory": "person_action",
+        "translation": "Who sings this song? - A well-known singer sings it."
+    },
+    {
+        "id": "wer7",
+        "wFrage": "Wer",
+        "questionStem": "___ hat angerufen?",
+        "fullQuestionExample": "Wer hat angerufen?",
+        "answer": "Dein Bruder hat angerufen.",
+        "answerCategory": "person_action",
+        "translation": "Who called? - Your brother called."
+    },
+    {
+        "id": "wer8",
+        "wFrage": "Wer",
+        "questionStem": "___ wohnt hier?",
+        "fullQuestionExample": "Wer wohnt hier?",
+        "answer": "Familie Schmidt wohnt hier.",
+        "answerCategory": "person_residence",
+        "translation": "Who lives here? - The Schmidt family lives here."
+    },
+    {
+        "id": "wo1",
+        "wFrage": "Wo",
+        "questionStem": "___ ist mein Handy?",
+        "fullQuestionExample": "Wo ist mein Handy?",
+        "answer": "Dein Handy ist auf dem Tisch.",
+        "answerCategory": "location_object",
+        "translation": "Where is my phone? - Your phone is on the table."
+    },
+    {
+        "id": "wo2",
+        "wFrage": "Wo",
+        "questionStem": "___ arbeitest du?",
+        "fullQuestionExample": "Wo arbeitest du?",
+        "answer": "Ich arbeite in einem Büro.",
+        "answerCategory": "location_work",
+        "translation": "Where do you work? - I work in an office."
+    },
+    {
+        "id": "wo3",
+        "wFrage": "Wo",
+        "questionStem": "___ ist der nächste Supermarkt?",
+        "fullQuestionExample": "Wo ist der nächste Supermarkt?",
+        "answer": "Der Supermarkt ist um die Ecke.",
+        "answerCategory": "location_place",
+        "translation": "Where is the nearest supermarket? - The supermarket is around the corner."
+    },
+    {
+        "id": "wo4",
+        "wFrage": "Wo",
+        "questionStem": "___ kann ich parken?",
+        "fullQuestionExample": "Wo kann ich parken?",
+        "answer": "Du kannst hier parken.",
+        "answerCategory": "location_activity",
+        "translation": "Where can I park? - You can park here."
+    },
+    {
+        "id": "wo5",
+        "wFrage": "Wo",
+        "questionStem": "___ warst du gestern?",
+        "fullQuestionExample": "Wo warst du gestern?",
+        "answer": "Ich war zu Hause.",
+        "answerCategory": "location_past",
+        "translation": "Where were you yesterday? - I was at home."
+    },
+    {
+        "id": "wo6",
+        "wFrage": "Wo",
+        "questionStem": "___ treffen wir uns?",
+        "fullQuestionExample": "Wo treffen wir uns?",
+        "answer": "Wir treffen uns vor dem Kino.",
+        "answerCategory": "location_meeting",
+        "translation": "Where do we meet? - We meet in front of the cinema."
+    },
+    {
+        "id": "wo7",
+        "wFrage": "Wo",
+        "questionStem": "___ liegt Österreich?",
+        "fullQuestionExample": "Wo liegt Österreich?",
+        "answer": "Österreich liegt in Europa.",
+        "answerCategory": "location_country",
+        "translation": "Where is Austria located? - Austria is in Europe."
+    },
+    {
+        "id": "wo8",
+        "wFrage": "Wo",
+        "questionStem": "___ ist das Restaurant?",
+        "fullQuestionExample": "Wo ist das Restaurant?",
+        "answer": "Das Restaurant ist neben der Bank.",
+        "answerCategory": "location_place",
+        "translation": "Where is the restaurant? - The restaurant is next to the bank."
+    },
+    {
+        "id": "wann1",
+        "wFrage": "Wann",
+        "questionStem": "___ kommst du?",
+        "fullQuestionExample": "Wann kommst du?",
+        "answer": "Ich komme um fünf Uhr.",
+        "answerCategory": "time_arrival",
+        "translation": "When are you coming? - I am coming at five o'clock."
+    },
+    {
+        "id": "wann2",
+        "wFrage": "Wann",
+        "questionStem": "___ ist die Besprechung?",
+        "fullQuestionExample": "Wann ist die Besprechung?",
+        "answer": "Die Besprechung ist morgen.",
+        "answerCategory": "time_event",
+        "translation": "When is the meeting? - The meeting is tomorrow."
+    },
+    {
+        "id": "wann3",
+        "wFrage": "Wann",
+        "questionStem": "___ fliegst du in den Urlaub?",
+        "fullQuestionExample": "Wann fliegst du in den Urlaub?",
+        "answer": "Ich fliege nächste Woche.",
+        "answerCategory": "time_travel",
+        "translation": "When are you flying on vacation? - I am flying next week."
+    },
+    {
+        "id": "wann4",
+        "wFrage": "Wann",
+        "questionStem": "___ hat er angerufen?",
+        "fullQuestionExample": "Wann hat er angerufen?",
+        "answer": "Er hat vor einer Stunde angerufen.",
+        "answerCategory": "time_past_event",
+        "translation": "When did he call? - He called an hour ago."
+    },
+    {
+        "id": "wann5",
+        "wFrage": "Wann",
+        "questionStem": "___ öffnet das Geschäft?",
+        "fullQuestionExample": "Wann öffnet das Geschäft?",
+        "answer": "Das Geschäft öffnet um 9 Uhr.",
+        "answerCategory": "time_opening",
+        "translation": "When does the shop open? - The shop opens at 9 o'clock."
+    },
+    {
+        "id": "wann6",
+        "wFrage": "Wann",
+        "questionStem": "___ können wir uns sehen?",
+        "fullQuestionExample": "Wann können wir uns sehen?",
+        "answer": "Wir können uns am Samstag sehen.",
+        "answerCategory": "time_meeting",
+        "translation": "When can we see each other? - We can see each other on Saturday."
+    },
+    {
+        "id": "wann7",
+        "wFrage": "Wann",
+        "questionStem": "___ ist das Konzert zu Ende?",
+        "fullQuestionExample": "Wann ist das Konzert zu Ende?",
+        "answer": "Das Konzert ist um elf zu Ende.",
+        "answerCategory": "time_ending",
+        "translation": "When does the concert end? - The concert ends at eleven."
+    },
+    {
+        "id": "wann8",
+        "wFrage": "Wann",
+        "questionStem": "___ fängt der Film an?",
+        "fullQuestionExample": "Wann fängt der Film an?",
+        "answer": "Der Film fängt bald an.",
+        "answerCategory": "time_start",
+        "translation": "When does the movie start? - The movie starts soon."
+    },
+    {
+        "id": "wie1",
+        "wFrage": "Wie",
+        "questionStem": "___ geht es dir heute?",
+        "fullQuestionExample": "Wie geht es dir heute?",
+        "answer": "Mir geht es gut, danke.",
+        "answerCategory": "wellbeing",
+        "translation": "How are you today? - I am fine, thank you."
+    },
+    {
+        "id": "wie2",
+        "wFrage": "Wie",
+        "questionStem": "___ alt sind Sie?",
+        "fullQuestionExample": "Wie alt sind Sie?",
+        "answer": "Ich bin dreißig Jahre alt.",
+        "answerCategory": "age",
+        "translation": "How old are you (formal)? - I am thirty years old."
+    },
+    {
+        "id": "wie3",
+        "wFrage": "Wie",
+        "questionStem": "___ ist das Wetter?",
+        "fullQuestionExample": "Wie ist das Wetter?",
+        "answer": "Das Wetter ist schön.",
+        "answerCategory": "condition_weather",
+        "translation": "How is the weather? - The weather is nice."
+    },
+    {
+        "id": "wie4",
+        "wFrage": "Wie",
+        "questionStem": "___ komme ich zur Post?",
+        "fullQuestionExample": "Wie komme ich zur Post?",
+        "answer": "Sie müssen links abbiegen.",
+        "answerCategory": "manner_direction",
+        "translation": "How do I get to the post office? - You have to turn left."
+    },
+    {
+        "id": "wie5",
+        "wFrage": "Wie",
+        "questionStem": "___ war dein Wochenende?",
+        "fullQuestionExample": "Wie war dein Wochenende?",
+        "answer": "Mein Wochenende war sehr schön.",
+        "answerCategory": "evaluation_experience",
+        "translation": "How was your weekend? - My weekend was very nice."
+    },
+    {
+        "id": "wie6",
+        "wFrage": "Wie",
+        "questionStem": "___ schreibt man das?",
+        "fullQuestionExample": "Wie schreibt man das?",
+        "answer": "Man schreibt es mit 'S'.",
+        "answerCategory": "manner_spelling",
+        "translation": "How do you write that? - You write it with 'S'."
+    },
+    {
+        "id": "wie7",
+        "wFrage": "Wie",
+        "questionStem": "___ spät ist es?",
+        "fullQuestionExample": "Wie spät ist es?",
+        "answer": "Es ist vier Uhr.",
+        "answerCategory": "time_inquiry",
+        "translation": "What time is it? (How late is it?) - It is four o'clock."
+    },
+    {
+        "id": "wie8",
+        "wFrage": "Wie",
+        "questionStem": "___ findest du den Film?",
+        "fullQuestionExample": "Wie findest du den Film?",
+        "answer": "Ich finde den Film langweilig.",
+        "answerCategory": "opinion",
+        "translation": "How do you find the movie? - I find the movie boring."
+    },
+    {
+        "id": "woher1",
+        "wFrage": "Woher",
+        "questionStem": "___ kommen Sie, Frau Meier?",
+        "fullQuestionExample": "Woher kommen Sie, Frau Meier?",
+        "answer": "Ich komme aus Deutschland.",
+        "answerCategory": "origin_country",
+        "translation": "Where do you come from, Mrs. Meier? - I come from Germany."
+    },
+    {
+        "id": "woher2",
+        "wFrage": "Woher",
+        "questionStem": "___ hast du diese Information?",
+        "fullQuestionExample": "Woher hast du diese Information?",
+        "answer": "Ich habe sie aus dem Internet.",
+        "answerCategory": "origin_source",
+        "translation": "Where did you get this information from? - I got it from the internet."
+    },
+    {
+        "id": "woher3",
+        "wFrage": "Woher",
+        "questionStem": "___ kennst du ihn?",
+        "fullQuestionExample": "Woher kennst du ihn?",
+        "answer": "Ich kenne ihn von der Arbeit.",
+        "answerCategory": "origin_acquaintance",
+        "translation": "Where do you know him from? - I know him from work."
+    },
+    {
+        "id": "woher4",
+        "wFrage": "Woher",
+        "questionStem": "___ kommt der Wind heute?",
+        "fullQuestionExample": "Woher kommt der Wind heute?",
+        "answer": "Der Wind kommt aus Westen.",
+        "answerCategory": "origin_direction",
+        "translation": "Where is the wind coming from today? - The wind is coming from the west."
+    },
+    {
+        "id": "woher5",
+        "wFrage": "Woher",
+        "questionStem": "___ sind diese Blumen?",
+        "fullQuestionExample": "Woher sind diese Blumen?",
+        "answer": "Diese Blumen sind aus dem Garten.",
+        "answerCategory": "origin_place",
+        "translation": "Where are these flowers from? - These flowers are from the garden."
+    },
+    {
+        "id": "woher6",
+        "wFrage": "Woher",
+        "questionStem": "___ nehmen Sie die Zeit?",
+        "fullQuestionExample": "Woher nehmen Sie die Zeit?",
+        "answer": "Ich plane meinen Tag gut.",
+        "answerCategory": "origin_resource",
+        "translation": "Where do you get the time from? - I plan my day well."
+    },
+    {
+        "id": "woher7",
+        "wFrage": "Woher",
+        "questionStem": "___ stammt dieses Rezept?",
+        "fullQuestionExample": "Woher stammt dieses Rezept?",
+        "answer": "Das Rezept stammt von meiner Oma.",
+        "answerCategory": "origin_tradition",
+        "translation": "Where does this recipe come from? - The recipe comes from my grandma."
+    },
+    {
+        "id": "woher8",
+        "wFrage": "Woher",
+        "questionStem": "___ hast du das gelernt?",
+        "fullQuestionExample": "Woher hast du das gelernt?",
+        "answer": "Ich habe es in der Schule gelernt.",
+        "answerCategory": "origin_knowledge",
+        "translation": "Where did you learn that from? - I learned it in school."
+    },
+    {
+        "id": "wieviel1",
+        "wFrage": "Wieviel",
+        "questionStem": "___ kostet ein Kilo Äpfel?",
+        "fullQuestionExample": "Wieviel kostet ein Kilo Äpfel?",
+        "answer": "Ein Kilo Äpfel kostet drei Euro.",
+        "answerCategory": "price_groceries",
+        "translation": "How much does a kilo of apples cost? - A kilo of apples costs three euros."
+    },
+    {
+        "id": "wieviel2",
+        "wFrage": "Wieviel",
+        "questionStem": "___ Zeit brauchen wir?",
+        "fullQuestionExample": "Wieviel Zeit brauchen wir?",
+        "answer": "Wir brauchen ungefähr eine Stunde.",
+        "answerCategory": "duration",
+        "translation": "How much time do we need? - We need about an hour."
+    },
+    {
+        "id": "wieviel3",
+        "wFrage": "Wieviel",
+        "questionStem": "___ Kinder haben Sie?",
+        "fullQuestionExample": "Wieviel Kinder haben Sie?",
+        "answer": "Ich habe keine Kinder.",
+        "answerCategory": "quantity_people",
+        "translation": "How many children do you have? - I have no children."
+    },
+    {
+        "id": "wieviel4",
+        "wFrage": "Wieviel",
+        "questionStem": "___ kostet die Miete pro Monat?",
+        "fullQuestionExample": "Wieviel kostet die Miete pro Monat?",
+        "answer": "Die Miete kostet 500 Euro.",
+        "answerCategory": "price_rent",
+        "translation": "How much is the rent per month? - The rent is 500 euros."
+    },
+    {
+        "id": "wieviel5",
+        "wFrage": "Wieviel",
+        "questionStem": "___ Grad sind es heute?",
+        "fullQuestionExample": "Wieviel Grad sind es heute?",
+        "answer": "Es sind heute 25 Grad.",
+        "answerCategory": "quantity_temperature",
+        "translation": "How many degrees is it today? - It is 25 degrees today."
+    },
+    {
+        "id": "wieviel6",
+        "wFrage": "Wieviel",
+        "questionStem": "___ Gepäck darf ich mitnehmen?",
+        "fullQuestionExample": "Wieviel Gepäck darf ich mitnehmen?",
+        "answer": "Sie dürfen 20 Kilo mitnehmen.",
+        "answerCategory": "quantity_weight",
+        "translation": "How much luggage can I take? - You can take 20 kilos."
+    },
+    {
+        "id": "wieviel7",
+        "wFrage": "Wieviel",
+        "questionStem": "___ Sprachen sprichst du?",
+        "fullQuestionExample": "Wieviel Sprachen sprichst du?",
+        "answer": "Ich spreche drei Sprachen.",
+        "answerCategory": "quantity_general",
+        "translation": "How many languages do you speak? - I speak three languages."
+    },
+    {
+        "id": "wieviel8",
+        "wFrage": "Wieviel",
+        "questionStem": "___ kostet eine Tasse Kaffee hier?",
+        "fullQuestionExample": "Wieviel kostet eine Tasse Kaffee hier?",
+        "answer": "Eine Tasse Kaffee kostet 2,50 Euro.",
+        "answerCategory": "price_cafe",
+        "translation": "How much does a cup of coffee cost here? - A cup of coffee costs 2.50 euros."
+    },
+    {
+        "id": "warum1",
         "wFrage": "Warum",
-        "questionStem": "___ lernst du Deutsch?",
-        "fullQuestionExample": "Warum lernst du Deutsch?",
-        "answer": "für meine Arbeit",
-        "answerCategory": "reason",
-        "translation": "Why are you learning German? - For my work"
+        "questionStem": "___ ist der Himmel blau?",
+        "fullQuestionExample": "Warum ist der Himmel blau?",
+        "answer": "Das Licht wird gestreut.",
+        "answerCategory": "reason_science",
+        "translation": "Why is the sky blue? - The light is scattered."
     },
     {
-        "id": "wf9",
+        "id": "warum2",
+        "wFrage": "Warum",
+        "questionStem": "___ kommst du zu spät?",
+        "fullQuestionExample": "Warum kommst du zu spät?",
+        "answer": "Mein Bus hatte Verspätung.",
+        "answerCategory": "reason_delay",
+        "translation": "Why are you late? - My bus was delayed."
+    },
+    {
+        "id": "warum3",
+        "wFrage": "Warum",
+        "questionStem": "___ magst du diesen Film?",
+        "fullQuestionExample": "Warum magst du diesen Film?",
+        "answer": "Der Film ist sehr spannend.",
+        "answerCategory": "reason_preference",
+        "translation": "Why do you like this movie? - The movie is very exciting."
+    },
+    {
+        "id": "warum4",
+        "wFrage": "Warum",
+        "questionStem": "___ funktioniert das nicht?",
+        "fullQuestionExample": "Warum funktioniert das nicht?",
+        "answer": "Es ist vielleicht kaputt.",
+        "answerCategory": "reason_problem",
+        "translation": "Why doesn't that work? - It might be broken."
+    },
+    {
+        "id": "warum5",
+        "wFrage": "Warum",
+        "questionStem": "___ hast du das gemacht?",
+        "fullQuestionExample": "Warum hast du das gemacht?",
+        "answer": "Ich wollte dir helfen.",
+        "answerCategory": "reason_motivation",
+        "translation": "Why did you do that? - I wanted to help you."
+    },
+    {
+        "id": "warum6",
+        "wFrage": "Warum",
+        "questionStem": "___ ist Sport wichtig?",
+        "fullQuestionExample": "Warum ist Sport wichtig?",
+        "answer": "Sport ist gut für die Gesundheit.",
+        "answerCategory": "reason_importance",
+        "translation": "Why is sport important? - Sport is good for health."
+    },
+    {
+        "id": "warum7",
+        "wFrage": "Warum",
+        "questionStem": "___ sind Bananen krumm?",
+        "fullQuestionExample": "Warum sind Bananen krumm?",
+        "answer": "Sie wachsen zur Sonne.",
+        "answerCategory": "reason_nature",
+        "translation": "Why are bananas crooked? - They grow towards the sun."
+    },
+    {
+        "id": "warum8",
+        "wFrage": "Warum",
+        "questionStem": "___ weinst du?",
+        "fullQuestionExample": "Warum weinst du?",
+        "answer": "Ich bin ein bisschen traurig.",
+        "answerCategory": "reason_emotion",
+        "translation": "Why are you crying? - I am a bit sad."
+    },
+    {
+        "id": "wohin1",
         "wFrage": "Wohin",
-        "questionStem": "___ gehst du?",
-        "fullQuestionExample": "Wohin gehst du?",
-        "answer": "ins Kino",
-        "answerCategory": "destination",
-        "translation": "Where are you going (to)? - To the cinema"
+        "questionStem": "___ gehst du nach der Schule?",
+        "fullQuestionExample": "Wohin gehst du nach der Schule?",
+        "answer": "Ich gehe direkt nach Hause.",
+        "answerCategory": "destination_daily",
+        "translation": "Where are you going after school? - I am going straight home."
     },
     {
-        "id": "wf10",
+        "id": "wohin2",
+        "wFrage": "Wohin",
+        "questionStem": "___ fahren Sie in den Ferien?",
+        "fullQuestionExample": "Wohin fahren Sie in den Ferien?",
+        "answer": "Wir fahren an die Ostsee.",
+        "answerCategory": "destination_vacation",
+        "translation": "Where are you going for the holidays? - We are going to the Baltic Sea."
+    },
+    {
+        "id": "wohin3",
+        "wFrage": "Wohin",
+        "questionStem": "___ soll ich das Paket bringen?",
+        "fullQuestionExample": "Wohin soll ich das Paket bringen?",
+        "answer": "Bitte bringen Sie es zur Post.",
+        "answerCategory": "destination_object",
+        "translation": "Where should I take this package? - Please take it to the post office."
+    },
+    {
+        "id": "wohin4",
+        "wFrage": "Wohin",
+        "questionStem": "___ führt dieser Weg?",
+        "fullQuestionExample": "Wohin führt dieser Weg?",
+        "answer": "Dieser Weg führt zum See.",
+        "answerCategory": "destination_path",
+        "translation": "Where does this path lead? - This path leads to the lake."
+    },
+    {
+        "id": "wohin5",
+        "wFrage": "Wohin",
+        "questionStem": "___ möchtest du am liebsten reisen?",
+        "fullQuestionExample": "Wohin möchtest du am liebsten reisen?",
+        "answer": "Ich möchte nach Japan reisen.",
+        "answerCategory": "destination_dream",
+        "translation": "Where would you most like to travel? - I would like to travel to Japan."
+    },
+    {
+        "id": "wohin6",
+        "wFrage": "Wohin",
+        "questionStem": "___ stellst du die Blumen?",
+        "fullQuestionExample": "Wohin stellst du die Blumen?",
+        "answer": "Ich stelle sie auf den Tisch.",
+        "answerCategory": "destination_placement",
+        "translation": "Where are you putting the flowers? - I am putting them on the table."
+    },
+    {
+        "id": "wohin7",
+        "wFrage": "Wohin",
+        "questionStem": "___ sind alle gegangen?",
+        "fullQuestionExample": "Wohin sind alle gegangen?",
+        "answer": "Alle sind in den Park gegangen.",
+        "answerCategory": "destination_group",
+        "translation": "Where did everyone go? - Everyone went to the park."
+    },
+    {
+        "id": "wohin8",
+        "wFrage": "Wohin",
+        "questionStem": "___ fliegt ihr im Winter?",
+        "fullQuestionExample": "Wohin fliegt ihr im Winter?",
+        "answer": "Wir fliegen in die Berge.",
+        "answerCategory": "destination_season",
+        "translation": "Where are you flying in winter? - We are flying to the mountains."
+    },
+    {
+        "id": "welche1",
         "wFrage": "Welche",
-        "questionStem": "___ Farbe magst du?",
-        "fullQuestionExample": "Welche Farbe magst du?",
-        "answer": "Blau",
-        "answerCategory": "choice",
-        "translation": "Which color do you like? - Blue"
+        "questionStem": "___ Farbe hat dein Fahrrad?",
+        "fullQuestionExample": "Welche Farbe hat dein Fahrrad?",
+        "answer": "Mein Fahrrad ist blau.",
+        "answerCategory": "choice_color",
+        "translation": "Which color is your bike? - My bike is blue."
+    },
+    {
+        "id": "welche2",
+        "wFrage": "Welcher",
+        "questionStem": "___ Bus fährt zum Zentrum?",
+        "fullQuestionExample": "Welcher Bus fährt zum Zentrum?",
+        "answer": "Der Bus Nummer fünf fährt dorthin.",
+        "answerCategory": "choice_transport",
+        "translation": "Which bus goes to the center? - Bus number five goes there."
+    },
+    {
+        "id": "welche3",
+        "wFrage": "Welches",
+        "questionStem": "___ Buch liest du gerade?",
+        "fullQuestionExample": "Welches Buch liest du gerade?",
+        "answer": "Ich lese einen Krimi.",
+        "answerCategory": "choice_media",
+        "translation": "Which book are you reading right now? - I am reading a crime novel."
+    },
+    {
+        "id": "welche4",
+        "wFrage": "Welche",
+        "questionStem": "___ Musik hörst du gern?",
+        "fullQuestionExample": "Welche Musik hörst du gern?",
+        "answer": "Ich höre gern Popmusik.",
+        "answerCategory": "choice_preference",
+        "translation": "Which music do you like to listen to? - I like to listen to pop music."
+    },
+    {
+        "id": "welche5",
+        "wFrage": "Welchen",
+        "questionStem": "___ Film schauen wir heute Abend?",
+        "fullQuestionExample": "Welchen Film schauen wir heute Abend?",
+        "answer": "Wir schauen eine Komödie.",
+        "answerCategory": "choice_entertainment",
+        "translation": "Which movie are we watching tonight? - We are watching a comedy."
+    },
+    {
+        "id": "welche6",
+        "wFrage": "Welcher",
+        "questionStem": "___ Wochentag ist dein Lieblingstag?",
+        "fullQuestionExample": "Welcher Wochentag ist dein Lieblingstag?",
+        "answer": "Mein Lieblingstag ist der Samstag.",
+        "answerCategory": "choice_time",
+        "translation": "Which day of the week is your favorite day? - My favorite day is Saturday."
+    },
+    {
+        "id": "welche7",
+        "wFrage": "Welches",
+        "questionStem": "___ Restaurant empfiehlst du?",
+        "fullQuestionExample": "Welches Restaurant empfiehlst du?",
+        "answer": "Ich empfehle das italienische Restaurant.",
+        "answerCategory": "choice_recommendation",
+        "translation": "Which restaurant do you recommend? - I recommend the Italian restaurant."
+    },
+    {
+        "id": "welche8",
+        "wFrage": "Welche",
+        "questionStem": "___ Hose passt besser?",
+        "fullQuestionExample": "Welche Hose passt besser?",
+        "answer": "Die blaue Hose passt besser.",
+        "answerCategory": "choice_clothing",
+        "translation": "Which pants fit better? - The blue pants fit better."
     }
 ]
