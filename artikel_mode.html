@@ -249,9 +249,14 @@
                 <button id="quiz-mode-btn" class="btn btn-primary mode-btn">
                     📝 Der/Die/Das Quiz
                     <div class="text-sm opacity-90 mt-1">Teste dein Wissen</div>
+                </button>
                 <button id="speed-mode-btn" class="btn btn-success mode-btn">
                     ⚡ Speed Learning
                     <div class="text-sm opacity-90 mt-1">Schnelle Karteikarten</div>
+                </button>
+                 <button id="mek-quiz-mode-btn" class="btn btn-warning mode-btn">
+                    🤔 Mein/Ein/Kein Quiz
+                    <div class="text-sm opacity-90 mt-1">Teste die Deklination</div>
                 </button>
             </div>
         </div>
@@ -432,7 +437,7 @@
         function initializeUI() {
             quizModeBtn.disabled = false;
             speedModeBtn.disabled = false;
-            mekQuizModeBtn.disabled = false;
+            if(mekQuizModeBtn) mekQuizModeBtn.disabled = false;
             showModeSelection();
         }
 
@@ -886,32 +891,49 @@
             }
         }
 
-        quizModeBtn.addEventListener('click', showQuizMode);
-        speedModeBtn.addEventListener('click', showSpeedMode);
-        mekQuizModeBtn.addEventListener('click', showMekQuizMode);
-        backToMenuBtn.addEventListener('click', showModeSelection); // DerDieDas back button
-        artikelButtons.forEach(button => button.addEventListener('click', () => handleAnswer(button.dataset.artikel)));
-        mekBackToMenuBtn.addEventListener('click', showModeSelection); // MEK back button
-        mekArtikelButtons.forEach(button => button.addEventListener('click', () => handleMekAnswer(button.dataset.artikelBase)));
-        speedPauseBtn.addEventListener('click', toggleSpeedPause);
-        speedRestartBtn.addEventListener('click', startSpeedRound);
-        speedBackToMenuBtn.addEventListener('click', showModeSelection);
-        speedBackToMenuBtnIngame.addEventListener('click', showModeSelection);
+        if(quizModeBtn) quizModeBtn.addEventListener('click', showQuizMode);
+        if(speedModeBtn) speedModeBtn.addEventListener('click', showSpeedMode);
+        if(mekQuizModeBtn) mekQuizModeBtn.addEventListener('click', showMekQuizMode);
+        if(backToMenuBtn) backToMenuBtn.addEventListener('click', showModeSelection); // DerDieDas back button
+        if(artikelButtons) artikelButtons.forEach(button => button.addEventListener('click', () => handleAnswer(button.dataset.artikel)));
+        if(mekBackToMenuBtn) mekBackToMenuBtn.addEventListener('click', showModeSelection); // MEK back button
+        if(mekArtikelButtons) mekArtikelButtons.forEach(button => button.addEventListener('click', () => handleMekAnswer(button.dataset.artikelBase)));
+        if(speedPauseBtn) speedPauseBtn.addEventListener('click', toggleSpeedPause);
+        if(speedRestartBtn) speedRestartBtn.addEventListener('click', startSpeedRound);
+        if(speedBackToMenuBtn) speedBackToMenuBtn.addEventListener('click', showModeSelection);
+        if(speedBackToMenuBtnIngame) speedBackToMenuBtnIngame.addEventListener('click', showModeSelection);
         document.addEventListener('keydown', handleSpacebar);
-        // restartQuizBtn & mekRestartQuizBtn onclicks are set dynamically.
 
         async function initialSetup() {
-            quizModeBtn.disabled = true; speedModeBtn.disabled = true; mekQuizModeBtn.disabled = true;
-            const loadingMsg = document.createElement('p'); loadingMsg.id = "loading-data-msg";
-            loadingMsg.textContent = "Lade Quizdaten..."; loadingMsg.className = "text-center text-purple-700 mb-4";
+            if(quizModeBtn) quizModeBtn.disabled = true;
+            if(speedModeBtn) speedModeBtn.disabled = true;
+            if(mekQuizModeBtn) mekQuizModeBtn.disabled = true;
+
+            const loadingMsg = document.createElement('p');
+            loadingMsg.id = "loading-data-msg";
+            loadingMsg.textContent = "Lade Quizdaten...";
+            loadingMsg.className = "text-center text-purple-700 mb-4";
             const modeSelDiv = modeSelectionScreen.querySelector('.mode-selection');
-            if (modeSelDiv) modeSelectionScreen.insertBefore(loadingMsg, modeSelDiv);
-            else modeSelectionScreen.appendChild(loadingMsg);
+
+            if (modeSelDiv) {
+                modeSelectionScreen.insertBefore(loadingMsg, modeSelDiv);
+            } else {
+                modeSelectionScreen.appendChild(loadingMsg);
+            }
+
             await loadQuizData();
+
             const existingMsg = document.getElementById('loading-data-msg');
             if(existingMsg) existingMsg.remove();
         }
-        initialSetup();
+
+        // Add a check before adding event listeners to avoid crash
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initialSetup);
+        } else {
+            initialSetup();
+        }
+
     </script>
 </body>
 </html>
