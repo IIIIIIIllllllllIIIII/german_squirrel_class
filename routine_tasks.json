@@ -1,26 +1,39 @@
 [
     {
-        "id": "rt_s1", // s for sentence_order
+        "id": "rs1",
         "full_sentence_de": "Ich esse gern Pizza zum Frühstück.",
         "full_sentence_es": "Me gusta comer pizza para el desayuno.",
         "translation_en": "I like to eat pizza for breakfast.",
-        "german_words": ["Ich", "esse", "gern", "Pizza", "zum", "Frühstück."] // Words in order for easy checking, shuffle in JS
+        "german_words": ["Ich", "esse", "gern", "Pizza", "zum", "Frühstück."]
     },
     {
-        "id": "rt_s2",
+        "id": "rs2",
         "full_sentence_de": "Am Wochenende lese ich oft ein Buch.",
         "full_sentence_es": "Los fines de semana leo a menudo un libro.",
         "translation_en": "On weekends I often read a book.",
         "german_words": ["Am Wochenende", "lese", "ich", "oft", "ein Buch."]
     },
     {
-        "id": "rt_s3",
-        "display_question_de": "Trinkst du gern Tee?", // Optional: Display a related question for context
+        "id": "rs3",
+        "display_question_de": "Trinkst du gern Tee?",
         "display_question_es": "¿Te gusta beber té?",
         "full_sentence_de": "Ja, ich trinke manchmal Tee.",
         "full_sentence_es": "Sí, a veces bebo té.",
         "translation_en": "Yes, I sometimes drink tea.",
         "german_words": ["Ja,", "ich", "trinke", "manchmal", "Tee."]
+    },
+    {
+        "id": "rs4",
+        "full_sentence_de": "Mein Bruder steht um sieben Uhr auf.",
+        "full_sentence_es": "Mi hermano se levanta a las siete.",
+        "translation_en": "My brother gets up at seven o'clock.",
+        "german_words": ["Mein Bruder", "steht", "um sieben Uhr", "auf."]
+    },
+    {
+        "id": "rs5",
+        "full_sentence_de": "Abends sehe ich oft fern.",
+        "full_sentence_es": "Por las noches veo a menudo la televisión.",
+        "translation_en": "In the evenings, I often watch TV.",
+        "german_words": ["Abends", "sehe", "ich", "oft", "fern."]
     }
-    // Add many more sentence examples
 ]
