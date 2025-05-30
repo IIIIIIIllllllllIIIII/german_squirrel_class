@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>German Learning Hub</title>
+    <title>German Learning Hub - Konjugieren</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
@@ -28,9 +28,14 @@
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             text-align: center;
             width: 100%;
-            max-width: 500px; 
+            position: relative; /* For settings button */
         }
         #mode-selection-card { max-width: 650px; }
+        .trainer-card-base { max-width: 500px; } /* Base for classic trainer */
+        .stats-card { max-width: 650px; }
+        #lego-mode-card { max-width: 900px; }
+        #gender-mode-card { max-width: 550px; }
+
         .mode-title {
             font-size: 1.75rem; font-weight: 700; color: #6d28d9; margin-bottom: 24px;
         }
@@ -40,14 +45,17 @@
             border-bottom: 1px solid #e5e7eb; padding-bottom: 8px;
         }
         .radio-group { text-align: left; margin-bottom: 16px; padding-left: 8px; }
-        .radio-group label { margin-left: 8px; font-size: 1rem; color: #374151; }
-        .radio-group input[type="radio"] { accent-color: #6d28d9; }
+        .radio-group label { margin-left: 8px; font-size: 1rem; color: #374151; cursor:pointer;}
+        .radio-group input[type="radio"] { accent-color: #6d28d9; cursor:pointer;}
         
+        .verb-selection-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .verb-selection-controls button { font-size: 0.8rem; padding: 6px 10px; margin-top: 0;}
+
         #verb-box-selection-area {
             display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
             margin-top: 8px; margin-bottom: 20px; padding: 10px;
             background-color: #f9fafb; border-radius: 8px;
-            border: 1px solid #e5e7eb; max-height: 220px; overflow-y: auto;
+            border: 1px solid #e5e7eb; max-height: 180px; overflow-y: auto;
         }
         .verb-select-box {
             padding: 10px 16px; border: 2px solid #cbd5e1; border-radius: 8px;
@@ -79,6 +87,7 @@
             border: none; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
             margin-top: 16px;
         }
+        .btn-sm { padding: 8px 16px; font-size: 0.875rem; }
         .btn:disabled {
             background-color: #d1d5db !important; 
             color: #6b7280 !important;
@@ -108,12 +117,11 @@
         .answer-reveal.incorrect { color: #dc2626; background-color: #fee2e2; border: 1px solid #fecaca; display: block;}
         .answer-reveal .correct-form { font-weight: 700; }
         .progress-text { margin-top: 20px; font-size: 0.875rem; color: #6b7280; }
-        .stats-card { max-width: 650px; }
         .stats-title { font-size: 2rem; font-weight: 700; color: #6d28d9; margin-bottom: 16px; }
         .stats-summary { font-size: 1.25rem; margin-bottom: 24px; }
         .stats-buttons-container { display: flex; justify-content: center; gap: 16px; margin-top: 24px; flex-wrap: wrap; }
         .round-review-container {
-            text-align: left; margin-top: 20px; max-height: 400px; overflow-y: auto;
+            text-align: left; margin-top: 20px; max-height: 300px; overflow-y: auto;
             padding: 16px; background-color: #f9fafb; border-radius: 8px; border: 1px solid #e5e7eb;
         }
         .round-review-container h3 { font-size: 1.25rem; font-weight: 600; color: #4f46e5; margin-bottom: 12px; text-align: center; }
@@ -133,7 +141,7 @@
         .hidden { display: none !important; }
         .message { margin-top: 1rem; color: #ef4444; font-weight: 500; }
 
-        #lego-mode-card { max-width: 900px; }
+        #lego-mode-card h1 {font-size: 1.75rem; }
         .lego-draggable-form {
             background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 100%); color: #374151; 
             padding: 10px 20px; border-radius: 9999px; cursor: grab; font-weight: 600; 
@@ -158,8 +166,10 @@
         @keyframes lego-flash-red { 0%, 100% { background-color: #e5e7eb; border-color: #9ca3af;} 50% { background-color: #fee2e2; border-color: #fca5a5;} }
         #feedback-lego.success { background-color: #d1fae5; color: #065f46; display: block; border: 1px solid #6ee7b7; }
         #feedback-lego.error { background-color: #fee2e2; color: #991b1b; display: block; border: 1px solid #fca5a5; }
+        #lego-buttons-container {display: flex; justify-content: space-between; align-items: center; margin-top: 24px; flex-wrap: wrap; gap: 10px;}
 
-        #gender-mode-card { max-width: 550px; }
+
+        #gender-mode-card h1 {font-size: 1.5rem;}
         #gender-noun-display-card {
             background-color: #f3f4f6; padding: 2rem 1rem; border-radius: 0.75rem; 
             margin-bottom: 1.5rem; border: 4px solid transparent; 
@@ -176,17 +186,47 @@
             font-size: 1.125rem; font-weight: 600; padding: 0.75rem; 
             border-radius: 0.5rem; min-height: 50px;
         }
-        #feedback-gender.correct { 
-            background-color: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; display: block !important;
+        #feedback-gender.correct { background-color: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; display: block !important;}
+        #feedback-gender.incorrect { background-color: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; display: block !important;}
+        .gender-bottom-controls {display: flex; justify-content: space-between; align-items: center; margin-top: 24px; flex-wrap: wrap; gap: 10px;}
+
+        /* Settings Panel Styles (copied from artikel_mode) */
+        #settings-btn-konjugieren { /* Unique ID for this page's settings button */
+            position: absolute; top: 16px; right: 16px; background: none; border: none;
+            font-size: 1.75rem; cursor: pointer; color: #9ca3af; transition: color 0.3s; z-index: 10;
         }
-        #feedback-gender.incorrect { 
-            background-color: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; display: block !important;
+        #settings-btn-konjugieren:hover { color: #4b5563; }
+        #settings-overlay-konjugieren {
+             position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.5);
+             backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center;
+             padding: 1rem; z-index: 500; /* High z-index */
         }
+        #settings-modal-content-konjugieren {
+             background-color: white; border-radius: 12px; padding: 24px; width: 100%;
+             max-width: 500px; max-height: 90vh; display: flex; flex-direction: column;
+             text-align: left; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+        }
+        .settings-title-konjugieren { font-size: 1.5rem; font-weight: 700; color: #4a044e; margin-bottom: 4px;}
+        .settings-subtitle-konjugieren { font-size: 0.875rem; color: #6b7280; margin-bottom: 24px;}
+        .settings-content-area-konjugieren { flex-grow: 1; overflow-y: auto; padding-right: 8px;}
+        .settings-section-konjugieren { margin-bottom: 24px; }
+        .settings-section-konjugieren h3 { font-size: 1.125rem; font-weight: 600; margin-bottom: 2px; color: #4a044e; }
+        .settings-section-konjugieren .translation { font-size: 0.8rem; color: #6b7280; margin-bottom: 12px;}
+        .settings-footer-konjugieren { margin-top: auto; padding-top: 1rem; }
+        .settings-footer-konjugieren .translation { font-size: 0.8rem; color: #6b7280; margin-top: 4px; text-align: center; }
+        @media (prefers-color-scheme: dark) {
+            #settings-modal-content-konjugieren { background-color: #1f2937; color: #d1d5db; }
+            .settings-title-konjugieren, .settings-section-konjugieren h3 { color: #a78bfa; }
+            .settings-subtitle-konjugieren, .settings-section-konjugieren .translation, .settings-footer-konjugieren .translation { color: #9ca3af; }
+            #settings-btn-konjugieren { color: #6b7280; }
+            #settings-btn-konjugieren:hover { color: #d1d5db; }
+        }
+
 
         @media (max-width: 640px) {
             .card, .stats-card, #mode-selection-card, #lego-mode-card, #gender-mode-card { padding: 20px; }
             .mode-title { font-size: 1.5rem; } .mode-subtitle { font-size: 1rem; }
-            #verb-box-selection-area { gap: 8px; }
+            #verb-box-selection-area { gap: 8px; max-height: 150px; }
             .verb-select-box { padding: 8px 12px; font-size: 0.9rem;}
             .verb-display { font-size: 1.5rem; } .pronoun-display { font-size: 1.25rem; }
             .answer-input-field { font-size: 1.125rem; max-width: 200px; }
@@ -195,23 +235,30 @@
             .feedback-buttons-container button { width: 100%; }
             .stats-buttons-container button { width: 100%; margin-top: 8px;}
             .stats-buttons-container button:first-child { margin-top: 0; }
-            .round-review-container { max-height: 300px; }
+            .round-review-container { max-height: 250px; }
             .pronoun-review-item { flex-direction: column; align-items: flex-start; text-align: left;}
             .pronoun-review-item .attempt-details { text-align: left; margin-top: 4px;}
-            #lego-mode-card h1 { font-size: 1.5rem;}
-            #current-verb-infinitive-lego { font-size: 1.75rem; }
-            .lego-draggable-form { font-size: 1rem; padding: 8px 16px; }
+            #lego-mode-card h1 { font-size: 1.25rem;}
+            #current-verb-infinitive-lego { font-size: 1.5rem; }
+            .lego-draggable-form { font-size: 0.9rem; padding: 6px 12px; }
             .lego-pronoun-slot { flex-direction: column; align-items: stretch; }
             .lego-pronoun-label { text-align: center; margin-bottom: 8px; margin-right: 0;}
-            #forms-pool-lego { padding: 12px; gap: 8px;}
+            #forms-pool-lego { padding: 10px; gap: 6px; min-h: 60px;}
             #pronoun-slots-lego { grid-template-columns: 1fr; }
-            #gender-noun-text { font-size: 2rem; }
+            #lego-buttons-container {flex-direction: column;}
+            #lego-buttons-container .btn {width: 100%;}
+
+            #gender-mode-card h1 { font-size: 1.25rem; }
+            #gender-noun-text { font-size: 1.75rem; }
             #gender-choice-buttons-container { grid-template-columns: 1fr; gap: 0.5rem; } 
+            .gender-bottom-controls {flex-direction: column;}
+            .gender-bottom-controls .btn {width: 100%;}
         }
     </style>
 </head>
 <body>
     <div id="mode-selection-card" class="card">
+        <button id="settings-btn-konjugieren" title="Einstellungen / Settings / Ajustes">⚙️</button>
         <h2 class="mode-title">Setup Your German Learning</h2>
         <h3 class="mode-subtitle">1. Choose Quiz Type:</h3>
         <div class="radio-group">
@@ -221,11 +268,11 @@
         </div>
         <div id="verb-selection-options">
             <h3 class="mode-subtitle">2. Choose Verbs (for Classic/LEGO):</h3>
-            <div class="radio-group">
-                <div> <input type="radio" id="quiz-all-verbs" name="verb-selection-mode" value="all" checked> <label for="quiz-all-verbs">Use All Verbs</label> </div>
-                <div class="mt-2"> <input type="radio" id="quiz-select-verbs" name="verb-selection-mode" value="select"> <label for="quiz-select-verbs">Select Specific Verbs</label> </div>
+            <div class="verb-selection-controls">
+                <button id="select-all-verbs-btn" class="btn btn-sm btn-secondary">Select All</button>
+                <button id="deselect-all-verbs-btn" class="btn btn-sm btn-secondary">Deselect All</button>
             </div>
-            <div id="verb-box-selection-area" class="hidden"></div>
+            <div id="verb-box-selection-area"></div>
         </div>
         <div id="classic-quiz-specific-options">
             <h3 class="mode-subtitle" id="classic-input-method-title">3. Choose Input Method (for Classic Quiz):</h3>
@@ -239,10 +286,11 @@
              <p class="text-sm text-gray-600 mb-2 text-left p-2">A list of common A1 nouns will be used. Click the correct article for the displayed noun.</p>
         </div>
         <button id="start-quiz-button" class="btn btn-primary w-full sm:w-auto mt-6">Start Quiz</button>
+        <p id="quiz-summary-konjugieren" class="text-sm text-gray-500 mt-2"></p>
         <p id="mode-selection-message" class="message hidden"></p>
     </div>
 
-    <div id="trainer-card" class="card hidden">
+    <div id="trainer-card" class="card trainer-card-base hidden">
         <h1 class="text-2xl sm:text-3xl font-bold text-violet-700 mb-4">German Verb Trainer</h1>
         <p id="trainer-instructions" class="text-gray-600 mb-6">Instructions</p>
         <div id="verb-container">
@@ -256,9 +304,12 @@
             <button id="incorrect-button" class="btn btn-danger">👎 I was Wrong</button>
         </div>
         <div id="progress-indicator" class="progress-text">Progress</div>
+        <div class="mt-4">
+            <button id="stop-classic-quiz-btn" class="btn btn-danger btn-sm">End Quiz & Show Stats</button>
+        </div>
     </div>
 
-    <div id="stats-display-card" class="stats-card hidden">
+    <div id="stats-display-card" class="card stats-card hidden">
         <h2 id="stats-title" class="stats-title">Round Complete!</h2>
         <p id="stats-summary" class="stats-summary">Summary</p>
         <div id="round-review-container" class="round-review-container hidden"> <h3>Round Review:</h3> <ul id="review-ul"></ul> </div>
@@ -269,21 +320,24 @@
     </div>
 
     <div id="lego-mode-card" class="card hidden">
-        <div class="flex justify-between items-center mb-6"> <h1 class="text-2xl sm:text-3xl font-bold text-violet-700">LEGO MODUS - Verben bauen!</h1> <button id="back-to-menu-lego" class="btn btn-secondary text-sm py-2 px-4">Back to Menu</button> </div>
-        <div id="verb-task-area-lego" class="text-center mb-6 p-4 bg-indigo-50 rounded-lg border border-indigo-200"> <h2 id="current-verb-infinitive-lego" class="text-3xl font-bold text-indigo-700 mb-1">Verb</h2> <p id="current-verb-translation-lego" class="text-md text-indigo-500 italic">(Übersetzung)</p> </div>
+        <div class="flex justify-between items-center mb-6"> <h1 class="text-xl sm:text-2xl font-bold text-violet-700">LEGO MODUS - Verben bauen!</h1> <button id="back-to-menu-lego" class="btn btn-secondary btn-sm py-2 px-4">Back to Menu</button> </div>
+        <div id="verb-task-area-lego" class="text-center mb-6 p-4 bg-indigo-50 rounded-lg border border-indigo-200"> <h2 id="current-verb-infinitive-lego" class="text-2xl sm:text-3xl font-bold text-indigo-700 mb-1">Verb</h2> <p id="current-verb-translation-lego" class="text-md text-indigo-500 italic">(Übersetzung)</p> </div>
         <div id="forms-pool-lego" class="mb-8 p-4 bg-slate-100 rounded-lg min-h-[80px] flex flex-wrap gap-4 justify-center items-center border-2 border-dashed border-slate-300"> <p class="placeholder-text-lego text-slate-500 italic">Ziehe die konjugierten Formen von hier...</p> </div>
         <div id="pronoun-slots-lego" class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 mb-6"> </div>
         <div id="feedback-lego" class="text-center font-semibold p-3 rounded-md min-h-[24px] mb-6"></div>
-        <div class="text-center"> <button id="next-verb-btn-lego" class="btn btn-primary" disabled>Nächstes Verb</button> </div>
+        <div id="lego-buttons-container"> 
+            <button id="stop-lego-round-btn" class="btn btn-danger btn-sm">End Round & Show Stats</button>
+            <button id="next-verb-btn-lego" class="btn btn-primary" disabled>Nächstes Verb</button> 
+        </div>
     </div>
 
     <div id="gender-mode-card" class="card hidden">
         <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl sm:text-3xl font-bold text-violet-700">Gender Mode - DER, DIE, DAS?</h1>
-            <button id="back-to-menu-gender" class="btn btn-secondary text-sm py-2 px-4">Back to Menu</button>
+            <h1 class="text-xl sm:text-2xl font-bold text-violet-700">Gender Mode - DER, DIE, DAS?</h1>
+            <button id="back-to-menu-gender" class="btn btn-secondary btn-sm py-2 px-4">Back to Menu</button>
         </div>
         
-        <div id="gender-noun-display-card" class="bg-gray-100 p-8 rounded-xl mb-6 border-4 border-transparent transition-colors duration-300 min-h-[120px] flex justify-center items-center">
+        <div id="gender-noun-display-card">
             <span id="gender-noun-text" class="text-4xl font-bold text-indigo-600">Noun</span>
         </div>
 
@@ -295,16 +349,43 @@
         
         <div id="feedback-gender" class="text-center my-4 text-lg font-semibold p-3 rounded-md min-h-[50px]"></div>
         
-        <div class="text-center">
+        <div class="gender-bottom-controls">
+            <button id="stop-gender-quiz-btn" class="btn btn-danger btn-sm">End Quiz & Show Stats</button>
             <button id="next-noun-btn" class="btn btn-primary hidden">Next Noun</button>
         </div>
     </div>
 
+    <div id="settings-overlay-konjugieren" class="hidden">
+        <div id="settings-modal-content-konjugieren">
+            <div>
+                <h2 class="settings-title-konjugieren">Einstellungen</h2>
+                <p class="settings-subtitle-konjugieren">Settings / Ajustes</p>
+            </div>
+            <div class="settings-content-area-konjugieren">
+                <div class="settings-section-konjugieren">
+                    <h3>Anzahl der Aufgaben</h3>
+                    <p class="translation">Number of Items / Número de Tareas</p>
+                    <div class="flex items-center gap-4">
+                        <input type="range" id="num-items-slider-konjugieren" min="1" value="10" class="w-full">
+                        <span id="num-items-value-konjugieren" class="font-bold text-purple-700 w-12 text-center">10</span>
+                         <label class="checkbox-label whitespace-nowrap"><input type="checkbox" id="all-items-checkbox-konjugieren"> Alle <span class="text-sm text-gray-500 ml-1">/ All</span></label>
+                    </div>
+                </div>
+            </div>
+            <div class="settings-footer-konjugieren">
+                <button id="save-settings-btn-konjugieren" class="btn btn-primary w-full">Speichern & Schließen</button>
+                <div class="translation">Save & Close / Guardar y Cerrar</div>
+            </div>
+        </div>
+    </div>
+
+
     <script>
-        // Global data stores - will be populated from JSON
+        // Global data stores
         let globalVerbsList = [];
         let globalNounsList = [];
-        let dataLoaded = false; // Flag to track if data is loaded
+        let dataLoaded = false;
+        let konjugierenSettings = {};
 
         const pronouns = ["ich", "du", "er/sie/es", "wir", "ihr", "sie/Sie"]; 
 
@@ -316,12 +397,13 @@
         const verbSelectionOptionsEl = document.getElementById('verb-selection-options');
         const classicQuizSpecificOptionsEl = document.getElementById('classic-quiz-specific-options');
         const genderModeSpecificOptionsEl = document.getElementById('gender-mode-specific-options');
-        const quizAllVerbsRadio = document.getElementById('quiz-all-verbs');
-        const quizSelectVerbsRadio = document.getElementById('quiz-select-verbs');
         const verbBoxSelectionAreaEl = document.getElementById('verb-box-selection-area'); 
+        const selectAllVerbsBtn = document.getElementById('select-all-verbs-btn');
+        const deselectAllVerbsBtn = document.getElementById('deselect-all-verbs-btn');
         const inputModeTypingRadio = document.getElementById('input-mode-typing');
         const startQuizButton = document.getElementById('start-quiz-button');
         const modeSelectionMessageEl = document.getElementById('mode-selection-message');
+        const quizSummaryKonjugierenEl = document.getElementById('quiz-summary-konjugieren');
 
         // DOM Elements (Classic Quiz)
         const trainerCardEl = document.getElementById('trainer-card');
@@ -335,6 +417,7 @@
         const incorrectButton = document.getElementById('incorrect-button');
         const answerRevealContainerEl = document.getElementById('answer-reveal-container');
         const progressIndicatorEl = document.getElementById('progress-indicator');
+        const stopClassicQuizBtn = document.getElementById('stop-classic-quiz-btn');
 
         // DOM Elements (Stats)
         const statsDisplayCardEl = document.getElementById('stats-display-card');
@@ -354,6 +437,7 @@
         const legoPronounSlotsContainerEl = document.getElementById('pronoun-slots-lego');
         const legoFeedbackEl = document.getElementById('feedback-lego');
         const legoNextVerbBtn = document.getElementById('next-verb-btn-lego');
+        const stopLegoRoundBtn = document.getElementById('stop-lego-round-btn');
         
         // DOM Elements (Gender Mode)
         const genderModeCardEl = document.getElementById('gender-mode-card');
@@ -365,23 +449,77 @@
         const genderDasButton = document.getElementById('gender-das-button');
         const genderFeedbackEl = document.getElementById('feedback-gender');
         const genderNextNounBtn = document.getElementById('next-noun-btn');
+        const stopGenderQuizBtn = document.getElementById('stop-gender-quiz-btn');
+
+        // DOM Elements (Settings)
+        const settingsBtnKonjugieren = document.getElementById('settings-btn-konjugieren');
+        const settingsOverlayKonjugieren = document.getElementById('settings-overlay-konjugieren');
+        const saveSettingsBtnKonjugieren = document.getElementById('save-settings-btn-konjugieren');
+        const numItemsSliderKonjugieren = document.getElementById('num-items-slider-konjugieren');
+        const numItemsValueKonjugieren = document.getElementById('num-items-value-konjugieren');
+        const allItemsCheckboxKonjugieren = document.getElementById('all-items-checkbox-konjugieren');
 
         // State Variables
         let currentQuizType = 'classic'; 
         let currentInputMethod = 'typing';
         let activeVerbsForQuiz = []; 
-        let allPossiblePairs = []; let shuffledPairs = []; let lastShuffledPairs = []; 
+        let allPossiblePairs = []; let shuffledPairs = [];
         let userRoundData = []; let currentIndex = 0; let currentVerbData = null;
         let currentPronoun = ''; let correctAnswerForm = ''; let answerRevealedForMental = false;
 
         const legoPronounsOrder = ["ich", "du", "er/sie/es", "wir", "ihr", "sie/Sie"];
         let lego_currentVerbData; let lego_draggedFormElement = null; 
-        let lego_correctlyPlacedCount = 0; let lego_availableVerbs = [];
+        let lego_correctlyPlacedCount = 0; let lego_availableVerbsFullList = []; let lego_currentQuizVerbs = [];
+        let lego_completedVerbsData = []; // For stats
         let lego_activeTouchClone = null; let lego_draggedTouchElement = null; 
         let lego_touchOffsetX = 0, lego_touchOffsetY = 0;
 
-        let gender_availableNouns = []; let gender_currentNounData = null;
-        let gender_choiceMade = false;
+        let gender_availableNounsFullList = []; let gender_currentQuizNouns = [];
+        let gender_currentNounData = null; let gender_choiceMade = false;
+        let gender_userAnswers = [];
+
+        // --- Settings Functions ---
+        function loadKonjugierenSettings() {
+            const savedSettings = localStorage.getItem('konjugierenSettings');
+            const defaultSettings = { numItems: 10, useAllItems: false };
+            konjugierenSettings = savedSettings ? JSON.parse(savedSettings) : defaultSettings;
+            updateKonjugierenQuizSummary();
+        }
+        function saveKonjugierenSettings() {
+            localStorage.setItem('konjugierenSettings', JSON.stringify(konjugierenSettings));
+            updateKonjugierenQuizSummary();
+        }
+        function openKonjugierenSettings() {
+            let maxItems = 10; // Default
+            if (currentQuizType === 'classic') maxItems = globalVerbsList.length * pronouns.length;
+            else if (currentQuizType === 'lego') maxItems = globalVerbsList.length;
+            else if (currentQuizType === 'gender') maxItems = globalNounsList.length;
+            numItemsSliderKonjugieren.max = Math.max(1, maxItems); // Ensure max is at least 1
+            
+            let currentNumItems = konjugierenSettings.numItems;
+            if (currentNumItems > numItemsSliderKonjugieren.max) {
+                currentNumItems = numItemsSliderKonjugieren.max;
+            }
+            if (currentNumItems < numItemsSliderKonjugieren.min && maxItems > 0) {
+                currentNumItems = numItemsSliderKonjugieren.min;
+            }
+            
+            numItemsSliderKonjugieren.value = currentNumItems;
+            numItemsValueKonjugieren.textContent = currentNumItems;
+            allItemsCheckboxKonjugieren.checked = konjugierenSettings.useAllItems;
+            numItemsSliderKonjugieren.disabled = konjugierenSettings.useAllItems;
+            settingsOverlayKonjugieren.classList.remove('hidden');
+        }
+        function handleSaveKonjugierenSettings() {
+            konjugierenSettings.useAllItems = allItemsCheckboxKonjugieren.checked;
+            konjugierenSettings.numItems = parseInt(numItemsSliderKonjugieren.value, 10);
+            saveKonjugierenSettings();
+            settingsOverlayKonjugieren.classList.add('hidden');
+        }
+        function updateKonjugierenQuizSummary() {
+            const numText = konjugierenSettings.useAllItems ? "Alle" : konjugierenSettings.numItems;
+            quizSummaryKonjugierenEl.textContent = `Aktuell: ${numText} Aufgaben.`;
+        }
 
         // --- Utility Functions ---
         function shuffleArray(array) { for (let i = array.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [array[i], array[j]] = [array[j], array[i]]; } }
@@ -408,13 +546,14 @@
             }
         }
         
-        function initializeAppUI() { // Called after data is successfully loaded
+        function initializeAppUI() {
             if (!dataLoaded) return; 
             populateVerbSelectionBoxes(); 
-            handleQuizTypeChange(); // Initial UI setup based on defaults
+            handleQuizTypeChange(); 
             startQuizButton.disabled = false;
             startQuizButton.textContent = "Start Quiz";
-            showModeSelectionScreen(); // Display the main setup screen
+            settingsBtnKonjugieren.disabled = false;
+            showModeSelectionScreen(); 
         }
 
         function showModeSelectionScreen() {
@@ -423,25 +562,21 @@
             statsDisplayCardEl.classList.add('hidden');
             legoModeCardEl.classList.add('hidden');
             genderModeCardEl.classList.add('hidden');
+            settingsOverlayKonjugieren.classList.add('hidden');
 
-            // Reset states
-            activeVerbsForQuiz = []; allPossiblePairs = []; shuffledPairs = []; lastShuffledPairs = [];
+            activeVerbsForQuiz = []; allPossiblePairs = []; shuffledPairs = []; 
             userRoundData = []; currentIndex = 0; answerRevealedForMental = false;
-            lego_availableVerbs = []; lego_correctlyPlacedCount = 0;
-            gender_availableNouns = []; gender_choiceMade = false;
+            lego_availableVerbsFullList = []; lego_currentQuizVerbs = []; lego_completedVerbsData = []; lego_correctlyPlacedCount = 0;
+            gender_availableNounsFullList = []; gender_currentQuizNouns = []; gender_userAnswers = []; gender_choiceMade = false;
             
-            // Reset UI elements in mode selection
-            if (dataLoaded && globalVerbsList.length > 0) { populateVerbSelectionBoxes(); }
-            quizAllVerbsRadio.checked = true;
-            quizSelectVerbsRadio.checked = false;
-            verbBoxSelectionAreaEl.classList.add('hidden'); // Default to hidden
-            quizTypeClassicRadio.checked = true;
+            if (dataLoaded && globalVerbsList.length > 0) { populateVerbSelectionBoxes(); } // Repopulate and set default selection
+            quizTypeClassicRadio.checked = true; // Default selection
             inputModeTypingRadio.checked = true;
-            handleQuizTypeChange(); // Ensure correct sections are visible
+            handleQuizTypeChange(); 
             modeSelectionMessageEl.classList.add('hidden');
             modeSelectionMessageEl.textContent = '';
+            updateKonjugierenQuizSummary();
         }
-
 
         function populateVerbSelectionBoxes() {
             verbBoxSelectionAreaEl.innerHTML = '';
@@ -451,15 +586,12 @@
             }
             globalVerbsList.forEach(verb => {
                 const box = document.createElement('div');
-                box.classList.add('verb-select-box');
+                box.classList.add('verb-select-box', 'selected'); // Default to selected
                 box.textContent = verb.infinitive;
                 box.dataset.verbId = verb.id;
-                box.classList.add('selected'); // Default to selected, actual use depends on radio button
                 box.addEventListener('click', () => {
                     box.classList.toggle('selected');
                     modeSelectionMessageEl.classList.add('hidden');
-                    quizSelectVerbsRadio.checked = true; // Switch to "select" mode if user interacts
-                    handleVerbSelectionModeChange(); 
                 });
                 verbBoxSelectionAreaEl.appendChild(box);
             });
@@ -467,28 +599,15 @@
 
         function handleQuizTypeChange() {
             currentQuizType = document.querySelector('input[name="quiz-type"]:checked').value;
-            const showVerbSelectArea = quizSelectVerbsRadio.checked && (currentQuizType === 'classic' || currentQuizType === 'lego');
             
             verbSelectionOptionsEl.classList.toggle('hidden', currentQuizType === 'gender');
             classicQuizSpecificOptionsEl.classList.toggle('hidden', currentQuizType !== 'classic');
             genderModeSpecificOptionsEl.classList.toggle('hidden', currentQuizType !== 'gender');
             
-            if (currentQuizType !== 'gender') {
-                verbBoxSelectionAreaEl.classList.toggle('hidden', !showVerbSelectArea);
-            } else {
-                verbBoxSelectionAreaEl.classList.add('hidden'); // Always hide for gender mode
-            }
             modeSelectionMessageEl.classList.add('hidden');
+            updateKonjugierenQuizSummary(); // Update summary based on new mode
         }
         
-        function handleVerbSelectionModeChange() {
-            if (currentQuizType !== 'gender') {
-                const showVerbBoxes = quizSelectVerbsRadio.checked;
-                verbBoxSelectionAreaEl.classList.toggle('hidden', !showVerbBoxes);
-            }
-            modeSelectionMessageEl.classList.add('hidden');
-        }
-
         function handleStartQuiz() {
             if (!dataLoaded) {
                 modeSelectionMessageEl.textContent = "Data is still loading. Please wait.";
@@ -498,16 +617,13 @@
             modeSelectionMessageEl.classList.add('hidden');
 
             if (currentQuizType === 'classic' || currentQuizType === 'lego') {
-                if (quizAllVerbsRadio.checked) {
-                    activeVerbsForQuiz = [...globalVerbsList];
-                } else {
-                    const selectedBoxes = verbBoxSelectionAreaEl.querySelectorAll('.verb-select-box.selected');
-                    activeVerbsForQuiz = Array.from(selectedBoxes)
-                        .map(box => globalVerbsList.find(v => v.id === box.dataset.verbId))
-                        .filter(v => v); // Filter out undefined if any
-                }
+                const selectedBoxes = verbBoxSelectionAreaEl.querySelectorAll('.verb-select-box.selected');
+                activeVerbsForQuiz = Array.from(selectedBoxes)
+                    .map(box => globalVerbsList.find(v => v.id === box.dataset.verbId))
+                    .filter(v => v); 
+                
                 if (activeVerbsForQuiz.length === 0) {
-                    modeSelectionMessageEl.textContent = "Please select at least one verb for Classic/LEGO mode!";
+                    modeSelectionMessageEl.textContent = "Please select at least one verb, or click 'Select All'.";
                     modeSelectionMessageEl.classList.remove('hidden');
                     return;
                 }
@@ -530,8 +646,44 @@
         }
 
         // --- Classic Quiz Functions ---
-        function prepareAndStartClassicQuiz() { generateAllPairs(activeVerbsForQuiz); if (allPossiblePairs.length === 0) { showModeSelectionScreen(); modeSelectionMessageEl.textContent = "No questions for selected verbs."; modeSelectionMessageEl.classList.remove('hidden'); return; } shuffledPairs = [...allPossiblePairs]; shuffleArray(shuffledPairs); lastShuffledPairs = [...shuffledPairs]; userRoundData = []; currentIndex = 0; trainerCardEl.classList.remove('hidden'); displayClassicChallenge(); }
-        function repeatClassicRound() { if (!dataLoaded || activeVerbsForQuiz.length === 0) { showModeSelectionScreen(); return; } generateAllPairs(activeVerbsForQuiz); if (allPossiblePairs.length === 0) { showModeSelectionScreen(); return; } shuffledPairs = [...allPossiblePairs]; shuffleArray(shuffledPairs); lastShuffledPairs = [...shuffledPairs]; userRoundData = []; currentIndex = 0; statsDisplayCardEl.classList.add('hidden'); trainerCardEl.classList.remove('hidden'); displayClassicChallenge(); }
+        function prepareAndStartClassicQuiz() { 
+            generateAllPairs(activeVerbsForQuiz); 
+            if (allPossiblePairs.length === 0) { 
+                showModeSelectionScreen(); 
+                modeSelectionMessageEl.textContent = "No questions for selected verbs."; 
+                modeSelectionMessageEl.classList.remove('hidden'); return; 
+            } 
+            
+            let itemsToQuiz = [...allPossiblePairs];
+            shuffleArray(itemsToQuiz);
+            if (!konjugierenSettings.useAllItems && konjugierenSettings.numItems < itemsToQuiz.length) {
+                itemsToQuiz = itemsToQuiz.slice(0, konjugierenSettings.numItems);
+            }
+            shuffledPairs = itemsToQuiz;
+
+            userRoundData = []; 
+            currentIndex = 0; 
+            trainerCardEl.classList.remove('hidden'); 
+            stopClassicQuizBtn.classList.remove('hidden');
+            displayClassicChallenge(); 
+        }
+        function repeatClassicQuiz() { 
+            if (!dataLoaded || activeVerbsForQuiz.length === 0) { showModeSelectionScreen(); return; } 
+            
+            let itemsToQuiz = [...allPossiblePairs]; // Uses pairs from originally selected verbs
+            shuffleArray(itemsToQuiz);
+            if (!konjugierenSettings.useAllItems && konjugierenSettings.numItems < itemsToQuiz.length) {
+                itemsToQuiz = itemsToQuiz.slice(0, konjugierenSettings.numItems);
+            }
+            shuffledPairs = itemsToQuiz;
+
+            userRoundData = []; 
+            currentIndex = 0; 
+            statsDisplayCardEl.classList.add('hidden'); 
+            trainerCardEl.classList.remove('hidden'); 
+            stopClassicQuizBtn.classList.remove('hidden');
+            displayClassicChallenge(); 
+        }
         function generateAllPairs(verbsToUse) { allPossiblePairs = []; verbsToUse.forEach(verb => { pronouns.forEach(pronoun => { allPossiblePairs.push({ verb: verb, pronoun: pronoun }); }); }); }
         function displayClassicChallenge() { if (shuffledPairs.length === 0 || currentIndex >= shuffledPairs.length) { showRoundStatistics(); return; } const currentPair = shuffledPairs[currentIndex]; currentVerbData = currentPair.verb; currentPronoun = currentPair.pronoun; correctAnswerForm = currentVerbData.conjugations[currentPronoun]; answerRevealedForMental = false; verbInfinitiveEl.textContent = `Verb: ${currentVerbData.infinitive.toUpperCase()}`; pronounEl.textContent = currentPronoun; answerRevealContainerEl.classList.add('hidden'); answerRevealContainerEl.innerHTML = ''; feedbackButtonsContainerEl.classList.add('hidden'); if (currentInputMethod === 'typing') { trainerInstructionsEl.textContent = "Type the correct verb form below."; answerInputEl.value = ''; answerInputEl.disabled = false; answerInputEl.classList.remove('hidden'); answerInputEl.focus(); actionButton.textContent = "Show Answer / Skip"; actionButton.classList.remove('btn-primary', 'hidden'); actionButton.classList.add('btn-warning'); actionButton.dataset.action = "skip_typing"; } else { trainerInstructionsEl.textContent = "Think of the conjugation, then click 'Show Answer'."; answerInputEl.classList.add('hidden'); actionButton.textContent = "Show Answer"; actionButton.classList.remove('btn-warning', 'hidden'); actionButton.classList.add('btn-primary'); actionButton.dataset.action = "show_mental"; } updateClassicProgress(); }
         function updateClassicProgress() { progressIndicatorEl.textContent = `Question: ${currentIndex + 1} / ${shuffledPairs.length}`; }
@@ -540,70 +692,152 @@
         function handleMentalFeedback(wasCorrect) { if (!answerRevealedForMental || currentQuizType !== 'classic') return; recordClassicAttempt(wasCorrect, null); proceedToNextClassicChallenge(); }
         function recordClassicAttempt(wasCorrect, typedAnswer) { userRoundData.push({ pair: shuffledPairs[currentIndex], correctAnswer: correctAnswerForm, markedCorrect: wasCorrect, inputMethodDuringAttempt: currentInputMethod, userTypedAnswer: currentInputMethod === 'typing' ? typedAnswer : null }); }
         function proceedToNextClassicChallenge() { currentIndex++; if (currentIndex >= shuffledPairs.length) { showRoundStatistics(); } else { displayClassicChallenge(); }}
-        function showRoundStatistics() { trainerCardEl.classList.add('hidden'); statsDisplayCardEl.classList.remove('hidden'); statsTitleEl.textContent = "Round Complete!"; let correctCount = 0; userRoundData.forEach(entry => { if (entry.markedCorrect) correctCount++; }); statsSummaryEl.textContent = `You got ${correctCount} out of ${shuffledPairs.length} correct.`; reviewUlEl.innerHTML = ''; if (userRoundData.length > 0) { roundReviewContainerEl.classList.remove('hidden'); const attemptsByVerbThenPronoun = {}; userRoundData.forEach(entry => { const verbName = entry.pair.verb.infinitive; const pronoun = entry.pair.pronoun; if (!attemptsByVerbThenPronoun[verbName]) { attemptsByVerbThenPronoun[verbName] = {}; } attemptsByVerbThenPronoun[verbName][pronoun] = entry; }); activeVerbsForQuiz.forEach(verbObj => { const verbName = verbObj.infinitive; if (attemptsByVerbThenPronoun[verbName]) { const verbTitleLi = document.createElement('li'); verbTitleLi.className = 'verb-review-title'; verbTitleLi.textContent = `VERB: ${verbName.toUpperCase()}`; reviewUlEl.appendChild(verbTitleLi); pronouns.forEach(pronounKey => { const entry = attemptsByVerbThenPronoun[verbName][pronounKey]; if (entry) { const li = document.createElement('li'); li.className = 'pronoun-review-item'; let attemptHtml = ''; if (entry.inputMethodDuringAttempt === 'typing') { if (entry.markedCorrect) { attemptHtml = `Your answer: <span class="user-answer-correct">${entry.userTypedAnswer || 'N/A'} ✔️</span>`; } else { if (entry.userTypedAnswer) { attemptHtml = `Your answer: <span class="user-answer-incorrect">${entry.userTypedAnswer}</span> ❌. Correct: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; } else { attemptHtml = `<span class="skipped-text">Skipped.</span> Correct: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; }}} else { if (entry.markedCorrect) { attemptHtml = `You marked: <span class="mental-mark-correct">Right 👍</span>. Answer: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; } else { attemptHtml = `You marked: <span class="mental-mark-incorrect">Wrong 👎</span>. Correct: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; }} li.innerHTML = `<span class="pronoun-name">${pronounKey}:</span><span class="attempt-details">${attemptHtml}</span>`; reviewUlEl.appendChild(li);}});}}); } else { roundReviewContainerEl.classList.add('hidden'); statsSummaryEl.textContent = "No questions presented."; } repeatRoundButton.disabled = !dataLoaded || activeVerbsForQuiz.length === 0; }
+        function showRoundStatistics() { trainerCardEl.classList.add('hidden'); statsDisplayCardEl.classList.remove('hidden'); stopClassicQuizBtn.classList.add('hidden'); statsTitleEl.textContent = userRoundData.length < shuffledPairs.length && shuffledPairs.length > 0 ? "Quiz Ended Early!" : "Round Complete!"; let correctCount = 0; userRoundData.forEach(entry => { if (entry.markedCorrect) correctCount++; }); const totalAnswered = userRoundData.length; statsSummaryEl.textContent = `You got ${correctCount} out of ${totalAnswered} correct.`; reviewUlEl.innerHTML = ''; if (userRoundData.length > 0) { roundReviewContainerEl.classList.remove('hidden'); const attemptsByVerbThenPronoun = {}; userRoundData.forEach(entry => { const verbName = entry.pair.verb.infinitive; const pronoun = entry.pair.pronoun; if (!attemptsByVerbThenPronoun[verbName]) { attemptsByVerbThenPronoun[verbName] = {}; } attemptsByVerbThenPronoun[verbName][pronoun] = entry; }); activeVerbsForQuiz.filter(v => attemptsByVerbThenPronoun[v.infinitive]).forEach(verbObj => { const verbName = verbObj.infinitive; if (attemptsByVerbThenPronoun[verbName]) { const verbTitleLi = document.createElement('li'); verbTitleLi.className = 'verb-review-title'; verbTitleLi.textContent = `VERB: ${verbName.toUpperCase()}`; reviewUlEl.appendChild(verbTitleLi); pronouns.forEach(pronounKey => { const entry = attemptsByVerbThenPronoun[verbName][pronounKey]; if (entry) { const li = document.createElement('li'); li.className = 'pronoun-review-item'; let attemptHtml = ''; if (entry.inputMethodDuringAttempt === 'typing') { if (entry.markedCorrect) { attemptHtml = `Your answer: <span class="user-answer-correct">${entry.userTypedAnswer || 'N/A'} ✔️</span>`; } else { if (entry.userTypedAnswer) { attemptHtml = `Your answer: <span class="user-answer-incorrect">${entry.userTypedAnswer}</span> ❌. Correct: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; } else { attemptHtml = `<span class="skipped-text">Skipped.</span> Correct: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; }}} else { if (entry.markedCorrect) { attemptHtml = `You marked: <span class="mental-mark-correct">Right 👍</span>. Answer: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; } else { attemptHtml = `You marked: <span class="mental-mark-incorrect">Wrong 👎</span>. Correct: <span class="correct-answer-stats">${entry.correctAnswer}</span>`; }} li.innerHTML = `<span class="pronoun-name">${pronounKey}:</span><span class="attempt-details">${attemptHtml}</span>`; reviewUlEl.appendChild(li);}});}}); } else { roundReviewContainerEl.classList.add('hidden'); statsSummaryEl.textContent = "No questions answered."; } repeatRoundButton.disabled = !dataLoaded || activeVerbsForQuiz.length === 0; }
 
-        // --- LEGO MODUS Functions (assumes globalVerbsList is populated) ---
-        function initializeLegoMode() { if (!dataLoaded) { showModeSelectionScreen(); modeSelectionMessageEl.textContent = "LEGO mode needs verb data."; modeSelectionMessageEl.classList.remove('hidden'); return; } legoModeCardEl.classList.remove('hidden'); lego_availableVerbs = [...activeVerbsForQuiz]; shuffleArray(lego_availableVerbs); lego_loadNextVerb(); }
+        // --- LEGO MODUS Functions ---
+        function initializeLegoMode() { if (!dataLoaded) { showModeSelectionScreen(); modeSelectionMessageEl.textContent = "LEGO mode needs verb data."; modeSelectionMessageEl.classList.remove('hidden'); return; } legoModeCardEl.classList.remove('hidden'); stopLegoRoundBtn.classList.remove('hidden'); lego_availableVerbsFullList = [...activeVerbsForQuiz]; shuffleArray(lego_availableVerbsFullList); lego_currentQuizVerbs = konjugierenSettings.useAllItems ? [...lego_availableVerbsFullList] : lego_availableVerbsFullList.slice(0, konjugierenSettings.numItems); lego_completedVerbsData = []; lego_loadNextVerb(); }
         function lego_setupPronounSlots() { legoPronounSlotsContainerEl.innerHTML = ''; legoPronounsOrder.forEach(pronounKey => { const slotDiv = document.createElement('div'); slotDiv.className = 'lego-pronoun-slot'; const labelSpan = document.createElement('span'); labelSpan.className = 'lego-pronoun-label'; labelSpan.textContent = pronounKey; const dropBoxDiv = document.createElement('div'); dropBoxDiv.className = 'lego-drop-box'; dropBoxDiv.dataset.pronoun = pronounKey; dropBoxDiv.addEventListener('dragover', lego_handleDragOver); dropBoxDiv.addEventListener('dragenter', lego_handleDragEnter); dropBoxDiv.addEventListener('dragleave', lego_handleDragLeave); dropBoxDiv.addEventListener('drop', lego_handleDrop); slotDiv.appendChild(labelSpan); slotDiv.appendChild(dropBoxDiv); legoPronounSlotsContainerEl.appendChild(slotDiv); }); }
-        function lego_loadNextVerb() { legoFeedbackEl.style.display = 'none'; legoFeedbackEl.className = 'text-center font-semibold p-3 rounded-md min-h-[24px] mb-6'; legoNextVerbBtn.disabled = true; lego_correctlyPlacedCount = 0; if (lego_availableVerbs.length === 0) { lego_availableVerbs = [...activeVerbsForQuiz]; shuffleArray(lego_availableVerbs); if (activeVerbsForQuiz.length === 0) { legoVerbInfinitiveEl.textContent = "Keine Verben!"; legoVerbTranslationEl.textContent = "Bitte wähle Verben im Setup."; legoFormsPoolEl.innerHTML = ''; legoNextVerbBtn.textContent = "Zurück zum Setup"; legoNextVerbBtn.disabled = false; lego_currentVerbData = null; return; } legoVerbInfinitiveEl.textContent = "Super!"; legoVerbTranslationEl.textContent = "Alle LEGO Verben durchgespielt!"; legoFormsPoolEl.innerHTML = '<p class="placeholder-text-lego text-slate-500 italic">🎉 Gut gemacht! 🎉</p>'; legoPronounSlotsContainerEl.innerHTML = ''; legoNextVerbBtn.textContent = "LEGO Runde wiederholen"; legoNextVerbBtn.disabled = false; lego_currentVerbData = null; return; } if (legoNextVerbBtn.textContent === "LEGO Runde wiederholen" || legoNextVerbBtn.textContent === "Zurück zum Setup") { legoNextVerbBtn.textContent = "Nächstes Verb"; } lego_currentVerbData = lego_availableVerbs.shift(); legoVerbInfinitiveEl.textContent = lego_currentVerbData.infinitive.toUpperCase(); legoVerbTranslationEl.textContent = lego_currentVerbData.translation ? `(${lego_currentVerbData.translation})` : ""; legoFormsPoolEl.innerHTML = ''; const conjugatedForms = []; for (const pronounKey of legoPronounsOrder) { conjugatedForms.push(lego_currentVerbData.conjugations[pronounKey]); } shuffleArray(conjugatedForms); conjugatedForms.forEach(formText => { const formDiv = document.createElement('div'); formDiv.className = 'lego-draggable-form'; formDiv.textContent = formText; formDiv.draggable = true; formDiv.dataset.formText = formText; formDiv.addEventListener('dragstart', lego_handleDragStart); formDiv.addEventListener('dragend', lego_handleDragEnd); formDiv.addEventListener('touchstart', lego_handleTouchStart, { passive: false }); legoFormsPoolEl.appendChild(formDiv); }); if (conjugatedForms.length === 0){ legoFormsPoolEl.innerHTML = '<p class="placeholder-text-lego text-slate-500 italic">Formen werden geladen...</p>';} lego_setupPronounSlots(); }
+        function lego_loadNextVerb() { legoFeedbackEl.style.display = 'none'; legoFeedbackEl.className = 'text-center font-semibold p-3 rounded-md min-h-[24px] mb-6'; legoNextVerbBtn.disabled = true; lego_correctlyPlacedCount = 0; if (lego_currentQuizVerbs.length === 0) { lego_showLegoStats(); return; } if (legoNextVerbBtn.textContent.includes("wiederholen") || legoNextVerbBtn.textContent.includes("Setup")) { legoNextVerbBtn.textContent = "Nächstes Verb"; } lego_currentVerbData = lego_currentQuizVerbs.shift(); legoVerbInfinitiveEl.textContent = lego_currentVerbData.infinitive.toUpperCase(); legoVerbTranslationEl.textContent = lego_currentVerbData.translation ? `(${lego_currentVerbData.translation})` : ""; legoFormsPoolEl.innerHTML = ''; const conjugatedForms = []; for (const pronounKey of legoPronounsOrder) { conjugatedForms.push(lego_currentVerbData.conjugations[pronounKey]); } shuffleArray(conjugatedForms); conjugatedForms.forEach(formText => { const formDiv = document.createElement('div'); formDiv.className = 'lego-draggable-form'; formDiv.textContent = formText; formDiv.draggable = true; formDiv.dataset.formText = formText; formDiv.addEventListener('dragstart', lego_handleDragStart); formDiv.addEventListener('dragend', lego_handleDragEnd); formDiv.addEventListener('touchstart', lego_handleTouchStart, { passive: false }); legoFormsPoolEl.appendChild(formDiv); }); if (conjugatedForms.length === 0){ legoFormsPoolEl.innerHTML = '<p class="placeholder-text-lego text-slate-500 italic">Formen werden geladen...</p>';} lego_setupPronounSlots(); }
         function lego_handleDragStart(e) { lego_draggedFormElement = e.target; e.target.classList.add('dragging'); e.dataTransfer.setData('text/plain', e.target.dataset.formText); }
         function lego_handleDragEnd(e) { if(lego_draggedFormElement) lego_draggedFormElement.classList.remove('dragging'); lego_draggedFormElement = null; document.querySelectorAll('.lego-drop-box.drag-over').forEach(box => box.classList.remove('drag-over')); }
         function lego_handleDragOver(e) { e.preventDefault(); }
         function lego_handleDragEnter(e) { e.preventDefault(); const dropBox = e.target.closest('.lego-drop-box'); if (dropBox && !dropBox.hasChildNodes()) { dropBox.classList.add('drag-over');}}
         function lego_handleDragLeave(e) { const dropBox = e.target.closest('.lego-drop-box'); if (dropBox) {dropBox.classList.remove('drag-over');}}
-        function lego_handleDrop(e) { e.preventDefault(); const dropBox = e.target.closest('.lego-drop-box'); if (!dropBox || dropBox.hasChildNodes() || !lego_draggedFormElement) { if(lego_draggedFormElement) lego_draggedFormElement.classList.remove('dragging'); lego_draggedFormElement = null; return; } dropBox.classList.remove('drag-over'); const targetPronounKey = dropBox.dataset.pronoun; const droppedFormText = lego_draggedFormElement.dataset.formText; if (lego_currentVerbData.conjugations[targetPronounKey] === droppedFormText) { dropBox.appendChild(lego_draggedFormElement); lego_draggedFormElement.classList.remove('dragging'); lego_draggedFormElement.draggable = false; dropBox.classList.add('filled', 'correct'); lego_correctlyPlacedCount++; lego_showFeedback(`"${droppedFormText}" ist richtig für "${targetPronounKey}"!`, 'success'); triggerConfetti(); if (lego_correctlyPlacedCount === legoPronounsOrder.length) { lego_showFeedback(`🎉 Super! "${lego_currentVerbData.infinitive}" komplett richtig gebaut!`, 'success'); legoNextVerbBtn.disabled = false; } } else { lego_showFeedback(`"${droppedFormText}" passt nicht zu "${targetPronounKey}". Versuch's nochmal!`, 'error'); lego_draggedFormElement.classList.remove('dragging'); dropBox.classList.add('lego-incorrect-flash'); setTimeout(() => dropBox.classList.remove('lego-incorrect-flash'), 600); } lego_draggedFormElement = null; }
+        function lego_handleDrop(e) { e.preventDefault(); const dropBox = e.target.closest('.lego-drop-box'); if (!dropBox || dropBox.hasChildNodes() || !lego_draggedFormElement) { if(lego_draggedFormElement) lego_draggedFormElement.classList.remove('dragging'); lego_draggedFormElement = null; return; } dropBox.classList.remove('drag-over'); const targetPronounKey = dropBox.dataset.pronoun; const droppedFormText = lego_draggedFormElement.dataset.formText; if (lego_currentVerbData.conjugations[targetPronounKey] === droppedFormText) { dropBox.appendChild(lego_draggedFormElement); lego_draggedFormElement.classList.remove('dragging'); lego_draggedFormElement.draggable = false; dropBox.classList.add('filled', 'correct'); lego_correctlyPlacedCount++; lego_showFeedback(`"${droppedFormText}" ist richtig für "${targetPronounKey}"!`, 'success'); triggerConfetti(); if (lego_correctlyPlacedCount === legoPronounsOrder.length) { lego_completedVerbsData.push({ verb: lego_currentVerbData.infinitive, correct: true }); lego_showFeedback(`🎉 Super! "${lego_currentVerbData.infinitive}" komplett richtig gebaut!`, 'success'); legoNextVerbBtn.disabled = false; } } else { lego_showFeedback(`"${droppedFormText}" passt nicht zu "${targetPronounKey}". Versuch's nochmal!`, 'error'); lego_draggedFormElement.classList.remove('dragging'); dropBox.classList.add('lego-incorrect-flash'); setTimeout(() => dropBox.classList.remove('lego-incorrect-flash'), 600); } lego_draggedFormElement = null; }
         function lego_handleTouchStart(e) { if (e.target.classList.contains('lego-draggable-form') && e.target.draggable !== false) { lego_draggedTouchElement = e.target; if (e.cancelable) e.preventDefault(); lego_activeTouchClone = lego_draggedTouchElement.cloneNode(true); lego_activeTouchClone.classList.add('dragging'); lego_activeTouchClone.style.position = 'fixed'; lego_activeTouchClone.style.pointerEvents = 'none'; lego_activeTouchClone.style.zIndex = '1000'; lego_activeTouchClone.style.width = lego_draggedTouchElement.offsetWidth + 'px'; lego_activeTouchClone.style.height = lego_draggedTouchElement.offsetHeight + 'px'; document.body.appendChild(lego_activeTouchClone); const rect = lego_draggedTouchElement.getBoundingClientRect(); lego_touchOffsetX = e.touches[0].clientX - rect.left; lego_touchOffsetY = e.touches[0].clientY - rect.top; lego_activeTouchClone.style.left = (e.touches[0].clientX - lego_touchOffsetX) + 'px'; lego_activeTouchClone.style.top = (e.touches[0].clientY - lego_touchOffsetY) + 'px'; lego_draggedTouchElement.style.opacity = '0.4'; document.addEventListener('touchmove', lego_handleTouchMove, { passive: false }); document.addEventListener('touchend', lego_handleTouchEnd, { once: true }); } }
         function lego_handleTouchMove(e) { if (lego_activeTouchClone) { if (e.cancelable) e.preventDefault(); let currentX = e.touches[0].clientX; let currentY = e.touches[0].clientY; lego_activeTouchClone.style.left = (currentX - lego_touchOffsetX) + 'px'; lego_activeTouchClone.style.top = (currentY - lego_touchOffsetY) + 'px'; document.querySelectorAll('.lego-drop-box').forEach(box => box.classList.remove('drag-over')); lego_activeTouchClone.style.display = 'none'; const elementBelow = document.elementFromPoint(currentX, currentY); lego_activeTouchClone.style.display = ''; if (elementBelow) { const dropBoxBelow = elementBelow.closest('.lego-drop-box'); if (dropBoxBelow && !dropBoxBelow.hasChildNodes()) { dropBoxBelow.classList.add('drag-over'); }}} }
-        function lego_handleTouchEnd(e) { document.removeEventListener('touchmove', lego_handleTouchMove); if (lego_activeTouchClone && lego_draggedTouchElement) { lego_activeTouchClone.style.display = 'none'; const dropTargetElement = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY); let droppedOnValidBoxAndCorrect = false; if (dropTargetElement) { const dropBox = dropTargetElement.closest('.lego-drop-box'); if (dropBox && !dropBox.hasChildNodes()) { const targetPronounKey = dropBox.dataset.pronoun; const droppedFormText = lego_draggedTouchElement.dataset.formText; if (lego_currentVerbData.conjugations[targetPronounKey] === droppedFormText) { dropBox.appendChild(lego_draggedTouchElement); lego_draggedTouchElement.style.opacity = '1'; lego_draggedTouchElement.classList.remove('dragging'); lego_draggedTouchElement.draggable = false; dropBox.classList.add('filled', 'correct'); lego_correctlyPlacedCount++; lego_showFeedback(`"${droppedFormText}" ist richtig für "${targetPronounKey}"!`, 'success'); triggerConfetti(); if (lego_correctlyPlacedCount === legoPronounsOrder.length) { lego_showFeedback(`🎉 Super! "${lego_currentVerbData.infinitive}" komplett richtig gebaut!`, 'success'); legoNextVerbBtn.disabled = false; } droppedOnValidBoxAndCorrect = true; } else { lego_showFeedback(`"${droppedFormText}" passt nicht zu "${targetPronounKey}". Versuch's nochmal!`, 'error'); dropBox.classList.add('lego-incorrect-flash'); setTimeout(() => dropBox.classList.remove('lego-incorrect-flash'), 600); } dropBox.classList.remove('drag-over'); } } if (!droppedOnValidBoxAndCorrect) { lego_draggedTouchElement.style.opacity = '1'; } document.body.removeChild(lego_activeTouchClone); } lego_activeTouchClone = null; lego_draggedTouchElement = null; lego_touchOffsetX = 0; lego_touchOffsetY = 0; document.querySelectorAll('.lego-drop-box.drag-over').forEach(box => box.classList.remove('drag-over')); }
+        function lego_handleTouchEnd(e) { document.removeEventListener('touchmove', lego_handleTouchMove); if (lego_activeTouchClone && lego_draggedTouchElement) { lego_activeTouchClone.style.display = 'none'; const dropTargetElement = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY); let droppedOnValidBoxAndCorrect = false; if (dropTargetElement) { const dropBox = dropTargetElement.closest('.lego-drop-box'); if (dropBox && !dropBox.hasChildNodes()) { const targetPronounKey = dropBox.dataset.pronoun; const droppedFormText = lego_draggedTouchElement.dataset.formText; if (lego_currentVerbData.conjugations[targetPronounKey] === droppedFormText) { dropBox.appendChild(lego_draggedTouchElement); lego_draggedTouchElement.style.opacity = '1'; lego_draggedTouchElement.classList.remove('dragging'); lego_draggedTouchElement.draggable = false; dropBox.classList.add('filled', 'correct'); lego_correctlyPlacedCount++; lego_showFeedback(`"${droppedFormText}" ist richtig für "${targetPronounKey}"!`, 'success'); triggerConfetti(); if (lego_correctlyPlacedCount === legoPronounsOrder.length) { lego_completedVerbsData.push({ verb: lego_currentVerbData.infinitive, correct: true }); lego_showFeedback(`🎉 Super! "${lego_currentVerbData.infinitive}" komplett richtig gebaut!`, 'success'); legoNextVerbBtn.disabled = false; } droppedOnValidBoxAndCorrect = true; } else { lego_showFeedback(`"${droppedFormText}" passt nicht zu "${targetPronounKey}". Versuch's nochmal!`, 'error'); dropBox.classList.add('lego-incorrect-flash'); setTimeout(() => dropBox.classList.remove('lego-incorrect-flash'), 600); } dropBox.classList.remove('drag-over'); } } if (!droppedOnValidBoxAndCorrect) { lego_draggedTouchElement.style.opacity = '1'; } document.body.removeChild(lego_activeTouchClone); } lego_activeTouchClone = null; lego_draggedTouchElement = null; lego_touchOffsetX = 0; lego_touchOffsetY = 0; document.querySelectorAll('.lego-drop-box.drag-over').forEach(box => box.classList.remove('drag-over')); }
         function lego_showFeedback(message, type) { legoFeedbackEl.textContent = message; legoFeedbackEl.className = `text-center font-semibold p-3 rounded-md min-h-[24px] mb-6 ${type}`; legoFeedbackEl.style.display = 'block'; if (type === 'error') { setTimeout(() => { if (legoFeedbackEl.textContent === message) legoFeedbackEl.style.display = 'none'; }, 2500); } else if (type === 'success' && !message.startsWith("🎉")) { setTimeout(() => { if (legoFeedbackEl.textContent === message) legoFeedbackEl.style.display = 'none'; }, 2000); } }
+        function lego_showLegoStats() {
+            legoModeCardEl.classList.add('hidden');
+            statsDisplayCardEl.classList.remove('hidden');
+            stopLegoRoundBtn.classList.add('hidden');
+
+            statsTitleEl.textContent = lego_completedVerbsData.length < (konjugierenSettings.useAllItems ? lego_availableVerbsFullList.length : konjugierenSettings.numItems) ? "LEGO Round Ended Early!" : "LEGO Round Complete!";
+            const totalAttemptedVerbs = lego_completedVerbsData.length + (lego_currentVerbData && lego_correctlyPlacedCount > 0 ? 1 : 0) - (lego_currentVerbData && lego_correctlyPlacedCount === legoPronounsOrder.length ? 1:0) ; // approximation
+            const correctVerbs = lego_completedVerbsData.filter(v => v.correct).length;
+            statsSummaryEl.textContent = `You fully conjugated ${correctVerbs} out of ${totalAttemptedVerbs || lego_completedVerbsData.length} verbs presented.`;
+
+            reviewUlEl.innerHTML = '';
+            if (lego_completedVerbsData.length > 0) {
+                roundReviewContainerEl.classList.remove('hidden');
+                let reviewHTML = '<h3>Completed Verbs:</h3><ul>';
+                lego_completedVerbsData.forEach(entry => {
+                    reviewHTML += `<li class="pronoun-review-item"><span class="pronoun-name">${entry.verb.toUpperCase()}</span> <span class="user-answer-correct">✔️ Completed</span></li>`;
+                });
+                reviewHTML += '</ul>';
+                reviewUlEl.innerHTML = reviewHTML;
+            } else {
+                roundReviewContainerEl.classList.add('hidden');
+                statsSummaryEl.textContent = "No verbs fully conjugated.";
+            }
+            repeatRoundButton.onclick = () => { initializeLegoMode(); }; // Lego repeat
+            repeatRoundButton.disabled = false;
+        }
         
-        // --- GENDER MODE Functions (assumes globalNounsList is populated) ---
-        function initializeGenderMode() { if (!dataLoaded) { showModeSelectionScreen(); modeSelectionMessageEl.textContent = "Gender mode needs noun data."; modeSelectionMessageEl.classList.remove('hidden'); return; } genderModeCardEl.classList.remove('hidden'); gender_availableNouns = [...globalNounsList]; shuffleArray(gender_availableNouns); gender_loadNextNoun(); }
-        function gender_loadNextNoun() { genderFeedbackEl.textContent = ''; genderFeedbackEl.className = 'text-center my-4 text-lg font-semibold p-3 rounded-md min-h-[50px]'; genderFeedbackEl.style.display = 'none'; genderNextNounBtn.classList.add('hidden'); genderNounDisplayCardEl.className = 'bg-gray-100 p-8 rounded-xl mb-6 border-4 border-transparent transition-colors duration-300 min-h-[120px] flex justify-center items-center'; gender_choiceMade = false; genderDerButton.disabled = false; genderDieButton.disabled = false; genderDasButton.disabled = false; if (gender_availableNouns.length === 0) { genderNounTextEl.textContent = "Super!"; genderFeedbackEl.textContent = "Alle Nomen geübt!"; genderFeedbackEl.classList.add('correct'); genderFeedbackEl.style.display = 'block'; genderNextNounBtn.textContent = "Gender Runde wiederholen"; genderNextNounBtn.classList.remove('hidden'); genderDerButton.disabled = true; genderDieButton.disabled = true; genderDasButton.disabled = true; gender_currentNounData = null; return; } if (genderNextNounBtn.textContent === "Gender Runde wiederholen") { genderNextNounBtn.textContent = "Next Noun"; } gender_currentNounData = gender_availableNouns.shift(); genderNounTextEl.textContent = gender_currentNounData.noun; }
-        function gender_handleChoice(chosenGender) { if (gender_choiceMade || !gender_currentNounData) return; gender_choiceMade = true; genderDerButton.disabled = true; genderDieButton.disabled = true; genderDasButton.disabled = true; genderNounDisplayCardEl.classList.remove('border-transparent', 'chosen-der', 'chosen-die', 'chosen-das'); if (chosenGender === 'male') genderNounDisplayCardEl.classList.add('chosen-der'); else if (chosenGender === 'female') genderNounDisplayCardEl.classList.add('chosen-die'); else if (chosenGender === 'neuter') genderNounDisplayCardEl.classList.add('chosen-das'); const correctGender = gender_currentNounData.gender; const correctArticle = gender_currentNounData.article; let feedbackMessage = ''; genderFeedbackEl.classList.remove('correct', 'incorrect'); if (chosenGender === correctGender) { feedbackMessage = `Richtig! ${correctArticle.toUpperCase()} ${gender_currentNounData.noun}`; genderFeedbackEl.classList.add('correct'); triggerConfetti(); } else { feedbackMessage = `Falsch. Es ist ${correctArticle.toUpperCase()} ${gender_currentNounData.noun}.`; genderFeedbackEl.classList.add('incorrect'); } genderFeedbackEl.textContent = feedbackMessage; genderNextNounBtn.classList.remove('hidden'); }
+        // --- GENDER MODE Functions ---
+        function initializeGenderMode() { if (!dataLoaded) { showModeSelectionScreen(); modeSelectionMessageEl.textContent = "Gender mode needs noun data."; modeSelectionMessageEl.classList.remove('hidden'); return; } genderModeCardEl.classList.remove('hidden'); stopGenderQuizBtn.classList.remove('hidden'); gender_availableNounsFullList = [...globalNounsList]; shuffleArray(gender_availableNounsFullList); gender_currentQuizNouns = konjugierenSettings.useAllItems ? [...gender_availableNounsFullList] : gender_availableNounsFullList.slice(0, konjugierenSettings.numItems); gender_userAnswers = []; gender_loadNextNoun(); }
+        function gender_loadNextNoun() { genderFeedbackEl.textContent = ''; genderFeedbackEl.className = 'text-center my-4 text-lg font-semibold p-3 rounded-md min-h-[50px]'; genderFeedbackEl.style.display = 'none'; genderNextNounBtn.classList.add('hidden'); genderNounDisplayCardEl.className = 'bg-gray-100 p-8 rounded-xl mb-6 border-4 border-transparent transition-colors duration-300 min-h-[120px] flex justify-center items-center'; gender_choiceMade = false; genderDerButton.disabled = false; genderDieButton.disabled = false; genderDasButton.disabled = false; if (gender_currentQuizNouns.length === 0) { gender_showStats(); return; } if (genderNextNounBtn.textContent.includes("wiederholen")) { genderNextNounBtn.textContent = "Next Noun"; } gender_currentNounData = gender_currentQuizNouns.shift(); genderNounTextEl.textContent = gender_currentNounData.noun; }
+        function gender_handleChoice(chosenGender) { if (gender_choiceMade || !gender_currentNounData) return; gender_choiceMade = true; genderDerButton.disabled = true; genderDieButton.disabled = true; genderDasButton.disabled = true; genderNounDisplayCardEl.classList.remove('border-transparent', 'chosen-der', 'chosen-die', 'chosen-das'); if (chosenGender === 'male') genderNounDisplayCardEl.classList.add('chosen-der'); else if (chosenGender === 'female') genderNounDisplayCardEl.classList.add('chosen-die'); else if (chosenGender === 'neuter') genderNounDisplayCardEl.classList.add('chosen-das'); const correctArticle = gender_currentNounData.article; // Nouns JSON has 'article' and 'gender'
+            const correctGenderDb = globalNounsList.find(n=>n.noun === gender_currentNounData.noun)?.gender || (correctArticle === 'der' ? 'male' : correctArticle === 'die' ? 'female' : 'neuter');
+            const isCorrect = chosenGender === correctGenderDb;
+            let feedbackMessage = ''; genderFeedbackEl.classList.remove('correct', 'incorrect'); 
+            if (isCorrect) { feedbackMessage = `Richtig! ${correctArticle.toUpperCase()} ${gender_currentNounData.noun}`; genderFeedbackEl.classList.add('correct'); triggerConfetti(); } else { feedbackMessage = `Falsch. Es ist ${correctArticle.toUpperCase()} ${gender_currentNounData.noun}.`; genderFeedbackEl.classList.add('incorrect'); } 
+            gender_userAnswers.push({ noun: gender_currentNounData.noun, article: correctArticle, chosenArticle: (chosenGender === 'male' ? 'der' : chosenGender === 'female' ? 'die' : 'das'), isCorrect: isCorrect });
+            genderFeedbackEl.textContent = feedbackMessage; genderFeedbackEl.style.display='block'; genderNextNounBtn.classList.remove('hidden'); 
+        }
+        function gender_showStats() {
+            genderModeCardEl.classList.add('hidden');
+            statsDisplayCardEl.classList.remove('hidden');
+            stopGenderQuizBtn.classList.add('hidden');
+            
+            statsTitleEl.textContent = gender_userAnswers.length < (konjugierenSettings.useAllItems ? gender_availableNounsFullList.length : konjugierenSettings.numItems) && gender_availableNounsFullList.length > 0 ? "Gender Quiz Ended Early!" : "Gender Quiz Complete!";
+            const correctCount = gender_userAnswers.filter(ans => ans.isCorrect).length;
+            const totalAnswered = gender_userAnswers.length;
+            statsSummaryEl.textContent = `You got ${correctCount} out of ${totalAnswered} correct.`;
+
+            reviewUlEl.innerHTML = '';
+            if (gender_userAnswers.length > 0) {
+                roundReviewContainerEl.classList.remove('hidden');
+                let reviewHTML = '<h3>Detailed Results:</h3><ul>';
+                gender_userAnswers.forEach(ans => {
+                    reviewHTML += `<li class="pronoun-review-item ${ans.isCorrect ? 'mental-mark-correct' : 'mental-mark-incorrect'}">`;
+                    reviewHTML += `<span class="pronoun-name">${ans.noun}</span> <span class="attempt-details">`;
+                    if (ans.isCorrect) {
+                        reviewHTML += `Your answer: <span class="user-answer-correct">${ans.chosenArticle.toUpperCase()} ✔️</span>`;
+                    } else {
+                        reviewHTML += `Your answer: <span class="user-answer-incorrect">${ans.chosenArticle.toUpperCase()}</span> ❌. Correct: <span class="correct-answer-stats">${ans.article.toUpperCase()}</span>`;
+                    }
+                    reviewHTML += `</span></li>`;
+                });
+                reviewHTML += '</ul>';
+                reviewUlEl.innerHTML = reviewHTML;
+            } else {
+                roundReviewContainerEl.classList.add('hidden');
+                statsSummaryEl.textContent = "No nouns practiced.";
+            }
+            repeatRoundButton.onclick = () => { initializeGenderMode(); }; // Gender repeat
+            repeatRoundButton.disabled = false;
+        }
+
         
         // --- Event Listeners Setup ---
         function setupEventListeners() {
             quizTypeClassicRadio.addEventListener('change', handleQuizTypeChange);
             quizTypeLegoRadio.addEventListener('change', handleQuizTypeChange);
             quizTypeGenderRadio.addEventListener('change', handleQuizTypeChange);
-            quizAllVerbsRadio.addEventListener('change', handleVerbSelectionModeChange);
-            quizSelectVerbsRadio.addEventListener('change', handleVerbSelectionModeChange);
             startQuizButton.addEventListener('click', handleStartQuiz);
             
+            selectAllVerbsBtn.addEventListener('click', () => {
+                verbBoxSelectionAreaEl.querySelectorAll('.verb-select-box').forEach(box => box.classList.add('selected'));
+            });
+            deselectAllVerbsBtn.addEventListener('click', () => {
+                verbBoxSelectionAreaEl.querySelectorAll('.verb-select-box').forEach(box => box.classList.remove('selected'));
+            });
+
             backToMenuLegoBtn.addEventListener('click', showModeSelectionScreen);
             backToMenuGenderBtn.addEventListener('click', showModeSelectionScreen);
             newRoundButton.addEventListener('click', showModeSelectionScreen);
-            repeatRoundButton.addEventListener('click', repeatClassicRound); 
+            // repeatRoundButton specific onclick is set in showRoundStatistics / lego_showLegoStats / gender_showStats
 
             answerInputEl.addEventListener('input', handleAnswerInput_Typing);
             answerInputEl.addEventListener('keypress', function(event) { if (event.key === 'Enter' && currentInputMethod === 'typing' && currentQuizType === 'classic') { event.preventDefault(); const userAnswer = answerInputEl.value.trim().toLowerCase(); if (userAnswer !== correctAnswerForm.toLowerCase()) { if (actionButton.dataset.action === "skip_typing") { handleClassicActionButtonClick(); }} else { handleAnswerInput_Typing(); } } });
             actionButton.addEventListener('click', handleClassicActionButtonClick);
             correctButton.addEventListener('click', () => handleMentalFeedback(true));
             incorrectButton.addEventListener('click', () => handleMentalFeedback(false));
+            stopClassicQuizBtn.addEventListener('click', showRoundStatistics);
             
             legoNextVerbBtn.addEventListener('click', lego_loadNextVerb);
+            stopLegoRoundBtn.addEventListener('click', lego_showLegoStats);
 
             genderNextNounBtn.addEventListener('click', gender_loadNextNoun);
             genderDerButton.addEventListener('click', () => gender_handleChoice('male'));
             genderDieButton.addEventListener('click', () => gender_handleChoice('female'));
             genderDasButton.addEventListener('click', () => gender_handleChoice('neuter'));
+            stopGenderQuizBtn.addEventListener('click', gender_showStats);
+
+            // Settings Listeners
+            settingsBtnKonjugieren.addEventListener('click', openKonjugierenSettings);
+            saveSettingsBtnKonjugieren.addEventListener('click', handleSaveKonjugierenSettings);
+            numItemsSliderKonjugieren.addEventListener('input', (e) => {
+                numItemsValueKonjugieren.textContent = e.target.value;
+            });
+            allItemsCheckboxKonjugieren.addEventListener('change', (e) => {
+                numItemsSliderKonjugieren.disabled = e.target.checked;
+            });
         }
         
         // --- Initial Application Start ---
         document.addEventListener('DOMContentLoaded', () => {
             setupEventListeners();
             modeSelectionCardEl.classList.remove('hidden');
-            trainerCardEl.classList.add('hidden');
-            statsDisplayCardEl.classList.add('hidden');
-            legoModeCardEl.classList.add('hidden');
-            genderModeCardEl.classList.add('hidden');
-
             startQuizButton.disabled = true;
             startQuizButton.textContent = "Loading Data...";
+            settingsBtnKonjugieren.disabled = true;
             verbBoxSelectionAreaEl.innerHTML = '<p class="text-sm text-gray-500">Loading verbs...</p>';
-
-            loadAppData();
+            
+            loadKonjugierenSettings(); // Load settings first
+            loadAppData(); // Fetch data and then initialize UI further
         });
 
     </script>
