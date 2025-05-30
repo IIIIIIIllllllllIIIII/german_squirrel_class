@@ -418,8 +418,8 @@
 
         async function loadQuizData() {
             try {
-                const foodNounsResponse = await fetch('food_nouns.json');
-                if (!foodNounsResponse.ok) throw new Error(`HTTP error! status: ${foodNounsResponse.status} for food_nouns.json`);
+                const foodNounsResponse = await fetch('nouns.json');
+                if (!foodNounsResponse.ok) throw new Error(`HTTP error! status: ${foodNounsResponse.status} for nouns.json`);
                 foodNouns = await foodNounsResponse.json();
                 initializeUI();
             } catch (error) {
