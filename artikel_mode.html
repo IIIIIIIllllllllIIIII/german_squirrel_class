@@ -145,11 +145,11 @@
             <div class="mode-selection">
                 <button id="quiz-mode-btn" class="btn btn-primary mode-btn">
                     📝 Der/Die/Das Quiz
-                    <div class="text-sm opacity-90 mt-1">Asignar los artículos correctos a los sustantivos respectivos</div>
+                    <div class="text-sm opacity-90 mt-1">Teste dein Wissen</div>
                 </button>
                 <button id="speed-mode-btn" class="btn btn-success mode-btn">
                     ⚡ Speed Learning
-                    <div class="text-sm opacity-90 mt-1">Cuestionario a tiempo</div>
+                    <div class="text-sm opacity-90 mt-1">Schnelle Karteikarten</div>
                 </button>
             </div>
             <p id="quiz-summary" class="text-sm text-gray-500 mt-4"></p>
@@ -197,6 +197,7 @@
                 <h2 class="text-2xl font-bold text-green-600 mb-4">🎉 Runde beendet!</h2>
                 <p class="text-lg mb-2">Du hast <span id="speed-total-qs">0</span> Fragen beantwortet!</p>
                 <p class="text-xl font-bold text-purple-600 mb-6">Endstand: <span id="speed-final-score">0</span> / <span id="speed-final-total">0</span></p>
+                <div id="speed-detailed-results-list" class="detailed-results-list hidden text-left mx-auto max-w-md mb-4"></div>
                 <button id="speed-restart-btn" class="btn btn-success mr-4">🔄 Neu starten</button>
                 <button id="speed-back-to-menu-btn" class="btn btn-secondary">Zurück zum Menü</button>
             </div>
@@ -237,6 +238,7 @@
        // --- Global Variables ---
        let allNouns = [];
        let derDieDasUserAnswers = [];
+       let speedRoundUserAnswers = [];
        let quizSettings = {};
 
        // --- Quiz State Variables ---
@@ -285,7 +287,8 @@
             categoryCheckboxesContainer = document.getElementById("category-checkboxes"),
             quizSummaryEl = document.getElementById("quiz-summary"),
             endQuizBtn = document.getElementById("end-quiz-btn"),
-            endSpeedBtn = document.getElementById("end-speed-btn");
+            endSpeedBtn = document.getElementById("end-speed-btn"),
+            speedDetailedResultsListEl = document.getElementById("speed-detailed-results-list");
 
         // --- Settings Functions ---
         function loadSettings() {
@@ -430,12 +433,8 @@
             clearAutoAdvance(autoAdvanceTimeout);
         }
         
-        function triggerConfetti() {
-            if (typeof confetti === 'function') confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
-        }
-        function clearAutoAdvance(timeoutVar) {
-            clearTimeout(timeoutVar);
-        }
+        function triggerConfetti() { if (typeof confetti === 'function') confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } }); }
+        function clearAutoAdvance(timeoutVar) { clearTimeout(timeoutVar); }
 
         function showQuizMode() {
             shuffledQuestions = getFilteredQuestions();
@@ -522,18 +521,16 @@
                 feedbackAreaEl.className = "feedback-area incorrect";
             }
             artikelButtons.forEach(btn => {
+                btn.disabled = true;
                 const isSelectedButton = btn.dataset.artikel === selectedArtikel;
                 const isCorrectButton = btn.dataset.artikel === question.article;
-                btn.classList.remove("btn-der", "btn-die", "btn-das", "opacity-50");
                 if (isSelectedButton) {
                     btn.classList.add(isCorrect ? "bg-green-600" : "bg-red-600");
                 } else if (isCorrectButton) {
                     btn.classList.add("bg-green-400");
                 } else {
                     btn.classList.add("opacity-50");
-                    btn.classList.add(`btn-${btn.dataset.artikel}`);
                 }
-                btn.disabled = true;
             });
             updateProgress();
             currentQuestionIndex++;
@@ -586,7 +583,9 @@
             speedScore = 0;
             speedPaused = false;
             speedAnswered = false;
+            speedRoundUserAnswers = []; // Reset for new round
             speedCompleteEl.classList.add('hidden');
+            speedDetailedResultsListEl.classList.add('hidden');
             speedRoundContainer.classList.remove('hidden');
             speedPauseBtn.textContent = "⏸️ Pause";
             showSpeedQuestion();
@@ -625,20 +624,24 @@
             const isCorrect = selectedAnswer === q.article;
             if (isCorrect) {
                 speedScore++;
-                speedFeedbackEl.textContent = "✅ Richtig!";
-                speedFeedbackEl.className = "text-lg font-bold mb-4 text-green-300";
-            } else {
-                speedFeedbackEl.textContent = `❌ Falsch! Richtig: ${q.article.toUpperCase()}`;
-                speedFeedbackEl.className = "text-lg font-bold mb-4 text-red-300";
             }
+            speedRoundUserAnswers.push({
+                question: JSON.parse(JSON.stringify(q)),
+                userAnswer: selectedAnswer,
+                isCorrect: isCorrect
+            });
+            
+            speedFeedbackEl.textContent = isCorrect ? "✅ Richtig!" : `❌ Falsch! Richtig: ${q.article.toUpperCase()}`;
+            speedFeedbackEl.className = `text-lg font-bold mb-4 ${isCorrect ? 'text-green-300' : 'text-red-300'}`;
             speedFeedbackEl.classList.remove('hidden');
+            
             const buttons = speedChoicesEl.querySelectorAll('button');
             buttons.forEach(btn => {
                 btn.disabled = true;
                 const btnArt = btn.textContent.toLowerCase();
                 if (btnArt === selectedAnswer) {
                     btn.className = isCorrect ? 'btn bg-green-600 text-lg py-4 px-5' : 'btn bg-red-600 text-lg py-4 px-5';
-                } else if (btnArt === q.article && !isCorrect) {
+                } else if (btnArt === q.article) {
                     btn.className = 'btn bg-green-400 text-lg py-4 px-5';
                 } else {
                     btn.className = 'btn bg-gray-500 text-lg py-4 px-5 opacity-50';
@@ -660,6 +663,12 @@
                 if (speedPaused || speedAnswered) return;
                 speedAnswered = true;
                 const q = speedQuestions[speedCurrentIndex];
+                speedRoundUserAnswers.push({
+                    question: JSON.parse(JSON.stringify(q)),
+                    userAnswer: "Keine Antwort",
+                    isCorrect: false
+                });
+                
                 speedFeedbackEl.textContent = `⏰ Zeit um! Richtig: ${q.article.toUpperCase()}`;
                 speedFeedbackEl.className = 'text-lg font-bold mb-4 text-orange-300';
                 speedFeedbackEl.classList.remove('hidden');
@@ -691,16 +700,11 @@
                     const remTime = (currWidthPx / parWidthPx) * speedTimePerCard;
                     timerFillEl.style.transition = `width ${remTime / 1000}s linear`;
                     timerFillEl.style.width = '0%';
-                    clearInterval(speedInterval);
                     speedInterval = setTimeout(() => {
                         if (speedPaused || speedAnswered) return;
                         speedAnswered = true;
-                        const q = speedQuestions[speedCurrentIndex];
-                        speedFeedbackEl.textContent = `⏰ Zeit um! Richtig: ${q.article.toUpperCase()}`;
-                        speedFeedbackEl.className = 'text-lg font-bold mb-4 text-orange-300';
-                        speedFeedbackEl.classList.remove('hidden');
                         speedCurrentIndex++;
-                        setTimeout(showSpeedQuestion, 1500);
+                        showSpeedQuestion();
                     }, remTime);
                 }
             }
@@ -710,10 +714,29 @@
             clearInterval(speedInterval);
             speedRoundContainer.classList.add("hidden");
             speedCompleteEl.classList.remove("hidden");
-            const questionsAnswered = speedCurrentIndex;
+            
+            const questionsAnswered = speedRoundUserAnswers.length;
             speedFinalScoreEl.textContent = speedScore;
             speedTotalQsEl.textContent = questionsAnswered;
             speedFinalTotalEl.textContent = questionsAnswered;
+            
+            // Build and display detailed results
+            speedDetailedResultsListEl.innerHTML = '';
+            let resultsHTML = `<h3 class="text-purple-700">Deine Antworten im Detail:</h3><ul>`;
+            speedRoundUserAnswers.forEach(ans => {
+                resultsHTML += `<li class="mb-2 p-2 rounded-md ${ans.isCorrect ? "result-correct" : "result-incorrect"}">`;
+                resultsHTML += `<strong>${ans.question.noun}</strong>: `;
+                if (ans.isCorrect) {
+                    resultsHTML += `<span class="text-green-700 font-semibold">Richtig als "${ans.userAnswer.toUpperCase()}"</span>`;
+                } else {
+                    resultsHTML += `<span class="text-red-700">Du: "${ans.userAnswer.toUpperCase()}". Richtig:</span> <strong class="text-blue-600">"${ans.question.article.toUpperCase()}"</strong>.`;
+                }
+                resultsHTML += `</li>`;
+            });
+            resultsHTML += "</ul>";
+            speedDetailedResultsListEl.innerHTML = resultsHTML;
+            speedDetailedResultsListEl.classList.remove("hidden");
+
             if (speedScore > 0) {
                 triggerConfetti();
             }
