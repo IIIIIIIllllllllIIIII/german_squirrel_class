@@ -44,6 +44,10 @@
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
             margin-top: 8px;
         }
+        .btn-link { /* For the back to menu button */
+            display: inline-block;
+            text-decoration: none;
+        }
         .btn:disabled {
             background-color: #d1d5db !important;
             color: #6b7280 !important;
@@ -58,8 +62,8 @@
         .btn-secondary:hover:not(:disabled) { background-color: #4338ca; }
         .btn-success { background-color: #059669; }
         .btn-success:hover:not(:disabled) { background-color: #047857; }
-        .btn-danger { background-color: #be123c; } /* New */
-        .btn-danger:hover:not(:disabled) { background-color: #9f1239; } /* New */
+        .btn-danger { background-color: #be123c; } 
+        .btn-danger:hover:not(:disabled) { background-color: #9f1239; }
 
         /* --- Settings Panel Styles --- */
         #settings-btn {
@@ -158,6 +162,9 @@
                 <br>
                 Nota: El número de sustantivos y las categorías para los cuestionarios se pueden elegir en la configuración (⚙️).
             </p>
+            <div class="mt-8 pt-6 border-t border-gray-200">
+                <a href="index.html" class="btn btn-secondary btn-link">← Back to Main Menu</a>
+           </div>
         </div>
 
         <div id="quiz-mode-screen" class="hidden">
