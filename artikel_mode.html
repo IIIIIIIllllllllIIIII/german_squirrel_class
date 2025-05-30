@@ -29,6 +29,7 @@
             text-align: center;
             width: 100%;
             max-width: 700px;
+            position: relative; /* For settings button positioning */
         }
         .btn {
             padding: 10px 18px;
@@ -37,7 +38,7 @@
             font-weight: 600;
             color: white;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.1s ease, border-color 0.3s ease, opacity 0.3s ease;
+            transition: all 0.3s ease;
             border: none;
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
             margin-top: 8px;
@@ -45,7 +46,6 @@
         .btn:disabled {
             background-color: #d1d5db !important;
             color: #6b7280 !important;
-            border-color: #d1d5db !important;
             cursor: not-allowed;
             box-shadow: none;
             opacity: 0.7;
@@ -58,151 +58,46 @@
         .btn-success { background-color: #059669; }
         .btn-success:hover:not(:disabled) { background-color: #047857; }
 
-        .artikel-option-btn {
-            padding: 18px 12px;
-            font-size: 1.2rem;
-            line-height: 1.3;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 80px;
-            flex-basis: calc(33.333% - 12px);
-            min-width: 120px;
-            word-break: break-word;
+        /* Settings Panel Styles */
+        #settings-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 1.75rem; /* text-3xl */
+            cursor: pointer;
+            color: #9ca3af; /* gray-400 */
+            transition: color 0.3s;
         }
-        .btn-der { background-color: #2563eb; } .btn-der:hover:not(:disabled) { background-color: #1d4ed8; }
-        .btn-die { background-color: #dc2626; } .btn-die:hover:not(:disabled) { background-color: #b91c1c; }
-        .btn-das { background-color: #16a34a; } .btn-das:hover:not(:disabled) { background-color: #15803d; }
+        #settings-btn:hover { color: #4b5563; /* gray-600 */ }
+        #settings-modal {
+             position: absolute;
+             inset: 0;
+             background-color: rgba(255, 255, 255, 0.98);
+             backdrop-filter: blur(4px);
+             padding: 24px;
+             border-radius: 16px;
+             display: flex;
+             flex-direction: column;
+             text-align: left;
+             z-index: 50;
+        }
+        .settings-section { margin-bottom: 24px; }
+        .settings-section h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 12px; color: #4a044e; }
+        #category-checkboxes { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+        .checkbox-label { display: flex; align-items: center; cursor: pointer; padding: 8px; border-radius: 6px; transition: background-color 0.2s; }
+        .checkbox-label:hover { background-color: #f3f4f6; }
+        .checkbox-label input { margin-right: 10px; width: 1.1em; height: 1.1em; }
 
-        .speed-round-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            min-height: 400px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .speed-round-word {
-            font-size: 4rem;
-            font-weight: 800;
-            margin: 20px 0;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        .speed-round-meaning {
-            font-size: 1.5rem;
-            margin: 10px 0;
-            opacity: 0.9;
-        }
-        .timer-bar {
-            width: 100%;
-            height: 8px;
-            background-color: rgba(255,255,255,0.3);
-            border-radius: 4px;
-            overflow: hidden;
-            margin: 20px 0;
-        }
-        .timer-fill {
-            height: 100%;
-            background-color: #10b981;
-            transition: width 0.1s linear;
-            border-radius: 4px;
-        }
-        .feedback-area {
-            font-size: 0.95rem;
-            font-weight: 500;
-            padding: 12px;
-            border-radius: 8px;
-            min-height: 60px;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-        .feedback-area.correct {
-            color: #065f46; background-color: #dcfce7; border: 1px solid #bbf7d0; display: block !important;
-        }
-        .feedback-area.incorrect {
-            color: #b91c1c; background-color: #fee2e2; border: 1px solid #fecaca; display: block !important;
-        }
-        .feedback-area .correct-answer-text, .feedback-area strong {
-            font-weight: 700;
-        }
-        .detailed-results-list {
-            margin-top: 1rem;
-            text-align: left;
-            max-height: 200px;
-            overflow-y: auto;
-            padding: 0.75rem;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            background-color: #f9fafb;
-        }
-        .detailed-results-list h3 {
-            font-size: 1.125rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-        }
-        .detailed-results-list ul { list-style: none; padding: 0; }
-        .detailed-results-list li {
-            margin-bottom: 0.75rem;
-            padding: 0.5rem;
-            border-radius: 6px;
-            font-size: 0.875rem;
-        }
-        .result-correct { background-color: #ecfdf5; border-left: 4px solid #10b981; }
-        .result-incorrect { background-color: #fff1f2; border-left: 4px solid #f43f5e; }
-        .progress-text { margin-top: 12px; font-size: 0.875rem; color: #6b7280; }
-        .hidden { display: none !important; }
-
-        #noun-display {
-            font-size: 2.5rem; font-weight: 700; color: #4a044e; margin-bottom: 0.5rem;
-        }
-        #translation-display {
-            font-size: 1rem; color: #6b7280; font-style: italic; margin-bottom: 2rem; min-height: 40px;
-        }
-        #artikel-choices-container {
-            display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;
-        }
-        .mode-selection {
-            display: flex; gap: 16px; justify-content: center; margin-bottom: 24px; flex-wrap: wrap;
-        }
-        .mode-btn {
-            padding: 16px 24px; font-size: 1.1rem; border-radius: 12px; min-width: 200px;
-        }
-        kbd {
-            font-family: monospace; background-color: #e2e8f0; color: #4a5568; padding: 3px 6px;
-            border-radius: 4px; border: 1px solid #cbd5e0; font-size: 0.85em; box-shadow: 1px 1px 1px rgba(0,0,0,0.1);
-        }
-        @media (max-width: 768px) {
-            #artikel-choices-container .btn {
-                flex-basis: calc(33.333% - 10px); font-size: 1.1rem;
-            }
-            .mode-selection { flex-direction: column; align-items: center; }
-            .speed-round-word { font-size: 3rem; }
-            #noun-display { font-size: 2rem; }
-            .detailed-results-list { max-height: 180px; }
-        }
-        @media (max-width: 640px) {
-            .card { padding: 20px; }
-            .btn { padding: 10px 16px; font-size: 0.9rem; }
-            .artikel-option-btn { font-size: 1rem; min-height: 70px; }
-            #noun-display { font-size: 1.8rem; }
-            .feedback-area { font-size: 0.9rem; min-height: 50px; }
-            #artikel-choices-container .btn {
-                flex-basis: calc(100% - 8px); min-width: 100px;
-            }
-            .speed-round-word { font-size: 2.5rem; }
-            .speed-round-meaning { font-size: 1.2rem; }
-            .detailed-results-list { max-height: 150px; font-size: 0.8rem;}
-            .detailed-results-list li { font-size: 0.8rem; }
-        }
+        /* Other styles from before... */
+        .artikel-option-btn{padding:18px 12px;font-size:1.2rem;line-height:1.3;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:80px;flex-basis:calc(33.333% - 12px);min-width:120px;word-break:break-word}.btn-der{background-color:#2563eb}.btn-der:hover:not(:disabled){background-color:#1d4ed8}.btn-die{background-color:#dc2626}.btn-die:hover:not(:disabled){background-color:#b91c1c}.btn-das{background-color:#16a34a}.btn-das:hover:not(:disabled){background-color:#15803d}.speed-round-card{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;padding:30px;border-radius:20px;text-align:center;min-height:400px;display:flex;flex-direction:column;justify-content:center}.speed-round-word{font-size:4rem;font-weight:800;margin:20px 0;text-shadow:2px 2px 4px rgba(0,0,0,.3)}.speed-round-meaning{font-size:1.5rem;margin:10px 0;opacity:.9}.timer-bar{width:100%;height:8px;background-color:rgba(255,255,255,.3);border-radius:4px;overflow:hidden;margin:20px 0}.timer-fill{height:100%;background-color:#10b981;transition:width .1s linear;border-radius:4px}.feedback-area{font-size:.95rem;font-weight:500;padding:12px;border-radius:8px;min-height:60px;margin-bottom:1rem;text-align:center}.feedback-area.correct{color:#065f46;background-color:#dcfce7;border:1px solid #bbf7d0;display:block!important}.feedback-area.incorrect{color:#b91c1c;background-color:#fee2e2;border:1px solid #fecaca;display:block!important}.feedback-area .correct-answer-text,.feedback-area strong{font-weight:700}.detailed-results-list{margin-top:1rem;text-align:left;max-height:200px;overflow-y:auto;padding:.75rem;border:1px solid #e5e7eb;border-radius:8px;background-color:#f9fafb}.detailed-results-list h3{font-size:1.125rem;font-weight:600;margin-bottom:.75rem}.detailed-results-list ul{list-style:none;padding:0}.detailed-results-list li{margin-bottom:.75rem;padding:.5rem;border-radius:6px;font-size:.875rem}.result-correct{background-color:#ecfdf5;border-left:4px solid #10b981}.result-incorrect{background-color:#fff1f2;border-left:4px solid #f43f5e}.progress-text{margin-top:12px;font-size:.875rem;color:#6b7280}.hidden{display:none!important}#noun-display{font-size:2.5rem;font-weight:700;color:#4a044e;margin-bottom:.5rem}#translation-display{font-size:1rem;color:#6b7280;font-style:italic;margin-bottom:2rem;min-height:40px}#artikel-choices-container{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}.mode-selection{display:flex;gap:16px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}.mode-btn{padding:16px 24px;font-size:1.1rem;border-radius:12px;min-width:200px}kbd{font-family:monospace;background-color:#e2e8f0;color:#4a5568;padding:3px 6px;border-radius:4px;border:1px solid #cbd5e0;font-size:.85em;box-shadow:1px 1px 1px rgba(0,0,0,.1)}@media (max-width:768px){#artikel-choices-container .btn{flex-basis:calc(33.333% - 10px);font-size:1.1rem}.mode-selection{flex-direction:column;align-items:center}.speed-round-word{font-size:3rem}#noun-display{font-size:2rem}.detailed-results-list{max-height:180px}}@media (max-width:640px){.card{padding:20px}.btn{padding:10px 16px;font-size:.9rem}.artikel-option-btn{font-size:1rem;min-height:70px}#noun-display{font-size:1.8rem}.feedback-area{font-size:.9rem;min-height:50px}#artikel-choices-container .btn{flex-basis:calc(100% - 8px);min-width:100px}.speed-round-word{font-size:2.5rem}.speed-round-meaning{font-size:1.2rem}.detailed-results-list{max-height:150px;font-size:.8rem}.detailed-results-list li{font-size:.8rem}}
     </style>
 </head>
 <body>
     <div id="main-container" class="card">
         <div id="mode-selection-screen" class="">
+            <button id="settings-btn">⚙️</button>
             <h1 class="text-2xl sm:text-3xl font-bold text-purple-700 mb-6 text-center">Deutsche Nomen Artikel</h1>
             <div class="mode-selection">
                 <button id="quiz-mode-btn" class="btn btn-primary mode-btn">
@@ -214,6 +109,7 @@
                     <div class="text-sm opacity-90 mt-1">Schnelle Karteikarten</div>
                 </button>
             </div>
+            <p id="quiz-summary" class="text-sm text-gray-500 mt-4"></p>
         </div>
 
         <div id="quiz-mode-screen" class="hidden">
@@ -230,7 +126,6 @@
             <div id="feedback-area" class="feedback-area hidden"></div>
             <div id="detailed-results-list" class="detailed-results-list hidden"></div>
             <div id="quiz-controls-area" class="text-center mt-4">
-                <button id="next-question-btn" class="btn btn-primary hidden">Nächste Frage</button>
                 <button id="restart-quiz-btn" class="btn btn-secondary hidden">Quiz neu starten</button>
                 <button id="back-to-menu-btn" class="btn btn-secondary">Zurück zum Menü</button>
             </div>
@@ -263,12 +158,36 @@
                 <button id="speed-back-to-menu-btn" class="btn btn-secondary">Zurück zum Menü</button>
             </div>
         </div>
+        
+        <div id="settings-modal" class="hidden">
+            <h2 class="text-2xl font-bold text-purple-700 mb-6">Einstellungen</h2>
+            <div class="settings-section flex-grow overflow-y-auto">
+                <div class="settings-section">
+                    <h3>Anzahl der Fragen</h3>
+                    <div class="flex items-center gap-4">
+                        <input type="range" id="num-questions-slider" min="5" max="40" value="20" class="w-full">
+                        <span id="num-questions-value" class="font-bold text-purple-700 w-12 text-center">20</span>
+                         <label class="flex items-center gap-2"><input type="checkbox" id="all-questions-checkbox"> Alle</label>
+                    </div>
+                </div>
+                <div class="settings-section">
+                    <h3>Kategorien</h3>
+                    <div id="category-checkboxes">
+                        </div>
+                </div>
+            </div>
+            <div class="mt-auto pt-4">
+                <button id="save-settings-btn" class="btn btn-primary w-full">Speichern & Schließen</button>
+            </div>
+        </div>
+
     </div>
 
     <script>
-       // Global variables
-       let foodNouns = [];
+       // --- Global Variables ---
+       let allNouns = []; // Will hold all nouns from JSON
        let derDieDasUserAnswers = [];
+       let quizSettings = {}; // To hold user settings
 
         // Quiz Mode (DerDieDas) Variables
         let currentQuestionIndex = 0;
@@ -286,29 +205,23 @@
         let speedScore = 0;
         let speedAnswered = false;
 
-        // Elements
+        // --- Element Caching ---
         const modeSelectionScreen = document.getElementById('mode-selection-screen');
         const quizModeScreen = document.getElementById('quiz-mode-screen');
         const speedModeScreen = document.getElementById('speed-mode-screen');
-
         const quizModeBtn = document.getElementById('quiz-mode-btn');
         const speedModeBtn = document.getElementById('speed-mode-btn');
-
-        // Quiz (DerDieDas) elements
         const nounDisplayEl = document.getElementById('noun-display');
         const translationDisplayEl = document.getElementById('translation-display');
         const choicesContainerEl = document.getElementById('artikel-choices-container');
         const feedbackAreaEl = document.getElementById('feedback-area');
         const detailedResultsListEl = document.getElementById('detailed-results-list');
-        const nextQuestionBtn = document.getElementById('next-question-btn');
         const restartQuizBtn = document.getElementById('restart-quiz-btn');
         const backToMenuBtn = document.getElementById('back-to-menu-btn');
         const progressIndicatorEl = document.getElementById('progress-indicator');
         const scoreIndicatorEl = document.getElementById('score-indicator');
         const hintAreaEl = document.getElementById('hint-area');
         const artikelButtons = choicesContainerEl.querySelectorAll('.artikel-option-btn');
-
-        // Speed elements
         const speedWordDeEl = document.getElementById('speed-word-de');
         const speedWordTransEl = document.getElementById('speed-word-trans');
         const speedChoicesEl = document.getElementById('speed-choices');
@@ -324,12 +237,111 @@
         const speedTotalQsEl = document.getElementById('speed-total-qs');
         const speedFinalTotalEl = document.getElementById('speed-final-total');
         const speedRoundContainer = document.getElementById('speed-round-container');
+        const settingsBtn = document.getElementById('settings-btn');
+        const settingsModal = document.getElementById('settings-modal');
+        const saveSettingsBtn = document.getElementById('save-settings-btn');
+        const numQuestionsSlider = document.getElementById('num-questions-slider');
+        const numQuestionsValue = document.getElementById('num-questions-value');
+        const allQuestionsCheckbox = document.getElementById('all-questions-checkbox');
+        const categoryCheckboxesContainer = document.getElementById('category-checkboxes');
+        const quizSummaryEl = document.getElementById('quiz-summary');
+        
+        // --- Settings Functions ---
+        function loadSettings() {
+            const savedSettings = localStorage.getItem('quizSettings');
+            const defaultSettings = {
+                numQuestions: 20,
+                useAllQuestions: false,
+                categories: ['all'] // 'all' is a special value
+            };
+            quizSettings = savedSettings ? JSON.parse(savedSettings) : defaultSettings;
+            updateQuizSummary();
+        }
 
+        function saveSettings() {
+            localStorage.setItem('quizSettings', JSON.stringify(quizSettings));
+            updateQuizSummary();
+        }
+        
+        function openSettings() {
+            // Update UI to reflect current settings
+            numQuestionsSlider.value = quizSettings.numQuestions;
+            numQuestionsValue.textContent = quizSettings.numQuestions;
+            allQuestionsCheckbox.checked = quizSettings.useAllQuestions;
+            numQuestionsSlider.disabled = quizSettings.useAllQuestions;
+            
+            // Set checkbox states
+            const availableCats = [...categoryCheckboxesContainer.querySelectorAll('input[type="checkbox"]')];
+            const allCatCheckbox = availableCats.find(cb => cb.value === 'all');
+            const specificCatCheckboxes = availableCats.filter(cb => cb.value !== 'all');
+
+            if (quizSettings.categories.includes('all')) {
+                allCatCheckbox.checked = true;
+                specificCatCheckboxes.forEach(cb => { cb.checked = false; cb.disabled = true; });
+            } else {
+                allCatCheckbox.checked = false;
+                specificCatCheckboxes.forEach(cb => {
+                    cb.disabled = false;
+                    cb.checked = quizSettings.categories.includes(cb.value);
+                });
+            }
+            settingsModal.classList.remove('hidden');
+        }
+
+        function handleSaveSettings() {
+            quizSettings.useAllQuestions = allQuestionsCheckbox.checked;
+            quizSettings.numQuestions = parseInt(numQuestionsSlider.value, 10);
+            
+            const selectedCategories = [...categoryCheckboxesContainer.querySelectorAll('input:checked')]
+                .map(cb => cb.value);
+
+            // If "All Categories" is checked, it overrides others. Otherwise, get the list.
+            if (selectedCategories.includes('all')) {
+                 quizSettings.categories = ['all'];
+            } else {
+                 quizSettings.categories = selectedCategories.length > 0 ? selectedCategories : ['all']; // Default to all if none selected
+            }
+            
+            saveSettings();
+            settingsModal.classList.add('hidden');
+        }
+
+        function populateCategoryCheckboxes() {
+            const categories = [...new Set(allNouns.map(n => n.category))];
+            let checkboxesHTML = `<label class="checkbox-label font-semibold"><input type="checkbox" value="all"> Alle Kategorien</label>`;
+            categories.forEach(cat => {
+                checkboxesHTML += `<label class="checkbox-label"><input type="checkbox" value="${cat}"> ${cat}</label>`;
+            });
+            categoryCheckboxesContainer.innerHTML = checkboxesHTML;
+            
+            // Add event listeners for the new checkboxes
+            const allCatCheckbox = categoryCheckboxesContainer.querySelector('input[value="all"]');
+            const specificCatCheckboxes = [...categoryCheckboxesContainer.querySelectorAll('input[value!="all"]')];
+            
+            allCatCheckbox.addEventListener('change', () => {
+                specificCatCheckboxes.forEach(cb => {
+                    cb.checked = false;
+                    cb.disabled = allCatCheckbox.checked;
+                });
+            });
+        }
+        
+        function updateQuizSummary() {
+            const numText = quizSettings.useAllQuestions ? 'Alle' : quizSettings.numQuestions;
+            const catText = quizSettings.categories.includes('all') ? 'allen Kategorien' : `${quizSettings.categories.length} Kategorien`;
+            quizSummaryEl.textContent = `Aktuell: ${numText} Fragen aus ${catText}.`;
+        }
+
+        // --- Core Functions ---
         async function loadQuizData() {
             try {
-                const foodNounsResponse = await fetch('nouns.json');
-                if (!foodNounsResponse.ok) throw new Error(`HTTP error! status: ${foodNounsResponse.status} for nouns.json`);
-                foodNouns = await foodNounsResponse.json();
+                const response = await fetch('nouns.json');
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                allNouns = await response.json();
+                
+                numQuestionsSlider.max = allNouns.length;
+                
+                populateCategoryCheckboxes();
                 initializeUI();
             } catch (error) {
                 console.error("Could not load quiz data:", error);
@@ -344,6 +356,18 @@
             showModeSelection();
         }
 
+        function getFilteredQuestions() {
+            let filtered = quizSettings.categories.includes('all')
+                ? [...allNouns]
+                : allNouns.filter(noun => quizSettings.categories.includes(noun.category));
+
+            shuffleArray(filtered);
+
+            return quizSettings.useAllQuestions
+                ? filtered
+                : filtered.slice(0, quizSettings.numQuestions);
+        }
+
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -351,294 +375,96 @@
             }
         }
 
-        function triggerConfetti() {
-            if (typeof confetti === 'function') confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
-        }
-
-        function clearAutoAdvance(timeoutVar) { clearTimeout(timeoutVar); }
-
         function showModeSelection() {
             modeSelectionScreen.classList.remove('hidden');
             quizModeScreen.classList.add('hidden');
             speedModeScreen.classList.add('hidden');
             clearInterval(speedInterval);
             clearAutoAdvance(autoAdvanceTimeout);
-            hintAreaEl.classList.add('hidden');
-            detailedResultsListEl.classList.add('hidden');
         }
+        
+        function triggerConfetti() { if (typeof confetti === 'function') confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } }); }
+        function clearAutoAdvance(timeoutVar) { clearTimeout(timeoutVar); }
 
         function showQuizMode() {
-            if (foodNouns.length === 0) { alert("Keine Fragen für Der/Die/Das Quiz geladen."); return; }
+            shuffledQuestions = getFilteredQuestions();
+            if (shuffledQuestions.length === 0) {
+                alert("Keine Nomen für die gewählten Einstellungen gefunden. Bitte ändere die Einstellungen.");
+                return;
+            }
             modeSelectionScreen.classList.add('hidden');
             quizModeScreen.classList.remove('hidden');
             startQuiz();
         }
 
         function showSpeedMode() {
-            if (foodNouns.length === 0) { alert("Keine Fragen für Speed Learning geladen."); return; }
+            speedQuestions = getFilteredQuestions();
+            if (speedQuestions.length === 0) {
+                alert("Keine Nomen für die gewählten Einstellungen gefunden. Bitte ändere die Einstellungen.");
+                return;
+            }
             modeSelectionScreen.classList.add('hidden');
             speedModeScreen.classList.remove('hidden');
             startSpeedRound();
         }
 
-        // --- DerDieDas Quiz Functions ---
-        function startQuiz() {
-            shuffledQuestions = [...foodNouns];
-            shuffleArray(shuffledQuestions);
-            currentQuestionIndex = 0;
-            score = 0;
-            answerSelected = false;
-            derDieDasUserAnswers = [];
-            detailedResultsListEl.classList.add('hidden');
-            clearAutoAdvance(autoAdvanceTimeout);
-            feedbackAreaEl.classList.add('hidden');
-            feedbackAreaEl.className = 'feedback-area hidden';
-            nextQuestionBtn.classList.add('hidden');
-            restartQuizBtn.classList.add('hidden');
-            hintAreaEl.classList.add('hidden');
-            document.getElementById('question-area').classList.remove('hidden');
-            choicesContainerEl.classList.remove('hidden');
-            loadQuestion();
-        }
+        // --- DerDieDas Quiz Functions (no major changes, just uses 'shuffledQuestions') ---
+        function startQuiz(){shuffledQuestions.length>0&&(currentQuestionIndex=0,score=0,answerSelected=!1,derDieDasUserAnswers=[],detailedResultsListEl.classList.add("hidden"),clearAutoAdvance(autoAdvanceTimeout),feedbackAreaEl.classList.add("hidden"),feedbackAreaEl.className="feedback-area hidden",restartQuizBtn.classList.add("hidden"),hintAreaEl.classList.add("hidden"),document.getElementById("question-area").classList.remove("hidden"),choicesContainerEl.classList.remove("hidden"),loadQuestion())}function loadQuestion(){answerSelected=!1,clearAutoAdvance(autoAdvanceTimeout),currentQuestionIndex<shuffledQuestions.length?(nounDisplayEl.textContent=shuffledQuestions[currentQuestionIndex].noun,translationDisplayEl.textContent=`${shuffledQuestions[currentQuestionIndex].en} / ${shuffledQuestions[currentQuestionIndex].es}`,feedbackAreaEl.classList.add("hidden","correct","incorrect"),feedbackAreaEl.textContent="",hintAreaEl.classList.add("hidden"),enableChoiceButtons(),updateProgress()):showResults()}function enableChoiceButtons(e=!0){artikelButtons.forEach(t=>{t.disabled=!e,t.classList.remove("opacity-50","bg-green-600","bg-red-600","bg-green-400"),t.classList.add(`btn-${t.dataset.artikel}`)})}function handleAnswer(e){if(answerSelected)return;answerSelected=!0;const t=shuffledQuestions[currentQuestionIndex],n=e===t.article;derDieDasUserAnswers.push({question:JSON.parse(JSON.stringify(t)),userAnswer:e,isCorrect:n}),feedbackAreaEl.classList.remove("hidden"),n?(score++,feedbackAreaEl.innerHTML=`Richtig! <span class="correct-answer-text">${t.article} ${t.noun}</span>`,feedbackAreaEl.className="feedback-area correct",triggerConfetti()):(feedbackAreaEl.innerHTML=`Falsch. Richtig ist: <span class="correct-answer-text">${t.article} ${t.noun}</span>`,feedbackAreaEl.className="feedback-area incorrect"),artikelButtons.forEach(s=>{const a=s.dataset.artikel===e,i=s.dataset.artikel===t.article;s.classList.remove("btn-der","btn-die","btn-das","opacity-50"),a?s.classList.add(n?"bg-green-600":"bg-red-600"):i?s.classList.add("bg-green-400"):(s.classList.add("opacity-50"),s.classList.add(`btn-${s.dataset.artikel}`)),s.disabled=!0}),updateProgress(),currentQuestionIndex<shuffledQuestions.length-1?autoAdvanceTimeout=setTimeout(()=>{currentQuestionIndex++,loadQuestion()},2e3):autoAdvanceTimeout=setTimeout(()=>{feedbackAreaEl.classList.add("hidden"),showResults()},2e3)}function updateProgress(){progressIndicatorEl.textContent=`Frage: ${Math.min(currentQuestionIndex+1,shuffledQuestions.length)} / ${shuffledQuestions.length}`,scoreIndicatorEl.textContent=`Punkte: ${score} / ${shuffledQuestions.length}`}function showResults(){clearAutoAdvance(autoAdvanceTimeout),document.getElementById("question-area").classList.add("hidden"),choicesContainerEl.classList.add("hidden"),feedbackAreaEl.classList.remove("hidden"),feedbackAreaEl.className="feedback-area correct",feedbackAreaEl.innerHTML=`Quiz beendet! Endergebnis: <strong class="text-2xl">${score}</strong> / ${shuffledQuestions.length}`,detailedResultsListEl.innerHTML="";let e='<h3 class="text-purple-700">Deine Antworten im Detail:</h3><ul>';derDieDasUserAnswers.forEach(t=>{e+=`<li class="mb-2 p-2 rounded-md ${t.isCorrect?"result-correct":"result-incorrect"}">`,e+=`<strong>${t.question.noun}</strong> (${t.question.en} / ${t.question.es}): `,t.isCorrect?e+=`<span class="text-green-700 font-semibold">Richtig als "${t.userAnswer.toUpperCase()}"</span>`:e+=`<span class="text-red-700">Du: "${t.userAnswer.toUpperCase()}". Richtig:</span> <strong class="text-blue-600">"${t.question.article.toUpperCase()}"</strong>.`,e+="</li>"}),e+="</ul>",detailedResultsListEl.innerHTML=e,detailedResultsListEl.classList.remove("hidden"),progressIndicatorEl.textContent="Quiz beendet!",scoreIndicatorEl.textContent=`Endstand: ${score} / ${shuffledQuestions.length}`,restartQuizBtn.textContent="Quiz neu starten",restartQuizBtn.classList.remove("hidden"),restartQuizBtn.onclick=startQuiz,hintAreaEl.innerHTML="Drücke <kbd>Leertaste</kbd> zum Neustarten",hintAreaEl.classList.remove("hidden")}
 
-        function loadQuestion() {
-            answerSelected = false;
-            clearAutoAdvance(autoAdvanceTimeout);
-            if (currentQuestionIndex < shuffledQuestions.length) {
-                const question = shuffledQuestions[currentQuestionIndex];
-                nounDisplayEl.textContent = question.noun;
-                translationDisplayEl.textContent = `${question.en} / ${question.es}`;
-                feedbackAreaEl.classList.add('hidden','correct','incorrect');
-                feedbackAreaEl.textContent = '';
-                nextQuestionBtn.classList.add('hidden');
-                hintAreaEl.classList.add('hidden');
-                enableChoiceButtons();
-                updateProgress();
-            } else {
-                showResults();
-            }
-        }
-
-        function enableChoiceButtons(enable = true) {
-            artikelButtons.forEach(button => {
-                button.disabled = !enable;
-                button.classList.remove('opacity-50', 'bg-green-600', 'bg-red-600', 'bg-green-400');
-                const baseClass = `btn-${button.dataset.artikel}`;
-                button.classList.add(baseClass);
-            });
-        }
-
-        function handleAnswer(selectedArtikel) {
-            if (answerSelected) return;
-            answerSelected = true;
-
-            const question = shuffledQuestions[currentQuestionIndex];
-            const isCorrect = selectedArtikel === question.article;
-
-            derDieDasUserAnswers.push({
-                question: JSON.parse(JSON.stringify(question)),
-                userAnswer: selectedArtikel,
-                isCorrect: isCorrect
-            });
-
-            feedbackAreaEl.classList.remove('hidden');
-            if (isCorrect) {
-                score++;
-                feedbackAreaEl.innerHTML = `Richtig! <span class="correct-answer-text">${question.article} ${question.noun}</span>`;
-                feedbackAreaEl.className = 'feedback-area correct';
-                triggerConfetti();
-            } else {
-                feedbackAreaEl.innerHTML = `Falsch. Richtig ist: <span class="correct-answer-text">${question.article} ${question.noun}</span>`;
-                feedbackAreaEl.className = 'feedback-area incorrect';
-            }
-
-            artikelButtons.forEach(btn => {
-                const isSelectedButton = btn.dataset.artikel === selectedArtikel;
-                const isCorrectButton = btn.dataset.artikel === question.article;
-                btn.classList.remove('btn-der', 'btn-die', 'btn-das', 'opacity-50');
-                if (isSelectedButton) btn.classList.add(isCorrect ? 'bg-green-600' : 'bg-red-600');
-                else if (isCorrectButton) btn.classList.add('bg-green-400');
-                else {
-                    btn.classList.add('opacity-50');
-                    const baseClass = `btn-${btn.dataset.artikel}`;
-                    btn.classList.add(baseClass);
-                }
-                btn.disabled = true;
-            });
-            updateProgress();
-            if (currentQuestionIndex < shuffledQuestions.length - 1) {
-                 autoAdvanceTimeout = setTimeout(() => { currentQuestionIndex++; loadQuestion(); }, 2000);
-            } else {
-                  autoAdvanceTimeout = setTimeout(() => {
-                    feedbackAreaEl.classList.add('hidden');
-                    showResults();
-                  }, 2000);
-            }
-        }
-
-        function updateProgress() {
-            progressIndicatorEl.textContent = `Frage: ${Math.min(currentQuestionIndex + 1, shuffledQuestions.length)} / ${shuffledQuestions.length}`;
-            scoreIndicatorEl.textContent = `Punkte: ${score} / ${shuffledQuestions.length}`;
-        }
-
-        function showResults() {
-            clearAutoAdvance(autoAdvanceTimeout);
-            document.getElementById('question-area').classList.add('hidden');
-            choicesContainerEl.classList.add('hidden');
-            nextQuestionBtn.classList.add('hidden');
-
-            feedbackAreaEl.classList.remove('hidden');
-            feedbackAreaEl.className = 'feedback-area correct';
-            feedbackAreaEl.innerHTML = `Quiz beendet! Endergebnis: <strong class="text-2xl">${score}</strong> / ${shuffledQuestions.length}`;
-
-            detailedResultsListEl.innerHTML = '';
-            let resultsHTML = '<h3 class="text-purple-700">Deine Antworten im Detail:</h3><ul>';
-            derDieDasUserAnswers.forEach(ans => {
-                resultsHTML += `<li class="mb-2 p-2 rounded-md ${ans.isCorrect ? 'result-correct' : 'result-incorrect'}">`;
-                resultsHTML += `<strong>${ans.question.noun}</strong> (${ans.question.en} / ${ans.question.es}): `;
-                if (ans.isCorrect) {
-                    resultsHTML += `<span class="text-green-700 font-semibold">Richtig als "${ans.userAnswer.toUpperCase()}"</span>`;
-                } else {
-                    resultsHTML += `<span class="text-red-700">Du: "${ans.userAnswer.toUpperCase()}". Richtig:</span> <strong class="text-blue-600">"${ans.question.article.toUpperCase()}"</strong>.`;
-                }
-                resultsHTML += `</li>`;
-            });
-            resultsHTML += '</ul>';
-            detailedResultsListEl.innerHTML = resultsHTML;
-            detailedResultsListEl.classList.remove('hidden');
-
-            progressIndicatorEl.textContent = `Quiz beendet!`;
-            scoreIndicatorEl.textContent = `Endstand: ${score} / ${shuffledQuestions.length}`;
-            restartQuizBtn.textContent = "Quiz neu starten";
-            restartQuizBtn.classList.remove('hidden');
-            restartQuizBtn.onclick = startQuiz;
-            hintAreaEl.innerHTML = `Drücke <kbd>Leertaste</kbd> zum Neustarten`;
-            hintAreaEl.classList.remove('hidden');
-        }
-
-        // --- Speed Mode Functions ---
-        function startSpeedRound() {
-            speedQuestions = [...foodNouns]; shuffleArray(speedQuestions); speedCurrentIndex = 0; speedScore = 0;
-            speedPaused = false; speedAnswered = false; speedCompleteEl.classList.add('hidden');
-            speedRoundContainer.classList.remove('hidden'); speedPauseBtn.textContent = '⏸️ Pause';
-            speedTotalQsEl.textContent = speedQuestions.length; speedFinalTotalEl.textContent = speedQuestions.length;
-            showSpeedQuestion();
-        }
-        function showSpeedQuestion() {
-            if (speedCurrentIndex >= speedQuestions.length) { completeSpeedRound(); return; }
-            speedAnswered = false; const q = speedQuestions[speedCurrentIndex];
-            speedWordDeEl.textContent = q.noun; speedWordTransEl.textContent = `${q.en} / ${q.es}`;
-            speedProgressEl.textContent = `${speedCurrentIndex + 1} / ${speedQuestions.length}`;
-            speedFeedbackEl.classList.add('hidden'); speedChoicesEl.innerHTML = '';
-            const articles = ["der", "die", "das"]; const colors = { der: "btn-der", die: "btn-die", das: "btn-das" };
-            articles.forEach(art => {
-                const btn = document.createElement('button');
-                btn.className = `btn ${colors[art]} text-lg py-4 px-5`; btn.textContent = art.toUpperCase();
-                btn.onclick = () => handleSpeedAnswer(art); speedChoicesEl.appendChild(btn);
-            });
-            const bgColors = ['linear-gradient(135deg, #667eea 0%, #764ba2 100%)', 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)', 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)', 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)', 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'];
-            speedRoundContainer.style.background = bgColors[speedCurrentIndex % bgColors.length];
-            startSpeedTimer();
-        }
-        function handleSpeedAnswer(selectedAnswer) {
-            if (speedAnswered) return; speedAnswered = true; clearInterval(speedInterval);
-            const q = speedQuestions[speedCurrentIndex]; const isCorrect = selectedAnswer === q.article;
-            if (isCorrect) { speedScore++; speedFeedbackEl.textContent = '✅ Richtig!'; speedFeedbackEl.className = 'text-lg font-bold mb-4 text-green-300';
-            } else { speedFeedbackEl.textContent = `❌ Falsch! Richtig: ${q.article.toUpperCase()}`; speedFeedbackEl.className = 'text-lg font-bold mb-4 text-red-300'; }
-            speedFeedbackEl.classList.remove('hidden');
-            const buttons = speedChoicesEl.querySelectorAll('button');
-            buttons.forEach(btn => { btn.disabled = true; const btnArt = btn.textContent.toLowerCase();
-                if (btnArt === selectedAnswer) btn.className = isCorrect ? 'btn bg-green-600 text-lg py-4 px-5' : 'btn bg-red-600 text-lg py-4 px-5';
-                else if (btnArt === q.article && !isCorrect) btn.className = 'btn bg-green-400 text-lg py-4 px-5';
-                else btn.className = 'btn bg-gray-500 text-lg py-4 px-5 opacity-50';
-            });
-            setTimeout(() => { speedCurrentIndex++; showSpeedQuestion(); }, 1500);
-        }
-        function startSpeedTimer() {
-            if (speedPaused || speedAnswered) return; clearInterval(speedInterval);
-            timerFillEl.style.transition = 'none'; timerFillEl.style.width = '100%'; timerFillEl.offsetHeight;
-            timerFillEl.style.transition = `width ${speedTimePerCard / 1000}s linear`; timerFillEl.style.width = '0%';
-            speedInterval = setTimeout(() => {
-                if (speedPaused || speedAnswered) return; speedAnswered = true; const q = speedQuestions[speedCurrentIndex];
-                speedFeedbackEl.textContent = `⏰ Zeit um! Richtig: ${q.article.toUpperCase()}`; speedFeedbackEl.className = 'text-lg font-bold mb-4 text-orange-300';
-                speedFeedbackEl.classList.remove('hidden'); speedChoicesEl.querySelectorAll('button').forEach(btn => { btn.disabled = true;
-                    if (btn.textContent.toLowerCase() === q.article) btn.className = 'btn bg-green-400 text-lg py-4 px-5';
-                    else btn.className = 'btn bg-gray-500 text-lg py-4 px-5 opacity-50';});
-                setTimeout(() => { speedCurrentIndex++; showSpeedQuestion(); }, 1500);
-            }, speedTimePerCard);
-        }
-        function toggleSpeedPause() {
-            speedPaused = !speedPaused; speedPauseBtn.textContent = speedPaused ? '▶️ Weiter' : '⏸️ Pause';
-            if (speedPaused) { clearInterval(speedInterval); const compStyle = getComputedStyle(timerFillEl);
-                timerFillEl.style.width = compStyle.width; timerFillEl.style.transition = 'none';
-            } else { if (speedCurrentIndex < speedQuestions.length && !speedAnswered) {
-                    const currWidthPx = parseFloat(timerFillEl.style.width||'0'); const parWidthPx = timerFillEl.parentNode.offsetWidth;
-                    const currWidthPerc = (currWidthPx / parWidthPx) * 100; const remTime = (currWidthPerc / 100) * speedTimePerCard;
-                    timerFillEl.style.transition = `width ${remTime / 1000}s linear`; timerFillEl.style.width = '0%';
-                    clearInterval(speedInterval); speedInterval = setTimeout(() => { if (speedPaused || speedAnswered) return; speedAnswered = true;
-                        const q = speedQuestions[speedCurrentIndex]; speedFeedbackEl.textContent = `⏰ Zeit um! Richtig: ${q.article.toUpperCase()}`;
-                        speedFeedbackEl.className = 'text-lg font-bold mb-4 text-orange-300'; speedFeedbackEl.classList.remove('hidden');
-                        setTimeout(() => { speedCurrentIndex++; showSpeedQuestion(); }, 1500);
-                    }, remTime); } }
-        }
-        function completeSpeedRound() {
-            clearInterval(speedInterval); speedRoundContainer.classList.add('hidden');
-            speedCompleteEl.classList.remove('hidden'); speedFinalScoreEl.textContent = speedScore; triggerConfetti();
-        }
+        // --- Speed Mode Functions (no major changes, just uses 'speedQuestions') ---
+        function startSpeedRound(){speedQuestions.length>0&&(speedCurrentIndex=0,speedScore=0,speedPaused=!1,speedAnswered=!1,speedCompleteEl.classList.add("hidden"),speedRoundContainer.classList.remove("hidden"),speedPauseBtn.textContent="⏸️ Pause",speedTotalQsEl.textContent=speedQuestions.length,speedFinalTotalEl.textContent=speedQuestions.length,showSpeedQuestion())}function showSpeedQuestion(){if(speedCurrentIndex>=speedQuestions.length)return void completeSpeedRound();speedAnswered=!1;const e=speedQuestions[speedCurrentIndex];speedWordDeEl.textContent=e.noun,speedWordTransEl.textContent=`${e.en} / ${e.es}`,speedProgressEl.textContent=`${speedCurrentIndex+1} / ${speedQuestions.length}`,speedFeedbackEl.classList.add("hidden"),speedChoicesEl.innerHTML="";const t=["der","die","das"],n={der:"btn-der",die:"btn-die",das:"btn-das"};t.forEach(s=>{const a=document.createElement("button");a.className=`btn ${n[s]} text-lg py-4 px-5`,a.textContent=s.toUpperCase(),a.onclick=()=>handleSpeedAnswer(s),speedChoicesEl.appendChild(a)});const s=["linear-gradient(135deg, #667eea 0%, #764ba2 100%)","linear-gradient(135deg, #f093fb 0%, #f5576c 100%)","linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)","linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)","linear-gradient(135deg, #fa709a 0%, #fee140 100%)"];speedRoundContainer.style.background=s[speedCurrentIndex%s.length],startSpeedTimer()}function handleSpeedAnswer(e){if(speedAnswered)return;speedAnswered=!0,clearInterval(speedInterval);const t=speedQuestions[speedCurrentIndex],n=e===t.article;n?(speedScore++,speedFeedbackEl.textContent="✅ Richtig!",speedFeedbackEl.className="text-lg font-bold mb-4 text-green-300"):(speedFeedbackEl.textContent=`❌ Falsch! Richtig: ${t.article.toUpperCase()}`,speedFeedbackEl.className="text-lg font-bold mb-4 text-red-300"),speedFeedbackEl.classList.remove("hidden");const s=speedChoicesEl.querySelectorAll("button");s.forEach(s=>{s.disabled=!0;const a=s.textContent.toLowerCase();a===e?s.className=n?"btn bg-green-600 text-lg py-4 px-5":"btn bg-red-600 text-lg py-4 px-5":a===t.article&&!n?s.className="btn bg-green-400 text-lg py-4 px-5":s.className="btn bg-gray-500 text-lg py-4 px-5 opacity-50"}),setTimeout(()=>{speedCurrentIndex++,showSpeedQuestion()},1500)}function startSpeedTimer(){if(speedPaused||speedAnswered)return;clearInterval(speedInterval),timerFillEl.style.transition="none",timerFillEl.style.width="100%",timerFillEl.offsetHeight,timerFillEl.style.transition=`width ${speedTimePerCard/1e3}s linear`,timerFillEl.style.width="0%",speedInterval=setTimeout(()=>{if(speedPaused||speedAnswered)return;speedAnswered=!0;const e=speedQuestions[speedCurrentIndex];speedFeedbackEl.textContent=`⏰ Zeit um! Richtig: ${e.article.toUpperCase()}`,speedFeedbackEl.className="text-lg font-bold mb-4 text-orange-300",speedFeedbackEl.classList.remove("hidden"),speedChoicesEl.querySelectorAll("button").forEach(t=>{t.disabled=!0,t.textContent.toLowerCase()===e.article?t.className="btn bg-green-400 text-lg py-4 px-5":t.className="btn bg-gray-500 text-lg py-4 px-5 opacity-50"}),setTimeout(()=>{speedCurrentIndex++,showSpeedQuestion()},1500)},speedTimePerCard)}function toggleSpeedPause(){speedPaused=!speedPaused,speedPauseBtn.textContent=speedPaused?"▶️ Weiter":"⏸️ Pause",speedPaused?(clearInterval(speedInterval),timerFillEl.style.width=getComputedStyle(timerFillEl).width,timerFillEl.style.transition="none"):speedCurrentIndex<speedQuestions.length&&!speedAnswered&&(timerFillEl.style.transition=`width ${parseFloat(timerFillEl.style.width||"0")/timerFillEl.parentNode.offsetWidth*speedTimePerCard/1e3}s linear`,timerFillEl.style.width="0%",clearInterval(speedInterval),speedInterval=setTimeout(()=>{if(speedPaused||speedAnswered)return;speedAnswered=!0;const e=speedQuestions[speedCurrentIndex];speedFeedbackEl.textContent=`⏰ Zeit um! Richtig: ${e.article.toUpperCase()}`,speedFeedbackEl.className="text-lg font-bold mb-4 text-orange-300",speedFeedbackEl.classList.remove("hidden"),setTimeout(()=>{speedCurrentIndex++,showSpeedQuestion()},1500)},parseFloat(timerFillEl.style.width||"0")/timerFillEl.parentNode.offsetWidth*speedTimePerCard))}function completeSpeedRound(){clearInterval(speedInterval),speedRoundContainer.classList.add("hidden"),speedCompleteEl.classList.remove("hidden"),speedFinalScoreEl.textContent=speedScore,triggerConfetti()}
 
         // --- Event Listeners & Initial Load ---
         function handleSpacebar(event) {
             if (event.code !== 'Space' && event.keyCode !== 32) return;
             if (document.activeElement && (document.activeElement.tagName === 'BUTTON' || document.activeElement.tagName === 'INPUT')) {
                 const activeId = document.activeElement.id;
-                const mainCtrlIds = ['next-question-btn', 'restart-quiz-btn'];
+                const mainCtrlIds = ['restart-quiz-btn'];
                 if (!mainCtrlIds.includes(activeId)) return;
             }
             event.preventDefault();
             if (!quizModeScreen.classList.contains('hidden')) {
-                if (!restartQuizBtn.classList.contains('hidden')) { clearAutoAdvance(autoAdvanceTimeout); restartQuizBtn.click(); }
-                else if (!nextQuestionBtn.classList.contains('hidden')) { clearAutoAdvance(autoAdvanceTimeout); nextQuestionBtn.click(); }
+                if (!restartQuizBtn.classList.contains('hidden')) { restartQuizBtn.click(); }
             }
         }
-
-        if(quizModeBtn) quizModeBtn.addEventListener('click', showQuizMode);
-        if(speedModeBtn) speedModeBtn.addEventListener('click', showSpeedMode);
-        if(backToMenuBtn) backToMenuBtn.addEventListener('click', showModeSelection);
-        if(artikelButtons) artikelButtons.forEach(button => button.addEventListener('click', () => handleAnswer(button.dataset.artikel)));
-        if(speedPauseBtn) speedPauseBtn.addEventListener('click', toggleSpeedPause);
-        if(speedRestartBtn) speedRestartBtn.addEventListener('click', startSpeedRound);
-        if(speedBackToMenuBtn) speedBackToMenuBtn.addEventListener('click', showModeSelection);
-        if(speedBackToMenuBtnIngame) speedBackToMenuBtnIngame.addEventListener('click', showModeSelection);
-        document.addEventListener('keydown', handleSpacebar);
-
+        
         async function initialSetup() {
-            if(quizModeBtn) quizModeBtn.disabled = true;
-            if(speedModeBtn) speedModeBtn.disabled = true;
-
+            quizModeBtn.disabled = true;
+            speedModeBtn.disabled = true;
+            settingsBtn.disabled = true;
+            
             const loadingMsg = document.createElement('p');
-            loadingMsg.id = "loading-data-msg";
             loadingMsg.textContent = "Lade Quizdaten...";
-            loadingMsg.className = "text-center text-purple-700 mb-4";
-            const modeSelDiv = modeSelectionScreen.querySelector('.mode-selection');
+            modeSelectionScreen.querySelector('.mode-selection').insertAdjacentElement('beforebegin', loadingMsg);
 
-            if (modeSelDiv) {
-                modeSelectionScreen.insertBefore(loadingMsg, modeSelDiv);
-            } else {
-                modeSelectionScreen.appendChild(loadingMsg);
-            }
-
+            loadSettings();
             await loadQuizData();
-
-            const existingMsg = document.getElementById('loading-data-msg');
-            if(existingMsg) existingMsg.remove();
+            
+            settingsBtn.disabled = false;
+            loadingMsg.remove();
         }
 
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initialSetup);
-        } else {
-            initialSetup();
-        }
+        // --- Event Listeners ---
+        quizModeBtn.addEventListener('click', showQuizMode);
+        speedModeBtn.addEventListener('click', showSpeedMode);
+        backToMenuBtn.addEventListener('click', showModeSelection);
+        artikelButtons.forEach(button => button.addEventListener('click', () => handleAnswer(button.dataset.artikel)));
+        speedPauseBtn.addEventListener('click', toggleSpeedPause);
+        speedRestartBtn.addEventListener('click', startSpeedRound);
+        speedBackToMenuBtn.addEventListener('click', showModeSelection);
+        speedBackToMenuBtnIngame.addEventListener('click', showModeSelection);
+        document.addEventListener('keydown', handleSpacebar);
+        settingsBtn.addEventListener('click', openSettings);
+        saveSettingsBtn.addEventListener('click', handleSaveSettings);
+        numQuestionsSlider.addEventListener('input', (e) => {
+            numQuestionsValue.textContent = e.target.value;
+        });
+        allQuestionsCheckbox.addEventListener('change', (e) => {
+            numQuestionsSlider.disabled = e.target.checked;
+        });
 
+        // --- App Start ---
+        initialSetup();
     </script>
 </body>
 </html>
