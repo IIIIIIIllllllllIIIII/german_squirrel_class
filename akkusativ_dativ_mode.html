@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Akkusativ & Dativ Trainer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <link href="[https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap)" rel="stylesheet">
+    <script src="[https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js](https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js)"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -17,11 +17,11 @@
             min-height: 100vh;
             margin: 0;
             padding: 16px; 
-            color: #f3e8ff; 
+            color: #f3e8ff; /* Light purple for text on dark bg */
             overflow-x: auto;
         }
         .card {
-            background-color: rgba(255, 255, 255, 0.08); 
+            background-color: rgba(255, 255, 255, 0.08); /* Semi-transparent white */
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.15);
             padding: 24px; 
@@ -29,7 +29,7 @@
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
             text-align: center;
             width: 100%;
-            max-width: 800px; /* Increased max-width for intro content */
+            max-width: 750px; 
             margin-top: 2vh;
             margin-bottom: 2vh;
         }
@@ -39,27 +39,44 @@
         .mode-title-subtitle { font-size: 0.9rem; sm:font-size: 1rem; color: #d8b4fe; margin-bottom: 24px; }
 
         .intro-toggle-button {
-            background-color: rgba(255,255,255,0.1); color: #e9d5ff;
-            border: 1px solid #d8b4fe; padding: 0.5rem 1rem; border-radius: 0.5rem;
-            cursor: pointer; transition: background-color 0.3s; margin-bottom: 1.5rem;
+            background-color: rgba(255,255,255,0.1);
+            color: #e9d5ff;
+            border: 1px solid #d8b4fe;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-bottom: 1.5rem;
         }
         .intro-toggle-button:hover { background-color: rgba(255,255,255,0.2); }
         
         #introduction-panel {
-            background-color: rgba(40, 10, 70, 0.3); /* Darker, slightly transparent purple */
-            padding: 1.5rem; border-radius: 0.75rem; margin-top: 1rem; margin-bottom: 2rem;
-            text-align: left; color: #ede9fe; 
+            background-color: rgba(0,0,0,0.25); 
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+            text-align: left;
+            color: #ede9fe; 
             border: 1px solid rgba(255,255,255,0.2);
-            max-height: 75vh; overflow-y: auto; 
+            max-height: 70vh; 
+            overflow-y: auto; 
         }
-        #introduction-panel h3 { /* Main section titles (e.g., El Caso Acusativo) */
-            font-size: 1.4rem; font-weight: 700; color: #f0abfc; /* Bright Pink/Magenta */
-            margin-top: 1.8rem; margin-bottom: 0.5rem; 
-            padding-bottom: 0.4rem; border-bottom: 2px solid #c084fc; /* Lighter Purple border */
+        #introduction-panel h3 { 
+            font-size: 1.3rem; 
+            font-weight: 700; 
+            color: #f0abfc; 
+            margin-top: 1.8rem; 
+            margin-bottom: 0.75rem; 
+            padding-bottom: 0.4rem; 
+            border-bottom: 2px solid #c084fc; 
         }
-        #introduction-panel h4 { /* Sub-section titles (e.g., Verbos Típicos) */
-            font-size: 1.15rem; font-weight: 600; color: #e9d5ff; /* Lightest Purple */
-            margin-top: 1.5rem; margin-bottom: 0.75rem;
+        #introduction-panel h4 { 
+            font-size: 1.15rem; 
+            font-weight: 600; 
+            color: #e9d5ff; 
+            margin-top: 1.5rem; 
+            margin-bottom: 0.75rem; 
         }
         #introduction-panel h3:first-child { margin-top: 0;}
         #introduction-panel p, #introduction-panel li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.85rem; color: #ede9fe;}
@@ -67,17 +84,17 @@
         #introduction-panel ul { list-style-type: none; padding-left: 0.5rem; margin-bottom:1rem;}
         #introduction-panel li { background-color: rgba(255,255,255,0.03); padding: 0.5rem; border-radius: 0.25rem; margin-bottom: 0.5rem;}
         #introduction-panel li .german-example { font-style: normal; color: #f3e8ff; display: block; margin-top: 0.15rem;}
-        #introduction-panel li .german-example strong { color: #f0abfc; } /* Highlight key parts */
+        #introduction-panel li .german-example strong { color: #f0abfc; } 
         #introduction-panel li .example-translation { font-size:0.85rem; font-style: italic; color: #d8b4fe; display: block; margin-top:0.15rem;}
 
 
         #introduction-panel table { 
             width: 100%; margin-top: 1rem; margin-bottom: 1.5rem; 
             border-collapse: separate; border-spacing: 0; font-size: 0.85rem; 
-            border: 1px solid #a855f7; border-radius: 0.5rem; overflow: hidden; /* For rounded corners on table */
+            border: 1px solid #a855f7; border-radius: 0.5rem; overflow: hidden; 
         }
         #introduction-panel th, #introduction-panel td { 
-            border-bottom: 1px solid #a855f7; padding: 0.75rem 0.6rem; text-align: left; 
+            border-bottom: 1px solid #a855f7; padding: 0.6rem 0.5rem; text-align: left; 
         }
         #introduction-panel tr:last-child td { border-bottom: none; }
         #introduction-panel tr td:not(:last-child), #introduction-panel tr th:not(:last-child) { border-right: 1px solid #a855f7; }
@@ -89,13 +106,13 @@
             background-color: rgba(255,255,255,0.07); 
             padding: 1rem; border-radius: 0.5rem; 
             margin: 1rem 0; font-style: italic; 
-            border-left: 4px solid #f0abfc; /* Pink border */
+            border-left: 4px solid #f0abfc; 
             color: #f5f3ff;
         }
         #introduction-panel .eselsbruecke strong { color: #f0abfc;}
 
 
-        .quiz-content-area { /* Styles if needed */ }
+        .quiz-content-area { }
         .sentence-display-container {
             background-color: rgba(255, 255, 255, 0.05); padding: 1.5rem;
             border-radius: 0.75rem; margin-bottom: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1);
@@ -153,7 +170,8 @@
 
         <button id="toggle-introduction-btn" class="intro-toggle-button">Einführung anzeigen / Mostrar Introducción</button>
 
-        <div id="introduction-panel" class="hidden"> <h3><span class="explanation-lang-marker">ES</span>¿Qué son los casos gramaticales? / <span class="explanation-lang-marker">EN</span>What are grammatical cases?</h3>
+        <div id="introduction-panel" class="hidden">
+            <h3><span class="explanation-lang-marker">ES</span>¿Qué son los casos gramaticales? / <span class="explanation-lang-marker">EN</span>What are grammatical cases?</h3>
             <p><span class="explanation-lang-marker">ES</span>En alemán, los sustantivos y sus acompañantes (artículos, adjetivos) cambian de forma según la función que desempeñan en la oración. Estas formas se llaman casos (Kasus). Los cuatro casos son Nominativo, Acusativo, Dativo y Genitivo. Aquí nos concentraremos en el Acusativo y el Dativo.</p>
             <p><span class="explanation-lang-marker">EN</span>In German, nouns and their companions (articles, adjectives) change their form depending on their function in the sentence. These forms are called cases (Kasus). The four cases are Nominative, Accusative, Dative, and Genitive. Here, we will focus on Accusative and Dative.</p>
 
@@ -219,13 +237,17 @@
                     <div class="example-sentence">Akk: Wir gehen <strong>in das Kino</strong> (ins Kino). <span class="example-translation">(ES: Vamos al cine. / EN: We go into the cinema.)</span></div>
                     <div class="example-sentence">Dat: Wir sind <strong>in dem Kino</strong> (im Kino). <span class="example-translation">(ES: Estamos en el cine. / EN: We are in the cinema.)</span></div>
                 </li>
+                 <li><span class="german-verb">an:</span>
+                    <div class="example-sentence">Akk: Er hängt das Bild <strong>an die Wand</strong>. <span class="example-translation">(ES: Él cuelga el cuadro en la pared (acción). / EN: He hangs the picture onto the wall.)</span></div>
+                    <div class="example-sentence">Dat: Das Bild hängt <strong>an der Wand</strong>. <span class="example-translation">(ES: El cuadro está colgado en la pared (posición). / EN: The picture is hanging on the wall.)</span></div>
+                </li>
             </ul>
             <div class="text-center mt-4">
                 <button id="close-introduction-btn" class="btn btn-secondary">Verstanden & Schließen / Entendido & Cerrar</button>
             </div>
         </div>
 
-        <div id="quiz-content-area" class=""> <div id="progress-score-area" class="progress-score-area">
+        <div id="quiz-content-area" class="hidden"> <div id="progress-score-area" class="progress-score-area">
                 <span id="progress-text-cases">Frage: 1/10</span>
                 <span id="score-text-cases">Punkte: 0</span>
             </div>
@@ -305,7 +327,7 @@
                 allCaseSentences = await response.json();
                 if (allCaseSentences.length === 0) throw new Error("case_practice.json is empty or does not contain valid questions.");
                 
-                // Start with quiz content visible and intro hidden by default
+                // Start with intro hidden and quiz content visible
                 introductionPanel.classList.add('hidden');
                 quizContentArea.classList.remove('hidden');
                 toggleIntroductionBtn.textContent = "Einführung anzeigen / Mostrar Introducción";
@@ -342,16 +364,11 @@
                 nextQuestionBtnCases.textContent = "Hauptmenü / Main Menu";
                 nextQuestionBtnCases.onclick = () => { window.location.href="index.html";};
                 nextQuestionBtnCases.classList.remove('hidden');
-                quizContentArea.classList.remove('hidden'); 
-                introductionPanel.classList.add('hidden');
                 return;
             }
             
             displayNextCaseQuestion();
             updateCaseProgressAndScore();
-            quizContentArea.classList.remove('hidden'); // Ensure quiz area is visible
-            introductionPanel.classList.add('hidden'); // Ensure intro is hidden
-            toggleIntroductionBtn.textContent = "Einführung anzeigen / Mostrar Introducción";
         }
 
         function displayNextCaseQuestion() {
@@ -405,9 +422,10 @@
             hintBtnCases.classList.remove('hidden');
             hintBtnCases.disabled = false;
             checkAnswerBtnCases.disabled = true; 
+            checkAnswerBtnCases.classList.remove('hidden');
             nextQuestionBtnCases.classList.add('hidden');
-            nextQuestionBtnCases.textContent = "Nächste / Siguiente"; 
-             nextQuestionBtnCases.onclick = () => { 
+            // Set default action for "Next" button for during the quiz
+            nextQuestionBtnCases.onclick = () => { 
                 currentCaseQuestionIndex++; 
                 displayNextCaseQuestion();
             }; 
@@ -466,8 +484,13 @@
             updateCaseProgressAndScore(); 
         });
         
-        nextQuestionBtnCases.addEventListener('click', () => { 
-            displayNextCaseQuestion(); 
+        // This primary listener for 'Next' is set once.
+        // It will be temporarily overridden by `startNewCaseRound` when the round ends.
+        nextQuestionBtnCases.addEventListener('click', () => {
+            // Default action is to go to the next question if not at the end of a round
+            if (currentCaseQuestionIndex < caseTrainerQuestions.length) {
+                 displayNextCaseQuestion();
+            }
         });
 
 
@@ -483,13 +506,9 @@
         toggleIntroductionBtn.addEventListener('click', () => {
             const introIsHidden = introductionPanel.classList.toggle('hidden');
             quizContentArea.classList.toggle('hidden', !introIsHidden);
-            if (introIsHidden) { // Intro is now hidden, quiz should be visible
+            if (introIsHidden) { 
                 toggleIntroductionBtn.textContent = "Einführung anzeigen / Mostrar Introducción";
-                // If quiz hasn't effectively started (no questions in current round yet) but data is loaded
-                if (caseTrainerQuestions.length === 0 && allCaseSentences.length > 0) {
-                    startNewCaseRound();
-                }
-            } else { // Intro is now visible, quiz should be hidden
+            } else { 
                 toggleIntroductionBtn.textContent = "Einführung schließen / Cerrar Introducción";
             }
         });
@@ -497,9 +516,6 @@
             introductionPanel.classList.add('hidden');
             quizContentArea.classList.remove('hidden');
             toggleIntroductionBtn.textContent = "Einführung anzeigen / Mostrar Introducción";
-            if (caseTrainerQuestions.length === 0 && allCaseSentences.length > 0) { 
-                 startNewCaseRound();
-            }
         });
 
         // Initial Load
