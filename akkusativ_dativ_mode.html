@@ -88,8 +88,19 @@
             display: inline-block; 
             border-bottom: 2px dashed #c084fc; 
             min-width: 120px; padding: 0 0.25rem;
+            /* Removed text color for empty blank */
+            /* color: #e9d5ff;  */
+        }
+        .noun-prompt-js { /* Style for the "Setze ein: der Mann (maskulin)" prompt */
+            font-size: 0.9rem;
+            color: #d8b4fe; /* Lighter than main text but readable */
+            font-style: italic;
+            margin-top: 0.25rem; /* Space below the main sentence */
+            margin-bottom: 0.75rem; /* Space above translations */
+        }
+        .noun-prompt-js strong {
+            color: #f3e8ff; /* Make the noun itself stand out a bit more */
             font-weight: 600;
-            color: #e9d5ff;
         }
         .sentence-translation { font-size: 0.85rem; sm:font-size:0.9rem; font-style: italic; color: #e9d5ff; margin-top: 0.25rem; }
 
@@ -231,13 +242,12 @@
             </div>
         </div>
 
-        <div id="quiz-content-area" class="quiz-content-area">
-            <div id="progress-score-area" class="progress-score-area">
+        <div id="quiz-content-area" class="quiz-content-area hidden"> <div id="progress-score-area" class="progress-score-area">
                 <span id="progress-text-cases">Frage: 1/10</span>
                 <span id="score-text-cases">Punkte: 0</span>
             </div>
             <div id="sentence-display-container" class="sentence-display-container">
-                <p id="sentence-german" class="sentence-german">Der Satz wird hier angezeigt... <span class="blank-placeholder">(das Nomen)</span>.</p>
+                <p id="sentence-german" class="sentence-german">Der Satz wird hier angezeigt... <span class="blank-placeholder"></span>.</p>
                 <p id="sentence-translation-en" class="sentence-translation">EN: English translation will appear here.</p>
                 <p id="sentence-translation-es" class="sentence-translation">ES: La traducción al español aparecerá aquí.</p>
             </div>
@@ -274,7 +284,7 @@
         let currentCaseQuestion = null;
         let currentCaseQuestionIndex = 0;
         let caseTrainerScore = 0;
-        let caseTrainerQuestions = [];
+        let caseTrainerQuestions = []; // This will hold the current round's questions
         let userSelectedOptionCases = null;
         let hintUsedForCurrentQuestion = false;
 
@@ -310,11 +320,15 @@
                 const response = await fetch('case_practice.json');
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status} for case_practice.json`);
                 allCaseSentences = await response.json();
-                if (allCaseSentences.length === 0) throw new Error("case_practice.json is empty.");
-                startNewCaseRound();
+                if (allCaseSentences.length === 0) throw new Error("case_practice.json is empty or does not contain valid questions.");
+                // Initially, show introduction, hide quiz
+                introductionPanel.classList.remove('hidden');
+                quizContentArea.classList.add('hidden');
+                toggleIntroductionBtn.textContent = "Einführung schließen / Cerrar Introducción";
             } catch (error) {
                 console.error("Could not load case practice data:", error);
-                sentenceGermanEl.textContent = `Error loading questions: ${error.message}`;
+                const mainCard = document.querySelector('.card');
+                mainCard.innerHTML = `<h1 class="mode-title text-red-400">Error</h1><p class="text-red-200">Could not load questions: ${error.message}. Please check the console and ensure 'case_practice.json' is available and correctly formatted.</p><a href="index.html" class="btn btn-secondary mt-4">Back to Menu</a>`;
             }
         }
 
@@ -329,31 +343,41 @@
             caseTrainerScore = 0;
             currentCaseQuestionIndex = 0;
             shuffleArray(allCaseSentences);
-            // For now, let's take a fixed number or all for simplicity. Settings can be added later.
             caseTrainerQuestions = allCaseSentences.slice(0, Math.min(10, allCaseSentences.length)); 
+            
             if (caseTrainerQuestions.length === 0) {
-                sentenceGermanEl.textContent = "No questions available for this round.";
+                sentenceGermanEl.textContent = "Keine Fragen verfügbar für diese Runde. / No questions available for this round.";
+                optionsContainerCases.innerHTML = '';
+                // Show only a back to menu or reload option.
+                checkAnswerBtnCases.classList.add('hidden');
+                hintBtnCases.classList.add('hidden');
+                nextQuestionBtnCases.textContent = "Hauptmenü / Main Menu";
+                nextQuestionBtnCases.onclick = () => { window.location.href="index.html";};
+                nextQuestionBtnCases.classList.remove('hidden');
+
                 return;
             }
+            
             displayNextCaseQuestion();
             updateCaseProgressAndScore();
-            introductionPanel.classList.add('hidden'); // Ensure intro is hidden when quiz starts
+            introductionPanel.classList.add('hidden'); 
             quizContentArea.classList.remove('hidden');
             toggleIntroductionBtn.textContent = "Einführung anzeigen / Mostrar Introducción";
         }
 
         function displayNextCaseQuestion() {
             if (currentCaseQuestionIndex >= caseTrainerQuestions.length) {
-                // End of round
                 sentenceGermanEl.innerHTML = `Runde beendet! Punktzahl: ${caseTrainerScore} / ${caseTrainerQuestions.length}<br>¡Ronda terminada! Puntuación: ${caseTrainerScore} / ${caseTrainerQuestions.length}`;
-                sentenceTranslationEnEl.textContent = "";
-                sentenceTranslationEsEl.textContent = "";
+                const nounPrompt = sentenceGermanEl.parentNode.querySelector('.noun-prompt-js');
+                if(nounPrompt) nounPrompt.remove();
+                sentenceTranslationEnEl.textContent = "Round finished! Click 'New Round' to start again.";
+                sentenceTranslationEsEl.textContent = "¡Ronda terminada! Haz clic en 'Nueva Ronda' para empezar de nuevo.";
                 optionsContainerCases.innerHTML = '';
                 hintBtnCases.classList.add('hidden');
                 checkAnswerBtnCases.classList.add('hidden');
                 nextQuestionBtnCases.textContent = "Neue Runde / Nueva Ronda";
                 nextQuestionBtnCases.classList.remove('hidden');
-                nextQuestionBtnCases.onclick = startNewCaseRound; // Reset for a new round
+                nextQuestionBtnCases.onclick = startNewCaseRound;
                 hintBoxEl.classList.add('hidden');
                 explanationBoxEl.classList.add('hidden');
                 return;
@@ -364,7 +388,16 @@
             hintUsedForCurrentQuestion = false;
 
             const sentenceParts = currentCaseQuestion.sentence_de_template.split('___');
-            sentenceGermanEl.innerHTML = `${sentenceParts[0]}<span class="blank-placeholder">(${currentCaseQuestion.target_noun_info.nominativ_form})</span>${sentenceParts[1] || ''}`;
+            sentenceGermanEl.innerHTML = `${sentenceParts[0]}<span class="blank-placeholder"></span>${sentenceParts[1] || ''}`;
+            
+            const existingPrompt = sentenceGermanEl.parentNode.querySelector('.noun-prompt-js');
+            if(existingPrompt) existingPrompt.remove();
+            
+            const nounPromptEl = document.createElement('p');
+            nounPromptEl.classList.add('noun-prompt-js'); 
+            nounPromptEl.innerHTML = `Setze ein / Insert / Inserta: <strong>${currentCaseQuestion.target_noun_info.nominativ_form}</strong> (${currentCaseQuestion.target_noun_info.gender})`;
+            sentenceGermanEl.parentNode.insertBefore(nounPromptEl, sentenceTranslationEnEl);
+
             sentenceTranslationEnEl.textContent = `EN: ${currentCaseQuestion.translation_en}`;
             sentenceTranslationEsEl.textContent = `ES: ${currentCaseQuestion.translation_es}`;
 
@@ -382,16 +415,15 @@
             explanationBoxEl.classList.add('hidden');
             hintBtnCases.classList.remove('hidden');
             hintBtnCases.disabled = false;
-            checkAnswerBtnCases.disabled = true; // Disabled until an option is selected
+            checkAnswerBtnCases.disabled = true; 
             nextQuestionBtnCases.classList.add('hidden');
-            nextQuestionBtnCases.textContent = "Nächste / Siguiente"; // Reset for next question
-            nextQuestionBtnCases.onclick = displayNextCaseQuestion; // Standard next question behavior
+            nextQuestionBtnCases.textContent = "Nächste / Siguiente"; 
+            nextQuestionBtnCases.onclick = displayNextCaseQuestion; 
 
             updateCaseProgressAndScore();
         }
 
         function handleCaseOptionClick(buttonEl, optionText) {
-            // Deselect previously selected button
             const currentlySelected = optionsContainerCases.querySelector('.option-btn.selected');
             if (currentlySelected) {
                 currentlySelected.classList.remove('selected');
@@ -406,7 +438,7 @@
             hintTextGermanEl.textContent = currentCaseQuestion.hint_de;
             hintTextSpanishEl.textContent = currentCaseQuestion.hint_es;
             hintBoxEl.classList.remove('hidden');
-            explanationBoxEl.classList.add('hidden'); // Hide explanation if hint is shown
+            explanationBoxEl.classList.add('hidden'); 
             hintBtnCases.disabled = true;
             hintUsedForCurrentQuestion = true;
         });
@@ -417,7 +449,7 @@
             const isCorrect = userSelectedOptionCases === currentCaseQuestion.correct_option_text;
             
             optionsContainerCases.querySelectorAll('.option-btn').forEach(btn => {
-                btn.disabled = true; // Disable all options
+                btn.disabled = true; 
                 if (btn.textContent === currentCaseQuestion.correct_option_text) {
                     btn.classList.add('correct');
                 } else if (btn.textContent === userSelectedOptionCases && !isCorrect) {
@@ -427,23 +459,25 @@
 
             if (isCorrect) {
                 caseTrainerScore++;
-                if(typeof confetti === 'function') confetti();
+                if(typeof confetti === 'function') confetti({ particleCount: 80, spread: 70, origin: {y: 0.6}});
             }
             
             explanationTextGermanEl.textContent = currentCaseQuestion.explanation_de;
             explanationTextSpanishEl.textContent = currentCaseQuestion.explanation_es;
             fullSentenceDisplayEl.textContent = `DE: ${currentCaseQuestion.full_correct_sentence_de}`;
             explanationBoxEl.classList.remove('hidden');
-            hintBoxEl.classList.add('hidden'); // Hide hint when explanation is shown
+            hintBoxEl.classList.add('hidden'); 
 
             checkAnswerBtnCases.classList.add('hidden');
             hintBtnCases.classList.add('hidden');
             nextQuestionBtnCases.classList.remove('hidden');
-            currentCaseQuestionIndex++;
-            updateCaseProgressAndScore();
+            updateCaseProgressAndScore(); // Update score display immediately
         });
         
-        nextQuestionBtnCases.addEventListener('click', displayNextCaseQuestion);
+        nextQuestionBtnCases.addEventListener('click', () => {
+            currentCaseQuestionIndex++; // Move to next question logic is now here
+            displayNextCaseQuestion();
+        });
 
 
         function updateCaseProgressAndScore() {
@@ -456,6 +490,9 @@
             quizContentArea.classList.toggle('hidden', !introductionPanel.classList.contains('hidden'));
             if (introductionPanel.classList.contains('hidden')) {
                 toggleIntroductionBtn.textContent = "Einführung anzeigen / Mostrar Introducción";
+                if (caseTrainerQuestions.length === 0 && allCaseSentences.length > 0) { // If quiz hasn't started, start it
+                    startNewCaseRound();
+                }
             } else {
                 toggleIntroductionBtn.textContent = "Einführung schließen / Cerrar Introducción";
             }
@@ -464,6 +501,9 @@
             introductionPanel.classList.add('hidden');
             quizContentArea.classList.remove('hidden');
             toggleIntroductionBtn.textContent = "Einführung anzeigen / Mostrar Introducción";
+            if (caseTrainerQuestions.length === 0 && allCaseSentences.length > 0) { // If quiz hasn't started, start it
+                 startNewCaseRound();
+            }
         });
 
         // Initial Load
