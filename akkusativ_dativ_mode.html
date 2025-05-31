@@ -29,7 +29,7 @@
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
             text-align: center;
             width: 100%;
-            max-width: 750px; 
+            max-width: 800px; /* Increased max-width for intro content */
             margin-top: 2vh;
             margin-bottom: 2vh;
         }
@@ -39,116 +39,80 @@
         .mode-title-subtitle { font-size: 0.9rem; sm:font-size: 1rem; color: #d8b4fe; margin-bottom: 24px; }
 
         .intro-toggle-button {
-            background-color: rgba(255,255,255,0.1);
-            color: #e9d5ff;
-            border: 1px solid #d8b4fe;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-bottom: 1.5rem;
+            background-color: rgba(255,255,255,0.1); color: #e9d5ff;
+            border: 1px solid #d8b4fe; padding: 0.5rem 1rem; border-radius: 0.5rem;
+            cursor: pointer; transition: background-color 0.3s; margin-bottom: 1.5rem;
         }
         .intro-toggle-button:hover { background-color: rgba(255,255,255,0.2); }
         
         #introduction-panel {
-            background-color: rgba(0,0,0,0.25); /* Darker for more contrast */
-            padding: 1.5rem;
-            border-radius: 0.75rem;
-            margin-top: 1rem;
-            margin-bottom: 2rem;
-            text-align: left;
-            color: #ede9fe; /* Lighter violet for main text */
+            background-color: rgba(40, 10, 70, 0.3); /* Darker, slightly transparent purple */
+            padding: 1.5rem; border-radius: 0.75rem; margin-top: 1rem; margin-bottom: 2rem;
+            text-align: left; color: #ede9fe; 
             border: 1px solid rgba(255,255,255,0.2);
-            max-height: 70vh; 
-            overflow-y: auto; 
+            max-height: 75vh; overflow-y: auto; 
         }
-        #introduction-panel h3 { 
-            font-size: 1.3rem; /* Slightly larger */
-            font-weight: 700; /* Bolder */
-            color: #f0abfc; /* Light Magenta/Pink */
-            margin-top: 1.5rem; 
-            margin-bottom: 0.75rem; 
-            border-bottom: 2px solid #d8b4fe; /* More prominent border */
-            padding-bottom: 0.4rem;
+        #introduction-panel h3 { /* Main section titles (e.g., El Caso Acusativo) */
+            font-size: 1.4rem; font-weight: 700; color: #f0abfc; /* Bright Pink/Magenta */
+            margin-top: 1.8rem; margin-bottom: 0.5rem; 
+            padding-bottom: 0.4rem; border-bottom: 2px solid #c084fc; /* Lighter Purple border */
         }
-        #introduction-panel h4 { 
-            font-size: 1.1rem; 
-            font-weight: 600; 
-            color: #e9d5ff; /* Lighter than h3 */
-            margin-top: 1.25rem; 
-            margin-bottom: 0.6rem; 
+        #introduction-panel h4 { /* Sub-section titles (e.g., Verbos Típicos) */
+            font-size: 1.15rem; font-weight: 600; color: #e9d5ff; /* Lightest Purple */
+            margin-top: 1.5rem; margin-bottom: 0.75rem;
         }
         #introduction-panel h3:first-child { margin-top: 0;}
         #introduction-panel p, #introduction-panel li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.85rem; color: #ede9fe;}
-        #introduction-panel ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom:1rem;}
-        #introduction-panel table { width: 100%; margin-top: 1rem; margin-bottom: 1.5rem; border-collapse: separate; border-spacing:0; font-size: 0.85rem; border: 1px solid #a855f7;}
-        #introduction-panel th, #introduction-panel td { border-bottom: 1px solid #a855f7; padding: 0.6rem 0.5rem; text-align: left; }
+        #introduction-panel .explanation-lang-marker { font-size: 0.8rem; font-weight: bold; color: #f5d0fe; display: block; margin-bottom: 0.25rem;}
+        #introduction-panel ul { list-style-type: none; padding-left: 0.5rem; margin-bottom:1rem;}
+        #introduction-panel li { background-color: rgba(255,255,255,0.03); padding: 0.5rem; border-radius: 0.25rem; margin-bottom: 0.5rem;}
+        #introduction-panel li .german-example { font-style: normal; color: #f3e8ff; display: block; margin-top: 0.15rem;}
+        #introduction-panel li .german-example strong { color: #f0abfc; } /* Highlight key parts */
+        #introduction-panel li .example-translation { font-size:0.85rem; font-style: italic; color: #d8b4fe; display: block; margin-top:0.15rem;}
+
+
+        #introduction-panel table { 
+            width: 100%; margin-top: 1rem; margin-bottom: 1.5rem; 
+            border-collapse: separate; border-spacing: 0; font-size: 0.85rem; 
+            border: 1px solid #a855f7; border-radius: 0.5rem; overflow: hidden; /* For rounded corners on table */
+        }
+        #introduction-panel th, #introduction-panel td { 
+            border-bottom: 1px solid #a855f7; padding: 0.75rem 0.6rem; text-align: left; 
+        }
         #introduction-panel tr:last-child td { border-bottom: none; }
-        #introduction-panel th { background-color: rgba(167, 139, 250, 0.2); color: #f5d0fe; font-weight: 600;}
+        #introduction-panel tr td:not(:last-child), #introduction-panel tr th:not(:last-child) { border-right: 1px solid #a855f7; }
+        #introduction-panel th { 
+            background-color: rgba(167, 139, 250, 0.25); color: #f5d0fe; font-weight: 600;
+        }
         #introduction-panel td strong { color: #f0abfc; font-weight: 600; } 
         #introduction-panel .eselsbruecke { 
             background-color: rgba(255,255,255,0.07); 
-            padding: 1rem; 
-            border-radius: 0.5rem; 
-            margin: 1rem 0; 
-            font-style: italic; 
-            border-left: 4px solid #c084fc;
+            padding: 1rem; border-radius: 0.5rem; 
+            margin: 1rem 0; font-style: italic; 
+            border-left: 4px solid #f0abfc; /* Pink border */
             color: #f5f3ff;
         }
-        #introduction-panel .example-sentence { margin-left: 1rem; font-style: italic; color: #d8b4fe; margin-bottom: 0.35rem;}
-        #introduction-panel .example-sentence strong { color: #f0abfc; }
+        #introduction-panel .eselsbruecke strong { color: #f0abfc;}
 
 
-        .quiz-content-area { /* Container for sentence and options */
-             /* Styles if needed */
-        }
-
+        .quiz-content-area { /* Styles if needed */ }
         .sentence-display-container {
-            background-color: rgba(255, 255, 255, 0.05);
-            padding: 1.5rem;
-            border-radius: 0.75rem;
-            margin-bottom: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.05); padding: 1.5rem;
+            border-radius: 0.75rem; margin-bottom: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .sentence-german { font-size: 1.25rem; sm:font-size: 1.5rem; line-height: 2; color: #f3e8ff; margin-bottom: 0.5rem;}
-        .sentence-german .blank-placeholder { 
-            display: inline-block; 
-            border-bottom: 2px dashed #c084fc; 
-            min-width: 120px; padding: 0 0.25rem;
-        }
-        .noun-prompt-js { 
-            font-size: 0.9rem;
-            color: #d8b4fe; 
-            font-style: italic;
-            margin-top: 0.25rem; 
-            margin-bottom: 0.75rem; 
-        }
-        .noun-prompt-js strong {
-            color: #f3e8ff; 
-            font-weight: 600;
-        }
+        .sentence-german .blank-placeholder { display: inline-block; border-bottom: 2px dashed #c084fc; min-width: 120px; padding: 0 0.25rem; }
+        .noun-prompt-js { font-size: 0.9rem; color: #d8b4fe; font-style: italic; margin-top: 0.25rem; margin-bottom: 0.75rem; }
+        .noun-prompt-js strong { color: #f3e8ff; font-weight: 600; }
         .sentence-translation { font-size: 0.85rem; sm:font-size:0.9rem; font-style: italic; color: #e9d5ff; margin-top: 0.25rem; }
 
-        .options-container {
-            display: grid;
-            grid-template-columns: 1fr; 
-            gap: 0.75rem;
-            margin-bottom: 1.5rem;
-        }
-        @media (min-width: 640px) { 
-             .options-container { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
-        }
+        .options-container { display: grid; grid-template-columns: 1fr; gap: 0.75rem; margin-bottom: 1.5rem; }
+        @media (min-width: 640px) { .options-container { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); } }
 
         .option-btn {
-            background-color: #7e22ce; 
-            color: white;
-            padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
-            border: 2px solid transparent;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            width: 100%;
+            background-color: #7e22ce; color: white; padding: 0.75rem 1rem;
+            border-radius: 0.5rem; border: 2px solid transparent; font-weight: 500;
+            cursor: pointer; transition: all 0.2s ease; width: 100%;
         }
         .option-btn:hover:not(:disabled) { background-color: #9333ea; border-color: #a855f7; }
         .option-btn.selected { background-color: #c084fc; border-color: #e9d5ff; color: #3b0764; }
@@ -157,13 +121,8 @@
         .option-btn.incorrect { background-color: #ef4444 !important; border-color: #dc2626 !important; color:white !important;}
 
         .feedback-box {
-            background-color: rgba(0,0,0,0.25);
-            padding: 1rem;
-            border-radius: 0.5rem;
-            margin-top: 1rem;
-            text-align: left;
-            color: #e9d5ff;
-            font-size: 0.9rem;
+            background-color: rgba(0,0,0,0.25); padding: 1rem; border-radius: 0.5rem;
+            margin-top: 1rem; text-align: left; color: #e9d5ff; font-size: 0.9rem;
         }
         .feedback-box h4 { font-weight: 600; margin-bottom: 0.5rem; color: #f5d0fe; font-size: 1rem;}
         .feedback-box p { line-height: 1.6; }
@@ -172,8 +131,7 @@
         
         .btn {
             padding: 10px 20px; border-radius: 8px; font-size: 0.95rem; font-weight: 600;
-            color: #581c87; 
-            background-color: #e9d5ff; 
+            color: #581c87; background-color: #e9d5ff; 
             cursor: pointer; transition: all 0.3s ease;
             border: none; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
             margin: 0.5rem; 
@@ -195,119 +153,71 @@
 
         <button id="toggle-introduction-btn" class="intro-toggle-button">Einführung anzeigen / Mostrar Introducción</button>
 
-        <div id="introduction-panel" class="hidden">
-            <h3>Was sind Fälle (Kasus)? / ¿Qué son los casos gramaticales?</h3>
-            <p>Im Deutschen verändern Nomen und ihre Begleiter (Artikel, Adjektive) ihre Form, je nachdem, welche Funktion sie im Satz haben. Diese Formen nennt man Fälle oder Kasus. Die vier Fälle sind Nominativ, Akkusativ, Dativ und Genitiv. Hier konzentrieren wir uns auf Akkusativ und Dativ.</p>
-            <p>En alemán, los sustantivos y sus acompañantes (artículos, adjetivos) cambian de forma según la función que desempeñan en la oración. Estas formas se llaman casos. Los cuatro casos son Nominativo, Acusativo, Dativo y Genitivo. Aquí nos concentraremos en el Acusativo y el Dativo.</p>
+        <div id="introduction-panel" class="hidden"> <h3><span class="explanation-lang-marker">ES</span>¿Qué son los casos gramaticales? / <span class="explanation-lang-marker">EN</span>What are grammatical cases?</h3>
+            <p><span class="explanation-lang-marker">ES</span>En alemán, los sustantivos y sus acompañantes (artículos, adjetivos) cambian de forma según la función que desempeñan en la oración. Estas formas se llaman casos (Kasus). Los cuatro casos son Nominativo, Acusativo, Dativo y Genitivo. Aquí nos concentraremos en el Acusativo y el Dativo.</p>
+            <p><span class="explanation-lang-marker">EN</span>In German, nouns and their companions (articles, adjectives) change their form depending on their function in the sentence. These forms are called cases (Kasus). The four cases are Nominative, Accusative, Dative, and Genitive. Here, we will focus on Accusative and Dative.</p>
 
-            <h3>Nominativ (Der Wer-Fall / El caso Quién)</h3>
-            <p>Der Nominativ ist der Grundfall. Er bezeichnet das Subjekt des Satzes – also wer oder was etwas tut.</p>
-            <p>Man fragt: <strong>Wer oder Was?</strong> Beispiel: <strong>Der Mann</strong> liest. (Wer liest? Der Mann.)</p>
-            <p>El Nominativo es el caso básico. Designa al sujeto de la oración, es decir, quién o qué realiza una acción.</p>
-            <p>Se pregunta: <strong>¿Quién o Qué?</strong> Ejemplo: <strong>El hombre</strong> lee. (¿Quién lee? El hombre.)</p>
+            <h3><span class="explanation-lang-marker">ES</span>Nominativo (El caso "Quién/Qué") / <span class="explanation-lang-marker">EN</span>Nominative (The "Who/What" Case)</h3>
+            <p><span class="explanation-lang-marker">ES</span>El Nominativo es el caso básico. Designa al sujeto de la oración, es decir, quién o qué realiza una acción. Se pregunta: <strong>Wer oder Was?</strong> (¿Quién o Qué?).</p>
+            <p><span class="explanation-lang-marker">EN</span>The Nominative is the basic case. It identifies the subject of the sentence – who or what is performing an action. You ask: <strong>Wer oder Was?</strong> (Who or What?).</p>
+            <div class="example-sentence">DE: <strong>Der Mann</strong> liest. <span class="example-translation">(ES: El hombre lee. / EN: The man reads.)</span></div>
 
-            <h3>Akkusativ (Der Wen-Fall / El caso A quién/Qué - objeto directo)</h3>
-            <p>Der Akkusativ bezeichnet oft das direkte Objekt – also auf wen oder was sich die Handlung des Subjekts direkt bezieht.</p>
-            <p>Man fragt: <strong>Wen oder Was?</strong></p>
-            <h4>Typische Verben mit Akkusativ / Verbos típicos con Acusativo:</h4>
+            <h3><span class="explanation-lang-marker">ES</span>Acusativo (El caso del objeto directo) / <span class="explanation-lang-marker">EN</span>Accusative (The direct object case)</h3>
+            <p><span class="explanation-lang-marker">ES</span>El Acusativo a menudo designa el objeto directo, es decir, sobre quién o qué recae directamente la acción del sujeto. Se pregunta: <strong>Wen oder Was?</strong> (¿A quién o Qué?).</p>
+            <p><span class="explanation-lang-marker">EN</span>The Accusative often identifies the direct object – who or what is directly affected by the subject's action. You ask: <strong>Wen oder Was?</strong> (Whom or What?).</p>
+            
+            <h4><span class="explanation-lang-marker">ES</span>Verbos Típicos con Acusativo / <span class="explanation-lang-marker">EN</span>Typical Verbs with Accusative:</h4>
             <ul>
-                <li><strong>haben</strong> (to have): <span class="example-sentence">Ich habe <strong>einen Hund</strong>.</span></li>
-                <li><strong>sehen</strong> (to see): <span class="example-sentence">Siehst du <strong>den Vogel</strong>?</span></li>
-                <li><strong>kaufen</strong> (to buy): <span class="example-sentence">Er kauft <strong>eine Blume</strong>.</span></li>
-                <li><strong>lesen</strong> (to read): <span class="example-sentence">Wir lesen <strong>das Buch</strong>.</span></li>
-                <li><strong>brauchen</strong> (to need): <span class="example-sentence">Ihr braucht <strong>einen Stift</strong>.</span></li>
-                <li><strong>suchen</strong> (to look for): <span class="example-sentence">Ich suche <strong>meine Schlüssel</strong> (Plural).</span></li>
-                <li><strong>finden</strong> (to find): <span class="example-sentence">Sie findet <strong>die Lösung</strong>.</span></li>
-                <li><strong>essen</strong> (to eat): <span class="example-sentence">Das Kind isst <strong>einen Apfel</strong>.</span></li>
-                <li><strong>trinken</strong> (to drink): <span class="example-sentence">Du trinkst <strong>den Saft</strong>.</span></li>
-                <li><strong>fragen</strong> (to ask sb.): <span class="example-sentence">Ich frage <strong>den Lehrer</strong>.</span></li>
-                <li><strong>treffen</strong> (to meet sb.): <span class="example-sentence">Sie trifft <strong>ihre Freunde</strong> (Plural).</span></li>
+                <li><span class="german-verb">haben</span> (tener/to have): <span class="german-example">Ich habe <strong>einen Hund</strong>.</span> <span class="example-translation">(ES: Tengo un perro. / EN: I have a dog.)</span></li>
+                <li><span class="german-verb">sehen</span> (ver/to see): <span class="german-example">Siehst du <strong>den Vogel</strong>?</span> <span class="example-translation">(ES: ¿Ves el pájaro? / EN: Do you see the bird?)</span></li>
+                <li><span class="german-verb">kaufen</span> (comprar/to buy): <span class="german-example">Er kauft <strong>eine Blume</strong>.</span> <span class="example-translation">(ES: Él compra una flor. / EN: He buys a flower.)</span></li>
+                <li><span class="german-verb">lesen</span> (leer/to read): <span class="german-example">Wir lesen <strong>das Buch</strong>.</span> <span class="example-translation">(ES: Leemos el libro. / EN: We read the book.)</span></li>
+                <li><span class="german-verb">brauchen</span> (necesitar/to need): <span class="german-example">Ihr braucht <strong>einen Stift</strong>.</span> <span class="example-translation">(ES: Necesitáis un bolígrafo. / EN: You all need a pen.)</span></li>
             </ul>
-            <h4>Präpositionen, die immer den Akkusativ verlangen / Preposiciones que siempre requieren Acusativo:</h4>
-            <p><strong>durch, für, gegen, ohne, um</strong>. (Eselsbrücke / Mnemotecnia: "DUFOG")</p>
+            <h4><span class="explanation-lang-marker">ES</span>Preposiciones Siempre con Acusativo / <span class="explanation-lang-marker">EN</span>Prepositions Always with Accusative:</h4>
+            <p><strong>durch, für, gegen, ohne, um</strong> (Mnemotecnia/Mnemonic: "DUFOG")</p>
             <ul>
-                <li><strong>durch:</strong> <span class="example-sentence">Wir gehen durch <strong>den Park</strong>. (Caminamos por el parque.)</span></li>
-                <li><strong>für:</strong> <span class="example-sentence">Das Geschenk ist für <strong>meine Mutter</strong>. (El regalo es para mi madre.)</span></li>
-                <li><strong>gegen:</strong> <span class="example-sentence">Er spielt gegen <strong>seinen Bruder</strong>. (Él juega contra su hermano.)</span></li>
-                <li><strong>ohne:</strong> <span class="example-sentence">Ich gehe ohne <strong>meinen Mantel</strong>. (Voy sin mi abrigo.)</span></li>
-                <li><strong>um:</strong> <span class="example-sentence">Sie geht um <strong>die Ecke</strong>. (Ella dobla la esquina.)</span></li>
+                <li><span class="german-verb">durch</span> (a través de/through): <span class="german-example">Wir gehen durch <strong>den Park</strong>.</span> <span class="example-translation">(ES: Caminamos por el parque. / EN: We walk through the park.)</span></li>
+                <li><span class="german-verb">für</span> (para/for): <span class="german-example">Das ist für <strong>meine Mutter</strong>.</span> <span class="example-translation">(ES: Esto es para mi madre. / EN: This is for my mother.)</span></li>
             </ul>
-            <h4>Artikel im Akkusativ / Artículos en Acusativo</h4>
-            <table><thead><tr><th>Geschlecht</th><th>Bestimmter Artikel</th><th>Unbestimmter Artikel</th><th>Kein-Artikel</th></tr></thead><tbody><tr><td>Maskulin (der)</td><td><strong>den</strong></td><td><strong>einen</strong></td><td><strong>keinen</strong></td></tr><tr><td>Feminin (die)</td><td><strong>die</strong></td><td><strong>eine</strong></td><td><strong>keine</strong></td></tr><tr><td>Neutrum (das)</td><td><strong>das</strong></td><td><strong>ein</strong></td><td><strong>kein</strong></td></tr><tr><td>Plural (die)</td><td><strong>die</strong></td><td>- (keine)</td><td><strong>keine</strong></td></tr></tbody></table>
+            <h4><span class="explanation-lang-marker">ES</span>Artículos en Acusativo / <span class="explanation-lang-marker">EN</span>Articles in Accusative</h4>
+            <table><thead><tr><th>Género/Gender</th><th>Definido/Definite</th><th>Indefinido/Indefinite</th><th>Negación/Negation (kein-)</th></tr></thead><tbody><tr><td>Maskulin (der)</td><td><strong>den</strong></td><td><strong>einen</strong></td><td><strong>keinen</strong></td></tr><tr><td>Feminin (die)</td><td><strong>die</strong></td><td><strong>eine</strong></td><td><strong>keine</strong></td></tr><tr><td>Neutrum (das)</td><td><strong>das</strong></td><td><strong>ein</strong></td><td><strong>kein</strong></td></tr><tr><td>Plural (die)</td><td><strong>die</strong></td><td>- (keine)</td><td><strong>keine</strong></td></tr></tbody></table>
 
-            <h3>Dativ (Der Wem-Fall / El caso A quién - objeto indirecto)</h3>
-            <p>Der Dativ bezeichnet oft das indirekte Objekt – also wem etwas gegeben wird, für wen etwas getan wird, oder das Ziel einer Handlung.</p>
-            <p>Man fragt: <strong>Wem?</strong></p>
-            <h4>Typische Verben mit Dativ / Verbos típicos con Dativo:</h4>
+            <h3><span class="explanation-lang-marker">ES</span>Dativo (El caso del objeto indirecto) / <span class="explanation-lang-marker">EN</span>Dative (The indirect object case)</h3>
+            <p><span class="explanation-lang-marker">ES</span>El Dativo a menudo designa el objeto indirecto: a quién se da algo, para quién se hace algo. Se pregunta: <strong>Wem?</strong> (¿A quién?).</p>
+            <p><span class="explanation-lang-marker">EN</span>The Dative often identifies the indirect object: to whom something is given, for whom something is done. You ask: <strong>Wem?</strong> (To whom?).</p>
+            <h4><span class="explanation-lang-marker">ES</span>Verbos Típicos con Dativo / <span class="explanation-lang-marker">EN</span>Typical Verbs with Dative:</h4>
             <ul>
-                <li><strong>helfen</strong> (to help): <span class="example-sentence">Ich helfe <strong>dir</strong>. / Er hilft <strong>dem Mann</strong>.</span></li>
-                <li><strong>danken</strong> (to thank): <span class="example-sentence">Wir danken <strong>Ihnen</strong>. / Sie dankt <strong>ihrer Freundin</strong>.</span></li>
-                <li><strong>gefallen</strong> (to please): <span class="example-sentence">Das Auto gefällt <strong>mir</strong>. / Die Stadt gefällt <strong>den Touristen</strong> (Plural).</span></li>
-                <li><strong>gehören</strong> (to belong to): <span class="example-sentence">Das Buch gehört <strong>dem Studenten</strong>.</span></li>
-                <li><strong>antworten</strong> (to answer sb.): <span class="example-sentence">Bitte antworte <strong>mir</strong> schnell.</span></li>
-                <li><strong>zuhören</strong> (to listen to sb.): <span class="example-sentence">Die Kinder hören <strong>dem Lehrer</strong> zu.</span></li>
-                <li><strong>schmecken</strong> (to taste good to sb.): <span class="example-sentence">Die Pizza schmeckt <strong>uns</strong> gut.</span></li>
-                <li><strong>passen</strong> (to fit sb. - clothing): <span class="example-sentence">Die Jacke passt <strong>dir</strong> nicht.</span></li>
+                <li><span class="german-verb">helfen</span> (ayudar/to help): <span class="german-example">Ich helfe <strong>dir</strong>. / Er hilft <strong>dem Mann</strong>.</span> <span class="example-translation">(ES: Te ayudo. / Él ayuda al hombre. EN: I help you. / He helps the man.)</span></li>
+                <li><span class="german-verb">danken</span> (agradecer/to thank): <span class="german-example">Wir danken <strong>Ihnen</strong>. / Sie dankt <strong>ihrer Freundin</strong>.</span> <span class="example-translation">(ES: Le agradecemos a usted. / Ella agradece a su amiga. EN: We thank you (formal). / She thanks her friend.)</span></li>
+                <li><span class="german-verb">gefallen</span> (gustar/to please): <span class="german-example">Das Auto gefällt <strong>mir</strong>.</span> <span class="example-translation">(ES: Me gusta el coche. / EN: I like the car.)</span></li>
             </ul>
-            <h4>Präpositionen, die immer den Dativ verlangen / Preposiciones que siempre requieren Dativo:</h4>
-            <p><strong>aus, bei, mit, nach, seit, von, zu, gegenüber</strong>. (Eselsbrücke: "Aus bei mit nach seit von zu, fährst immer mit dem Dativ du!")</p>
+            <h4><span class="explanation-lang-marker">ES</span>Preposiciones Siempre con Dativo / <span class="explanation-lang-marker">EN</span>Prepositions Always with Dative:</h4>
+            <p><strong>aus, bei, mit, nach, seit, von, zu, gegenüber</strong> (Mnemotecnia: "Aus bei mit nach seit von zu...")</p>
             <ul>
-                <li><strong>aus:</strong> <span class="example-sentence">Er kommt aus <strong>der Schweiz</strong>. (Él viene de Suiza.)</span></li>
-                <li><strong>bei:</strong> <span class="example-sentence">Sie wohnt bei <strong>ihren Eltern</strong>. (Ella vive con sus padres.)</span></li>
-                <li><strong>mit:</strong> <span class="example-sentence">Ich spiele mit <strong>meinem Hund</strong>. (Juego con mi perro.)</span></li>
-                <li><strong>nach:</strong> <span class="example-sentence">Wir fahren nach <strong>Hause</strong> / nach <strong>Deutschland</strong>. (Vamos a casa / a Alemania.)</span></li>
-                <li><strong>seit:</strong> <span class="example-sentence">Ich lerne Deutsch seit <strong>einem Jahr</strong>. (Aprendo alemán desde hace un año.)</span></li>
-                <li><strong>von:</strong> <span class="example-sentence">Das ist ein Geschenk von <strong>meinem Freund</strong>. (Este es un regalo de mi amigo.)</span></li>
-                <li><strong>zu:</strong> <span class="example-sentence">Sie geht zu <strong>dem Arzt</strong> (zum Arzt). (Ella va al médico.)</span></li>
-                <li><strong>gegenüber:</strong> <span class="example-sentence">Die Bank ist <strong>dem Hotel</strong> gegenüber. (El banco está enfrente del hotel.)</span></li>
+                <li><span class="german-verb">aus</span> (de/from): <span class="german-example">Er kommt aus <strong>der Schweiz</strong>.</span> <span class="example-translation">(ES: Él viene de Suiza. / EN: He comes from Switzerland.)</span></li>
+                <li><span class="german-verb">mit</span> (con/with): <span class="german-example">Ich spiele mit <strong>meinem Hund</strong>.</span> <span class="example-translation">(ES: Juego con mi perro. / EN: I play with my dog.)</span></li>
+                 <li><span class="german-verb">zu</span> (a, hacia/to): <span class="german-example">Sie geht zu <strong>dem Arzt</strong> (zum Arzt).</span> <span class="example-translation">(ES: Ella va al médico. / EN: She goes to the doctor.)</span></li>
             </ul>
-            <h4>Artikel im Dativ / Artículos en Dativo</h4>
-            <table><thead><tr><th>Geschlecht</th><th>Bestimmter Artikel</th><th>Unbestimmter Artikel</th><th>Kein-Artikel</th></tr></thead><tbody><tr><td>Maskulin (der)</td><td><strong>dem</strong></td><td><strong>einem</strong></td><td><strong>keinem</strong></td></tr><tr><td>Feminin (die)</td><td><strong>der</strong></td><td><strong>einer</strong></td><td><strong>keiner</strong></td></tr><tr><td>Neutrum (das)</td><td><strong>dem</strong></td><td><strong>einem</strong></td><td><strong>keinem</strong></td></tr><tr><td>Plural (die)</td><td><strong>den</strong> (+n am Nomen)</td><td>- (keinen)</td><td><strong>keinen</strong> (+n am Nomen)</td></tr></tbody></table>
-            <div class="eselsbruecke">Merkregel für Dativ Plural Endung: Fast alle Nomen bekommen im Dativ Plural ein <strong>-n</strong>, wenn sie nicht schon auf -n oder -s enden. (z.B. die Kinder -> den Kindern, die Autos -> den Autos).<br>Mnemotecnia para la terminación del Dativo Plural: Casi todos los sustantivos reciben una <strong>-n</strong> en dativo plural si no terminan ya en -n o -s. (ej. die Kinder -> den Kindern, die Autos -> den Autos).</div>
+            <h4><span class="explanation-lang-marker">ES</span>Artículos en Dativo / <span class="explanation-lang-marker">EN</span>Articles in Dative</h4>
+            <table><thead><tr><th>Género/Gender</th><th>Definido/Definite</th><th>Indefinido/Indefinite</th><th>Negación/Negation (kein-)</th></tr></thead><tbody><tr><td>Maskulin (der)</td><td><strong>dem</strong></td><td><strong>einem</strong></td><td><strong>keinem</strong></td></tr><tr><td>Feminin (die)</td><td><strong>der</strong></td><td><strong>einer</strong></td><td><strong>keiner</strong></td></tr><tr><td>Neutrum (das)</td><td><strong>dem</strong></td><td><strong>einem</strong></td><td><strong>keinem</strong></td></tr><tr><td>Plural (die)</td><td><strong>den</strong> (+n*)</td><td>- (keinen*)</td><td><strong>keinen</strong> (+n*)</td></tr></tbody></table>
+            <div class="eselsbruecke"><span class="explanation-lang-marker">ES</span>*Nota Dativo Plural: La mayoría de los sustantivos añaden una <strong>-n</strong> en dativo plural si no terminan ya en -n o -s. (ej. die Kinder -> den Kinder<strong>n</strong>)<br><span class="explanation-lang-marker">EN</span>*Dative Plural Note: Most nouns add an <strong>-n</strong> in the dative plural if they don't already end in -n or -s. (e.g., die Kinder -> den Kinder<strong>n</strong>)</div>
 
-            <h3>Wechselpräpositionen (Preposiciones Duales)</h3>
-            <p>Diese Präpositionen können mit Akkusativ ODER Dativ stehen: <strong>an, auf, hinter, in, neben, über, unter, vor, zwischen</strong>.</p>
+            <h3><span class="explanation-lang-marker">ES</span>Preposiciones Duales (Wechselpräpositionen) / <span class="explanation-lang-marker">EN</span>Two-Way Prepositions</h3>
+            <p><span class="explanation-lang-marker">ES</span>Estas preposiciones pueden ir con Acusativo O Dativo: <strong>an, auf, hinter, in, neben, über, unter, vor, zwischen</strong>.</p>
+            <p><span class="explanation-lang-marker">EN</span>These prepositions can take either Accusative OR Dative: <strong>an, auf, hinter, in, neben, über, unter, vor, zwischen</strong>.</p>
             <ul>
-                <li><strong>Akkusativ (Richtung):</strong> Frage "Wohin?" (Bewegung zu einem Ziel) <br><span class="example-sentence">Ich lege das Buch <strong>auf den Tisch</strong>. (Wohin lege ich das Buch?)</span></li>
-                <li><strong>Dativ (Ort):</strong> Frage "Wo?" (Position, keine Bewegung zum Ziel) <br><span class="example-sentence">Das Buch liegt <strong>auf dem Tisch</strong>. (Wo liegt das Buch?)</span></li>
+                <li><span class="explanation-lang-marker">ES</span><strong>Acusativo (dirección):</strong> Pregunta "Wohin?" (¿A dónde? - movimiento hacia un destino) <br><span class="german-example">Ich lege das Buch <strong>auf den Tisch</strong>.</span><span class="example-translation">(Pongo el libro sobre la mesa.)</span></li>
+                <li><span class="explanation-lang-marker">EN</span><strong>Accusative (direction):</strong> Question "Wohin?" (Where to? - movement to a destination) <br><span class="german-example">Ich lege das Buch <strong>auf den Tisch</strong>.</span><span class="example-translation">(I put the book onto the table.)</span></li>
+<br>
+                <li><span class="explanation-lang-marker">ES</span><strong>Dativo (lugar):</strong> Pregunta "Wo?" (¿Dónde? - posición, sin movimiento hacia un destino) <br><span class="german-example">Das Buch liegt <strong>auf dem Tisch</strong>.</span><span class="example-translation">(El libro está sobre la mesa.)</span></li>
+                <li><span class="explanation-lang-marker">EN</span><strong>Dative (location):</strong> Question "Wo?" (Where? - position, no movement to a destination) <br><span class="german-example">Das Buch liegt <strong>auf dem Tisch</strong>.</span><span class="example-translation">(The book is on the table.)</span></li>
             </ul>
-            <h4>Beispiele mit Wechselpräpositionen / Ejemplos con preposiciones duales:</h4>
+            <h4><span class="explanation-lang-marker">ES</span>Más Ejemplos / <span class="explanation-lang-marker">EN</span>More Examples:</h4>
             <ul>
-                <li><strong>an:</strong>
-                    <div class="example-sentence">Akk: Er hängt das Bild <strong>an die Wand</strong>. (Él cuelga el cuadro en la pared.)</div>
-                    <div class="example-sentence">Dat: Das Bild hängt <strong>an der Wand</strong>. (El cuadro está colgado en la pared.)</div>
-                </li>
-                <li><strong>auf:</strong>
-                    <div class="example-sentence">Akk: Die Katze springt <strong>auf den Stuhl</strong>. (El gato salta sobre la silla.)</div>
-                    <div class="example-sentence">Dat: Die Katze sitzt <strong>auf dem Stuhl</strong>. (El gato está sentado en la silla.)</div>
-                </li>
-                <li><strong>in:</strong>
-                    <div class="example-sentence">Akk: Wir gehen <strong>in das Kino</strong> (ins Kino). (Vamos al cine.)</div>
-                    <div class="example-sentence">Dat: Wir sind <strong>in dem Kino</strong> (im Kino). (Estamos en el cine.)</div>
-                </li>
-                 <li><strong>hinter:</strong>
-                    <div class="example-sentence">Akk: Er stellt das Fahrrad <strong>hinter das Haus</strong>. (Él pone la bicicleta detrás de la casa.)</div>
-                    <div class="example-sentence">Dat: Das Fahrrad steht <strong>hinter dem Haus</strong>. (La bicicleta está detrás de la casa.)</div>
-                </li>
-                 <li><strong>neben:</strong>
-                    <div class="example-sentence">Akk: Sie setzt sich <strong>neben ihren Freund</strong>. (Ella se sienta al lado de su amigo.)</div>
-                    <div class="example-sentence">Dat: Sie sitzt <strong>neben ihrem Freund</strong>. (Ella está sentada al lado de su amigo.)</div>
-                </li>
-                 <li><strong>über:</strong>
-                    <div class="example-sentence">Akk: Das Flugzeug fliegt <strong>über die Stadt</strong>. (El avión vuela sobre la ciudad.)</div>
-                    <div class="example-sentence">Dat: Die Lampe hängt <strong>über dem Tisch</strong>. (La lámpara cuelga sobre la mesa.)</div>
-                </li>
-                 <li><strong>unter:</strong>
-                    <div class="example-sentence">Akk: Der Hund kriecht <strong>unter das Bett</strong>. (El perro se arrastra debajo de la cama.)</div>
-                    <div class="example-sentence">Dat: Der Hund liegt <strong>unter dem Bett</strong>. (El perro está debajo de la cama.)</div>
-                </li>
-                 <li><strong>vor:</strong>
-                    <div class="example-sentence">Akk: Er fährt das Auto <strong>vor die Garage</strong>. (Él conduce el coche delante del garaje.)</div>
-                    <div class="example-sentence">Dat: Das Auto steht <strong>vor der Garage</strong>. (El coche está delante del garaje.)</div>
-                </li>
-                 <li><strong>zwischen:</strong>
-                    <div class="example-sentence">Akk: Sie stellt die Vase <strong>zwischen die Bücher</strong>. (Ella coloca el jarrón entre los libros.)</div>
-                    <div class="example-sentence">Dat: Die Vase steht <strong>zwischen den Büchern</strong>. (El jarrón está entre los libros.)</div>
+                <li><span class="german-verb">in:</span>
+                    <div class="example-sentence">Akk: Wir gehen <strong>in das Kino</strong> (ins Kino). <span class="example-translation">(ES: Vamos al cine. / EN: We go into the cinema.)</span></div>
+                    <div class="example-sentence">Dat: Wir sind <strong>in dem Kino</strong> (im Kino). <span class="example-translation">(ES: Estamos en el cine. / EN: We are in the cinema.)</span></div>
                 </li>
             </ul>
             <div class="text-center mt-4">
@@ -361,12 +271,11 @@
         let userSelectedOptionCases = null;
         let hintUsedForCurrentQuestion = false;
 
-        // DOM Elements
         const toggleIntroductionBtn = document.getElementById('toggle-introduction-btn');
         const introductionPanel = document.getElementById('introduction-panel');
         const closeIntroductionBtn = document.getElementById('close-introduction-btn');
         const quizContentArea = document.getElementById('quiz-content-area');
-        const sentenceDisplayContainer = document.getElementById('sentence-display-container'); // Parent for noun prompt
+        const sentenceDisplayContainer = document.getElementById('sentence-display-container');
 
         const sentenceGermanEl = document.getElementById('sentence-german');
         const sentenceTranslationEnEl = document.getElementById('sentence-translation-en');
@@ -396,11 +305,11 @@
                 allCaseSentences = await response.json();
                 if (allCaseSentences.length === 0) throw new Error("case_practice.json is empty or does not contain valid questions.");
                 
-                // Start with quiz content visible and intro hidden
+                // Start with quiz content visible and intro hidden by default
                 introductionPanel.classList.add('hidden');
                 quizContentArea.classList.remove('hidden');
                 toggleIntroductionBtn.textContent = "Einführung anzeigen / Mostrar Introducción";
-                startNewCaseRound(); // Start the quiz immediately
+                startNewCaseRound(); 
             } catch (error) {
                 console.error("Could not load case practice data:", error);
                 const mainCard = document.querySelector('.card');
@@ -433,17 +342,15 @@
                 nextQuestionBtnCases.textContent = "Hauptmenü / Main Menu";
                 nextQuestionBtnCases.onclick = () => { window.location.href="index.html";};
                 nextQuestionBtnCases.classList.remove('hidden');
-                quizContentArea.classList.remove('hidden'); // Ensure quiz area is shown for this message
+                quizContentArea.classList.remove('hidden'); 
                 introductionPanel.classList.add('hidden');
                 return;
             }
             
             displayNextCaseQuestion();
             updateCaseProgressAndScore();
-            // Ensure quiz area is visible and intro is hidden if not actively shown
-            if (introductionPanel.classList.contains('hidden')) {
-                 quizContentArea.classList.remove('hidden');
-            }
+            quizContentArea.classList.remove('hidden'); // Ensure quiz area is visible
+            introductionPanel.classList.add('hidden'); // Ensure intro is hidden
             toggleIntroductionBtn.textContent = "Einführung anzeigen / Mostrar Introducción";
         }
 
@@ -559,10 +466,8 @@
             updateCaseProgressAndScore(); 
         });
         
-        // Corrected: nextQuestionBtnCases listener should just call displayNextCaseQuestion AFTER currentCaseQuestionIndex is incremented by the click handler.
-        // The logic for incrementing is now combined with the call.
-        nextQuestionBtnCases.addEventListener('click', () => {
-             displayNextCaseQuestion(); // displayNextCaseQuestion now handles incrementing after initial round end
+        nextQuestionBtnCases.addEventListener('click', () => { 
+            displayNextCaseQuestion(); 
         });
 
 
@@ -578,13 +483,13 @@
         toggleIntroductionBtn.addEventListener('click', () => {
             const introIsHidden = introductionPanel.classList.toggle('hidden');
             quizContentArea.classList.toggle('hidden', !introIsHidden);
-            if (introIsHidden) {
+            if (introIsHidden) { // Intro is now hidden, quiz should be visible
                 toggleIntroductionBtn.textContent = "Einführung anzeigen / Mostrar Introducción";
-                // If quiz hasn't started yet (i.e. no questions loaded into caseTrainerQuestions) and there are sentences available, start it.
-                if (caseTrainerQuestions.length === 0 && allCaseSentences.length > 0 && !quizContentArea.classList.contains('hidden')) {
+                // If quiz hasn't effectively started (no questions in current round yet) but data is loaded
+                if (caseTrainerQuestions.length === 0 && allCaseSentences.length > 0) {
                     startNewCaseRound();
                 }
-            } else {
+            } else { // Intro is now visible, quiz should be hidden
                 toggleIntroductionBtn.textContent = "Einführung schließen / Cerrar Introducción";
             }
         });
