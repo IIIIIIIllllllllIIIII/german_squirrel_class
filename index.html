@@ -51,8 +51,6 @@
         .quiz-link {
             padding: 1rem 1.5rem; /* Adjusted padding */
             border-radius: 12px;
-            /* font-size: 1.125rem; /* Maintained */
-            /* font-weight: 600; /* Maintained */
             color: white;
             text-decoration: none;
             transition: all 0.3s ease;
@@ -61,8 +59,8 @@
         }
 
         .main-title-lang {
-            font-size: 1.125rem; /* Original font-size for quiz-link */
-            font-weight: 600;   /* Original font-weight for quiz-link */
+            font-size: 1.125rem; 
+            font-weight: 600;   
             display: block; 
             margin-bottom: 0.3rem; 
         }
@@ -72,7 +70,7 @@
             opacity: 0.9;  
             display: block; 
             line-height: 1.3;
-            font-weight: 400; /* Lighter weight for translations */
+            font-weight: 400; 
         }
         
         .quiz-link.primary {
@@ -90,10 +88,13 @@
         .quiz-link.quaternary { 
             background-color: #ca8a04; /* Amber */
         }
+        .quiz-link.quinary { /* New style for Akkusativ/Dativ link */
+            background-color: #16a34a; /* Green */
+        }
         
         .quiz-link:hover {
-            transform: translateY(-3px); /* Slightly more lift */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+            transform: translateY(-3px); 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
         }
         
         .quiz-link.primary:hover {
@@ -110,6 +111,9 @@
 
         .quiz-link.quaternary:hover {
             background-color: #a16207; 
+        }
+        .quiz-link.quinary:hover {
+            background-color: #15803d; /* Darker Green */
         }
         
         @media (max-width: 640px) {
@@ -155,6 +159,11 @@
             <a href="daily_routine_mode.html" class="quiz-link quaternary">
                 <span class="main-title-lang">Satzbau: Tägliche Routinen (LEGO Quiz)</span>
                 <span class="translation-lang">Sentence Structure: Daily Routines (LEGO Quiz) / Estructura de Frases: Rutinas Diarias (Quiz LEGO)</span>
+            </a>
+
+            <a href="akkusativ_dativ_mode.html" class="quiz-link quinary">
+                <span class="main-title-lang">Akkusativ & Dativ Trainer</span>
+                <span class="translation-lang">Accusative & Dative Trainer / Entrenador de Acusativo y Dativo</span>
             </a>
         </div>
     </div>
