@@ -26,7 +26,7 @@
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             text-align: center;
             width: 100%;
-            max-width: 500px;
+            max-width: 550px; /* Adjusted for potentially more text */
         }
         
         .title {
@@ -49,14 +49,30 @@
         }
         
         .quiz-link {
-            padding: 1rem 2rem;
+            padding: 1rem 1.5rem; /* Adjusted padding */
             border-radius: 12px;
-            font-size: 1.125rem;
-            font-weight: 600;
+            /* font-size: 1.125rem; /* Maintained */
+            /* font-weight: 600; /* Maintained */
             color: white;
             text-decoration: none;
             transition: all 0.3s ease;
             display: block;
+            line-height: 1.4; /* Added for better spacing with multiple lines */
+        }
+
+        .main-title-lang {
+            font-size: 1.125rem; /* Original font-size for quiz-link */
+            font-weight: 600;   /* Original font-weight for quiz-link */
+            display: block; 
+            margin-bottom: 0.3rem; 
+        }
+
+        .translation-lang {
+            font-size: 0.8em; 
+            opacity: 0.9;  
+            display: block; 
+            line-height: 1.3;
+            font-weight: 400; /* Lighter weight for translations */
         }
         
         .quiz-link.primary {
@@ -71,47 +87,46 @@
             background-color: #0d9488; /* Teal */
         }
 
-        .quiz-link.quaternary { /* New style for Daily Routine link */
+        .quiz-link.quaternary { 
             background-color: #ca8a04; /* Amber */
         }
         
         .quiz-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(109, 40, 217, 0.3); 
+            transform: translateY(-3px); /* Slightly more lift */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
         }
         
         .quiz-link.primary:hover {
             background-color: #5b21b6;
-            box-shadow: 0 8px 25px rgba(91, 33, 182, 0.4);
         }
         
         .quiz-link.secondary:hover {
             background-color: #4338ca;
-            box-shadow: 0 8px 25px rgba(67, 56, 202, 0.4);
         }
 
         .quiz-link.tertiary:hover {
             background-color: #0f766e; 
-            box-shadow: 0 8px 25px rgba(13, 148, 136, 0.4);
         }
 
         .quiz-link.quaternary:hover {
-            background-color: #a16207; /* Darker Amber */
-            box-shadow: 0 8px 25px rgba(202, 138, 4, 0.4);
+            background-color: #a16207; 
         }
         
         @media (max-width: 640px) {
             .main-card {
                 padding: 2rem;
             }
-            
             .title {
                 font-size: 2rem;
             }
-            
-            .quiz-link {
-                padding: 0.875rem 1.5rem;
+            .main-title-lang {
                 font-size: 1rem;
+            }
+            .translation-lang {
+                font-size: 0.75em;
+            }
+            .quiz-link {
+                padding: 0.875rem 1rem;
             }
         }
     </style>
@@ -119,23 +134,27 @@
 <body>
     <div class="main-card">
         <h1 class="title">German Learning Hub</h1>
-        <p class="subtitle">Choose a quiz to practice German</p>
+        <p class="subtitle">Choose a quiz to practice German / Elige un quiz para practicar alemán</p>
         
         <div class="quiz-links">
             <a href="konjugieren_mode.html" class="quiz-link primary">
-                Verb Kojugieren (Verben Modus)
+                <span class="main-title-lang">Verben Konjugieren (Trainer)</span>
+                <span class="translation-lang">Verb Conjugation (Trainer) / Conjugación de Verbos (Entrenador)</span>
             </a>
             
             <a href="artikel_mode.html" class="quiz-link secondary">
-                Der/Die/Das (Artikel Modus)
+                <span class="main-title-lang">Artikel-Quiz (Der, Die, Das)</span>
+                <span class="translation-lang">Article Quiz (Der, Die, Das) / Quiz de Artículos (Der, Die, Das)</span>
             </a>
 
             <a href="wfragen_mode.html" class="quiz-link tertiary">
-                W-Fragen (LEGO Modus)
+                <span class="main-title-lang">W-Fragen Bauen (LEGO Quiz)</span>
+                <span class="translation-lang">Build W-Questions (LEGO Quiz) / Construir Preguntas-W (Quiz LEGO)</span>
             </a>
 
             <a href="daily_routine_mode.html" class="quiz-link quaternary">
-                Satzbau Übung (LEGO Modus)
+                <span class="main-title-lang">Satzbau: Tägliche Routinen (LEGO Quiz)</span>
+                <span class="translation-lang">Sentence Structure: Daily Routines (LEGO Quiz) / Estructura de Frases: Rutinas Diarias (Quiz LEGO)</span>
             </a>
         </div>
     </div>
