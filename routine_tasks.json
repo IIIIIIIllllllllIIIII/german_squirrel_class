@@ -15,8 +15,6 @@
     },
     {
         "id": "rs3",
-        "display_question_de": "Trinkst du gern Tee?",
-        "display_question_es": "¿Te gusta beber té?",
         "full_sentence_de": "Ja, ich trinke manchmal Tee.",
         "full_sentence_es": "Sí, a veces bebo té.",
         "translation_en": "Yes, I sometimes drink tea.",
@@ -35,5 +33,320 @@
         "full_sentence_es": "Por las noches veo a menudo la televisión.",
         "translation_en": "In the evenings, I often watch TV.",
         "german_words": ["Abends", "sehe", "ich", "oft", "fern."]
+    },
+    {
+        "id": "rs6",
+        "full_sentence_de": "Guten Morgen, wie geht es dir?",
+        "full_sentence_es": "Buenos días, ¿cómo estás?",
+        "translation_en": "Good morning, how are you?",
+        "german_words": ["Guten Morgen,", "wie", "geht", "es", "dir?"]
+    },
+    {
+        "id": "rs7",
+        "full_sentence_de": "Mir geht es gut, danke.",
+        "full_sentence_es": "Estoy bien, gracias.",
+        "translation_en": "I am fine, thank you.",
+        "german_words": ["Mir", "geht", "es", "gut,", "danke."]
+    },
+    {
+        "id": "rs8",
+        "full_sentence_de": "Ich heiße Maria.",
+        "full_sentence_es": "Me llamo María.",
+        "translation_en": "My name is Maria.",
+        "german_words": ["Ich", "heiße", "Maria."]
+    },
+    {
+        "id": "rs9",
+        "full_sentence_de": "Ich komme aus Spanien.",
+        "full_sentence_es": "Vengo de España.",
+        "translation_en": "I come from Spain.",
+        "german_words": ["Ich", "komme", "aus", "Spanien."]
+    },
+    {
+        "id": "rs10",
+        "full_sentence_de": "Ich wohne in Berlin.",
+        "full_sentence_es": "Vivo en Berlín.",
+        "translation_en": "I live in Berlin.",
+        "german_words": ["Ich", "wohne", "in", "Berlin."]
+    },
+    {
+        "id": "rs11",
+        "full_sentence_de": "Ich lerne Deutsch.",
+        "full_sentence_es": "Aprendo alemán.",
+        "translation_en": "I am learning German.",
+        "german_words": ["Ich", "lerne", "Deutsch."]
+    },
+    {
+        "id": "rs12",
+        "full_sentence_de": "Das ist mein Freund Paul.",
+        "full_sentence_es": "Este es mi amigo Paul.",
+        "translation_en": "This is my friend Paul.",
+        "german_words": ["Das", "ist", "mein Freund", "Paul."]
+    },
+    {
+        "id": "rs13",
+        "full_sentence_de": "Er spielt gern Fußball.",
+        "full_sentence_es": "A él le gusta jugar al fútbol.",
+        "translation_en": "He likes to play soccer.",
+        "german_words": ["Er", "spielt", "gern", "Fußball."]
+    },
+    {
+        "id": "rs14",
+        "full_sentence_de": "Sie trinkt morgens Kaffee.",
+        "full_sentence_es": "Ella bebe café por las mañanas.",
+        "translation_en": "She drinks coffee in the mornings.",
+        "german_words": ["Sie", "trinkt", "morgens", "Kaffee."]
+    },
+    {
+        "id": "rs15",
+        "full_sentence_de": "Wir gehen heute Abend ins Kino.",
+        "full_sentence_es": "Vamos al cine esta noche.",
+        "translation_en": "We are going to the cinema tonight.",
+        "german_words": ["Wir", "gehen", "heute Abend", "ins Kino."]
+    },
+    {
+        "id": "rs16",
+        "full_sentence_de": "Ich habe einen Hund.",
+        "full_sentence_es": "Tengo un perro.",
+        "translation_en": "I have a dog.",
+        "german_words": ["Ich", "habe", "einen Hund."]
+    },
+    {
+        "id": "rs17",
+        "full_sentence_de": "Meine Katze schläft viel.",
+        "full_sentence_es": "Mi gato duerme mucho.",
+        "translation_en": "My cat sleeps a lot.",
+        "german_words": ["Meine Katze", "schläft", "viel."]
+    },
+    {
+        "id": "rs18",
+        "full_sentence_de": "Ich koche gern Nudeln.",
+        "full_sentence_es": "Me gusta cocinar pasta.",
+        "translation_en": "I like to cook pasta.",
+        "german_words": ["Ich", "koche", "gern", "Nudeln."]
+    },
+    {
+        "id": "rs19",
+        "full_sentence_de": "Das Wetter ist heute schön.",
+        "full_sentence_es": "El tiempo está bueno hoy.",
+        "translation_en": "The weather is nice today.",
+        "german_words": ["Das Wetter", "ist", "heute", "schön."]
+    },
+    {
+        "id": "rs20",
+        "full_sentence_de": "Ich brauche einen Stift.",
+        "full_sentence_es": "Necesito un bolígrafo.",
+        "translation_en": "I need a pen.",
+        "german_words": ["Ich", "brauche", "einen Stift."]
+    },
+    {
+        "id": "rs21",
+        "full_sentence_de": "Mein Lieblingsessen ist Reis mit Hähnchen.",
+        "full_sentence_es": "Mi comida favorita es arroz con pollo.",
+        "translation_en": "My favorite food is rice with chicken.",
+        "german_words": ["Mein Lieblingsessen", "ist", "Reis", "mit Hähnchen."]
+    },
+    {
+        "id": "rs22",
+        "full_sentence_de": "Sie hört gern Musik.",
+        "full_sentence_es": "A ella le gusta escuchar música.",
+        "translation_en": "She likes to listen to music.",
+        "german_words": ["Sie", "hört", "gern", "Musik."]
+    },
+    {
+        "id": "rs23",
+        "full_sentence_de": "Der Unterricht beginnt um neun Uhr.",
+        "full_sentence_es": "La clase comienza a las nueve.",
+        "translation_en": "The class starts at nine o'clock.",
+        "german_words": ["Der Unterricht", "beginnt", "um neun Uhr."]
+    },
+    {
+        "id": "rs24",
+        "full_sentence_de": "Ich fahre mit dem Bus zur Arbeit.",
+        "full_sentence_es": "Voy al trabajo en autobús.",
+        "translation_en": "I go to work by bus.",
+        "german_words": ["Ich", "fahre", "mit dem Bus", "zur Arbeit."]
+    },
+    {
+        "id": "rs25",
+        "full_sentence_de": "Meine Mutter kocht sehr gut.",
+        "full_sentence_es": "Mi madre cocina muy bien.",
+        "translation_en": "My mother cooks very well.",
+        "german_words": ["Meine Mutter", "kocht", "sehr gut."]
+    },
+    {
+        "id": "rs26",
+        "full_sentence_de": "Am Abend bin ich oft müde.",
+        "full_sentence_es": "Por la noche estoy a menudo cansado/a.",
+        "translation_en": "In the evening I am often tired.",
+        "german_words": ["Am Abend", "bin", "ich", "oft", "müde."]
+    },
+    {
+        "id": "rs27",
+        "full_sentence_de": "Wir lernen zusammen Deutsch.",
+        "full_sentence_es": "Aprendemos alemán juntos.",
+        "translation_en": "We learn German together.",
+        "german_words": ["Wir", "lernen", "zusammen", "Deutsch."]
+    },
+    {
+        "id": "rs28",
+        "full_sentence_de": "Er hat am Montag Geburtstag.",
+        "full_sentence_es": "Él cumple años el lunes.",
+        "translation_en": "His birthday is on Monday.",
+        "german_words": ["Er", "hat", "am Montag", "Geburtstag."]
+    },
+    {
+        "id": "rs29",
+        "full_sentence_de": "Ich mag Äpfel und Bananen.",
+        "full_sentence_es": "Me gustan las manzanas y los plátanos.",
+        "translation_en": "I like apples and bananas.",
+        "german_words": ["Ich", "mag", "Äpfel", "und", "Bananen."]
+    },
+    {
+        "id": "rs30",
+        "full_sentence_de": "Das ist ein kleines Auto.",
+        "full_sentence_es": "Este es un coche pequeño.",
+        "translation_en": "That is a small car.",
+        "german_words": ["Das", "ist", "ein kleines Auto."]
+    },
+    {
+        "id": "rs31",
+        "full_sentence_de": "Ich gehe jetzt schlafen.",
+        "full_sentence_es": "Me voy a dormir ahora.",
+        "translation_en": "I am going to sleep now.",
+        "german_words": ["Ich", "gehe", "jetzt", "schlafen."]
+    },
+    {
+        "id": "rs32",
+        "full_sentence_de": "Mein Vater arbeitet im Garten.",
+        "full_sentence_es": "Mi padre trabaja en el jardín.",
+        "translation_en": "My father works in the garden.",
+        "german_words": ["Mein Vater", "arbeitet", "im Garten."]
+    },
+    {
+        "id": "rs33",
+        "full_sentence_de": "Sie macht ihre Hausaufgaben.",
+        "full_sentence_es": "Ella hace sus deberes.",
+        "translation_en": "She does her homework.",
+        "german_words": ["Sie", "macht", "ihre Hausaufgaben."]
+    },
+    {
+        "id": "rs34",
+        "full_sentence_de": "Wir essen um zwölf Uhr Mittag.",
+        "full_sentence_es": "Almorzamos a las doce.",
+        "translation_en": "We eat lunch at twelve o'clock.",
+        "german_words": ["Wir", "essen", "um zwölf Uhr", "Mittag."]
+    },
+    {
+        "id": "rs35",
+        "full_sentence_de": "Ich kaufe Brot im Supermarkt.",
+        "full_sentence_es": "Compro pan en el supermercado.",
+        "translation_en": "I buy bread at the supermarket.",
+        "german_words": ["Ich", "kaufe", "Brot", "im Supermarkt."]
+    },
+    {
+        "id": "rs36",
+        "full_sentence_de": "Meine Schwester lernt Englisch.",
+        "full_sentence_es": "Mi hermana aprende inglés.",
+        "translation_en": "My sister learns English.",
+        "german_words": ["Meine Schwester", "lernt", "Englisch."]
+    },
+    {
+        "id": "rs37",
+        "full_sentence_de": "Er trinkt Wasser nach dem Sport.",
+        "full_sentence_es": "Él bebe agua después del deporte.",
+        "translation_en": "He drinks water after sports.",
+        "german_words": ["Er", "trinkt", "Wasser", "nach dem Sport."]
+    },
+    {
+        "id": "rs38",
+        "full_sentence_de": "Ich spiele mit meinem Hund.",
+        "full_sentence_es": "Juego con mi perro.",
+        "translation_en": "I play with my dog.",
+        "german_words": ["Ich", "spiele", "mit meinem Hund."]
+    },
+    {
+        "id": "rs39",
+        "full_sentence_de": "Sie besucht ihre Oma am Sonntag.",
+        "full_sentence_es": "Ella visita a su abuela el domingo.",
+        "translation_en": "She visits her grandma on Sunday.",
+        "german_words": ["Sie", "besucht", "ihre Oma", "am Sonntag."]
+    },
+    {
+        "id": "rs40",
+        "full_sentence_de": "Wir frühstücken immer zusammen.",
+        "full_sentence_es": "Siempre desayunamos juntos.",
+        "translation_en": "We always have breakfast together.",
+        "german_words": ["Wir", "frühstücken", "immer", "zusammen."]
+    },
+    {
+        "id": "rs41",
+        "full_sentence_de": "Das Kind spielt im Zimmer.",
+        "full_sentence_es": "El niño juega en la habitación.",
+        "translation_en": "The child plays in the room.",
+        "german_words": ["Das Kind", "spielt", "im Zimmer."]
+    },
+    {
+        "id": "rs42",
+        "full_sentence_de": "Ich gehe gern spazieren.",
+        "full_sentence_es": "Me gusta pasear.",
+        "translation_en": "I like to go for a walk.",
+        "german_words": ["Ich", "gehe", "gern", "spazieren."]
+    },
+    {
+        "id": "rs43",
+        "full_sentence_de": "Mein Wecker klingelt um sechs Uhr.",
+        "full_sentence_es": "Mi despertador suena a las seis.",
+        "translation_en": "My alarm clock rings at six o'clock.",
+        "german_words": ["Mein Wecker", "klingelt", "um sechs Uhr."]
+    },
+    {
+        "id": "rs44",
+        "full_sentence_de": "Er putzt sich die Zähne.",
+        "full_sentence_es": "Él se cepilla los dientes.",
+        "translation_en": "He brushes his teeth.",
+        "german_words": ["Er", "putzt", "sich", "die Zähne."]
+    },
+    {
+        "id": "rs45",
+        "full_sentence_de": "Ich ziehe meine Jacke an.",
+        "full_sentence_es": "Me pongo la chaqueta.",
+        "translation_en": "I put on my jacket.",
+        "german_words": ["Ich", "ziehe", "meine Jacke", "an."]
+    },
+    {
+        "id": "rs46",
+        "full_sentence_de": "Sie macht das Fenster auf.",
+        "full_sentence_es": "Ella abre la ventana.",
+        "translation_en": "She opens the window.",
+        "german_words": ["Sie", "macht", "das Fenster", "auf."]
+    },
+    {
+        "id": "rs47",
+        "full_sentence_de": "Wir räumen das Haus auf.",
+        "full_sentence_es": "Ordenamos la casa.",
+        "translation_en": "We tidy up the house.",
+        "german_words": ["Wir", "räumen", "das Haus", "auf."]
+    },
+    {
+        "id": "rs48",
+        "full_sentence_de": "Ich rufe meine Freundin an.",
+        "full_sentence_es": "Llamo a mi amiga.",
+        "translation_en": "I call my friend (female).",
+        "german_words": ["Ich", "rufe", "meine Freundin", "an."]
+    },
+    {
+        "id": "rs49",
+        "full_sentence_de": "Der Zug kommt pünktlich an.",
+        "full_sentence_es": "El tren llega puntual.",
+        "translation_en": "The train arrives on time.",
+        "german_words": ["Der Zug", "kommt", "pünktlich", "an."]
+    },
+    {
+        "id": "rs50",
+        "full_sentence_de": "Ich kaufe im Supermarkt ein.",
+        "full_sentence_es": "Hago la compra en el supermercado.",
+        "translation_en": "I shop at the supermarket.",
+        "german_words": ["Ich", "kaufe", "im Supermarkt", "ein."]
     }
 ]
