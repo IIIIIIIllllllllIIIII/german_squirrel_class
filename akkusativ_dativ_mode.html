@@ -17,11 +17,11 @@
             min-height: 100vh;
             margin: 0;
             padding: 16px; 
-            color: #f3e8ff; /* Light purple for text on dark bg */
+            color: #f3e8ff; 
             overflow-x: auto;
         }
         .card {
-            background-color: rgba(255, 255, 255, 0.08); /* Semi-transparent white */
+            background-color: rgba(255, 255, 255, 0.08); 
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.15);
             padding: 24px; 
@@ -51,28 +51,51 @@
         .intro-toggle-button:hover { background-color: rgba(255,255,255,0.2); }
         
         #introduction-panel {
-            background-color: rgba(0,0,0,0.2);
+            background-color: rgba(0,0,0,0.25); /* Darker for more contrast */
             padding: 1.5rem;
             border-radius: 0.75rem;
             margin-top: 1rem;
             margin-bottom: 2rem;
             text-align: left;
-            color: #f3e8ff;
-            border: 1px solid rgba(255,255,255,0.1);
+            color: #ede9fe; /* Lighter violet for main text */
+            border: 1px solid rgba(255,255,255,0.2);
             max-height: 70vh; 
             overflow-y: auto; 
         }
-        #introduction-panel h3 { font-size: 1.35rem; font-weight: 600; color: #f5d0fe; margin-top: 1.5rem; margin-bottom: 0.75rem; border-bottom: 1px solid #e9d5ff; padding-bottom: 0.3rem;}
-        #introduction-panel h4 { font-size: 1.1rem; font-weight: 600; color: #e9d5ff; margin-top: 1rem; margin-bottom: 0.5rem; }
+        #introduction-panel h3 { 
+            font-size: 1.3rem; /* Slightly larger */
+            font-weight: 700; /* Bolder */
+            color: #f0abfc; /* Light Magenta/Pink */
+            margin-top: 1.5rem; 
+            margin-bottom: 0.75rem; 
+            border-bottom: 2px solid #d8b4fe; /* More prominent border */
+            padding-bottom: 0.4rem;
+        }
+        #introduction-panel h4 { 
+            font-size: 1.1rem; 
+            font-weight: 600; 
+            color: #e9d5ff; /* Lighter than h3 */
+            margin-top: 1.25rem; 
+            margin-bottom: 0.6rem; 
+        }
         #introduction-panel h3:first-child { margin-top: 0;}
-        #introduction-panel p, #introduction-panel li { font-size: 0.95rem; line-height: 1.6; margin-bottom: 0.75rem; }
+        #introduction-panel p, #introduction-panel li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.85rem; color: #ede9fe;}
         #introduction-panel ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom:1rem;}
-        #introduction-panel table { width: 100%; margin-top: 0.75rem; margin-bottom: 1.5rem; border-collapse: collapse; font-size: 0.8rem;}
-        #introduction-panel th, #introduction-panel td { border: 1px solid #a855f7; padding: 0.5rem; text-align: left; }
-        #introduction-panel th { background-color: rgba(126, 34, 206, 0.4); color: #f5d0fe; font-weight: 600;}
-        #introduction-panel td strong { color: #f0abfc; } 
-        #introduction-panel .eselsbruecke { background-color: rgba(255,255,255,0.05); padding: 0.75rem; border-radius: 0.375rem; margin: 0.75rem 0; font-style: italic; border-left: 3px solid #c084fc;}
-        #introduction-panel .example-sentence { margin-left: 1rem; font-style: italic; color: #d8b4fe; margin-bottom: 0.25rem;}
+        #introduction-panel table { width: 100%; margin-top: 1rem; margin-bottom: 1.5rem; border-collapse: separate; border-spacing:0; font-size: 0.85rem; border: 1px solid #a855f7;}
+        #introduction-panel th, #introduction-panel td { border-bottom: 1px solid #a855f7; padding: 0.6rem 0.5rem; text-align: left; }
+        #introduction-panel tr:last-child td { border-bottom: none; }
+        #introduction-panel th { background-color: rgba(167, 139, 250, 0.2); color: #f5d0fe; font-weight: 600;}
+        #introduction-panel td strong { color: #f0abfc; font-weight: 600; } 
+        #introduction-panel .eselsbruecke { 
+            background-color: rgba(255,255,255,0.07); 
+            padding: 1rem; 
+            border-radius: 0.5rem; 
+            margin: 1rem 0; 
+            font-style: italic; 
+            border-left: 4px solid #c084fc;
+            color: #f5f3ff;
+        }
+        #introduction-panel .example-sentence { margin-left: 1rem; font-style: italic; color: #d8b4fe; margin-bottom: 0.35rem;}
         #introduction-panel .example-sentence strong { color: #f0abfc; }
 
 
@@ -188,26 +211,26 @@
             <p>Man fragt: <strong>Wen oder Was?</strong></p>
             <h4>Typische Verben mit Akkusativ / Verbos típicos con Acusativo:</h4>
             <ul>
-                <li><strong>haben</strong> (to have): Ich habe <strong>einen Hund</strong>.</li>
-                <li><strong>sehen</strong> (to see): Siehst du <strong>den Vogel</strong>?</li>
-                <li><strong>kaufen</strong> (to buy): Er kauft <strong>eine Blume</strong>.</li>
-                <li><strong>lesen</strong> (to read): Wir lesen <strong>das Buch</strong>.</li>
-                <li><strong>brauchen</strong> (to need): Ihr braucht <strong>einen Stift</strong>.</li>
-                <li><strong>suchen</strong> (to look for): Ich suche <strong>meine Schlüssel</strong> (Plural).</li>
-                <li><strong>finden</strong> (to find): Sie findet <strong>die Lösung</strong>.</li>
-                <li><strong>essen</strong> (to eat): Das Kind isst <strong>einen Apfel</strong>.</li>
-                <li><strong>trinken</strong> (to drink): Du trinkst <strong>den Saft</strong>.</li>
-                <li><strong>fragen</strong> (to ask sb.): Ich frage <strong>den Lehrer</strong>.</li>
-                <li><strong>treffen</strong> (to meet sb.): Sie trifft <strong>ihre Freunde</strong> (Plural).</li>
+                <li><strong>haben</strong> (to have): <span class="example-sentence">Ich habe <strong>einen Hund</strong>.</span></li>
+                <li><strong>sehen</strong> (to see): <span class="example-sentence">Siehst du <strong>den Vogel</strong>?</span></li>
+                <li><strong>kaufen</strong> (to buy): <span class="example-sentence">Er kauft <strong>eine Blume</strong>.</span></li>
+                <li><strong>lesen</strong> (to read): <span class="example-sentence">Wir lesen <strong>das Buch</strong>.</span></li>
+                <li><strong>brauchen</strong> (to need): <span class="example-sentence">Ihr braucht <strong>einen Stift</strong>.</span></li>
+                <li><strong>suchen</strong> (to look for): <span class="example-sentence">Ich suche <strong>meine Schlüssel</strong> (Plural).</span></li>
+                <li><strong>finden</strong> (to find): <span class="example-sentence">Sie findet <strong>die Lösung</strong>.</span></li>
+                <li><strong>essen</strong> (to eat): <span class="example-sentence">Das Kind isst <strong>einen Apfel</strong>.</span></li>
+                <li><strong>trinken</strong> (to drink): <span class="example-sentence">Du trinkst <strong>den Saft</strong>.</span></li>
+                <li><strong>fragen</strong> (to ask sb.): <span class="example-sentence">Ich frage <strong>den Lehrer</strong>.</span></li>
+                <li><strong>treffen</strong> (to meet sb.): <span class="example-sentence">Sie trifft <strong>ihre Freunde</strong> (Plural).</span></li>
             </ul>
             <h4>Präpositionen, die immer den Akkusativ verlangen / Preposiciones que siempre requieren Acusativo:</h4>
             <p><strong>durch, für, gegen, ohne, um</strong>. (Eselsbrücke / Mnemotecnia: "DUFOG")</p>
             <ul>
-                <li><strong>durch:</strong> Wir gehen durch <strong>den Park</strong>. (Caminamos por el parque.)</li>
-                <li><strong>für:</strong> Das Geschenk ist für <strong>meine Mutter</strong>. (El regalo es para mi madre.)</li>
-                <li><strong>gegen:</strong> Er spielt gegen <strong>seinen Bruder</strong>. (Él juega contra su hermano.)</li>
-                <li><strong>ohne:</strong> Ich gehe ohne <strong>meinen Mantel</strong>. (Voy sin mi abrigo.)</li>
-                <li><strong>um:</strong> Sie geht um <strong>die Ecke</strong>. (Ella dobla la esquina.)</li>
+                <li><strong>durch:</strong> <span class="example-sentence">Wir gehen durch <strong>den Park</strong>. (Caminamos por el parque.)</span></li>
+                <li><strong>für:</strong> <span class="example-sentence">Das Geschenk ist für <strong>meine Mutter</strong>. (El regalo es para mi madre.)</span></li>
+                <li><strong>gegen:</strong> <span class="example-sentence">Er spielt gegen <strong>seinen Bruder</strong>. (Él juega contra su hermano.)</span></li>
+                <li><strong>ohne:</strong> <span class="example-sentence">Ich gehe ohne <strong>meinen Mantel</strong>. (Voy sin mi abrigo.)</span></li>
+                <li><strong>um:</strong> <span class="example-sentence">Sie geht um <strong>die Ecke</strong>. (Ella dobla la esquina.)</span></li>
             </ul>
             <h4>Artikel im Akkusativ / Artículos en Acusativo</h4>
             <table><thead><tr><th>Geschlecht</th><th>Bestimmter Artikel</th><th>Unbestimmter Artikel</th><th>Kein-Artikel</th></tr></thead><tbody><tr><td>Maskulin (der)</td><td><strong>den</strong></td><td><strong>einen</strong></td><td><strong>keinen</strong></td></tr><tr><td>Feminin (die)</td><td><strong>die</strong></td><td><strong>eine</strong></td><td><strong>keine</strong></td></tr><tr><td>Neutrum (das)</td><td><strong>das</strong></td><td><strong>ein</strong></td><td><strong>kein</strong></td></tr><tr><td>Plural (die)</td><td><strong>die</strong></td><td>- (keine)</td><td><strong>keine</strong></td></tr></tbody></table>
@@ -217,37 +240,36 @@
             <p>Man fragt: <strong>Wem?</strong></p>
             <h4>Typische Verben mit Dativ / Verbos típicos con Dativo:</h4>
             <ul>
-                <li><strong>helfen</strong> (to help): Ich helfe <strong>dir</strong>. / Er hilft <strong>dem Mann</strong>.</li>
-                <li><strong>danken</strong> (to thank): Wir danken <strong>Ihnen</strong>. / Sie dankt <strong>ihrer Freundin</strong>.</li>
-                <li><strong>gefallen</strong> (to please): Das Auto gefällt <strong>mir</strong>. / Die Stadt gefällt <strong>den Touristen</strong> (Plural).</li>
-                <li><strong>gehören</strong> (to belong to): Das Buch gehört <strong>dem Studenten</strong>.</li>
-                <li><strong>antworten</strong> (to answer sb.): Bitte antworte <strong>mir</strong> schnell.</li>
-                <li><strong>zuhören</strong> (to listen to sb.): Die Kinder hören <strong>dem Lehrer</strong> zu.</li>
-                <li><strong>schmecken</strong> (to taste good to sb.): Die Pizza schmeckt <strong>uns</strong> gut.</li>
-                <li><strong>passen</strong> (to fit sb. - clothing): Die Jacke passt <strong>dir</strong> nicht.</li>
+                <li><strong>helfen</strong> (to help): <span class="example-sentence">Ich helfe <strong>dir</strong>. / Er hilft <strong>dem Mann</strong>.</span></li>
+                <li><strong>danken</strong> (to thank): <span class="example-sentence">Wir danken <strong>Ihnen</strong>. / Sie dankt <strong>ihrer Freundin</strong>.</span></li>
+                <li><strong>gefallen</strong> (to please): <span class="example-sentence">Das Auto gefällt <strong>mir</strong>. / Die Stadt gefällt <strong>den Touristen</strong> (Plural).</span></li>
+                <li><strong>gehören</strong> (to belong to): <span class="example-sentence">Das Buch gehört <strong>dem Studenten</strong>.</span></li>
+                <li><strong>antworten</strong> (to answer sb.): <span class="example-sentence">Bitte antworte <strong>mir</strong> schnell.</span></li>
+                <li><strong>zuhören</strong> (to listen to sb.): <span class="example-sentence">Die Kinder hören <strong>dem Lehrer</strong> zu.</span></li>
+                <li><strong>schmecken</strong> (to taste good to sb.): <span class="example-sentence">Die Pizza schmeckt <strong>uns</strong> gut.</span></li>
+                <li><strong>passen</strong> (to fit sb. - clothing): <span class="example-sentence">Die Jacke passt <strong>dir</strong> nicht.</span></li>
             </ul>
             <h4>Präpositionen, die immer den Dativ verlangen / Preposiciones que siempre requieren Dativo:</h4>
             <p><strong>aus, bei, mit, nach, seit, von, zu, gegenüber</strong>. (Eselsbrücke: "Aus bei mit nach seit von zu, fährst immer mit dem Dativ du!")</p>
             <ul>
-                <li><strong>aus:</strong> Er kommt aus <strong>der Schweiz</strong>. (Él viene de Suiza.)</li>
-                <li><strong>bei:</strong> Sie wohnt bei <strong>ihren Eltern</strong>. (Ella vive con sus padres.)</li>
-                <li><strong>mit:</strong> Ich spiele mit <strong>meinem Hund</strong>. (Juego con mi perro.)</li>
-                <li><strong>nach:</strong> Wir fahren nach <strong>Hause</strong> / nach <strong>Deutschland</strong>. (Vamos a casa / a Alemania.)</li>
-                <li><strong>seit:</strong> Ich lerne Deutsch seit <strong>einem Jahr</strong>. (Aprendo alemán desde hace un año.)</li>
-                <li><strong>von:</strong> Das ist ein Geschenk von <strong>meinem Freund</strong>. (Este es un regalo de mi amigo.)</li>
-                <li><strong>zu:</strong> Sie geht zu <strong>dem Arzt</strong> (zum Arzt). (Ella va al médico.)</li>
-                <li><strong>gegenüber:</strong> Die Bank ist <strong>dem Hotel</strong> gegenüber. (El banco está enfrente del hotel.)</li>
+                <li><strong>aus:</strong> <span class="example-sentence">Er kommt aus <strong>der Schweiz</strong>. (Él viene de Suiza.)</span></li>
+                <li><strong>bei:</strong> <span class="example-sentence">Sie wohnt bei <strong>ihren Eltern</strong>. (Ella vive con sus padres.)</span></li>
+                <li><strong>mit:</strong> <span class="example-sentence">Ich spiele mit <strong>meinem Hund</strong>. (Juego con mi perro.)</span></li>
+                <li><strong>nach:</strong> <span class="example-sentence">Wir fahren nach <strong>Hause</strong> / nach <strong>Deutschland</strong>. (Vamos a casa / a Alemania.)</span></li>
+                <li><strong>seit:</strong> <span class="example-sentence">Ich lerne Deutsch seit <strong>einem Jahr</strong>. (Aprendo alemán desde hace un año.)</span></li>
+                <li><strong>von:</strong> <span class="example-sentence">Das ist ein Geschenk von <strong>meinem Freund</strong>. (Este es un regalo de mi amigo.)</span></li>
+                <li><strong>zu:</strong> <span class="example-sentence">Sie geht zu <strong>dem Arzt</strong> (zum Arzt). (Ella va al médico.)</span></li>
+                <li><strong>gegenüber:</strong> <span class="example-sentence">Die Bank ist <strong>dem Hotel</strong> gegenüber. (El banco está enfrente del hotel.)</span></li>
             </ul>
             <h4>Artikel im Dativ / Artículos en Dativo</h4>
             <table><thead><tr><th>Geschlecht</th><th>Bestimmter Artikel</th><th>Unbestimmter Artikel</th><th>Kein-Artikel</th></tr></thead><tbody><tr><td>Maskulin (der)</td><td><strong>dem</strong></td><td><strong>einem</strong></td><td><strong>keinem</strong></td></tr><tr><td>Feminin (die)</td><td><strong>der</strong></td><td><strong>einer</strong></td><td><strong>keiner</strong></td></tr><tr><td>Neutrum (das)</td><td><strong>dem</strong></td><td><strong>einem</strong></td><td><strong>keinem</strong></td></tr><tr><td>Plural (die)</td><td><strong>den</strong> (+n am Nomen)</td><td>- (keinen)</td><td><strong>keinen</strong> (+n am Nomen)</td></tr></tbody></table>
-            <p class="eselsbruecke">Merkregel für Dativ Plural Endung: Fast alle Nomen bekommen im Dativ Plural ein <strong>-n</strong>, wenn sie nicht schon auf -n oder -s enden. (z.B. die Kinder -> den Kindern, die Autos -> den Autos).</p>
-            <p class="eselsbruecke">Mnemotecnia para la terminación del Dativo Plural: Casi todos los sustantivos reciben una <strong>-n</strong> en dativo plural si no terminan ya en -n o -s. (ej. die Kinder -> den Kindern, die Autos -> den Autos).</p>
+            <div class="eselsbruecke">Merkregel für Dativ Plural Endung: Fast alle Nomen bekommen im Dativ Plural ein <strong>-n</strong>, wenn sie nicht schon auf -n oder -s enden. (z.B. die Kinder -> den Kindern, die Autos -> den Autos).<br>Mnemotecnia para la terminación del Dativo Plural: Casi todos los sustantivos reciben una <strong>-n</strong> en dativo plural si no terminan ya en -n o -s. (ej. die Kinder -> den Kindern, die Autos -> den Autos).</div>
 
             <h3>Wechselpräpositionen (Preposiciones Duales)</h3>
             <p>Diese Präpositionen können mit Akkusativ ODER Dativ stehen: <strong>an, auf, hinter, in, neben, über, unter, vor, zwischen</strong>.</p>
             <ul>
-                <li><strong>Akkusativ (Richtung):</strong> Frage "Wohin?" (Bewegung zu einem Ziel) <br>Beispiel: Ich lege das Buch <strong>auf den Tisch</strong>. (Wohin lege ich das Buch?)</li>
-                <li><strong>Dativ (Ort):</strong> Frage "Wo?" (Position, keine Bewegung zum Ziel) <br>Beispiel: Das Buch liegt <strong>auf dem Tisch</strong>. (Wo liegt das Buch?)</li>
+                <li><strong>Akkusativ (Richtung):</strong> Frage "Wohin?" (Bewegung zu einem Ziel) <br><span class="example-sentence">Ich lege das Buch <strong>auf den Tisch</strong>. (Wohin lege ich das Buch?)</span></li>
+                <li><strong>Dativ (Ort):</strong> Frage "Wo?" (Position, keine Bewegung zum Ziel) <br><span class="example-sentence">Das Buch liegt <strong>auf dem Tisch</strong>. (Wo liegt das Buch?)</span></li>
             </ul>
             <h4>Beispiele mit Wechselpräpositionen / Ejemplos con preposiciones duales:</h4>
             <ul>
@@ -293,8 +315,7 @@
             </div>
         </div>
 
-        <div id="quiz-content-area" class="quiz-content-area hidden"> 
-            <div id="progress-score-area" class="progress-score-area">
+        <div id="quiz-content-area" class=""> <div id="progress-score-area" class="progress-score-area">
                 <span id="progress-text-cases">Frage: 1/10</span>
                 <span id="score-text-cases">Punkte: 0</span>
             </div>
@@ -345,6 +366,7 @@
         const introductionPanel = document.getElementById('introduction-panel');
         const closeIntroductionBtn = document.getElementById('close-introduction-btn');
         const quizContentArea = document.getElementById('quiz-content-area');
+        const sentenceDisplayContainer = document.getElementById('sentence-display-container'); // Parent for noun prompt
 
         const sentenceGermanEl = document.getElementById('sentence-german');
         const sentenceTranslationEnEl = document.getElementById('sentence-translation-en');
@@ -373,9 +395,12 @@
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status} for case_practice.json`);
                 allCaseSentences = await response.json();
                 if (allCaseSentences.length === 0) throw new Error("case_practice.json is empty or does not contain valid questions.");
-                introductionPanel.classList.remove('hidden');
-                quizContentArea.classList.add('hidden');
-                toggleIntroductionBtn.textContent = "Einführung schließen / Cerrar Introducción";
+                
+                // Start with quiz content visible and intro hidden
+                introductionPanel.classList.add('hidden');
+                quizContentArea.classList.remove('hidden');
+                toggleIntroductionBtn.textContent = "Einführung anzeigen / Mostrar Introducción";
+                startNewCaseRound(); // Start the quiz immediately
             } catch (error) {
                 console.error("Could not load case practice data:", error);
                 const mainCard = document.querySelector('.card');
@@ -398,26 +423,34 @@
             
             if (caseTrainerQuestions.length === 0) {
                 sentenceGermanEl.textContent = "Keine Fragen verfügbar für diese Runde. / No questions available for this round.";
+                const existingPrompt = sentenceDisplayContainer.querySelector('.noun-prompt-js');
+                if(existingPrompt) existingPrompt.remove();
+                sentenceTranslationEnEl.textContent = "";
+                sentenceTranslationEsEl.textContent = "";
                 optionsContainerCases.innerHTML = '';
                 checkAnswerBtnCases.classList.add('hidden');
                 hintBtnCases.classList.add('hidden');
                 nextQuestionBtnCases.textContent = "Hauptmenü / Main Menu";
                 nextQuestionBtnCases.onclick = () => { window.location.href="index.html";};
                 nextQuestionBtnCases.classList.remove('hidden');
+                quizContentArea.classList.remove('hidden'); // Ensure quiz area is shown for this message
+                introductionPanel.classList.add('hidden');
                 return;
             }
             
             displayNextCaseQuestion();
             updateCaseProgressAndScore();
-            introductionPanel.classList.add('hidden'); 
-            quizContentArea.classList.remove('hidden');
+            // Ensure quiz area is visible and intro is hidden if not actively shown
+            if (introductionPanel.classList.contains('hidden')) {
+                 quizContentArea.classList.remove('hidden');
+            }
             toggleIntroductionBtn.textContent = "Einführung anzeigen / Mostrar Introducción";
         }
 
         function displayNextCaseQuestion() {
             if (currentCaseQuestionIndex >= caseTrainerQuestions.length) {
                 sentenceGermanEl.innerHTML = `Runde beendet! Punktzahl: ${caseTrainerScore} / ${caseTrainerQuestions.length}<br>¡Ronda terminada! Puntuación: ${caseTrainerScore} / ${caseTrainerQuestions.length}`;
-                const nounPrompt = sentenceGermanEl.parentNode.querySelector('.noun-prompt-js');
+                const nounPrompt = sentenceDisplayContainer.querySelector('.noun-prompt-js');
                 if(nounPrompt) nounPrompt.remove();
                 sentenceTranslationEnEl.textContent = "Round finished! Click 'New Round' to start again.";
                 sentenceTranslationEsEl.textContent = "¡Ronda terminada! Haz clic en 'Nueva Ronda' para empezar de nuevo.";
@@ -439,13 +472,13 @@
             const sentenceParts = currentCaseQuestion.sentence_de_template.split('___');
             sentenceGermanEl.innerHTML = `${sentenceParts[0]}<span class="blank-placeholder"></span>${sentenceParts[1] || ''}`;
             
-            const existingPrompt = document.querySelector('.noun-prompt-js'); // Query whole document or specific parent
+            const existingPrompt = sentenceDisplayContainer.querySelector('.noun-prompt-js');
             if(existingPrompt) existingPrompt.remove();
             
             const nounPromptEl = document.createElement('p');
             nounPromptEl.classList.add('noun-prompt-js'); 
             nounPromptEl.innerHTML = `Setze ein / Insert / Inserta: <strong>${currentCaseQuestion.target_noun_info.nominativ_form}</strong> (${currentCaseQuestion.target_noun_info.gender})`;
-            sentenceDisplayContainer.insertBefore(nounPromptEl, sentenceTranslationEnEl); // Insert before translations
+            sentenceDisplayContainer.insertBefore(nounPromptEl, sentenceTranslationEnEl); 
 
             sentenceTranslationEnEl.textContent = `EN: ${currentCaseQuestion.translation_en}`;
             sentenceTranslationEsEl.textContent = `ES: ${currentCaseQuestion.translation_es}`;
@@ -467,7 +500,7 @@
             checkAnswerBtnCases.disabled = true; 
             nextQuestionBtnCases.classList.add('hidden');
             nextQuestionBtnCases.textContent = "Nächste / Siguiente"; 
-            nextQuestionBtnCases.onclick = () => { // Ensure it increments before displaying
+             nextQuestionBtnCases.onclick = () => { 
                 currentCaseQuestionIndex++; 
                 displayNextCaseQuestion();
             }; 
@@ -526,8 +559,10 @@
             updateCaseProgressAndScore(); 
         });
         
-        nextQuestionBtnCases.addEventListener('click', () => { // This listener will be reassigned or used if already next question
-             displayNextCaseQuestion();
+        // Corrected: nextQuestionBtnCases listener should just call displayNextCaseQuestion AFTER currentCaseQuestionIndex is incremented by the click handler.
+        // The logic for incrementing is now combined with the call.
+        nextQuestionBtnCases.addEventListener('click', () => {
+             displayNextCaseQuestion(); // displayNextCaseQuestion now handles incrementing after initial round end
         });
 
 
@@ -541,11 +576,12 @@
         }
 
         toggleIntroductionBtn.addEventListener('click', () => {
-            introductionPanel.classList.toggle('hidden');
-            quizContentArea.classList.toggle('hidden', !introductionPanel.classList.contains('hidden'));
-            if (introductionPanel.classList.contains('hidden')) {
+            const introIsHidden = introductionPanel.classList.toggle('hidden');
+            quizContentArea.classList.toggle('hidden', !introIsHidden);
+            if (introIsHidden) {
                 toggleIntroductionBtn.textContent = "Einführung anzeigen / Mostrar Introducción";
-                if (caseTrainerQuestions.length === 0 && allCaseSentences.length > 0 && quizContentArea.classList.contains('hidden')) { 
+                // If quiz hasn't started yet (i.e. no questions loaded into caseTrainerQuestions) and there are sentences available, start it.
+                if (caseTrainerQuestions.length === 0 && allCaseSentences.length > 0 && !quizContentArea.classList.contains('hidden')) {
                     startNewCaseRound();
                 }
             } else {
