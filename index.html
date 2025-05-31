@@ -67,13 +67,17 @@
             background-color: #4f46e5; /* Indigo */
         }
 
-        .quiz-link.tertiary { /* New style for W-Fragen link */
+        .quiz-link.tertiary { 
             background-color: #0d9488; /* Teal */
+        }
+
+        .quiz-link.quaternary { /* New style for Daily Routine link */
+            background-color: #ca8a04; /* Amber */
         }
         
         .quiz-link:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(109, 40, 217, 0.3); /* Default hover shadow, can adjust per color */
+            box-shadow: 0 8px 25px rgba(109, 40, 217, 0.3); 
         }
         
         .quiz-link.primary:hover {
@@ -87,8 +91,13 @@
         }
 
         .quiz-link.tertiary:hover {
-            background-color: #0f766e; /* Darker Teal */
+            background-color: #0f766e; 
             box-shadow: 0 8px 25px rgba(13, 148, 136, 0.4);
+        }
+
+        .quiz-link.quaternary:hover {
+            background-color: #a16207; /* Darker Amber */
+            box-shadow: 0 8px 25px rgba(202, 138, 4, 0.4);
         }
         
         @media (max-width: 640px) {
@@ -114,15 +123,19 @@
         
         <div class="quiz-links">
             <a href="konjugieren_mode.html" class="quiz-link primary">
-                "Verben Konjugieren" Modus
+                Verb Kojugieren (Verben Modus)
             </a>
             
             <a href="artikel_mode.html" class="quiz-link secondary">
-                "Der/Die/Das" Modus
+                Der/Die/Das (Artikel Modus)
             </a>
 
             <a href="wfragen_mode.html" class="quiz-link tertiary">
-                "Wer, Wie, Was, Wo, ..." Modus
+                W-Fragen (LEGO Modus)
+            </a>
+
+            <a href="daily_routine_mode.html" class="quiz-link quaternary">
+                Satzbau Übung (LEGO Modus)
             </a>
         </div>
     </div>
