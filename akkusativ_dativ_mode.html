@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Akkusativ & Dativ Trainer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: linear-gradient(to right top, #a855f7, #9333ea, #7e22ce, #6b21a8, #581c87); /* Purple Gradient */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; 
+            min-height: 100vh;
+            margin: 0;
+            padding: 16px; 
+            color: #f3e8ff; /* Light purple for text on dark bg */
+            overflow-x: auto;
+        }
+        .card {
+            background-color: rgba(255, 255, 255, 0.08); /* Semi-transparent white */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 24px; 
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 750px; 
+            margin-top: 2vh;
+            margin-bottom: 2vh;
+        }
+        @media (min-width: 768px) { .card { padding: 32px; } }
+
+        .mode-title { font-size: 1.6rem; sm:font-size: 1.75rem; font-weight: 700; color: #e9d5ff; margin-bottom: 4px; } 
+        .mode-title-subtitle { font-size: 0.9rem; sm:font-size: 1rem; color: #d8b4fe; margin-bottom: 24px; }
+
+        .intro-toggle-button {
+            background-color: rgba(255,255,255,0.1);
+            color: #e9d5ff;
+            border: 1px solid #d8b4fe;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-bottom: 1.5rem;
+        }
+        .intro-toggle-button:hover { background-color: rgba(255,255,255,0.2); }
+        
+        #introduction-panel {
+            background-color: rgba(0,0,0,0.2);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+            text-align: left;
+            color: #f3e8ff;
+            border: 1px solid rgba(255,255,255,0.1);
+            max-height: 70vh; /* Max height for scroll */
+            overflow-y: auto; /* Enable scroll if content overflows */
+        }
+        #introduction-panel h3 { font-size: 1.25rem; font-weight: 600; color: #f5d0fe; margin-top: 1rem; margin-bottom: 0.5rem; border-bottom: 1px solid #e9d5ff; padding-bottom: 0.25rem;}
+        #introduction-panel h3:first-child { margin-top: 0;}
+        #introduction-panel p, #introduction-panel li { font-size: 0.95rem; line-height: 1.6; margin-bottom: 0.75rem; }
+        #introduction-panel ul { list-style-type: disc; padding-left: 1.5rem; }
+        #introduction-panel table { width: 100%; margin-top: 0.75rem; margin-bottom: 1rem; border-collapse: collapse; font-size: 0.8rem;}
+        #introduction-panel th, #introduction-panel td { border: 1px solid #a855f7; padding: 0.4rem; text-align: left; }
+        #introduction-panel th { background-color: rgba(126, 34, 206, 0.4); color: #f5d0fe; }
+        #introduction-panel td strong { color: #f0abfc; } /* Light pink for emphasis */
+        #introduction-panel .eselsbruecke { background-color: rgba(255,255,255,0.05); padding: 0.75rem; border-radius: 0.375rem; margin: 0.75rem 0; font-style: italic; border-left: 3px solid #c084fc;}
+
+        .quiz-content-area { /* Container for sentence and options */
+             /* Styles if needed */
+        }
+
+        .sentence-display-container {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .sentence-german { font-size: 1.25rem; sm:font-size: 1.5rem; line-height: 2; color: #f3e8ff; margin-bottom: 0.5rem;}
+        .sentence-german .blank-placeholder { 
+            display: inline-block; 
+            border-bottom: 2px dashed #c084fc; 
+            min-width: 120px; padding: 0 0.25rem;
+            font-weight: 600;
+            color: #e9d5ff;
+        }
+        .sentence-translation { font-size: 0.85rem; sm:font-size:0.9rem; font-style: italic; color: #e9d5ff; margin-top: 0.25rem; }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr; /* Single column for mobile */
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        @media (min-width: 640px) { /* sm breakpoint */
+             .options-container { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+        }
+
+        .option-btn {
+            background-color: #7e22ce; 
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            border: 2px solid transparent;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+        .option-btn:hover:not(:disabled) { background-color: #9333ea; border-color: #a855f7; }
+        .option-btn.selected { background-color: #c084fc; border-color: #e9d5ff; color: #3b0764; }
+        .option-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .option-btn.correct { background-color: #22c55e !important; border-color: #16a34a !important; color:white !important;}
+        .option-btn.incorrect { background-color: #ef4444 !important; border-color: #dc2626 !important; color:white !important;}
+
+        .feedback-box {
+            background-color: rgba(0,0,0,0.25);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            text-align: left;
+            color: #e9d5ff;
+            font-size: 0.9rem;
+        }
+        .feedback-box h4 { font-weight: 600; margin-bottom: 0.5rem; color: #f5d0fe; font-size: 1rem;}
+        .feedback-box p { line-height: 1.6; }
+        .feedback-box .german-explanation { margin-bottom: 0.5rem;}
+        .feedback-box .spanish-explanation { font-style: italic; color: #d8b4fe;}
+        
+        .btn {
+            padding: 10px 20px; border-radius: 8px; font-size: 0.95rem; font-weight: 600;
+            color: #581c87; 
+            background-color: #e9d5ff; 
+            cursor: pointer; transition: all 0.3s ease;
+            border: none; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            margin: 0.5rem; 
+        }
+        .btn:disabled { background-color: #a78bfa !important; color: #6b21a8 !important; cursor: not-allowed; opacity: 0.7; }
+        .btn:hover:not(:disabled) { background-color: #f3e8ff; }
+        .btn-secondary { background-color: #9333ea; color:white; }
+        .btn-secondary:hover:not(:disabled) { background-color: #a855f7; }
+        
+        .hidden { display: none !important; }
+        .controls-area { margin-top: 1.5rem; display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 10px;}
+        .progress-score-area { display: flex; justify-content: space-between; width:100%; margin-bottom: 1rem; font-size: 0.875rem; color: #d8b4fe;}
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1 class="mode-title">Akkusativ & Dativ Trainer</h1>
+        <p class="mode-title-subtitle">Entrenador de Casos Acusativo y Dativo</p>
+
+        <button id="toggle-introduction-btn" class="intro-toggle-button">Einführung anzeigen / Mostrar Introducción</button>
+
+        <div id="introduction-panel" class="hidden">
+            <h3>Was sind Fälle (Kasus)? / ¿Qué son los casos gramaticales?</h3>
+            <p>Im Deutschen verändern Nomen und ihre Begleiter (Artikel, Adjektive) ihre Form, je nachdem, welche Funktion sie im Satz haben. Diese Formen nennt man Fälle oder Kasus. Die vier Fälle sind Nominativ, Akkusativ, Dativ und Genitiv. Hier konzentrieren wir uns auf Akkusativ und Dativ.</p>
+            <p>En alemán, los sustantivos y sus acompañantes (artículos, adjetivos) cambian de forma según la función que desempeñan en la oración. Estas formas se llaman casos. Los cuatro casos son Nominativo, Acusativo, Dativo y Genitivo. Aquí nos concentraremos en el Acusativo y el Dativo.</p>
+
+            <h3>Nominativ (Der Wer-Fall / El caso Quién)</h3>
+            <p>Der Nominativ ist der Grundfall. Er bezeichnet das Subjekt des Satzes – also wer oder was etwas tut.</p>
+            <p>Man fragt: <strong>Wer oder Was?</strong> Beispiel: <strong>Der Mann</strong> liest. (Wer liest? Der Mann.)</p>
+            <p>El Nominativo es el caso básico. Designa al sujeto de la oración, es decir, quién o qué realiza una acción.</p>
+            <p>Se pregunta: <strong>¿Quién o Qué?</strong> Ejemplo: <strong>El hombre</strong> lee. (¿Quién lee? El hombre.)</p>
+
+            <h3>Akkusativ (Der Wen-Fall / El caso A quién/Qué - objeto directo)</h3>
+            <p>Der Akkusativ bezeichnet oft das direkte Objekt – also auf wen oder was sich die Handlung des Subjekts direkt bezieht.</p>
+            <p>Man fragt: <strong>Wen oder Was?</strong></p>
+            <p>Viele Verben erfordern den Akkusativ (z.B. haben, sehen, kaufen, lesen, lieben, brauchen, essen, trinken, suchen, finden, fragen, treffen).</p>
+            <p>Präpositionen, die immer den Akkusativ verlangen: <strong>durch, für, gegen, ohne, um</strong>. (Eselsbrücke: "DUFOG")</p>
+            <p>El Acusativo a menudo designa el objeto directo, es decir, sobre quién o qué recae directamente la acción del sujeto.</p>
+            <p>Se pregunta: <strong>¿A quién o Qué?</strong></p>
+            <p>Muchos verbos requieren el Acusativo (ej. haben, sehen, kaufen, lesen, lieben, brauchen, essen, trinken, suchen, finden, fragen, treffen).</p>
+            <p>Preposiciones que siempre requieren Acusativo: <strong>durch, für, gegen, ohne, um</strong>. (Mnemotecnia: "DUFOG")</p>
+            
+            <h4>Artikel im Akkusativ / Artículos en Acusativo</h4>
+            <table>
+                <thead><tr><th>Geschlecht</th><th>Bestimmter Artikel</th><th>Unbestimmter Artikel</th><th>Kein-Artikel</th></tr></thead>
+                <tbody>
+                    <tr><td>Maskulin (der)</td><td><strong>den</strong></td><td><strong>einen</strong></td><td><strong>keinen</strong></td></tr>
+                    <tr><td>Feminin (die)</td><td><strong>die</strong></td><td><strong>eine</strong></td><td><strong>keine</strong></td></tr>
+                    <tr><td>Neutrum (das)</td><td><strong>das</strong></td><td><strong>ein</strong></td><td><strong>kein</strong></td></tr>
+                    <tr><td>Plural (die)</td><td><strong>die</strong></td><td>- (keine)</td><td><strong>keine</strong></td></tr>
+                </tbody>
+            </table>
+            <p>Beispiel: Ich sehe <strong>den Mann</strong>. (Wen sehe ich? Den Mann.) Sie kauft <strong>eine Tasche</strong>.</p>
+
+            <h3>Dativ (Der Wem-Fall / El caso A quién - objeto indirecto)</h3>
+            <p>Der Dativ bezeichnet oft das indirekte Objekt – also wem etwas gegeben wird, für wen etwas getan wird, oder das Ziel einer Handlung.</p>
+            <p>Man fragt: <strong>Wem?</strong> (Manchmal auch: Wo? bei Ortsangaben mit bestimmten Verben/Präpositionen)</p>
+            <p>Viele Verben erfordern den Dativ (z.B. helfen, danken, gefallen, gehören, antworten, zuhören, schmecken, passen, glauben).</p>
+            <p>Präpositionen, die immer den Dativ verlangen: <strong>aus, bei, mit, nach, seit, von, zu, gegenüber</strong>. (Eselsbrücke: "Aus bei mit nach seit von zu, fährst immer mit dem Dativ du!")</p>
+            <p>El Dativo a menudo designa el objeto indirecto, es decir, a quién se le da algo, para quién se hace algo, o el destinatario de una acción.</p>
+            <p>Se pregunta: <strong>¿A quién?</strong> (A veces también: ¿Dónde? para localizaciones con ciertos verbos/preposiciones)</p>
+            <p>Muchos verbos requieren el Dativo (ej. helfen, danken, gefallen, gehören, antworten, zuhören, schmecken, passen, glauben).</p>
+            <p>Preposiciones que siempre requieren Dativo: <strong>aus, bei, mit, nach, seit, von, zu, gegenüber</strong>.</p>
+            
+            <h4>Artikel im Dativ / Artículos en Dativo</h4>
+            <table>
+                <thead><tr><th>Geschlecht</th><th>Bestimmter Artikel</th><th>Unbestimmter Artikel</th><th>Kein-Artikel</th></tr></thead>
+                <tbody>
+                    <tr><td>Maskulin (der)</td><td><strong>dem</strong></td><td><strong>einem</strong></td><td><strong>keinem</strong></td></tr>
+                    <tr><td>Feminin (die)</td><td><strong>der</strong></td><td><strong>einer</strong></td><td><strong>keiner</strong></td></tr>
+                    <tr><td>Neutrum (das)</td><td><strong>dem</strong></td><td><strong>einem</strong></td><td><strong>keinem</strong></td></tr>
+                    <tr><td>Plural (die)</td><td><strong>den</strong> (+n am Nomen)</td><td>- (keinen)</td><td><strong>keinen</strong> (+n am Nomen)</td></tr>
+                </tbody>
+            </table>
+            <p>Beispiel: Ich gebe <strong>dem Mann</strong> das Buch. (Wem gebe ich das Buch? Dem Mann.)</p>
+            <p>Beispiel: Wir spielen <strong>mit den Kindern</strong>. (Mit wem spielen wir? Mit den Kindern.)</p>
+
+            <h3>Wechselpräpositionen (Preposiciones Duales)</h3>
+            <p>Diese Präpositionen können mit Akkusativ ODER Dativ stehen: <strong>an, auf, hinter, in, neben, über, unter, vor, zwischen</strong>.</p>
+            <ul>
+                <li><strong>Akkusativ (Richtung):</strong> Frage "Wohin?" (Bewegung zu einem Ziel) <br>Beispiel: Ich lege das Buch <strong>auf den Tisch</strong>. (Wohin lege ich das Buch?)</li>
+                <li><strong>Dativ (Ort):</strong> Frage "Wo?" (Position, keine Bewegung zum Ziel) <br>Beispiel: Das Buch liegt <strong>auf dem Tisch</strong>. (Wo liegt das Buch?)</li>
+            </ul>
+            <p>Estas preposiciones pueden ir con Acusativo O Dativo: <strong>an, auf, hinter, in, neben, über, unter, vor, zwischen</strong>.</p>
+             <ul>
+                <li><strong>Acusativo (dirección):</strong> Pregunta "¿A dónde?" (movimiento hacia un destino) <br>Ejemplo: Pongo el libro <strong>sobre la mesa</strong> (auf den Tisch). (¿A dónde pongo el libro?)</li>
+                <li><strong>Dativo (lugar):</strong> Pregunta "¿Dónde?" (posición, sin movimiento hacia un destino) <br>Ejemplo: El libro está <strong>sobre la mesa</strong> (auf dem Tisch). (¿Dónde está el libro?)</li>
+            </ul>
+            <div class="text-center mt-4">
+                <button id="close-introduction-btn" class="btn btn-secondary">Verstanden & Schließen / Entendido & Cerrar</button>
+            </div>
+        </div>
+
+        <div id="quiz-content-area" class="quiz-content-area">
+            <div id="progress-score-area" class="progress-score-area">
+                <span id="progress-text-cases">Frage: 1/10</span>
+                <span id="score-text-cases">Punkte: 0</span>
+            </div>
+            <div id="sentence-display-container" class="sentence-display-container">
+                <p id="sentence-german" class="sentence-german">Der Satz wird hier angezeigt... <span class="blank-placeholder">(das Nomen)</span>.</p>
+                <p id="sentence-translation-en" class="sentence-translation">EN: English translation will appear here.</p>
+                <p id="sentence-translation-es" class="sentence-translation">ES: La traducción al español aparecerá aquí.</p>
+            </div>
+
+            <div id="options-container" class="options-container">
+                </div>
+            
+            <div id="hint-box" class="feedback-box hidden">
+                <h4>Hinweis / Pista:</h4>
+                <p id="hint-text-german"></p>
+                <p id="hint-text-spanish" class="spanish-explanation"></p>
+            </div>
+
+            <div id="explanation-box" class="feedback-box hidden">
+                <h4>Erklärung / Explicación:</h4>
+                <p id="explanation-text-german" class="german-explanation"></p>
+                <p id="explanation-text-spanish" class="spanish-explanation"></p>
+                <p id="full-sentence-display" class="mt-2 font-semibold"></p>
+            </div>
+
+            <div class="controls-area">
+                <button id="hint-btn-cases" class="btn btn-secondary">Hinweis / Pista</button>
+                <button id="check-answer-btn-cases" class="btn btn-primary" disabled>Prüfen / Verificar</button>
+                <button id="next-question-btn-cases" class="btn btn-primary hidden">Nächste / Siguiente</button>
+            </div>
+        </div>
+        <div class="mt-8 pt-4 border-t border-gray-200 border-opacity-20">
+             <a href="index.html" class="btn btn-secondary btn-sm">← Hauptmenü / Menú Principal</a>
+        </div>
+    </div>
+
+    <script>
+        let allCaseSentences = [];
+        let currentCaseQuestion = null;
+        let currentCaseQuestionIndex = 0;
+        let caseTrainerScore = 0;
+        let caseTrainerQuestions = [];
+        let userSelectedOptionCases = null;
+        let hintUsedForCurrentQuestion = false;
+
+        // DOM Elements
+        const toggleIntroductionBtn = document.getElementById('toggle-introduction-btn');
+        const introductionPanel = document.getElementById('introduction-panel');
+        const closeIntroductionBtn = document.getElementById('close-introduction-btn');
+        const quizContentArea = document.getElementById('quiz-content-area');
+
+        const sentenceGermanEl = document.getElementById('sentence-german');
+        const sentenceTranslationEnEl = document.getElementById('sentence-translation-en');
+        const sentenceTranslationEsEl = document.getElementById('sentence-translation-es');
+        const optionsContainerCases = document.getElementById('options-container');
+        
+        const hintBtnCases = document.getElementById('hint-btn-cases');
+        const checkAnswerBtnCases = document.getElementById('check-answer-btn-cases');
+        const nextQuestionBtnCases = document.getElementById('next-question-btn-cases');
+        
+        const hintBoxEl = document.getElementById('hint-box');
+        const hintTextGermanEl = document.getElementById('hint-text-german');
+        const hintTextSpanishEl = document.getElementById('hint-text-spanish');
+        
+        const explanationBoxEl = document.getElementById('explanation-box');
+        const explanationTextGermanEl = document.getElementById('explanation-text-german');
+        const explanationTextSpanishEl = document.getElementById('explanation-text-spanish');
+        const fullSentenceDisplayEl = document.getElementById('full-sentence-display');
+
+        const progressTextCasesEl = document.getElementById('progress-text-cases');
+        const scoreTextCasesEl = document.getElementById('score-text-cases');
+
+        async function loadCaseData() {
+            try {
+                const response = await fetch('case_practice.json');
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status} for case_practice.json`);
+                allCaseSentences = await response.json();
+                if (allCaseSentences.length === 0) throw new Error("case_practice.json is empty.");
+                startNewCaseRound();
+            } catch (error) {
+                console.error("Could not load case practice data:", error);
+                sentenceGermanEl.textContent = `Error loading questions: ${error.message}`;
+            }
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function startNewCaseRound() {
+            caseTrainerScore = 0;
+            currentCaseQuestionIndex = 0;
+            shuffleArray(allCaseSentences);
+            // For now, let's take a fixed number or all for simplicity. Settings can be added later.
+            caseTrainerQuestions = allCaseSentences.slice(0, Math.min(10, allCaseSentences.length)); 
+            if (caseTrainerQuestions.length === 0) {
+                sentenceGermanEl.textContent = "No questions available for this round.";
+                return;
+            }
+            displayNextCaseQuestion();
+            updateCaseProgressAndScore();
+            introductionPanel.classList.add('hidden'); // Ensure intro is hidden when quiz starts
+            quizContentArea.classList.remove('hidden');
+            toggleIntroductionBtn.textContent = "Einführung anzeigen / Mostrar Introducción";
+        }
+
+        function displayNextCaseQuestion() {
+            if (currentCaseQuestionIndex >= caseTrainerQuestions.length) {
+                // End of round
+                sentenceGermanEl.innerHTML = `Runde beendet! Punktzahl: ${caseTrainerScore} / ${caseTrainerQuestions.length}<br>¡Ronda terminada! Puntuación: ${caseTrainerScore} / ${caseTrainerQuestions.length}`;
+                sentenceTranslationEnEl.textContent = "";
+                sentenceTranslationEsEl.textContent = "";
+                optionsContainerCases.innerHTML = '';
+                hintBtnCases.classList.add('hidden');
+                checkAnswerBtnCases.classList.add('hidden');
+                nextQuestionBtnCases.textContent = "Neue Runde / Nueva Ronda";
+                nextQuestionBtnCases.classList.remove('hidden');
+                nextQuestionBtnCases.onclick = startNewCaseRound; // Reset for a new round
+                hintBoxEl.classList.add('hidden');
+                explanationBoxEl.classList.add('hidden');
+                return;
+            }
+
+            currentCaseQuestion = caseTrainerQuestions[currentCaseQuestionIndex];
+            userSelectedOptionCases = null;
+            hintUsedForCurrentQuestion = false;
+
+            const sentenceParts = currentCaseQuestion.sentence_de_template.split('___');
+            sentenceGermanEl.innerHTML = `${sentenceParts[0]}<span class="blank-placeholder">(${currentCaseQuestion.target_noun_info.nominativ_form})</span>${sentenceParts[1] || ''}`;
+            sentenceTranslationEnEl.textContent = `EN: ${currentCaseQuestion.translation_en}`;
+            sentenceTranslationEsEl.textContent = `ES: ${currentCaseQuestion.translation_es}`;
+
+            optionsContainerCases.innerHTML = '';
+            currentCaseQuestion.options.forEach((optionText, index) => {
+                const optionButton = document.createElement('button');
+                optionButton.classList.add('option-btn');
+                optionButton.textContent = optionText;
+                optionButton.dataset.optionIndex = index;
+                optionButton.onclick = () => handleCaseOptionClick(optionButton, optionText);
+                optionsContainerCases.appendChild(optionButton);
+            });
+
+            hintBoxEl.classList.add('hidden');
+            explanationBoxEl.classList.add('hidden');
+            hintBtnCases.classList.remove('hidden');
+            hintBtnCases.disabled = false;
+            checkAnswerBtnCases.disabled = true; // Disabled until an option is selected
+            nextQuestionBtnCases.classList.add('hidden');
+            nextQuestionBtnCases.textContent = "Nächste / Siguiente"; // Reset for next question
+            nextQuestionBtnCases.onclick = displayNextCaseQuestion; // Standard next question behavior
+
+            updateCaseProgressAndScore();
+        }
+
+        function handleCaseOptionClick(buttonEl, optionText) {
+            // Deselect previously selected button
+            const currentlySelected = optionsContainerCases.querySelector('.option-btn.selected');
+            if (currentlySelected) {
+                currentlySelected.classList.remove('selected');
+            }
+            buttonEl.classList.add('selected');
+            userSelectedOptionCases = optionText;
+            checkAnswerBtnCases.disabled = false;
+        }
+
+        hintBtnCases.addEventListener('click', () => {
+            if (!currentCaseQuestion || hintUsedForCurrentQuestion) return;
+            hintTextGermanEl.textContent = currentCaseQuestion.hint_de;
+            hintTextSpanishEl.textContent = currentCaseQuestion.hint_es;
+            hintBoxEl.classList.remove('hidden');
+            explanationBoxEl.classList.add('hidden'); // Hide explanation if hint is shown
+            hintBtnCases.disabled = true;
+            hintUsedForCurrentQuestion = true;
+        });
+
+        checkAnswerBtnCases.addEventListener('click', () => {
+            if (!userSelectedOptionCases || !currentCaseQuestion) return;
+
+            const isCorrect = userSelectedOptionCases === currentCaseQuestion.correct_option_text;
+            
+            optionsContainerCases.querySelectorAll('.option-btn').forEach(btn => {
+                btn.disabled = true; // Disable all options
+                if (btn.textContent === currentCaseQuestion.correct_option_text) {
+                    btn.classList.add('correct');
+                } else if (btn.textContent === userSelectedOptionCases && !isCorrect) {
+                    btn.classList.add('incorrect');
+                }
+            });
+
+            if (isCorrect) {
+                caseTrainerScore++;
+                if(typeof confetti === 'function') confetti();
+            }
+            
+            explanationTextGermanEl.textContent = currentCaseQuestion.explanation_de;
+            explanationTextSpanishEl.textContent = currentCaseQuestion.explanation_es;
+            fullSentenceDisplayEl.textContent = `DE: ${currentCaseQuestion.full_correct_sentence_de}`;
+            explanationBoxEl.classList.remove('hidden');
+            hintBoxEl.classList.add('hidden'); // Hide hint when explanation is shown
+
+            checkAnswerBtnCases.classList.add('hidden');
+            hintBtnCases.classList.add('hidden');
+            nextQuestionBtnCases.classList.remove('hidden');
+            currentCaseQuestionIndex++;
+            updateCaseProgressAndScore();
+        });
+        
+        nextQuestionBtnCases.addEventListener('click', displayNextCaseQuestion);
+
+
+        function updateCaseProgressAndScore() {
+            progressTextCasesEl.textContent = `Frage: ${currentCaseQuestionIndex + 1}/${caseTrainerQuestions.length}`;
+            scoreTextCasesEl.textContent = `Punkte: ${caseTrainerScore}`;
+        }
+
+        toggleIntroductionBtn.addEventListener('click', () => {
+            introductionPanel.classList.toggle('hidden');
+            quizContentArea.classList.toggle('hidden', !introductionPanel.classList.contains('hidden'));
+            if (introductionPanel.classList.contains('hidden')) {
+                toggleIntroductionBtn.textContent = "Einführung anzeigen / Mostrar Introducción";
+            } else {
+                toggleIntroductionBtn.textContent = "Einführung schließen / Cerrar Introducción";
+            }
+        });
+        closeIntroductionBtn.addEventListener('click', () => {
+            introductionPanel.classList.add('hidden');
+            quizContentArea.classList.remove('hidden');
+            toggleIntroductionBtn.textContent = "Einführung anzeigen / Mostrar Introducción";
+        });
+
+        // Initial Load
+        document.addEventListener('DOMContentLoaded', loadCaseData);
+    </script>
+</body>
+</html>

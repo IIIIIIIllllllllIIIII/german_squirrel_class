@@ -1,0 +1,230 @@
+[
+    {
+        "id": "ad_akk_v1",
+        "sentence_de_template": "Ich kaufe ___.",
+        "target_noun_info": {
+            "nominativ_form": "der Apfel",
+            "gender": "maskulin"
+        },
+        "required_case": "Akkusativ",
+        "trigger_element": "kaufen (verb + Akkusativ)",
+        "options": ["den Apfel", "dem Apfel", "der Apfel"],
+        "correct_option_text": "den Apfel",
+        "hint_de": "Das Verb 'kaufen' braucht ein direktes Objekt (Wen oder Was kaufe ich?). Welchen Kasus nimmt das direkte Objekt? Achte auf das Geschlecht von 'Apfel'.",
+        "hint_es": "El verbo 'kaufen' necesita un objeto directo (¿A quién o qué compro?). ¿Qué caso toma el objeto directo? Presta atención al género de 'Apfel'.",
+        "explanation_de": "'Kaufen' ist ein transitives Verb und verlangt ein Akkusativobjekt. 'Der Apfel' ist maskulin. Im Akkusativ wird 'der' zu 'den'. Also: 'den Apfel'.",
+        "explanation_es": "'Kaufen' es un verbo transitivo y requiere un objeto acusativo. 'Der Apfel' es masculino. En acusativo, 'der' se convierte en 'den'. Por lo tanto: 'den Apfel'.",
+        "full_correct_sentence_de": "Ich kaufe den Apfel.",
+        "translation_en": "I am buying the apple.",
+        "translation_es": "Compro la manzana."
+    },
+    {
+        "id": "ad_dat_v1",
+        "sentence_de_template": "Sie hilft ___.",
+        "target_noun_info": {
+            "nominativ_form": "das Kind",
+            "gender": "neutrum"
+        },
+        "required_case": "Dativ",
+        "trigger_element": "helfen (verb + Dativ)",
+        "options": ["dem Kind", "das Kind", "den Kind"],
+        "correct_option_text": "dem Kind",
+        "hint_de": "Das Verb 'helfen' verlangt immer den Dativ. Wem hilft sie? Achte auf das Geschlecht von 'Kind'.",
+        "hint_es": "El verbo 'helfen' siempre requiere el dativo. ¿A quién ayuda ella? Presta atención al género de 'Kind'.",
+        "explanation_de": "Das Verb 'helfen' erfordert immer den Dativ. 'Das Kind' ist neutrum. Im Dativ wird der neutrale Artikel 'das' zu 'dem'. Also: 'dem Kind'.",
+        "explanation_es": "El verbo 'helfen' siempre requiere el dativo. 'Das Kind' es neutro. En dativo, el artículo neutro 'das' se convierte en 'dem'. Por lo tanto: 'dem Kind'.",
+        "full_correct_sentence_de": "Sie hilft dem Kind.",
+        "translation_en": "She is helping the child.",
+        "translation_es": "Ella ayuda al niño."
+    },
+    {
+        "id": "ad_akk_wp1",
+        "sentence_de_template": "Er legt das Buch auf ___.",
+        "target_noun_info": {
+            "nominativ_form": "der Tisch",
+            "gender": "maskulin"
+        },
+        "required_case": "Akkusativ",
+        "trigger_element": "auf (Wechselpräposition + Akkusativ - Richtung)",
+        "options": ["den Tisch", "dem Tisch", "der Tisch"],
+        "correct_option_text": "den Tisch",
+        "hint_de": "'Auf' ist eine Wechselpräposition. Zeigt die Handlung eine Richtung (Wohin?) oder einen Ort (Wo?)? 'Legen' bedeutet eine Bewegung zu einem Ziel.",
+        "hint_es": "'Auf' es una preposición dual. ¿Indica la acción una dirección (¿A dónde?) o un lugar (¿Dónde?)? 'Legen' (colocar) implica movimiento hacia un destino.",
+        "explanation_de": "'Auf' ist eine Wechselpräposition. Da 'legen' eine Richtung (Wohin?) ausdrückt, steht das Objekt im Akkusativ. 'Der Tisch' ist maskulin. Akkusativ maskulin von 'der' ist 'den'. Also: 'auf den Tisch'.",
+        "explanation_es": "'Auf' es una preposición dual. Como 'legen' (colocar) expresa una dirección (¿A dónde?), el objeto va en acusativo. 'Der Tisch' es masculino. El acusativo masculino de 'der' es 'den'. Por lo tanto: 'auf den Tisch'.",
+        "full_correct_sentence_de": "Er legt das Buch auf den Tisch.",
+        "translation_en": "He places the book onto the table.",
+        "translation_es": "Él pone el libro sobre la mesa."
+    },
+    {
+        "id": "ad_dat_wp1",
+        "sentence_de_template": "Das Buch liegt auf ___.",
+        "target_noun_info": {
+            "nominativ_form": "der Tisch",
+            "gender": "maskulin"
+        },
+        "required_case": "Dativ",
+        "trigger_element": "auf (Wechselpräposition + Dativ - Ort)",
+        "options": ["dem Tisch", "den Tisch", "des Tisches"],
+        "correct_option_text": "dem Tisch",
+        "hint_de": "'Auf' ist eine Wechselpräposition. Zeigt die Handlung eine Richtung (Wohin?) oder einen Ort (Wo?)? 'Liegen' bedeutet eine Position an einem Ort.",
+        "hint_es": "'Auf' es una preposición dual. ¿Indica la acción una dirección (¿A dónde?) o un lugar (¿Dónde?)? 'Liegen' (estar acostado/situado) implica una posición en un lugar.",
+        "explanation_de": "'Auf' ist eine Wechselpräposition. Da 'liegen' einen Ort (Wo?) ausdrückt, steht das Objekt im Dativ. 'Der Tisch' ist maskulin. Dativ maskulin von 'der' ist 'dem'. Also: 'auf dem Tisch'.",
+        "explanation_es": "'Auf' es una preposición dual. Como 'liegen' (estar acostado/situado) expresa un lugar (¿Dónde?), el objeto va en dativo. 'Der Tisch' es masculino. El dativo masculino de 'der' es 'dem'. Por lo tanto: 'auf dem Tisch'.",
+        "full_correct_sentence_de": "Das Buch liegt auf dem Tisch.",
+        "translation_en": "The book is lying on the table.",
+        "translation_es": "El libro está sobre la mesa."
+    },
+    {
+        "id": "ad_akk_p1",
+        "sentence_de_template": "Er geht ohne ___ spazieren.",
+        "target_noun_info": {
+            "nominativ_form": "der Schirm",
+            "gender": "maskulin"
+        },
+        "required_case": "Akkusativ",
+        "trigger_element": "ohne (Präposition + Akkusativ)",
+        "options": ["seinen Schirm", "seinem Schirm", "sein Schirm"],
+        "correct_option_text": "seinen Schirm",
+        "hint_de": "Die Präposition 'ohne' verlangt immer den Akkusativ. Wie lautet der Possessivartikel für 'er' bei einem maskulinen Nomen im Akkusativ?",
+        "hint_es": "La preposición 'ohne' siempre requiere el acusativo. ¿Cuál es el artículo posesivo para 'er' (él) con un sustantivo masculino en acusativo?",
+        "explanation_de": "Die Präposition 'ohne' braucht immer den Akkusativ. 'Schirm' ist maskulin. Der Possessivartikel 'sein' im Akkusativ maskulin ist 'seinen'.",
+        "explanation_es": "La preposición 'ohne' siempre necesita el acusativo. 'Schirm' es masculino. El artículo posesivo 'sein' en acusativo masculino es 'seinen'.",
+        "full_correct_sentence_de": "Er geht ohne seinen Schirm spazieren.",
+        "translation_en": "He goes for a walk without his umbrella.",
+        "translation_es": "Él va a pasear sin su paraguas."
+    },
+    {
+        "id": "ad_dat_p2",
+        "sentence_de_template": "Das Geschenk ist von ___.",
+        "target_noun_info": {
+            "nominativ_form": "meine Tante",
+            "gender": "feminin"
+        },
+        "required_case": "Dativ",
+        "trigger_element": "von (Präposition + Dativ)",
+        "options": ["meiner Tante", "meine Tante", "meinen Tante"],
+        "correct_option_text": "meiner Tante",
+        "hint_de": "Die Präposition 'von' verlangt immer den Dativ. Wie lautet der Possessivartikel für 'ich' bei einem femininen Nomen im Dativ?",
+        "hint_es": "La preposición 'von' siempre requiere el dativo. ¿Cuál es el artículo posesivo para 'ich' (yo) con un sustantivo femenino en dativo?",
+        "explanation_de": "Die Präposition 'von' braucht immer den Dativ. 'Tante' ist feminin. Der Possessivartikel 'mein' im Dativ feminin ist 'meiner'.",
+        "explanation_es": "La preposición 'von' siempre necesita el dativo. 'Tante' es femenino. El artículo posesivo 'mein' en dativo femenino es 'meiner'.",
+        "full_correct_sentence_de": "Das Geschenk ist von meiner Tante.",
+        "translation_en": "The gift is from my aunt.",
+        "translation_es": "El regalo es de mi tía."
+    },
+    {
+        "id": "ad_akk_v2",
+        "sentence_de_template": "Siehst du ___ dort drüben?",
+        "target_noun_info": {
+            "nominativ_form": "die Frau",
+            "gender": "feminin"
+        },
+        "required_case": "Akkusativ",
+        "trigger_element": "sehen (verb + Akkusativ)",
+        "options": ["die Frau", "der Frau", "den Frau"],
+        "correct_option_text": "die Frau",
+        "hint_de": "'Sehen' nimmt ein direktes Objekt. Was ist das Geschlecht von 'Frau'? Wie verändert sich der feminine Artikel im Akkusativ?",
+        "hint_es": "'Sehen' toma un objeto directo. ¿Cuál es el género de 'Frau'? ¿Cómo cambia el artículo femenino en acusativo?",
+        "explanation_de": "'Sehen' verlangt Akkusativ. 'Frau' ist feminin. Der feminine Artikel 'die' bleibt im Akkusativ 'die'.",
+        "explanation_es": "'Sehen' requiere acusativo. 'Frau' es femenino. El artículo femenino 'die' permanece 'die' en acusativo.",
+        "full_correct_sentence_de": "Siehst du die Frau dort drüben?",
+        "translation_en": "Do you see the woman over there?",
+        "translation_es": "¿Ves a la mujer allí?"
+    },
+    {
+        "id": "ad_dat_v2",
+        "sentence_de_template": "Das Auto gehört ___.",
+        "target_noun_info": {
+            "nominativ_form": "mein Bruder",
+            "gender": "maskulin"
+        },
+        "required_case": "Dativ",
+        "trigger_element": "gehören (verb + Dativ)",
+        "options": ["meinem Bruder", "meinen Bruder", "mein Bruder"],
+        "correct_option_text": "meinem Bruder",
+        "hint_de": "Das Verb 'gehören' verlangt immer den Dativ. Wem gehört das Auto? Wie ist der Dativ von 'mein Bruder'?",
+        "hint_es": "El verbo 'gehören' siempre requiere el dativo. ¿A quién pertenece el coche? ¿Cómo es el dativo de 'mein Bruder'?",
+        "explanation_de": "'Gehören' braucht den Dativ. 'Bruder' ist maskulin. Der Possessivartikel 'mein' im Dativ maskulin ist 'meinem'.",
+        "explanation_es": "'Gehören' necesita el dativo. 'Bruder' es masculino. El artículo posesivo 'mein' en dativo masculino es 'meinem'.",
+        "full_correct_sentence_de": "Das Auto gehört meinem Bruder.",
+        "translation_en": "The car belongs to my brother.",
+        "translation_es": "El coche pertenece a mi hermano."
+    },
+    {
+        "id": "ad_akk_wp2",
+        "sentence_de_template": "Wir stellen die Gläser in ___.",
+        "target_noun_info": {
+            "nominativ_form": "der Schrank",
+            "gender": "maskulin"
+        },
+        "required_case": "Akkusativ",
+        "trigger_element": "in (Wechselpräposition + Akkusativ - Richtung)",
+        "options": ["den Schrank", "dem Schrank", "des Schrankes"],
+        "correct_option_text": "den Schrank",
+        "hint_de": "'In' ist eine Wechselpräposition. Die Handlung 'stellen' impliziert eine Bewegung zu einem Ziel (Wohin?).",
+        "hint_es": "'In' es una preposición dual. La acción 'stellen' (colocar) implica un movimiento hacia un destino (¿A dónde?).",
+        "explanation_de": "'In' mit einer Richtung (Wohin stellen wir die Gläser?) nimmt den Akkusativ. 'Schrank' ist maskulin. Akkusativ: 'den Schrank'.",
+        "explanation_es": "'In' con una dirección (¿A dónde colocamos los vasos?) toma el acusativo. 'Schrank' es masculino. Acusativo: 'den Schrank'.",
+        "full_correct_sentence_de": "Wir stellen die Gläser in den Schrank.",
+        "translation_en": "We put the glasses into the cupboard.",
+        "translation_es": "Ponemos los vasos en el armario."
+    },
+    {
+        "id": "ad_dat_wp2",
+        "sentence_de_template": "Die Gläser stehen in ___.",
+        "target_noun_info": {
+            "nominativ_form": "der Schrank",
+            "gender": "maskulin"
+        },
+        "required_case": "Dativ",
+        "trigger_element": "in (Wechselpräposition + Dativ - Ort)",
+        "options": ["dem Schrank", "den Schrank", "des Schrankes"],
+        "correct_option_text": "dem Schrank",
+        "hint_de": "'In' ist eine Wechselpräposition. Die Handlung 'stehen' beschreibt einen Ort (Wo?).",
+        "hint_es": "'In' es una preposición dual. La acción 'stehen' (estar de pie/situado) describe un lugar (¿Dónde?).",
+        "explanation_de": "'In' mit einem Ort (Wo stehen die Gläser?) nimmt den Dativ. 'Schrank' ist maskulin. Dativ: 'dem Schrank'.",
+        "explanation_es": "'In' con un lugar (¿Dónde están los vasos?) toma el dativo. 'Schrank' es masculino. Dativo: 'dem Schrank'.",
+        "full_correct_sentence_de": "Die Gläser stehen in dem Schrank.",
+        "translation_en": "The glasses are in the cupboard.",
+        "translation_es": "Los vasos están en el armario."
+    },
+    {
+        "id": "ad_akk_v_neut",
+        "sentence_de_template": "Das Mädchen hat ___ .",
+        "target_noun_info": {
+            "nominativ_form": "ein Fahrrad",
+            "gender": "neutrum" 
+        },
+        "required_case": "Akkusativ",
+        "trigger_element": "haben (verb + Akkusativ)",
+        "options": ["ein Fahrrad", "einem Fahrrad", "eines Fahrrades"],
+        "correct_option_text": "ein Fahrrad",
+        "hint_de": "Das Verb 'haben' braucht ein direktes Objekt. Was hat das Mädchen? Neutrale Nomen im Akkusativ: Wie lautet der unbestimmte Artikel?",
+        "hint_es": "El verbo 'haben' necesita un objeto directo. ¿Qué tiene la niña? Sustantivos neutros en acusativo: ¿cuál es el artículo indefinido?",
+        "explanation_de": "'Haben' verlangt ein Akkusativobjekt. 'Fahrrad' ist neutrum. Der unbestimmte Artikel für neutrale Nomen im Akkusativ ist 'ein' (bleibt gleich wie Nominativ).",
+        "explanation_es": "'Haben' requiere un objeto acusativo. 'Fahrrad' es neutro. El artículo indefinido para sustantivos neutros en acusativo es 'ein' (permanece igual que en nominativo).",
+        "full_correct_sentence_de": "Das Mädchen hat ein Fahrrad.",
+        "translation_en": "The girl has a bicycle.",
+        "translation_es": "La niña tiene una bicicleta."
+    },
+    {
+        "id": "ad_dat_p_fem",
+        "sentence_de_template": "Er spricht mit ___ .",
+        "target_noun_info": {
+            "nominativ_form": "eine Kollegin",
+            "gender": "feminin"
+        },
+        "required_case": "Dativ",
+        "trigger_element": "mit (Präposition + Dativ)",
+        "options": ["einer Kollegin", "eine Kollegin", "einen Kollegin"],
+        "correct_option_text": "einer Kollegin",
+        "hint_de": "Die Präposition 'mit' verlangt immer den Dativ. Mit wem spricht er? Wie lautet der unbestimmte Artikel für feminine Nomen im Dativ?",
+        "hint_es": "La preposición 'mit' siempre requiere el dativo. ¿Con quién habla él? ¿Cuál es el artículo indefinido para sustantivos femeninos en dativo?",
+        "explanation_de": "Die Präposition 'mit' erfordert den Dativ. 'Kollegin' ist feminin. Der unbestimmte Artikel 'eine' wird im Dativ zu 'einer'.",
+        "explanation_es": "La preposición 'mit' requiere el dativo. 'Kollegin' es femenino. El artículo indefinido 'eine' se convierte en 'einer' en dativo.",
+        "full_correct_sentence_de": "Er spricht mit einer Kollegin.",
+        "translation_en": "He is speaking with a (female) colleague.",
+        "translation_es": "Él habla con una colega."
+    }
+]
