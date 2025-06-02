@@ -74,7 +74,7 @@
             position: fixed;
             top: 100px;
             right: 20px;
-            width: 320px;
+            width: 340px;
             background: #fff;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
@@ -96,11 +96,18 @@
         #cheat-sheet-box ul {
             list-style: none;
             padding-left: 0;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         #cheat-sheet-box ul li {
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: #333;
+            line-height: 1.3;
+        }
+        #cheat-sheet-box .section-title {
+            font-weight: bold;
+            color: #1e3c72;
+            margin-top: 15px;
+            margin-bottom: 8px;
         }
     </style>
 </head>
@@ -119,20 +126,22 @@
     </div>
     
     <div id="cheat-sheet-box">
-        <h4>🚨 Condition Verb Cheat Sheet</h4>
-        <p>These Verbs are ALWAYS "conditions"! If you see one of these, the case is likely solved immediately.</p>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <h4 style="margin: 0;">🚨 CONDITION VERBS = NOMINATIV!</h4>
+            <button id="close-cheat-sheet" style="background: #ff6b6b; border: none; color: white; width: 25px; height: 25px; border-radius: 50%; cursor: pointer; font-weight: bold;">×</button>
+        </div>
+        <p>If you see these verbs, the word after them is ALWAYS Nominativ! These verbs describe what someone IS, not what they DO.</p>
+        
         <ul>
-            <li>•&nbsp;<b>sein</b> (to be) -> Ich <b>bin</b> Student.</li>
-            <li>•&nbsp;<b>heißen</b> (to be called) -> Sie <b>heißt</b> Anna.</li>
-            <li>•&nbsp;<b>werden</b> (to become) -> Er <b>wird</b> Arzt.</li>
-            <li>•&nbsp;<b>bleiben</b> (to stay) -> Wir <b>bleiben</b> Freunde.</li>
-            <li>•&nbsp;<b>kommen</b> (to come) -> Ich <b>komme</b> aus Spanien.</li>
-            <li>•&nbsp;<b>wohnen / leben</b> (to live) -> Er <b>wohnt</b> in München.</li>
-            <li>•&nbsp;<b>gehen / laufen</b> (to go / run) -> Wir <b>gehen</b> ins Kino.</li>
-            <li>•&nbsp;<b>schlafen</b> (to sleep) -> Das Baby <b>schläft</b>.</li>
-            <li>•&nbsp;<b>warten</b> (to wait) -> Ich <b>warte</b> hier.</li>
-            <li>•&nbsp;<b>fahren</b> (to drive/go) -> Sie <b>fährt</b> mit dem Bus.</li>
+            <li>•&nbsp;<b>sein</b> (to be) → Ich <b>bin</b> deine Mutter.</li>
+            <li>•&nbsp;<b>heißen</b> (to be called) → Sie <b>heißt</b> Anna Schmidt.</li>
+            <li>•&nbsp;<b>werden</b> (to become) → Er <b>wird</b> ein guter Arzt.</li>
+            <li>•&nbsp;<b>bleiben</b> (to stay) → Wir <b>bleiben</b> beste Freunde.</li>
         </ul>
+        
+        <p style="font-size: 0.8rem; color: #666; margin-top: 15px; font-style: italic;">
+            ✨ Easy rule: CONDITION = NOMINATIV!
+        </p>
     </div>
 
 
@@ -189,6 +198,15 @@
                 cheatSheetBtn.addEventListener('click', () => {
                     const cheatSheetBox = document.getElementById('cheat-sheet-box');
                     cheatSheetBox.style.display = 'block';
+                });
+            }
+
+            // -- NEW: Add event listener for close button
+            const closeCheatSheetBtn = document.getElementById('close-cheat-sheet');
+            if (closeCheatSheetBtn) {
+                closeCheatSheetBtn.addEventListener('click', () => {
+                    const cheatSheetBox = document.getElementById('cheat-sheet-box');
+                    cheatSheetBox.style.display = 'none';
                 });
             }
         }
