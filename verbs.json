@@ -13,5 +13,10 @@
     { "id": "schreiben", "infinitive": "schreiben", "translation": "to write", "conjugations": { "ich": "schreibe", "du": "schreibst", "er/sie/es": "schreibt", "wir": "schreiben", "ihr": "schreibt", "sie/Sie": "schreiben" }},
     { "id": "lesen", "infinitive": "lesen", "translation": "to read", "conjugations": { "ich": "lese", "du": "liest", "er/sie/es": "liest", "wir": "lesen", "ihr": "lest", "sie/Sie": "lesen" }},
     { "id": "sehen", "infinitive": "sehen", "translation": "to see", "conjugations": { "ich": "sehe", "du": "siehst", "er/sie/es": "sieht", "wir": "sehen", "ihr": "seht", "sie/Sie": "sehen" }},
-    { "id": "essen", "infinitive": "essen", "translation": "to eat", "conjugations": { "ich": "esse", "du": "isst", "er/sie/es": "isst", "wir": "essen", "ihr": "esst", "sie/Sie": "essen" }}
+    { "id": "essen", "infinitive": "essen", "translation": "to eat", "conjugations": { "ich": "esse", "du": "isst", "er/sie/es": "isst", "wir": "essen", "ihr": "esst", "sie/Sie": "essen" }},
+    { "id": "kennen", "infinitive": "kennen", "translation": "to know/be familiar with", "conjugations": { "ich": "kenne", "du": "kennst", "er/sie/es": "kennt", "wir": "kennen", "ihr": "kennt", "sie/Sie": "kennen" }},
+    { "id": "besuchen", "infinitive": "besuchen", "translation": "to visit", "conjugations": { "ich": "besuche", "du": "besuchst", "er/sie/es": "besucht", "wir": "besuchen", "ihr": "besucht", "sie/Sie": "besuchen" }},
+    { "id": "schicken", "infinitive": "schicken", "translation": "to send", "conjugations": { "ich": "schicke", "du": "schickst", "er/sie/es": "schickt", "wir": "schicken", "ihr": "schickt", "sie/Sie": "schicken" }},
+    { "id": "verbringen", "infinitive": "verbringen", "translation": "to spend (time)", "conjugations": { "ich": "verbringe", "du": "verbringst", "er/sie/es": "verbringt", "wir": "verbringen", "ihr": "verbringt", "sie/Sie": "verbringen" }},
+    { "id": "hören", "infinitive": "hören", "translation": "to hear/listen", "conjugations": { "ich": "höre", "du": "hörst", "er/sie/es": "hört", "wir": "hören", "ihr": "hört", "sie/Sie": "hören" }}
 ]
