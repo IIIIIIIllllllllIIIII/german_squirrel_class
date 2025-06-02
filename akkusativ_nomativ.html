@@ -7,15 +7,39 @@
     <style>
         :root { --accent-color: #ffc107; --dark-blue: #1e3c72; --completed-green: #27ae60; --error-red: #ff6b6b; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); min-height: 100vh; color: #333; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; position: relative; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); 
+            min-height: 100vh; 
+            color: #333; 
+            display: flex; /* Added for vertical centering */
+            flex-direction: column; /* Added for vertical centering */
+            align-items: center; /* Horizontally centers .container */
+            justify-content: center; /* Vertically centers .container if content is short */
+        }
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; /* Still useful for fallback and structure */
+            padding: 20px; 
+            position: relative; 
+            width: 100%; /* Helps with centering in flex body */
+        }
         .header { text-align: center; color: white; margin-bottom: 30px; }
         .header h1 { font-size: 2.5rem; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
         .case-board { background: rgba(255, 255, 255, 0.95); border-radius: 20px; padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); backdrop-filter: blur(10px); }
         .case-info { background: linear-gradient(135deg, #ff6b6b, #ee5a24); color: white; padding: 20px; border-radius: 15px; margin-bottom: 30px; text-align: center; }
         .case-info h2 { font-size: 1.8rem; margin-bottom: 10px; }
         .sentence-display { font-size: 1.5rem; font-weight: bold; background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; margin-top: 15px; }
-        .step { background: white; border-radius: 15px; padding: 25px; margin-bottom: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-left: 5px solid #3498db; transition: all 0.3s ease; }
+        .step { 
+            background: white; 
+            border-radius: 15px; 
+            padding: 25px; 
+            margin-bottom: 20px; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
+            border-left: 5px solid #3498db; 
+            transition: all 0.3s ease; 
+            text-align: center; /* Added to center text within steps */
+        }
         .step.active { opacity: 1; transform: scale(1.02); border-left-color: #e74c3c; }
         .step.completed { border-left-color: var(--completed-green); background: linear-gradient(135deg, #d4edda, #e2f0d6); }
         .step.step-hidden { display: none; }
@@ -26,7 +50,18 @@
         .step.completed .step-number { background: var(--completed-green); animation: none; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
         
-        .word-bubbles { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; min-height: 60px; padding: 15px; background: #f8f9fa; border-radius: 10px; border: 2px dashed #dee2e6; }
+        .word-bubbles { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 10px; 
+            margin: 20px 0; 
+            min-height: 60px; 
+            padding: 15px; 
+            background: #f8f9fa; 
+            border-radius: 10px; 
+            border: 2px dashed #dee2e6; 
+            justify-content: center; /* Added to center bubbles */
+        }
         .word-bubble { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 20px; border-radius: 25px; cursor: pointer; user-select: none; font-weight: 500; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all 0.2s ease-out; }
         .word-bubble.placeholder { background: #ced4da; color: #495057; cursor: not-allowed; }
         .word-bubble.clue { background: #adb5bd; color: #fff; cursor: default; }
@@ -35,7 +70,15 @@
             background: linear-gradient(135deg, #27ae60, #2ecc71); 
         }
 
-        .answer-area { display: flex; align-items: center; gap: 15px; margin-top: 20px; margin-bottom:10px; flex-wrap: wrap;}
+        .answer-area { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            margin-top: 20px; 
+            margin-bottom:10px; 
+            flex-wrap: wrap;
+            justify-content: center; /* Added to center answer box and GO button */
+        }
         .answer-box { min-width: 120px; min-height: 50px; border: 3px dashed #3498db; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; padding: 5px; background: rgba(52, 152, 219, 0.05); transition: all 0.3s ease; }
         .answer-box .word-bubble { margin: 0; box-shadow: none; } 
         
@@ -43,7 +86,7 @@
         .go-button:hover { background: #c0392b; transform: translateY(-1px); }
         .go-button:disabled { background: #bdc3c7; cursor: not-allowed; }
 
-        .investigation-text { font-style: italic; color: #666; margin: 15px 0; padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #3498db; }
+        .investigation-text { font-style: italic; color: #666; margin: 15px auto; padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #3498db; max-width: 90%; } /* Added auto margin for centered block text */
         .final-result { background: linear-gradient(135deg, #27ae60, #2ecc71); color: white; padding: 30px; border-radius: 15px; text-align: center; margin-top: 30px; display: none; }
         .final-result.show { display: block; animation: slideUp 0.8s ease; }
         @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
@@ -54,24 +97,24 @@
         .cheat-sheet-button { background: var(--accent-color); border: none; color: #333; font-weight: bold; padding: 8px 15px; border-radius: 20px; cursor: pointer; transition: all 0.2s ease; }
         .cheat-sheet-button:hover { background: #ffca2c; transform: translateY(-1px); }
         .link-like { color: #007bff; text-decoration: underline; cursor: pointer; }
-        #cheat-sheet-box { display: none; position: fixed; top: 100px; right: 20px; width: 340px; background: #fff; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); padding: 20px; z-index: 1000; border: 3px solid var(--accent-color); }
-        #cheat-sheet-box h4 { margin: 0; }
-        #cheat-sheet-box p { font-size: 0.9rem; margin-bottom: 15px; color: #666; line-height: 1.4; }
-        #cheat-sheet-box ul { list-style: none; padding-left: 0; font-size: 0.85rem; }
+        #cheat-sheet-box { display: none; position: fixed; top: 100px; right: 20px; width: 340px; background: #fff; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); padding: 20px; z-index: 1000; border: 3px solid var(--accent-color); text-align: left; } /* Reset text-align for cheat sheet */
+        #cheat-sheet-box h4 { margin: 0; text-align: left; } /* Reset text-align */
+        #cheat-sheet-box p { font-size: 0.9rem; margin-bottom: 15px; color: #666; line-height: 1.4; text-align: left; } /* Reset text-align */
+        #cheat-sheet-box ul { list-style: none; padding-left: 0; font-size: 0.85rem; text-align: left; } /* Reset text-align */
         #cheat-sheet-box ul li { margin-bottom: 8px; color: #333; line-height: 1.3; }
         #cheat-sheet-box .legend-item { padding: 2px 8px; border-radius: 4px; color: #333; font-weight: bold; }
         #cheat-sheet-box .cs-subject { background-color: #ffcccc; }
         #cheat-sheet-box .cs-verb { background-color: #cce5ff; }
         #cheat-sheet-box .cs-nominativ { background-color: #d4edda; }
-        .verb-focus { text-align: center; padding: 20px; background: #f8f9fa; border-radius: 10px; margin: 20px 0; border: 1px solid #e9ecef;}
+        .verb-focus { text-align: center; padding: 20px; background: #f8f9fa; border-radius: 10px; margin: 20px auto; border: 1px solid #e9ecef; max-width: 90%;} /* Added auto margin */
         .verb-focus .word-bubble { display: inline-block; margin-bottom: 15px; transform: scale(1.1); }
         .verb-focus .verb-info { line-height: 1.6; }
         .verb-focus .verb-info .german-q { font-family: 'Courier New', monospace; font-weight: bold; }
         .verb-focus .verb-info .english-q { font-style: italic; color: #555; }
-        details { margin: 20px 0; border: 1px solid #ddd; border-radius: 8px; }
-        details summary { cursor: pointer; font-weight: bold; padding: 15px; background-color: #f8f9fa; border-radius: 8px; }
+        details { margin: 20px auto; border: 1px solid #ddd; border-radius: 8px; max-width: 90%;} /* Added auto margin */
+        details summary { cursor: pointer; font-weight: bold; padding: 15px; background-color: #f8f9fa; border-radius: 8px; text-align: left; } /* Adjusted text-align */
         details[open] summary { border-bottom: 1px solid #ddd; border-radius: 8px 8px 0 0; }
-        .hint-content { padding: 15px; line-height: 1.6; color: #0c5460; background: #d1ecf1; border-radius: 0 0 8px 8px; }
+        .hint-content { padding: 15px; line-height: 1.6; color: #0c5460; background: #d1ecf1; border-radius: 0 0 8px 8px; text-align: left; } /* Adjusted text-align */
         .hint-content .highlight { background-color: var(--accent-color); padding: 2px 5px; border-radius: 4px; font-weight: bold; }
         .sentence-reminder { font-size: 1.8rem; font-weight: bold; text-align: center; padding: 20px; background: #e9ecef; border-radius: 10px; margin-top: 15px; }
         .sentence-reminder-en { font-size: 1.2rem; font-style: italic; color: #6c757d; text-align: center; margin-top: 5px; }
@@ -212,14 +255,14 @@
             let extraHTML = '';
             let answerAreaHTML = '';
 
-            if (index === 1) { // Step 2: Find the BOSS
+            if (index === 1) { 
                 extraHTML = `<div class="verb-focus"><div class="word-bubble clue">${verb}</div><div class="verb-info"><div><small>${stepData.verb_info}</small></div><div class="german-q">'Wer oder was?' + '${verb}'?</div><div class="english-q">${stepData.verb_question_en}</div></div></div>`;
             }
-            if (index === 2) { // Step 3
+            if (index === 2) { 
                 const formula = stepData.formula.replace('%VERB%', verb).replace('%BOSS%', boss);
                 extraHTML = `<div class="formula">${formula}</div><div class="formula-en">${stepData.formula_en}</div>`;
             }
-            if (index === 3) { // Step 4: Choose the Case
+            if (index === 3) { 
                 const bossVerb = `${boss} ${verb}`;
                 
                 instructionText = stepData.instruction
@@ -229,11 +272,11 @@
 
                 if (caseData.predicate_nominative_noun) { 
                     instructionText = instructionText
-                        .replace(/%PREDICATE_NOMINATIVE_NOUN%/g, caseData.predicate_nominative_noun) // Fixed: Use global replace
+                        .replace(/%PREDICATE_NOMINATIVE_NOUN%/g, caseData.predicate_nominative_noun) 
                         .replace('%PREDICATE_NOMINATIVE_GENDER%', caseData.predicate_nominative_gender);
                 } else if (caseData.victim_noun) { 
                      instructionText = instructionText
-                        .replace(/%VICTIM_NOUN%/g, caseData.victim_noun) // Fixed: Use global replace
+                        .replace(/%VICTIM_NOUN%/g, caseData.victim_noun) 
                         .replace('%VICTIM_GENDER%', caseData.victim_gender);
                 }
                 
@@ -261,8 +304,6 @@
             return stepDiv;
         }
 
-        // All other functions (createWordBubble, handleChoiceBubbleClick, etc.) are unchanged from the previous version.
-        // They are pasted below for completeness.
         function createWordBubble(text, correctAnswerForStep) { const bubble = document.createElement('div'); bubble.className = 'word-bubble'; if (text === '___' && correctAnswerForStep !== '___') { bubble.classList.add('placeholder'); } bubble.textContent = text; bubble.dataset.value = text; return bubble; }
         function handleChoiceBubbleClick(clickedBubbleEl) { const stepEl = clickedBubbleEl.closest('.step'); const stepIndex = parseInt(stepEl.id.replace('step', '')) - 1; const targetType = caseFiles[currentCaseIndex].steps[stepIndex].target; const answerBox = stepEl.querySelector(`.answer-box[data-step-target="${targetType}"], .article-answer-box`); if (!answerBox) { console.error("Answer box not found for step", stepEl, "target", targetType); return; } if (answerBox.children.length > 0 && answerBox.children[0] !== clickedBubbleEl) { returnSelectedBubbleToChoices(answerBox.children[0]); } if (clickedBubbleEl.parentElement !== answerBox) { answerBox.appendChild(clickedBubbleEl); } }
         function returnSelectedBubbleToChoices(bubbleInAnswerBox) { const stepEl = bubbleInAnswerBox.closest('.step'); if (!stepEl) return; const wordBubblesContainer = stepEl.querySelector('.word-bubbles'); if (wordBubblesContainer) { wordBubblesContainer.appendChild(bubbleInAnswerBox); } }
