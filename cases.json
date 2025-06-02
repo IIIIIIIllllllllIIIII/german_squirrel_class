@@ -31,7 +31,7 @@
                 "title": "🎯 Find the VICTIM!",
                 "instruction": "To find the victim of the action, ask: Who or what is influenced by the verb?",
                 "formula": "'Wen oder was?' + '%VERB%' + '%BOSS%'?",
-                "formula_en": "'Whom or what?' + 'do' + '%BOSS%' + ' %VERB%'?",
+                "formula_en": "'Whom or what?' + 'do' + ' %BOSS%' + ' %VERB%'?",
                 "bubbles": ["Bruder.", "Ich"],
                 "correctAnswer": "Bruder.",
                 "investigation": "'Whom or what do I have?' → 'Bruder'. This is our <strong>VICTIM</strong>!"
@@ -48,50 +48,50 @@
         ]
     },
     {
-        "caseTitle": "🕵️ THE CASE: 'The dog helps the man.'",
-        "sentence": "Der Hund hilft ___ Mann.",
-        "correctArticle": "dem",
-        "fullSentence": "Der Hund hilft dem Mann.",
-        "words": ["Der Hund", "hilft", "___", "Mann."],
-        "victim_noun": "'der Mann'",
+        "caseTitle": "🕵️ THE CASE: 'The student buys a pen.'",
+        "sentence": "Der Schüler kauft ___ Stift.",
+        "correctArticle": "einen",
+        "fullSentence": "Der Schüler kauft einen Stift.",
+        "words": ["Der Schüler", "kauft", "___", "Stift."],
+        "victim_noun": "'der Stift'",
         "victim_gender": "masculine",
         "steps": [
             {
                 "target": "verb",
                 "title": "🎯 Find the Verb!",
                 "instruction": "Identify the verb in the sentence below and pull it to the answer box!",
-                "bubbles": ["Der Hund", "hilft", "___", "Mann."],
-                "correctAnswer": "hilft",
-                "investigation": "'hilft' comes from 'helfen' (to help). This verb is a special exception that requires the <strong>DATIVE</strong> case, not Accusative!"
+                "bubbles": ["Der Schüler", "kauft", "___", "Stift."],
+                "correctAnswer": "kauft",
+                "investigation": "'kauft' comes from 'kaufen' (to buy). This is not a condition verb, so it's an <strong>ACTION</strong>! You can review the most common condition verbs <span class='link-like' id='open-cheat-sheet-link'>here</span>."
             },
             {
                 "target": "boss",
                 "title": "👑 Find the BOSS!",
-                "instruction": "Who or what is performing the action?",
-                "verb_info": "('helfen' - to help)",
-                "bubbles": ["Der Hund", "Mann."],
-                "correctAnswer": "Der Hund",
-                "correctAnswer_en": "The dog",
-                "investigation": "Who or what is helping? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS (Nominative)."
+                "instruction": "Who or what is performing the action? Who or what is doing the thing?",
+                "verb_info": "('kaufen' - to buy)",
+                "bubbles": ["Der Schüler", "Stift."],
+                "correctAnswer": "Der Schüler",
+                "correctAnswer_en": "The student",
+                "investigation": "Who or what is performing the action? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
             },
             {
-                "target": "dative",
-                "title": "🤝 Find the 'Helper' Object!",
-                "instruction": "Since 'helfen' is a special Dative verb, we don't ask 'Whom or what?'. Instead, we ask 'To whom?'",
-                "formula": "'Wem?' + '%VERB%' + '%BOSS%'?",
-                "formula_en": "'To whom?' + 'does' + '%BOSS%' + ' %VERB%'?",
-                "bubbles": ["Mann.", "Der Hund"],
-                "correctAnswer": "Mann.",
-                "investigation": "'To whom does the dog help?' → 'Mann'. This object is in the <strong>DATIVE</strong> case."
+                "target": "victim",
+                "title": "🎯 Find the VICTIM!",
+                "instruction": "To find the victim of the action, ask: Who or what is influenced by the verb?",
+                "formula": "'Wen oder was?' + '%VERB%' + '%BOSS%'?",
+                "formula_en": "'Whom or what?' + 'does' + ' %BOSS%' + ' %VERB%'?",
+                "bubbles": ["Stift.", "Der Schüler"],
+                "correctAnswer": "Stift.",
+                "investigation": "'Whom or what does the student buy?' → 'Stift'. This is our <strong>VICTIM</strong>!"
             },
             {
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
-                "instruction": "Because 'helfen' is a <strong>DATIVE</strong> verb, the object receiving the action must be put into the <strong>DATIVE</strong> case.",
-                "result_template": "<strong>What you found out so far:</strong><br>The object is %VICTIM_NOUN% (%VICTIM_GENDER%).<br><hr style='margin: 8px 0; border: none; border-top: 1px solid #ddd;'><strong>Masculine:</strong> der → <span class='highlight'>dem</span> / ein → <span class='highlight'>einem</span><br><strong>Feminine:</strong> die → der / eine → einer<br><strong>Neuter:</strong> das → dem / ein → einem",
-                "bubbles": ["dem", "den", "der", "des"],
-                "correctAnswer": "dem",
-                "investigation": "Correct! Because 'Mann' is masculine, 'der' becomes 'dem' in the dative case."
+                "instruction": "Since we are working with an <strong>ACTION</strong> verb and you found a <strong>BOSS</strong> (Nominative) and a <strong>VICTIM</strong>, the victim must be put into the <strong>ACCUSATIVE</strong> case.",
+                "result_template": "<strong>What you found out so far:</strong><br>The victim is %VICTIM_NOUN% (%VICTIM_GENDER%).<br><hr style='margin: 8px 0; border: none; border-top: 1px solid #ddd;'><strong>Masculine:</strong> der → <span class='highlight'>den</span> / ein → <span class='highlight'>einen</span><br><strong>Feminine:</strong> die → die / eine → eine<br><strong>Neuter:</strong> das → das / ein → ein",
+                "bubbles": ["einen", "ein", "den", "eine"],
+                "correctAnswer": "einen",
+                "investigation": "Correct! Because 'Stift' is masculine, 'ein' becomes 'einen' in the accusative case."
             }
         ]
     }
