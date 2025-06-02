@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>German Case Detective</title>
+    
+    <script src="https://bernardo-castilho.github.io/drag-drop-touch/drag-drop-touch.js"></script>
+    
     <style>
         :root { --accent-color: #ffc107; --dark-blue: #1e3c72; --completed-green: #27ae60; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -48,18 +51,15 @@
         .cheat-sheet-button { background: var(--accent-color); border: none; color: #333; font-weight: bold; padding: 8px 15px; border-radius: 20px; cursor: pointer; transition: all 0.2s ease; }
         .cheat-sheet-button:hover { background: #ffca2c; transform: translateY(-1px); }
         .link-like { color: #007bff; text-decoration: underline; cursor: pointer; }
-        
-        /* Cheat Sheet Styles */
         #cheat-sheet-box { display: none; position: fixed; top: 100px; right: 20px; width: 340px; background: #fff; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); padding: 20px; z-index: 1000; border: 3px solid var(--accent-color); }
         #cheat-sheet-box h4 { margin: 0; }
         #cheat-sheet-box p { font-size: 0.9rem; margin-bottom: 15px; color: #666; line-height: 1.4; }
         #cheat-sheet-box ul { list-style: none; padding-left: 0; font-size: 0.85rem; }
         #cheat-sheet-box ul li { margin-bottom: 8px; color: #333; line-height: 1.3; }
         #cheat-sheet-box .legend-item { padding: 2px 8px; border-radius: 4px; color: #333; font-weight: bold; }
-        #cheat-sheet-box .cs-subject { background-color: #ffcccc; } /* Red */
-        #cheat-sheet-box .cs-verb { background-color: #cce5ff; }    /* Blue */
-        #cheat-sheet-box .cs-nominativ { background-color: #d4edda; } /* Green */
-
+        #cheat-sheet-box .cs-subject { background-color: #ffcccc; }
+        #cheat-sheet-box .cs-verb { background-color: #cce5ff; }
+        #cheat-sheet-box .cs-nominativ { background-color: #d4edda; }
         .verb-focus { text-align: center; padding: 20px; background: #f8f9fa; border-radius: 10px; margin: 20px 0; border: 1px solid #e9ecef;}
         .verb-focus .word-bubble { display: inline-block; margin-bottom: 15px; transform: scale(1.1); }
         .verb-focus .verb-info { line-height: 1.6; }
@@ -95,13 +95,11 @@
             <button id="close-cheat-sheet" style="background: #ff6b6b; border: none; color: white; width: 25px; height: 25px; border-radius: 50%; cursor: pointer; font-weight: bold;">×</button>
         </div>
         <p>Condition verbs describe what someone <b>IS</b>. They don't have a "victim" (Accusative). Instead, both parts of the sentence are Nominative.</p>
-        
         <div style="margin: 10px 0; font-size: 0.8rem; display: flex; gap: 10px;">
             <span class="legend-item cs-subject">SUBJECT 🔴</span>
             <span class="legend-item cs-verb">VERB 🔵</span>
             <span class="legend-item cs-nominativ">NOMINATIV 🟢</span>
         </div>
-        
         <ul>
             <li>•&nbsp;<b>sein</b> (to be) → <span class="cs-subject">Ich</span> <span class="cs-verb"><b>bin</b></span> <span class="cs-nominativ">deine Mutter</span>.</li>
             <li>•&nbsp;<b>heißen</b> (to be called) → <span class="cs-subject">Sie</span> <span class="cs-verb"><b>heißt</b></span> <span class="cs-nominativ">Anna Schmidt</span>.</li>
@@ -112,8 +110,6 @@
 
 
     <script>
-        // The JavaScript does not need any changes from the previous version.
-        // All functions remain the same.
         let caseFiles = [];
         let currentStepIndex = 0;
         let currentCaseIndex = 0;
@@ -173,49 +169,34 @@
 
             const verb = caseData.steps[0].correctAnswer;
             const boss = caseData.steps[1].correctAnswer;
-            const victim = caseData.steps[2].correctAnswer;
             const infinitive = caseData.verb_infinitive;
             
             let instructionText = stepData.instruction;
             let extraHTML = '';
 
-            // Step 2: Find the BOSS
-            if (index === 1) { 
-                extraHTML = `<div class="verb-focus">
-                    <div class="word-bubble clue">${verb}</div>
-                    <div class="verb-info">
-                        <div><small>${stepData.verb_info}</small></div>
-                        <div class="german-q">'Wer oder was?' + '${verb}'?</div>
-                        <div class="english-q">${stepData.verb_question_en}</div>
-                    </div>
-                </div>`;
+            if (index === 1) { // Step 2: Find the BOSS
+                extraHTML = `<div class="verb-focus">...</div>`; // Kept concise, logic is the same
             }
-            // Step 3: Find the VICTIM
-            if (index === 2) {
+            if (index === 2) { // Step 3: Find the VICTIM
                 const formula = stepData.formula.replace('%VERB%', verb).replace('%BOSS%', boss);
-                extraHTML = `<div class="formula">${formula}</div>
-                             <div class="formula-en">${stepData.formula_en}</div>`;
+                extraHTML = `<div class="formula">${formula}</div><div class="formula-en">${stepData.formula_en}</div>`;
             }
-            // Step 4: Choose the Case
-            if (index === 3) {
-                 instructionText = stepData.instruction
-                    .replace('%VERB%', verb)
+            if (index === 3) { // Step 4: Choose the Case
+                const bossVerb = `${boss} ${verb}`;
+                const victimNoun = caseData.victim_noun; // Now using the clean data
+                instructionText = stepData.instruction
+                    .replace('%BOSS_VERB%', bossVerb)
                     .replace('%INFINITIVE%', infinitive)
                     .replace('%BOSS%', boss)
-                    .replace('%VICTIM%', victim);
-
+                    .replace('%VICTIM_NOUN%', victimNoun);
+                
                 const sentenceReminderHTML = caseData.sentence.replace('___', `<span class="drop-zone article-drop-zone" data-step="4" data-target="article">___</span>`);
                 const sentenceEnHTML = `<div class="sentence-reminder-en">(${caseData.sentence_en})</div>`;
-                extraHTML = `<details>
-                                <summary>HINT!</summary>
-                                <div class="hint-content">${stepData.hint_rules}</div>
-                             </details>
-                             <div class="sentence-reminder">${sentenceReminderHTML}</div>
-                             ${sentenceEnHTML}`;
+                extraHTML = `<details>...</details><div class="sentence-reminder">${sentenceReminderHTML}</div>${sentenceEnHTML}`; // Kept concise
             }
 
+            // Re-populating the full innerHTML for clarity
             const cheatSheetButtonHTML = (index === 0) ? `<button id="cheat-sheet-btn" class="cheat-sheet-button">CHEAT SHEET</button>` : '';
-
             stepDiv.innerHTML = `
                 <div class="step-header">
                     <div class="step-title-group"><div class="step-number">${index + 1}</div><h3>${stepData.title}</h3></div>
@@ -227,6 +208,11 @@
                 ${index < 3 ? `<p>Drag the answer here: <span class="drop-zone" data-step="${index + 1}" data-target="${stepData.target}"></span></p>` : ''}
                 <div class="investigation-text" id="${stepData.target}-investigation" style="display: none;"></div>
             `;
+            
+            // Re-inject dynamic content that was abbreviated
+            if (index === 1) { stepDiv.querySelector('.verb-focus').innerHTML = `<div class="word-bubble clue">${verb}</div><div class="verb-info"><div><small>${stepData.verb_info}</small></div><div class="german-q">'Wer oder was?' + '${verb}'?</div><div class="english-q">${stepData.verb_question_en}</div></div>`; }
+            if (index === 3) { stepDiv.querySelector('details').innerHTML = `<summary>HINT!</summary><div class="hint-content">${stepData.hint_rules}</div>`; }
+            
             const wordBubblesContainer = stepDiv.querySelector(`#bubbles-step${index + 1}`);
             stepData.bubbles.forEach(bubbleText => {
                 wordBubblesContainer.appendChild(createWordBubble(bubbleText, bubbleText === stepData.correctAnswer));
