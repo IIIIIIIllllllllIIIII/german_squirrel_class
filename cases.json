@@ -43,7 +43,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are using a <strong>CONDITION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\"), the word describing the <strong>BOSS</strong> (\"%BOSS%\") is also in the <strong>NOMINATIVE</strong> case. The noun is <strong>%PREDICATE_NOMINATIVE_NOUN%</strong> (%PREDICATE_NOMINATIVE_GENDER%). Choose the correct Nominative article.",
-                "hint_rules": "<strong>Masculine (Nom):</strong> der → der / ein → <span class='highlight'>ein</span><br><strong>Feminine (Nom):</strong> die → die / eine → eine<br><strong>Neuter (Nom):</strong> das → das / ein → ein",
+                "hint_rules": "<strong>Masculine (Nominative):</strong> der → der / ein → <span class='highlight'>ein</span><br><strong>Feminine (Nominative):</strong> die → die / eine → eine<br><strong>Neuter (Nominative):</strong> das → das / ein → ein",
                 "bubbles": ["ein", "einen", "eine", "eines"],
                 "correctAnswer": "ein",
                 "investigation": "Correct! Because 'Student' is masculine, 'ein' remains 'ein' in the Nominative case."
@@ -94,7 +94,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are working with an <strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") and you found a <strong>BOSS</strong> (\"%BOSS%\") and a <strong>VICTIM</strong> (\"%VICTIM_NOUN%\"), the victim must be put into the <strong>ACCUSATIVE</strong> case. The noun is <strong>%VICTIM_NOUN%</strong> (%VICTIM_GENDER%).",
-                "hint_rules": "<strong>Masculine (Acc):</strong> der → den / ein → einen<br><strong>Feminine (Acc):</strong> die → die / eine → <span class='highlight'>eine</span><br><strong>Neuter (Acc):</strong> das → das / ein → ein",
+                "hint_rules": "<strong>Masculine (Accusative):</strong> der → den / ein → einen<br><strong>Feminine (Accusative):</strong> die → die / eine → <span class='highlight'>eine</span><br><strong>Neuter (Accusative):</strong> das → das / ein → ein",
                 "bubbles": ["eine", "einen", "ein", "einer"],
                 "correctAnswer": "eine",
                 "investigation": "Correct! Because 'Katze' is feminine, 'eine' remains 'eine' in the accusative case."
@@ -145,7 +145,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are using a <strong>CONDITION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\"), the word describing what the <strong>BOSS</strong> (\"%BOSS%\") becomes is also in the <strong>NOMINATIVE</strong> case. The noun is <strong>%PREDICATE_NOMINATIVE_NOUN%</strong> (%PREDICATE_NOMINATIVE_GENDER%). Choose the correct Nominative article.",
-                "hint_rules": "<strong>Masculine (Nom):</strong> der → der / ein → <span class='highlight'>ein</span><br><strong>Feminine (Nom):</strong> die → die / eine → eine<br><strong>Neuter (Nom):</strong> das → das / ein → ein",
+                "hint_rules": "<strong>Masculine (Nominative):</strong> der → der / ein → <span class='highlight'>ein</span><br><strong>Feminine (Nominative):</strong> die → die / eine → eine<br><strong>Neuter (Nominative):</strong> das → das / ein → ein",
                 "bubbles": ["ein", "einen", "dem", "des"],
                 "correctAnswer": "ein",
                 "investigation": "Correct! Because 'Arzt' is masculine, 'ein' remains 'ein' in the Nominative case."
@@ -196,7 +196,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are working with an <strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") and you found a <strong>BOSS</strong> (\"%BOSS%\") and a <strong>VICTIM</strong> (\"%VICTIM_NOUN%\"), the victim must be put into the <strong>ACCUSATIVE</strong> case. The noun is <strong>%VICTIM_NOUN%</strong> (%VICTIM_GENDER%).",
-                "hint_rules": "<strong>Masculine (Acc):</strong> der → den / ein → einen<br><strong>Feminine (Acc):</strong> die → die / eine → eine<br><strong>Neuter (Acc):</strong> das → das / ein → <span class='highlight'>ein</span>",
+                "hint_rules": "<strong>Masculine (Accusative):</strong> der → den / ein → einen<br><strong>Feminine (Accusative):</strong> die → die / eine → eine<br><strong>Neuter (Accusative):</strong> das → das / ein → <span class='highlight'>ein</span>",
                 "bubbles": ["ein", "einen", "eine", "eines"],
                 "correctAnswer": "ein",
                 "investigation": "Correct! Because 'Buch' is neuter, 'ein' remains 'ein' in the accusative case."
@@ -247,7 +247,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are using a <strong>CONDITION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\"), the word describing the <strong>BOSS</strong> (\"%BOSS%\") is also in the <strong>NOMINATIVE</strong> case. The noun is <strong>%PREDICATE_NOMINATIVE_NOUN%</strong> (%PREDICATE_NOMINATIVE_GENDER%). Choose the correct Nominative article.",
-                "hint_rules": "<strong>Masculine (Nom):</strong> ...ein<br><strong>Feminine (Nom):</strong> ...eine<br><strong>Neuter (Nom):</strong> ...<span class='highlight'>ein</span>",
+                "hint_rules": "<strong>Masculine (Nominative):</strong> der → der / ein → ein<br><strong>Feminine (Nominative):</strong> die → die / eine → eine<br><strong>Neuter (Nominative):</strong> das → das / ein → <span class='highlight'>ein</span>",
                 "bubbles": ["ein", "einen", "eine", "einer"],
                 "correctAnswer": "ein",
                 "investigation": "Correct! 'Haus' is neuter, so 'ein' stays 'ein' in Nominative."
@@ -298,7 +298,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are working with an <strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") and you found a <strong>BOSS</strong> (\"%BOSS%\") and a <strong>VICTIM</strong> (\"%VICTIM_NOUN%\"), the victim must be put into the <strong>ACCUSATIVE</strong> case. The noun is <strong>%VICTIM_NOUN%</strong> (%VICTIM_GENDER%).",
-                "hint_rules": "<strong>Masculine (Acc):</strong> der → den / ein → <span class='highlight'>einen</span><br><strong>Feminine (Acc):</strong> ...eine<br><strong>Neuter (Acc):</strong> ...ein",
+                "hint_rules": "<strong>Masculine (Accusative):</strong> der → den / ein → <span class='highlight'>einen</span><br><strong>Feminine (Accusative):</strong> die → die / eine → eine<br><strong>Neuter (Accusative):</strong> das → das / ein → ein",
                 "bubbles": ["einen", "ein", "eine", "einem"],
                 "correctAnswer": "einen",
                 "investigation": "Correct! 'Apfel' is masculine, so 'ein' becomes 'einen' in Accusative."
@@ -349,7 +349,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are using a <strong>CONDITION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\"), the word describing what the <strong>BOSS</strong> (\"%BOSS%\") remains is also in the <strong>NOMINATIVE</strong> case. The noun is <strong>%PREDICATE_NOMINATIVE_NOUN%</strong> (%PREDICATE_NOMINATIVE_GENDER%). Choose the correct Nominative article.",
-                "hint_rules": "<strong>Masculine (Nom):</strong> ...ein<br><strong>Feminine (Nom):</strong> ...<span class='highlight'>eine</span><br><strong>Neuter (Nom):</strong> ...ein",
+                "hint_rules": "<strong>Masculine (Nominative):</strong> der → der / ein → ein<br><strong>Feminine (Nominative):</strong> die → die / eine → <span class='highlight'>eine</span><br><strong>Neuter (Nominative):</strong> das → das / ein → ein",
                 "bubbles": ["eine", "einer", "ein", "einen"],
                 "correctAnswer": "eine",
                 "investigation": "Correct! 'Lehrerin' is feminine, so 'eine' stays 'eine'."
@@ -400,7 +400,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are working with an <strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") and you found a <strong>BOSS</strong> (\"%BOSS%\") and a <strong>VICTIM</strong> (\"%VICTIM_NOUN%\"), the victim must be put into the <strong>ACCUSATIVE</strong> case. The noun is <strong>%VICTIM_NOUN%</strong> (%VICTIM_GENDER%).",
-                "hint_rules": "<strong>Masculine (Acc):</strong> der → <span class='highlight'>den</span> / ein → einen<br><strong>Feminine (Acc):</strong> ...die / ...eine<br><strong>Neuter (Acc):</strong> ...das / ...ein",
+                "hint_rules": "<strong>Masculine (Accusative):</strong> der → <span class='highlight'>den</span> / ein → einen<br><strong>Feminine (Accusative):</strong> die → die / eine → eine<br><strong>Neuter (Accusative):</strong> das → das / ein → ein",
                 "bubbles": ["den", "dem", "der", "des"],
                 "correctAnswer": "den",
                 "investigation": "Correct! 'Saft' is masculine, so 'der' becomes 'den' in Accusative."
@@ -415,7 +415,7 @@
         "correctArticle": "Der",
         "fullSentence": "Der Junge heißt Peter.",
         "words": ["___", "Junge", "heißt", "Peter."],
-        "predicate_nominative_noun": "Peter (Name)",
+        "predicate_nominative_noun": "Peter (Name)", 
         "predicate_nominative_gender": "masculine", 
         "steps": [
             {
@@ -441,7 +441,7 @@
                 "target": "predicate_nominative",
                 "title": "🤔 Identify the Name/Description!",
                 "instruction": "With condition verbs like 'heißen', we identify what the Subject (BOSS) IS CALLED. Ask: What is the Subject (BOSS) called?",
-                "formula": "'Wie %VERB% %BOSS%?'",
+                "formula": "'Wie %VERB% %BOSS%?'", 
                 "formula_en": "'What is the boy called?'",
                 "bubbles": ["Peter.", "Junge"],
                 "correctAnswer": "Peter.",
@@ -451,7 +451,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "The <strong>BOSS</strong> (\"Junge\") needs an article. With <strong>CONDITION</strong> verbs like \"%VERB%\" (from \"%INFINITIVE%\"), the BOSS is <strong>NOMINATIVE</strong>. Noun: der Junge (masculine).",
-                "hint_rules": "<strong>Masculine (Nom):</strong> der → <span class='highlight'>der</span> / ein → ein<br><strong>Feminine (Nom):</strong> ...die / ...eine<br><strong>Neuter (Nom):</strong> ...das / ...ein",
+                "hint_rules": "<strong>Masculine (Nominative):</strong> der → <span class='highlight'>der</span> / ein → ein<br><strong>Feminine (Nominative):</strong> die → die / eine → eine<br><strong>Neuter (Nominative):</strong> das → das / ein → ein",
                 "bubbles": ["Der", "Den", "Dem", "Ein"],
                 "correctAnswer": "Der",
                 "investigation": "Correct! 'Junge' is masculine, so it takes 'der' in Nominative."
@@ -502,7 +502,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are working with an <strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") and you found a <strong>BOSS</strong> (\"%BOSS%\") and a <strong>VICTIM</strong> (\"%VICTIM_NOUN%\"), the victim must be put into the <strong>ACCUSATIVE</strong> case. The noun is <strong>%VICTIM_NOUN%</strong> (%VICTIM_GENDER%).",
-                "hint_rules": "<strong>Masculine (Acc):</strong> ...den / ...einen<br><strong>Feminine (Acc):</strong> ...die / ...<span class='highlight'>eine</span><br><strong>Neuter (Acc):</strong> ...das / ...ein",
+                "hint_rules": "<strong>Masculine (Accusative):</strong> der → den / ein → einen<br><strong>Feminine (Accusative):</strong> die → die / eine → <span class='highlight'>eine</span><br><strong>Neuter (Accusative):</strong> das → das / ein → ein",
                 "bubbles": ["eine", "einer", "ein", "einen"],
                 "correctAnswer": "eine",
                 "investigation": "Correct! 'Wohnung' is feminine, so 'eine' stays 'eine' in Accusative."
@@ -553,7 +553,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are using a <strong>CONDITION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\"), the word describing the <strong>BOSS</strong> (\"%BOSS%\") is also in the <strong>NOMINATIVE</strong> case. The noun is <strong>%PREDICATE_NOMINATIVE_NOUN%</strong> (%PREDICATE_NOMINATIVE_GENDER%). Choose the correct Nominative article.",
-                "hint_rules": "<strong>Masculine (Nom):</strong> der → der / ein → <span class='highlight'>ein</span><br><strong>Feminine (Nom):</strong> ...eine<br><strong>Neuter (Nom):</strong> ...ein",
+                "hint_rules": "<strong>Masculine (Nominative):</strong> der → der / ein → <span class='highlight'>ein</span><br><strong>Feminine (Nominative):</strong> die → die / eine → eine<br><strong>Neuter (Nominative):</strong> das → das / ein → ein",
                 "bubbles": ["ein", "einen", "eine", "einem"],
                 "correctAnswer": "ein",
                 "investigation": "Correct! 'Traum' is masculine, so 'ein' stays 'ein'."
@@ -604,7 +604,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are working with an <strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") and you found a <strong>BOSS</strong> (\"%BOSS%\") and a <strong>VICTIM</strong> (\"%VICTIM_NOUN%\"), the victim must be put into the <strong>ACCUSATIVE</strong> case. The noun is <strong>%VICTIM_NOUN%</strong> (%VICTIM_GENDER%).",
-                "hint_rules": "<strong>Masculine (Acc):</strong> der → den / ein → <span class='highlight'>einen</span><br><strong>Feminine (Acc):</strong> ...eine<br><strong>Neuter (Acc):</strong> ...ein",
+                "hint_rules": "<strong>Masculine (Accusative):</strong> der → den / ein → <span class='highlight'>einen</span><br><strong>Feminine (Accusative):</strong> die → die / eine → eine<br><strong>Neuter (Accusative):</strong> das → das / ein → ein",
                 "bubbles": ["einen", "ein", "eine", "einem"],
                 "correctAnswer": "einen",
                 "investigation": "Correct! 'Stuhl' is masculine, so 'ein' becomes 'einen'."
@@ -655,7 +655,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are using a <strong>CONDITION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\"), the word describing the <strong>BOSS</strong> (\"%BOSS%\") is also in the <strong>NOMINATIVE</strong> case. The noun is <strong>%PREDICATE_NOMINATIVE_NOUN%</strong> (%PREDICATE_NOMINATIVE_GENDER%). Choose the correct Nominative article.",
-                "hint_rules": "<strong>Masculine (Nom):</strong> der → der / ein → <span class='highlight'>ein</span><br><strong>Feminine (Nom):</strong> ...eine<br><strong>Neuter (Nom):</strong> ...ein",
+                "hint_rules": "<strong>Masculine (Nominative):</strong> der → der / ein → <span class='highlight'>ein</span><br><strong>Feminine (Nominative):</strong> die → die / eine → eine<br><strong>Neuter (Nominative):</strong> das → das / ein → ein",
                 "bubbles": ["ein", "einen", "dem", "den"],
                 "correctAnswer": "ein",
                 "investigation": "Correct! 'Polizist' is masculine, so 'ein' stays 'ein'."
@@ -706,7 +706,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are working with an <strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") and you found a <strong>BOSS</strong> (\"%BOSS%\") and a <strong>VICTIM</strong> (\"%VICTIM_NOUN%\"), the victim must be put into the <strong>ACCUSATIVE</strong> case. The noun is <strong>%VICTIM_NOUN%</strong> (%VICTIM_GENDER%).",
-                "hint_rules": "<strong>Masculine (Acc):</strong> der → <span class='highlight'>den</span> / ein → einen<br><strong>Feminine (Acc):</strong> ...die / ...eine<br><strong>Neuter (Acc):</strong> ...das / ...ein",
+                "hint_rules": "<strong>Masculine (Accusative):</strong> der → <span class='highlight'>den</span> / ein → einen<br><strong>Feminine (Accusative):</strong> die → die / eine → eine<br><strong>Neuter (Accusative):</strong> das → das / ein → ein",
                 "bubbles": ["den", "dem", "der", "ein"],
                 "correctAnswer": "den",
                 "investigation": "Correct! 'Schlüssel' is masculine, so 'der' becomes 'den'."
@@ -757,7 +757,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are using a <strong>CONDITION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\"), the word describing what the <strong>BOSS</strong> (\"%BOSS%\") becomes is also in the <strong>NOMINATIVE</strong> case. The noun is <strong>%PREDICATE_NOMINATIVE_NOUN%</strong> (%PREDICATE_NOMINATIVE_GENDER%). Choose the correct Nominative article.",
-                "hint_rules": "<strong>Masculine (Nom):</strong> ...ein<br><strong>Feminine (Nom):</strong> ...<span class='highlight'>eine</span><br><strong>Neuter (Nom):</strong> ...ein",
+                "hint_rules": "<strong>Masculine (Nominative):</strong> der → der / ein → ein<br><strong>Feminine (Nominative):</strong> die → die / eine → <span class='highlight'>eine</span><br><strong>Neuter (Nominative):</strong> das → das / ein → ein",
                 "bubbles": ["eine", "einer", "einem", "einen"],
                 "correctAnswer": "eine",
                 "investigation": "Correct! 'Sängerin' is feminine, so 'eine' stays 'eine'."
@@ -808,7 +808,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are working with an <strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") and you found a <strong>BOSS</strong> (\"%BOSS%\") and a <strong>VICTIM</strong> (\"%VICTIM_NOUN%\"), the victim must be put into the <strong>ACCUSATIVE</strong> case. The noun is <strong>%VICTIM_NOUN%</strong> (%VICTIM_GENDER%).",
-                "hint_rules": "<strong>Masculine (Acc):</strong> der → <span class='highlight'>den</span> / ein → einen<br><strong>Feminine (Acc):</strong> ...die / ...eine<br><strong>Neuter (Acc):</strong> ...das / ...ein",
+                "hint_rules": "<strong>Masculine (Accusative):</strong> der → <span class='highlight'>den</span> / ein → einen<br><strong>Feminine (Accusative):</strong> die → die / eine → eine<br><strong>Neuter (Accusative):</strong> das → das / ein → ein",
                 "bubbles": ["den", "dem", "der", "das"],
                 "correctAnswer": "den",
                 "investigation": "Correct! 'Film' is masculine, so 'der' becomes 'den'."
@@ -859,7 +859,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are using a <strong>CONDITION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\"), the word describing what the <strong>BOSS</strong> (\"%BOSS%\") remains is also in the <strong>NOMINATIVE</strong> case. The noun is <strong>%PREDICATE_NOMINATIVE_NOUN%</strong> (%PREDICATE_NOMINATIVE_GENDER%). Choose the correct Nominative article.",
-                "hint_rules": "<strong>Masculine (Nom):</strong> ...ein<br><strong>Feminine (Nom):</strong> ...eine<br><strong>Neuter (Nom):</strong> ...<span class='highlight'>ein</span>",
+                "hint_rules": "<strong>Masculine (Nominative):</strong> der → der / ein → ein<br><strong>Feminine (Nominative):</strong> die → die / eine → eine<br><strong>Neuter (Nominative):</strong> das → das / ein → <span class='highlight'>ein</span>",
                 "bubbles": ["ein", "einen", "eine", "einem"],
                 "correctAnswer": "ein",
                 "investigation": "Correct! 'Team' is neuter, so 'ein' stays 'ein'."
@@ -910,7 +910,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are working with an <strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") and you found a <strong>BOSS</strong> (\"%BOSS%\") and a <strong>VICTIM</strong> (\"%VICTIM_NOUN%\"), the victim must be put into the <strong>ACCUSATIVE</strong> case. The noun is <strong>%VICTIM_NOUN%</strong> (%VICTIM_GENDER%).",
-                "hint_rules": "<strong>Masculine (Acc):</strong> der → <span class='highlight'>den</span> / ein → einen<br><strong>Feminine (Acc):</strong> ...die / ...eine<br><strong>Neuter (Acc):</strong> ...das / ...ein",
+                "hint_rules": "<strong>Masculine (Accusative):</strong> der → <span class='highlight'>den</span> / ein → einen<br><strong>Feminine (Accusative):</strong> die → die / eine → eine<br><strong>Neuter (Accusative):</strong> das → das / ein → ein",
                 "bubbles": ["den", "dem", "der", "des"],
                 "correctAnswer": "den",
                 "investigation": "Correct! 'Mann' is masculine, so 'der' becomes 'den'."
@@ -961,7 +961,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are using a <strong>CONDITION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\"), the word describing the <strong>BOSS</strong> (\"%BOSS%\") is also in the <strong>NOMINATIVE</strong> case. The noun is <strong>%PREDICATE_NOMINATIVE_NOUN%</strong> (%PREDICATE_NOMINATIVE_GENDER%). Choose the correct Nominative article.",
-                "hint_rules": "<strong>Masculine (Nom):</strong> der → der / ein → <span class='highlight'>ein</span><br><strong>Feminine (Nom):</strong> ...eine<br><strong>Neuter (Nom):</strong> ...ein",
+                "hint_rules": "<strong>Masculine (Nominative):</strong> der → der / ein → <span class='highlight'>ein</span><br><strong>Feminine (Nominative):</strong> die → die / eine → eine<br><strong>Neuter (Nominative):</strong> das → das / ein → ein",
                 "bubbles": ["ein", "einen", "eines", "einem"],
                 "correctAnswer": "ein",
                 "investigation": "Correct! 'Held' is masculine, so 'ein' stays 'ein'."
@@ -969,13 +969,13 @@
         ]
     },
     {
-        "caseTitle": "🕵️ THE CASE: 'We visit our friend (female).'",
-        "sentence": "Wir besuchen ___ Freundin.",
-        "sentence_en": "We visit our friend (female).",
+        "caseTitle": "🕵️ THE CASE: 'We visit a nice friend (female).'",
+        "sentence": "Wir besuchen ___ nette Freundin.",
+        "sentence_en": "We visit a nice friend (female).",
         "verb_infinitive": "besuchen",
-        "correctArticle": "unsere",
-        "fullSentence": "Wir besuchen unsere Freundin.",
-        "words": ["Wir", "besuchen", "___", "Freundin."],
+        "correctArticle": "eine",
+        "fullSentence": "Wir besuchen eine nette Freundin.",
+        "words": ["Wir", "besuchen", "___", "nette Freundin."],
         "victim_noun": "die Freundin",
         "victim_gender": "feminine",
         "steps": [
@@ -983,7 +983,7 @@
                 "target": "verb",
                 "title": "🎯 Find the Verb!",
                 "instruction": "Identify the verb...",
-                "bubbles": ["Wir", "besuchen", "___", "Freundin."],
+                "bubbles": ["Wir", "besuchen", "___", "nette Freundin."],
                 "correctAnswer": "besuchen",
                 "investigation": "'besuchen' (to visit) is an <strong>ACTION</strong> verb."
             },
@@ -993,7 +993,7 @@
                 "instruction": "Who or what is performing the action?",
                 "verb_info": "('besuchen' - to visit)",
                 "verb_question_en": "Who or what visits someone/something?????",
-                "bubbles": ["Wir", "Freundin."],
+                "bubbles": ["Wir", "nette Freundin."],
                 "correctAnswer": "Wir",
                 "correctAnswer_en": "We",
                 "investigation": "Who visits? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
@@ -1004,18 +1004,18 @@
                 "instruction": "To find the victim of the action, ask: Who or what is influenced by the verb?",
                 "formula": "'Wen oder was %VERB% %BOSS%?'",
                 "formula_en": "'Whom or what do we visit?'",
-                "bubbles": ["Freundin.", "Wir"],
-                "correctAnswer": "Freundin.",
-                "investigation": "Whom or what do we visit? → 'Freundin'. This is the <strong>VICTIM</strong>."
+                "bubbles": ["nette Freundin.", "Wir"],
+                "correctAnswer": "nette Freundin.",
+                "investigation": "Whom or what do we visit? → 'nette Freundin'. This is the <strong>VICTIM</strong>."
             },
             {
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are working with an <strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") and you found a <strong>BOSS</strong> (\"%BOSS%\") and a <strong>VICTIM</strong> (\"%VICTIM_NOUN%\"), the victim must be put into the <strong>ACCUSATIVE</strong> case. The noun is <strong>%VICTIM_NOUN%</strong> (%VICTIM_GENDER%).",
-                "hint_rules": "<strong>Masculine (Acc):</strong> ...unseren<br><strong>Feminine (Acc):</strong> ...<span class='highlight'>unsere</span><br><strong>Neuter (Acc):</strong> ...unser",
-                "bubbles": ["unsere", "unserer", "unseren", "unser"],
-                "correctAnswer": "unsere",
-                "investigation": "Correct! 'Freundin' is feminine, so 'unsere' stays 'unsere'."
+                "hint_rules": "<strong>Masculine (Accusative):</strong> der → den / ein → einen<br><strong>Feminine (Accusative):</strong> die → die / eine → <span class='highlight'>eine</span><br><strong>Neuter (Accusative):</strong> das → das / ein → ein",
+                "bubbles": ["eine", "einer", "einen", "ein"],
+                "correctAnswer": "eine",
+                "investigation": "Correct! 'Freundin' is feminine, so 'eine' stays 'eine' in Accusative."
             }
         ]
     },
@@ -1063,7 +1063,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are using a <strong>CONDITION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\"), the word describing the <strong>BOSS</strong> (\"%BOSS%\") is also in the <strong>NOMINATIVE</strong> case. The noun is <strong>%PREDICATE_NOMINATIVE_NOUN%</strong> (%PREDICATE_NOMINATIVE_GENDER%). Choose the correct Nominative article.",
-                "hint_rules": "<strong>Masculine (Nom):</strong> der → der / ein → <span class='highlight'>ein</span><br><strong>Feminine (Nom):</strong> ...eine<br><strong>Neuter (Nom):</strong> ...ein",
+                "hint_rules": "<strong>Masculine (Nominative):</strong> der → der / ein → <span class='highlight'>ein</span><br><strong>Feminine (Nominative):</strong> die → die / eine → eine<br><strong>Neuter (Nominative):</strong> das → das / ein → ein",
                 "bubbles": ["ein", "einen", "eine", "eines"],
                 "correctAnswer": "ein",
                 "investigation": "Correct! 'Tag' is masculine, so 'ein' stays 'ein'."
@@ -1114,7 +1114,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are working with an <strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") and you found a <strong>BOSS</strong> (\"%BOSS%\") and a <strong>VICTIM</strong> (\"%VICTIM_NOUN%\"), the victim must be put into the <strong>ACCUSATIVE</strong> case. The noun is <strong>%VICTIM_NOUN%</strong> (%VICTIM_GENDER%).",
-                "hint_rules": "<strong>Masculine (Acc):</strong> ...den / ...einen<br><strong>Feminine (Acc):</strong> ...die / ...<span class='highlight'>eine</span><br><strong>Neuter (Acc):</strong> ...das / ...ein",
+                "hint_rules": "<strong>Masculine (Accusative):</strong> der → den / ein → einen<br><strong>Feminine (Accusative):</strong> die → die / eine → <span class='highlight'>eine</span><br><strong>Neuter (Accusative):</strong> das → das / ein → ein",
                 "bubbles": ["eine", "einer", "ein", "einen"],
                 "correctAnswer": "eine",
                 "investigation": "Correct! 'E-Mail' is feminine, so 'eine' stays 'eine'."
@@ -1122,13 +1122,13 @@
         ]
     },
     {
-        "caseTitle": "🕵️ THE CASE: 'The man is my father.'",
-        "sentence": "Der Mann ist ___ Vater.",
-        "sentence_en": "The man is my father.",
+        "caseTitle": "🕵️ THE CASE: 'The man is a good father.'",
+        "sentence": "Der Mann ist ___ guter Vater.",
+        "sentence_en": "The man is a good father.",
         "verb_infinitive": "sein",
-        "correctArticle": "mein",
-        "fullSentence": "Der Mann ist mein Vater.",
-        "words": ["Der Mann", "ist", "___", "Vater."],
+        "correctArticle": "ein",
+        "fullSentence": "Der Mann ist ein guter Vater.",
+        "words": ["Der Mann", "ist", "___", "guter Vater."],
         "predicate_nominative_noun": "der Vater",
         "predicate_nominative_gender": "masculine",
         "steps": [
@@ -1136,7 +1136,7 @@
                 "target": "verb",
                 "title": "🎯 Find the Verb!",
                 "instruction": "Identify the verb...",
-                "bubbles": ["Der Mann", "ist", "___", "Vater."],
+                "bubbles": ["Der Mann", "ist", "___", "guter Vater."],
                 "correctAnswer": "ist",
                 "investigation": "'ist' from 'sein' (to be) is a <strong>CONDITION</strong> verb."
             },
@@ -1146,7 +1146,7 @@
                 "instruction": "Who or what is being described by the verb?",
                 "verb_info": "('sein' - to be)",
                 "verb_question_en": "Who or what is being described?????",
-                "bubbles": ["Der Mann", "Vater."],
+                "bubbles": ["Der Mann", "guter Vater."],
                 "correctAnswer": "Der Mann",
                 "correctAnswer_en": "The man",
                 "investigation": "Who is described? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
@@ -1157,18 +1157,18 @@
                 "instruction": "With condition verbs, the sentence describes what the Subject (BOSS) IS. To find this description (which is also Nominative), ask: The Subject (BOSS) is... what?",
                 "formula": "'Was %VERB% %BOSS%?'",
                 "formula_en": "'What is the man?'",
-                "bubbles": ["Vater.", "Der Mann"],
-                "correctAnswer": "Vater.",
-                "investigation": "What is the man? → 'Vater'. Also Nominative."
+                "bubbles": ["guter Vater.", "Der Mann"],
+                "correctAnswer": "guter Vater.",
+                "investigation": "What is the man? → 'guter Vater'. Also Nominative."
             },
             {
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
-                "instruction": "Since we are using a <strong>CONDITION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\"), the word describing the <strong>BOSS</strong> (\"%BOSS%\") is also in the <strong>NOMINATIVE</strong> case. The noun is <strong>%PREDICATE_NOMINATIVE_NOUN%</strong> (%PREDICATE_NOMINATIVE_GENDER%). Choose the correct Nominative possessive pronoun.",
-                "hint_rules": "<strong>Masculine (Nom):</strong> mein → <span class='highlight'>mein</span> / meinen<br><strong>Feminine (Nom):</strong> meine → meine / meiner<br><strong>Neuter (Nom):</strong> mein → mein / meinem",
-                "bubbles": ["mein", "meinen", "meinem", "meiner"],
-                "correctAnswer": "mein",
-                "investigation": "Correct! 'Vater' is masculine, so 'mein' stays 'mein' for Nominative."
+                "instruction": "Since we are using a <strong>CONDITION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\"), the word describing the <strong>BOSS</strong> (\"%BOSS%\") is also in the <strong>NOMINATIVE</strong> case. The noun is <strong>%PREDICATE_NOMINATIVE_NOUN%</strong> (%PREDICATE_NOMINATIVE_GENDER%). Choose the correct Nominative article.",
+                "hint_rules": "<strong>Masculine (Nominative):</strong> der → der / ein → <span class='highlight'>ein</span><br><strong>Feminine (Nominative):</strong> die → die / eine → eine<br><strong>Neuter (Nominative):</strong> das → das / ein → ein",
+                "bubbles": ["ein", "einen", "meinen", "dem"],
+                "correctAnswer": "ein",
+                "investigation": "Correct! 'Vater' is masculine, so 'ein' stays 'ein' for Nominative."
             }
         ]
     },
@@ -1216,7 +1216,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are working with an <strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") and you found a <strong>BOSS</strong> (\"%BOSS%\") and a <strong>VICTIM</strong> (\"%VICTIM_NOUN%\"), the victim must be put into the <strong>ACCUSATIVE</strong> case. The noun is <strong>%VICTIM_NOUN%</strong> (%VICTIM_GENDER%).",
-                "hint_rules": "<strong>Masculine (Acc):</strong> ...den / ...einen<br><strong>Feminine (Acc):</strong> ...<span class='highlight'>die</span> / ...eine<br><strong>Neuter (Acc):</strong> ...das / ...ein",
+                "hint_rules": "<strong>Masculine (Accusative):</strong> der → den / ein → einen<br><strong>Feminine (Accusative):</strong> die → <span class='highlight'>die</span> / eine → eine<br><strong>Neuter (Accusative):</strong> das → das / ein → ein",
                 "bubbles": ["die", "der", "den", "dem"],
                 "correctAnswer": "die",
                 "investigation": "Correct! 'Tür' is feminine, so 'die' stays 'die'."
@@ -1267,7 +1267,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are using a <strong>CONDITION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\"), the word describing the <strong>BOSS</strong> (\"%BOSS%\") is also in the <strong>NOMINATIVE</strong> case. The noun is <strong>%PREDICATE_NOMINATIVE_NOUN%</strong> (%PREDICATE_NOMINATIVE_GENDER%). Choose the correct Nominative article.",
-                "hint_rules": "<strong>Masculine (Nom):</strong> ...ein<br><strong>Feminine (Nom):</strong> ...eine<br><strong>Neuter (Nom):</strong> ...<span class='highlight'>ein</span>",
+                "hint_rules": "<strong>Masculine (Nominative):</strong> der → der / ein → ein<br><strong>Feminine (Nominative):</strong> die → die / eine → eine<br><strong>Neuter (Nominative):</strong> das → das / ein → <span class='highlight'>ein</span>",
                 "bubbles": ["ein", "einen", "eine", "eines"],
                 "correctAnswer": "ein",
                 "investigation": "Correct! 'Tier' is neuter, so 'ein' stays 'ein'."
@@ -1318,7 +1318,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are working with an <strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") and you found a <strong>BOSS</strong> (\"%BOSS%\") and a <strong>VICTIM</strong> (\"%VICTIM_NOUN%\"), the victim must be put into the <strong>ACCUSATIVE</strong> case. The noun is <strong>%VICTIM_NOUN%</strong> (%VICTIM_GENDER%).",
-                "hint_rules": "<strong>Masculine (Acc):</strong> ...den / ...einen<br><strong>Feminine (Acc):</strong> ...die / ...eine<br><strong>Neuter (Acc):</strong> ...<span class='highlight'>das</span> / ...ein",
+                "hint_rules": "<strong>Masculine (Accusative):</strong> der → den / ein → einen<br><strong>Feminine (Accusative):</strong> die → die / eine → eine<br><strong>Neuter (Accusative):</strong> das → <span class='highlight'>das</span> / ein → ein",
                 "bubbles": ["das", "dem", "den", "die"],
                 "correctAnswer": "das",
                 "investigation": "Correct! 'Fenster' is neuter, so 'das' stays 'das'."
@@ -1369,7 +1369,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are using a <strong>CONDITION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\"), the word describing the <strong>BOSS</strong> (\"%BOSS%\") is also in the <strong>NOMINATIVE</strong> case. The noun is <strong>%PREDICATE_NOMINATIVE_NOUN%</strong> (%PREDICATE_NOMINATIVE_GENDER%). Choose the correct Nominative article.",
-                "hint_rules": "<strong>Masculine (Nom):</strong> ...ein<br><strong>Feminine (Nom):</strong> ...<span class='highlight'>eine</span><br><strong>Neuter (Nom):</strong> ...ein",
+                "hint_rules": "<strong>Masculine (Nominative):</strong> der → der / ein → ein<br><strong>Feminine (Nominative):</strong> die → die / eine → <span class='highlight'>eine</span><br><strong>Neuter (Nominative):</strong> das → das / ein → ein",
                 "bubbles": ["eine", "einer", "einem", "einen"],
                 "correctAnswer": "eine",
                 "investigation": "Correct! 'Ärztin' is feminine, so 'eine' stays 'eine'."
@@ -1420,7 +1420,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are working with an <strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") and you found a <strong>BOSS</strong> (\"%BOSS%\") and a <strong>VICTIM</strong> (\"%VICTIM_NOUN%\"), the victim must be put into the <strong>ACCUSATIVE</strong> case. The noun is <strong>%VICTIM_NOUN%</strong> (%VICTIM_GENDER%).",
-                "hint_rules": "<strong>Masculine (Acc):</strong> ...den / ...einen<br><strong>Feminine (Acc):</strong> ...die / ...eine<br><strong>Neuter (Acc):</strong> ...<span class='highlight'>ein</span> / ...das",
+                "hint_rules": "<strong>Masculine (Accusative):</strong> der → den / ein → einen<br><strong>Feminine (Accusative):</strong> die → die / eine → eine<br><strong>Neuter (Accusative):</strong> das → das / ein → <span class='highlight'>ein</span>",
                 "bubbles": ["ein", "einen", "eine", "eines"],
                 "correctAnswer": "ein",
                 "investigation": "Correct! 'Bild' is neuter, so 'ein' stays 'ein'."
