@@ -3,29 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Boss & Victim - Nominativ & Akkusativ Detective (MVP)</title>
+    <title>Boss & Victim - Nominativ & Akkusativ Detective</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-image: linear-gradient(to right bottom, #4c1d95, #5b21b6, #6d28d9, #7c3aed, #8b5cf6);
-            display: flex; justify-content: center; align-items: center; 
+            background-image: linear-gradient(to right bottom, #4c1d95, #5b21b6, #6d28d9, #7c3aed, #8b5cf6); 
+            display: flex; flex-direction: column; 
+            justify-content: flex-start; align-items: center; 
             min-height: 100vh; margin: 0; padding: 16px; color: #ede9fe; 
+        }
+        @media (min-width: 1024px) { 
+            body { flex-direction: row; align-items: flex-start; justify-content: center; gap: 24px; }
         }
         .card { 
             background-color: rgba(255, 255, 255, 0.07); backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.15);
             padding: 20px; border-radius: 16px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.25), 0 5px 10px rgba(0,0,0,0.1);
-            text-align: center; width: 100%; max-width: 700px; margin-top: 2vh; margin-bottom: 2vh;
+            text-align: center; width: 100%; margin-bottom: 16px; 
         }
         @media (min-width: 768px) { .card { padding: 28px; } }
 
+        #quiz-main-area { max-width: 700px; order: 1; }
+        #detective-guide-sidebar-container { max-width: 420px; order: 2; }
+
+        @media (min-width: 1024px) { 
+            #quiz-main-area { order: 1; flex: 2; max-width: none; }
+            #detective-guide-sidebar-container {
+                order: 2; flex: 1; position: sticky; top: 24px; 
+                max-height: calc(100vh - 48px); overflow-y: auto; max-width: none;
+            }
+        }
+        #detective-guide-sidebar-container .card { height: 100%; background-color: rgba(46, 26, 71, 0.85); border: 1px solid rgba(255, 255, 255, 0.1); }
+
         .mode-title { font-size: 1.7rem; sm:font-size: 2rem; font-weight: 700; color: #ddd6fe; margin-bottom: 0.25rem; } 
         .mode-title-subtitle { font-size: 1rem; sm:font-size: 1.1rem; color: #c4b5fd; margin-bottom: 1.5rem; }
+
+        /* Detective Guide Styling */
+        #introduction-panel { background-color: transparent; padding: 0.5rem; text-align: left; color: #ede9fe; border: none; }
+        #introduction-panel h3 { font-size: 1.4rem; font-weight: 700; color: #f0abfc; margin-top: 1.5rem; margin-bottom: 0.75rem; padding-bottom: 0.4rem; border-bottom: 2px solid #c084fc; }
+        #introduction-panel h4 { font-size: 1.1rem; font-weight: 600; color: #e9d5ff; margin-top: 1.25rem; margin-bottom: 0.6rem; }
+        #introduction-panel h3:first-child { margin-top: 0;}
+        #introduction-panel p, #introduction-panel li { font-size: 0.9rem; line-height: 1.65; margin-bottom: 0.85rem; color: #d8b4fe;}
+        #introduction-panel ul { list-style-type: '👉'; padding-left: 1.5rem; margin-bottom:1.2rem; }
+        #introduction-panel strong { color: #f5d0fe; font-weight: 600; }
+        #introduction-panel .golden-rule { background-color: rgba(250, 204, 21, 0.15); padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; border-left: 5px solid #facc15; color: #fef3c7; font-size: 0.9rem;}
+        #introduction-panel .golden-rule strong {color: #fde047;} 
+        #introduction-panel .eselsbruecke { background-color: rgba(192, 132, 252, 0.1); padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; font-style: italic; border-left: 4px solid #f0abfc; color: #e9d5ff; font-size: 0.9rem;}
+        #introduction-panel .example-sentence { margin-left: 0.5rem; font-style: italic; color: #c4b5fd; margin-bottom: 0.25rem; display: block;}
+        #introduction-panel .step-explanation { margin-top: 0.75em; padding: 0.75em ; border-left: 3px solid #a78bfa; font-size:0.9rem; color: #d8b4fe; background-color: rgba(255,255,255,0.04); border-radius: 0 4px 4px 0;}
         
+        /* Quiz Area Styling */
         .quiz-step-area { margin-bottom: 1.5rem; padding: 1.25rem; background-color: rgba(255,255,255,0.05); border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.1);}
         .quiz-step-area h4 { font-size: 1.25rem; font-weight: 600; color: #e0cffc; margin-bottom: 0.75rem;}
         .quiz-step-area p { margin-bottom: 0.75rem; color: #d8b4fe; font-size: 0.95rem;}
@@ -47,14 +78,16 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.2); border: 2px solid transparent;
         }
         .word-bubble:hover:not(.disabled) { background-color: #c4b5fd; transform: translateY(-2px); }
-        .word-bubble.selected-correct { background-color: #4ade80 !important; color: #14532d !important; font-weight: bold; border-color: #22c55e !important;}
-        .word-bubble.selected-incorrect { background-color: #f87171 !important; color: #7f1d1d !important; border-color: #ef4444 !important;}
-        .word-bubble.disabled { opacity: 0.7; cursor: not-allowed; background-color: #6b21a8; color:#c4b5fd }
-        .word-bubble.is-verb { border: 2px solid #f0abfc; } /* Highlight for already ID'd verb */
-        .word-bubble.is-boss { border: 2px solid #facc15; } /* Highlight for already ID'd boss */
+        .word-bubble.highlight-verb { background-color: #6ee7b7; color: #064e3b; border-color: #34d396; transform: scale(1.03);} /* Tealish green */
+        .word-bubble.highlight-boss { background-color: #facc15; color: #713f12; border-color: #eab308; transform: scale(1.03);} /* Gold/Yellow */
+        .word-bubble.highlight-victim { background-color: #f0abfc; color: #581c87; border-color: #e879f9; transform: scale(1.03);} /* Pink/Fuchsia */
+        .word-bubble.disabled { opacity: 0.6; cursor: not-allowed; background-color: #6b21a8 !important; color:#c4b5fd !important; border-color: transparent !important;}
         
         .button-group { display: flex; gap: 0.75rem; justify-content: center; margin-top: 1rem;}
         .button-group .btn {margin-top:0;}
+        .button-group .btn.selected-correct { background-color: #4ade80 !important; color: #14532d !important; }
+        .button-group .btn.selected-incorrect { background-color: #f87171 !important; color: #7f1d1d !important; }
+
 
         .feedback-text { margin-top: 0.75rem; font-weight: 600; min-height: 1.75em; padding: 0.25rem;}
         .feedback-text.correct { color: #a7f3d0; }
@@ -72,19 +105,24 @@
         .btn-secondary:hover:not(:disabled) { background-color: #8b5cf6; }
         
         .hidden { display: none !important; }
-        .controls-area { margin-top: 1.5rem; display: flex; justify-content: center; gap: 10px;}
+        .controls-area { margin-top: 1.5rem; display: flex; justify-content: center; gap: 10px;} /* Centered controls */
         .progress-score-area { display: flex; justify-content: space-between; width:100%; margin-top: 1rem; font-size: 0.875rem; color: #d8b4fe;}
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px;}
+        ::-webkit-scrollbar-thumb { background: #a78bfa; border-radius: 10px;}
+        ::-webkit-scrollbar-thumb:hover { background: #8b5cf6; }
     </style>
 </head>
-<body>
+<body class="lg:gap-6"> 
     <div id="quiz-main-area" class="card">
-        <h1 class="mode-title">Boss & Victim Detective Mode (MVP)</h1>
+        <h1 class="mode-title">Boss & Victim Detective Mode</h1>
         <p class="mode-title-subtitle">Nominativ & Akkusativ Fälle Meistern / Dominando los Casos Nominativo y Acusativo</p>
 
         <div id="task-reference-area" class="mb-4 text-left">
             <p><strong>EN:</strong> <span id="sentence-en">Loading case...</span></p>
             <p><strong>ES:</strong> <span id="sentence-es">Cargando caso...</span></p>
-            <p class="mt-2"><strong>Deutsche Satzstruktur (Ziel):</strong> <span id="german-sentence-context" class="font-mono text-purple-300"></span></p>
+            <p class="mt-2"><strong>Deutsche Satz (Ziel):</strong> <span id="german-sentence-context" class="font-mono text-purple-300"></span></p>
         </div>
 
         <div id="sentence-bubbles-container" class="sentence-bubbles-container">
@@ -92,8 +130,8 @@
         </div>
         
         <div id="current-step-instruction" class="my-4 font-semibold text-lg text-purple-200"></div>
-
         <div id="step-feedback" class="feedback-text mb-4"></div>
+
 
         <div id="step2-verb-type" class="quiz-step-area hidden">
             <h4>Schritt 2: Verb-Typ? / Paso 2: ¿Tipo de verbo?</h4>
@@ -105,6 +143,29 @@
             </div>
         </div>
         
+        <div id="step3-identify-boss" class="quiz-step-area hidden">
+             <h4>Schritt 3: Finde den BOSS! / Paso 3: ¡Encuentra al JEFE!</h4>
+             <p id="boss-question-prompt">Frage: Wer oder was + <span class="font-bold text-purple-100" id="verb-for-boss-prompt"></span>?</p>
+             <p class="italic-instruction">Klicke auf den BOSS im Satz oben.</p>
+        </div>
+        
+        <div id="step4-identify-victim" class="quiz-step-area hidden">
+             <h4>Schritt 4: Finde das OPFER! / Paso 4: ¡Encuentra a la VÍCTIMA!</h4>
+             <p id="victim-question-prompt">Frage: Wen oder was + <span class="font-bold text-purple-100" id="verb-for-victim-prompt"></span> + <span class="font-bold text-purple-100" id="boss-for-victim-prompt"></span>?</p>
+             <p class="italic-instruction">Klicke auf das OPFER im Satz oben.</p>
+        </div>
+
+        <div id="step5-choose-article" class="quiz-step-area hidden">
+             <h4>Schritt 5: Wähle den Artikel! / Paso 5: ¡Elige el Artículo!</h4>
+             <p id="sentence-for-article-step5" class="mb-2 sentence-german text-xl"></p>
+             <p class="italic-instruction mb-2">
+                Das <strong id="targetNounRoleStep5" class="text-purple-100"></strong> ist "<strong id="targetNounInfoStep5" class="text-purple-100"></strong>"
+                (<span id="genderForArticleStep5" class="text-purple-100"></span>) und braucht den <strong id="caseForArticleStep5" class="text-purple-100"></strong> Fall.
+             </p>
+             <div id="article-options-buttons" class="button-group">
+                </div>
+        </div>
+
         <div class="controls-area mt-6">
             <button id="next-case-btn-bv" class="btn btn-secondary hidden">Nächster Fall / Siguiente Caso</button>
         </div>
@@ -116,25 +177,85 @@
              <a href="index.html" class="btn btn-sm btn-secondary">← Hauptmenü / Menú Principal</a>
         </div>
     </div>
+
+    <div id="detective-guide-sidebar-container" class="card"> 
+        <div id="introduction-panel"> 
+            <h3>The Ultimate Detective's Guide to German Cases</h3>
+            <p class="mode-title-subtitle" style="font-size:0.9em; opacity:0.8;">(The "Boss & Victim" Method)</p>
+            <div class="golden-rule">
+                <strong>THE GOLDEN RULES</strong><br>
+                REMEMBER: NOMINATIVE = A CONDITION.<br>
+                This sentence describes a state of being. It has ONLY A BOSS. The Boss is always NOMINATIVE.<br><br>
+                REMEMBER: ACCUSATIVE = AN ACTION.<br>
+                This sentence describes an action. It has a BOSS + A VICTIM. The Victim is always ACCUSATIVE.
+            </div>
+            <h4>YOUR CHEAT SHEET: These Verbs are ALWAYS "Condition"</h4>
+            <p>If you see one of these verbs, you know immediately there is NO VICTIM. The case is solved quickly! Just find the Boss (Nominative).</p>
+            <ul>
+                <li><strong>sein</strong> (to be) <span class="example-sentence">→ <strong>Ich</strong> bin Student.</span></li>
+                <li><strong>heißen</strong> (to be called) <span class="example-sentence">→ <strong>Meine Schwester</strong> heißt Anna.</span></li>
+                <li><strong>werden</strong> (to become) <span class="example-sentence">→ <strong>Er</strong> wird Arzt.</span></li>
+                <li><strong>bleiben</strong> (to stay/remain) <span class="example-sentence">→ <strong>Wir</strong> bleiben Freunde.</span></li>
+                <li><strong>kommen</strong> (to come) <span class="example-sentence">→ <strong>Ich</strong> komme aus Spanien.</span></li>
+                <li><strong>wohnen / leben</strong> (to live/reside) <span class="example-sentence">→ <strong>Er</strong> wohnt in München.</span></li>
+                <li><strong>gehen / laufen</strong> (to go / to run) <span class="example-sentence">→ <strong>Wir</strong> gehen ins Kino.</span></li>
+                <li><strong>schlafen</strong> (to sleep) <span class="example-sentence">→ <strong>Das Baby</strong> schläft.</span></li>
+                <li><strong>warten</strong> (to wait) <span class="example-sentence">→ <strong>Ich</strong> warte hier.</span></li>
+                <li><strong>fahren</strong> (to drive/travel) <span class="example-sentence">→ <strong>Sie</strong> fährt mit dem Bus.</span></li>
+            </ul>
+            <h4>THE 4-STEP DEDUCTION METHOD (Example)</h4>
+            <div class="eselsbruecke">
+                <p><strong>THE CASE:</strong> "I have a brother!"</p>
+                <p><strong>THE SENTENCE:</strong> Ich habe ___ Bruder.</p>
+                <div class="step-explanation"><strong>Step 1: Find the verb!</strong><br>Verb: <strong>habe</strong> (from "haben"). Verdict: <strong>ACTION</strong>.</div>
+                <div class="step-explanation"><strong>Step 2: Find the BOSS!</strong><br>"Wer oder was" hat? → Answer: "Ich". Result: The <strong>BOSS</strong> is "Ich" (Nominative).</div>
+                <div class="step-explanation"><strong>Step 3: Find the VICTIM!</strong><br>"Wen oder was" habe ich? → Answer: "Bruder". Result: The <strong>VICTIM</strong> is "Bruder".</div>
+                <div class="step-explanation"><strong>Step 4: PUT THE FUCKER BEHIND BARS!!!</strong><br>The VICTIM ("Bruder", masculine) goes into ACCUSATIVE. 'ein' Bruder becomes 'einen' Bruder.<br><strong>CASE CLOSED:</strong> Ich habe <strong>einen Bruder</strong>.</div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        let allTasksBV = [];
+        let allBossVictimTasksBV = [];
         let currentTaskDataBV = null;
         let currentTaskIndexBV = 0;
         let scoreBV = 0;
         let tasksForRoundBV = []; 
         let currentStepBV = 1; 
         let identifiedVerbForm = null;
+        let identifiedVerbType = null; // Corrected variable name
         let identifiedBossWord = null;
         let identifiedVictimWord = null;
 
+        const quizMainAreaEl = document.getElementById('quiz-main-area');
         const sentenceBubblesContainerEl = document.getElementById('sentence-bubbles-container');
         const currentStepInstructionEl = document.getElementById('current-step-instruction');
-        const stepFeedbackEl = document.getElementById('step-feedback');
+        const stepFeedbackEl = document.getElementById('step-feedback'); // General feedback for steps
+        
+        // Step 1 elements are implicitly sentenceBubblesContainerEl and stepFeedbackEl
         
         const step2VerbTypeEl = document.getElementById('step2-verb-type');
-        const identifiedVerbForTypeCheckEl = document.getElementById('identified-verb-for-type-check');
+        const identifiedVerbStep2El = document.getElementById('identified-verb-step2');
+        // const identifiedVerbStep2EnEl = document.getElementById('identified-verb-step2-en'); // Kept if you want to use it
         const btnCondition = document.getElementById('btn-condition');
         const btnAction = document.getElementById('btn-action');
+        // Step 2 feedback uses the general stepFeedbackEl
+
+        const step3FindBossEl = document.getElementById('step3-identify-boss'); // Corrected ID
+        const bossQuestionPromptEl = document.getElementById('boss-question-prompt');
+        // For click-based MVP, boss-drag-pool and boss-drop-zone are not used for dragging
+
+        const step4FindVictimEl = document.getElementById('step4-identify-victim'); // Corrected ID
+        const victimQuestionPromptEl = document.getElementById('victim-question-prompt');
+
+        const step5ChooseArticleEl = document.getElementById('step5-choose-article');
+        const sentenceForArticleStep5El = document.getElementById('sentence-for-article-step5');
+        const targetNounRoleStep5El = document.getElementById('targetNounRoleStep5');
+        const targetNounInfoStep5El = document.getElementById('targetNounInfoStep5');
+        const genderForArticleStep5El = document.getElementById('genderForArticleStep5');
+        const caseForArticleStep5El = document.getElementById('caseForArticleStep5');
+        const articleOptionsButtonsEl = document.getElementById('article-options-buttons');
+        // Step 5 feedback uses the general stepFeedbackEl
 
         const nextCaseBtnBV = document.getElementById('next-case-btn-bv');
         
@@ -144,35 +265,46 @@
         const progressTextBVEl = document.getElementById('progress-text-bv');
         const scoreTextBVEl = document.getElementById('score-text-bv');
         
-        function triggerConfettiBV() { if (typeof confetti === 'function') confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } }); }
+        function triggerConfettiBV() { if (typeof confetti === 'function') confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } }); }
         function shuffleArrayBV(array) { for (let i = array.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [array[i], array[j]] = [array[j], array[i]]; } }
 
         async function loadTasksBV() {
             try {
                 const response = await fetch('boss_victim_tasks.json');
-                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}.`);
-                allTasksBV = await response.json();
-                if (!Array.isArray(allTasksBV) || allTasksBV.length === 0) throw new Error("boss_victim_tasks.json is empty or not a valid array.");
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}. Failed to fetch boss_victim_tasks.json`);
+                }
+                const responseText = await response.text();
+                try {
+                    allBossVictimTasksBV = JSON.parse(responseText);
+                } catch (e) {
+                    throw new Error(`Failed to parse boss_victim_tasks.json: ${e.message}. Content preview: ${responseText.substring(0,200)}...`);
+                }
+
+                if (!Array.isArray(allBossVictimTasksBV) || allBossVictimTasksBV.length === 0) throw new Error("boss_victim_tasks.json is empty or not a valid array of tasks.");
                 startNewRoundBV(); 
             } catch (error) {
-                console.error("Could not load tasks:", error);
-                const quizMainArea = document.getElementById('quiz-main-area');
-                quizMainArea.innerHTML = `<h2 class="mode-title text-red-300">Error</h2><p class="text-lg text-red-200">Could not load tasks: ${error.message}</p><p class="text-sm mt-2 text-red-200">Please check your 'boss_victim_tasks.json' file format and ensure it's in the same directory.</p><a href="index.html" class="btn btn-secondary mt-6">Back to Main Menu</a>`;
+                console.error("Could not load or parse tasks:", error);
+                quizMainAreaEl.innerHTML = `<h2 class="mode-title text-red-300">Error</h2><p class="text-lg text-red-200">Could not load tasks: ${error.message}</p><p class="text-sm mt-2 text-red-200">Please check the console and ensure 'boss_victim_tasks.json' is available and correctly formatted.</p><a href="index.html" class="btn btn-secondary mt-6">Back to Main Menu</a>`;
             }
         }
-
+        
         function startNewRoundBV() {
             currentTaskIndexBV = 0;
             scoreBV = 0;
-            shuffleArrayBV(allTasksBV);
-            tasksForRoundBV = allTasksBV.slice(0, Math.min(5, allTasksBV.length)); 
-            if (tasksForRoundBV.length === 0 && allTasksBV.length > 0) {
-                 tasksForRoundBV = allTasksBV.slice(0, allTasksBV.length); 
+            shuffleArrayBV(allBossVictimTasksBV);
+            tasksForRoundBV = allBossVictimTasksBV.slice(0, Math.min(5, allBossVictimTasksBV.length)); 
+            if (tasksForRoundBV.length === 0 && allBossVictimTasksBV.length > 0) { 
+                 tasksForRoundBV = allBossVictimTasksBV.slice(0, allBossVictimTasksBV.length); 
             }
+
             if (tasksForRoundBV.length === 0) {
-                sentenceBubblesContainerEl.innerHTML = "<p class=\"text-lg text-purple-200\">No tasks available for this round.</p>";
-                currentStepInstructionEl.textContent = "Please check your JSON file or reload.";
-                nextCaseBtnBV.classList.add('hidden');
+                sentenceBubblesContainerEl.innerHTML = "<p class=\"text-lg text-purple-200\">Keine Aufgaben für diese Runde verfügbar oder alle Aufgaben erledigt.</p>";
+                currentStepInstructionEl.textContent = "Bitte lade die Seite neu oder überprüfe die JSON-Datei.";
+                hideAllStepAreas(); 
+                nextCaseBtnBV.textContent = "Hauptmenü";
+                nextCaseBtnBV.onclick = () => { window.location.href = "index.html"; };
+                nextCaseBtnBV.classList.remove('hidden');
                 updateProgressAndScoreBV(); 
                 return;
             }
@@ -182,19 +314,21 @@
         function loadNextCaseBV() {
             stepFeedbackEl.classList.add('hidden');
             if (currentTaskIndexBV >= tasksForRoundBV.length) {
-                sentenceBubblesContainerEl.innerHTML = `<p class="text-xl font-semibold">Round Complete! Your Score: ${scoreBV}/${tasksForRoundBV.length}</p>`;
-                currentStepInstructionEl.textContent = "Well done! / ¡Bien hecho!";
+                sentenceBubblesContainerEl.innerHTML = `<p class="text-xl font-semibold">Runde Beendet! Deine Punktzahl: ${scoreBV}/${tasksForRoundBV.length}</p>`;
+                currentStepInstructionEl.textContent = "Super gemacht! / Well done!";
                 hideAllStepAreas();
-                nextCaseBtnBV.textContent = "Start New Round / Empezar Nueva Ronda";
+                nextCaseBtnBV.textContent = "Neue Runde starten / Start New Round";
                 nextCaseBtnBV.onclick = startNewRoundBV; 
                 nextCaseBtnBV.classList.remove('hidden');
+                updateProgressAndScoreBV();
                 return;
             }
             currentTaskDataBV = tasksForRoundBV[currentTaskIndexBV];
             identifiedVerbForm = null;
+            identifiedVerbType = null;
             identifiedBossWord = null;
             identifiedVictimWord = null;
-            
+
             sentenceEnRef.textContent = currentTaskDataBV.translations.en;
             sentenceEsRef.textContent = currentTaskDataBV.translations.es;
             germanSentenceContextEl.textContent = currentTaskDataBV.sentence_display_for_context;
@@ -202,20 +336,22 @@
             setupStep1_IdentifyVerb();
             updateProgressAndScoreBV();
             nextCaseBtnBV.classList.add('hidden');
+            // Default action for Next Case button
+            nextCaseBtnBV.onclick = () => { currentTaskIndexBV++; loadNextCaseBV(); };
         }
 
         function hideAllStepAreas() {
             step2VerbTypeEl.classList.add('hidden');
-            // Future steps would be hidden here too
-            // document.getElementById('step3-find-boss').classList.add('hidden');
-            // document.getElementById('step4-find-victim').classList.add('hidden');
-            // document.getElementById('step5-choose-article').classList.add('hidden');
+            step3FindBossEl.classList.add('hidden');
+            step4FindVictimEl.classList.add('hidden');
+            step5ChooseArticleEl.classList.add('hidden'); 
+            stepFeedbackEl.classList.add('hidden'); // Hide general step feedback too
         }
 
         function setupStep1_IdentifyVerb() {
             currentStepBV = 1;
-            hideAllStepAreas(); // Hide all other step areas
-            currentStepInstructionEl.textContent = "Step 1: Find the Verb! Click on the verb in the sentence below.";
+            hideAllStepAreas(); 
+            currentStepInstructionEl.textContent = "Schritt 1: Finde das Verb! Klicke auf das Verb im Satz.";
             currentStepInstructionEl.classList.remove('hidden');
             
             sentenceBubblesContainerEl.innerHTML = '';
@@ -224,6 +360,9 @@
                 bubble.classList.add('word-bubble');
                 bubble.textContent = word;
                 bubble.dataset.word = word;
+                if (word === currentTaskDataBV.verb_info.verb_form_in_sentence) {
+                    bubble.dataset.isVerb = "true";
+                }
                 bubble.addEventListener('click', handleWordBubbleClick);
                 sentenceBubblesContainerEl.appendChild(bubble);
             });
@@ -231,70 +370,71 @@
         }
 
         function handleWordBubbleClick(event) {
-            const clickedBubble = event.target.closest('.word-bubble');
+            const clickedBubble = event.target.closest('.word-bubble'); 
             if (!clickedBubble || clickedBubble.classList.contains('disabled')) return;
 
             const wordClicked = clickedBubble.dataset.word;
             stepFeedbackEl.classList.remove('hidden');
 
-            if (currentStepBV === 1) { // Identifying the Verb
+            if (currentStepBV === 1) { 
                 sentenceBubblesContainerEl.querySelectorAll('.word-bubble').forEach(b => b.classList.add('disabled'));
-                if (wordClicked === currentTaskDataBV.verb_info.verb_form_in_sentence) {
+                if (clickedBubble.dataset.isVerb === "true") {
                     identifiedVerbForm = wordClicked;
-                    clickedBubble.classList.add('selected-correct');
-                    stepFeedbackEl.textContent = `Correct! Verb: ${identifiedVerbForm}.`;
+                    clickedBubble.classList.add('highlight-verb'); // Use specific highlight
+                    stepFeedbackEl.textContent = `Richtig! Verb: ${identifiedVerbForm} (Infinitiv: ${currentTaskDataBV.verb_info.infinitive}).`;
                     stepFeedbackEl.className = 'feedback-text correct';
-                    setTimeout(setupStep2_ChooseVerbType, 1500);
+                    setTimeout(setupStep2_ChooseVerbType, 1500); 
                 } else {
-                    clickedBubble.classList.add('selected-incorrect');
-                    stepFeedbackEl.textContent = "Incorrect. That's not the verb. Try again!";
+                    clickedBubble.classList.add('selected-incorrect'); // Temporary incorrect marking
+                    stepFeedbackEl.textContent = "Falsch! Das ist nicht das Verb. Versuche es nochmal!";
                     stepFeedbackEl.className = 'feedback-text incorrect';
-                    setTimeout(() => {
-                        sentenceBubblesContainerEl.querySelectorAll('.word-bubble').forEach(b => b.classList.remove('disabled', 'selected-incorrect'));
-                        stepFeedbackEl.classList.add('hidden');
+                    setTimeout(() => { 
+                         sentenceBubblesContainerEl.querySelectorAll('.word-bubble').forEach(b => b.classList.remove('disabled', 'selected-incorrect'));
+                         stepFeedbackEl.classList.add('hidden');
                     }, 2000);
                 }
             } else if (currentStepBV === 3) { // Identifying the Boss
-                 sentenceBubblesContainerEl.querySelectorAll('.word-bubble:not(.is-verb)').forEach(b => b.classList.add('disabled'));
+                 sentenceBubblesContainerEl.querySelectorAll('.word-bubble:not(.highlight-verb)').forEach(b => b.classList.add('disabled'));
                 if (wordClicked === currentTaskDataBV.boss_word) {
                     identifiedBossWord = wordClicked;
-                    clickedBubble.classList.add('selected-correct', 'is-boss');
-                    stepFeedbackEl.textContent = `Correct! The BOSS is "${identifiedBossWord}".`;
+                    clickedBubble.classList.add('highlight-boss');
+                    stepFeedbackEl.textContent = `Korrekt! Der BOSS ist "${identifiedBossWord}".`;
                     stepFeedbackEl.className = 'feedback-text correct';
-                     if (currentTaskDataBV.verb_info.type === "Action") {
+                     if (identifiedVerbType === "Action") {
                         setTimeout(setupStep4_IdentifyVictim, 1500);
-                    } else { // Condition verb, only Boss
-                        stepFeedbackEl.textContent += " This sentence only has a BOSS (Nominative). Case complete!";
-                        scoreBV++;
-                        updateProgressAndScoreBV();
+                    } else { 
+                        stepFeedbackEl.textContent += " Diese الحالة (Kondition) hat nur einen BOSS.";
+                        // TODO: Proceed to an adjusted Step 5 for Nominative article for Boss/Predicate if needed
+                        scoreBV++; updateProgressAndScoreBV(); // Mark task as complete for MVP if only Boss
                         nextCaseBtnBV.classList.remove('hidden');
                     }
                 } else {
                     clickedBubble.classList.add('selected-incorrect');
-                    stepFeedbackEl.textContent = "Incorrect. That's not the BOSS. Try again!";
+                    stepFeedbackEl.textContent = "Falsch. Das ist nicht der BOSS. ('Wer oder was...?')";
                     stepFeedbackEl.className = 'feedback-text incorrect';
                      setTimeout(() => {
-                        sentenceBubblesContainerEl.querySelectorAll('.word-bubble:not(.is-verb)').forEach(b => b.classList.remove('disabled', 'selected-incorrect'));
+                        sentenceBubblesContainerEl.querySelectorAll('.word-bubble:not(.highlight-verb)').forEach(b => b.classList.remove('disabled', 'selected-incorrect'));
                         stepFeedbackEl.classList.add('hidden');
                     }, 2000);
                 }
             } else if (currentStepBV === 4) { // Identifying the Victim
-                sentenceBubblesContainerEl.querySelectorAll('.word-bubble:not(.is-verb):not(.is-boss)').forEach(b => b.classList.add('disabled'));
+                sentenceBubblesContainerEl.querySelectorAll('.word-bubble:not(.highlight-verb):not(.highlight-boss)').forEach(b => b.classList.add('disabled'));
                 if (wordClicked === currentTaskDataBV.victim_word) {
                     identifiedVictimWord = wordClicked;
-                    clickedBubble.classList.add('selected-correct');
-                    stepFeedbackEl.textContent = `Correct! The VICTIM is "${identifiedVictimWord}". This will be Akkusativ.`;
+                    clickedBubble.classList.add('highlight-victim');
+                    stepFeedbackEl.textContent = `Korrekt! Das OPFER ist "${identifiedVictimWord}".`;
                     stepFeedbackEl.className = 'feedback-text correct';
-                    scoreBV++; // For MVP, we count this as a success for the task.
-                    updateProgressAndScoreBV();
+                    // TODO: Proceed to Step 5 (Choose Article)
+                    stepFeedbackEl.textContent += " Nächster Schritt (TODO): Artikel wählen!";
+                    scoreBV++; updateProgressAndScoreBV(); // Mark task as complete for MVP
                     triggerConfettiBV();
-                    nextCaseBtnBV.classList.remove('hidden'); // Go to next case as article selection is deferred
+                    nextCaseBtnBV.classList.remove('hidden'); 
                 } else {
                     clickedBubble.classList.add('selected-incorrect');
-                    stepFeedbackEl.textContent = "Incorrect. That's not the VICTIM. Try again!";
+                    stepFeedbackEl.textContent = "Falsch. Das ist nicht das OPFER. ('Wen oder was...?')";
                     stepFeedbackEl.className = 'feedback-text incorrect';
                      setTimeout(() => {
-                        sentenceBubblesContainerEl.querySelectorAll('.word-bubble:not(.is-verb):not(.is-boss)').forEach(b => b.classList.remove('disabled', 'selected-incorrect'));
+                        sentenceBubblesContainerEl.querySelectorAll('.word-bubble:not(.highlight-verb):not(.highlight-boss)').forEach(b => b.classList.remove('disabled', 'selected-incorrect'));
                         stepFeedbackEl.classList.add('hidden');
                     }, 2000);
                 }
@@ -302,14 +442,13 @@
         }
 
         function setupStep2_ChooseVerbType() {
-            currentStepBV = 2;
             hideAllStepAreas();
+            currentStepBV = 2;
             step2VerbTypeEl.classList.remove('hidden');
-            currentStepInstructionEl.textContent = `Step 2: Verb Type. Is "${identifiedVerbForm}" a CONDITION or ACTION verb?`;
-            identifiedVerbForTypeCheckEl.textContent = identifiedVerbForm;
+            currentStepInstructionEl.textContent = `Schritt 2: Verb-Typ? Ist "${identifiedVerbForm}" KONDITION oder AKTION?`;
+            identifiedVerbStep2El.textContent = identifiedVerbForm;
             stepFeedbackEl.classList.add('hidden');
-            btnCondition.disabled = false;
-            btnAction.disabled = false;
+            btnCondition.disabled = false; btnAction.disabled = false;
             btnCondition.classList.remove('selected-correct', 'selected-incorrect');
             btnAction.classList.remove('selected-correct', 'selected-incorrect');
         }
@@ -319,54 +458,52 @@
 
         function checkVerbType(chosenType) {
             if (currentStepBV !== 2) return;
-            btnCondition.disabled = true;
-            btnAction.disabled = true;
+            btnCondition.disabled = true; btnAction.disabled = true;
             stepFeedbackEl.classList.remove('hidden');
+            identifiedVerbType = chosenType; 
+            const correctType = currentTaskDataBV.verb_info.type;
 
-            if (chosenType === currentTaskDataBV.verb_info.type) {
-                stepFeedbackEl.textContent = `Correct! "${identifiedVerbForm}" is a ${chosenType.toUpperCase()} verb.`;
+            if (chosenType === correctType) {
+                stepFeedbackEl.textContent = `KORREKT! '${identifiedVerbForm}' ist ${correctType === "Action" ? "eine AKTION" : "eine KONDITION"}.`;
                 stepFeedbackEl.className = 'feedback-text correct';
                 if(chosenType === "Action") btnAction.classList.add('selected-correct'); else btnCondition.classList.add('selected-correct');
                 triggerConfettiBV();
-                if (chosenType === "Action") {
-                    setTimeout(setupStep3_IdentifyBoss, 1500);
-                } else { // Condition verb
-                    stepFeedbackEl.textContent += " This sentence only has a BOSS. Next step: Identify the Boss.";
-                    setTimeout(setupStep3_IdentifyBoss, 1500); // Still identify boss for condition sentences
-                }
+                setTimeout(() => { setupStep3_IdentifyBoss(); }, 1500);
             } else {
-                stepFeedbackEl.textContent = `Incorrect. "${identifiedVerbForm}" is a ${currentTaskDataBV.verb_info.type.toUpperCase()} verb. Check your Detective Guide!`;
+                stepFeedbackEl.textContent = `Nicht ganz. '${identifiedVerbForm}' ist eigentlich ${correctType === "Action" ? "eine AKTION" : "eine KONDITION"}. (Siehe Detektiv-Handbuch!)`;
                 stepFeedbackEl.className = 'feedback-text incorrect';
-                 if(chosenType === "Action") btnAction.classList.add('selected-incorrect'); else btnCondition.classList.add('selected-incorrect');
-                setTimeout(() => { // Allow retry or skip
-                    nextCaseBtnBV.classList.remove('hidden');
-                }, 2500);
+                if(chosenType === "Action") btnAction.classList.add('selected-incorrect'); else btnCondition.classList.add('selected-incorrect');
+                setTimeout(() => { nextCaseBtnBV.classList.remove('hidden'); }, 2500);
             }
         }
         
         function setupStep3_IdentifyBoss() {
-            currentStepBV = 3;
             hideAllStepAreas();
-            // Note: step3FindBossEl is currently a placeholder in HTML. For click-based MVP, we reuse sentenceBubblesContainerEl.
-            currentStepInstructionEl.textContent = `Step 3: Find the BOSS! Ask: Wer oder was ${identifiedVerbForm}? Click the BOSS.`;
+            currentStepBV = 3;
+            step3FindBossEl.classList.remove('hidden'); // Make sure this step's div is shown
+            currentStepInstructionEl.textContent = `Schritt 3: Finde den BOSS! Frage: Wer oder was ${identifiedVerbForm}? Klicke auf den BOSS.`;
             sentenceBubblesContainerEl.querySelectorAll('.word-bubble').forEach(b => {
                 b.classList.remove('disabled', 'selected-correct', 'selected-incorrect'); // Reset bubbles
-                if (b.textContent === identifiedVerbForm) b.classList.add('is-verb', 'disabled'); // Keep verb marked and disabled
+                if (b.textContent === identifiedVerbForm) b.classList.add('highlight-verb', 'disabled'); 
             });
             stepFeedbackEl.classList.add('hidden');
         }
 
         function setupStep4_IdentifyVictim() {
-            currentStepBV = 4;
             hideAllStepAreas();
-            currentStepInstructionEl.textContent = `Step 4: Find the VICTIM! Ask: Wen oder was ${identifiedVerbForm} ${identifiedBossWord}? Click the VICTIM.`;
+            currentStepBV = 4;
+            step4FindVictimEl.classList.remove('hidden'); // Make sure this step's div is shown
+            currentStepInstructionEl.textContent = `Schritt 4: Finde das OPFER! Frage: Wen oder was ${identifiedVerbForm} ${identifiedBossWord}? Klicke auf das OPFER.`;
             sentenceBubblesContainerEl.querySelectorAll('.word-bubble').forEach(b => {
                 b.classList.remove('disabled', 'selected-correct', 'selected-incorrect');
-                if (b.textContent === identifiedVerbForm) b.classList.add('is-verb', 'disabled');
-                if (b.textContent === identifiedBossWord) b.classList.add('is-boss', 'disabled');
+                if (b.textContent === identifiedVerbForm) b.classList.add('highlight-verb', 'disabled');
+                if (b.textContent === identifiedBossWord) b.classList.add('highlight-boss', 'disabled');
             });
             stepFeedbackEl.classList.add('hidden');
         }
+        
+        // Step 5 (Article Choice) is still a placeholder for full implementation
+        // function setupStep5_ChooseArticle() { ... }
 
 
         function updateProgressAndScoreBV() {
@@ -374,11 +511,6 @@
             scoreTextBVEl.textContent = `Punkte: ${scoreBV}`;
         }
         
-        nextCaseBtnBV.addEventListener('click', () => {
-            // Default action is set in loadNextCaseBV for continuing the round
-            // and in startNewRoundBV for starting a new round after completion.
-        });
-
         document.addEventListener('DOMContentLoaded', loadTasksBV);
     </script>
 </body>
