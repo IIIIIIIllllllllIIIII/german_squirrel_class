@@ -8,7 +8,7 @@
         /* All your great CSS goes here... */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); min-height: 100vh; color: #333; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; position: relative; } /* Added position:relative */
         .header { text-align: center; color: white; margin-bottom: 30px; }
         .header h1 { font-size: 2.5rem; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
         .case-board { background: rgba(255, 255, 255, 0.95); border-radius: 20px; padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); backdrop-filter: blur(10px); }
@@ -18,32 +18,20 @@
         .step { background: white; border-radius: 15px; padding: 25px; margin-bottom: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-left: 5px solid #3498db; transition: all 0.3s ease; }
         .step.active { opacity: 1; transform: scale(1.02); border-left-color: #e74c3c; }
         .step.completed { opacity: 1; border-left-color: #27ae60; background: linear-gradient(135deg, #d4edda, #c3e6cb); }
-        
-        /* -- NEW STYLE TO HIDE STEPS -- */
-        .step.step-hidden {
-            display: none;
-        }
-
-        .step-header { display: flex; align-items: center; margin-bottom: 20px; }
-        .step-number { background: #3498db; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 15px; }
+        .step.step-hidden { display: none; }
+        .step-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+        .step-title-group { display: flex; align-items: center; }
+        .step-number { background: #3498db; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 15px; flex-shrink: 0; }
         .step.active .step-number { background: #e74c3c; animation: pulse 2s infinite; }
         .step.completed .step-number { background: #27ae60; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
         .word-bubbles { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; min-height: 60px; padding: 15px; background: #f8f9fa; border-radius: 10px; border: 2px dashed #dee2e6; }
-        
-        /* Style for non-interactive sentence clues */
-        .clue-bubbles {
-             border-style: solid;
-             background: #e9ecef;
-        }
-        
+        .clue-bubbles { border-style: solid; background: #e9ecef; }
         .word-bubble { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 20px; border-radius: 25px; cursor: grab; user-select: none; font-weight: 500; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all 0.3s ease; position: relative; }
         .word-bubble.placeholder { background: #ced4da; color: #495057; cursor: not-allowed; }
         .word-bubble.clue { background: #adb5bd; color: #fff; cursor: default; }
-
         .word-bubble:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
         .word-bubble.placeholder:hover, .word-bubble.clue:hover { transform: none; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-
         .word-bubble:active { cursor: grabbing; transform: scale(0.95); }
         .drop-zone { min-width: 120px; min-height: 50px; border: 3px dashed #3498db; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; margin: 5px; padding: 10px; background: rgba(52, 152, 219, 0.1); transition: all 0.3s ease; position: relative; }
         .drop-zone.drag-over { border-color: #e74c3c; background: rgba(231, 76, 60, 0.2); transform: scale(1.05); }
@@ -51,7 +39,6 @@
         .investigation-text { font-style: italic; color: #666; margin: 15px 0; padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #3498db; }
         .formula { background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px; padding: 15px; margin: 10px 0; font-family: 'Courier New', monospace; font-weight: bold; }
         .formula-en { font-style: italic; color: #555; padding: 0 15px 15px 15px; background: #fff3cd; border: 1px solid #ffeaa7; border-top: none; border-radius: 0 0 8px 8px; margin-top: -11px; }
-
         .result { background: #d1ecf1; border: 1px solid #bee5eb; border-radius: 8px; padding: 15px; margin: 10px 0; font-weight: bold; color: #0c5460; }
         .next-button { background: linear-gradient(135deg, #27ae60, #2ecc71); color: white; border: none; padding: 15px 30px; border-radius: 25px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease; display: none; }
         .next-button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3); }
@@ -64,6 +51,57 @@
         .final-sentence { font-size: 1.8rem; font-weight: bold; background: rgba(255,255,255,0.2); padding: 20px; border-radius: 10px; margin: 20px 0; }
         .restart-button { background: white; color: #27ae60; border: 2px solid white; padding: 12px 25px; border-radius: 20px; cursor: pointer; font-weight: bold; transition: all 0.3s ease; }
         .restart-button:hover { background: transparent; color: white; }
+        
+        /* -- NEW -- Button for Cheat Sheet */
+        .cheat-sheet-button {
+            background: #ffc107;
+            border: none;
+            color: #333;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .cheat-sheet-button:hover {
+            background: #ffca2c;
+            transform: translateY(-1px);
+        }
+
+        /* -- NEW -- Cheat Sheet Box styles */
+        #cheat-sheet-box {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            width: 320px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 20px;
+            z-index: 1000;
+            border: 3px solid #ffc107;
+        }
+        #cheat-sheet-box h4 {
+            margin-bottom: 10px;
+            color: #1e3c72;
+            font-size: 1.1rem;
+        }
+        #cheat-sheet-box p {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            color: #666;
+            line-height: 1.4;
+        }
+        #cheat-sheet-box ul {
+            list-style: none;
+            padding-left: 0;
+            font-size: 0.9rem;
+        }
+        #cheat-sheet-box ul li {
+            margin-bottom: 8px;
+            color: #333;
+        }
     </style>
 </head>
 <body>
@@ -79,6 +117,24 @@
             <button class="restart-button" id="restart-button">Solve Another Case</button>
         </div>
     </div>
+    
+    <div id="cheat-sheet-box">
+        <h4>🚨 Condition Verb Cheat Sheet</h4>
+        <p>These Verbs are ALWAYS "conditions"! If you see one of these, the case is likely solved immediately.</p>
+        <ul>
+            <li>•&nbsp;<b>sein</b> (to be) -> Ich <b>bin</b> Student.</li>
+            <li>•&nbsp;<b>heißen</b> (to be called) -> Sie <b>heißt</b> Anna.</li>
+            <li>•&nbsp;<b>werden</b> (to become) -> Er <b>wird</b> Arzt.</li>
+            <li>•&nbsp;<b>bleiben</b> (to stay) -> Wir <b>bleiben</b> Freunde.</li>
+            <li>•&nbsp;<b>kommen</b> (to come) -> Ich <b>komme</b> aus Spanien.</li>
+            <li>•&nbsp;<b>wohnen / leben</b> (to live) -> Er <b>wohnt</b> in München.</li>
+            <li>•&nbsp;<b>gehen / laufen</b> (to go / run) -> Wir <b>gehen</b> ins Kino.</li>
+            <li>•&nbsp;<b>schlafen</b> (to sleep) -> Das Baby <b>schläft</b>.</li>
+            <li>•&nbsp;<b>warten</b> (to wait) -> Ich <b>warte</b> hier.</li>
+            <li>•&nbsp;<b>fahren</b> (to drive/go) -> Sie <b>fährt</b> mit dem Bus.</li>
+        </ul>
+    </div>
+
 
     <script>
         let caseFiles = [];
@@ -107,6 +163,9 @@
             currentCaseIndex = caseIndex;
             currentStepIndex = 0;
 
+            // -- NEW: Hide cheat sheet on new case load
+            document.getElementById('cheat-sheet-box').style.display = 'none';
+
             document.getElementById('case-title').innerHTML = caseData.caseTitle;
             document.getElementById('sentence-display').innerHTML = caseData.sentence.replace('___', '<span id="blank">___</span>');
             
@@ -119,14 +178,23 @@
             document.getElementById('final-result').classList.remove('show');
             document.querySelector('.case-board').style.display = 'block';
 
-            document.getElementById('step1').classList.add('active');
-            document.getElementById('step1').classList.remove('step-hidden'); // Make sure first step is visible
+            const firstStep = document.getElementById('step1');
+            firstStep.classList.add('active');
+            firstStep.classList.remove('step-hidden');
             initializeDragAndDrop();
+
+            // -- NEW: Add event listener for the new button
+            const cheatSheetBtn = document.getElementById('cheat-sheet-btn');
+            if (cheatSheetBtn) {
+                cheatSheetBtn.addEventListener('click', () => {
+                    const cheatSheetBox = document.getElementById('cheat-sheet-box');
+                    cheatSheetBox.style.display = 'block';
+                });
+            }
         }
 
         function createStepHTML(stepData, index, caseData) {
             const stepDiv = document.createElement('div');
-            // Add step-hidden class to all but the first step
             stepDiv.className = index > 0 ? 'step step-hidden' : 'step';
             stepDiv.id = `step${index + 1}`;
 
@@ -135,8 +203,12 @@
             let formulaEnHTML = stepData.formula_en ? `<div class="formula-en">${stepData.formula_en.replace('%VERB%', verb)}</div>` : '';
             let resultHTML = stepData.result ? `<div class="result">${stepData.result}</div>` : '';
             let sentenceClueHTML = '';
+            let cheatSheetButtonHTML = '';
 
-            // Add sentence context bubbles for steps that need it
+            if (index === 0) { // -- NEW: Add button only to Step 1
+                cheatSheetButtonHTML = `<button id="cheat-sheet-btn" class="cheat-sheet-button">CHEAT SHEET</button>`;
+            }
+
             if (stepData.displaySentence) {
                 sentenceClueHTML = `<div class="word-bubbles clue-bubbles">
                     ${caseData.words.map(word => `<div class="word-bubble clue">${word}</div>`).join('')}
@@ -147,7 +219,13 @@
             const nextButtonAction = index < caseData.steps.length - 1 ? `nextStep(${index + 2})` : 'solveCase()';
 
             stepDiv.innerHTML = `
-                <div class="step-header"><div class="step-number">${index + 1}</div><h3>${stepData.title}</h3></div>
+                <div class="step-header">
+                    <div class="step-title-group">
+                        <div class="step-number">${index + 1}</div>
+                        <h3>${stepData.title}</h3>
+                    </div>
+                    ${cheatSheetButtonHTML}
+                </div>
                 <p>${stepData.instruction}</p>
                 ${formulaHTML}
                 ${formulaEnHTML}
@@ -164,105 +242,21 @@
             });
             return stepDiv;
         }
-
-        function createWordBubble(text, isCorrect) {
-            const bubble = document.createElement('div');
-            bubble.className = 'word-bubble';
-            if (text === '___') {
-                bubble.classList.add('placeholder');
-                bubble.draggable = false;
-            } else {
-                bubble.draggable = true;
-            }
-            bubble.textContent = text;
-            bubble.dataset.answer = isCorrect ? text : 'incorrect';
-            return bubble;
-        }
-
-        function handleDrop(e) {
-            e.preventDefault();
-            e.target.classList.remove('drag-over');
-            const answer = e.dataTransfer.getData('text/plain');
-            const elementText = e.dataTransfer.getData('element');
-            const stepIndex = parseInt(e.target.dataset.step) - 1;
-            const target = e.target.dataset.target;
-
-            if (answer === 'incorrect') {
-                e.target.style.background = 'rgba(231, 76, 60, 0.3)';
-                setTimeout(() => { e.target.style.background = 'rgba(52, 152, 219, 0.1)'; }, 1000);
-                return;
-            }
-
-            e.target.textContent = elementText;
-            e.target.classList.add('filled');
-            e.target.style.background = 'rgba(39, 174, 96, 0.2)';
-            
-            const originalBubble = Array.from(e.target.closest('.step').querySelectorAll('.word-bubble')).find(bubble => bubble.textContent === elementText);
-            if (originalBubble) originalBubble.style.display = 'none';
-
-            const investigation = document.getElementById(`${target}-investigation`);
-            if (investigation) {
-                investigation.style.display = 'block';
-                investigation.style.animation = 'fadeIn 0.5s ease';
-            }
-            
-            const nextButton = e.target.closest('.step').querySelector('.next-button');
-            if (nextButton) nextButton.classList.add('show');
-            
-            // --- UNLOCK NEXT STEP ---
-            const nextStepElement = document.getElementById(`step${stepIndex + 2}`);
-            if (nextStepElement) {
-                nextStepElement.classList.remove('step-hidden');
-            }
-            // ------------------------
-
-            if (target === 'article') {
-                document.getElementById('blank').textContent = ` ${elementText} `;
-            }
-        }
         
-        function nextStep(step) {
-            document.getElementById(`step${currentStepIndex + 1}`).classList.remove('active');
-            document.getElementById(`step${currentStepIndex + 1}`).classList.add('completed');
-            currentStepIndex = step - 1;
-            const nextStepElement = document.getElementById(`step${step}`);
-            nextStepElement.classList.add('active');
-            nextStepElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
+        // All other Javascript functions (createWordBubble, handleDrop, nextStep, solveCase, etc.)
+        // remain the same as the previous version. They are pasted below for completeness.
 
-        function solveCase() {
-            document.getElementById(`step${currentStepIndex + 1}`).classList.remove('active');
-            document.getElementById(`step${currentStepIndex + 1}`).classList.add('completed');
-            const finalResult = document.getElementById('final-result');
-            document.getElementById('final-sentence').textContent = caseFiles[currentCaseIndex].fullSentence;
-            finalResult.classList.add('show');
-            finalResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-        
-        // ---UNCHANGED HELPER FUNCTIONS---
-        function initializeDragAndDrop() {
-            const bubbles = document.querySelectorAll('.word-bubble[draggable="true"]');
-            const dropZones = document.querySelectorAll('.drop-zone');
-            bubbles.forEach(bubble => {
-                bubble.addEventListener('dragstart', handleDragStart);
-                bubble.addEventListener('dragend', handleDragEnd);
-            });
-            dropZones.forEach(zone => {
-                zone.addEventListener('dragover', handleDragOver);
-                zone.addEventListener('drop', handleDrop);
-                zone.addEventListener('dragenter', handleDragEnter);
-                zone.addEventListener('dragleave', handleDragLeave);
-            });
-        }
+        function createWordBubble(text, isCorrect) { const bubble = document.createElement('div'); bubble.className = 'word-bubble'; if (text === '___') { bubble.classList.add('placeholder'); bubble.draggable = false; } else { bubble.draggable = true; } bubble.textContent = text; bubble.dataset.answer = isCorrect ? text : 'incorrect'; return bubble; }
+        function handleDrop(e) { e.preventDefault(); e.target.classList.remove('drag-over'); const answer = e.dataTransfer.getData('text/plain'); const elementText = e.dataTransfer.getData('element'); const stepIndex = parseInt(e.target.dataset.step) - 1; const target = e.target.dataset.target; if (answer === 'incorrect') { e.target.style.background = 'rgba(231, 76, 60, 0.3)'; setTimeout(() => { e.target.style.background = 'rgba(52, 152, 219, 0.1)'; }, 1000); return; } e.target.textContent = elementText; e.target.classList.add('filled'); e.target.style.background = 'rgba(39, 174, 96, 0.2)'; const originalBubble = Array.from(e.target.closest('.step').querySelectorAll('.word-bubble')).find(bubble => bubble.textContent === elementText); if (originalBubble) originalBubble.style.display = 'none'; const investigation = document.getElementById(`${target}-investigation`); if (investigation) { investigation.style.display = 'block'; investigation.style.animation = 'fadeIn 0.5s ease'; } const nextButton = e.target.closest('.step').querySelector('.next-button'); if (nextButton) nextButton.classList.add('show'); const nextStepElement = document.getElementById(`step${stepIndex + 2}`); if (nextStepElement) { nextStepElement.classList.remove('step-hidden'); } if (target === 'article') { document.getElementById('blank').textContent = ` ${elementText} `; } }
+        function nextStep(step) { document.getElementById(`step${currentStepIndex + 1}`).classList.remove('active'); document.getElementById(`step${currentStepIndex + 1}`).classList.add('completed'); currentStepIndex = step - 1; const nextStepElement = document.getElementById(`step${step}`); nextStepElement.classList.add('active'); nextStepElement.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+        function solveCase() { document.getElementById(`step${currentStepIndex + 1}`).classList.remove('active'); document.getElementById(`step${currentStepIndex + 1}`).classList.add('completed'); const finalResult = document.getElementById('final-result'); document.getElementById('final-sentence').textContent = caseFiles[currentCaseIndex].fullSentence; finalResult.classList.add('show'); finalResult.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+        function initializeDragAndDrop() { const bubbles = document.querySelectorAll('.word-bubble[draggable="true"]'); const dropZones = document.querySelectorAll('.drop-zone'); bubbles.forEach(bubble => { bubble.addEventListener('dragstart', handleDragStart); bubble.addEventListener('dragend', handleDragEnd); }); dropZones.forEach(zone => { zone.addEventListener('dragover', handleDragOver); zone.addEventListener('drop', handleDrop); zone.addEventListener('dragenter', handleDragEnter); zone.addEventListener('dragleave', handleDragLeave); }); }
         function handleDragStart(e) { e.dataTransfer.setData('text/plain', e.target.dataset.answer); e.dataTransfer.setData('element', e.target.textContent); e.target.style.opacity = '0.5'; }
         function handleDragEnd(e) { e.target.style.opacity = '1'; }
         function handleDragOver(e) { e.preventDefault(); }
         function handleDragEnter(e) { e.preventDefault(); e.target.classList.add('drag-over'); }
         function handleDragLeave(e) { e.target.classList.remove('drag-over'); }
-        const style = document.createElement('style');
-        style.textContent = `@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }`;
-        document.head.appendChild(style);
-
+        const style = document.createElement('style'); style.textContent = `@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }`; document.head.appendChild(style);
     </script>
 </body>
 </html>
