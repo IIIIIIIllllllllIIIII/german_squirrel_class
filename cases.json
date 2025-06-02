@@ -2,6 +2,7 @@
     {
         "caseTitle": "🕵️ THE CASE: 'I have a brother!'",
         "sentence": "Ich habe ___ Bruder.",
+        "sentence_en": "I have a brother.",
         "correctArticle": "einen",
         "fullSentence": "Ich habe einen Bruder.",
         "words": ["Ich", "habe", "___", "Bruder."],
@@ -51,6 +52,7 @@
     {
         "caseTitle": "🕵️ THE CASE: 'The student buys a pen.'",
         "sentence": "Der Schüler kauft ___ Stift.",
+        "sentence_en": "The student buys a pen.",
         "correctArticle": "einen",
         "fullSentence": "Der Schüler kauft einen Stift.",
         "words": ["Der Schüler", "kauft", "___", "Stift."],
