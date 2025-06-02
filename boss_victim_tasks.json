@@ -1,291 +1,77 @@
 [
   {
     "id": "bv1",
-    "sentence_de_parts": ["Ich", "habe", "Bruder"], 
-    "sentence_for_article_step": "Ich habe ___ Bruder.", 
+    "sentence_de_full_for_display": "Ich habe ___ Bruder.", // Sentence shown to user with a blank for the article
+    "sentence_de_parts": ["Ich", "habe", "Bruder"],        // Words for creating clickable/draggable bubbles
     "translations": {
       "en": "I have a brother.",
       "es": "Tengo un hermano."
     },
     "verb_info": {
-      "verb_in_sentence": "habe", 
+      "verb_form_in_sentence": "habe", // The exact verb form in the sentence
       "infinitive": "haben",
-      "type": "Action" 
+      "type": "Action" // "Action" or "Condition"
     },
-    "boss_identification_word": "Ich",
-    "victim_identification_word": "Bruder",
-    "target_for_blank_info": {
-        "role_in_sentence": "Victim",
-        "word_stem_in_blank": "Bruder", 
-        "gender": "maskulin",
-        "nominativ_article_example": "der", 
-        "case_needed": "Akkusativ",
-        "correct_article_for_blank": "einen", 
-        "article_options": ["ein", "eine", "einen", "einem"] 
+    "boss_info": {
+      "word_in_sentence": "Ich" // The exact word(s) in the sentence that is the Boss
     },
-    "full_correct_sentence_de": "Ich habe einen Bruder.",
-    "explanation_full_de": "VERB: 'haben' ist ACTION. BOSS: 'Wer oder was hat?' -> 'Ich' (Nominativ). VICTIM: 'Wen oder was habe ich?' -> 'Bruder' (Akkusativ). 'der Bruder' (maskulin) im Akkusativ mit unbestimmtem Artikel ist 'einen Bruder'."
+    "victim_info": { // This field will be null if verb_info.type is "Condition" and the blank isn't for a predicate nominative
+      "word_in_sentence": "Bruder", // The exact word(s) in the sentence that is the Victim (noun stem)
+      "gender": "maskulin",          // Gender of the victim noun
+      "article_nominativ": "der"     // Nominative definite article of the victim noun
+    },
+    "blank_target_role": "Victim", // What the blank represents: "Boss", "Victim", or "PredicateNominative"
+    "correct_article_for_blank": "einen", // The single correct article word for the blank
+    "article_options": ["ein", "eine", "einen", "einem"], // Options for the final article choice step
+    "final_explanation_de": "VERB: 'haben' ist ACTION. BOSS: 'Wer oder was hat?' -> 'Ich' (Nominativ). VICTIM: 'Wen oder was habe ich?' -> 'Bruder' (Akkusativ). 'der Bruder' (maskulin) im Akkusativ mit unbestimmtem Artikel wird zu 'einen Bruder'.",
+    "full_correct_sentence_with_article": "Ich habe einen Bruder."
   },
   {
     "id": "bv2",
+    "sentence_de_full_for_display": "___ Baby schläft.",
     "sentence_de_parts": ["Baby", "schläft"], 
-    "sentence_for_article_step": "___ Baby schläft.", 
-    "translations": {
-      "en": "The baby sleeps.",
-      "es": "El bebé duerme."
-    },
-    "verb_info": {
-      "verb_in_sentence": "schläft",
-      "infinitive": "schlafen",
-      "type": "Condition"
-    },
-    "boss_identification_word": "Baby",
-    "victim_identification_word": null,
-    "target_for_blank_info": {
-        "role_in_sentence": "Boss",
-        "word_stem_in_blank": "Baby",
-        "gender": "neutrum",
-        "nominativ_article_example": "das",
-        "case_needed": "Nominativ",
-        "correct_article_for_blank": "Das",
-        "article_options": ["Das", "Den", "Dem", "Die"]
-    },
-    "full_correct_sentence_de": "Das Baby schläft.",
-    "explanation_full_de": "VERB: 'schlafen' ist KONDITION (Cheat Sheet!). Es gibt nur einen BOSS. BOSS: 'Wer oder was schläft?' -> 'Baby'. 'das Baby' (neutrum) im Nominativ ist 'Das Baby'."
+    "translations": { "en": "The baby sleeps.", "es": "El bebé duerme." },
+    "verb_info": { "verb_form_in_sentence": "schläft", "infinitive": "schlafen", "type": "Condition" },
+    "boss_info": { "word_in_sentence": "Baby" },
+    "victim_info": null,
+    "blank_target_role": "Boss",
+    "correct_article_for_blank": "Das",
+    "article_options": ["Das", "Den", "Dem", "Die"],
+    "final_explanation_de": "VERB: 'schlafen' ist KONDITION (Cheat Sheet!). Nur BOSS. BOSS: 'Wer oder was schläft?' -> 'Baby' (Nominativ). 'das Baby' (neutrum) im Nominativ ist 'Das Baby'.",
+    "full_correct_sentence_with_article": "Das Baby schläft."
   },
   {
     "id": "bv3",
+    "sentence_de_full_for_display": "Die Katze trinkt ___ Milch.",
     "sentence_de_parts": ["Die Katze", "trinkt", "Milch"],
-    "sentence_for_article_step": "Die Katze trinkt ___ Milch.",
-    "translations": {
-        "en": "The cat drinks the milk.",
-        "es": "El gato bebe la leche."
-    },
-    "verb_info": {
-        "verb_in_sentence": "trinkt",
-        "infinitive": "trinken",
-        "type": "Action"
-    },
-    "boss_identification_word": "Die Katze",
-    "victim_identification_word": "Milch",
-    "target_for_blank_info": {
-        "role_in_sentence": "Victim",
-        "word_stem_in_blank": "Milch",
-        "gender": "feminin",
-        "nominativ_article_example": "die",
-        "case_needed": "Akkusativ",
-        "correct_article_for_blank": "die",
-        "article_options": ["die", "der", "das"]
-    },
-    "full_correct_sentence_de": "Die Katze trinkt die Milch.",
-    "explanation_full_de": "VERB: 'trinken' ist ACTION. BOSS: 'Wer oder was trinkt?' -> 'Die Katze' (Nominativ). VICTIM: 'Wen oder was trinkt die Katze?' -> 'Milch' (Akkusativ). 'die Milch' (feminin) Akkusativ => 'die Milch'."
+    "translations": { "en": "The cat drinks the milk.", "es": "El gato bebe la leche." },
+    "verb_info": { "verb_form_in_sentence": "trinkt", "infinitive": "trinken", "type": "Action" },
+    "boss_info": { "word_in_sentence": "Die Katze" },
+    "victim_info": { "word_in_sentence": "Milch", "gender": "feminin", "article_nominativ": "die" },
+    "blank_target_role": "Victim",
+    "correct_article_for_blank": "die",
+    "article_options": ["die", "der", "das", "den"],
+    "final_explanation_de": "VERB: 'trinken' ist ACTION. BOSS: 'Wer oder was trinkt?' -> 'Die Katze'. VICTIM: 'Wen oder was trinkt die Katze?' -> 'Milch'. 'die Milch' (feminin) im Akkusativ bleibt 'die Milch'.",
+    "full_correct_sentence_with_article": "Die Katze trinkt die Milch."
   },
   {
     "id": "bv4",
+    "sentence_de_full_for_display": "Er ist ___ guter Freund.",
     "sentence_de_parts": ["Er", "ist", "guter Freund"],
-    "sentence_for_article_step": "Er ist ___ guter Freund.",
-    "translations": {
-      "en": "He is a good friend.",
-      "es": "Él es un buen amigo."
-    },
-    "verb_info": {
-      "verb_in_sentence": "ist",
-      "infinitive": "sein",
-      "type": "Condition"
-    },
-    "boss_identification_word": "Er",
-    "victim_identification_word": null, // Or "guter Freund" if identifying predicate nominative
-    "target_for_blank_info": {
-        "role_in_sentence": "PredicateNominative",
-        "word_stem_in_blank": "guter Freund", 
+    "translations": { "en": "He is a good friend.", "es": "Él es un buen amigo." },
+    "verb_info": { "verb_form_in_sentence": "ist", "infinitive": "sein", "type": "Condition" },
+    "boss_info": { "word_in_sentence": "Er" },
+    "victim_info": null, // Or treat Predicate Nominative info here
+    "blank_target_role": "PredicateNominative", // Special role for 'sein', etc.
+    "target_noun_predicate_info": { // Specific info for predicate nominative
+        "word_in_sentence": "guter Freund",
         "gender": "maskulin",
-        "nominativ_article_example": "ein", 
-        "case_needed": "Nominativ",
-        "correct_article_for_blank": "ein",
-        "article_options": ["ein", "einen", "einem"]
+        "article_nominativ": "ein"
     },
-    "full_correct_sentence_de": "Er ist ein guter Freund.",
-    "explanation_full_de": "VERB: 'sein' ist KONDITION. Nur BOSS und Prädikatsnomen (Nominativ). BOSS: 'Er'. PRÄDIKATSNOMEN: 'guter Freund'. 'ein guter Freund' (maskulin) im Nominativ ist 'ein guter Freund'."
-  },
-  {
-    "id": "bv5",
-    "sentence_de_parts": ["Wir", "sehen", "Film"],
-    "sentence_for_article_step": "Wir sehen ___ Film.",
-    "translations": {
-      "en": "We watch a movie.",
-      "es": "Vemos una película."
-    },
-    "verb_info": {
-      "verb_in_sentence": "sehen",
-      "infinitive": "sehen",
-      "type": "Action"
-    },
-    "boss_identification_word": "Wir",
-    "victim_identification_word": "Film",
-    "target_for_blank_info": {
-        "role_in_sentence": "Victim",
-        "word_stem_in_blank": "Film",
-        "gender": "maskulin",
-        "nominativ_article_example": "der",
-        "case_needed": "Akkusativ",
-        "correct_article_for_blank": "einen",
-        "article_options": ["ein", "einen", "einem", "den"]
-    },
-    "full_correct_sentence_de": "Wir sehen einen Film.",
-    "explanation_full_de": "VERB: 'sehen' ist ACTION. BOSS: 'Wer oder was sieht?' -> 'Wir'. VICTIM: 'Wen oder was sehen wir?' -> 'Film'. 'der Film' (maskulin) Akkusativ => 'einen Film'."
-  },
-  {
-    "id": "bv6",
-    "sentence_de_parts": ["Lehrerin", "hilft", "Studenten"],
-    "sentence_for_article_step": "___ Lehrerin hilft ___ Studenten.", // Multiple blanks are harder, let's simplify
-                                                                   // For now, assume one blank per task in this mode.
-                                                                   // Let's make the blank for "Studenten".
-    "sentence_for_article_step": "Die Lehrerin hilft ___ Studenten.",
-    "translations": {
-      "en": "The teacher helps the student.", // Assuming singular student for simplicity of article
-      "es": "La profesora ayuda al estudiante."
-    },
-    "verb_info": {
-      "verb_in_sentence": "hilft",
-      "infinitive": "helfen",
-      "type": "Action" // Helfen takes Dativ, which is not covered by Boss/Victim. This needs adjustment or removal.
-                      // The "Boss & Victim" method is specifically for NOM & AKK.
-                      // I should remove this example or change it to an Akkusativ verb.
-                      // Let's change to an Akkusativ verb.
-    },
-    // REVISED BV6
-    "id": "bv6_revised",
-    "sentence_de_parts": ["Die Lehrerin", "fragt", "Schüler"],
-    "sentence_for_article_step": "Die Lehrerin fragt ___ Schüler.",
-    "translations": {
-      "en": "The teacher asks the pupil.",
-      "es": "La profesora pregunta al alumno."
-    },
-    "verb_info": {
-      "verb_in_sentence": "fragt",
-      "infinitive": "fragen",
-      "type": "Action"
-    },
-    "boss_identification_word": "Die Lehrerin",
-    "victim_identification_word": "Schüler",
-    "target_for_blank_info": {
-        "role_in_sentence": "Victim",
-        "word_stem_in_blank": "Schüler",
-        "gender": "maskulin",
-        "nominativ_article_example": "der",
-        "case_needed": "Akkusativ",
-        "correct_article_for_blank": "den",
-        "article_options": ["den", "dem", "der", "des"]
-    },
-    "full_correct_sentence_de": "Die Lehrerin fragt den Schüler.",
-    "explanation_full_de": "VERB: 'fragen' ist ACTION. BOSS: 'Wer oder was fragt?' -> 'Die Lehrerin'. VICTIM: 'Wen oder was fragt die Lehrerin?' -> 'Schüler'. 'der Schüler' (maskulin) Akkusativ => 'den Schüler'."
-  },
-  {
-    "id": "bv7",
-    "sentence_de_parts": ["Das Mädchen", "malt", "Bild"],
-    "sentence_for_article_step": "Das Mädchen malt ___ Bild.",
-    "translations": {
-      "en": "The girl paints a picture.",
-      "es": "La niña pinta un cuadro."
-    },
-    "verb_info": {
-      "verb_in_sentence": "malt",
-      "infinitive": "malen",
-      "type": "Action"
-    },
-    "boss_identification_word": "Das Mädchen",
-    "victim_identification_word": "Bild",
-    "target_for_blank_info": {
-        "role_in_sentence": "Victim",
-        "word_stem_in_blank": "Bild",
-        "gender": "neutrum",
-        "nominativ_article_example": "das",
-        "case_needed": "Akkusativ",
-        "correct_article_for_blank": "ein",
-        "article_options": ["ein", "einen", "einem", "das"]
-    },
-    "full_correct_sentence_de": "Das Mädchen malt ein Bild.",
-    "explanation_full_de": "VERB: 'malen' ist ACTION. BOSS: 'Wer oder was malt?' -> 'Das Mädchen'. VICTIM: 'Wen oder was malt das Mädchen?' -> 'Bild'. 'das Bild' (neutrum) Akkusativ unbestimmt => 'ein Bild'."
-  },
-  {
-    "id": "bv8",
-    "sentence_de_parts": ["Auto", "ist", "schnell"],
-    "sentence_for_article_step": "___ Auto ist schnell.",
-    "translations": {
-      "en": "The car is fast.",
-      "es": "El coche es rápido."
-    },
-    "verb_info": {
-      "verb_in_sentence": "ist",
-      "infinitive": "sein",
-      "type": "Condition"
-    },
-    "boss_identification_word": "Auto", 
-    "victim_identification_word": null,
-    "target_for_blank_info": {
-        "role_in_sentence": "Boss",
-        "word_stem_in_blank": "Auto",
-        "gender": "neutrum",
-        "nominativ_article_example": "das",
-        "case_needed": "Nominativ",
-        "correct_article_for_blank": "Das",
-        "article_options": ["Das", "Den", "Dem"]
-    },
-    "full_correct_sentence_de": "Das Auto ist schnell.",
-    "explanation_full_de": "VERB: 'sein' ist KONDITION. Nur BOSS. BOSS: 'Wer oder was ist schnell?' -> 'Auto'. 'das Auto' (neutrum) im Nominativ ist 'Das Auto'."
-  },
-  {
-    "id": "bv9",
-    "sentence_de_parts": ["Der Mann", "liest", "Zeitung"],
-    "sentence_for_article_step": "Der Mann liest ___ Zeitung.",
-    "translations": {
-      "en": "The man reads a newspaper.",
-      "es": "El hombre lee un periódico."
-    },
-    "verb_info": {
-      "verb_in_sentence": "liest",
-      "infinitive": "lesen",
-      "type": "Action"
-    },
-    "boss_identification_word": "Der Mann",
-    "victim_identification_word": "Zeitung",
-    "target_for_blank_info": {
-        "role_in_sentence": "Victim",
-        "word_stem_in_blank": "Zeitung",
-        "gender": "feminin",
-        "nominativ_article_example": "die",
-        "case_needed": "Akkusativ",
-        "correct_article_for_blank": "eine",
-        "article_options": ["eine", "einer", "ein", "die"]
-    },
-    "full_correct_sentence_de": "Der Mann liest eine Zeitung.",
-    "explanation_full_de": "VERB: 'lesen' ist ACTION. BOSS: 'Der Mann'. VICTIM: 'Zeitung'. 'die Zeitung' (feminin) Akkusativ unbestimmt => 'eine Zeitung'."
-  },
-  {
-    "id": "bv10",
-    "sentence_de_parts": ["Freunde", "kommen", "spät"],
-    "sentence_for_article_step": "___ Freunde kommen spät.",
-    "translations": {
-      "en": "The friends arrive late.",
-      "es": "Los amigos llegan tarde."
-    },
-    "verb_info": {
-      "verb_in_sentence": "kommen",
-      "infinitive": "kommen",
-      "type": "Condition" // 'kommen' is on the cheat sheet as condition
-    },
-    "boss_identification_word": "Freunde",
-    "victim_identification_word": null,
-    "target_for_blank_info": {
-        "role_in_sentence": "Boss",
-        "word_stem_in_blank": "Freunde",
-        "gender": "plural", // Assuming "die Freunde"
-        "nominativ_article_example": "die",
-        "case_needed": "Nominativ",
-        "correct_article_for_blank": "Die",
-        "article_options": ["Die", "Den", "Der"]
-    },
-    "full_correct_sentence_de": "Die Freunde kommen spät.",
-    "explanation_full_de": "VERB: 'kommen' ist KONDITION. Nur BOSS. BOSS: 'Wer oder was kommt spät?' -> 'Freunde'. 'die Freunde' (plural) im Nominativ ist 'Die Freunde'."
+    "correct_article_for_blank": "ein",
+    "article_options": ["ein", "einen", "einem"],
+    "final_explanation_de": "VERB: 'sein' ist KONDITION. BOSS: 'Er'. Das Nomen nach 'sein', das den Boss beschreibt (Prädikatsnomen), steht auch im Nominativ. 'guter Freund' (maskulin) -> 'ein guter Freund'.",
+    "full_correct_sentence_with_article": "Er ist ein guter Freund."
   }
+  // Add many more tasks (around 50 as requested)
 ]
