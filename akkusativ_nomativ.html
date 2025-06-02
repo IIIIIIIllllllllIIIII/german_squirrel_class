@@ -17,13 +17,7 @@
         .sentence-display { font-size: 1.5rem; font-weight: bold; background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; margin-top: 15px; }
         .step { background: white; border-radius: 15px; padding: 25px; margin-bottom: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-left: 5px solid #3498db; transition: all 0.3s ease; }
         .step.active { opacity: 1; transform: scale(1.02); border-left-color: #e74c3c; }
-        
-        /* MODIFIED: Completed steps are now fully visible with a green background */
-        .step.completed {
-            border-left-color: var(--completed-green);
-            background: linear-gradient(135deg, #d4edda, #e2f0d6);
-        }
-        
+        .step.completed { border-left-color: var(--completed-green); background: linear-gradient(135deg, #d4edda, #e2f0d6); }
         .step.step-hidden { display: none; }
         .step-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
         .step-title-group { display: flex; align-items: center; }
@@ -54,11 +48,18 @@
         .cheat-sheet-button { background: var(--accent-color); border: none; color: #333; font-weight: bold; padding: 8px 15px; border-radius: 20px; cursor: pointer; transition: all 0.2s ease; }
         .cheat-sheet-button:hover { background: #ffca2c; transform: translateY(-1px); }
         .link-like { color: #007bff; text-decoration: underline; cursor: pointer; }
+        
+        /* Cheat Sheet Styles */
         #cheat-sheet-box { display: none; position: fixed; top: 100px; right: 20px; width: 340px; background: #fff; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); padding: 20px; z-index: 1000; border: 3px solid var(--accent-color); }
         #cheat-sheet-box h4 { margin: 0; }
         #cheat-sheet-box p { font-size: 0.9rem; margin-bottom: 15px; color: #666; line-height: 1.4; }
         #cheat-sheet-box ul { list-style: none; padding-left: 0; font-size: 0.85rem; }
-        #cheat-sheet-box ul li { margin-bottom: 6px; color: #333; line-height: 1.3; }
+        #cheat-sheet-box ul li { margin-bottom: 8px; color: #333; line-height: 1.3; }
+        #cheat-sheet-box .legend-item { padding: 2px 8px; border-radius: 4px; color: #333; font-weight: bold; }
+        #cheat-sheet-box .cs-subject { background-color: #ffcccc; } /* Red */
+        #cheat-sheet-box .cs-verb { background-color: #cce5ff; }    /* Blue */
+        #cheat-sheet-box .cs-nominativ { background-color: #d4edda; } /* Green */
+
         .verb-focus { text-align: center; padding: 20px; background: #f8f9fa; border-radius: 10px; margin: 20px 0; border: 1px solid #e9ecef;}
         .verb-focus .word-bubble { display: inline-block; margin-bottom: 15px; transform: scale(1.1); }
         .verb-focus .verb-info { line-height: 1.6; }
@@ -90,20 +91,29 @@
     
     <div id="cheat-sheet-box">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-            <h4 style="margin: 0;">🚨 CONDITION VERBS = NOMINATIV!</h4>
+            <h4 style="margin: 0;">🚨 Condition Verbs Rule</h4>
             <button id="close-cheat-sheet" style="background: #ff6b6b; border: none; color: white; width: 25px; height: 25px; border-radius: 50%; cursor: pointer; font-weight: bold;">×</button>
         </div>
-        <p>If you see these verbs, the word after them is ALWAYS Nominativ! These verbs describe what someone IS, not what they DO.</p>
+        <p>Condition verbs describe what someone <b>IS</b>. They don't have a "victim" (Accusative). Instead, both parts of the sentence are Nominative.</p>
+        
+        <div style="margin: 10px 0; font-size: 0.8rem; display: flex; gap: 10px;">
+            <span class="legend-item cs-subject">SUBJECT 🔴</span>
+            <span class="legend-item cs-verb">VERB 🔵</span>
+            <span class="legend-item cs-nominativ">NOMINATIV 🟢</span>
+        </div>
+        
         <ul>
-            <li>•&nbsp;<b>sein</b> (to be) → Ich <b>bin</b> deine Mutter.</li>
-            <li>•&nbsp;<b>heißen</b> (to be called) → Sie <b>heißt</b> Anna Schmidt.</li>
-            <li>•&nbsp;<b>werden</b> (to become) → Er <b>wird</b> ein guter Arzt.</li>
-            <li>•&nbsp;<b>bleiben</b> (to stay) → Wir <b>bleiben</b> beste Freunde.</li>
+            <li>•&nbsp;<b>sein</b> (to be) → <span class="cs-subject">Ich</span> <span class="cs-verb"><b>bin</b></span> <span class="cs-nominativ">deine Mutter</span>.</li>
+            <li>•&nbsp;<b>heißen</b> (to be called) → <span class="cs-subject">Sie</span> <span class="cs-verb"><b>heißt</b></span> <span class="cs-nominativ">Anna Schmidt</span>.</li>
+            <li>•&nbsp;<b>werden</b> (to become) → <span class="cs-subject">Er</span> <span class="cs-verb"><b>wird</b></span> <span class="cs-nominativ">ein guter Arzt</span>.</li>
+            <li>•&nbsp;<b>bleiben</b> (to stay) → <span class="cs-subject">Wir</span> <span class="cs-verb"><b>bleiben</b></span> <span class="cs-nominativ">beste Freunde</span>.</li>
         </ul>
     </div>
 
 
     <script>
+        // The JavaScript does not need any changes from the previous version.
+        // All functions remain the same.
         let caseFiles = [];
         let currentStepIndex = 0;
         let currentCaseIndex = 0;
@@ -188,7 +198,7 @@
             }
             // Step 4: Choose the Case
             if (index === 3) {
-                instructionText = stepData.instruction
+                 instructionText = stepData.instruction
                     .replace('%VERB%', verb)
                     .replace('%INFINITIVE%', infinitive)
                     .replace('%BOSS%', boss)
