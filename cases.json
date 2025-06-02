@@ -4,21 +4,24 @@
         "sentence": "Ich habe ___ Bruder.",
         "correctArticle": "einen",
         "fullSentence": "Ich habe einen Bruder.",
+        "words": ["Ich", "habe", "___", "Bruder."],
         "steps": [
             {
                 "target": "verb",
                 "title": "🎯 Find the Verb!",
-                "instruction": "Find the verb in the sentence. Decide: Is it a 'Condition' or an 'Action'?",
-                "bubbles": ["habe", "Ich", "Bruder"],
+                "instruction": "Identify the verb in the sentence below and pull it to the answer box!",
+                "bubbles": ["Ich", "habe", "___", "Bruder."],
                 "correctAnswer": "habe",
                 "investigation": "<strong>Investigation:</strong> 'habe' comes from 'haben' (to have). This is not a condition verb, so it's an <strong>ACTION</strong>!"
             },
             {
                 "target": "boss",
                 "title": "👑 Find the BOSS!",
-                "instruction": "To find the boss of the sentence, use this question:",
-                "formula": "'Wer oder was?' + habe?",
-                "bubbles": ["Ich", "habe", "Bruder"],
+                "instruction": "Who or what is performing the action?",
+                "formula": "'Wer oder was?' + '%VERB%'?",
+                "formula_en": "'Who or what?' + '%VERB%'? Who or what is doing the thing?",
+                "displaySentence": true,
+                "bubbles": ["Ich", "Bruder."],
                 "correctAnswer": "Ich",
                 "investigation": "<strong>Investigation:</strong> 'Wer oder was habe?' → 'Ich' (I). The BOSS is always <strong>Nominative</strong>!"
             },
@@ -26,9 +29,9 @@
                 "target": "victim",
                 "title": "🎯 Find the VICTIM!",
                 "instruction": "To find the victim of the action, use this question:",
-                "formula": "'Wen oder was?' + habe + ich?",
-                "bubbles": ["Bruder", "Ich", "habe"],
-                "correctAnswer": "Bruder",
+                "formula": "'Wen oder was?' + '%VERB%' + ' ich?",
+                "bubbles": ["Bruder.", "Ich"],
+                "correctAnswer": "Bruder.",
                 "investigation": "<strong>Investigation:</strong> 'Wen oder was habe ich?' → 'Bruder' (brother). This is our <strong>VICTIM</strong>!"
             },
             {
@@ -47,12 +50,13 @@
         "sentence": "Der Hund hilft ___ Mann.",
         "correctArticle": "dem",
         "fullSentence": "Der Hund hilft dem Mann.",
+        "words": ["Der Hund", "hilft", "___", "Mann."],
         "steps": [
             {
                 "target": "verb",
                 "title": "🎯 Find the Verb!",
-                "instruction": "Find the verb in the sentence.",
-                "bubbles": ["hilft", "Hund", "Mann"],
+                "instruction": "Identify the verb in the sentence below and pull it to the answer box!",
+                "bubbles": ["Der Hund", "hilft", "___", "Mann."],
                 "correctAnswer": "hilft",
                 "investigation": "<strong>Investigation:</strong> The verb is 'hilft' (from 'helfen' - to help). This verb commonly takes a Dative object."
             },
@@ -60,8 +64,10 @@
                 "target": "boss",
                 "title": "👑 Find the BOSS!",
                 "instruction": "Who or what is performing the action?",
-                "formula": "'Wer oder was?' + hilft?",
-                "bubbles": ["Der Hund", "hilft", "Mann"],
+                "formula": "'Wer oder was?' + '%VERB%'?",
+                "formula_en": "'Who or what?' + '%VERB%'? Who or what is doing the thing?",
+                "displaySentence": true,
+                "bubbles": ["Der Hund", "Mann."],
                 "correctAnswer": "Der Hund",
                 "investigation": "<strong>Investigation:</strong> 'Wer oder was hilft?' → 'Der Hund' (The dog). The BOSS is <strong>Nominative</strong>!"
             },
@@ -69,9 +75,10 @@
                 "target": "dative",
                 "title": "🤝 Find the 'Helper' Object!",
                 "instruction": "Some verbs need a 'helper' or 'receiver' of the action. To find this Dative object, ask:",
-                "formula": "'Wem?' + hilft der Hund?",
-                "bubbles": ["Mann", "Hund", "hilft"],
-                "correctAnswer": "Mann",
+                "formula": "'Wem?' + '%VERB%' der Hund?",
+                "formula_en": "'To whom?' + ' does the dog %VERB%'?",
+                "bubbles": ["Mann.", "Der Hund"],
+                "correctAnswer": "Mann.",
                 "investigation": "<strong>Investigation:</strong> 'Wem hilft der Hund?' → 'Mann' (man). The object receiving the help is in the <strong>DATIVE</strong> case!"
             },
             {
