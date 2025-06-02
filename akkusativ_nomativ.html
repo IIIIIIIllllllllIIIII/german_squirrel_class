@@ -227,13 +227,13 @@
                     .replace('%INFINITIVE%', infinitive)
                     .replace('%BOSS%', boss);
 
-                if (caseData.predicate_nominative_noun) { // Nominative Case
+                if (caseData.predicate_nominative_noun) { 
                     instructionText = instructionText
-                        .replace(/%PREDICATE_NOMINATIVE_NOUN%/g, caseData.predicate_nominative_noun) // Use global replace
+                        .replace(/%PREDICATE_NOMINATIVE_NOUN%/g, caseData.predicate_nominative_noun) // Fixed: Use global replace
                         .replace('%PREDICATE_NOMINATIVE_GENDER%', caseData.predicate_nominative_gender);
-                } else if (caseData.victim_noun) { // Accusative Case
+                } else if (caseData.victim_noun) { 
                      instructionText = instructionText
-                        .replace(/%VICTIM_NOUN%/g, caseData.victim_noun) // Use global replace
+                        .replace(/%VICTIM_NOUN%/g, caseData.victim_noun) // Fixed: Use global replace
                         .replace('%VICTIM_GENDER%', caseData.victim_gender);
                 }
                 
@@ -261,122 +261,14 @@
             return stepDiv;
         }
 
-        function createWordBubble(text, correctAnswerForStep) {
-            const bubble = document.createElement('div');
-            bubble.className = 'word-bubble';
-            if (text === '___' && correctAnswerForStep !== '___') {
-                bubble.classList.add('placeholder');
-            }
-            bubble.textContent = text;
-            bubble.dataset.value = text;
-            return bubble;
-        }
-
-        function handleChoiceBubbleClick(clickedBubbleEl) {
-            const stepEl = clickedBubbleEl.closest('.step');
-            const stepIndex = parseInt(stepEl.id.replace('step', '')) - 1;
-            const targetType = caseFiles[currentCaseIndex].steps[stepIndex].target;
-            const answerBox = stepEl.querySelector(`.answer-box[data-step-target="${targetType}"], .article-answer-box`);
-
-
-            if (!answerBox) { console.error("Answer box not found for step", stepEl, "target", targetType); return; }
-
-            if (answerBox.children.length > 0 && answerBox.children[0] !== clickedBubbleEl) {
-                returnSelectedBubbleToChoices(answerBox.children[0]);
-            }
-            if (clickedBubbleEl.parentElement !== answerBox) {
-                answerBox.appendChild(clickedBubbleEl);
-            }
-        }
-
-        function returnSelectedBubbleToChoices(bubbleInAnswerBox) {
-            const stepEl = bubbleInAnswerBox.closest('.step');
-            if (!stepEl) return;
-            const wordBubblesContainer = stepEl.querySelector('.word-bubbles');
-            if (wordBubblesContainer) {
-                 wordBubblesContainer.appendChild(bubbleInAnswerBox);
-            }
-        }
-
-        function handleGoClick(goButton) {
-            const stepEl = goButton.closest('.step');
-            const stepIndex = parseInt(stepEl.id.replace('step', '')) - 1;
-            const targetType = caseFiles[currentCaseIndex].steps[stepIndex].target;
-            const answerBox = stepEl.querySelector(`.answer-box[data-step-target="${targetType}"], .article-answer-box`);
-            const answerBubble = answerBox ? answerBox.querySelector('.word-bubble') : null;
-
-            if (!answerBubble) {
-                if(answerBox) {
-                    answerBox.classList.add('shake');
-                    setTimeout(() => answerBox.classList.remove('shake'), 820);
-                }
-                return; 
-            }
-
-            const caseData = caseFiles[currentCaseIndex];
-            const stepData = caseData.steps[stepIndex];
-            const selectedAnswerValue = answerBubble.dataset.value;
-            const isCorrect = selectedAnswerValue === stepData.correctAnswer;
-            
-            const investigationEl = stepEl.querySelector('.investigation-text');
-            if (isCorrect) {
-                goButton.disabled = true;
-                stepEl.classList.add('step-answered'); 
-
-                let investigationText = stepData.investigation
-                    .replace('%ANSWER%', stepData.correctAnswer) 
-                    .replace('%ANSWER_EN%', stepData.correctAnswer_en); 
-                investigationEl.innerHTML = investigationText;
-                investigationEl.style.display = 'block';
-                
-                if (targetType === 'verb') { 
-                    const cheatLink = investigationEl.querySelector('#open-cheat-sheet-link');
-                    if(cheatLink) cheatLink.addEventListener('click', () => document.getElementById('cheat-sheet-box').style.display = 'block' );
-                }
-                if (targetType === 'article') { 
-                    document.getElementById('blank').textContent = ` ${answerBubble.textContent} `;
-                }
-
-                const isLastStep = stepIndex === caseData.steps.length - 1;
-                setTimeout(() => {
-                    if (isLastStep) { solveCase(); } 
-                    else { nextStep(stepIndex + 2); }
-                }, 1500);
-
-            } else {
-                answerBox.classList.add('shake');
-                setTimeout(() => {
-                    answerBox.classList.remove('shake');
-                    if (answerBubble) returnSelectedBubbleToChoices(answerBubble); 
-                }, 820);
-            }
-        }
-        
-        function nextStep(stepNum) { 
-            const currentStepEl = document.getElementById(`step${currentStepIndex + 1}`); 
-            if(currentStepEl) { 
-                currentStepEl.classList.remove('active'); 
-                currentStepEl.classList.add('completed'); 
-            } 
-            currentStepIndex = stepNum - 1; 
-            const nextStepElement = document.getElementById(`step${stepNum}`); 
-            if(nextStepElement) { 
-                nextStepElement.classList.remove('step-hidden'); 
-                nextStepElement.classList.add('active'); 
-                nextStepElement.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
-            } 
-        }
-        function solveCase() { 
-            const finalStepEl = document.getElementById(`step${currentStepIndex + 1}`); 
-            if(finalStepEl) { 
-                 finalStepEl.classList.remove('active'); 
-                 finalStepEl.classList.add('completed'); 
-            } 
-            const finalResult = document.getElementById('final-result'); 
-            document.getElementById('final-sentence').textContent = caseFiles[currentCaseIndex].fullSentence; 
-            finalResult.classList.add('show'); 
-            finalResult.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
-        }
+        // All other functions (createWordBubble, handleChoiceBubbleClick, etc.) are unchanged from the previous version.
+        // They are pasted below for completeness.
+        function createWordBubble(text, correctAnswerForStep) { const bubble = document.createElement('div'); bubble.className = 'word-bubble'; if (text === '___' && correctAnswerForStep !== '___') { bubble.classList.add('placeholder'); } bubble.textContent = text; bubble.dataset.value = text; return bubble; }
+        function handleChoiceBubbleClick(clickedBubbleEl) { const stepEl = clickedBubbleEl.closest('.step'); const stepIndex = parseInt(stepEl.id.replace('step', '')) - 1; const targetType = caseFiles[currentCaseIndex].steps[stepIndex].target; const answerBox = stepEl.querySelector(`.answer-box[data-step-target="${targetType}"], .article-answer-box`); if (!answerBox) { console.error("Answer box not found for step", stepEl, "target", targetType); return; } if (answerBox.children.length > 0 && answerBox.children[0] !== clickedBubbleEl) { returnSelectedBubbleToChoices(answerBox.children[0]); } if (clickedBubbleEl.parentElement !== answerBox) { answerBox.appendChild(clickedBubbleEl); } }
+        function returnSelectedBubbleToChoices(bubbleInAnswerBox) { const stepEl = bubbleInAnswerBox.closest('.step'); if (!stepEl) return; const wordBubblesContainer = stepEl.querySelector('.word-bubbles'); if (wordBubblesContainer) { wordBubblesContainer.appendChild(bubbleInAnswerBox); } }
+        function handleGoClick(goButton) { const stepEl = goButton.closest('.step'); const stepIndex = parseInt(stepEl.id.replace('step', '')) - 1; const targetType = caseFiles[currentCaseIndex].steps[stepIndex].target; const answerBox = stepEl.querySelector(`.answer-box[data-step-target="${targetType}"], .article-answer-box`); const answerBubble = answerBox ? answerBox.querySelector('.word-bubble') : null; if (!answerBubble) { if(answerBox) { answerBox.classList.add('shake'); setTimeout(() => answerBox.classList.remove('shake'), 820); } return;  } const caseData = caseFiles[currentCaseIndex]; const stepData = caseData.steps[stepIndex]; const selectedAnswerValue = answerBubble.dataset.value; const isCorrect = selectedAnswerValue === stepData.correctAnswer; const investigationEl = stepEl.querySelector('.investigation-text'); if (isCorrect) { goButton.disabled = true; stepEl.classList.add('step-answered');  let investigationText = stepData.investigation.replace('%ANSWER%', stepData.correctAnswer).replace('%ANSWER_EN%', stepData.correctAnswer_en); investigationEl.innerHTML = investigationText; investigationEl.style.display = 'block'; if (targetType === 'verb') { const cheatLink = investigationEl.querySelector('#open-cheat-sheet-link'); if(cheatLink) cheatLink.addEventListener('click', () => document.getElementById('cheat-sheet-box').style.display = 'block' ); } if (targetType === 'article') { document.getElementById('blank').textContent = ` ${answerBubble.textContent} `; } const isLastStep = stepIndex === caseData.steps.length - 1; setTimeout(() => { if (isLastStep) { solveCase(); } else { nextStep(stepIndex + 2); } }, 1500); } else { answerBox.classList.add('shake'); setTimeout(() => { answerBox.classList.remove('shake'); if (answerBubble) returnSelectedBubbleToChoices(answerBubble);  }, 820); } }
+        function nextStep(stepNum) {  const currentStepEl = document.getElementById(`step${currentStepIndex + 1}`);  if(currentStepEl) {  currentStepEl.classList.remove('active');  currentStepEl.classList.add('completed');  }  currentStepIndex = stepNum - 1;  const nextStepElement = document.getElementById(`step${stepNum}`);  if(nextStepElement) {  nextStepElement.classList.remove('step-hidden');  nextStepElement.classList.add('active');  nextStepElement.scrollIntoView({ behavior: 'smooth', block: 'center' });  }  }
+        function solveCase() {  const finalStepEl = document.getElementById(`step${currentStepIndex + 1}`);  if(finalStepEl) {  finalStepEl.classList.remove('active');  finalStepEl.classList.add('completed');  }  const finalResult = document.getElementById('final-result');  document.getElementById('final-sentence').textContent = caseFiles[currentCaseIndex].fullSentence;  finalResult.classList.add('show');  finalResult.scrollIntoView({ behavior: 'smooth', block: 'center' });  }
     </script>
 </body>
 </html>
