@@ -1,0 +1,88 @@
+[
+    {
+        "caseTitle": "🕵️ THE CASE: 'I have a brother!'",
+        "sentence": "Ich habe ___ Bruder.",
+        "correctArticle": "einen",
+        "fullSentence": "Ich habe einen Bruder.",
+        "steps": [
+            {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Find the verb in the sentence. Decide: Is it a 'Condition' or an 'Action'?",
+                "bubbles": ["habe", "Ich", "Bruder"],
+                "correctAnswer": "habe",
+                "investigation": "<strong>Investigation:</strong> 'habe' comes from 'haben' (to have). This is not a condition verb, so it's an <strong>ACTION</strong>!"
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "To find the boss of the sentence, use this question:",
+                "formula": "'Wer oder was?' + habe?",
+                "bubbles": ["Ich", "habe", "Bruder"],
+                "correctAnswer": "Ich",
+                "investigation": "<strong>Investigation:</strong> 'Wer oder was habe?' → 'Ich' (I). The BOSS is always <strong>Nominative</strong>!"
+            },
+            {
+                "target": "victim",
+                "title": "🎯 Find the VICTIM!",
+                "instruction": "To find the victim of the action, use this question:",
+                "formula": "'Wen oder was?' + habe + ich?",
+                "bubbles": ["Bruder", "Ich", "habe"],
+                "correctAnswer": "Bruder",
+                "investigation": "<strong>Investigation:</strong> 'Wen oder was habe ich?' → 'Bruder' (brother). This is our <strong>VICTIM</strong>!"
+            },
+            {
+                "target": "article",
+                "title": "⚖️ PUT THE VICTIM BEHIND BARS!",
+                "instruction": "The VICTIM always goes into the <strong>ACCUSATIVE</strong> case.",
+                "result": "Evidence: The victim is 'Bruder' (masculine: der Bruder)<br>Law: Accusative changes masculine articles: der → den, ein → einen",
+                "bubbles": ["einen", "ein", "der", "den"],
+                "correctAnswer": "einen",
+                "investigation": "<strong>Case Closed:</strong> Victim 'der Bruder' → Accusative → <strong>'einen Bruder'</strong>"
+            }
+        ]
+    },
+    {
+        "caseTitle": "🕵️ THE CASE: 'The dog helps the man.'",
+        "sentence": "Der Hund hilft ___ Mann.",
+        "correctArticle": "dem",
+        "fullSentence": "Der Hund hilft dem Mann.",
+        "steps": [
+            {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Find the verb in the sentence.",
+                "bubbles": ["hilft", "Hund", "Mann"],
+                "correctAnswer": "hilft",
+                "investigation": "<strong>Investigation:</strong> The verb is 'hilft' (from 'helfen' - to help). This verb commonly takes a Dative object."
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "Who or what is performing the action?",
+                "formula": "'Wer oder was?' + hilft?",
+                "bubbles": ["Der Hund", "hilft", "Mann"],
+                "correctAnswer": "Der Hund",
+                "investigation": "<strong>Investigation:</strong> 'Wer oder was hilft?' → 'Der Hund' (The dog). The BOSS is <strong>Nominative</strong>!"
+            },
+            {
+                "target": "dative",
+                "title": "🤝 Find the 'Helper' Object!",
+                "instruction": "Some verbs need a 'helper' or 'receiver' of the action. To find this Dative object, ask:",
+                "formula": "'Wem?' + hilft der Hund?",
+                "bubbles": ["Mann", "Hund", "hilft"],
+                "correctAnswer": "Mann",
+                "investigation": "<strong>Investigation:</strong> 'Wem hilft der Hund?' → 'Mann' (man). The object receiving the help is in the <strong>DATIVE</strong> case!"
+            },
+            {
+                "target": "article",
+                "title": "⚖️ DETERMINE THE ARTICLE!",
+                "instruction": "The object is Dative. Now find the correct article.",
+                "result": "Evidence: The object is 'Mann' (masculine: der Mann)<br>Law: Dative changes masculine articles: der → dem, ein → einem",
+                "bubbles": ["dem", "den", "der", "des"],
+                "correctAnswer": "dem",
+                "investigation": "<strong>Case Closed:</strong> Dative object 'der Mann' → <strong>'dem Mann'</strong>"
+            }
+        ]
+    }
+]
