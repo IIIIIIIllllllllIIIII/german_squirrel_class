@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>German Case Detective</title>
     <style>
-        /* All your great CSS goes here... */
+        :root { --accent-color: #ffc107; --dark-blue: #1e3c72; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); min-height: 100vh; color: #333; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; position: relative; } /* Added position:relative */
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; position: relative; }
         .header { text-align: center; color: white; margin-bottom: 30px; }
         .header h1 { font-size: 2.5rem; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
         .case-board { background: rgba(255, 255, 255, 0.95); border-radius: 20px; padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); backdrop-filter: blur(10px); }
@@ -17,13 +17,13 @@
         .sentence-display { font-size: 1.5rem; font-weight: bold; background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; margin-top: 15px; }
         .step { background: white; border-radius: 15px; padding: 25px; margin-bottom: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-left: 5px solid #3498db; transition: all 0.3s ease; }
         .step.active { opacity: 1; transform: scale(1.02); border-left-color: #e74c3c; }
-        .step.completed { opacity: 1; border-left-color: #27ae60; background: linear-gradient(135deg, #d4edda, #c3e6cb); }
+        .step.completed { opacity: 0.6; border-left-color: #27ae60; background: #f8f9fa; }
         .step.step-hidden { display: none; }
         .step-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
         .step-title-group { display: flex; align-items: center; }
         .step-number { background: #3498db; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 15px; flex-shrink: 0; }
         .step.active .step-number { background: #e74c3c; animation: pulse 2s infinite; }
-        .step.completed .step-number { background: #27ae60; }
+        .step.completed .step-number { background: #27ae60; animation: none; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
         .word-bubbles { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; min-height: 60px; padding: 15px; background: #f8f9fa; border-radius: 10px; border: 2px dashed #dee2e6; }
         .clue-bubbles { border-style: solid; background: #e9ecef; }
@@ -39,76 +39,27 @@
         .investigation-text { font-style: italic; color: #666; margin: 15px 0; padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #3498db; }
         .formula { background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px; padding: 15px; margin: 10px 0; font-family: 'Courier New', monospace; font-weight: bold; }
         .formula-en { font-style: italic; color: #555; padding: 0 15px 15px 15px; background: #fff3cd; border: 1px solid #ffeaa7; border-top: none; border-radius: 0 0 8px 8px; margin-top: -11px; }
-        .result { background: #d1ecf1; border: 1px solid #bee5eb; border-radius: 8px; padding: 15px; margin: 10px 0; font-weight: bold; color: #0c5460; }
-        .next-button { background: linear-gradient(135deg, #27ae60, #2ecc71); color: white; border: none; padding: 15px 30px; border-radius: 25px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease; display: none; }
-        .next-button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3); }
-        .next-button.show { display: inline-block; animation: bounceIn 0.6s; }
-        @keyframes bounceIn { 0% { transform: scale(0); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        .result { background: #d1ecf1; border: 1px solid #bee5eb; border-radius: 8px; padding: 15px; margin: 10px 0; color: #0c5460; line-height: 1.6; }
+        .result .highlight { background-color: #ffc107; padding: 2px 5px; border-radius: 4px; font-weight: bold;}
         .final-result { background: linear-gradient(135deg, #27ae60, #2ecc71); color: white; padding: 30px; border-radius: 15px; text-align: center; margin-top: 30px; display: none; }
         .final-result.show { display: block; animation: slideUp 0.8s ease; }
         @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .final-result h2 { font-size: 2rem; margin-bottom: 15px; }
+        .final-result h2 { font-size: 2.5rem; margin-bottom: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
         .final-sentence { font-size: 1.8rem; font-weight: bold; background: rgba(255,255,255,0.2); padding: 20px; border-radius: 10px; margin: 20px 0; }
         .restart-button { background: white; color: #27ae60; border: 2px solid white; padding: 12px 25px; border-radius: 20px; cursor: pointer; font-weight: bold; transition: all 0.3s ease; }
         .restart-button:hover { background: transparent; color: white; }
-        
-        /* -- NEW -- Button for Cheat Sheet */
-        .cheat-sheet-button {
-            background: #ffc107;
-            border: none;
-            color: #333;
-            font-weight: bold;
-            padding: 8px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .cheat-sheet-button:hover {
-            background: #ffca2c;
-            transform: translateY(-1px);
-        }
-
-        /* -- NEW -- Cheat Sheet Box styles */
-        #cheat-sheet-box {
-            display: none; /* Hidden by default */
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            width: 340px;
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            padding: 20px;
-            z-index: 1000;
-            border: 3px solid #ffc107;
-        }
-        #cheat-sheet-box h4 {
-            margin-bottom: 10px;
-            color: #1e3c72;
-            font-size: 1.1rem;
-        }
-        #cheat-sheet-box p {
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            color: #666;
-            line-height: 1.4;
-        }
-        #cheat-sheet-box ul {
-            list-style: none;
-            padding-left: 0;
-            font-size: 0.85rem;
-        }
-        #cheat-sheet-box ul li {
-            margin-bottom: 6px;
-            color: #333;
-            line-height: 1.3;
-        }
-        #cheat-sheet-box .section-title {
-            font-weight: bold;
-            color: #1e3c72;
-            margin-top: 15px;
-            margin-bottom: 8px;
-        }
+        .cheat-sheet-button { background: var(--accent-color); border: none; color: #333; font-weight: bold; padding: 8px 15px; border-radius: 20px; cursor: pointer; transition: all 0.2s ease; }
+        .cheat-sheet-button:hover { background: #ffca2c; transform: translateY(-1px); }
+        .link-like { color: #007bff; text-decoration: underline; cursor: pointer; }
+        #cheat-sheet-box { display: none; position: fixed; top: 100px; right: 20px; width: 340px; background: #fff; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); padding: 20px; z-index: 1000; border: 3px solid var(--accent-color); }
+        #cheat-sheet-box h4 { margin: 0; }
+        #cheat-sheet-box p { font-size: 0.9rem; margin-bottom: 15px; color: #666; line-height: 1.4; }
+        #cheat-sheet-box ul { list-style: none; padding-left: 0; font-size: 0.85rem; }
+        #cheat-sheet-box ul li { margin-bottom: 6px; color: #333; line-height: 1.3; }
+        .verb-focus { text-align: center; padding: 15px; background: #f8f9fa; border-radius: 10px; margin: 20px 0; }
+        .verb-focus .word-bubble { display: inline-block; margin-bottom: 10px; }
+        .verb-focus .verb-info { font-family: 'Courier New', monospace; font-weight: bold; }
+        .verb-focus .verb-info small { font-weight: normal; font-family: 'Segoe UI', sans-serif; }
     </style>
 </head>
 <body>
@@ -131,23 +82,12 @@
             <button id="close-cheat-sheet" style="background: #ff6b6b; border: none; color: white; width: 25px; height: 25px; border-radius: 50%; cursor: pointer; font-weight: bold;">×</button>
         </div>
         <p>If you see these verbs, the word after them is ALWAYS Nominativ! These verbs describe what someone IS, not what they DO.</p>
-        
-        <div style="margin: 10px 0; font-size: 0.8rem;">
-            <span style="background: #ff9999; padding: 2px 6px; border-radius: 3px; margin-right: 5px;">SUBJECT</span>
-            <span style="background: #99ccff; padding: 2px 6px; border-radius: 3px; margin-right: 5px;">CONDITION VERB</span>
-            <span style="background: #99ff99; padding: 2px 6px; border-radius: 3px;">NOMINATIV</span>
-        </div>
-        
         <ul>
-            <li>•&nbsp;<b>sein</b> (to be) → <span style="background: #ff9999; padding: 1px 3px; border-radius: 2px;">Ich</span> <span style="background: #99ccff; padding: 1px 3px; border-radius: 2px;"><b>bin</b></span> <span style="background: #99ff99; padding: 1px 3px; border-radius: 2px;">deine Mutter</span>.</li>
-            <li>•&nbsp;<b>heißen</b> (to be called) → <span style="background: #ff9999; padding: 1px 3px; border-radius: 2px;">Sie</span> <span style="background: #99ccff; padding: 1px 3px; border-radius: 2px;"><b>heißt</b></span> <span style="background: #99ff99; padding: 1px 3px; border-radius: 2px;">Anna Schmidt</span>.</li>
-            <li>•&nbsp;<b>werden</b> (to become) → <span style="background: #ff9999; padding: 1px 3px; border-radius: 2px;">Er</span> <span style="background: #99ccff; padding: 1px 3px; border-radius: 2px;"><b>wird</b></span> <span style="background: #99ff99; padding: 1px 3px; border-radius: 2px;">ein guter Arzt</span>.</li>
-            <li>•&nbsp;<b>bleiben</b> (to stay) → <span style="background: #ff9999; padding: 1px 3px; border-radius: 2px;">Wir</span> <span style="background: #99ccff; padding: 1px 3px; border-radius: 2px;"><b>bleiben</b></span> <span style="background: #99ff99; padding: 1px 3px; border-radius: 2px;">beste Freunde</span>.</li>
+            <li>•&nbsp;<b>sein</b> (to be) → Ich <b>bin</b> deine Mutter.</li>
+            <li>•&nbsp;<b>heißen</b> (to be called) → Sie <b>heißt</b> Anna Schmidt.</li>
+            <li>•&nbsp;<b>werden</b> (to become) → Er <b>wird</b> ein guter Arzt.</li>
+            <li>•&nbsp;<b>bleiben</b> (to stay) → Wir <b>bleiben</b> beste Freunde.</li>
         </ul>
-        
-        <p style="font-size: 0.8rem; color: #666; margin-top: 15px; font-style: italic;">
-            ✨ Easy rule: CONDITION = NOMINATIV!
-        </p>
     </div>
 
 
@@ -157,15 +97,15 @@
         let currentCaseIndex = 0;
 
         document.addEventListener('DOMContentLoaded', () => {
-            fetch('cases.json').then(response => {
-                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                return response.json();
-            }).then(data => {
+            fetch('cases.json').then(r => r.ok ? r.json() : Promise.reject(r)).then(data => {
                 caseFiles = data;
                 loadCase(currentCaseIndex);
                 document.getElementById('restart-button').addEventListener('click', () => {
                     currentCaseIndex = (currentCaseIndex + 1) % caseFiles.length;
                     loadCase(currentCaseIndex);
+                });
+                document.getElementById('close-cheat-sheet').addEventListener('click', () => {
+                    document.getElementById('cheat-sheet-box').style.display = 'none';
                 });
             }).catch(error => {
                 console.error("Could not fetch case files:", error);
@@ -178,9 +118,7 @@
             currentCaseIndex = caseIndex;
             currentStepIndex = 0;
 
-            // -- NEW: Hide cheat sheet on new case load
             document.getElementById('cheat-sheet-box').style.display = 'none';
-
             document.getElementById('case-title').innerHTML = caseData.caseTitle;
             document.getElementById('sentence-display').innerHTML = caseData.sentence.replace('___', '<span id="blank">___</span>');
             
@@ -198,21 +136,10 @@
             firstStep.classList.remove('step-hidden');
             initializeDragAndDrop();
 
-            // -- NEW: Add event listener for the new button
             const cheatSheetBtn = document.getElementById('cheat-sheet-btn');
             if (cheatSheetBtn) {
                 cheatSheetBtn.addEventListener('click', () => {
-                    const cheatSheetBox = document.getElementById('cheat-sheet-box');
-                    cheatSheetBox.style.display = 'block';
-                });
-            }
-
-            // -- NEW: Add event listener for close button
-            const closeCheatSheetBtn = document.getElementById('close-cheat-sheet');
-            if (closeCheatSheetBtn) {
-                closeCheatSheetBtn.addEventListener('click', () => {
-                    const cheatSheetBox = document.getElementById('cheat-sheet-box');
-                    cheatSheetBox.style.display = 'none';
+                    document.getElementById('cheat-sheet-box').style.display = 'block';
                 });
             }
         }
@@ -222,25 +149,35 @@
             stepDiv.className = index > 0 ? 'step step-hidden' : 'step';
             stepDiv.id = `step${index + 1}`;
 
-            let verb = caseData.steps[0].correctAnswer;
-            let formulaHTML = stepData.formula ? `<div class="formula">${stepData.formula.replace('%VERB%', verb)}</div>` : '';
-            let formulaEnHTML = stepData.formula_en ? `<div class="formula-en">${stepData.formula_en.replace('%VERB%', verb)}</div>` : '';
-            let resultHTML = stepData.result ? `<div class="result">${stepData.result}</div>` : '';
-            let sentenceClueHTML = '';
-            let cheatSheetButtonHTML = '';
+            const verb = caseData.steps[0].correctAnswer;
+            const boss = caseData.steps[1].correctAnswer;
 
-            if (index === 0) { // -- NEW: Add button only to Step 1
-                cheatSheetButtonHTML = `<button id="cheat-sheet-btn" class="cheat-sheet-button">CHEAT SHEET</button>`;
-            }
+            let extraHTML = '';
 
-            if (stepData.displaySentence) {
-                sentenceClueHTML = `<div class="word-bubbles clue-bubbles">
-                    ${caseData.words.map(word => `<div class="word-bubble clue">${word}</div>`).join('')}
+            if (index === 1) { // Step 2: Find the BOSS
+                extraHTML = `<div class="verb-focus">
+                    <div class="word-bubble clue">${verb}</div>
+                    <div class="verb-info">'Wer oder was?' + '${verb}'?<br><small>${stepData.verb_info}</small></div>
                 </div>`;
             }
+            if (index === 2) { // Step 3: Find the VICTIM/DATIVE
+                const formula = stepData.formula.replace('%VERB%', verb).replace('%BOSS%', boss);
+                const formula_en = stepData.formula_en.replace('%VERB%', verb).replace('%BOSS%', boss);
+                extraHTML = `<div class="formula">${formula}</div><div class="formula-en">${formula_en}</div>`;
+            }
+            if (index === 3) { // Step 4: Choose the Case
+                let resultText = stepData.result_template
+                    .replace('%VICTIM_NOUN%', caseData.victim_noun)
+                    .replace('%VICTIM_GENDER%', caseData.victim_gender);
+                
+                // Highlight the correct gender row
+                const gender = caseData.victim_gender;
+                resultText = resultText.replace(new RegExp(`<strong>(${gender.charAt(0).toUpperCase() + gender.slice(1)}):`, 'g'), `<strong><span class='highlight'>$1</span>`);
 
-            const nextButtonText = index < caseData.steps.length - 1 ? 'Continue Investigation →' : 'Solve the Case! 🎉';
-            const nextButtonAction = index < caseData.steps.length - 1 ? `nextStep(${index + 2})` : 'solveCase()';
+                extraHTML = `<div class="result">${resultText}</div>`;
+            }
+
+            const cheatSheetButtonHTML = (index === 0) ? `<button id="cheat-sheet-btn" class="cheat-sheet-button">CHEAT SHEET</button>` : '';
 
             stepDiv.innerHTML = `
                 <div class="step-header">
@@ -251,14 +188,10 @@
                     ${cheatSheetButtonHTML}
                 </div>
                 <p>${stepData.instruction}</p>
-                ${formulaHTML}
-                ${formulaEnHTML}
-                ${sentenceClueHTML}
-                ${resultHTML}
+                ${extraHTML}
                 <div class="word-bubbles" id="bubbles-step${index + 1}"></div>
                 <p>Drag the answer here: <span class="drop-zone" data-step="${index + 1}" data-target="${stepData.target}"></span></p>
-                <div class="investigation-text" id="${stepData.target}-investigation" style="display: none;">${stepData.investigation}</div>
-                <button class="next-button" onclick="${nextButtonAction}">${nextButtonText}</button>
+                <div class="investigation-text" id="${stepData.target}-investigation" style="display: none;"></div>
             `;
             const wordBubblesContainer = stepDiv.querySelector(`#bubbles-step${index + 1}`);
             stepData.bubbles.forEach(bubbleText => {
@@ -266,21 +199,122 @@
             });
             return stepDiv;
         }
-        
-        // All other Javascript functions (createWordBubble, handleDrop, nextStep, solveCase, etc.)
-        // remain the same as the previous version. They are pasted below for completeness.
 
-        function createWordBubble(text, isCorrect) { const bubble = document.createElement('div'); bubble.className = 'word-bubble'; if (text === '___') { bubble.classList.add('placeholder'); bubble.draggable = false; } else { bubble.draggable = true; } bubble.textContent = text; bubble.dataset.answer = isCorrect ? text : 'incorrect'; return bubble; }
-        function handleDrop(e) { e.preventDefault(); e.target.classList.remove('drag-over'); const answer = e.dataTransfer.getData('text/plain'); const elementText = e.dataTransfer.getData('element'); const stepIndex = parseInt(e.target.dataset.step) - 1; const target = e.target.dataset.target; if (answer === 'incorrect') { e.target.style.background = 'rgba(231, 76, 60, 0.3)'; setTimeout(() => { e.target.style.background = 'rgba(52, 152, 219, 0.1)'; }, 1000); return; } e.target.textContent = elementText; e.target.classList.add('filled'); e.target.style.background = 'rgba(39, 174, 96, 0.2)'; const originalBubble = Array.from(e.target.closest('.step').querySelectorAll('.word-bubble')).find(bubble => bubble.textContent === elementText); if (originalBubble) originalBubble.style.display = 'none'; const investigation = document.getElementById(`${target}-investigation`); if (investigation) { investigation.style.display = 'block'; investigation.style.animation = 'fadeIn 0.5s ease'; } const nextButton = e.target.closest('.step').querySelector('.next-button'); if (nextButton) nextButton.classList.add('show'); const nextStepElement = document.getElementById(`step${stepIndex + 2}`); if (nextStepElement) { nextStepElement.classList.remove('step-hidden'); } if (target === 'article') { document.getElementById('blank').textContent = ` ${elementText} `; } }
-        function nextStep(step) { document.getElementById(`step${currentStepIndex + 1}`).classList.remove('active'); document.getElementById(`step${currentStepIndex + 1}`).classList.add('completed'); currentStepIndex = step - 1; const nextStepElement = document.getElementById(`step${step}`); nextStepElement.classList.add('active'); nextStepElement.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
-        function solveCase() { document.getElementById(`step${currentStepIndex + 1}`).classList.remove('active'); document.getElementById(`step${currentStepIndex + 1}`).classList.add('completed'); const finalResult = document.getElementById('final-result'); document.getElementById('final-sentence').textContent = caseFiles[currentCaseIndex].fullSentence; finalResult.classList.add('show'); finalResult.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
-        function initializeDragAndDrop() { const bubbles = document.querySelectorAll('.word-bubble[draggable="true"]'); const dropZones = document.querySelectorAll('.drop-zone'); bubbles.forEach(bubble => { bubble.addEventListener('dragstart', handleDragStart); bubble.addEventListener('dragend', handleDragEnd); }); dropZones.forEach(zone => { zone.addEventListener('dragover', handleDragOver); zone.addEventListener('drop', handleDrop); zone.addEventListener('dragenter', handleDragEnter); zone.addEventListener('dragleave', handleDragLeave); }); }
+        function createWordBubble(text, isCorrect) {
+            const bubble = document.createElement('div');
+            bubble.className = 'word-bubble';
+            if (text === '___') {
+                bubble.classList.add('placeholder');
+                bubble.draggable = false;
+            } else {
+                bubble.draggable = true;
+            }
+            bubble.textContent = text;
+            bubble.dataset.answer = isCorrect ? text : 'incorrect';
+            return bubble;
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            e.target.classList.remove('drag-over');
+            const answer = e.dataTransfer.getData('text/plain');
+            const elementText = e.dataTransfer.getData('element');
+            const stepIndex = parseInt(e.target.dataset.step) - 1;
+            const target = e.target.dataset.target;
+
+            if (answer === 'incorrect') {
+                e.target.style.background = 'rgba(231, 76, 60, 0.3)';
+                setTimeout(() => { e.target.style.background = 'rgba(52, 152, 219, 0.1)'; }, 1000);
+                return;
+            }
+
+            e.target.textContent = elementText;
+            e.target.classList.add('filled');
+            e.target.style.background = 'rgba(39, 174, 96, 0.2)';
+            
+            const originalBubble = Array.from(e.target.closest('.step').querySelectorAll('.word-bubble')).find(bubble => bubble.textContent === elementText);
+            if (originalBubble) originalBubble.style.display = 'none';
+
+            const caseData = caseFiles[currentCaseIndex];
+            const stepData = caseData.steps[stepIndex];
+            
+            const investigation = document.getElementById(`${target}-investigation`);
+            let investigationText = stepData.investigation
+                .replace('%ANSWER%', stepData.correctAnswer)
+                .replace('%ANSWER_EN%', stepData.correctAnswer_en);
+            
+            investigation.innerHTML = investigationText;
+            investigation.style.display = 'block';
+
+            if (target === 'verb') {
+                const cheatLink = document.getElementById('open-cheat-sheet-link');
+                if(cheatLink) {
+                    cheatLink.addEventListener('click', () => document.getElementById('cheat-sheet-box').style.display = 'block' );
+                }
+            }
+            
+            if (target === 'article') {
+                document.getElementById('blank').textContent = ` ${elementText} `;
+            }
+
+            // Automatic Progression
+            const isLastStep = stepIndex === caseData.steps.length - 1;
+            setTimeout(() => {
+                if (isLastStep) {
+                    solveCase();
+                } else {
+                    nextStep(stepIndex + 2);
+                }
+            }, 1500); // 1.5 second delay
+        }
+        
+        function nextStep(stepNum) {
+            const currentStepEl = document.getElementById(`step${currentStepIndex + 1}`);
+            if(currentStepEl) {
+                currentStepEl.classList.remove('active');
+                currentStepEl.classList.add('completed');
+            }
+            
+            currentStepIndex = stepNum - 1;
+            const nextStepElement = document.getElementById(`step${stepNum}`);
+            if(nextStepElement) {
+                nextStepElement.classList.remove('step-hidden');
+                nextStepElement.classList.add('active');
+                nextStepElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        function solveCase() {
+            const finalStepEl = document.getElementById(`step${currentStepIndex + 1}`);
+            if(finalStepEl) {
+                 finalStepEl.classList.remove('active');
+                 finalStepEl.classList.add('completed');
+            }
+            const finalResult = document.getElementById('final-result');
+            document.getElementById('final-sentence').textContent = caseFiles[currentCaseIndex].fullSentence;
+            finalResult.classList.add('show');
+            finalResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        
+        function initializeDragAndDrop() {
+            const bubbles = document.querySelectorAll('.word-bubble[draggable="true"]');
+            const dropZones = document.querySelectorAll('.drop-zone');
+            bubbles.forEach(bubble => {
+                bubble.addEventListener('dragstart', handleDragStart);
+                bubble.addEventListener('dragend', handleDragEnd);
+            });
+            dropZones.forEach(zone => {
+                zone.addEventListener('dragover', handleDragOver);
+                zone.addEventListener('drop', handleDrop);
+                zone.addEventListener('dragenter', handleDragEnter);
+                zone.addEventListener('dragleave', handleDragLeave);
+            });
+        }
         function handleDragStart(e) { e.dataTransfer.setData('text/plain', e.target.dataset.answer); e.dataTransfer.setData('element', e.target.textContent); e.target.style.opacity = '0.5'; }
         function handleDragEnd(e) { e.target.style.opacity = '1'; }
         function handleDragOver(e) { e.preventDefault(); }
         function handleDragEnter(e) { e.preventDefault(); e.target.classList.add('drag-over'); }
         function handleDragLeave(e) { e.target.classList.remove('drag-over'); }
-        const style = document.createElement('style'); style.textContent = `@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }`; document.head.appendChild(style);
     </script>
 </body>
 </html>
