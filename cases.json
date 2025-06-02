@@ -1,103 +1,1429 @@
 [
     {
-        "caseTitle": "🕵️ THE CASE: 'I have a brother!'",
-        "sentence": "Ich habe ___ Bruder.",
-        "sentence_en": "I have a brother.",
-        "verb_infinitive": "haben",
-        "correctArticle": "einen",
-        "fullSentence": "Ich habe einen Bruder.",
-        "words": ["Ich", "habe", "___", "Bruder."],
-        "victim_noun": "der Bruder",
-        "victim_gender": "masculine",
+        "caseTitle": "🕵️ THE CASE: 'I am a student.' (Nominative)",
+        "sentence": "Ich bin ___ Student.",
+        "sentence_en": "I am a student.",
+        "verb_infinitive": "sein",
+        "correctArticle": "ein",
+        "fullSentence": "Ich bin ein Student.",
+        "words": ["Ich", "bin", "___", "Student."],
+        "predicate_nominative_noun": "der Student",
+        "predicate_nominative_gender": "masculine",
         "steps": [
             {
                 "target": "verb",
                 "title": "🎯 Find the Verb!",
                 "instruction": "Identify the verb in the sentence below and pull it to the answer box!",
-                "bubbles": ["Ich", "habe", "___", "Bruder."],
-                "correctAnswer": "habe",
-                "investigation": "'habe' comes from 'haben' (to have). This is not a condition verb, so it's an <strong>ACTION</strong>! You can review the most common condition verbs <span class='link-like' id='open-cheat-sheet-link'>here</span>."
+                "bubbles": ["Ich", "bin", "___", "Student."],
+                "correctAnswer": "bin",
+                "investigation": "'bin' comes from 'sein' (to be). This is a <strong>CONDITION</strong> verb! The sentence describes what the subject IS. This means we'll be looking for another Nominative part. You can review common condition verbs <span class='link-like' id='open-cheat-sheet-link'>here</span>."
             },
             {
                 "target": "boss",
                 "title": "👑 Find the BOSS!",
-                "instruction": "Who or what is performing the action? Who or what is doing the thing?",
-                "verb_info": "('haben' - to have)",
-                "verb_question_en": "Who or what has someone or something?????",
-                "bubbles": ["Ich", "Bruder."],
+                "instruction": "Who or what is being described by the verb?",
+                "verb_info": "('sein' - to be)",
+                "verb_question_en": "Who or what is being described?????",
+                "bubbles": ["Ich", "Student."],
                 "correctAnswer": "Ich",
                 "correctAnswer_en": "I",
-                "investigation": "Who or what is performing the action? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
+                "investigation": "Who or what is being described? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS (Subject)."
             },
             {
-                "target": "victim",
-                "title": "🎯 Find the VICTIM!",
-                "instruction": "To find the victim of the action, ask: Who or what is influenced by the verb?",
-                "formula": "'Wen oder was?' + '%VERB%' + '%BOSS%'?",
-                "formula_en": "'Whom or what do I have????",
-                "bubbles": ["Bruder.", "Ich"],
-                "correctAnswer": "Bruder.",
-                "investigation": "'Whom or what do I have?' → 'Bruder'. This is our <strong>VICTIM</strong>!"
+                "target": "predicate_nominative",
+                "title": "🤔 Identify the Description!",
+                "instruction": "With condition verbs, we identify what the BOSS is. Ask: What or who is the BOSS?",
+                "formula": "'Was/Wer?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'What am I?'",
+                "bubbles": ["Student.", "Ich"],
+                "correctAnswer": "Student.",
+                "investigation": "What am I? → 'Student'. This describes the BOSS and is also Nominative."
             },
             {
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
-                "instruction": "Since we are working with an <strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") and you found a <strong>BOSS</strong> (\"%BOSS%\") and a <strong>VICTIM</strong> (\"%VICTIM_NOUN%\"), the victim must be put into the <strong>ACCUSATIVE</strong> case.",
-                "hint_rules": "<strong>Masculine:</strong> der → <span class='highlight'>den</span> / ein → <span class='highlight'>einen</span><br><strong>Feminine:</strong> die → die / eine → eine<br><strong>Neuter:</strong> das → das / ein → ein",
-                "bubbles": ["einen", "ein", "der", "den"],
-                "correctAnswer": "einen",
-                "investigation": "Correct! Because 'Bruder' is masculine, 'ein' becomes 'einen' in the accusative case."
+                "instruction": "Since we are using a <strong>CONDITION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\"), the word describing the <strong>BOSS</strong> (\"%BOSS%\") is also in the <strong>NOMINATIVE</strong> case. The noun is <strong>%PREDICATE_NOMINATIVE_NOUN%</strong> (%PREDICATE_NOMINATIVE_GENDER%). Choose the correct Nominative article.",
+                "hint_rules": "<strong>Masculine (Nom):</strong> der → der / ein → <span class='highlight'>ein</span><br><strong>Feminine (Nom):</strong> die → die / eine → eine<br><strong>Neuter (Nom):</strong> das → das / ein → ein",
+                "bubbles": ["ein", "einen", "eine", "eines"],
+                "correctAnswer": "ein",
+                "investigation": "Correct! Because 'Student' is masculine, 'ein' remains 'ein' in the Nominative case."
             }
         ]
     },
     {
-        "caseTitle": "🕵️ THE CASE: 'The student buys a pen.'",
-        "sentence": "Der Schüler kauft ___ Stift.",
-        "sentence_en": "The student buys a pen.",
-        "verb_infinitive": "kaufen",
-        "correctArticle": "einen",
-        "fullSentence": "Der Schüler kauft einen Stift.",
-        "words": ["Der Schüler", "kauft", "___", "Stift."],
-        "victim_noun": "der Stift",
-        "victim_gender": "masculine",
+        "caseTitle": "🕵️ THE CASE: 'You see a cat.' (Accusative)",
+        "sentence": "Du siehst ___ Katze.",
+        "sentence_en": "You see a cat.",
+        "verb_infinitive": "sehen",
+        "correctArticle": "eine",
+        "fullSentence": "Du siehst eine Katze.",
+        "words": ["Du", "siehst", "___", "Katze."],
+        "victim_noun": "die Katze",
+        "victim_gender": "feminine",
         "steps": [
             {
                 "target": "verb",
                 "title": "🎯 Find the Verb!",
                 "instruction": "Identify the verb in the sentence below and pull it to the answer box!",
-                "bubbles": ["Der Schüler", "kauft", "___", "Stift."],
-                "correctAnswer": "kauft",
-                "investigation": "'kauft' comes from 'kaufen' (to buy). This is not a condition verb, so it's an <strong>ACTION</strong>! You can review the most common condition verbs <span class='link-like' id='open-cheat-sheet-link'>here</span>."
+                "bubbles": ["Du", "siehst", "___", "Katze."],
+                "correctAnswer": "siehst",
+                "investigation": "'siehst' comes from 'sehen' (to see). This is an <strong>ACTION</strong> verb! You can review common condition verbs <span class='link-like' id='open-cheat-sheet-link'>here</span>."
             },
             {
                 "target": "boss",
                 "title": "👑 Find the BOSS!",
                 "instruction": "Who or what is performing the action? Who or what is doing the thing?",
-                "verb_info": "('kaufen' - to buy)",
-                "verb_question_en": "Who or what buys someone or something?????",
-                "bubbles": ["Der Schüler", "Stift."],
-                "correctAnswer": "Der Schüler",
-                "correctAnswer_en": "The student",
+                "verb_info": "('sehen' - to see)",
+                "verb_question_en": "Who or what sees someone or something?????",
+                "bubbles": ["Du", "Katze."],
+                "correctAnswer": "Du",
+                "correctAnswer_en": "You",
                 "investigation": "Who or what is performing the action? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
             },
             {
                 "target": "victim",
                 "title": "🎯 Find the VICTIM!",
                 "instruction": "To find the victim of the action, ask: Who or what is influenced by the verb?",
-                "formula": "'Wen oder was?' + '%VERB%' + '%BOSS%'?",
-                "formula_en": "'Whom or what does the student buy????",
-                "bubbles": ["Stift.", "Der Schüler"],
-                "correctAnswer": "Stift.",
-                "investigation": "'Whom or what does the student buy?' → 'Stift'. This is our <strong>VICTIM</strong>!"
+                "formula": "'Wen oder was?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'Whom or what do you see????",
+                "bubbles": ["Katze.", "Du"],
+                "correctAnswer": "Katze.",
+                "investigation": "'Whom or what do you see?' → 'Katze'. This is our <strong>VICTIM</strong>!"
             },
             {
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are working with an <strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") and you found a <strong>BOSS</strong> (\"%BOSS%\") and a <strong>VICTIM</strong> (\"%VICTIM_NOUN%\"), the victim must be put into the <strong>ACCUSATIVE</strong> case.",
-                "hint_rules": "<strong>Masculine:</strong> der → <span class='highlight'>den</span> / ein → <span class='highlight'>einen</span><br><strong>Feminine:</strong> die → die / eine → eine<br><strong>Neuter:</strong> das → das / ein → ein",
-                "bubbles": ["einen", "ein", "den", "eine"],
+                "hint_rules": "<strong>Masculine (Acc):</strong> der → den / ein → einen<br><strong>Feminine (Acc):</strong> die → die / eine → <span class='highlight'>eine</span><br><strong>Neuter (Acc):</strong> das → das / ein → ein",
+                "bubbles": ["eine", "einen", "ein", "einer"],
+                "correctAnswer": "eine",
+                "investigation": "Correct! Because 'Katze' is feminine, 'eine' remains 'eine' in the accusative case."
+            }
+        ]
+    },
+    {
+        "caseTitle": "🕵️ THE CASE: 'He is becoming a doctor.' (Nominative)",
+        "sentence": "Er wird ___ Arzt.",
+        "sentence_en": "He is becoming a doctor.",
+        "verb_infinitive": "werden",
+        "correctArticle": "ein",
+        "fullSentence": "Er wird ein Arzt.",
+        "words": ["Er", "wird", "___", "Arzt."],
+        "predicate_nominative_noun": "der Arzt",
+        "predicate_nominative_gender": "masculine",
+        "steps": [
+            {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Identify the verb in the sentence below and pull it to the answer box!",
+                "bubbles": ["Er", "wird", "___", "Arzt."],
+                "correctAnswer": "wird",
+                "investigation": "'wird' comes from 'werden' (to become). This is a <strong>CONDITION</strong> verb! The sentence describes what the subject IS BECOMING. This means we'll be looking for another Nominative part. You can review common condition verbs <span class='link-like' id='open-cheat-sheet-link'>here</span>."
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "Who or what is being described by the verb?",
+                "verb_info": "('werden' - to become)",
+                "verb_question_en": "Who or what is becoming something?????",
+                "bubbles": ["Er", "Arzt."],
+                "correctAnswer": "Er",
+                "correctAnswer_en": "He",
+                "investigation": "Who or what is becoming something? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS (Subject)."
+            },
+            {
+                "target": "predicate_nominative",
+                "title": "🤔 Identify the Description!",
+                "instruction": "With condition verbs, we identify what the BOSS is becoming. Ask: What or who is the BOSS becoming?",
+                "formula": "'Was/Wer?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'What is he becoming?'",
+                "bubbles": ["Arzt.", "Er"],
+                "correctAnswer": "Arzt.",
+                "investigation": "What is he becoming? → 'Arzt'. This describes what the BOSS is becoming and is also Nominative."
+            },
+            {
+                "target": "article",
+                "title": "⚖️ Choose the Case!",
+                "instruction": "Since we are using a <strong>CONDITION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\"), the word describing what the <strong>BOSS</strong> (\"%BOSS%\") becomes is also in the <strong>NOMINATIVE</strong> case. The noun is <strong>%PREDICATE_NOMINATIVE_NOUN%</strong> (%PREDICATE_NOMINATIVE_GENDER%). Choose the correct Nominative article.",
+                "hint_rules": "<strong>Masculine (Nom):</strong> der → der / ein → <span class='highlight'>ein</span><br><strong>Feminine (Nom):</strong> die → die / eine → eine<br><strong>Neuter (Nom):</strong> das → das / ein → ein",
+                "bubbles": ["ein", "einen", "dem", "des"],
+                "correctAnswer": "ein",
+                "investigation": "Correct! Because 'Arzt' is masculine, 'ein' remains 'ein' in the Nominative case."
+            }
+        ]
+    },
+    {
+        "caseTitle": "🕵️ THE CASE: 'She reads a book.' (Accusative)",
+        "sentence": "Sie liest ___ Buch.",
+        "sentence_en": "She reads a book.",
+        "verb_infinitive": "lesen",
+        "correctArticle": "ein",
+        "fullSentence": "Sie liest ein Buch.",
+        "words": ["Sie", "liest", "___", "Buch."],
+        "victim_noun": "das Buch",
+        "victim_gender": "neuter",
+        "steps": [
+            {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Identify the verb in the sentence below and pull it to the answer box!",
+                "bubbles": ["Sie", "liest", "___", "Buch."],
+                "correctAnswer": "liest",
+                "investigation": "'liest' comes from 'lesen' (to read). This is an <strong>ACTION</strong> verb! You can review common condition verbs <span class='link-like' id='open-cheat-sheet-link'>here</span>."
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "Who or what is performing the action? Who or what is doing the thing?",
+                "verb_info": "('lesen' - to read)",
+                "verb_question_en": "Who or what reads something?????",
+                "bubbles": ["Sie", "Buch."],
+                "correctAnswer": "Sie",
+                "correctAnswer_en": "She",
+                "investigation": "Who or what is performing the action? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
+            },
+            {
+                "target": "victim",
+                "title": "🎯 Find the VICTIM!",
+                "instruction": "To find the victim of the action, ask: Who or what is influenced by the verb?",
+                "formula": "'Wen oder was?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'Whom or what does she read????",
+                "bubbles": ["Buch.", "Sie"],
+                "correctAnswer": "Buch.",
+                "investigation": "'Whom or what does she read?' → 'Buch'. This is our <strong>VICTIM</strong>!"
+            },
+            {
+                "target": "article",
+                "title": "⚖️ Choose the Case!",
+                "instruction": "Since we are working with an <strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") and you found a <strong>BOSS</strong> (\"%BOSS%\") and a <strong>VICTIM</strong> (\"%VICTIM_NOUN%\"), the victim must be put into the <strong>ACCUSATIVE</strong> case.",
+                "hint_rules": "<strong>Masculine (Acc):</strong> der → den / ein → einen<br><strong>Feminine (Acc):</strong> die → die / eine → eine<br><strong>Neuter (Acc):</strong> das → das / ein → <span class='highlight'>ein</span>",
+                "bubbles": ["ein", "einen", "eine", "eines"],
+                "correctAnswer": "ein",
+                "investigation": "Correct! Because 'Buch' is neuter, 'ein' remains 'ein' in the accusative case."
+            }
+        ]
+    },
+    {
+        "caseTitle": "🕵️ THE CASE: 'That is a house.' (Nominative)",
+        "sentence": "Das ist ___ Haus.",
+        "sentence_en": "That is a house.",
+        "verb_infinitive": "sein",
+        "correctArticle": "ein",
+        "fullSentence": "Das ist ein Haus.",
+        "words": ["Das", "ist", "___", "Haus."],
+        "predicate_nominative_noun": "das Haus",
+        "predicate_nominative_gender": "neuter",
+        "steps": [
+            {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Identify the verb...",
+                "bubbles": ["Das", "ist", "___", "Haus."],
+                "correctAnswer": "ist",
+                "investigation": "'ist' from 'sein' (to be). This is a <strong>CONDITION</strong> verb! It links the subject to its description. Both will be Nominative."
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "Who or what is being described?",
+                "verb_info": "('sein' - to be)",
+                "verb_question_en": "Who or what is being described?????",
+                "bubbles": ["Das", "Haus."],
+                "correctAnswer": "Das",
+                "correctAnswer_en": "That",
+                "investigation": "Who or what is being described? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
+            },
+            {
+                "target": "predicate_nominative",
+                "title": "🤔 Identify the Description!",
+                "instruction": "What is the BOSS?",
+                "formula": "'Was?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'What is that?'",
+                "bubbles": ["Haus.", "Das"],
+                "correctAnswer": "Haus.",
+                "investigation": "What is that? → 'Haus'. This is the description, also Nominative."
+            },
+            {
+                "target": "article",
+                "title": "⚖️ Choose the Case!",
+                "instruction": "With <strong>CONDITION</strong> verbs like \"%BOSS_VERB%\" (from \"%INFINITIVE%\"), the description of the <strong>BOSS</strong> (\"%BOSS%\") is also <strong>NOMINATIVE</strong>. Noun: <strong>%PREDICATE_NOMINATIVE_NOUN%</strong> (%PREDICATE_NOMINATIVE_GENDER%).",
+                "hint_rules": "<strong>Masculine (Nom):</strong> ...ein<br><strong>Feminine (Nom):</strong> ...eine<br><strong>Neuter (Nom):</strong> ...<span class='highlight'>ein</span>",
+                "bubbles": ["ein", "einen", "eine", "einer"],
+                "correctAnswer": "ein",
+                "investigation": "Correct! 'Haus' is neuter, so 'ein' stays 'ein' in Nominative."
+            }
+        ]
+    },
+    {
+        "caseTitle": "🕵️ THE CASE: 'We are buying an apple.' (Accusative)",
+        "sentence": "Wir kaufen ___ Apfel.",
+        "sentence_en": "We are buying an apple.",
+        "verb_infinitive": "kaufen",
+        "correctArticle": "einen",
+        "fullSentence": "Wir kaufen einen Apfel.",
+        "words": ["Wir", "kaufen", "___", "Apfel."],
+        "victim_noun": "der Apfel",
+        "victim_gender": "masculine",
+        "steps": [
+            {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Identify the verb...",
+                "bubbles": ["Wir", "kaufen", "___", "Apfel."],
+                "correctAnswer": "kaufen",
+                "investigation": "'kaufen' (to buy) is an <strong>ACTION</strong> verb."
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "Who or what is doing the action?",
+                "verb_info": "('kaufen' - to buy)",
+                "verb_question_en": "Who or what buys something?????",
+                "bubbles": ["Wir", "Apfel."],
+                "correctAnswer": "Wir",
+                "correctAnswer_en": "We",
+                "investigation": "Who is buying? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
+            },
+            {
+                "target": "victim",
+                "title": "🎯 Find the VICTIM!",
+                "instruction": "Whom or what is being affected by the action?",
+                "formula": "'Wen oder was?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'Whom or what do we buy?'",
+                "bubbles": ["Apfel.", "Wir"],
+                "correctAnswer": "Apfel.",
+                "investigation": "Whom or what do we buy? → 'Apfel'. This is the <strong>VICTIM</strong>."
+            },
+            {
+                "target": "article",
+                "title": "⚖️ Choose the Case!",
+                "instruction": "<strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") + <strong>BOSS</strong> (\"%BOSS%\") + <strong>VICTIM</strong> (\"%VICTIM_NOUN%\") means the victim is <strong>ACCUSATIVE</strong>. Noun: <strong>%VICTIM_NOUN%</strong> (%VICTIM_GENDER%).",
+                "hint_rules": "<strong>Masculine (Acc):</strong> ...<span class='highlight'>einen</span><br><strong>Feminine (Acc):</strong> ...eine<br><strong>Neuter (Acc):</strong> ...ein",
+                "bubbles": ["einen", "ein", "eine", "einem"],
                 "correctAnswer": "einen",
-                "investigation": "Correct! Because 'Stift' is masculine, 'ein' becomes 'einen' in the accusative case."
+                "investigation": "Correct! 'Apfel' is masculine, so 'ein' becomes 'einen' in Accusative."
+            }
+        ]
+    },
+    {
+        "caseTitle": "🕵️ THE CASE: 'She remains a teacher.' (Nominative)",
+        "sentence": "Sie bleibt ___ Lehrerin.",
+        "sentence_en": "She remains a teacher.",
+        "verb_infinitive": "bleiben",
+        "correctArticle": "eine",
+        "fullSentence": "Sie bleibt eine Lehrerin.",
+        "words": ["Sie", "bleibt", "___", "Lehrerin."],
+        "predicate_nominative_noun": "die Lehrerin",
+        "predicate_nominative_gender": "feminine",
+        "steps": [
+            {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Identify the verb...",
+                "bubbles": ["Sie", "bleibt", "___", "Lehrerin."],
+                "correctAnswer": "bleibt",
+                "investigation": "'bleibt' from 'bleiben' (to remain/stay). This is a <strong>CONDITION</strong> verb."
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "Who or what is being described?",
+                "verb_info": "('bleiben' - to remain)",
+                "verb_question_en": "Who or what remains something?????",
+                "bubbles": ["Sie", "Lehrerin."],
+                "correctAnswer": "Sie",
+                "correctAnswer_en": "She",
+                "investigation": "Who remains? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
+            },
+            {
+                "target": "predicate_nominative",
+                "title": "🤔 Identify the Description!",
+                "instruction": "What does the BOSS remain?",
+                "formula": "'Was?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'What does she remain?'",
+                "bubbles": ["Lehrerin.", "Sie"],
+                "correctAnswer": "Lehrerin.",
+                "investigation": "What does she remain? → 'Lehrerin'. Also Nominative."
+            },
+            {
+                "target": "article",
+                "title": "⚖️ Choose the Case!",
+                "instruction": "<strong>CONDITION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") means description is <strong>NOMINATIVE</strong>. Noun: <strong>%PREDICATE_NOMINATIVE_NOUN%</strong> (%PREDICATE_NOMINATIVE_GENDER%).",
+                "hint_rules": "<strong>Masculine (Nom):</strong> ...ein<br><strong>Feminine (Nom):</strong> ...<span class='highlight'>eine</span><br><strong>Neuter (Nom):</strong> ...ein",
+                "bubbles": ["eine", "einer", "ein", "einen"],
+                "correctAnswer": "eine",
+                "investigation": "Correct! 'Lehrerin' is feminine, so 'eine' stays 'eine'."
+            }
+        ]
+    },
+    {
+        "caseTitle": "🕵️ THE CASE: 'You all drink the juice.' (Accusative)",
+        "sentence": "Ihr trinkt ___ Saft.",
+        "sentence_en": "You all drink the juice.",
+        "verb_infinitive": "trinken",
+        "correctArticle": "den",
+        "fullSentence": "Ihr trinkt den Saft.",
+        "words": ["Ihr", "trinkt", "___", "Saft."],
+        "victim_noun": "der Saft",
+        "victim_gender": "masculine",
+        "steps": [
+            {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Identify the verb...",
+                "bubbles": ["Ihr", "trinkt", "___", "Saft."],
+                "correctAnswer": "trinkt",
+                "investigation": "'trinkt' from 'trinken' (to drink) is an <strong>ACTION</strong> verb."
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "Who or what is doing the action?",
+                "verb_info": "('trinken' - to drink)",
+                "verb_question_en": "Who or what drinks something?????",
+                "bubbles": ["Ihr", "Saft."],
+                "correctAnswer": "Ihr",
+                "correctAnswer_en": "You all",
+                "investigation": "Who drinks? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
+            },
+            {
+                "target": "victim",
+                "title": "🎯 Find the VICTIM!",
+                "instruction": "Whom or what is being affected?",
+                "formula": "'Wen oder was?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'Whom or what do you all drink?'",
+                "bubbles": ["Saft.", "Ihr"],
+                "correctAnswer": "Saft.",
+                "investigation": "Whom or what do you all drink? → 'Saft'. This is the <strong>VICTIM</strong>."
+            },
+            {
+                "target": "article",
+                "title": "⚖️ Choose the Case!",
+                "instruction": "<strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") + <strong>BOSS</strong> (\"%BOSS%\") + <strong>VICTIM</strong> (\"%VICTIM_NOUN%\") → Accusative. Noun: <strong>%VICTIM_NOUN%</strong> (%VICTIM_GENDER%).",
+                "hint_rules": "<strong>Masculine (Acc):</strong> der → <span class='highlight'>den</span> / ein → einen<br><strong>Feminine (Acc):</strong> ...die / ...eine<br><strong>Neuter (Acc):</strong> ...das / ...ein",
+                "bubbles": ["den", "dem", "der", "des"],
+                "correctAnswer": "den",
+                "investigation": "Correct! 'Saft' is masculine, so 'der' becomes 'den' in Accusative."
+            }
+        ]
+    },
+    {
+        "caseTitle": "🕵️ THE CASE: 'The boy is called Peter.' (Nominative)",
+        "sentence": "___ Junge heißt Peter.",
+        "sentence_en": "The boy is called Peter.",
+        "verb_infinitive": "heißen",
+        "correctArticle": "Der",
+        "fullSentence": "Der Junge heißt Peter.",
+        "words": ["___", "Junge", "heißt", "Peter."],
+        "predicate_nominative_noun": "Peter (Name)",
+        "predicate_nominative_gender": "masculine",
+        "steps": [
+            {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Identify the verb...",
+                "bubbles": ["Junge", "heißt", "Peter."],
+                "correctAnswer": "heißt",
+                "investigation": "'heißt' from 'heißen' (to be called) is a <strong>CONDITION</strong> verb."
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "Who or what is being described/named?",
+                "verb_info": "('heißen' - to be called)",
+                "verb_question_en": "Who or what is called something?????",
+                "bubbles": ["Junge", "Peter."],
+                "correctAnswer": "Junge",
+                "correctAnswer_en": "Boy",
+                "investigation": "Who is called Peter? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS (Subject)."
+            },
+            {
+                "target": "predicate_nominative",
+                "title": "🤔 Identify the Name/Description!",
+                "instruction": "What is the BOSS called?",
+                "formula": "'Wie?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'What is the boy called?'",
+                "bubbles": ["Peter.", "Junge"],
+                "correctAnswer": "Peter.",
+                "investigation": "What is the boy called? → 'Peter'. This is the name, also Nominative."
+            },
+            {
+                "target": "article",
+                "title": "⚖️ Choose the Case!",
+                "instruction": "The <strong>BOSS</strong> (\"Junge\") needs an article. With <strong>CONDITION</strong> verbs like \"%VERB%\" (from \"%INFINITIVE%\"), the BOSS is <strong>NOMINATIVE</strong>. Noun: der Junge (masculine).",
+                "hint_rules": "<strong>Masculine (Nom):</strong> der → <span class='highlight'>der</span> / ein → ein<br><strong>Feminine (Nom):</strong> ...die / ...eine<br><strong>Neuter (Nom):</strong> ...das / ...ein",
+                "bubbles": ["Der", "Den", "Dem", "Ein"],
+                "correctAnswer": "Der",
+                "investigation": "Correct! 'Junge' is masculine, so it takes 'der' in Nominative."
+            }
+        ]
+    },
+    {
+        "caseTitle": "🕵️ THE CASE: 'They are looking for a flat.' (Accusative)",
+        "sentence": "Sie suchen ___ Wohnung.",
+        "sentence_en": "They are looking for a flat.",
+        "verb_infinitive": "suchen",
+        "correctArticle": "eine",
+        "fullSentence": "Sie suchen eine Wohnung.",
+        "words": ["Sie", "suchen", "___", "Wohnung."],
+        "victim_noun": "die Wohnung",
+        "victim_gender": "feminine",
+        "steps": [
+            {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Identify the verb...",
+                "bubbles": ["Sie", "suchen", "___", "Wohnung."],
+                "correctAnswer": "suchen",
+                "investigation": "'suchen' (to look for) is an <strong>ACTION</strong> verb."
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "Who or what is doing the action?",
+                "verb_info": "('suchen' - to look for)",
+                "verb_question_en": "Who or what looks for something?????",
+                "bubbles": ["Sie", "Wohnung."],
+                "correctAnswer": "Sie",
+                "correctAnswer_en": "They",
+                "investigation": "Who is looking for? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
+            },
+            {
+                "target": "victim",
+                "title": "🎯 Find the VICTIM!",
+                "instruction": "Whom or what is being affected?",
+                "formula": "'Wen oder was?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'Whom or what do they look for?'",
+                "bubbles": ["Wohnung.", "Sie"],
+                "correctAnswer": "Wohnung.",
+                "investigation": "Whom or what do they look for? → 'Wohnung'. This is the <strong>VICTIM</strong>."
+            },
+            {
+                "target": "article",
+                "title": "⚖️ Choose the Case!",
+                "instruction": "<strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") + <strong>BOSS</strong> (\"%BOSS%\") + <strong>VICTIM</strong> (\"%VICTIM_NOUN%\") → Accusative. Noun: <strong>%VICTIM_NOUN%</strong> (%VICTIM_GENDER%).",
+                "hint_rules": "<strong>Masculine (Acc):</strong> ...den / ...einen<br><strong>Feminine (Acc):</strong> ...die / ...<span class='highlight'>eine</span><br><strong>Neuter (Acc):</strong> ...das / ...ein",
+                "bubbles": ["eine", "einer", "ein", "einen"],
+                "correctAnswer": "eine",
+                "investigation": "Correct! 'Wohnung' is feminine, so 'eine' stays 'eine' in Accusative."
+            }
+        ]
+    },
+    {
+        "caseTitle": "🕵️ THE CASE: 'The weather is a dream.' (Nominative)",
+        "sentence": "Das Wetter ist ___ Traum.",
+        "sentence_en": "The weather is a dream.",
+        "verb_infinitive": "sein",
+        "correctArticle": "ein",
+        "fullSentence": "Das Wetter ist ein Traum.",
+        "words": ["Das Wetter", "ist", "___", "Traum."],
+        "predicate_nominative_noun": "der Traum",
+        "predicate_nominative_gender": "masculine",
+         "steps": [
+            {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Identify the verb...",
+                "bubbles": ["Das Wetter", "ist", "___", "Traum."],
+                "correctAnswer": "ist",
+                "investigation": "'ist' from 'sein' (to be). This is a <strong>CONDITION</strong> verb."
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "Who or what is being described?",
+                "verb_info": "('sein' - to be)",
+                "verb_question_en": "Who or what is being described?????",
+                "bubbles": ["Das Wetter", "Traum."],
+                "correctAnswer": "Das Wetter",
+                "correctAnswer_en": "The weather",
+                "investigation": "What is being described? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
+            },
+            {
+                "target": "predicate_nominative",
+                "title": "🤔 Identify the Description!",
+                "instruction": "What is the BOSS?",
+                "formula": "'Was?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'What is the weather?'",
+                "bubbles": ["Traum.", "Das Wetter"],
+                "correctAnswer": "Traum.",
+                "investigation": "What is the weather? → 'Traum'. Also Nominative."
+            },
+            {
+                "target": "article",
+                "title": "⚖️ Choose the Case!",
+                "instruction": "<strong>CONDITION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") means description is <strong>NOMINATIVE</strong>. Noun: <strong>%PREDICATE_NOMINATIVE_NOUN%</strong> (%PREDICATE_NOMINATIVE_GENDER%).",
+                "hint_rules": "<strong>Masculine (Nom):</strong> ...<span class='highlight'>ein</span><br><strong>Feminine (Nom):</strong> ...eine<br><strong>Neuter (Nom):</strong> ...ein",
+                "bubbles": ["ein", "einen", "eine", "einem"],
+                "correctAnswer": "ein",
+                "investigation": "Correct! 'Traum' is masculine, so 'ein' stays 'ein'."
+            }
+        ]
+    },
+    {
+        "caseTitle": "🕵️ THE CASE: 'I need a chair.' (Accusative)",
+        "sentence": "Ich brauche ___ Stuhl.",
+        "sentence_en": "I need a chair.",
+        "verb_infinitive": "brauchen",
+        "correctArticle": "einen",
+        "fullSentence": "Ich brauche einen Stuhl.",
+        "words": ["Ich", "brauche", "___", "Stuhl."],
+        "victim_noun": "der Stuhl",
+        "victim_gender": "masculine",
+        "steps": [
+            {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Identify the verb...",
+                "bubbles": ["Ich", "brauche", "___", "Stuhl."],
+                "correctAnswer": "brauche",
+                "investigation": "'brauche' from 'brauchen' (to need) is an <strong>ACTION</strong> verb."
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "Who or what is doing the action?",
+                "verb_info": "('brauchen' - to need)",
+                "verb_question_en": "Who or what needs something?????",
+                "bubbles": ["Ich", "Stuhl."],
+                "correctAnswer": "Ich",
+                "correctAnswer_en": "I",
+                "investigation": "Who needs? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
+            },
+            {
+                "target": "victim",
+                "title": "🎯 Find the VICTIM!",
+                "instruction": "Whom or what is being affected?",
+                "formula": "'Wen oder was?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'Whom or what do I need?'",
+                "bubbles": ["Stuhl.", "Ich"],
+                "correctAnswer": "Stuhl.",
+                "investigation": "Whom or what do I need? → 'Stuhl'. This is the <strong>VICTIM</strong>."
+            },
+            {
+                "target": "article",
+                "title": "⚖️ Choose the Case!",
+                "instruction": "<strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") + <strong>BOSS</strong> (\"%BOSS%\") + <strong>VICTIM</strong> (\"%VICTIM_NOUN%\") → Accusative. Noun: <strong>%VICTIM_NOUN%</strong> (%VICTIM_GENDER%).",
+                "hint_rules": "<strong>Masculine (Acc):</strong> ...<span class='highlight'>einen</span><br><strong>Feminine (Acc):</strong> ...eine<br><strong>Neuter (Acc):</strong> ...ein",
+                "bubbles": ["einen", "ein", "eine", "einem"],
+                "correctAnswer": "einen",
+                "investigation": "Correct! 'Stuhl' is masculine, so 'ein' becomes 'einen'."
+            }
+        ]
+    },
+    {
+        "caseTitle": "🕵️ THE CASE: 'My brother is a police officer.' (Nominative)",
+        "sentence": "Mein Bruder ist ___ Polizist.",
+        "sentence_en": "My brother is a police officer.",
+        "verb_infinitive": "sein",
+        "correctArticle": "ein",
+        "fullSentence": "Mein Bruder ist ein Polizist.",
+        "words": ["Mein Bruder", "ist", "___", "Polizist."],
+        "predicate_nominative_noun": "der Polizist",
+        "predicate_nominative_gender": "masculine",
+        "steps": [
+             {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Identify the verb...",
+                "bubbles": ["Mein Bruder", "ist", "___", "Polizist."],
+                "correctAnswer": "ist",
+                "investigation": "'ist' from 'sein' (to be) is a <strong>CONDITION</strong> verb."
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "Who or what is being described?",
+                "verb_info": "('sein' - to be)",
+                "verb_question_en": "Who or what is being described?????",
+                "bubbles": ["Mein Bruder", "Polizist."],
+                "correctAnswer": "Mein Bruder",
+                "correctAnswer_en": "My brother",
+                "investigation": "Who is described? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
+            },
+            {
+                "target": "predicate_nominative",
+                "title": "🤔 Identify the Description!",
+                "instruction": "What is the BOSS?",
+                "formula": "'Was?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'What is my brother?'",
+                "bubbles": ["Polizist.", "Mein Bruder"],
+                "correctAnswer": "Polizist.",
+                "investigation": "What is my brother? → 'Polizist'. Also Nominative."
+            },
+            {
+                "target": "article",
+                "title": "⚖️ Choose the Case!",
+                "instruction": "<strong>CONDITION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") means description is <strong>NOMINATIVE</strong>. Noun: <strong>%PREDICATE_NOMINATIVE_NOUN%</strong> (%PREDICATE_NOMINATIVE_GENDER%).",
+                "hint_rules": "<strong>Masculine (Nom):</strong> ...<span class='highlight'>ein</span><br><strong>Feminine (Nom):</strong> ...eine<br><strong>Neuter (Nom):</strong> ...ein",
+                "bubbles": ["ein", "einen", "dem", "den"],
+                "correctAnswer": "ein",
+                "investigation": "Correct! 'Polizist' is masculine, so 'ein' stays 'ein'."
+            }
+        ]
+    },
+    {
+        "caseTitle": "🕵️ THE CASE: 'You find the key.' (Accusative)",
+        "sentence": "Du findest ___ Schlüssel.",
+        "sentence_en": "You find the key.",
+        "verb_infinitive": "finden",
+        "correctArticle": "den",
+        "fullSentence": "Du findest den Schlüssel.",
+        "words": ["Du", "findest", "___", "Schlüssel."],
+        "victim_noun": "der Schlüssel",
+        "victim_gender": "masculine",
+        "steps": [
+            {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Identify the verb...",
+                "bubbles": ["Du", "findest", "___", "Schlüssel."],
+                "correctAnswer": "findest",
+                "investigation": "'findest' from 'finden' (to find) is an <strong>ACTION</strong> verb."
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "Who or what is doing the action?",
+                "verb_info": "('finden' - to find)",
+                "verb_question_en": "Who or what finds something?????",
+                "bubbles": ["Du", "Schlüssel."],
+                "correctAnswer": "Du",
+                "correctAnswer_en": "You",
+                "investigation": "Who finds? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
+            },
+            {
+                "target": "victim",
+                "title": "🎯 Find the VICTIM!",
+                "instruction": "Whom or what is being affected?",
+                "formula": "'Wen oder was?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'Whom or what do you find?'",
+                "bubbles": ["Schlüssel.", "Du"],
+                "correctAnswer": "Schlüssel.",
+                "investigation": "Whom or what do you find? → 'Schlüssel'. This is the <strong>VICTIM</strong>."
+            },
+            {
+                "target": "article",
+                "title": "⚖️ Choose the Case!",
+                "instruction": "<strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") + <strong>BOSS</strong> (\"%BOSS%\") + <strong>VICTIM</strong> (\"%VICTIM_NOUN%\") → Accusative. Noun: <strong>%VICTIM_NOUN%</strong> (%VICTIM_GENDER%).",
+                "hint_rules": "<strong>Masculine (Acc):</strong> der → <span class='highlight'>den</span> / ein → einen<br><strong>Feminine (Acc):</strong> ...die / ...eine<br><strong>Neuter (Acc):</strong> ...das / ...ein",
+                "bubbles": ["den", "dem", "der", "ein"],
+                "correctAnswer": "den",
+                "investigation": "Correct! 'Schlüssel' is masculine, so 'der' becomes 'den'."
+            }
+        ]
+    },
+    {
+        "caseTitle": "🕵️ THE CASE: 'Her sister becomes a famous singer.' (Nominative)",
+        "sentence": "Ihre Schwester wird ___ berühmte Sängerin.",
+        "sentence_en": "Her sister becomes a famous singer.",
+        "verb_infinitive": "werden",
+        "correctArticle": "eine",
+        "fullSentence": "Ihre Schwester wird eine berühmte Sängerin.",
+        "words": ["Ihre Schwester", "wird", "___", "berühmte Sängerin."],
+        "predicate_nominative_noun": "die Sängerin",
+        "predicate_nominative_gender": "feminine",
+        "steps": [
+             {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Identify the verb...",
+                "bubbles": ["Ihre Schwester", "wird", "___", "berühmte Sängerin."],
+                "correctAnswer": "wird",
+                "investigation": "'wird' from 'werden' (to become) is a <strong>CONDITION</strong> verb."
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "Who or what is being described/becoming something?",
+                "verb_info": "('werden' - to become)",
+                "verb_question_en": "Who or what becomes something?????",
+                "bubbles": ["Ihre Schwester", "berühmte Sängerin."],
+                "correctAnswer": "Ihre Schwester",
+                "correctAnswer_en": "Her sister",
+                "investigation": "Who becomes? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
+            },
+            {
+                "target": "predicate_nominative",
+                "title": "🤔 Identify the Description!",
+                "instruction": "What does the BOSS become?",
+                "formula": "'Was?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'What does her sister become?'",
+                "bubbles": ["berühmte Sängerin.", "Ihre Schwester"],
+                "correctAnswer": "berühmte Sängerin.",
+                "investigation": "What does her sister become? → 'berühmte Sängerin'. Also Nominative."
+            },
+            {
+                "target": "article",
+                "title": "⚖️ Choose the Case!",
+                "instruction": "<strong>CONDITION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") means description is <strong>NOMINATIVE</strong>. Noun: <strong>%PREDICATE_NOMINATIVE_NOUN%</strong> (%PREDICATE_NOMINATIVE_GENDER%).",
+                "hint_rules": "<strong>Masculine (Nom):</strong> ...ein<br><strong>Feminine (Nom):</strong> ...<span class='highlight'>eine</span><br><strong>Neuter (Nom):</strong> ...ein",
+                "bubbles": ["eine", "einer", "einem", "einen"],
+                "correctAnswer": "eine",
+                "investigation": "Correct! 'Sängerin' is feminine, so 'eine' stays 'eine'."
+            }
+        ]
+    },
+    {
+        "caseTitle": "🕵️ THE CASE: 'He likes the film.' (Accusative)",
+        "sentence": "Er mag ___ Film.",
+        "sentence_en": "He likes the film.",
+        "verb_infinitive": "mögen",
+        "correctArticle": "den",
+        "fullSentence": "Er mag den Film.",
+        "words": ["Er", "mag", "___", "Film."],
+        "victim_noun": "der Film",
+        "victim_gender": "masculine",
+        "steps": [
+             {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Identify the verb...",
+                "bubbles": ["Er", "mag", "___", "Film."],
+                "correctAnswer": "mag",
+                "investigation": "'mag' from 'mögen' (to like) is an <strong>ACTION</strong> verb."
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "Who or what is doing the action?",
+                "verb_info": "('mögen' - to like)",
+                "verb_question_en": "Who or what likes something?????",
+                "bubbles": ["Er", "Film."],
+                "correctAnswer": "Er",
+                "correctAnswer_en": "He",
+                "investigation": "Who likes? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
+            },
+            {
+                "target": "victim",
+                "title": "🎯 Find the VICTIM!",
+                "instruction": "Whom or what is being affected?",
+                "formula": "'Wen oder was?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'Whom or what does he like?'",
+                "bubbles": ["Film.", "Er"],
+                "correctAnswer": "Film.",
+                "investigation": "Whom or what does he like? → 'Film'. This is the <strong>VICTIM</strong>."
+            },
+            {
+                "target": "article",
+                "title": "⚖️ Choose the Case!",
+                "instruction": "<strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") + <strong>BOSS</strong> (\"%BOSS%\") + <strong>VICTIM</strong> (\"%VICTIM_NOUN%\") → Accusative. Noun: <strong>%VICTIM_NOUN%</strong> (%VICTIM_GENDER%).",
+                "hint_rules": "<strong>Masculine (Acc):</strong> der → <span class='highlight'>den</span> / ein → einen<br><strong>Feminine (Acc):</strong> ...die / ...eine<br><strong>Neuter (Acc):</strong> ...das / ...ein",
+                "bubbles": ["den", "dem", "der", "das"],
+                "correctAnswer": "den",
+                "investigation": "Correct! 'Film' is masculine, so 'der' becomes 'den'."
+            }
+        ]
+    },
+    {
+        "caseTitle": "🕵️ THE CASE: 'We remain a team.' (Nominative)",
+        "sentence": "Wir bleiben ___ Team.",
+        "sentence_en": "We remain a team.",
+        "verb_infinitive": "bleiben",
+        "correctArticle": "ein",
+        "fullSentence": "Wir bleiben ein Team.",
+        "words": ["Wir", "bleiben", "___", "Team."],
+        "predicate_nominative_noun": "das Team",
+        "predicate_nominative_gender": "neuter",
+        "steps": [
+            {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Identify the verb...",
+                "bubbles": ["Wir", "bleiben", "___", "Team."],
+                "correctAnswer": "bleiben",
+                "investigation": "'bleiben' (to remain/stay) is a <strong>CONDITION</strong> verb."
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "Who or what is being described?",
+                "verb_info": "('bleiben' - to remain)",
+                "verb_question_en": "Who or what remains something?????",
+                "bubbles": ["Wir", "Team."],
+                "correctAnswer": "Wir",
+                "correctAnswer_en": "We",
+                "investigation": "Who remains? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
+            },
+            {
+                "target": "predicate_nominative",
+                "title": "🤔 Identify the Description!",
+                "instruction": "What does the BOSS remain?",
+                "formula": "'Was?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'What do we remain?'",
+                "bubbles": ["Team.", "Wir"],
+                "correctAnswer": "Team.",
+                "investigation": "What do we remain? → 'Team'. Also Nominative."
+            },
+            {
+                "target": "article",
+                "title": "⚖️ Choose the Case!",
+                "instruction": "<strong>CONDITION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") means description is <strong>NOMINATIVE</strong>. Noun: <strong>%PREDICATE_NOMINATIVE_NOUN%</strong> (%PREDICATE_NOMINATIVE_GENDER%).",
+                "hint_rules": "<strong>Masculine (Nom):</strong> ...ein<br><strong>Feminine (Nom):</strong> ...eine<br><strong>Neuter (Nom):</strong> ...<span class='highlight'>ein</span>",
+                "bubbles": ["ein", "einen", "eine", "einem"],
+                "correctAnswer": "ein",
+                "investigation": "Correct! 'Team' is neuter, so 'ein' stays 'ein'."
+            }
+        ]
+    },
+    {
+        "caseTitle": "🕵️ THE CASE: 'She knows the man.' (Accusative)",
+        "sentence": "Sie kennt ___ Mann.",
+        "sentence_en": "She knows the man.",
+        "verb_infinitive": "kennen",
+        "correctArticle": "den",
+        "fullSentence": "Sie kennt den Mann.",
+        "words": ["Sie", "kennt", "___", "Mann."],
+        "victim_noun": "der Mann",
+        "victim_gender": "masculine",
+        "steps": [
+             {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Identify the verb...",
+                "bubbles": ["Sie", "kennt", "___", "Mann."],
+                "correctAnswer": "kennt",
+                "investigation": "'kennt' from 'kennen' (to know a person/place) is an <strong>ACTION</strong> verb."
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "Who or what is doing the action?",
+                "verb_info": "('kennen' - to know)",
+                "verb_question_en": "Who or what knows someone/something?????",
+                "bubbles": ["Sie", "Mann."],
+                "correctAnswer": "Sie",
+                "correctAnswer_en": "She",
+                "investigation": "Who knows? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
+            },
+            {
+                "target": "victim",
+                "title": "🎯 Find the VICTIM!",
+                "instruction": "Whom or what is being affected?",
+                "formula": "'Wen oder was?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'Whom or what does she know?'",
+                "bubbles": ["Mann.", "Sie"],
+                "correctAnswer": "Mann.",
+                "investigation": "Whom or what does she know? → 'Mann'. This is the <strong>VICTIM</strong>."
+            },
+            {
+                "target": "article",
+                "title": "⚖️ Choose the Case!",
+                "instruction": "<strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") + <strong>BOSS</strong> (\"%BOSS%\") + <strong>VICTIM</strong> (\"%VICTIM_NOUN%\") → Accusative. Noun: <strong>%VICTIM_NOUN%</strong> (%VICTIM_GENDER%).",
+                "hint_rules": "<strong>Masculine (Acc):</strong> der → <span class='highlight'>den</span> / ein → einen<br><strong>Feminine (Acc):</strong> ...die / ...eine<br><strong>Neuter (Acc):</strong> ...das / ...ein",
+                "bubbles": ["den", "dem", "der", "des"],
+                "correctAnswer": "den",
+                "investigation": "Correct! 'Mann' is masculine, so 'der' becomes 'den'."
+            }
+        ]
+    },
+    {
+        "caseTitle": "🕵️ THE CASE: 'You are a hero.' (Nominative)",
+        "sentence": "Du bist ___ Held.",
+        "sentence_en": "You are a hero.",
+        "verb_infinitive": "sein",
+        "correctArticle": "ein",
+        "fullSentence": "Du bist ein Held.",
+        "words": ["Du", "bist", "___", "Held."],
+        "predicate_nominative_noun": "der Held",
+        "predicate_nominative_gender": "masculine",
+        "steps": [
+            {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Identify the verb...",
+                "bubbles": ["Du", "bist", "___", "Held."],
+                "correctAnswer": "bist",
+                "investigation": "'bist' from 'sein' (to be) is a <strong>CONDITION</strong> verb."
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "Who or what is being described?",
+                "verb_info": "('sein' - to be)",
+                "verb_question_en": "Who or what is being described?????",
+                "bubbles": ["Du", "Held."],
+                "correctAnswer": "Du",
+                "correctAnswer_en": "You",
+                "investigation": "Who is described? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
+            },
+            {
+                "target": "predicate_nominative",
+                "title": "🤔 Identify the Description!",
+                "instruction": "What is the BOSS?",
+                "formula": "'Was?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'What are you?'",
+                "bubbles": ["Held.", "Du"],
+                "correctAnswer": "Held.",
+                "investigation": "What are you? → 'Held'. Also Nominative."
+            },
+            {
+                "target": "article",
+                "title": "⚖️ Choose the Case!",
+                "instruction": "<strong>CONDITION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") means description is <strong>NOMINATIVE</strong>. Noun: <strong>%PREDICATE_NOMINATIVE_NOUN%</strong> (%PREDICATE_NOMINATIVE_GENDER%).",
+                "hint_rules": "<strong>Masculine (Nom):</strong> ...<span class='highlight'>ein</span><br><strong>Feminine (Nom):</strong> ...eine<br><strong>Neuter (Nom):</strong> ...ein",
+                "bubbles": ["ein", "einen", "eines", "einem"],
+                "correctAnswer": "ein",
+                "investigation": "Correct! 'Held' is masculine, so 'ein' stays 'ein'."
+            }
+        ]
+    },
+    {
+        "caseTitle": "🕵️ THE CASE: 'We visit our friend (female).' (Accusative)",
+        "sentence": "Wir besuchen ___ Freundin.",
+        "sentence_en": "We visit our friend (female).",
+        "verb_infinitive": "besuchen",
+        "correctArticle": "unsere",
+        "fullSentence": "Wir besuchen unsere Freundin.",
+        "words": ["Wir", "besuchen", "___", "Freundin."],
+        "victim_noun": "die Freundin",
+        "victim_gender": "feminine",
+        "steps": [
+             {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Identify the verb...",
+                "bubbles": ["Wir", "besuchen", "___", "Freundin."],
+                "correctAnswer": "besuchen",
+                "investigation": "'besuchen' (to visit) is an <strong>ACTION</strong> verb."
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "Who or what is doing the action?",
+                "verb_info": "('besuchen' - to visit)",
+                "verb_question_en": "Who or what visits someone/something?????",
+                "bubbles": ["Wir", "Freundin."],
+                "correctAnswer": "Wir",
+                "correctAnswer_en": "We",
+                "investigation": "Who visits? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
+            },
+            {
+                "target": "victim",
+                "title": "🎯 Find the VICTIM!",
+                "instruction": "Whom or what is being affected?",
+                "formula": "'Wen oder was?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'Whom or what do we visit?'",
+                "bubbles": ["Freundin.", "Wir"],
+                "correctAnswer": "Freundin.",
+                "investigation": "Whom or what do we visit? → 'Freundin'. This is the <strong>VICTIM</strong>."
+            },
+            {
+                "target": "article",
+                "title": "⚖️ Choose the Case!",
+                "instruction": "<strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") + <strong>BOSS</strong> (\"%BOSS%\") + <strong>VICTIM</strong> (\"%VICTIM_NOUN%\") → Accusative. Noun: <strong>%VICTIM_NOUN%</strong> (%VICTIM_GENDER%).",
+                "hint_rules": "<strong>Masculine (Acc):</strong> ...unseren<br><strong>Feminine (Acc):</strong> ...<span class='highlight'>unsere</span><br><strong>Neuter (Acc):</strong> ...unser",
+                "bubbles": ["unsere", "unserer", "unseren", "unser"],
+                "correctAnswer": "unsere",
+                "investigation": "Correct! 'Freundin' is feminine, so 'unsere' stays 'unsere'."
+            }
+        ]
+    },
+    {
+        "caseTitle": "🕵️ THE CASE: 'It is a cold day.' (Nominative)",
+        "sentence": "Es ist ___ kalter Tag.",
+        "sentence_en": "It is a cold day.",
+        "verb_infinitive": "sein",
+        "correctArticle": "ein",
+        "fullSentence": "Es ist ein kalter Tag.",
+        "words": ["Es", "ist", "___", "kalter Tag."],
+        "predicate_nominative_noun": "der Tag",
+        "predicate_nominative_gender": "masculine",
+        "steps": [
+            {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Identify the verb...",
+                "bubbles": ["Es", "ist", "___", "kalter Tag."],
+                "correctAnswer": "ist",
+                "investigation": "'ist' from 'sein' (to be) is a <strong>CONDITION</strong> verb."
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "Who or what is being described?",
+                "verb_info": "('sein' - to be)",
+                "verb_question_en": "Who or what is being described?????",
+                "bubbles": ["Es", "kalter Tag."],
+                "correctAnswer": "Es",
+                "correctAnswer_en": "It",
+                "investigation": "What is described? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
+            },
+            {
+                "target": "predicate_nominative",
+                "title": "🤔 Identify the Description!",
+                "instruction": "What is the BOSS?",
+                "formula": "'Was?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'What is it?'",
+                "bubbles": ["kalter Tag.", "Es"],
+                "correctAnswer": "kalter Tag.",
+                "investigation": "What is it? → 'kalter Tag'. Also Nominative."
+            },
+            {
+                "target": "article",
+                "title": "⚖️ Choose the Case!",
+                "instruction": "<strong>CONDITION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") means description is <strong>NOMINATIVE</strong>. Noun: <strong>%PREDICATE_NOMINATIVE_NOUN%</strong> (%PREDICATE_NOMINATIVE_GENDER%).",
+                "hint_rules": "<strong>Masculine (Nom):</strong> ...<span class='highlight'>ein</span><br><strong>Feminine (Nom):</strong> ...eine<br><strong>Neuter (Nom):</strong> ...ein",
+                "bubbles": ["ein", "einen", "eine", "eines"],
+                "correctAnswer": "ein",
+                "investigation": "Correct! 'Tag' is masculine, so 'ein' stays 'ein'."
+            }
+        ]
+    },
+    {
+        "caseTitle": "🕵️ THE CASE: 'I write an email.' (Accusative)",
+        "sentence": "Ich schreibe ___ E-Mail.",
+        "sentence_en": "I write an email.",
+        "verb_infinitive": "schreiben",
+        "correctArticle": "eine",
+        "fullSentence": "Ich schreibe eine E-Mail.",
+        "words": ["Ich", "schreibe", "___", "E-Mail."],
+        "victim_noun": "die E-Mail",
+        "victim_gender": "feminine",
+        "steps": [
+             {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Identify the verb...",
+                "bubbles": ["Ich", "schreibe", "___", "E-Mail."],
+                "correctAnswer": "schreibe",
+                "investigation": "'schreibe' from 'schreiben' (to write) is an <strong>ACTION</strong> verb."
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "Who or what is doing the action?",
+                "verb_info": "('schreiben' - to write)",
+                "verb_question_en": "Who or what writes something?????",
+                "bubbles": ["Ich", "E-Mail."],
+                "correctAnswer": "Ich",
+                "correctAnswer_en": "I",
+                "investigation": "Who writes? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
+            },
+            {
+                "target": "victim",
+                "title": "🎯 Find the VICTIM!",
+                "instruction": "Whom or what is being affected?",
+                "formula": "'Wen oder was?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'Whom or what do I write?'",
+                "bubbles": ["E-Mail.", "Ich"],
+                "correctAnswer": "E-Mail.",
+                "investigation": "Whom or what do I write? → 'E-Mail'. This is the <strong>VICTIM</strong>."
+            },
+            {
+                "target": "article",
+                "title": "⚖️ Choose the Case!",
+                "instruction": "<strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") + <strong>BOSS</strong> (\"%BOSS%\") + <strong>VICTIM</strong> (\"%VICTIM_NOUN%\") → Accusative. Noun: <strong>%VICTIM_NOUN%</strong> (%VICTIM_GENDER%).",
+                "hint_rules": "<strong>Masculine (Acc):</strong> ...den / ...einen<br><strong>Feminine (Acc):</strong> ...die / ...<span class='highlight'>eine</span><br><strong>Neuter (Acc):</strong> ...das / ...ein",
+                "bubbles": ["eine", "einer", "ein", "einen"],
+                "correctAnswer": "eine",
+                "investigation": "Correct! 'E-Mail' is feminine, so 'eine' stays 'eine'."
+            }
+        ]
+    },
+    {
+        "caseTitle": "🕵️ THE CASE: 'The man is my father.' (Nominative)",
+        "sentence": "Der Mann ist ___ Vater.",
+        "sentence_en": "The man is my father.",
+        "verb_infinitive": "sein",
+        "correctArticle": "mein",
+        "fullSentence": "Der Mann ist mein Vater.",
+        "words": ["Der Mann", "ist", "___", "Vater."],
+        "predicate_nominative_noun": "der Vater",
+        "predicate_nominative_gender": "masculine",
+        "steps": [
+            {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Identify the verb...",
+                "bubbles": ["Der Mann", "ist", "___", "Vater."],
+                "correctAnswer": "ist",
+                "investigation": "'ist' from 'sein' (to be) is a <strong>CONDITION</strong> verb."
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "Who or what is being described?",
+                "verb_info": "('sein' - to be)",
+                "verb_question_en": "Who or what is being described?????",
+                "bubbles": ["Der Mann", "Vater."],
+                "correctAnswer": "Der Mann",
+                "correctAnswer_en": "The man",
+                "investigation": "Who is described? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
+            },
+            {
+                "target": "predicate_nominative",
+                "title": "🤔 Identify the Description!",
+                "instruction": "What is the BOSS?",
+                "formula": "'Was?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'What is the man?'",
+                "bubbles": ["Vater.", "Der Mann"],
+                "correctAnswer": "Vater.",
+                "investigation": "What is the man? → 'Vater'. Also Nominative."
+            },
+            {
+                "target": "article",
+                "title": "⚖️ Choose the Case!",
+                "instruction": "<strong>CONDITION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") means description is <strong>NOMINATIVE</strong>. Noun: <strong>%PREDICATE_NOMINATIVE_NOUN%</strong> (%PREDICATE_NOMINATIVE_GENDER%).",
+                "hint_rules": "<strong>Masculine (Nom):</strong> mein → <span class='highlight'>mein</span> / meinen<br><strong>Feminine (Nom):</strong> meine → meine / meiner<br><strong>Neuter (Nom):</strong> mein → mein / meinem",
+                "bubbles": ["mein", "meinen", "meinem", "meiner"],
+                "correctAnswer": "mein",
+                "investigation": "Correct! 'Vater' is masculine, so 'mein' stays 'mein' for Nominative."
+            }
+        ]
+    },
+    {
+        "caseTitle": "🕵️ THE CASE: 'You (formal) open the door.' (Accusative)",
+        "sentence": "Sie öffnen ___ Tür.",
+        "sentence_en": "You (formal) open the door.",
+        "verb_infinitive": "öffnen",
+        "correctArticle": "die",
+        "fullSentence": "Sie öffnen die Tür.",
+        "words": ["Sie", "öffnen", "___", "Tür."],
+        "victim_noun": "die Tür",
+        "victim_gender": "feminine",
+        "steps": [
+            {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Identify the verb...",
+                "bubbles": ["Sie", "öffnen", "___", "Tür."],
+                "correctAnswer": "öffnen",
+                "investigation": "'öffnen' (to open) is an <strong>ACTION</strong> verb."
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "Who or what is doing the action?",
+                "verb_info": "('öffnen' - to open)",
+                "verb_question_en": "Who or what opens something?????",
+                "bubbles": ["Sie", "Tür."],
+                "correctAnswer": "Sie",
+                "correctAnswer_en": "You (formal)",
+                "investigation": "Who opens? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
+            },
+            {
+                "target": "victim",
+                "title": "🎯 Find the VICTIM!",
+                "instruction": "Whom or what is being affected?",
+                "formula": "'Wen oder was?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'Whom or what do you (formal) open?'",
+                "bubbles": ["Tür.", "Sie"],
+                "correctAnswer": "Tür.",
+                "investigation": "Whom or what do you open? → 'Tür'. This is the <strong>VICTIM</strong>."
+            },
+            {
+                "target": "article",
+                "title": "⚖️ Choose the Case!",
+                "instruction": "<strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") + <strong>BOSS</strong> (\"%BOSS%\") + <strong>VICTIM</strong> (\"%VICTIM_NOUN%\") → Accusative. Noun: <strong>%VICTIM_NOUN%</strong> (%VICTIM_GENDER%).",
+                "hint_rules": "<strong>Masculine (Acc):</strong> ...den / ...einen<br><strong>Feminine (Acc):</strong> ...<span class='highlight'>die</span> / ...eine<br><strong>Neuter (Acc):</strong> ...das / ...ein",
+                "bubbles": ["die", "der", "den", "dem"],
+                "correctAnswer": "die",
+                "investigation": "Correct! 'Tür' is feminine, so 'die' stays 'die'."
+            }
+        ]
+    },
+    {
+        "caseTitle": "🕵️ THE CASE: 'The dog is a good animal.' (Nominative)",
+        "sentence": "Der Hund ist ___ gutes Tier.",
+        "sentence_en": "The dog is a good animal.",
+        "verb_infinitive": "sein",
+        "correctArticle": "ein",
+        "fullSentence": "Der Hund ist ein gutes Tier.",
+        "words": ["Der Hund", "ist", "___", "gutes Tier."],
+        "predicate_nominative_noun": "das Tier",
+        "predicate_nominative_gender": "neuter",
+        "steps": [
+            {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Identify the verb...",
+                "bubbles": ["Der Hund", "ist", "___", "gutes Tier."],
+                "correctAnswer": "ist",
+                "investigation": "'ist' from 'sein' (to be) is a <strong>CONDITION</strong> verb."
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "Who or what is being described?",
+                "verb_info": "('sein' - to be)",
+                "verb_question_en": "Who or what is being described?????",
+                "bubbles": ["Der Hund", "gutes Tier."],
+                "correctAnswer": "Der Hund",
+                "correctAnswer_en": "The dog",
+                "investigation": "Who is described? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
+            },
+            {
+                "target": "predicate_nominative",
+                "title": "🤔 Identify the Description!",
+                "instruction": "What is the BOSS?",
+                "formula": "'Was?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'What is the dog?'",
+                "bubbles": ["gutes Tier.", "Der Hund"],
+                "correctAnswer": "gutes Tier.",
+                "investigation": "What is the dog? → 'gutes Tier'. Also Nominative."
+            },
+            {
+                "target": "article",
+                "title": "⚖️ Choose the Case!",
+                "instruction": "<strong>CONDITION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") means description is <strong>NOMINATIVE</strong>. Noun: <strong>%PREDICATE_NOMINATIVE_NOUN%</strong> (%PREDICATE_NOMINATIVE_GENDER%).",
+                "hint_rules": "<strong>Masculine (Nom):</strong> ...ein<br><strong>Feminine (Nom):</strong> ...eine<br><strong>Neuter (Nom):</strong> ...<span class='highlight'>ein</span>",
+                "bubbles": ["ein", "einen", "eine", "eines"],
+                "correctAnswer": "ein",
+                "investigation": "Correct! 'Tier' is neuter, so 'ein' stays 'ein'."
+            }
+        ]
+    },
+    {
+        "caseTitle": "🕵️ THE CASE: 'The children close the window.' (Accusative)",
+        "sentence": "Die Kinder schließen ___ Fenster.",
+        "sentence_en": "The children close the window.",
+        "verb_infinitive": "schließen",
+        "correctArticle": "das",
+        "fullSentence": "Die Kinder schließen das Fenster.",
+        "words": ["Die Kinder", "schließen", "___", "Fenster."],
+        "victim_noun": "das Fenster",
+        "victim_gender": "neuter",
+        "steps": [
+            {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Identify the verb...",
+                "bubbles": ["Die Kinder", "schließen", "___", "Fenster."],
+                "correctAnswer": "schließen",
+                "investigation": "'schließen' (to close) is an <strong>ACTION</strong> verb."
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "Who or what is doing the action?",
+                "verb_info": "('schließen' - to close)",
+                "verb_question_en": "Who or what closes something?????",
+                "bubbles": ["Die Kinder", "Fenster."],
+                "correctAnswer": "Die Kinder",
+                "correctAnswer_en": "The children",
+                "investigation": "Who closes? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
+            },
+            {
+                "target": "victim",
+                "title": "🎯 Find the VICTIM!",
+                "instruction": "Whom or what is being affected?",
+                "formula": "'Wen oder was?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'Whom or what do the children close?'",
+                "bubbles": ["Fenster.", "Die Kinder"],
+                "correctAnswer": "Fenster.",
+                "investigation": "Whom or what do the children close? → 'Fenster'. This is the <strong>VICTIM</strong>."
+            },
+            {
+                "target": "article",
+                "title": "⚖️ Choose the Case!",
+                "instruction": "<strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") + <strong>BOSS</strong> (\"%BOSS%\") + <strong>VICTIM</strong> (\"%VICTIM_NOUN%\") → Accusative. Noun: <strong>%VICTIM_NOUN%</strong> (%VICTIM_GENDER%).",
+                "hint_rules": "<strong>Masculine (Acc):</strong> ...den / ...einen<br><strong>Feminine (Acc):</strong> ...die / ...eine<br><strong>Neuter (Acc):</strong> ...<span class='highlight'>das</span> / ...ein",
+                "bubbles": ["das", "dem", "den", "die"],
+                "correctAnswer": "das",
+                "investigation": "Correct! 'Fenster' is neuter, so 'das' stays 'das'."
+            }
+        ]
+    },
+    {
+        "caseTitle": "🕵️ THE CASE: 'The woman is a doctor (female).' (Nominative)",
+        "sentence": "Die Frau ist ___ Ärztin.",
+        "sentence_en": "The woman is a doctor (female).",
+        "verb_infinitive": "sein",
+        "correctArticle": "eine",
+        "fullSentence": "Die Frau ist eine Ärztin.",
+        "words": ["Die Frau", "ist", "___", "Ärztin."],
+        "predicate_nominative_noun": "die Ärztin",
+        "predicate_nominative_gender": "feminine",
+        "steps": [
+            {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Identify the verb...",
+                "bubbles": ["Die Frau", "ist", "___", "Ärztin."],
+                "correctAnswer": "ist",
+                "investigation": "'ist' from 'sein' (to be) is a <strong>CONDITION</strong> verb."
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "Who or what is being described?",
+                "verb_info": "('sein' - to be)",
+                "verb_question_en": "Who or what is being described?????",
+                "bubbles": ["Die Frau", "Ärztin."],
+                "correctAnswer": "Die Frau",
+                "correctAnswer_en": "The woman",
+                "investigation": "Who is described? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
+            },
+            {
+                "target": "predicate_nominative",
+                "title": "🤔 Identify the Description!",
+                "instruction": "What is the BOSS?",
+                "formula": "'Was?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'What is the woman?'",
+                "bubbles": ["Ärztin.", "Die Frau"],
+                "correctAnswer": "Ärztin.",
+                "investigation": "What is the woman? → 'Ärztin'. Also Nominative."
+            },
+            {
+                "target": "article",
+                "title": "⚖️ Choose the Case!",
+                "instruction": "<strong>CONDITION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") means description is <strong>NOMINATIVE</strong>. Noun: <strong>%PREDICATE_NOMINATIVE_NOUN%</strong> (%PREDICATE_NOMINATIVE_GENDER%).",
+                "hint_rules": "<strong>Masculine (Nom):</strong> ...ein<br><strong>Feminine (Nom):</strong> ...<span class='highlight'>eine</span><br><strong>Neuter (Nom):</strong> ...ein",
+                "bubbles": ["eine", "einer", "einem", "einen"],
+                "correctAnswer": "eine",
+                "investigation": "Correct! 'Ärztin' is feminine, so 'eine' stays 'eine'."
+            }
+        ]
+    },
+    {
+        "caseTitle": "🕵️ THE CASE: 'I paint a picture.' (Accusative)",
+        "sentence": "Ich male ___ Bild.",
+        "sentence_en": "I paint a picture.",
+        "verb_infinitive": "malen",
+        "correctArticle": "ein",
+        "fullSentence": "Ich male ein Bild.",
+        "words": ["Ich", "male", "___", "Bild."],
+        "victim_noun": "das Bild",
+        "victim_gender": "neuter",
+        "steps": [
+            {
+                "target": "verb",
+                "title": "🎯 Find the Verb!",
+                "instruction": "Identify the verb...",
+                "bubbles": ["Ich", "male", "___", "Bild."],
+                "correctAnswer": "male",
+                "investigation": "'male' from 'malen' (to paint) is an <strong>ACTION</strong> verb."
+            },
+            {
+                "target": "boss",
+                "title": "👑 Find the BOSS!",
+                "instruction": "Who or what is doing the action?",
+                "verb_info": "('malen' - to paint)",
+                "verb_question_en": "Who or what paints something?????",
+                "bubbles": ["Ich", "Bild."],
+                "correctAnswer": "Ich",
+                "correctAnswer_en": "I",
+                "investigation": "Who paints? → <strong>%ANSWER% (%ANSWER_EN%)</strong> is the BOSS."
+            },
+            {
+                "target": "victim",
+                "title": "🎯 Find the VICTIM!",
+                "instruction": "Whom or what is being affected?",
+                "formula": "'Wen oder was?' + ' %VERB%' + ' %BOSS%'?",
+                "formula_en": "'Whom or what do I paint?'",
+                "bubbles": ["Bild.", "Ich"],
+                "correctAnswer": "Bild.",
+                "investigation": "Whom or what do I paint? → 'Bild'. This is the <strong>VICTIM</strong>."
+            },
+            {
+                "target": "article",
+                "title": "⚖️ Choose the Case!",
+                "instruction": "<strong>ACTION</strong> verb (\"%BOSS_VERB%\" from \"%INFINITIVE%\") + <strong>BOSS</strong> (\"%BOSS%\") + <strong>VICTIM</strong> (\"%VICTIM_NOUN%\") → Accusative. Noun: <strong>%VICTIM_NOUN%</strong> (%VICTIM_GENDER%).",
+                "hint_rules": "<strong>Masculine (Acc):</strong> ...den / ...einen<br><strong>Feminine (Acc):</strong> ...die / ...eine<br><strong>Neuter (Acc):</strong> ...<span class='highlight'>ein</span> / ...das",
+                "bubbles": ["ein", "einen", "eine", "eines"],
+                "correctAnswer": "ein",
+                "investigation": "Correct! 'Bild' is neuter, so 'ein' stays 'ein'."
             }
         ]
     }
