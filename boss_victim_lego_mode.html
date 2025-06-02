@@ -11,63 +11,66 @@
         body {
             font-family: 'Inter', sans-serif;
             background-image: linear-gradient(to right bottom, #4c1d95, #5b21b6, #6d28d9, #7c3aed, #8b5cf6); /* Darker to Lighter Purple */
-            display: flex; /* Changed for sidebar layout */
-            flex-direction: column; /* Mobile first: stack */
-            justify-content: flex-start; /* Align to top */
-            align-items: center; /* Center content horizontally */
+            display: flex; 
+            flex-direction: column; 
+            justify-content: flex-start; 
+            align-items: center; 
             min-height: 100vh;
             margin: 0;
             padding: 16px; 
-            color: #ede9fe; /* Default light text for dark bg */
+            color: #ede9fe; 
         }
         @media (min-width: 1024px) { /* lg breakpoint for sidebar layout */
             body {
                 flex-direction: row;
                 align-items: flex-start;
                 justify-content: center;
-                gap: 24px; /* Space between quiz and sidebar */
+                gap: 24px; 
             }
         }
 
-        .card { /* General card styling, will be specialized */
+        .card { 
             background-color: rgba(255, 255, 255, 0.07); 
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px); /* Safari */
+            -webkit-backdrop-filter: blur(12px); 
             border: 1px solid rgba(255, 255, 255, 0.15);
             padding: 20px; 
             border-radius: 16px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.25), 0 5px 10px rgba(0,0,0,0.1);
             text-align: center;
             width: 100%;
-            margin-bottom: 16px; /* Space between cards on mobile */
+            margin-bottom: 16px; 
         }
         @media (min-width: 768px) { .card { padding: 28px; } }
 
 
         #quiz-main-area {
             max-width: 700px;
-            order: 1; /* On mobile, quiz comes first */
+            order: 1; 
         }
-        #detective-guide-sidebar {
+        #detective-guide-sidebar-container { /* Renamed for clarity */
             max-width: 420px;
-            order: 2; /* On mobile, guide comes second */
+            order: 2; 
         }
 
-        @media (min-width: 1024px) { /* lg breakpoint */
+        @media (min-width: 1024px) { 
             #quiz-main-area {
                 order: 1;
-                flex: 2; /* Takes more space */
-                max-width: none; /* Allow it to take flex space */
+                flex: 2; 
+                max-width: none; 
             }
-            #detective-guide-sidebar {
+            #detective-guide-sidebar-container {
                 order: 2;
-                flex: 1; /* Takes less space */
+                flex: 1; 
                 position: sticky;
-                top: 24px; /* Align with body padding */
-                max-height: calc(100vh - 48px); /* Consider body padding */
+                top: 24px; 
+                max-height: calc(100vh - 48px); 
                 overflow-y: auto;
                 max-width: none;
             }
+        }
+        #detective-guide-sidebar-container .card { /* Ensure sidebar card takes full height */
+            height: 100%;
         }
 
 
@@ -75,37 +78,43 @@
         .mode-title-subtitle { font-size: 1rem; sm:font-size: 1.1rem; color: #c4b5fd; margin-bottom: 1.5rem; }
 
         /* Detective Guide Styling */
-        #detective-guide-sidebar h3 { /* Main section titles (e.g., El Caso Acusativo) */
-            font-size: 1.4rem; font-weight: 700; color: #f0abfc; /* Bright Pink/Magenta */
-            margin-top: 1.5rem; margin-bottom: 0.75rem; 
-            padding-bottom: 0.4rem; border-bottom: 2px solid #c084fc; /* Lighter Purple border */
+        #introduction-panel { 
+            background-color: transparent; /* Guide is already in a card */
+            padding: 0; /* Padding is on the card */
+            text-align: left; color: #ede9fe; 
+            border: none; /* Border is on the card */
         }
-        #detective-guide-sidebar h4 { /* Sub-section titles (e.g., Verbos Típicos) */
-            font-size: 1.1rem; font-weight: 600; color: #e9d5ff; /* Lightest Purple */
+        #introduction-panel h3 { 
+            font-size: 1.4rem; font-weight: 700; color: #f0abfc; 
+            margin-top: 1.5rem; margin-bottom: 0.75rem; 
+            padding-bottom: 0.4rem; border-bottom: 2px solid #c084fc; 
+        }
+        #introduction-panel h4 { 
+            font-size: 1.1rem; font-weight: 600; color: #e9d5ff; 
             margin-top: 1.25rem; margin-bottom: 0.6rem; 
         }
-        #detective-guide-sidebar h3:first-child { margin-top: 0;}
-        #detective-guide-sidebar p, #detective-guide-sidebar li { font-size: 0.9rem; line-height: 1.65; margin-bottom: 0.85rem; color: #ede9fe;}
-        #detective-guide-sidebar ul { list-style-type: '👉'; padding-left: 1.5rem; margin-bottom:1.2rem; }
-        #detective-guide-sidebar strong { color: #f5d0fe; font-weight: 600; }
-        #detective-guide-sidebar .golden-rule { 
-            background-color: rgba(250, 204, 21, 0.1); /* Yellowish tint */
+        #introduction-panel h3:first-child { margin-top: 0;}
+        #introduction-panel p, #introduction-panel li { font-size: 0.9rem; line-height: 1.65; margin-bottom: 0.85rem; color: #ede9fe;}
+        #introduction-panel ul { list-style-type: '👉'; padding-left: 1.5rem; margin-bottom:1.2rem; }
+        #introduction-panel strong { color: #f5d0fe; font-weight: 600; }
+        #introduction-panel .golden-rule { 
+            background-color: rgba(250, 204, 21, 0.1); 
             padding: 1rem; border-radius: 0.5rem; 
             margin: 1rem 0; font-style: italic; 
-            border-left: 5px solid #facc15; /* Gold border */
+            border-left: 5px solid #facc15; 
             color: #fde68a; font-size: 0.9rem;
         }
-        #detective-guide-sidebar .golden-rule strong {color: #fde047;} 
-        #detective-guide-sidebar .eselsbruecke { 
+        #introduction-panel .golden-rule strong {color: #fde047;} 
+        #introduction-panel .eselsbruecke { 
             background-color: rgba(255,255,255,0.07); 
             padding: 1rem; border-radius: 0.5rem; 
             margin: 1rem 0; font-style: italic; 
             border-left: 4px solid #f0abfc;
             color: #f5f3ff; font-size: 0.9rem;
         }
-        #detective-guide-sidebar .example-sentence { margin-left: 1rem; font-style: italic; color: #d8b4fe; margin-bottom: 0.35rem;}
-        #detective-guide-sidebar .example-sentence strong { color: #f0abfc; }
-        #detective-guide-sidebar .step-explanation { margin-top: 0.75em; padding-left:1em; border-left: 2px solid #a78bfa; font-size:0.85rem; }
+        #introduction-panel .example-sentence { margin-left: 1rem; font-style: italic; color: #d8b4fe; margin-bottom: 0.35rem;}
+        #introduction-panel .example-sentence strong { color: #f0abfc; }
+        #introduction-panel .step-explanation { margin-top: 0.75em; padding-left:1em; border-left: 2px solid #a78bfa; font-size:0.85rem; }
         
         /* Quiz Area Styling */
         .quiz-step-area { margin-bottom: 1.5rem; padding: 1.25rem; background-color: rgba(255,255,255,0.05); border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.1);}
@@ -121,6 +130,7 @@
         .sentence-bubbles-container {
             display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;
             padding: 1rem; margin-bottom: 1rem; background-color: rgba(0,0,0,0.1); border-radius: 0.5rem;
+            min-height: 50px; /* Ensure it has some height even when empty */
         }
         .word-bubble {
             background-color: #a78bfa; color: #2e1065;
@@ -139,7 +149,7 @@
             padding: 0.75rem; margin: 0.5rem 0; color: #c4b5fd; font-style: italic;
         }
         .drop-zone.drag-over { background-color: rgba(167, 139, 250, 0.3); border-color: #c4b5fd; }
-        .drop-zone.filled .draggable-item { cursor: default; } /* Re-use draggable-item if needed */
+        .drop-zone.filled .draggable-item { cursor: default; } 
         
         .button-group { display: flex; gap: 0.75rem; justify-content: center; margin-top: 1rem;}
         .button-group .btn {margin-top:0;}
@@ -162,7 +172,7 @@
         .hidden { display: none !important; }
         .controls-area { margin-top: 1.5rem; display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 10px;}
         .progress-score-area { display: flex; justify-content: space-between; width:100%; margin-bottom: 1rem; font-size: 0.875rem; color: #d8b4fe;}
-         /* Custom scrollbar for webkit browsers */
+        
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px;}
         ::-webkit-scrollbar-thumb { background: #a78bfa; border-radius: 10px;}
@@ -185,8 +195,7 @@
         
         <div id="current-step-instruction" class="my-4 font-semibold text-lg text-purple-200"></div>
 
-        <div id="step1-verb" class="quiz-step-area">
-            <h4>Schritt 1: Finde das Verb! / Paso 1: ¡Encuentra el verbo!</h4>
+        <div id="step1-verb" class="quiz-step-area hidden"> <h4>Schritt 1: Finde das Verb! / Paso 1: ¡Encuentra el verbo!</h4>
             <p class="italic-instruction">Klicke auf das Verb im Satz oben. / Haz clic en el verbo en la oración de arriba.</p>
             <div id="step1-feedback" class="feedback-text"></div>
         </div>
@@ -228,6 +237,7 @@
              <div id="step5-feedback" class="feedback-text"></div>
         </div>
 
+
         <div class="controls-area mt-6">
             <button id="next-case-btn-bv" class="btn btn-secondary hidden">Nächster Fall / Siguiente Caso</button>
         </div>
@@ -240,10 +250,9 @@
         </div>
     </div>
 
-    <div id="detective-guide-sidebar" class="card">
-        <div id="introduction-panel"> <h3>The Ultimate Detective's Guide to German Cases</h3>
+    <div id="detective-guide-sidebar-container" class="card"> <div id="introduction-panel"> 
+            <h3>The Ultimate Detective's Guide to German Cases</h3>
             <p class="mode-title-subtitle" style="font-size:0.9em; opacity:0.8;">(The "Boss & Victim" Method)</p>
-
             <div class="golden-rule">
                 <strong>THE GOLDEN RULES</strong><br>
                 REMEMBER: NOMINATIVE = A CONDITION.<br>
@@ -251,29 +260,27 @@
                 REMEMBER: ACCUSATIVE = AN ACTION.<br>
                 This sentence describes an action. It has a BOSS + A VICTIM. The Victim is always ACCUSATIVE.
             </div>
-
             <h4>YOUR CHEAT SHEET: These Verbs are ALWAYS "Condition"</h4>
             <p>If you see one of these verbs, you know immediately there is NO VICTIM. The case is solved quickly! Just find the Boss (Nominative).</p>
             <ul>
-                <li><strong>sein</strong> (to be) -> <span class="german-example"><strong>Ich</strong> bin Student.</span></li>
-                <li><strong>heißen</strong> (to be called) -> <span class="german-example"><strong>Meine Schwester</strong> heißt Anna.</span></li>
-                <li><strong>werden</strong> (to become) -> <span class="german-example"><strong>Er</strong> wird Arzt.</span></li>
-                <li><strong>bleiben</strong> (to stay/remain) -> <span class="german-example"><strong>Wir</strong> bleiben Freunde.</span></li>
-                <li><strong>kommen</strong> (to come) -> <span class="german-example"><strong>Ich</strong> komme aus Spanien.</span></li>
-                <li><strong>wohnen / leben</strong> (to live/reside) -> <span class="german-example"><strong>Er</strong> wohnt in München.</span></li>
-                <li><strong>gehen / laufen</strong> (to go / to run) -> <span class="german-example"><strong>Wir</strong> gehen ins Kino.</span></li>
-                <li><strong>schlafen</strong> (to sleep) -> <span class="german-example"><strong>Das Baby</strong> schläft.</span></li>
-                <li><strong>warten</strong> (to wait) -> <span class="german-example"><strong>Ich</strong> warte hier.</span></li>
-                <li><strong>fahren</strong> (to drive/travel) -> <span class="german-example"><strong>Sie</strong> fährt mit dem Bus.</span></li>
+                <li><strong>sein</strong> (to be) <span class="example-sentence">→ <strong>Ich</strong> bin Student.</span></li>
+                <li><strong>heißen</strong> (to be called) <span class="example-sentence">→ <strong>Meine Schwester</strong> heißt Anna.</span></li>
+                <li><strong>werden</strong> (to become) <span class="example-sentence">→ <strong>Er</strong> wird Arzt.</span></li>
+                <li><strong>bleiben</strong> (to stay/remain) <span class="example-sentence">→ <strong>Wir</strong> bleiben Freunde.</span></li>
+                <li><strong>kommen</strong> (to come) <span class="example-sentence">→ <strong>Ich</strong> komme aus Spanien.</span></li>
+                <li><strong>wohnen / leben</strong> (to live/reside) <span class="example-sentence">→ <strong>Er</strong> wohnt in München.</span></li>
+                <li><strong>gehen / laufen</strong> (to go / to run) <span class="example-sentence">→ <strong>Wir</strong> gehen ins Kino.</span></li>
+                <li><strong>schlafen</strong> (to sleep) <span class="example-sentence">→ <strong>Das Baby</strong> schläft.</span></li>
+                <li><strong>warten</strong> (to wait) <span class="example-sentence">→ <strong>Ich</strong> warte hier.</span></li>
+                <li><strong>fahren</strong> (to drive/travel) <span class="example-sentence">→ <strong>Sie</strong> fährt mit dem Bus.</span></li>
             </ul>
-
             <h4>THE 4-STEP DEDUCTION METHOD (Example)</h4>
             <div class="eselsbruecke">
                 <p><strong>THE CASE:</strong> "I have a brother!"</p>
                 <p><strong>THE SENTENCE:</strong> Ich habe ___ Bruder.</p>
                 <div class="step-explanation"><strong>Step 1: Find the verb!</strong><br>Verb: <strong>habe</strong> (from "haben"). Verdict: <strong>ACTION</strong>.</div>
-                <div class="step-explanation"><strong>Step 2: Find the BOSS!</strong><br>"Wer oder was" hat? -> Answer: "Ich". Result: The <strong>BOSS</strong> is "Ich" (Nominative).</div>
-                <div class="step-explanation"><strong>Step 3: Find the VICTIM!</strong><br>"Wen oder was" habe ich? -> Answer: "Bruder". Result: The <strong>VICTIM</strong> is "Bruder".</div>
+                <div class="step-explanation"><strong>Step 2: Find the BOSS!</strong><br>"Wer oder was" hat? → Answer: "Ich". Result: The <strong>BOSS</strong> is "Ich" (Nominative).</div>
+                <div class="step-explanation"><strong>Step 3: Find the VICTIM!</strong><br>"Wen oder was" habe ich? → Answer: "Bruder". Result: The <strong>VICTIM</strong> is "Bruder".</div>
                 <div class="step-explanation"><strong>Step 4: PUT THE FUCKER BEHIND BARS!!!</strong><br>The VICTIM ("Bruder", masculine) goes into ACCUSATIVE. 'ein' Bruder becomes 'einen' Bruder.<br><strong>CASE CLOSED:</strong> Ich habe <strong>einen Bruder</strong>.</div>
             </div>
         </div>
@@ -284,14 +291,14 @@
         let currentTaskDataBV = null;
         let currentTaskIndexBV = 0;
         let scoreBV = 0;
-        let tasksForRoundBV = [];
+        let tasksForRoundBV = []; // Holds the subset of tasks for the current round
         let currentStepBV = 1; 
         let identifiedVerbBV = null;
         let identifiedVerbTypeBV = null;
-        let identifiedBossBV = null;
-        let identifiedVictimBV = null;
+        // ... other state vars for identifiedBossBV, identifiedVictimBV if needed for complex feedback ...
 
         // DOM Elements
+        const quizMainAreaEl = document.getElementById('quiz-main-area'); // Main quiz area
         const sentenceBubblesContainerEl = document.getElementById('sentence-bubbles-container');
         const currentStepInstructionEl = document.getElementById('current-step-instruction');
         
@@ -300,40 +307,24 @@
         
         const step2VerbTypeEl = document.getElementById('step2-verb-type');
         const identifiedVerbStep2El = document.getElementById('identified-verb-step2');
-        const identifiedVerbStep2EnEl = document.getElementById('identified-verb-step2-en'); // Keep if you use it
+        // const identifiedVerbStep2EnEl = document.getElementById('identified-verb-step2-en'); // Kept if you want to use it
         const btnCondition = document.getElementById('btn-condition');
         const btnAction = document.getElementById('btn-action');
         const step2FeedbackEl = document.getElementById('step2-feedback');
 
         const step3FindBossEl = document.getElementById('step3-find-boss');
-        const bossQuestionEl = document.getElementById('boss-question');
-        const bossDragPoolEl = document.getElementById('boss-drag-pool');
-        const bossDropZoneEl = document.getElementById('boss-drop-zone');
-        const step3FeedbackEl = document.getElementById('step3-feedback');
-        
-        const step4FindVictimEl = document.getElementById('step4-find-victim');
-        const victimQuestionEl = document.getElementById('victim-question');
-        const victimDragPoolEl = document.getElementById('victim-drag-pool');
-        const victimDropZoneEl = document.getElementById('victim-drop-zone');
-        const step4FeedbackEl = document.getElementById('step4-feedback');
-
-        const step5ChooseArticleEl = document.getElementById('step5-choose-article');
-        const sentenceForArticleStep5El = document.getElementById('sentence-for-article-step5');
-        const targetNounRoleStep5El = document.getElementById('targetNounRoleStep5');
-        const targetNounInfoStep5El = document.getElementById('targetNounInfoStep5');
-        const genderForArticleStep5El = document.getElementById('genderForArticleStep5');
-        const caseForArticleStep5El = document.getElementById('caseForArticleStep5');
-        const articleOptionsButtonsEl = document.getElementById('article-options-buttons');
-        const step5FeedbackEl = document.getElementById('step5-feedback');
+        // ... (get other step elements when implementing them) ...
 
         const nextCaseBtnBV = document.getElementById('next-case-btn-bv');
-        // Removed nextStepBtn as each step will have its own progression logic or auto-advance
-
+        
         const sentenceEnRef = document.getElementById('sentence-en');
         const sentenceEsRef = document.getElementById('sentence-es');
         const progressTextBVEl = document.getElementById('progress-text-bv');
         const scoreTextBVEl = document.getElementById('score-text-bv');
-
+        
+        // Introduction Panel elements (if needed for JS interaction, but it's mainly static)
+        // const toggleIntroductionBtnBV = document.getElementById('toggle-introduction-btn'); // Removed as per new layout
+        // const introductionPanelBV = document.getElementById('introduction-panel'); // This is the sidebar content now
 
         function triggerConfettiBV() { if (typeof confetti === 'function') confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } }); }
         function shuffleArrayBV(array) { for (let i = array.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [array[i], array[j]] = [array[j], array[i]]; } }
@@ -344,11 +335,12 @@
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 allBossVictimTasksBV = await response.json();
                 if (allBossVictimTasksBV.length === 0) throw new Error("boss_victim_tasks.json is empty.");
-                startNewRoundBV();
+                
+                // Quiz area is visible by default now
+                startNewRoundBV(); 
             } catch (error) {
                 console.error("Could not load tasks:", error);
-                const quizMainArea = document.getElementById('quiz-main-area');
-                quizMainArea.innerHTML = `<h2 class="mode-title text-red-300">Error</h2><p>Could not load tasks: ${error.message}</p><a href="index.html" class="btn btn-secondary mt-4">Back to Main Menu</a>`;
+                quizMainAreaEl.innerHTML = `<h2 class="mode-title text-red-300">Error</h2><p class="text-lg">Could not load tasks: ${error.message}</p><p class="text-sm mt-2">Please check the console and ensure 'boss_victim_tasks.json' is available and correctly formatted.</p><a href="index.html" class="btn btn-secondary mt-6">Back to Main Menu</a>`;
             }
         }
 
@@ -357,9 +349,15 @@
             scoreBV = 0;
             shuffleArrayBV(allBossVictimTasksBV);
             tasksForRoundBV = allBossVictimTasksBV.slice(0, Math.min(5, allBossVictimTasksBV.length)); 
+            
             if (tasksForRoundBV.length === 0) {
-                sentenceBubblesContainerEl.innerHTML = "<p>Keine Aufgaben mehr! / No more tasks!</p>";
-                currentStepInstructionEl.textContent = "";
+                sentenceBubblesContainerEl.innerHTML = "<p>Keine Aufgaben für diese Runde verfügbar oder alle Aufgaben erledigt.</p>";
+                currentStepInstructionEl.textContent = "Bitte lade die Seite neu oder überprüfe die JSON-Datei.";
+                hideAllSteps(); 
+                nextCaseBtnBV.textContent = "Hauptmenü";
+                nextCaseBtnBV.onclick = () => { window.location.href = "index.html"; };
+                nextCaseBtnBV.classList.remove('hidden');
+                updateProgressAndScoreBV(); 
                 return;
             }
             loadNextCaseBV();
@@ -371,15 +369,15 @@
                 currentStepInstructionEl.textContent = "Super gemacht! / Well done!";
                 hideAllSteps();
                 nextCaseBtnBV.textContent = "Neue Runde starten / Start New Round";
-                nextCaseBtnBV.onclick = startNewRoundBV; // Reassign here
+                nextCaseBtnBV.onclick = startNewRoundBV; 
                 nextCaseBtnBV.classList.remove('hidden');
                 return;
             }
             currentTaskDataBV = tasksForRoundBV[currentTaskIndexBV];
             identifiedVerbBV = null;
             identifiedVerbTypeBV = null;
-            identifiedBossBV = null;
-            identifiedVictimBV = null;
+            // identifiedBossBV = null; // Reset for each new case
+            // identifiedVictimBV = null; // Reset for each new case
 
             sentenceEnRef.textContent = currentTaskDataBV.translations.en;
             sentenceEsRef.textContent = currentTaskDataBV.translations.es;
@@ -387,7 +385,7 @@
             setupStep1_ClickVerb();
             updateProgressAndScoreBV();
             nextCaseBtnBV.classList.add('hidden');
-             // Ensure default "Next Case" functionality for the button when it's shown after a case is complete
+            // Ensure default "Next Case" functionality for the button when it's shown after a case is complete
             nextCaseBtnBV.onclick = () => { currentTaskIndexBV++; loadNextCaseBV(); };
         }
 
@@ -396,10 +394,10 @@
             step2VerbTypeEl.classList.add('hidden');
             step3FindBossEl.classList.add('hidden');
             step4FindVictimEl.classList.add('hidden');
-            step5ChooseArticleEl.classList.add('hidden');
+            step5ChooseArticleEl.classList.add('hidden'); // If this element exists
             step1FeedbackEl.classList.add('hidden');
             step2FeedbackEl.classList.add('hidden');
-            // Add other step feedback elements here if they exist
+            // Hide other step feedback elements if they exist
         }
 
         function setupStep1_ClickVerb() {
@@ -425,9 +423,10 @@
 
         function handleVerbBubbleClick(event) {
             if (currentStepBV !== 1) return;
-            const clickedBubble = event.target;
-            
-            sentenceBubblesContainerEl.querySelectorAll('.word-bubble').forEach(b => b.classList.add('disabled')); // Disable all bubbles
+            const clickedBubble = event.target.closest('.word-bubble'); // Make sure to get the bubble itself
+            if (!clickedBubble) return;
+
+            sentenceBubblesContainerEl.querySelectorAll('.word-bubble').forEach(b => b.classList.add('disabled'));
 
             if (clickedBubble.dataset.isVerb === "true") {
                 identifiedVerbBV = clickedBubble.textContent;
@@ -442,7 +441,7 @@
                 step1FeedbackEl.textContent = "Falsch! Das ist nicht das Verb. Versuche es nochmal!";
                 step1FeedbackEl.className = 'feedback-text incorrect';
                 step1FeedbackEl.classList.remove('hidden');
-                setTimeout(() => { // Allow retry
+                setTimeout(() => { 
                      sentenceBubblesContainerEl.querySelectorAll('.word-bubble').forEach(b => b.classList.remove('disabled'));
                      step1FeedbackEl.classList.add('hidden');
                 }, 2000);
@@ -455,11 +454,14 @@
             step2VerbTypeEl.classList.remove('hidden');
             currentStepInstructionEl.textContent = "Schritt 2: Verb-Typ? Ist es KONDITION oder AKTION?";
             identifiedVerbStep2El.textContent = identifiedVerbBV;
-            // identifiedVerbStep2EnEl.textContent = identifiedVerbBV; // If you want english verb here too
+            // identifiedVerbStep2EnEl.textContent = identifiedVerbBV; 
             step2FeedbackEl.textContent = '';
             step2FeedbackEl.classList.add('hidden');
             btnCondition.classList.remove('selected', 'correct', 'incorrect');
             btnAction.classList.remove('selected', 'correct', 'incorrect');
+            // Enable buttons for this step
+            btnCondition.disabled = false;
+            btnAction.disabled = false;
         }
 
         btnCondition.addEventListener('click', () => checkVerbType('Condition'));
@@ -468,8 +470,11 @@
         function checkVerbType(chosenType) {
             if (currentStepBV !== 2) return;
             
-            identifiedVerbTypeBV = chosenType; // Store user's choice
+            identifiedVerbTypeBV = chosenType; 
             const correctType = currentTaskDataBV.verb_info.type;
+
+            btnCondition.disabled = true; // Disable after choice
+            btnAction.disabled = true;
 
             if (chosenType === correctType) {
                 step2FeedbackEl.textContent = `KORREKT: '${identifiedVerbBV}' ist ${correctType === "Action" ? "eine AKTION" : "eine KONDITION"}.`;
@@ -479,34 +484,24 @@
                 
                 setTimeout(() => {
                     if (correctType === "Action") {
-                         // TODO: setupStep3_FindBoss();
-                         currentStepInstructionEl.textContent = "Nächster Schritt (TODO): Boss finden!";
+                         // setupStep3_FindBoss(); // TODO: Implement this next
+                         step2FeedbackEl.textContent += " Nächster Schritt (TODO): Boss finden!";
                     } else { // Condition
-                         // TODO: setupStep4_ChooseArticle() (for Boss or predicate nominative);
-                         currentStepInstructionEl.textContent = "Nächster Schritt (TODO): Artikel für Boss!";
+                         // setupStep4_ChooseArticle(); // For Boss or predicate nominative
+                         step2FeedbackEl.textContent += " Nächster Schritt (TODO): Artikel für Boss!";
                     }
-                    // For now, since other LEGO steps aren't built, enable Next Case
-                     nextCaseBtnBV.classList.remove('hidden');
+                    nextCaseBtnBV.classList.remove('hidden'); // Enable Next Case as other steps are placeholders
                 }, 1500);
 
             } else {
                 step2FeedbackEl.textContent = `Nicht ganz. '${identifiedVerbBV}' ist eigentlich ${correctType === "Action" ? "eine AKTION" : "eine KONDITION"}. (Siehe Detektiv-Handbuch!)`;
                 step2FeedbackEl.className = 'feedback-text incorrect';
                 if(chosenType === "Action") btnAction.classList.add('incorrect'); else btnCondition.classList.add('incorrect');
-                 setTimeout(() => {nextCaseBtnBV.classList.remove('hidden'); }, 2000); // Allow to skip to next case
+                 setTimeout(() => {nextCaseBtnBV.classList.remove('hidden'); }, 2000);
             }
             step2FeedbackEl.classList.remove('hidden');
         }
         
-        // Placeholder for other step setups and checks
-        // function setupStep3_FindBoss() { /* ... */ }
-        // function checkStep3_FindBoss() { /* ... */ }
-        // function setupStep4_FindVictim() { /* ... */ }
-        // function checkStep4_FindVictim() { /* ... */ }
-        // function setupStep5_ChooseArticle() { /* ... */ }
-        // function checkStep5_ChooseArticle() { /* ... */ }
-
-
         function updateProgressAndScoreBV() {
             if (tasksForRoundBV.length > 0) {
                 progressTextBVEl.textContent = `Fall: ${Math.min(currentTaskIndexBV + 1, tasksForRoundBV.length)}/${tasksForRoundBV.length}`;
@@ -515,13 +510,6 @@
             }
             scoreTextBVEl.textContent = `Punkte: ${scoreBV}`;
         }
-
-
-        toggleIntroductionBtnBV.addEventListener('click', () => {
-            introductionPanelBV.classList.toggle('hidden');
-        });
-        // No close button for intro, it's a persistent sidebar now on larger screens.
-        // Logic for starting quiz if intro is hidden and quiz hasn't started is in loadTasksBV
 
         document.addEventListener('DOMContentLoaded', loadTasksBV);
     </script>
