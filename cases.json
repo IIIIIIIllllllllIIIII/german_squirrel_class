@@ -3,6 +3,7 @@
         "caseTitle": "🕵️ THE CASE: 'I have a brother!'",
         "sentence": "Ich habe ___ Bruder.",
         "sentence_en": "I have a brother.",
+        "verb_infinitive": "haben",
         "correctArticle": "einen",
         "fullSentence": "Ich habe einen Bruder.",
         "words": ["Ich", "habe", "___", "Bruder."],
@@ -41,7 +42,7 @@
             {
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
-                "instruction": "Since we are working with an <strong>ACTION</strong> verb and you found a <strong>BOSS</strong> (Nominative) and a <strong>VICTIM</strong>, the victim must be put into the <strong>ACCUSATIVE</strong> case.",
+                "instruction": "Since we are working with an <strong>ACTION</strong> verb (<strong>%VERB%</strong> from <strong>%INFINITIVE%</strong>) and you found a <strong>BOSS</strong> (<strong>%BOSS%</strong>) and a <strong>VICTIM</strong> (<strong>%VICTIM%</strong>), the victim must be put into the <strong>ACCUSATIVE</strong> case.",
                 "hint_rules": "<strong>Masculine:</strong> der → <span class='highlight'>den</span> / ein → <span class='highlight'>einen</span><br><strong>Feminine:</strong> die → die / eine → eine<br><strong>Neuter:</strong> das → das / ein → ein",
                 "bubbles": ["einen", "ein", "der", "den"],
                 "correctAnswer": "einen",
@@ -53,6 +54,7 @@
         "caseTitle": "🕵️ THE CASE: 'The student buys a pen.'",
         "sentence": "Der Schüler kauft ___ Stift.",
         "sentence_en": "The student buys a pen.",
+        "verb_infinitive": "kaufen",
         "correctArticle": "einen",
         "fullSentence": "Der Schüler kauft einen Stift.",
         "words": ["Der Schüler", "kauft", "___", "Stift."],
@@ -91,7 +93,7 @@
             {
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
-                "instruction": "Since we are working with an <strong>ACTION</strong> verb and you found a <strong>BOSS</strong> (Nominative) and a <strong>VICTIM</strong>, the victim must be put into the <strong>ACCUSATIVE</strong> case.",
+                "instruction": "Since we are working with an <strong>ACTION</strong> verb (<strong>%VERB%</strong> from <strong>%INFINITIVE%</strong>) and you found a <strong>BOSS</strong> (<strong>%BOSS%</strong>) and a <strong>VICTIM</strong> (<strong>%VICTIM%</strong>), the victim must be put into the <strong>ACCUSATIVE</strong> case.",
                 "hint_rules": "<strong>Masculine:</strong> der → <span class='highlight'>den</span> / ein → <span class='highlight'>einen</span><br><strong>Feminine:</strong> die → die / eine → eine<br><strong>Neuter:</strong> das → das / ein → ein",
                 "bubbles": ["einen", "ein", "den", "eine"],
                 "correctAnswer": "einen",
