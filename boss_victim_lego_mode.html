@@ -10,143 +10,79 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-image: linear-gradient(to right bottom, #4c1d95, #5b21b6, #6d28d9, #7c3aed, #8b5cf6); /* Darker to Lighter Purple */
-            display: flex; 
-            flex-direction: column; 
-            justify-content: flex-start; 
-            align-items: center; 
-            min-height: 100vh;
-            margin: 0;
-            padding: 16px; 
-            color: #ede9fe; /* Default light text for dark bg */
+            background-image: linear-gradient(to right bottom, #4c1d95, #5b21b6, #6d28d9, #7c3aed, #8b5cf6); 
+            display: flex; flex-direction: column; 
+            justify-content: flex-start; align-items: center; 
+            min-height: 100vh; margin: 0; padding: 16px; color: #ede9fe; 
         }
-        @media (min-width: 1024px) { /* lg breakpoint for sidebar layout */
-            body {
-                flex-direction: row;
-                align-items: flex-start;
-                justify-content: center;
-                gap: 24px; 
-            }
+        @media (min-width: 1024px) { 
+            body { flex-direction: row; align-items: flex-start; justify-content: center; gap: 24px; }
         }
-
         .card { 
-            background-color: rgba(255, 255, 255, 0.07); 
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px); 
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 20px; 
-            border-radius: 16px;
+            background-color: rgba(255, 255, 255, 0.07); backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 20px; border-radius: 16px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.25), 0 5px 10px rgba(0,0,0,0.1);
-            text-align: center;
-            width: 100%;
-            margin-bottom: 16px; 
+            text-align: center; width: 100%; margin-bottom: 16px; 
         }
         @media (min-width: 768px) { .card { padding: 28px; } }
 
-
-        #quiz-main-area {
-            max-width: 700px;
-            order: 1; 
-        }
-        #detective-guide-sidebar-container { 
-            max-width: 420px;
-            order: 2; 
-        }
+        #quiz-main-area { max-width: 700px; order: 1; }
+        #detective-guide-sidebar-container { max-width: 420px; order: 2; }
 
         @media (min-width: 1024px) { 
-            #quiz-main-area {
-                order: 1;
-                flex: 2; 
-                max-width: none; 
-            }
+            #quiz-main-area { order: 1; flex: 2; max-width: none; }
             #detective-guide-sidebar-container {
-                order: 2;
-                flex: 1; 
-                position: sticky;
-                top: 24px; 
-                max-height: calc(100vh - 48px); 
-                overflow-y: auto;
-                max-width: none;
+                order: 2; flex: 1; position: sticky; top: 24px; 
+                max-height: calc(100vh - 48px); overflow-y: auto; max-width: none;
             }
         }
-        #detective-guide-sidebar-container .card { 
-            height: 100%; /* Make sidebar card take available height */
-             background-color: rgba(46, 26, 71, 0.7); /* Darker, more opaque for guide */
-             border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
+        #detective-guide-sidebar-container .card { height: 100%; background-color: rgba(46, 26, 71, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); }
 
         .mode-title { font-size: 1.7rem; sm:font-size: 2rem; font-weight: 700; color: #ddd6fe; margin-bottom: 0.25rem; } 
         .mode-title-subtitle { font-size: 1rem; sm:font-size: 1.1rem; color: #c4b5fd; margin-bottom: 1.5rem; }
 
         /* Detective Guide Styling */
-        #introduction-panel { 
-            background-color: transparent; 
-            padding: 0; 
-            text-align: left; color: #ede9fe; 
-            border: none; 
-        }
-        #introduction-panel h3 { 
-            font-size: 1.4rem; font-weight: 700; color: #f0abfc; 
-            margin-top: 1.5rem; margin-bottom: 0.75rem; 
-            padding-bottom: 0.4rem; border-bottom: 2px solid #a78bfa; 
-        }
-        #introduction-panel h4 { 
-            font-size: 1.1rem; font-weight: 600; color: #e9d5ff; 
-            margin-top: 1.25rem; margin-bottom: 0.6rem; 
-        }
+        #introduction-panel { background-color: transparent; padding: 0; text-align: left; color: #ede9fe; border: none; }
+        #introduction-panel h3 { font-size: 1.4rem; font-weight: 700; color: #f0abfc; margin-top: 1.5rem; margin-bottom: 0.75rem; padding-bottom: 0.4rem; border-bottom: 2px solid #c084fc; }
+        #introduction-panel h4 { font-size: 1.1rem; font-weight: 600; color: #e9d5ff; margin-top: 1.25rem; margin-bottom: 0.6rem; }
         #introduction-panel h3:first-child { margin-top: 0;}
-        #introduction-panel p, #introduction-panel li { font-size: 0.9rem; line-height: 1.65; margin-bottom: 0.85rem; color: #d8b4fe;} /* Slightly less bright for p/li */
+        #introduction-panel p, #introduction-panel li { font-size: 0.9rem; line-height: 1.65; margin-bottom: 0.85rem; color: #d8b4fe;}
         #introduction-panel ul { list-style-type: '👉'; padding-left: 1.5rem; margin-bottom:1.2rem; }
-        #introduction-panel strong { color: #f5d0fe; font-weight: 600; } /* Make strong stand out */
-        #introduction-panel .golden-rule { 
-            background-color: rgba(250, 204, 21, 0.15); /* Yellowish tint */
-            padding: 1rem; border-radius: 0.5rem; 
-            margin: 1rem 0; 
-            border-left: 5px solid #facc15; /* Gold border */
-            color: #fef3c7; font-size: 0.9rem;
-        }
+        #introduction-panel strong { color: #f5d0fe; font-weight: 600; }
+        #introduction-panel .golden-rule { background-color: rgba(250, 204, 21, 0.15); padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; border-left: 5px solid #facc15; color: #fef3c7; font-size: 0.9rem;}
         #introduction-panel .golden-rule strong {color: #fde047;} 
-        #introduction-panel .eselsbruecke { 
-            background-color: rgba(192, 132, 252, 0.1); /* Light purple tint */
-            padding: 1rem; border-radius: 0.5rem; 
-            margin: 1rem 0; font-style: italic; 
-            border-left: 4px solid #c084fc; /* Bright purple */
-            color: #e9d5ff; font-size: 0.9rem;
-        }
+        #introduction-panel .eselsbruecke { background-color: rgba(192, 132, 252, 0.1); padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; font-style: italic; border-left: 4px solid #f0abfc; color: #e9d5ff; font-size: 0.9rem; }
         #introduction-panel .example-sentence { margin-left: 0.5rem; font-style: italic; color: #c4b5fd; margin-bottom: 0.25rem;}
         #introduction-panel .example-sentence strong { color: #f0abfc; }
-        #introduction-panel .step-explanation { margin-top: 0.75em; padding-left:1em; border-left: 2px solid #a78bfa; font-size:0.9rem; color: #d8b4fe; }
-        #introduction-panel .step-explanation strong {color: #f0abfc;}
+        #introduction-panel .step-explanation { margin-top: 0.75em; padding: 0.5em 0 0.5em 1em; border-left: 2px solid #a78bfa; font-size:0.9rem; color: #d8b4fe; background-color: rgba(255,255,255,0.03); border-radius: 0 4px 4px 0;}
         
-        /* Quiz Area Styling */
         .quiz-step-area { margin-bottom: 1.5rem; padding: 1.25rem; background-color: rgba(255,255,255,0.05); border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.1);}
         .quiz-step-area h4 { font-size: 1.25rem; font-weight: 600; color: #e0cffc; margin-bottom: 0.75rem;}
         .quiz-step-area p { margin-bottom: 0.75rem; color: #d8b4fe; font-size: 0.95rem;}
         .quiz-step-area .italic-instruction { font-style: italic; font-size: 0.85rem; color: #c4b5fd;}
 
-        #task-reference-area { margin-bottom: 1rem; text-align: left; padding: 0.5rem; background-color: rgba(0,0,0,0.1); border-radius: 0.375rem;}
-        #task-reference-area p {font-size: 0.85rem; color: #d8b4fe;}
+        #task-reference-area { margin-bottom: 1rem; text-align: left; padding: 0.75rem; background-color: rgba(0,0,0,0.15); border-radius: 0.375rem;}
+        #task-reference-area p {font-size: 0.9rem; color: #d8b4fe; line-height: 1.4;}
         #task-reference-area strong {color: #ede9fe;}
 
-
         .sentence-bubbles-container {
-            display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;
-            padding: 1rem; margin-bottom: 1rem; background-color: rgba(0,0,0,0.15); border-radius: 0.5rem;
+            display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center;
+            padding: 1rem; margin-bottom: 1rem; background-color: rgba(0,0,0,0.1); border-radius: 0.5rem;
             min-height: 50px; 
         }
         .word-bubble {
             background-color: #a78bfa; color: #2e1065;
-            padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer;
+            padding: 0.6rem 1.1rem; border-radius: 0.5rem; cursor: pointer;
             font-weight: 500; transition: all 0.2s ease;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         .word-bubble:hover:not(.disabled) { background-color: #c4b5fd; transform: translateY(-2px); }
-        .word-bubble.selected-verb { background-color: #4ade80; color: #14532d; font-weight: bold; transform: scale(1.05); }
-        .word-bubble.disabled { opacity: 0.6; cursor: not-allowed; pointer-events: none;}
+        .word-bubble.selected-verb { background-color: #4ade80; color: #14532d; font-weight: bold; transform: scale(1.05); box-shadow: 0 0 10px #4ade80;}
+        .word-bubble.disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none;}
         
-        .drop-zone {
-            min-height: 50px; background-color: rgba(0,0,0,0.25); border-radius: 0.5rem; 
+        .drop-zone { /* General drop-zone, specific step zones might override */
+            min-height: 60px; background-color: rgba(0,0,0,0.25); border-radius: 0.5rem; 
             border: 2px dashed #a78bfa; display: flex; justify-content: center; 
             align-items: center; transition: all 0.25s ease-in-out;
             padding: 0.75rem; margin: 0.5rem 0; color: #c4b5fd; font-style: italic;
@@ -157,9 +93,9 @@
         .button-group { display: flex; gap: 0.75rem; justify-content: center; margin-top: 1rem;}
         .button-group .btn {margin-top:0;}
 
-        .feedback-text { margin-top: 0.75rem; font-weight: 500; min-height: 1.5em;}
-        .feedback-text.correct { color: #a7f3d0; }
-        .feedback-text.incorrect { color: #fca5a5; }
+        .feedback-text { margin-top: 0.75rem; font-weight: 600; min-height: 1.75em; padding: 0.25rem;}
+        .feedback-text.correct { color: #86efac; } /* Brighter Green */
+        .feedback-text.incorrect { color: #f87171; } /* Brighter Red */
 
         .btn {
             padding: 10px 20px; border-radius: 8px; font-size: 0.9rem; font-weight: 600;
@@ -188,8 +124,8 @@
         <p class="mode-title-subtitle">Nominativ & Akkusativ Fälle Meistern / Dominando los Casos Nominativo y Acusativo</p>
 
         <div id="task-reference-area" class="mb-4 text-left">
-            <p class="text-sm "><strong>EN:</strong> <span id="sentence-en">Loading case...</span></p>
-            <p class="text-sm "><strong>ES:</strong> <span id="sentence-es">Cargando caso...</span></p>
+            <p><strong>EN:</strong> <span id="sentence-en">Loading case...</span></p>
+            <p><strong>ES:</strong> <span id="sentence-es">Cargando caso...</span></p>
         </div>
 
         <div id="sentence-bubbles-container" class="sentence-bubbles-container">
@@ -206,8 +142,8 @@
 
         <div id="step2-verb-type" class="quiz-step-area hidden">
             <h4>Schritt 2: Verb-Typ? / Paso 2: ¿Tipo de verbo?</h4>
-            <p>Ist "<span class="font-bold text-purple-300" id="identified-verb-step2"></span>" eine "Kondition" (nur Boss) oder eine "Aktion" (Boss + Opfer)?<br>
-               <span class="italic-instruction">Is "<span class="font-bold text-purple-300" id="identified-verb-step2-en"></span>" a "Condition" (Boss only) or an "Action" (Boss + Victim)?</span></p>
+            <p>Ist "<span class="font-bold text-purple-100" id="identified-verb-step2"></span>" eine "Kondition" (nur Boss) oder eine "Aktion" (Boss + Opfer)?<br>
+               <span class="italic-instruction">Is "<span class="font-bold text-purple-100" id="identified-verb-step2-en"></span>" a "Condition" (Boss only) or an "Action" (Boss + Victim)?</span></p>
             <div class="button-group">
                 <button id="btn-condition" data-verb-type="Condition" class="btn">KONDITION (Nur Boss)</button>
                 <button id="btn-action" data-verb-type="Action" class="btn">AKTION (Boss + Opfer)</button>
@@ -217,29 +153,27 @@
 
         <div id="step3-find-boss" class="quiz-step-area hidden">
             <h4>Schritt 3: Finde den BOSS! / Paso 3: ¡Encuentra al JEFE!</h4>
-            <p id="boss-question">Wer oder was ...?</p>
-            <p class="italic-instruction">Ziehe den Boss aus dem Satz in die Box. / Arrastra el JEFE de la oración a la caja.</p>
-            <div id="boss-drag-pool" class="sentence-bubbles-container min-h-[60px]"></div>
-            <div id="boss-drop-zone" class="drop-zone">BOSS (Nominativ)</div>
+            <p id="boss-question-text">Wer oder was ...?</p>
+            <p class="italic-instruction">Klicke auf den Boss im Satz oben. / Haz clic en el JEFE en la oración de arriba.</p>
             <div id="step3-feedback" class="feedback-text"></div>
         </div>
         
         <div id="step4-find-victim" class="quiz-step-area hidden">
              <h4>Schritt 4: Finde das OPFER! / Paso 4: ¡Encuentra a la VÍCTIMA!</h4>
-             <p id="victim-question">Wen oder was ...?</p>
-             <p class="italic-instruction">Ziehe das Opfer aus dem Satz in die Box. / Arrastra la VÍCTIMA de la oración a la caja.</p>
-             <div id="victim-drag-pool" class="sentence-bubbles-container min-h-[60px]"></div>
-             <div id="victim-drop-zone" class="drop-zone">OPFER (Akkusativ)</div>
+             <p id="victim-question-text">Wen oder was ...?</p>
+             <p class="italic-instruction">Klicke auf das Opfer im Satz oben. / Haz clic en la VÍCTIMA en la oración de arriba.</p>
              <div id="step4-feedback" class="feedback-text"></div>
         </div>
 
         <div id="step5-choose-article" class="quiz-step-area hidden">
              <h4>Schritt 5: Wähle den Artikel! / Paso 5: ¡Elige el Artículo!</h4>
-             <p id="sentence-for-article-step5" class="mb-2 sentence-german"></p>
-             <p class="italic-instruction mb-2">Das <span id="targetNounRoleStep5" class="font-bold"></span> ist <strong id="targetNounInfoStep5"></strong> (<span id="genderForArticleStep5"></span>) und braucht den <strong id="caseForArticleStep5"></strong> Fall.</p>
-             <div id="article-options-buttons" class="button-group"></div>
+             <p id="sentence-for-article-step5" class="mb-2 sentence-german text-xl"></p>
+             <p class="italic-instruction mb-2">Das <span id="targetNounRoleStep5" class="font-bold text-purple-100"></span> ist <strong id="targetNounInfoStep5" class="text-purple-100"></strong> (<span id="genderForArticleStep5" class="text-purple-100"></span>) und braucht den <strong id="caseForArticleStep5" class="text-purple-100"></strong> Fall.</p>
+             <div id="article-options-buttons" class="button-group">
+                </div>
              <div id="step5-feedback" class="feedback-text"></div>
         </div>
+
 
         <div class="controls-area mt-6">
             <button id="next-case-btn-bv" class="btn btn-secondary hidden">Nächster Fall / Siguiente Caso</button>
@@ -314,8 +248,25 @@
         const step2FeedbackEl = document.getElementById('step2-feedback');
 
         const step3FindBossEl = document.getElementById('step3-find-boss');
+        const bossQuestionEl = document.getElementById('boss-question-text'); // Corrected ID
+        const bossDragPoolEl = document.getElementById('boss-drag-pool');
+        const bossDropZoneEl = document.getElementById('boss-drop-zone');
+        const step3FeedbackEl = document.getElementById('step3-feedback');
+        
         const step4FindVictimEl = document.getElementById('step4-find-victim');
+        const victimQuestionEl = document.getElementById('victim-question-text'); // Corrected ID
+        const victimDragPoolEl = document.getElementById('victim-drag-pool');
+        const victimDropZoneEl = document.getElementById('victim-drop-zone');
+        const step4FeedbackEl = document.getElementById('step4-feedback');
+
         const step5ChooseArticleEl = document.getElementById('step5-choose-article');
+        const sentenceForArticleStep5El = document.getElementById('sentence-for-article-step5');
+        const targetNounRoleStep5El = document.getElementById('targetNounRoleStep5');
+        const targetNounInfoStep5El = document.getElementById('targetNounInfoStep5');
+        const genderForArticleStep5El = document.getElementById('genderForArticleStep5');
+        const caseForArticleStep5El = document.getElementById('caseForArticleStep5');
+        const articleOptionsButtonsEl = document.getElementById('article-options-buttons');
+        const step5FeedbackEl = document.getElementById('step5-feedback');
 
         const nextCaseBtnBV = document.getElementById('next-case-btn-bv');
         
@@ -324,21 +275,19 @@
         const progressTextBVEl = document.getElementById('progress-text-bv');
         const scoreTextBVEl = document.getElementById('score-text-bv');
         
-        // Removed toggleIntroductionBtnBV and introductionPanelBV, as the guide is now a static sidebar.
-
         function triggerConfettiBV() { if (typeof confetti === 'function') confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } }); }
         function shuffleArrayBV(array) { for (let i = array.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [array[i], array[j]] = [array[j], array[i]]; } }
 
         async function loadTasksBV() {
             try {
                 const response = await fetch('boss_victim_tasks.json');
-                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status} for boss_victim_tasks.json. Message: ${await response.text()}`);
                 allBossVictimTasksBV = await response.json();
                 if (allBossVictimTasksBV.length === 0) throw new Error("boss_victim_tasks.json is empty.");
                 startNewRoundBV(); 
             } catch (error) {
                 console.error("Could not load tasks:", error);
-                quizMainAreaEl.innerHTML = `<h2 class="mode-title text-red-300">Error</h2><p class="text-lg">Could not load tasks: ${error.message}</p><p class="text-sm mt-2">Please check the console and ensure 'boss_victim_tasks.json' is available and correctly formatted.</p><a href="index.html" class="btn btn-secondary mt-6">Back to Main Menu</a>`;
+                quizMainAreaEl.innerHTML = `<h2 class="mode-title text-red-300">Error</h2><p class="text-lg text-red-200">Could not load tasks: ${error.message}</p><p class="text-sm mt-2 text-red-200">Please check the console and ensure 'boss_victim_tasks.json' is available and correctly formatted.</p><a href="index.html" class="btn btn-secondary mt-6">Back to Main Menu</a>`;
             }
         }
 
@@ -348,8 +297,13 @@
             shuffleArrayBV(allBossVictimTasksBV);
             tasksForRoundBV = allBossVictimTasksBV.slice(0, Math.min(5, allBossVictimTasksBV.length)); 
             
+            if (tasksForRoundBV.length === 0 && allBossVictimTasksBV.length > 0) { // If slicing results in 0 but original had tasks
+                 tasksForRoundBV = allBossVictimTasksBV.slice(0, allBossVictimTasksBV.length); // Take all remaining if less than 5
+            }
+
+
             if (tasksForRoundBV.length === 0) {
-                sentenceBubblesContainerEl.innerHTML = "<p class="text-lg text-purple-200">Keine Aufgaben für diese Runde verfügbar oder alle Aufgaben erledigt.</p>";
+                sentenceBubblesContainerEl.innerHTML = "<p class=\"text-lg text-purple-200\">Keine Aufgaben für diese Runde verfügbar oder alle Aufgaben erledigt.</p>";
                 currentStepInstructionEl.textContent = "Bitte lade die Seite neu oder überprüfe die JSON-Datei.";
                 hideAllSteps(); 
                 nextCaseBtnBV.textContent = "Hauptmenü";
@@ -393,6 +347,9 @@
             step5ChooseArticleEl.classList.add('hidden'); 
             if(step1FeedbackEl) step1FeedbackEl.classList.add('hidden');
             if(step2FeedbackEl) step2FeedbackEl.classList.add('hidden');
+            if(step3FeedbackEl) step3FeedbackEl.classList.add('hidden');
+            if(step4FeedbackEl) step4FeedbackEl.classList.add('hidden');
+            if(step5FeedbackEl) step5FeedbackEl.classList.add('hidden');
         }
 
         function setupStep1_ClickVerb() {
@@ -406,7 +363,7 @@
                 const bubble = document.createElement('div');
                 bubble.classList.add('word-bubble');
                 bubble.textContent = word;
-                if (word === currentTaskDataBV.verb_info.verb_in_sentence) {
+                if (word === currentTaskDataBV.verb_info.verb_form_in_sentence) {
                     bubble.dataset.isVerb = "true";
                 }
                 bubble.addEventListener('click', handleVerbBubbleClick);
@@ -421,7 +378,7 @@
         function handleVerbBubbleClick(event) {
             if (currentStepBV !== 1) return;
             const clickedBubble = event.target.closest('.word-bubble'); 
-            if (!clickedBubble) return;
+            if (!clickedBubble || clickedBubble.classList.contains('disabled')) return;
 
             sentenceBubblesContainerEl.querySelectorAll('.word-bubble').forEach(b => b.classList.add('disabled'));
 
@@ -451,10 +408,10 @@
             step2VerbTypeEl.classList.remove('hidden');
             currentStepInstructionEl.textContent = "Schritt 2: Verb-Typ? Ist es KONDITION oder AKTION?";
             identifiedVerbStep2El.textContent = identifiedVerbBV;
-            // identifiedVerbStep2EnEl.textContent = identifiedVerbBV; // Assuming this element exists or is needed
+            // identifiedVerbStep2EnEl.textContent = identifiedVerbBV; 
             step2FeedbackEl.textContent = '';
             step2FeedbackEl.classList.add('hidden');
-            btnCondition.classList.remove('selected-verb', 'correct', 'incorrect'); // Using selected-verb for visual consistency
+            btnCondition.classList.remove('selected-verb', 'correct', 'incorrect');
             btnAction.classList.remove('selected-verb', 'correct', 'incorrect');
             btnCondition.disabled = false;
             btnAction.disabled = false;
@@ -479,19 +436,21 @@
                 triggerConfettiBV();
                 
                 setTimeout(() => {
-                    // Placeholder for next steps
+                    // TODO: Implement next steps fully
                     if (correctType === "Action") {
-                         currentStepInstructionEl.textContent = "Nächster Schritt (TODO): Boss finden!";
+                         currentStepInstructionEl.textContent = "Gut! Nächster Schritt (TODO): Boss finden!";
+                         // setupStep3_FindBoss(); 
                     } else { 
-                         currentStepInstructionEl.textContent = "Nächster Schritt (TODO): Artikel für Boss!";
+                         currentStepInstructionEl.textContent = "Gut! Nächster Schritt (TODO): Artikel für Boss!";
+                         // setupStep5_ChooseArticle(); 
                     }
-                    nextCaseBtnBV.classList.remove('hidden'); // Show "Next Case" as other steps are placeholders
+                    step2FeedbackEl.textContent += " (Nächste Schritte noch nicht implementiert)";
+                    nextCaseBtnBV.classList.remove('hidden'); 
                 }, 1500);
 
             } else {
                 step2FeedbackEl.textContent = `Nicht ganz. '${identifiedVerbBV}' ist eigentlich ${correctType === "Action" ? "eine AKTION" : "eine KONDITION"}. (Siehe Detektiv-Handbuch!)`;
                 step2FeedbackEl.className = 'feedback-text incorrect';
-                // No selected-verb class on incorrect button choice
                  setTimeout(() => {nextCaseBtnBV.classList.remove('hidden'); }, 2000);
             }
             step2FeedbackEl.classList.remove('hidden');
@@ -505,7 +464,6 @@
             }
             scoreTextBVEl.textContent = `Punkte: ${scoreBV}`;
         }
-
         document.addEventListener('DOMContentLoaded', loadTasksBV);
     </script>
 </body>
