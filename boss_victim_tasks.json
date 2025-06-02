@@ -1,0 +1,87 @@
+[
+  {
+    "id": "bv1",
+    "sentence_de_parts": ["Ich", "habe", "Bruder"], 
+    "sentence_for_article_step": "Ich habe ___ Bruder.", 
+    "translations": {
+      "en": "I have a brother.",
+      "es": "Tengo un hermano."
+    },
+    "verb_in_sentence": "habe",
+    "verb_infinitive": "haben",
+    "verb_type": "Action", 
+    "boss_info": {
+      "word": "Ich",
+      "explanation_de": "Der BOSS ist 'Ich' (Nominativ).",
+      "explanation_es": "El JEFE es 'Ich' (Nominativo)."
+    },
+    "victim_info": { 
+      "word": "Bruder",
+      "gender": "maskulin",
+      "nominativ_article_example": "der", // e.g., der Bruder
+      "case_needed_for_blank": "Akkusativ",
+      "correct_article_for_blank": "einen", 
+      "article_options": ["ein", "eine", "einen", "einem"],
+      "explanation_de": "Das OPFER 'Bruder' (maskulin) kommt in den Akkusativ. 'ein' wird zu 'einen'.",
+      "explanation_es": "La VÍCTIMA 'Bruder' (masculino) va en Acusativo. 'ein' se convierte en 'einen'."
+    },
+    "full_correct_sentence_de": "Ich habe einen Bruder."
+  },
+  {
+    "id": "bv2",
+    "sentence_de_parts": ["Das Baby", "schläft"],
+    "sentence_for_article_step": "___ Baby schläft.", 
+    "translations": {
+      "en": "The baby sleeps.",
+      "es": "El bebé duerme."
+    },
+    "verb_info": {
+      "verb_in_sentence": "schläft",
+      "infinitive": "schlafen",
+      "type": "Condition"
+    },
+    "boss_info": {
+      "word": "Das Baby", 
+      "gender": "neutrum",
+      "nominativ_article_example": "das",
+      "case_needed_for_blank": "Nominativ",
+      "correct_article_for_blank": "Das",
+      "article_options": ["Das", "Den", "Dem", "Die"],
+      "explanation_de": "Der BOSS ist 'Das Baby' (Nominativ). 'das Baby' (neutrum) im Nominativ ist 'Das Baby'.",
+      "explanation_es": "El JEFE es 'Das Baby' (Nominativo). 'das Baby' (neutro) en Nominativo es 'Das Baby'."
+    },
+    "victim_info": null, // No victim for Condition verbs where the blank is for the boss
+    "full_correct_sentence_de": "Das Baby schläft."
+  },
+  {
+    "id": "bv3",
+    "sentence_de_parts": ["Die Katze", "trinkt", "Milch"],
+    "sentence_for_article_step": "Die Katze trinkt ___ Milch.",
+    "translations": {
+        "en": "The cat drinks the milk.",
+        "es": "El gato bebe la leche."
+    },
+    "verb_info": {
+        "verb_in_sentence": "trinkt",
+        "infinitive": "trinken",
+        "type": "Action"
+    },
+    "boss_info": {
+        "word": "Die Katze",
+        "explanation_de": "Der BOSS ist 'Die Katze' (Nominativ).",
+        "explanation_es": "El JEFE es 'Die Katze' (Nominativo)."
+    },
+    "victim_info": {
+        "word": "Milch",
+        "gender": "feminin",
+        "nominativ_article_example": "die",
+        "case_needed_for_blank": "Akkusativ",
+        "correct_article_for_blank": "die",
+        "article_options": ["die", "der", "das"],
+        "explanation_de": "Das OPFER 'Milch' (feminin) kommt in den Akkusativ. 'die' bleibt 'die'.",
+        "explanation_es": "La VÍCTIMA 'Milch' (femenino) va en Acusativo. 'die' permanece 'die'."
+    },
+    "full_correct_sentence_de": "Die Katze trinkt die Milch."
+  }
+  // Add more tasks here
+]
