@@ -87,12 +87,23 @@
             <button id="close-cheat-sheet" style="background: #ff6b6b; border: none; color: white; width: 25px; height: 25px; border-radius: 50%; cursor: pointer; font-weight: bold;">×</button>
         </div>
         <p>If you see these verbs, the word after them is ALWAYS Nominativ! These verbs describe what someone IS, not what they DO.</p>
+        
+        <div style="margin: 10px 0; font-size: 0.8rem;">
+            <span style="background: #ff9999; padding: 2px 6px; border-radius: 3px; margin-right: 5px;">SUBJECT</span>
+            <span style="background: #99ccff; padding: 2px 6px; border-radius: 3px; margin-right: 5px;">CONDITION VERB</span>
+            <span style="background: #99ff99; padding: 2px 6px; border-radius: 3px;">NOMINATIV</span>
+        </div>
+        
         <ul>
-            <li>•&nbsp;<b>sein</b> (to be) → Ich <b>bin</b> deine Mutter.</li>
-            <li>•&nbsp;<b>heißen</b> (to be called) → Sie <b>heißt</b> Anna Schmidt.</li>
-            <li>•&nbsp;<b>werden</b> (to become) → Er <b>wird</b> ein guter Arzt.</li>
-            <li>•&nbsp;<b>bleiben</b> (to stay) → Wir <b>bleiben</b> beste Freunde.</li>
+            <li>•&nbsp;<b>sein</b> (to be) → <span style="background: #ff9999; padding: 1px 3px; border-radius: 2px;">Ich</span> <span style="background: #99ccff; padding: 1px 3px; border-radius: 2px;"><b>bin</b></span> <span style="background: #99ff99; padding: 1px 3px; border-radius: 2px;">deine Mutter</span>.</li>
+            <li>•&nbsp;<b>heißen</b> (to be called) → <span style="background: #ff9999; padding: 1px 3px; border-radius: 2px;">Sie</span> <span style="background: #99ccff; padding: 1px 3px; border-radius: 2px;"><b>heißt</b></span> <span style="background: #99ff99; padding: 1px 3px; border-radius: 2px;">Anna Schmidt</span>.</li>
+            <li>•&nbsp;<b>werden</b> (to become) → <span style="background: #ff9999; padding: 1px 3px; border-radius: 2px;">Er</span> <span style="background: #99ccff; padding: 1px 3px; border-radius: 2px;"><b>wird</b></span> <span style="background: #99ff99; padding: 1px 3px; border-radius: 2px;">ein guter Arzt</span>.</li>
+            <li>•&nbsp;<b>bleiben</b> (to stay) → <span style="background: #ff9999; padding: 1px 3px; border-radius: 2px;">Wir</span> <span style="background: #99ccff; padding: 1px 3px; border-radius: 2px;"><b>bleiben</b></span> <span style="background: #99ff99; padding: 1px 3px; border-radius: 2px;">beste Freunde</span>.</li>
         </ul>
+        
+        <p style="font-size: 0.8rem; color: #666; margin-top: 15px; font-style: italic;">
+            ✨ Easy rule: CONDITION = NOMINATIV!
+        </p>
     </div>
 
 
@@ -109,6 +120,7 @@
                     currentCaseIndex = (currentCaseIndex + 1) % caseFiles.length;
                     loadCase(currentCaseIndex);
                 });
+                // Event listener for the cheat sheet's close button
                 document.getElementById('close-cheat-sheet').addEventListener('click', () => {
                     document.getElementById('cheat-sheet-box').style.display = 'none';
                 });
@@ -162,40 +174,40 @@
             // Step 2: Find the BOSS
             if (index === 1) { 
                 extraHTML = `<div class="verb-focus">
-                    <div class="word-bubble clue">${verb}</div>
-                    <div class="verb-info">
-                        <div><small>${stepData.verb_info}</small></div>
-                        <div class="german-q">'Wer oder was?' + '${verb}'?</div>
-                        <div class="english-q">${stepData.verb_question_en}</div>
+                    <div class="word-bubble clue"><span class="math-inline">\{verb\}</div\>
+<div class\="verb\-info"\>
+<div\><small\></span>{stepData.verb_info}</small></div>
+                        <div class="german-q">'Wer oder was?' + '<span class="math-inline">\{verb\}'?</div\>
+<div class\="english\-q"\></span>{stepData.verb_question_en}</div>
                     </div>
                 </div>`;
             }
             // Step 3: Find the VICTIM
             if (index === 2) {
                 const formula = stepData.formula.replace('%VERB%', verb).replace('%BOSS%', boss);
-                extraHTML = `<div class="formula">${formula}</div>
-                             <div class="formula-en">${stepData.formula_en}</div>`;
+                extraHTML = `<div class="formula"><span class="math-inline">\{formula\}</div\>
+<div class\="formula\-en"\></span>{stepData.formula_en}</div>`;
             }
             // Step 4: Choose the Case
             if (index === 3) {
                 const sentenceReminderHTML = caseData.sentence.replace('___', `<span class="drop-zone article-drop-zone" data-step="4" data-target="article">___</span>`);
                 extraHTML = `<details>
                                 <summary>HINT!</summary>
-                                <div class="hint-content">${stepData.hint_rules}</div>
-                             </details>
-                             <div class="sentence-reminder">${sentenceReminderHTML}</div>`;
+                                <div class="hint-content"><span class="math-inline">\{stepData\.hint\_rules\}</div\>
+</details\>
+<div class\="sentence\-reminder"\></span>{sentenceReminderHTML}</div>`;
             }
 
             const cheatSheetButtonHTML = (index === 0) ? `<button id="cheat-sheet-btn" class="cheat-sheet-button">CHEAT SHEET</button>` : '';
 
             stepDiv.innerHTML = `
                 <div class="step-header">
-                    <div class="step-title-group"><div class="step-number">${index + 1}</div><h3>${stepData.title}</h3></div>
-                    ${cheatSheetButtonHTML}
-                </div>
-                <p>${stepData.instruction}</p>
-                ${extraHTML}
-                <div class="word-bubbles" id="bubbles-step${index + 1}"></div>
+                    <div class="step-title-group"><div class="step-number"><span class="math-inline">\{index \+ 1\}</div\><h3\></span>{stepData.title}</h3></div>
+                    <span class="math-inline">\{cheatSheetButtonHTML\}
+</div\>
+<p\></span>{stepData.instruction}</p>
+                <span class="math-inline">\{extraHTML\}
+<div class\="word\-bubbles" id\="bubbles\-step</span>{index + 1}"></div>
                 ${index < 3 ? `<p>Drag the answer here: <span class="drop-zone" data-step="${index + 1}" data-target="${stepData.target}"></span></p>` : ''}
                 <div class="investigation-text" id="${stepData.target}-investigation" style="display: none;"></div>
             `;
@@ -206,7 +218,19 @@
             return stepDiv;
         }
 
-        function createWordBubble(text, isCorrect) { /* Unchanged */ const bubble = document.createElement('div'); bubble.className = 'word-bubble'; if (text === '___') { bubble.classList.add('placeholder'); bubble.draggable = false; } else { bubble.draggable = true; } bubble.textContent = text; bubble.dataset.answer = isCorrect ? text : 'incorrect'; return bubble; }
+        function createWordBubble(text, isCorrect) {
+            const bubble = document.createElement('div');
+            bubble.className = 'word-bubble';
+            if (text === '___') {
+                bubble.classList.add('placeholder');
+                bubble.draggable = false;
+            } else {
+                bubble.draggable = true;
+            }
+            bubble.textContent = text;
+            bubble.dataset.answer = isCorrect ? text : 'incorrect';
+            return bubble;
+        }
 
         function handleDrop(e) {
             e.preventDefault();
@@ -255,11 +279,49 @@
             }, 1500);
         }
         
-        function nextStep(stepNum) { /* Unchanged */ const currentStepEl = document.getElementById(`step${currentStepIndex + 1}`); if(currentStepEl) { currentStepEl.classList.remove('active'); currentStepEl.classList.add('completed'); } currentStepIndex = stepNum - 1; const nextStepElement = document.getElementById(`step${stepNum}`); if(nextStepElement) { nextStepElement.classList.remove('step-hidden'); nextStepElement.classList.add('active'); nextStepElement.scrollIntoView({ behavior: 'smooth', block: 'center' }); } }
-        function solveCase() { /* Unchanged */ const finalStepEl = document.getElementById(`step${currentStepIndex + 1}`); if(finalStepEl) { finalStepEl.classList.remove('active'); finalStepEl.classList.add('completed'); } const finalResult = document.getElementById('final-result'); document.getElementById('final-sentence').textContent = caseFiles[currentCaseIndex].fullSentence; finalResult.classList.add('show'); finalResult.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+        function nextStep(stepNum) {
+            const currentStepEl = document.getElementById(`step${currentStepIndex + 1}`);
+            if(currentStepEl) {
+                currentStepEl.classList.remove('active');
+                currentStepEl.classList.add('completed');
+            }
+            
+            currentStepIndex = stepNum - 1;
+            const nextStepElement = document.getElementById(`step${stepNum}`);
+            if(nextStepElement) {
+                nextStepElement.classList.remove('step-hidden');
+                nextStepElement.classList.add('active');
+                nextStepElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        function solveCase() {
+            const finalStepEl = document.getElementById(`step${currentStepIndex + 1}`);
+            if(finalStepEl) {
+                 finalStepEl.classList.remove('active');
+                 finalStepEl.classList.add('completed');
+            }
+            const finalResult = document.getElementById('final-result');
+            document.getElementById('final-sentence').textContent = caseFiles[currentCaseIndex].fullSentence;
+            finalResult.classList.add('show');
+            finalResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
         
-        // Unchanged Drag and Drop Helper Functions
-        function initializeDragAndDrop() { const bubbles = document.querySelectorAll('.word-bubble[draggable="true"]'); const dropZones = document.querySelectorAll('.drop-zone'); bubbles.forEach(bubble => { bubble.addEventListener('dragstart', handleDragStart); bubble.addEventListener('dragend', handleDragEnd); }); dropZones.forEach(zone => { zone.addEventListener('dragover', handleDragOver); zone.addEventListener('drop', handleDrop); zone.addEventListener('dragenter', handleDragEnter); zone.addEventListener('dragleave', handleDragLeave); }); }
+        function initializeDragAndDrop() {
+            const bubbles = document.querySelectorAll('.word-bubble[draggable="true"]');
+            const dropZones = document.querySelectorAll('.drop-zone');
+            bubbles.forEach(bubble => {
+                bubble.addEventListener('dragstart', handleDragStart);
+                bubble.addEventListener('dragend', handleDragEnd);
+            });
+            dropZones.forEach(zone => {
+                zone.addEventListener('dragover', handleDragOver);
+                zone.addEventListener('drop', handleDrop);
+                zone.addEventListener('dragenter', handleDragEnter);
+                zone.addEventListener('dragleave', handleDragLeave);
+            });
+        }
+
         function handleDragStart(e) { e.dataTransfer.setData('text/plain', e.target.dataset.answer); e.dataTransfer.setData('element', e.target.textContent); e.target.style.opacity = '0.5'; }
         function handleDragEnd(e) { e.target.style.opacity = '1'; }
         function handleDragOver(e) { e.preventDefault(); }
