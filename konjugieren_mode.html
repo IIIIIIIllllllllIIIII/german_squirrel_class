@@ -54,16 +54,21 @@
         .verb-selection-controls button { font-size: 0.8rem; padding: 6px 10px; margin-top: 0;}
 
         #verb-box-selection-area {
-            display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+            display: flex; flex-wrap: wrap; gap: 8px; /* MODIFIED: Reduced gap */ justify-content: center;
             margin-top: 8px; margin-bottom: 20px; padding: 10px;
             background-color: #f9fafb; border-radius: 8px;
             border: 1px solid #e5e7eb; max-height: 180px; overflow-y: auto;
         }
         .verb-select-box {
-            padding: 10px 16px; border: 2px solid #cbd5e1; border-radius: 8px;
-            font-weight: 500; color: #374151; cursor: pointer;
+            padding: 6px 10px; /* MODIFIED: Reduced padding */
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            font-weight: 500;
+            color: #374151;
+            cursor: pointer;
             transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-            text-transform: capitalize; 
+            text-transform: capitalize;
+            font-size: 0.875rem; /* MODIFIED: Added/Adjusted for smaller font */
         }
         .verb-select-box:hover { border-color: #a78bfa; background-color: #f3f4f6; }
         .verb-select-box.selected {
@@ -206,8 +211,8 @@
         @media (max-width: 640px) {
             .card, .stats-card, #mode-selection-card, #lego-mode-card { padding: 20px; }
             .mode-title { font-size: 1.5rem; } .mode-subtitle { font-size: 1rem; }
-            #verb-box-selection-area { gap: 8px; max-height: 150px; }
-            .verb-select-box { padding: 8px 12px; font-size: 0.9rem;}
+            #verb-box-selection-area { gap: 8px; max-height: 150px; } /* gap is already 8px, consistent with new base */
+            .verb-select-box { padding: 8px 12px; font-size: 0.9rem;} /* This is slightly larger padding-top/bottom than new base. Font is similar. This should be fine. */
             .verb-display { font-size: 1.5rem; } .pronoun-display { font-size: 1.25rem; }
             .answer-input-field { font-size: 1.125rem; max-width: 200px; }
             .btn { padding: 10px 16px; font-size: 0.9rem; }
