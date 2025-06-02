@@ -21,6 +21,7 @@
                 "title": "👑 Find the BOSS!",
                 "instruction": "Who or what is performing the action? Who or what is doing the thing?",
                 "verb_info": "('haben' - to have)",
+                "verb_question_en": "Who or what has someone or something?????",
                 "bubbles": ["Ich", "Bruder."],
                 "correctAnswer": "Ich",
                 "correctAnswer_en": "I",
@@ -31,7 +32,7 @@
                 "title": "🎯 Find the VICTIM!",
                 "instruction": "To find the victim of the action, ask: Who or what is influenced by the verb?",
                 "formula": "'Wen oder was?' + '%VERB%' + '%BOSS%'?",
-                "formula_en": "'Whom or what?' + 'do' + ' %BOSS%' + ' %VERB%'?",
+                "formula_en": "'Whom or what do I have????",
                 "bubbles": ["Bruder.", "Ich"],
                 "correctAnswer": "Bruder.",
                 "investigation": "'Whom or what do I have?' → 'Bruder'. This is our <strong>VICTIM</strong>!"
@@ -40,7 +41,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are working with an <strong>ACTION</strong> verb and you found a <strong>BOSS</strong> (Nominative) and a <strong>VICTIM</strong>, the victim must be put into the <strong>ACCUSATIVE</strong> case.",
-                "result_template": "<strong>What you found out so far:</strong><br>The victim is %VICTIM_NOUN% (%VICTIM_GENDER%).<br><hr style='margin: 8px 0; border: none; border-top: 1px solid #ddd;'><strong>Masculine:</strong> der → <span class='highlight'>den</span> / ein → <span class='highlight'>einen</span><br><strong>Feminine:</strong> die → die / eine → eine<br><strong>Neuter:</strong> das → das / ein → ein",
+                "hint_rules": "<strong>Masculine:</strong> der → <span class='highlight'>den</span> / ein → <span class='highlight'>einen</span><br><strong>Feminine:</strong> die → die / eine → eine<br><strong>Neuter:</strong> das → das / ein → ein",
                 "bubbles": ["einen", "ein", "der", "den"],
                 "correctAnswer": "einen",
                 "investigation": "Correct! Because 'Bruder' is masculine, 'ein' becomes 'einen' in the accusative case."
@@ -69,6 +70,7 @@
                 "title": "👑 Find the BOSS!",
                 "instruction": "Who or what is performing the action? Who or what is doing the thing?",
                 "verb_info": "('kaufen' - to buy)",
+                "verb_question_en": "Who or what buys someone or something?????",
                 "bubbles": ["Der Schüler", "Stift."],
                 "correctAnswer": "Der Schüler",
                 "correctAnswer_en": "The student",
@@ -79,7 +81,7 @@
                 "title": "🎯 Find the VICTIM!",
                 "instruction": "To find the victim of the action, ask: Who or what is influenced by the verb?",
                 "formula": "'Wen oder was?' + '%VERB%' + '%BOSS%'?",
-                "formula_en": "'Whom or what?' + 'does' + ' %BOSS%' + ' %VERB%'?",
+                "formula_en": "'Whom or what does the student buy????",
                 "bubbles": ["Stift.", "Der Schüler"],
                 "correctAnswer": "Stift.",
                 "investigation": "'Whom or what does the student buy?' → 'Stift'. This is our <strong>VICTIM</strong>!"
@@ -88,7 +90,7 @@
                 "target": "article",
                 "title": "⚖️ Choose the Case!",
                 "instruction": "Since we are working with an <strong>ACTION</strong> verb and you found a <strong>BOSS</strong> (Nominative) and a <strong>VICTIM</strong>, the victim must be put into the <strong>ACCUSATIVE</strong> case.",
-                "result_template": "<strong>What you found out so far:</strong><br>The victim is %VICTIM_NOUN% (%VICTIM_GENDER%).<br><hr style='margin: 8px 0; border: none; border-top: 1px solid #ddd;'><strong>Masculine:</strong> der → <span class='highlight'>den</span> / ein → <span class='highlight'>einen</span><br><strong>Feminine:</strong> die → die / eine → eine<br><strong>Neuter:</strong> das → das / ein → ein",
+                "hint_rules": "<strong>Masculine:</strong> der → <span class='highlight'>den</span> / ein → <span class='highlight'>einen</span><br><strong>Feminine:</strong> die → die / eine → eine<br><strong>Neuter:</strong> das → das / ein → ein",
                 "bubbles": ["einen", "ein", "den", "eine"],
                 "correctAnswer": "einen",
                 "investigation": "Correct! Because 'Stift' is masculine, 'ein' becomes 'einen' in the accusative case."
