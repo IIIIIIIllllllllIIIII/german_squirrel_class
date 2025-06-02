@@ -31,13 +31,13 @@
         .word-bubble.placeholder { background: #ced4da; color: #495057; cursor: not-allowed; }
         .word-bubble.clue { background: #adb5bd; color: #fff; cursor: default; }
         .word-bubble:hover:not(.clue):not(.placeholder) { transform: translateY(-2px) scale(1.03); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
-        .word-bubble.selected-in-answer-box { /* Optional: style for when in answer box */
-            background: linear-gradient(135deg, #27ae60, #2ecc71); /* Greenish when selected */
+        .word-bubble.selected-in-answer-box { 
+            background: linear-gradient(135deg, #27ae60, #2ecc71); 
         }
 
         .answer-area { display: flex; align-items: center; gap: 15px; margin-top: 20px; margin-bottom:10px; flex-wrap: wrap;}
         .answer-box { min-width: 120px; min-height: 50px; border: 3px dashed #3498db; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; padding: 5px; background: rgba(52, 152, 219, 0.05); transition: all 0.3s ease; }
-        .answer-box .word-bubble { margin: 0; box-shadow: none; } /* Bubble inside answer box */
+        .answer-box .word-bubble { margin: 0; box-shadow: none; } 
         
         .go-button { background: #e74c3c; color: white; border: none; padding: 12px 25px; border-radius: 25px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease; }
         .go-button:hover { background: #c0392b; transform: translateY(-1px); }
@@ -119,19 +119,18 @@
         let currentStepIndex = 0;
         let currentCaseIndex = 0;
 
-        // --- Fisher-Yates Shuffle Function ---
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]]; // ES6 destructuring swap
+                [array[i], array[j]] = [array[j], array[i]];
             }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             fetch('cases.json').then(r => r.ok ? r.json() : Promise.reject(r)).then(data => {
                 caseFiles = data;
-                shuffleArray(caseFiles); // Shuffle the cases after fetching
-                loadCase(currentCaseIndex); // Load the first case from the shuffled array
+                shuffleArray(caseFiles);
+                loadCase(currentCaseIndex);
                 setupGlobalListeners();
             }).catch(error => {
                 console.error("Could not fetch case files:", error);
@@ -170,8 +169,8 @@
         
         function loadCase(caseIndex) {
             const caseData = caseFiles[caseIndex];
-            currentCaseIndex = caseIndex; // Ensure this is set for the current loaded case
-            currentStepIndex = 0; // Reset step index for the new case
+            currentCaseIndex = caseIndex; 
+            currentStepIndex = 0;
 
             document.getElementById('cheat-sheet-box').style.display = 'none';
             document.getElementById('case-title').innerHTML = caseData.caseTitle;
@@ -203,18 +202,16 @@
         function createStepHTML(stepData, index, caseData) {
             const stepDiv = document.createElement('div');
             stepDiv.className = index > 0 ? 'step step-hidden' : 'step';
-            stepDiv.id = `step${index + 1}`; // Used for direct access and by nextStep
+            stepDiv.id = `step${index + 1}`;
 
-            // Ensure these are correctly fetched for each step's dynamic content
             const verb = caseData.steps[0].correctAnswer;
-            const boss = (caseData.steps.length > 1 && caseData.steps[1].correctAnswer) ? caseData.steps[1].correctAnswer : ""; // Handle cases where boss might not be defined yet if only 1 step
+            const boss = (caseData.steps.length > 1 && caseData.steps[1].correctAnswer) ? caseData.steps[1].correctAnswer : "";
             const infinitive = caseData.verb_infinitive;
             
             let instructionText = stepData.instruction;
             let extraHTML = '';
             let answerAreaHTML = '';
 
-            // Populate dynamic content for specific steps
             if (index === 1) { // Step 2: Find the BOSS
                 extraHTML = `<div class="verb-focus"><div class="word-bubble clue">${verb}</div><div class="verb-info"><div><small>${stepData.verb_info}</small></div><div class="german-q">'Wer oder was?' + '${verb}'?</div><div class="english-q">${stepData.verb_question_en}</div></div></div>`;
             }
@@ -224,18 +221,19 @@
             }
             if (index === 3) { // Step 4: Choose the Case
                 const bossVerb = `${boss} ${verb}`;
+                
                 instructionText = stepData.instruction
                     .replace('%BOSS_VERB%', bossVerb)
                     .replace('%INFINITIVE%', infinitive)
                     .replace('%BOSS%', boss);
 
-                if (caseData.predicate_nominative_noun) {
+                if (caseData.predicate_nominative_noun) { // Nominative Case
                     instructionText = instructionText
-                        .replace('%PREDICATE_NOMINATIVE_NOUN%', caseData.predicate_nominative_noun)
+                        .replace(/%PREDICATE_NOMINATIVE_NOUN%/g, caseData.predicate_nominative_noun) // Use global replace
                         .replace('%PREDICATE_NOMINATIVE_GENDER%', caseData.predicate_nominative_gender);
-                } else if (caseData.victim_noun) {
-                    instructionText = instructionText
-                        .replace('%VICTIM_NOUN%', caseData.victim_noun)
+                } else if (caseData.victim_noun) { // Accusative Case
+                     instructionText = instructionText
+                        .replace(/%VICTIM_NOUN%/g, caseData.victim_noun) // Use global replace
                         .replace('%VICTIM_GENDER%', caseData.victim_gender);
                 }
                 
@@ -278,7 +276,6 @@
             const stepEl = clickedBubbleEl.closest('.step');
             const stepIndex = parseInt(stepEl.id.replace('step', '')) - 1;
             const targetType = caseFiles[currentCaseIndex].steps[stepIndex].target;
-            // Ensure we target the correct answer box, especially for Step 4
             const answerBox = stepEl.querySelector(`.answer-box[data-step-target="${targetType}"], .article-answer-box`);
 
 
@@ -294,7 +291,7 @@
 
         function returnSelectedBubbleToChoices(bubbleInAnswerBox) {
             const stepEl = bubbleInAnswerBox.closest('.step');
-            if (!stepEl) return; // Bubble might have been removed from DOM if step re-rendered
+            if (!stepEl) return;
             const wordBubblesContainer = stepEl.querySelector('.word-bubbles');
             if (wordBubblesContainer) {
                  wordBubblesContainer.appendChild(bubbleInAnswerBox);
@@ -305,7 +302,6 @@
             const stepEl = goButton.closest('.step');
             const stepIndex = parseInt(stepEl.id.replace('step', '')) - 1;
             const targetType = caseFiles[currentCaseIndex].steps[stepIndex].target;
-            // Ensure we target the correct answer box
             const answerBox = stepEl.querySelector(`.answer-box[data-step-target="${targetType}"], .article-answer-box`);
             const answerBubble = answerBox ? answerBox.querySelector('.word-bubble') : null;
 
