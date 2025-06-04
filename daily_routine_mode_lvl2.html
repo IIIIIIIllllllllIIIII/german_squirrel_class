@@ -251,7 +251,7 @@
             });
 
             draggablePoolEl.innerHTML = '';
-            const wordsToDrag = [...currentTask.german_words];
+            const wordsToDrag = [...currentTask.german_words, ...currentTask.distractor_words];
             shuffleArray(wordsToDrag);
             wordsToDrag.forEach(word => {
                 draggablePoolEl.appendChild(createDraggableItem(word));
