@@ -141,5 +141,18 @@
             "ihr": "wohnt",
             "sie/Sie": "wohnen"
         }
+    },
+    {
+    "id": "gefallen",
+    "infinitive": "gefallen",
+    "translation": "to like",
+    "conjugations": {
+        "ich": "gefalle",
+        "du": "gefällst",
+        "er/sie/es": "gefällt",
+        "wir": "gefallen",
+        "ihr": "gefallt",
+        "sie/Sie": "gefallen"
     }
+}
 ]
