@@ -16,11 +16,12 @@
             flex-direction: column; /* Added for vertical centering */
             align-items: center; /* Horizontally centers .container */
             justify-content: center; /* Vertically centers .container if content is short */
+            padding: 20px; /* Added padding to body to avoid content touching edges */
         }
         .container { 
             max-width: 1200px; 
             margin: 0 auto; /* Still useful for fallback and structure */
-            padding: 20px; 
+            /* padding: 20px; */ /* Padding moved to body for better fullscreen centering */
             position: relative; 
             width: 100%; /* Helps with centering in flex body */
         }
@@ -122,6 +123,32 @@
         .article-answer-box .word-bubble { font-size: 1.4rem; padding: 8px 15px; }
         @keyframes shake { 10%, 90% { transform: translate3d(-1px, 0, 0); } 20%, 80% { transform: translate3d(2px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-4px, 0, 0); } 40%, 60% { transform: translate3d(4px, 0, 0); } }
         .shake { animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both; }
+
+        /* --- NEW STYLE FOR MENU BUTTON --- */
+        .menu-nav-button {
+            display: inline-block;
+            background: #f39c12; /* Orange color */
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-top: 10px; /* Added some margin for spacing */
+        }
+        .menu-nav-button:hover {
+            background: #e67e22; /* Darker orange */
+            transform: translateY(-1px);
+        }
+        .bottom-controls-bar { /* Container for the menu button */
+            text-align: center;
+            padding: 20px 0; /* Add padding above and below */
+            width: 100%;
+        }
+        /* --- END OF NEW STYLE --- */
     </style>
 </head>
 <body>
@@ -136,7 +163,11 @@
             <p>Congratulations, Detective! You've successfully solved the German case mystery!</p>
             <button class="restart-button" id="restart-button">Solve Another Case</button>
         </div>
-    </div>
+
+        <div class="bottom-controls-bar">
+            <a href="index.html" class="menu-nav-button">Back to Menu / Volver al Menú</a>
+        </div>
+        </div>
     
     <div id="cheat-sheet-box">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
@@ -275,7 +306,7 @@
                         .replace(/%PREDICATE_NOMINATIVE_NOUN%/g, caseData.predicate_nominative_noun) 
                         .replace('%PREDICATE_NOMINATIVE_GENDER%', caseData.predicate_nominative_gender);
                 } else if (caseData.victim_noun) { 
-                     instructionText = instructionText
+                    instructionText = instructionText
                         .replace(/%VICTIM_NOUN%/g, caseData.victim_noun) 
                         .replace('%VICTIM_GENDER%', caseData.victim_gender);
                 }
@@ -285,7 +316,7 @@
                 extraHTML = `<details><summary>HINT!</summary><div class="hint-content">${stepData.hint_rules}</div></details><div class="sentence-reminder">${sentenceReminderHTML}</div>${sentenceEnHTML}`;
                 answerAreaHTML = `<div class="answer-area" style="justify-content: center;"><button class="go-button" data-step="${index + 1}">GO</button></div>`;
             } else {
-                 answerAreaHTML = `<div class="answer-area"><div class="answer-box" data-step-target="${stepData.target}"></div><button class="go-button" data-step="${index + 1}">GO</button></div>`;
+                answerAreaHTML = `<div class="answer-area"><div class="answer-box" data-step-target="${stepData.target}"></div><button class="go-button" data-step="${index + 1}">GO</button></div>`;
             }
 
             const cheatSheetButtonHTML = (index === 0) ? `<button id="cheat-sheet-btn" class="cheat-sheet-button">CHEAT SHEET</button>` : '';
