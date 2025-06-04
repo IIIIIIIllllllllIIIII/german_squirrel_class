@@ -44,6 +44,13 @@
     { "article": "die", "noun": "Marmelade", "en": "Jam", "es": "Mermelada", "category": "Foods & Drinks" },
     { "article": "der", "noun": "Keks", "en": "Cookie/Biscuit", "es": "Galleta", "category": "Foods & Drinks" },
     { "article": "das", "noun": "Eis", "en": "Ice cream", "es": "Helado", "category": "Foods & Drinks" },
+    { "article": "der", "noun": "Hamburger", "en": "Hamburger", "es": "Hamburguesa", "category": "Foods & Drinks" },
+    { "article": "der", "noun": "Rotwein", "en": "Red wine", "es": "Vino tinto", "category": "Foods & Drinks" },
+    { "article": "die", "noun": "Limonade", "en": "Lemonade", "es": "Limonada", "category": "Foods & Drinks" },
+    { "article": "das", "noun": "Mineralwasser", "en": "Mineral water", "es": "Agua mineral", "category": "Foods & Drinks" },
+    { "article": "der", "noun": "Orangensaft", "en": "Orange juice", "es": "Jugo de naranja", "category": "Foods & Drinks" },
+    { "article": "der", "noun": "Pfannkuchen", "en": "Pancake", "es": "Panqueque", "category": "Foods & Drinks" },
+    { "article": "die", "noun": "Meeresfrüchte", "en": "Seafood", "es": "Mariscos", "category": "Foods & Drinks" },
 
     { "article": "die", "noun": "Mutter", "en": "Mother", "es": "Madre", "category": "Familie" },
     { "article": "der", "noun": "Vater", "en": "Father", "es": "Padre", "category": "Familie" },
