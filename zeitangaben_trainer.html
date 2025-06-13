@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Deutsche Zeitwörter Quiz (Tage, Monate, Zeiten)</title>
+    <title>Deutsche Zeitwörter Quiz</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
@@ -39,51 +39,64 @@
             font-weight: 600;
             color: white;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             border: none;
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
             margin-top: 8px;
         }
-         .btn-link { /* For the back to menu button */
-            display: inline-block;
-            text-decoration: none;
-        }
-        .btn:disabled {
-            background-color: #d1d5db !important;
-            color: #6b7280 !important;
-            cursor: not-allowed;
-            box-shadow: none;
-            opacity: 0.7;
-        }
+        .btn-link { display: inline-block; text-decoration: none; }
+        .btn:disabled { background-color: #d1d5db !important; color: #6b7280 !important; cursor: not-allowed; box-shadow: none; opacity: 0.7; }
         .btn:active:not(:disabled) { transform: translateY(1px); }
-        .btn-primary { background-color: #6d28d9; }
-        .btn-primary:hover:not(:disabled) { background-color: #5b21b6; }
+        .btn-primary { background-color: #059669; }
+        .btn-primary:hover:not(:disabled) { background-color: #047857; }
         .btn-secondary { background-color: #4f46e5; }
         .btn-secondary:hover:not(:disabled) { background-color: #4338ca; }
-        .btn-success { background-color: #059669; }
-        .btn-success:hover:not(:disabled) { background-color: #047857; }
-        .btn-danger { background-color: #be123c; } 
-        .btn-danger:hover:not(:disabled) { background-color: #9f1239; }
         .btn-choice { background-color: #1d4ed8; }
         .btn-choice:hover:not(:disabled) { background-color: #1e40af; }
+        
+        /* NEUE STYLES FÜR KATEGORIE-BUTTONS */
+        .category-btn {
+            background-color: #f3f4f6;
+            color: #374151;
+            border: 2px solid #e5e7eb;
+            font-weight: 500;
+        }
+        .category-btn.selected {
+            background-color: #dbeafe;
+            color: #1e40af;
+            border-color: #3b82f6;
+            font-weight: 600;
+        }
+        .category-btn:hover:not(.selected) {
+            background-color: #e5e7eb;
+        }
+
         #question-display{font-size:2rem;font-weight:700;color:#4a044e;margin-bottom:0.5rem;}
         #multilang-translation-display {font-size: 1rem; color: #4b5563; font-style: italic; margin-top: 0.5rem; margin-bottom: 1rem; min-height: 40px; }
         #hint-display{font-size:0.9rem;color:#6b7280;margin-bottom:2rem;min-height:40px; line-height: 1.4;}
-        #choices-container{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}.mode-selection{display:flex;gap:16px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}.mode-btn{padding:16px 24px;font-size:1.1rem;border-radius:12px;min-width:200px}kbd{font-family:monospace;background-color:#e2e8f0;color:#4a5568;padding:3px 6px;border-radius:4px;border:1px solid #cbd5e0;font-size:.85em;box-shadow:1px 1px 1px rgba(0,0,0,.1)}@media (max-width:768px){#question-display{font-size:1.8rem}}@media (max-width:640px){.card{padding:20px}.btn{padding:10px 16px;font-size:.9rem}#question-display{font-size:1.5rem}}
+        .feedback-area{font-size:.95rem;font-weight:500;padding:12px;border-radius:8px;min-height:60px;margin-bottom:1rem;text-align:center}.feedback-area.correct{color:#065f46;background-color:#dcfce7;border:1px solid #bbf7d0;display:block!important}.feedback-area.incorrect{color:#b91c1c;background-color:#fee2e2;border:1px solid #fecaca;display:block!important}.feedback-area .correct-answer-text{font-weight:700}.detailed-results-list{margin-top:1rem;text-align:left;max-height:200px;overflow-y:auto;padding:.75rem;border:1px solid #e5e7eb;border-radius:8px;background-color:#f9fafb}.detailed-results-list h3{font-size:1.125rem;font-weight:600;margin-bottom:.75rem}.detailed-results-list ul{list-style:none;padding:0}.detailed-results-list li{margin-bottom:.75rem;padding:.5rem;border-radius:6px;font-size:.875rem}.result-correct{background-color:#ecfdf5;border-left:4px solid #10b981}.result-incorrect{background-color:#fff1f2;border-left:4px solid #f43f5e}.progress-text{margin-top:12px;font-size:.875rem;color:#6b7280}.hidden{display:none!important}
+        @media (max-width:640px){.card{padding:20px}.btn{padding:10px 16px;font-size:.9rem}#question-display{font-size:1.5rem}}
     </style>
 </head>
 <body>
     <div id="main-container" class="card">
         <div id="mode-selection-screen" class="">
-            <button id="settings-btn" title="Einstellungen">⚙️</button>
-            <h1 class="text-2xl sm:text-3xl font-bold text-blue-700 mb-6 text-center">Deutsche Zeitwörter Quiz</h1>
-            <div class="mode-selection">
-                <button id="quiz-mode-btn" class="btn btn-primary mode-btn">
-                    📝 Lern-Quiz
-                    <div class="text-sm opacity-90 mt-1">Lerne Tage, Monate und Zeiten</div>
-                </button>
+            <h1 class="text-2xl sm:text-3xl font-bold text-blue-700 mb-4 text-center">Deutsche Zeitwörter Quiz</h1>
+            
+            <div class="mb-6">
+                <h2 class="text-lg font-semibold mb-3 text-gray-800">1. Wähle deine Kategorien:</h2>
+                <div id="category-button-container" class="flex flex-wrap justify-center gap-3">
+                    </div>
             </div>
-            <p id="quiz-summary" class="text-sm text-gray-500 mt-4"></p>
+
+            <div class="pt-6 border-t border-gray-200">
+                <h2 class="text-lg font-semibold mb-2 text-gray-800">2. Starte das Quiz:</h2>
+                <button id="quiz-mode-btn" class="btn btn-primary text-lg w-full max-w-sm mx-auto">
+                    📝 Lern-Quiz starten
+                </button>
+                <p id="quiz-summary" class="text-sm text-gray-500 mt-2"></p>
+            </div>
+
             <div class="mt-8 pt-6 border-t border-gray-200">
                 <a href="index.html" class="btn btn-secondary btn-link">← Zurück zum Hauptmenü</a>
             </div>
@@ -96,44 +109,16 @@
                  <div id="multilang-translation-display"></div>
                  <div id="hint-display" class="text-center"></div>
             </div>
-            <div id="choices-container" class="mb-6"></div>
+            <div id="choices-container" class="flex flex-wrap justify-center gap-4 mb-6"></div>
             <div id="feedback-area" class="feedback-area hidden"></div>
             <div id="detailed-results-list" class="detailed-results-list hidden"></div>
             <div id="quiz-controls-area" class="text-center mt-4">
-                <button id="restart-quiz-btn" class="btn btn-secondary hidden">Quiz neu starten</button>
+                <button id="restart-quiz-btn" class="btn btn-secondary hidden">Neues Quiz starten</button>
                 <button id="back-to-menu-btn" class="btn btn-secondary mr-2">Quiz-Menü</button>
                 <a href="index.html" class="btn btn-secondary btn-link">Hauptmenü</a>
             </div>
             <div id="progress-indicator" class="progress-text mt-4 text-center">Frage 0 / 0</div>
             <div id="score-indicator" class="progress-text mt-1 text-center">Punkte: 0 / 0</div>
-        </div>
-    </div>
-    
-    <div id="settings-overlay" class="hidden">
-        <div id="settings-modal-content">
-            <div>
-                <h2 class="settings-title">Einstellungen</h2>
-                <p class="settings-subtitle">Settings</p>
-            </div>
-            <div class="settings-content-area">
-                <div class="settings-section">
-                    <h3>Anzahl der Fragen</h3>
-                    <p class="translation">Number of Questions</p>
-                    <div class="flex items-center gap-4">
-                        <input type="range" id="num-questions-slider" min="10" value="20" class="w-full">
-                        <span id="num-questions-value" class="font-bold text-purple-700 w-12 text-center">20</span>
-                         <label class="checkbox-label whitespace-nowrap"><input type="checkbox" id="all-questions-checkbox"> Alle <span class="text-sm text-gray-500 ml-1">/ All</span></label>
-                    </div>
-                </div>
-                <div class="settings-section">
-                    <h3>Kategorien</h3>
-                    <p class="translation">Categories</p>
-                    <div id="category-checkboxes"></div>
-                </div>
-            </div>
-            <div class="settings-footer">
-                <button id="save-settings-btn" class="btn btn-primary w-full">Speichern & Schließen</button>
-            </div>
         </div>
     </div>
 
@@ -157,13 +142,7 @@
             quizModeScreen: document.getElementById("quiz-mode-screen"),
             restartQuizBtn: document.getElementById("restart-quiz-btn"),
             scoreIndicatorEl: document.getElementById("score-indicator"),
-            settingsBtn: document.getElementById("settings-btn"),
-            settingsOverlay: document.getElementById("settings-overlay"),
-            saveSettingsBtn: document.getElementById("save-settings-btn"),
-            numQuestionsSlider: document.getElementById("num-questions-slider"),
-            numQuestionsValue: document.getElementById("num-questions-value"),
-            allQuestionsCheckbox: document.getElementById("all-questions-checkbox"),
-            categoryCheckboxesContainer: document.getElementById("category-checkboxes"),
+            categoryButtonContainer: document.getElementById("category-button-container"),
             quizSummaryEl: document.getElementById("quiz-summary"),
             questionArea: document.getElementById("question-area")
         };
@@ -181,68 +160,59 @@
         function clearAutoAdvance(timeoutVar) { clearTimeout(timeoutVar); }
 
         function loadSettings() {
-            const savedSettings = localStorage.getItem('timeQuizSettingsV2');
-            const defaultSettings = { numQuestions: 20, useAllQuestions: false, categories: ['Wochentage'] };
+            const savedSettings = localStorage.getItem('timeQuizSettingsV3');
+            const defaultSettings = { categories: ['Wochentage'] };
             quizSettings = savedSettings ? JSON.parse(savedSettings) : defaultSettings;
-            updateQuizSummary();
         }
 
         function saveSettings() {
-            localStorage.setItem('timeQuizSettingsV2', JSON.stringify(quizSettings));
+            localStorage.setItem('timeQuizSettingsV3', JSON.stringify(quizSettings));
+        }
+        
+        // NEUE FUNKTIONEN FÜR DIE BUTTON-AUSWAHL
+        function populateCategoryButtons() {
+            const categories = [...new Set(allQuestions.map(q => q.category))].sort();
+            elements.categoryButtonContainer.innerHTML = '';
+            categories.forEach(cat => {
+                const button = document.createElement('button');
+                button.textContent = cat;
+                button.className = 'btn category-btn';
+                button.dataset.category = cat;
+                if (quizSettings.categories.includes(cat)) {
+                    button.classList.add('selected');
+                }
+                button.addEventListener('click', () => toggleCategorySelection(cat, button));
+                elements.categoryButtonContainer.appendChild(button);
+            });
+            updateQuizSummary();
+        }
+
+        function toggleCategorySelection(categoryName, buttonElement) {
+            const index = quizSettings.categories.indexOf(categoryName);
+            if (index > -1) {
+                // Nur deselektieren, wenn es nicht die letzte ausgewählte Kategorie ist
+                if (quizSettings.categories.length > 1) {
+                    quizSettings.categories.splice(index, 1);
+                    buttonElement.classList.remove('selected');
+                } else {
+                    alert("Bitte behalte mindestens eine Kategorie ausgewählt.");
+                }
+            } else {
+                quizSettings.categories.push(categoryName);
+                buttonElement.classList.add('selected');
+            }
+            saveSettings();
             updateQuizSummary();
         }
         
-        function openSettings() {
-            elements.numQuestionsSlider.value = quizSettings.numQuestions;
-            elements.numQuestionsValue.textContent = quizSettings.numQuestions;
-            elements.allQuestionsCheckbox.checked = quizSettings.useAllQuestions;
-            elements.numQuestionsSlider.disabled = quizSettings.useAllQuestions;
-            
-            const availableCats = [...elements.categoryCheckboxesContainer.querySelectorAll('input[type="checkbox"]')];
-            availableCats.forEach(cb => {
-                cb.checked = quizSettings.categories.includes(cb.value);
-            });
-            elements.settingsOverlay.classList.remove('hidden');
-        }
-
-        function handleSaveSettings() {
-            quizSettings.useAllQuestions = elements.allQuestionsCheckbox.checked;
-            if (!quizSettings.useAllQuestions) {
-                quizSettings.numQuestions = parseInt(elements.numQuestionsSlider.value, 10);
-            }
-            
-            let selectedCategories = [...elements.categoryCheckboxesContainer.querySelectorAll('input:checked')].map(cb => cb.value);
-
-            if(selectedCategories.length === 0) {
-                alert("Bitte wähle mindestens eine Kategorie aus.");
-                return;
-            }
-            
-            quizSettings.categories = selectedCategories;
-            
-            saveSettings();
-            elements.settingsOverlay.classList.add('hidden');
-            showQuizMode(); // Quiz mit neuen Einstellungen neu starten
-        }
-
-        function populateCategoryCheckboxes() {
-            const categories = [...new Set(allQuestions.map(n => n.category))].sort();
-            let checkboxesHTML = '';
-            categories.forEach(cat => {
-                checkboxesHTML += `<label class="checkbox-label"><input type="checkbox" value="${cat}"> ${cat}</label>`;
-            });
-            elements.categoryCheckboxesContainer.innerHTML = checkboxesHTML;
-        }
-        
         function updateQuizSummary() {
-            const numText = quizSettings.useAllQuestions ? `Alle (${getFilteredQuestions(false).length})` : quizSettings.numQuestions;
-            const catText = `${quizSettings.categories.length} Kategorien`;
-            elements.quizSummaryEl.textContent = `Aktuell: ${numText} Fragen aus ${catText}. Ändere dies in den Einstellungen (⚙️).`;
+            const questionCount = getFilteredQuestions().length;
+            elements.quizSummaryEl.textContent = `Starte das Quiz mit ${questionCount} Fragen aus ${quizSettings.categories.length} Kategorien.`;
         }
 
         async function loadQuizData() {
             try {
-                const response = await fetch('zeitangaben.json');
+                const response = await fetch('german_time.json');
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 allQuestions = await response.json();
             } catch (error) {
@@ -252,10 +222,8 @@
             }
         }
         
-        function getFilteredQuestions(shuffle = true) {
-            let filtered = allQuestions.filter(q => quizSettings.categories.includes(q.category));
-            if (shuffle) shuffleArray(filtered);
-            return quizSettings.useAllQuestions ? filtered : filtered.slice(0, quizSettings.numQuestions);
+        function getFilteredQuestions() {
+            return allQuestions.filter(q => quizSettings.categories.includes(q.category));
         }
 
         function showModeSelection() {
@@ -265,18 +233,18 @@
         }
         
         function showQuizMode() {
+            shuffledQuestions = getFilteredQuestions();
+            if (shuffledQuestions.length === 0) {
+                alert("Bitte wähle mindestens eine Kategorie aus, um das Quiz zu starten.");
+                return;
+            }
+            shuffleArray(shuffledQuestions);
             document.getElementById('mode-selection-screen').classList.add('hidden');
             elements.quizModeScreen.classList.remove('hidden');
             startQuiz();
         }
 
         function startQuiz() {
-            shuffledQuestions = getFilteredQuestions();
-            if (shuffledQuestions.length === 0) {
-                alert("Für die gewählten Kategorien wurden keine Fragen gefunden. Bitte wähle andere Kategorien in den Einstellungen.");
-                showModeSelection();
-                return;
-            }
             currentQuestionIndex = 0;
             score = 0;
             userAnswers = [];
@@ -296,7 +264,6 @@
                 const question = shuffledQuestions[currentQuestionIndex];
                 elements.questionDisplayEl.textContent = question.question;
                 
-                // HIER IST DIE NEUE LOGIK FÜR MEHRSPRACHIGE HINTS
                 const translationContainer = elements.multilangTranslationDisplayEl;
                 translationContainer.innerHTML = '';
                 if (question.en_translation || question.es_mx_translation) {
@@ -311,8 +278,8 @@
                 if (question.hint && question.hint.de) {
                     hintContainer.innerHTML = `
                         <span class="block font-semibold">${question.hint.de}</span>
-                        <span class="block text-xs text-gray-500">${question.hint.en}</span>
-                        <span class="block text-xs text-gray-500">${question.hint.es_mx}</span>
+                        <span class="block text-xs text-gray-500">${question.hint.en || ''}</span>
+                        <span class="block text-xs text-gray-500">${question.hint.es_mx || ''}</span>
                     `;
                 }
                 
@@ -402,34 +369,27 @@
         
         async function initialSetup() {
             elements.quizModeBtn.disabled = true;
-            elements.settingsBtn.disabled = true;
             const loadingMsg = document.createElement('p');
             loadingMsg.id = 'loading-msg';
             loadingMsg.textContent = "Lade Quizdaten...";
             loadingMsg.className = 'text-lg text-gray-600 my-4';
-            document.getElementById('mode-selection-screen').querySelector('.mode-selection').insertAdjacentElement('beforebegin', loadingMsg);
+            document.getElementById('mode-selection-screen').querySelector('#category-button-container').insertAdjacentElement('beforebegin', loadingMsg);
             
             await loadQuizData();
             
             const msg = document.getElementById('loading-msg');
             if (msg) msg.remove();
             
-            elements.numQuestionsSlider.max = allQuestions.length;
-            populateCategoryCheckboxes();
             loadSettings();
+            populateCategoryButtons();
 
             elements.quizModeBtn.disabled = false;
-            elements.settingsBtn.disabled = false;
             showModeSelection();
         }
         
         elements.quizModeBtn.addEventListener("click", showQuizMode);
         elements.restartQuizBtn.addEventListener("click", startQuiz);
         elements.backToMenuBtn.addEventListener("click", showModeSelection);
-        elements.settingsBtn.addEventListener("click", openSettings);
-        elements.saveSettingsBtn.addEventListener("click", handleSaveSettings);
-        elements.numQuestionsSlider.addEventListener("input", e => { elements.numQuestionsValue.textContent = e.target.value });
-        elements.allQuestionsCheckbox.addEventListener("change", e => { elements.numQuestionsSlider.disabled = e.target.checked });
         
         initialSetup();
     </script>
