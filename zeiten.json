@@ -1,0 +1,182 @@
+[
+    { 
+        "category": "Wochentage", 
+        "question": "Which day is 'Monday'?", 
+        "answer": "der Montag", 
+        "hint": "The first day of the working week.", 
+        "distractors": ["der Dienstag", "der Sonntag", "der Freitag"] 
+    },
+    { 
+        "category": "Wochentage", 
+        "question": "Which day is 'Tuesday'?", 
+        "answer": "der Dienstag", 
+        "hint": "", 
+        "distractors": ["der Mittwoch", "der Montag", "der Donnerstag"] 
+    },
+    { 
+        "category": "Wochentage", 
+        "question": "Which day is 'Wednesday'?", 
+        "answer": "der Mittwoch", 
+        "hint": "Mid-week.", 
+        "distractors": ["der Montag", "der Donnerstag", "der Samstag"] 
+    },
+    { 
+        "category": "Wochentage", 
+        "question": "Which day is 'Thursday'?", 
+        "answer": "der Donnerstag", 
+        "hint": "", "distractors": ["der Freitag", "der Dienstag", "der Sonntag"] 
+    },
+    { 
+        "category": "Wochentage", 
+        "question": "Which day is 'Friday'?", 
+        "answer": "der Freitag", 
+        "hint": "Last day of the working week.", 
+        "distractors": ["der Samstag", "der Donnerstag", "der Mittwoch"] 
+    },
+    { 
+        "category": "Wochentage", 
+        "question": "Which day is 'Saturday'?", 
+        "answer": "der Samstag", 
+        "hint": "Part of the weekend.", 
+        "distractors": ["der Sonntag", "der Freitag", "der Montag"] 
+    },
+    { 
+        "category": "Wochentage", 
+        "question": "Which day is 'Sunday'?", 
+        "answer": "der Sonntag", 
+        "hint": "The day of the sun.", 
+        "distractors": ["der Samstag", "der Montag", "der Dienstag"] 
+    },
+    { 
+        "category": "Wochentage", 
+        "question": "Which day comes AFTER 'Freitag'?", 
+        "answer": "der Samstag", 
+        "hint": "Freitag, ...", 
+        "distractors": ["der Sonntag", "der Donnerstag", "der Montag"] 
+    },
+    { 
+        "category": "Wochentage", 
+        "question": "Which day comes BEFORE 'Dienstag'?", 
+        "answer": "der Montag", 
+        "hint": "..., Dienstag", 
+        "distractors": ["der Mittwoch", "der Sonntag", "der Samstag"] 
+    },
+    { 
+        "category": "Wochentage", 
+        "question": "Complete the phrase: Ich gehe ___ Montag schwimmen.", 
+        "answer": "am", 
+        "hint": "Preposition for days of the week.", 
+        "distractors": ["im", "in", "an"] 
+    },
+    { 
+        "category": "Monate", 
+        "question": "Which month is 'January'?", 
+        "answer": "der Januar", 
+        "hint": "First month.", 
+        "distractors": ["der Juli", "der Juni", "der Mai"] 
+    },
+    { 
+        "category": "Monate", 
+        "question": "Which month is 'February'?", 
+        "answer": "der Februar", 
+        "hint": "", "distractors": ["der März", "der Januar", "der April"] 
+    },
+    { 
+        "category": "Monate", 
+        "question": "Which month is 'March'?", 
+        "answer": "der März", 
+        "hint": "", 
+        "distractors": ["der Mai", "der Februar", "der Juni"] 
+    },
+    { 
+        "category": "Monate", 
+        "question": "Which month is 'May'?", 
+        "answer": "der Mai", 
+        "hint": "", 
+        "distractors": ["der März", "der Juni", "der Juli"] 
+    },
+    { 
+        "category": "Monate", 
+        "question": "Which month is 'July'?", 
+        "answer": "der Juli", 
+        "hint": "Summer month.", 
+        "distractors": ["der Juni", "der August", "der September"] 
+    },
+    { 
+        "category": "Monate", 
+        "question": "Which month is 'December'?", 
+        "answer": "der Dezember", 
+        "hint": "Last month.", 
+        "distractors": ["der November", "der Oktober", "der Januar"] 
+    },
+    { 
+        "category": "Monate", 
+        "question": "Which month comes AFTER 'August'?", 
+        "answer": "der September", 
+        "hint": "August, ...", 
+        "distractors": ["der Oktober", "der Juli", "der November"] 
+    },
+    { 
+        "category": "Monate", 
+        "question": "Complete the phrase: Mein Geburtstag ist ___ Mai.", 
+        "answer": "im", 
+        "hint": "Preposition for months.", 
+        "distractors": ["am", "in dem", "an"] 
+    },
+    { 
+        "category": "Tageszeiten", 
+        "question": "Which word means 'morning'?", 
+        "answer": "der Morgen", 
+        "hint": "When you wake up.", 
+        "distractors": ["der Abend", "der Mittag", "die Nacht"] 
+    },
+    { 
+        "category": "Tageszeiten", 
+        "question": "Which word means 'afternoon'?", 
+        "answer": "der Nachmittag", 
+        "hint": "After lunch.", 
+        "distractors": ["der Vormittag", "der Abend", "die Nacht"] 
+    },
+    { 
+        "category": "Tageszeiten", 
+        "question": "Which word means 'evening'?", 
+        "answer": "der Abend", 
+        "hint": "Before you go to sleep.", 
+        "distractors": ["der Morgen", "der Mittag", "die Nacht"] 
+    },
+    { 
+        "category": "Tageszeiten", 
+        "question": "What is the correct phrase for 'AT night'?", 
+        "answer": "in der Nacht", 
+        "hint": "Exception to the 'am' rule.", 
+        "distractors": ["am Nacht", "im Nacht", "um die Nacht"] 
+    },
+    { 
+        "category": "Tageszeiten", 
+        "question": "What is the correct phrase for 'AT noon'?", 
+        "answer": "am Mittag", 
+        "hint": "12:00 PM", 
+        "distractors": ["in Mittag", "um Mittag", "an Mittag"] 
+    },
+    { 
+        "category": "Tageszeiten", 
+        "question": "What is the correct phrase for 'AT midnight'?", 
+        "answer": "um Mitternacht", 
+        "hint": "00:00", 
+        "distractors": ["am Mitternacht", "in Mitternacht", "der Mitternacht"] 
+    },
+    { 
+        "category": "Tageszeiten", 
+        "question": "The opposite of 'früh' (early) is...", 
+        "answer": "spät", 
+        "hint": "Late", 
+        "distractors": ["schnell", "langsam", "morgen"] 
+    },
+    { 
+        "category": "Tageszeiten", 
+        "question": "The word for 'late morning' (before noon) is...", 
+        "answer": "der Vormittag", 
+        "hint": "Before Mittag.", 
+        "distractors": ["der Nachmittag", "der Früh", "der Abend"] 
+    }
+]
