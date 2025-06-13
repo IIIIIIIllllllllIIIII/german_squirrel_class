@@ -1,0 +1,68 @@
+[
+  {
+    "full_sentence_de": "Stehst du um 7 Uhr auf?",
+    "german_words": ["Stehst", "du", "um 7 Uhr", "auf?"],
+    "translation_en": "Do you get up at 7 o'clock?",
+    "full_sentence_es": "¿Te levantas a las 7?"
+  },
+  {
+    "full_sentence_de": "Wann fängt der Deutschkurs an?",
+    "german_words": ["Wann", "fängt", "der Deutschkurs", "an?"],
+    "translation_en": "When does the German course start?",
+    "full_sentence_es": "¿Cuándo empieza el curso de alemán?"
+  },
+  {
+    "full_sentence_de": "Räumst du heute dein Zimmer auf?",
+    "german_words": ["Räumst", "du", "heute", "dein Zimmer", "auf?"],
+    "translation_en": "Are you cleaning up your room today?",
+    "full_sentence_es": "¿Ordenas tu habitación hoy?"
+  },
+  {
+    "full_sentence_de": "Wo kaufst du normalerweise ein?",
+    "german_words": ["Wo", "kaufst", "du", "normalerweise", "ein?"],
+    "translation_en": "Where do you normally shop?",
+    "full_sentence_es": "¿Dónde haces la compra normalmente?"
+  },
+  {
+    "full_sentence_de": "Siehst du heute Abend fern?",
+    "german_words": ["Siehst", "du", "heute Abend", "fern?"],
+    "translation_en": "Are you watching TV this evening?",
+    "full_sentence_es": "¿Ves la tele esta noche?"
+  },
+  {
+    "full_sentence_de": "Wen rufst du an?",
+    "german_words": ["Wen", "rufst", "du", "an?"],
+    "translation_en": "Who are you calling?",
+    "full_sentence_es": "¿A quién llamas?"
+  },
+  {
+    "full_sentence_de": "Holst du mich vom Bahnhof ab?",
+    "german_words": ["Holst", "du", "mich", "vom Bahnhof", "ab?"],
+    "translation_en": "Are you picking me up from the train station?",
+    "full_sentence_es": "¿Me recoges de la estación de tren?"
+  },
+  {
+    "full_sentence_de": "Wann fährst du nach Guadalajara zurück?",
+    "german_words": ["Wann", "fährst", "du", "nach Guadalajara", "zurück?"],
+    "translation_en": "When are you traveling back to Guadalajara?",
+    "full_sentence_es": "¿Cuándo regresas a Guadalajara?"
+  },
+  {
+    "full_sentence_de": "Bereitet deine Mutter das Essen vor?",
+    "german_words": ["Bereitet", "deine Mutter", "das Essen", "vor?"],
+    "translation_en": "Is your mother preparing the food?",
+    "full_sentence_es": "¿Tu madre prepara la comida?"
+  },
+  {
+    "full_sentence_de": "Machst du das Fenster zu?",
+    "german_words": ["Machst", "du", "das Fenster", "zu?"],
+    "translation_en": "Are you closing the window?",
+    "full_sentence_es": "¿Cierras la ventana?"
+  },
+  {
+    "full_sentence_de": "Warum hörst du mit dem Kurs auf?",
+    "german_words": ["Warum", "hörst", "du", "mit dem Kurs", "auf?"],
+    "translation_en": "Why are you quitting the course?",
+    "full_sentence_es": "¿Por qué dejas el curso?"
+  }
+]
