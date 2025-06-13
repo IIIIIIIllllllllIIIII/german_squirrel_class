@@ -212,7 +212,7 @@
 
         async function loadQuizData() {
             try {
-                const response = await fetch('german_time.json');
+                const response = await fetch('zeitangaben.json');
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 allQuestions = await response.json();
             } catch (error) {
