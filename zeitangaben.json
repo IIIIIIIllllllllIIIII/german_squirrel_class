@@ -1,0 +1,146 @@
+[
+    {
+        "category": "Wochentage",
+        "question": "Welcher Tag ist 'Monday'?",
+        "en_translation": "Which day is 'Monday'?",
+        "es_mx_translation": "¿Qué día es 'lunes'?",
+        "answer": "der Montag",
+        "hint": "Der erste Arbeitstag der Woche.",
+        "distractors": ["der Dienstag", "der Sonntag", "der Freitag"]
+    },
+    {
+        "category": "Wochentage",
+        "question": "Was bedeutet 'gestern'?",
+        "en_translation": "What does 'gestern' mean?",
+        "es_mx_translation": "¿Qué significa 'gestern'?",
+        "answer": "yesterday",
+        "hint": "Der Tag vor heute.",
+        "distractors": ["tomorrow", "today", "the day before yesterday"]
+    },
+    {
+        "category": "Wochentage",
+        "question": "Was bedeutet 'übermorgen'?",
+        "en_translation": "What does 'übermorgen' mean?",
+        "es_mx_translation": "¿Qué significa 'übermorgen'?",
+        "answer": "the day after tomorrow",
+        "hint": "Nicht morgen, sondern der Tag danach.",
+        "distractors": ["vorgestern", "gestern", "morgen"]
+    },
+    {
+        "category": "Monate",
+        "question": "Welcher Monat kommt nach 'August'?",
+        "en_translation": "Which month comes after 'August'?",
+        "es_mx_translation": "¿Qué mes viene después de 'agosto'?",
+        "answer": "der September",
+        "hint": "Der Herbst beginnt.",
+        "distractors": ["der Oktober", "der Juli", "der November"]
+    },
+    {
+        "category": "Jahreszeiten & Feiertage",
+        "question": "Wann ist 'Silvester' in Deutschland?",
+        "en_translation": "When is 'New Year's Eve' in Germany?",
+        "es_mx_translation": "¿Cuándo es 'Nochevieja' en Alemania?",
+        "answer": "am 31. Dezember",
+        "hint": "Der letzte Tag des Jahres.",
+        "distractors": ["am 1. Januar", "am 3. Oktober", "am 24. Dezember"]
+    },
+    {
+        "category": "Jahreszeiten & Feiertage",
+        "question": "Welche Jahreszeit ist im Juni, Juli und August?",
+        "en_translation": "Which season is in June, July and August?",
+        "es_mx_translation": "¿Qué estación del año es en junio, julio y agosto?",
+        "answer": "der Sommer",
+        "hint": "Es ist heiß und die Tage sind lang.",
+        "distractors": ["der Winter", "der Herbst", "der Frühling"]
+    },
+    {
+        "category": "Temporale Präpositionen",
+        "question": "Wähle: Ich lerne Deutsch ___ drei Monaten.",
+        "en_translation": "Choose: I have been learning German ___ three months.",
+        "es_mx_translation": "Elige: Estudio alemán ___ tres meses.",
+        "answer": "seit",
+        "hint": "'since'. Etwas begann in der Vergangenheit und dauert an.",
+        "distractors": ["vor", "in", "am"]
+    },
+    {
+        "category": "Temporale Präpositionen",
+        "question": "Wähle: Der Film beginnt ___ 20 Uhr.",
+        "en_translation": "Choose: The movie starts ___ 8 PM.",
+        "es_mx_translation": "Elige: La película empieza ___ las 8 PM.",
+        "answer": "um",
+        "hint": "Präposition für genaue Uhrzeiten.",
+        "distractors": ["am", "im", "an"]
+    },
+    {
+        "category": "Temporale Präpositionen",
+        "question": "Wähle: Wir treffen uns ___ 18 Uhr im Café.",
+        "en_translation": "Choose: We're meeting ___ 6 PM at the café.",
+        "es_mx_translation": "Elige: Nos vemos ___ las 6 PM en el café.",
+        "answer": "gegen",
+        "hint": "'around' / 'approximately'. Ungefähre Zeit.",
+        "distractors": ["um", "am", "in"]
+    },
+    {
+        "category": "Zeit-Nomen",
+        "question": "Was ist der Artikel von 'Jahrhundert'?",
+        "en_translation": "What is the article for 'century'?",
+        "es_mx_translation": "¿Cuál es el artículo para 'siglo'?",
+        "answer": "das",
+        "hint": "100 Jahre.",
+        "distractors": ["der", "die", "dem"]
+    },
+    {
+        "category": "Zeit-Nomen",
+        "question": "Was ist der Plural von 'der Tag'?",
+        "en_translation": "What is the plural of 'der Tag' (the day)?",
+        "es_mx_translation": "¿Cuál es el plural de 'der Tag' (el día)?",
+        "answer": "die Tage",
+        "hint": "Mehr als ein Tag.",
+        "distractors": ["die Tager", "die Täge", "die Tag"]
+    },
+    {
+        "category": "Uhrzeiten",
+        "question": "Wie sagt man 'It's 8:30'?",
+        "en_translation": "How do you say 'It's 8:30'?",
+        "es_mx_translation": "¿Cómo se dice 'Son las 8:30'?",
+        "answer": "Es ist halb neun.",
+        "hint": "30 Minuten bis 9.",
+        "distractors": ["Es ist halb acht.", "Es ist acht Uhr dreißig.", "Es ist Viertel nach neun."]
+    },
+    {
+        "category": "Uhrzeiten",
+        "question": "Wie lautet '16:40 Uhr' formell?",
+        "en_translation": "What is the formal way to say '16:40'?",
+        "es_mx_translation": "¿Cuál es la manera formal de decir '16:40'?",
+        "answer": "sechzehn Uhr vierzig",
+        "hint": "24-Stunden-Format, z.B. bei der Bahn.",
+        "distractors": ["zwanzig vor fünf", "vier Uhr vierzig", "vierzig nach sechzehn"]
+    },
+    {
+        "category": "Uhrzeiten",
+        "question": "Wie sagt man '10:35' informell?",
+        "en_translation": "How do you say '10:35' informally?",
+        "es_mx_translation": "¿Cómo se dice '10:35' de manera informal?",
+        "answer": "fünf nach halb elf",
+        "hint": "5 Minuten nach 10:30",
+        "distractors": ["fünf vor halb elf", "zehn Uhr fünfunddreißig", "fünfundzwanzig vor elf"]
+    },
+    {
+        "category": "Satzbau",
+        "question": "Wähle: Morgen ___ ich meine Oma.",
+        "en_translation": "Choose: Tomorrow I ___ my grandma.",
+        "es_mx_translation": "Elige: Mañana yo ___ a mi abuela.",
+        "answer": "besuche",
+        "hint": "Verb an Position 2.",
+        "distractors": ["ich besuche", "besuche ich", "ich zu besuchen"]
+    },
+    {
+        "category": "Satzbau",
+        "question": "Wähle: '___ dem Sport trinke ich viel Wasser.'",
+        "en_translation": "Choose: '___ sports I drink a lot of water.'",
+        "es_mx_translation": "Elige: '___ del deporte bebo mucha agua.'",
+        "answer": "Nach",
+        "hint": "Was passiert danach?",
+        "distractors": ["Vor", "Während", "Seit"]
+    }
+]
