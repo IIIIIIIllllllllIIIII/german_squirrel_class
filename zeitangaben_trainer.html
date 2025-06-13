@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>German Trainer: Zeitangaben</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-image: linear-gradient(to right top, #6d28d9, #8b5cf6, #a78bfa, #c4b5fd, #ddd6fe); display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; margin: 0; padding: 24px; color: #374151; -webkit-tap-highlight-color: transparent; }
+        .card { background-color: white; padding: 24px; border-radius: 16px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); width: 100%; max-width: 800px; text-align: center; }
+        @media (min-width: 768px) { .card { padding: 32px; } }
+        .title { font-size: 1.75rem; font-weight: 700; color: #5b21b6; margin-bottom: 0.5rem; }
+        .subtitle { font-size: 1rem; color: #6b7280; margin-bottom: 2rem; }
+        .hidden { display: none !important; }
+
+        /* --- Menu Styles --- */
+        #menu-container .quiz-links { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        #menu-container .quiz-link { padding: 1.5rem 1rem; border-radius: 12px; color: white; cursor: pointer; text-decoration: none; transition: all 0.3s ease; display: flex; flex-direction: column; justify-content: center; align-items: center; line-height: 1.3; }
+        #menu-container .quiz-link:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); }
+        #menu-container .main-title-lang { font-size: 1.125rem; font-weight: 600; }
+        #menu-container .translation-lang { font-size: 0.8em; opacity: 0.9; font-weight: 400; margin-top: 0.25rem; }
+        @media (max-width: 640px) { #menu-container .quiz-links { grid-template-columns: 1fr; } }
+
+        /* --- Quiz Area Styles --- */
+        .progress-bar-container { width: 100%; background-color: #e5e7eb; border-radius: 9999px; margin-bottom: 0.5rem; }
+        .progress-bar { height: 12px; border-radius: 9999px; transition: width 0.4s ease; }
+        .progress-text { font-size: 0.875rem; color: #4b5563; margin-bottom: 2rem; }
+        #mc-container, #scramble-container { min-height: 220px; }
+
+        /* Multiple Choice Styles */
+        #mc-question { font-size: 1.5rem; font-weight: 600; color: #1f2937; margin-bottom: 2rem; }
+        #mc-question .blank { color: #4f46e5; font-weight: 700; border-bottom: 3px dotted #a5b4fc; padding: 0 1.5rem; }
+        .options-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+        @media (min-width: 640px) { .options-grid { grid-template-columns: 1fr 1fr; } }
+        .option-btn { background-color: white; border: 2px solid #d1d5db; color: #374151; padding: 1rem; border-radius: 0.75rem; font-size: 1.125rem; font-weight: 500; cursor: pointer; transition: all 0.2s ease; }
+        .option-btn:not(:disabled):hover { border-color: #4f46e5; background-color: #eef2ff; }
+        .option-btn.correct { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #166534 !important; }
+        .option-btn.incorrect { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; }
+        
+        /* Scramble Styles */
+        .scramble-ref-sentence { background-color: #f3f4f6; color: #374151; padding: 0.75rem; border-radius: 0.5rem; margin-bottom: 1rem; font-style: italic; }
+        .drop-zone-container { background-color: #eef2ff; border: 2px dashed #a5b4fc; border-radius: 0.75rem; padding: 1rem; min-height: 60px; display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-bottom: 1rem; }
+        .draggable-item-slot { min-width: 80px; height: 45px; background-color: #e0e7ff; border: 1px solid #c7d2fe; border-radius: 0.375rem; }
+        .draggable-pool { background-color: #f0f9ff; border: 2px dashed #7dd3fc; border-radius: 0.75rem; padding: 1rem; min-height: 80px; display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; align-items: center; }
+        .draggable-item { background-image: linear-gradient(to right, #7dd3fc 0%, #38bdf8 100%); color: #075985; padding: 10px 18px; border-radius: 9999px; cursor: grab; font-weight: 600; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); user-select: none; }
+        .draggable-item.dragging { opacity: 0.6; }
+
+        /* Common Feedback & Controls */
+        .feedback-container { min-height: 60px; padding-top: 1rem; }
+        .feedback-text { font-size: 1.25rem; font-weight: 600; }
+        .feedback-text.correct { color: #166534; }
+        .feedback-text.incorrect { color: #991b1b; }
+        .correct-answer-text { color: #4b5563; margin-top: 0.5rem; font-size: 1rem; }
+        .correct-answer-text strong { color: #4338ca; }
+        .bottom-controls { margin-top: 1rem; display: flex; justify-content: center; align-items: center; gap: 1rem; }
+        .btn { padding: 12px 24px; border-radius: 8px; font-size: 1rem; font-weight: 600; color: white; cursor: pointer; transition: all 0.3s ease; border: none; }
+        .btn-primary { background-color: #4f46e5; }
+        .btn-primary:hover:not(:disabled) { background-color: #4338ca; }
+        .btn-secondary { background-color: #64748b; }
+        .btn-secondary:hover { background-color: #475569; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1 id="main-title" class="title">Zeitangaben Trainer</h1>
+        <p id="main-subtitle" class="subtitle">Wähle einen Modus / Choose a mode</p>
+
+        <div id="menu-container">
+            <div class="quiz-links">
+                <div id="start-praepositionen" class="quiz-link" style="background-color: #059669;"><span class="main-title-lang">Präpositionen</span><span class="translation-lang">(am, im, um...)</span></div>
+                <div id="start-zeitwoerter" class="quiz-link" style="background-color: #2563eb;"><span class="main-title-lang">Zeitwörter</span><span class="translation-lang">(Stunde, Tag...)</span></div>
+                <div id="start-wochentage" class="quiz-link" style="background-color: #d97706;"><span class="main-title-lang">Wochentage</span><span class="translation-lang">(Montag, Dienstag...)</span></div>
+                <div id="start-monate" class="quiz-link" style="background-color: #be185d;"><span class="main-title-lang">Monate</span><span class="translation-lang">(Januar, Februar...)</span></div>
+            </div>
+             <div class="mt-8">
+                <a href="index.html" class="btn btn-secondary">Zurück zum Hauptmenü</a>
+            </div>
+        </div>
+
+        <div id="quiz-area" class="hidden">
+            <div class="progress-bar-container">
+                <div id="progress-bar" class="progress-bar" style="width: 0%; background-color: #4f46e5;"></div>
+            </div>
+            <p id="progress-text" class="progress-text"></p>
+            
+            <div id="mc-container" class="hidden">
+                <p id="mc-question"></p>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+
+            <div id="scramble-container" class="hidden">
+                <p class="scramble-ref-sentence"><strong>EN:</strong> <span id="scramble-ref-en"></span></p>
+                <div id="drop-zone-container" class="drop-zone-container"></div>
+                <div id="draggable-pool" class="draggable-pool"></div>
+                <button id="check-scramble-btn" class="btn btn-primary" style="margin-top: 1rem;">Check Answer</button>
+            </div>
+
+            <div id="feedback-container" class="feedback-container"></div>
+            <div class="bottom-controls">
+                <button id="change-mode-btn" class="btn btn-secondary">Change Mode</button>
+                <button id="next-btn" class="btn btn-primary hidden">Next / Siguiente</button>
+            </div>
+        </div>
+
+        <div id="final-screen" class="hidden">
+            <h2 class="text-2xl font-bold">Quiz Complete!</h2>
+            <p id="final-score" class="text-xl mt-4 mb-8"></p>
+            <button id="restart-btn" class="btn btn-primary">Restart Quiz</button>
+            <button id="final-change-mode-btn" class="btn btn-secondary">Change Mode</button>
+        </div>
+    </div>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- EMBEDDED QUIZ DATA ---
+        const quizData = {
+            praepositionen: [
+                { type: 'preposition_mc', question: 'Ich gehe ___ dem Abendessen spazieren.', options: ['nach', 'vor', 'um', 'im'], correct_answer: 'nach' },
+                { type: 'preposition_mc', question: 'Wir treffen uns ___ 20 Uhr.', options: ['am', 'vor', 'um', 'in'], correct_answer: 'um' },
+                { type: 'preposition_mc', question: 'Mein Kurs ist ___ Montag ___ Freitag.', options: ['am - bis', 'von - bis', 'um - am', 'in - nach'], correct_answer: 'von - bis' },
+                { type: 'preposition_mc', question: '___ Sonntag schlafe ich lange.', options: ['Um', 'Im', 'Am', 'Nach'], correct_answer: 'Am' },
+                { type: 'preposition_mc', question: '___ Januar ist es sehr kalt.', options: ['Am', 'Um', 'Im', 'Vor'], correct_answer: 'Im' },
+                { type: 'preposition_mc', question: 'Ich muss ___ der Arbeit noch einkaufen.', options: ['nach', 'vor', 'um', 'am'], correct_answer: 'nach' },
+                { type: 'preposition_mc', question: 'Er putzt sich ___ dem Schlafen die Zähne.', options: ['von', 'vor', 'um', 'am'], correct_answer: 'vor' },
+                { type: 'preposition_mc', question: '___ Nacht sind alle Katzen grau.', options: ['Am', 'In der', 'Um', 'Im'], correct_answer: 'In der' },
+                { type: 'preposition_mc', question: 'Die Party ist ___ Samstag.', options: ['am', 'im', 'um', 'von'], correct_answer: 'am' },
+                { type: 'preposition_mc', question: 'Der Sommer ist ___ Juni bis August.', options: ['am - bis', 'von - bis', 'um - nach', 'vor - bis'], correct_answer: 'von - bis' }
+            ],
+            zeitwoerter: [
+                { word_de: 'die Stunde', translation_en: 'the hour', mc_options: ['the minute', 'the second', 'the day'], sentence_de: 'Eine Stunde hat sechzig Minuten.', sentence_words: ['Eine Stunde', 'hat', 'sechzig', 'Minuten.'], sentence_en: 'An hour has sixty minutes.' },
+                { word_de: 'der Tag', translation_en: 'the day', mc_options: ['the week', 'the month', 'the year'], sentence_de: 'Heute ist ein schöner Tag.', sentence_words: ['Heute', 'ist', 'ein schöner', 'Tag.'], sentence_en: 'Today is a beautiful day.' },
+                { word_de: 'das Wochenende', translation_en: 'the weekend', mc_options: ['the week', 'the workday', 'the holiday'], sentence_de: 'Am Wochenende schlafe ich lange.', sentence_words: ['Am Wochenende', 'schlafe', 'ich', 'lange.'], sentence_en: 'On the weekend I sleep in.' },
+                { word_de: 'der Monat', translation_en: 'the month', mc_options: ['the day', 'the year', 'the week'], sentence_de: 'Der Monat hat 30 Tage.', sentence_words: ['Der Monat', 'hat', '30', 'Tage.'], sentence_en: 'The month has 30 days.' },
+                { word_de: 'die Zeit', translation_en: 'the time', mc_options: ['the clock', 'the schedule', 'the hour'], sentence_de: 'Ich habe keine Zeit.', sentence_words: ['Ich', 'habe', 'keine', 'Zeit.'], sentence_en: 'I have no time.' },
+                { word_de: 'der Abend', translation_en: 'the evening', mc_options: ['the morning', 'the afternoon', 'the night'], sentence_de: 'Am Abend sehe ich fern.', sentence_words: ['Am Abend', 'sehe', 'ich', 'fern.'], sentence_en: 'In the evening I watch TV.' }
+            ],
+            wochentage: [
+                { word_de: 'der Montag', translation_en: 'Monday', mc_options: ['Tuesday', 'Sunday', 'Friday'], sentence_de: 'Am Montag beginnt die Woche.', sentence_words: ['Am Montag', 'beginnt', 'die Woche.'], sentence_en: 'The week begins on Monday.' },
+                { word_de: 'der Dienstag', translation_en: 'Tuesday', mc_options: ['Wednesday', 'Thursday', 'Saturday'], sentence_de: 'Ich habe am Dienstag einen Termin.', sentence_words: ['Ich habe', 'am Dienstag', 'einen Termin.'], sentence_en: 'I have an appointment on Tuesday.' },
+                { word_de: 'der Mittwoch', translation_en: 'Wednesday', mc_options: ['Monday', 'Friday', 'Sunday'], sentence_de: 'Der Mittwoch ist in der Mitte.', sentence_words: ['Der Mittwoch', 'ist', 'in der Mitte.'], sentence_en: 'Wednesday is in the middle.' },
+                { word_de: 'der Donnerstag', translation_en: 'Thursday', mc_options: ['Tuesday', 'Saturday', 'Friday'], sentence_de: 'Am Donnerstag gehe ich ins Kino.', sentence_words: ['Am Donnerstag', 'gehe', 'ich', 'ins Kino.'], sentence_en: 'On Thursday I go to the cinema.' },
+                { word_de: 'der Freitag', translation_en: 'Friday', mc_options: ['Saturday', 'Sunday', 'Monday'], sentence_de: 'Freitag ist der letzte Arbeitstag.', sentence_words: ['Freitag', 'ist', 'der letzte', 'Arbeitstag.'], sentence_en: 'Friday is the last workday.' }
+            ],
+            monate: [
+                { word_de: 'der Januar', translation_en: 'January', mc_options: ['February', 'June', 'December'], sentence_de: 'Im Januar ist es kalt.', sentence_words: ['Im Januar', 'ist', 'es', 'kalt.'], sentence_en: 'It is cold in January.' },
+                { word_de: 'der Mai', translation_en: 'May', mc_options: ['March', 'June', 'April'], sentence_de: 'Alles neu macht der Mai.', sentence_words: ['Alles', 'neu', 'macht', 'der Mai.'], sentence_en: 'May makes everything new.' },
+                { word_de: 'der Juli', translation_en: 'July', mc_options: ['June', 'August', 'September'], sentence_de: 'Im Juli ist es oft heiß.', sentence_words: ['Im Juli', 'ist', 'es', 'oft', 'heiß.'], sentence_en: 'In July it is often hot.' },
+                { word_de: 'der Oktober', translation_en: 'October', mc_options: ['September', 'November', 'December'], sentence_de: 'In München ist im Oktober das Oktoberfest.', sentence_words: ['In München', 'ist', 'im Oktober', 'das Oktoberfest.'], sentence_en: 'In Munich, Oktoberfest is in October.' },
+                { word_de: 'der Dezember', translation_en: 'December', mc_options: ['November', 'January', 'October'], sentence_de: 'Im Dezember ist Weihnachten.', sentence_words: ['Im Dezember', 'ist', 'Weihnachten.'], sentence_en: 'Christmas is in December.' }
+            ]
+        };
+
+        // DOM Elements
+        const menuContainer = document.getElementById('menu-container');
+        const quizArea = document.getElementById('quiz-area');
+        const finalScreen = document.getElementById('final-screen');
+        const mainTitle = document.getElementById('main-title');
+        const mainSubtitle = document.getElementById('main-subtitle');
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+        const feedbackContainer = document.getElementById('feedback-container');
+        const nextBtn = document.getElementById('next-btn');
+        const changeModeBtn = document.getElementById('change-mode-btn');
+        const finalChangeModeBtn = document.getElementById('final-change-mode-btn');
+        const restartBtn = document.getElementById('restart-btn');
+
+        const mcContainer = document.getElementById('mc-container');
+        const mcQuestion = document.getElementById('mc-question');
+        const optionsGrid = document.getElementById('options-grid');
+        
+        const scrambleContainer = document.getElementById('scramble-container');
+        const scrambleRefEn = document.getElementById('scramble-ref-en');
+        const dropZoneContainer = document.getElementById('drop-zone-container');
+        const draggablePool = document.getElementById('draggable-pool');
+        const checkScrambleBtn = document.getElementById('check-scramble-btn');
+
+        // State
+        let allTasksForMode = [];
+        let shuffledTasks = [];
+        let currentTaskIndex = 0;
+        let score = 0;
+        let currentMode = '';
+        let draggedItem = null;
+
+        // --- Menu Logic ---
+        function setupMenuListeners() {
+            document.getElementById('start-praepositionen').addEventListener('click', () => startQuiz('praepositionen', 'Präpositionen'));
+            document.getElementById('start-zeitwoerter').addEventListener('click', () => startQuiz('zeitwoerter', 'Zeitwörter'));
+            document.getElementById('start-wochentage').addEventListener('click', () => startQuiz('wochentage', 'Wochentage'));
+            document.getElementById('start-monate').addEventListener('click', () => startQuiz('monate', 'Monate'));
+        }
+
+        function showMenu() {
+            menuContainer.classList.remove('hidden');
+            quizArea.classList.add('hidden');
+            finalScreen.classList.add('hidden');
+            mainTitle.textContent = 'Zeitangaben Trainer';
+            mainSubtitle.textContent = 'Wähle einen Modus / Choose a mode';
+        }
+
+        // --- Quiz Logic ---
+        function startQuiz(mode, title) {
+            currentMode = mode;
+            allTasksForMode = quizData[mode];
+            shuffledTasks = [...allTasksForMode].sort(() => Math.random() - 0.5);
+            currentTaskIndex = 0;
+            score = 0;
+            
+            mainTitle.textContent = `Trainer: ${title}`;
+            mainSubtitle.textContent = 'Lass uns üben! / Let\'s practice!';
+            menuContainer.classList.add('hidden');
+            quizArea.classList.remove('hidden');
+            finalScreen.classList.add('hidden');
+
+            loadNextTask();
+        }
+
+        function loadNextTask() {
+            if (currentTaskIndex >= shuffledTasks.length) {
+                showFinalScreen();
+                return;
+            }
+            
+            feedbackContainer.innerHTML = '';
+            nextBtn.classList.add('hidden');
+            checkScrambleBtn.classList.remove('hidden');
+            checkScrambleBtn.disabled = false;
+
+            const task = shuffledTasks[currentTaskIndex];
+            
+            progressText.textContent = `Frage ${currentTaskIndex + 1} / ${shuffledTasks.length}`;
+            progressBar.style.width = `${((currentTaskIndex + 1) / shuffledTasks.length) * 100}%`;
+            
+            const randomMode = Math.random() < 0.5 ? 'mc' : 'scramble';
+
+            if (task.type === 'preposition_mc') {
+                loadMcTask(task, 'preposition');
+            } else if (randomMode === 'mc') {
+                loadMcTask(task, 'vocab');
+            } else {
+                loadScrambleTask(task);
+            }
+        }
+        
+        function loadMcTask(task, mcType) {
+            mcContainer.classList.remove('hidden');
+            scrambleContainer.classList.add('hidden');
+            
+            let questionHTML = '';
+            let options = [];
+            if (mcType === 'preposition') {
+                questionHTML = task.question.replace('___', '<span class="blank">___</span>');
+                options = [...task.options].sort(() => Math.random() - 0.5);
+            } else { // vocab
+                questionHTML = `What is the German for '${task.translation_en}'?`;
+                options = [...task.mc_options, task.word_de].sort(() => Math.random() - 0.5);
+            }
+            mcQuestion.innerHTML = questionHTML;
+            
+            optionsGrid.innerHTML = '';
+            options.forEach(option => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.classList.add('option-btn');
+                button.addEventListener('click', () => handleMcAnswer(option, task, mcType));
+                optionsGrid.appendChild(button);
+            });
+        }
+
+        function handleMcAnswer(selectedOption, task, mcType) {
+            const correctAnswer = (mcType === 'preposition') ? task.correct_answer : task.word_de;
+            const isCorrect = selectedOption === correctAnswer;
+            if (isCorrect) score++;
+            
+            let feedbackAnswer = (mcType === 'preposition') 
+                ? task.question.replace('___', `<strong>${correctAnswer}</strong>`)
+                : `<strong>${correctAnswer}</strong> = ${task.translation_en}`;
+
+            showFeedback(isCorrect, `Correct: ${feedbackAnswer}`);
+            
+            Array.from(optionsGrid.children).forEach(btn => {
+                btn.disabled = true;
+                if (btn.textContent === correctAnswer) btn.classList.add('correct');
+                else if (btn.textContent === selectedOption) btn.classList.add('incorrect');
+            });
+            nextBtn.classList.remove('hidden');
+            currentTaskIndex++;
+        }
+
+        function loadScrambleTask(task) {
+            mcContainer.classList.add('hidden');
+            scrambleContainer.classList.remove('hidden');
+            
+            scrambleRefEn.textContent = task.sentence_en;
+            dropZoneContainer.innerHTML = '';
+            task.sentence_words.forEach(() => {
+                const slot = document.createElement('div');
+                slot.classList.add('draggable-item-slot');
+                dropZoneContainer.appendChild(slot);
+            });
+            
+            draggablePool.innerHTML = '';
+            [...task.sentence_words].sort(() => Math.random() - 0.5).forEach(word => {
+                const item = document.createElement('div');
+                item.textContent = word;
+                item.classList.add('draggable-item');
+                item.draggable = true;
+                item.addEventListener('dragstart', e => { draggedItem = e.target; });
+                draggablePool.appendChild(item);
+            });
+        }
+        
+        checkScrambleBtn.addEventListener('click', () => {
+            const task = shuffledTasks[currentTaskIndex];
+            const constructed = Array.from(dropZoneContainer.children).map(slot => slot.firstChild?.textContent || '').join(' ');
+            const correct = task.sentence_de;
+            const isCorrect = constructed.trim() === correct.trim();
+            
+            if (isCorrect) score++;
+            showFeedback(isCorrect, `Correct sentence: <strong>${correct}</strong>`);
+            
+            checkScrambleBtn.disabled = true;
+            nextBtn.classList.remove('hidden');
+            currentTaskIndex++;
+        });
+
+        // --- Common & Utility Functions ---
+        function showFeedback(isCorrect, correctAnswerText) {
+            feedbackContainer.innerHTML = `
+                <p class="feedback-text ${isCorrect ? 'correct' : 'incorrect'}">${isCorrect ? 'Richtig!' : 'Leider falsch.'}</p>
+                <p class="correct-answer-text">${correctAnswerText}</p>`;
+            if (isCorrect) confetti({ particleCount: 50, spread: 50, origin: { y: 0.6 } });
+        }
+        
+        function showFinalScreen() {
+            quizArea.classList.add('hidden');
+            finalScreen.classList.remove('hidden');
+            finalScoreEl.textContent = `Your final score: ${score} / ${shuffledTasks.length}`;
+        }
+
+        // --- Event Listeners ---
+        setupMenuListeners();
+        changeModeBtn.addEventListener('click', showMenu);
+        finalChangeModeBtn.addEventListener('click', showMenu);
+        nextBtn.addEventListener('click', loadNextTask);
+        restartBtn.addEventListener('click', () => startQuiz(currentMode, mainTitle.textContent.replace('Trainer: ', '')));
+        
+        // Drag and Drop Listeners
+        dropZoneContainer.addEventListener('dragover', e => e.preventDefault());
+        dropZoneContainer.addEventListener('drop', e => {
+            e.preventDefault();
+            const targetSlot = e.target.classList.contains('draggable-item-slot') ? e.target : null;
+            if (targetSlot && !targetSlot.firstChild && draggedItem) targetSlot.appendChild(draggedItem);
+        });
+        draggablePool.addEventListener('dragover', e => e.preventDefault());
+        draggablePool.addEventListener('drop', e => {
+             e.preventDefault();
+             if (draggedItem) draggablePool.appendChild(draggedItem);
+        });
+    });
+    </script>
+</body>
+</html>
