@@ -739,6 +739,278 @@
             "es_mx": "El mes con Nochebuena y Nochevieja."
         },
         "distractors": ["der November", "der Januar", "der Oktober"]
+    },
+    {
+        "category": "Temporale Präpositionen",
+        "question": "Welche Präposition benutzt man für eine exakte Uhrzeit wie '10:00 Uhr'?",
+        "en_translation": "Which preposition do you use for a specific time like '10:00 AM'?",
+        "es_mx_translation": "¿Qué preposición se usa para una hora exacta como '10:00 AM'?",
+        "answer": "um",
+        "hint": {
+            "de": "Denk an: '___ acht Uhr'.",
+            "en": "Think of: '___ eight o'clock'.",
+            "es_mx": "Piensa en: '___ las ocho'."
+        },
+        "distractors": ["am", "im", "in"]
+    },
+    {
+        "category": "Temporale Präpositionen",
+        "question": "Fülle die Lücke: Der Deutschkurs beginnt ___ 9:30 Uhr.",
+        "en_translation": "Fill in the blank: The German course starts ___ 9:30 AM.",
+        "es_mx_translation": "Llena el espacio: El curso de alemán empieza ___ las 9:30 AM.",
+        "answer": "um",
+        "hint": {
+            "de": "Eine genaue Zeitangabe.",
+            "en": "A specific time.",
+            "es_mx": "Una hora específica."
+        },
+        "distractors": ["am", "im", "an"]
+    },
+    {
+        "category": "Temporale Präpositionen",
+        "question": "Was ist die korrekte Frage nach der Uhrzeit für einen Termin?",
+        "en_translation": "What is the correct question for the time of an appointment?",
+        "es_mx_translation": "¿Cuál es la pregunta correcta para la hora de una cita?",
+        "answer": "Um wie viel Uhr?",
+        "hint": {
+            "de": "Die Antwort beginnt mit 'Um...'.",
+            "en": "The answer starts with 'Um...'.",
+            "es_mx": "La respuesta empieza con 'Um...'."
+        },
+        "distractors": ["Am wie viel Uhr?", "Im wie viel Uhr?", "Wann Uhr?"]
+    },
+    {
+        "category": "Temporale Präpositionen",
+        "question": "Welche Präposition benutzt man für Wochentage wie 'Montag' oder 'Freitag'?",
+        "en_translation": "Which preposition do you use for days of the week like 'Monday' or 'Friday'?",
+        "es_mx_translation": "¿Qué preposición se usa para días de la semana como 'lunes' o 'viernes'?",
+        "answer": "am",
+        "hint": {
+            "de": "Kurzform von 'an dem'. Auch für Tageszeiten.",
+            "en": "Short for 'an dem'. Also for parts of the day.",
+            "es_mx": "Abreviatura de 'an dem'. También para partes del día."
+        },
+        "distractors": ["um", "im", "in"]
+    },
+    {
+        "category": "Temporale Präpositionen",
+        "question": "Fülle die Lücke: Ich spiele ___ Samstag Fußball.",
+        "en_translation": "Fill in the blank: I play soccer ___ Saturday.",
+        "es_mx_translation": "Llena el espacio: Juego fútbol ___ sábado.",
+        "answer": "am",
+        "hint": {
+            "de": "'Samstag' ist ein Wochentag.",
+            "en": "'Samstag' is a day of the week.",
+            "es_mx": "'Samstag' es un día de la semana."
+        },
+        "distractors": ["um", "im", "bis"]
+    },
+    {
+        "category": "Temporale Präpositionen",
+        "question": "Fülle die Lücke: Wir gehen ___ Abend ins Kino.",
+        "en_translation": "Fill in the blank: We are going to the cinema ___ the evening.",
+        "es_mx_translation": "Llena el espacio: Vamos al cine ___ la tarde/noche.",
+        "answer": "am",
+        "hint": {
+            "de": "Für Tageszeiten (Morgen, Mittag, Abend) benutzt man...",
+            "en": "For parts of the day (morning, noon, evening) you use...",
+            "es_mx": "Para partes del día (mañana, mediodía, tarde) se usa..."
+        },
+        "distractors": ["um", "im", "in der"]
+    },
+    {
+        "category": "Temporale Präpositionen",
+        "question": "Welche Präposition benutzt man für Monate wie 'Juli' oder 'Dezember'?",
+        "en_translation": "Which preposition do you use for months like 'July' or 'December'?",
+        "es_mx_translation": "¿Qué preposición se usa para meses como 'julio' o 'diciembre'?",
+        "answer": "im",
+        "hint": {
+            "de": "Kurzform von 'in dem'. Auch für Jahreszeiten.",
+            "en": "Short for 'in dem'. Also for seasons.",
+            "es_mx": "Abreviatura de 'in dem'. También para estaciones del año."
+        },
+        "distractors": ["am", "um", "an"]
+    },
+    {
+        "category": "Temporale Präpositionen",
+        "question": "Fülle die Lücke: ___ Winter fahre ich Ski.",
+        "en_translation": "Fill in the blank: ___ winter I go skiing.",
+        "es_mx_translation": "Llena el espacio: ___ invierno voy a esquiar.",
+        "answer": "Im",
+        "hint": {
+            "de": "'Winter' ist eine Jahreszeit.",
+            "en": "'Winter' is a season.",
+            "es_mx": "'Winter' es una estación del año."
+        },
+        "distractors": ["Am", "Um", "An"]
+    },
+    {
+        "category": "Temporale Präpositionen",
+        "question": "Fülle die Lücke: Ostern ist ___ April.",
+        "en_translation": "Fill in the blank: Easter is ___ April.",
+        "es_mx_translation": "Llena el espacio: La Pascua es ___ abril.",
+        "answer": "im",
+        "hint": {
+            "de": "'April' ist ein Monat.",
+            "en": "'April' is a month.",
+            "es_mx": "'April' es un mes."
+        },
+        "distractors": ["am", "um", "bis"]
+    },
+    {
+        "category": "Temporale Präpositionen",
+        "question": "Welche Tageszeit ist eine Ausnahme und benutzt NICHT 'am'?",
+        "en_translation": "Which part of the day is an exception and does NOT use 'am'?",
+        "es_mx_translation": "¿Qué parte del día es una excepción y NO usa 'am'?",
+        "answer": "die Nacht",
+        "hint": {
+            "de": "Man sagt '___ der Nacht'.",
+            "en": "One says '___ der Nacht'.",
+            "es_mx": "Se dice '___ der Nacht'."
+        },
+        "distractors": ["der Morgen", "der Abend", "der Mittag"]
+    },
+    {
+        "category": "Temporale Präpositionen",
+        "question": "Fülle die Lücke: Ich kann ___ Nacht nicht gut schlafen.",
+        "en_translation": "Fill in the blank: I can't sleep well ___ night.",
+        "es_mx_translation": "Llena el espacio: No puedo dormir bien ___ la noche.",
+        "answer": "in der",
+        "hint": {
+            "de": "Die besondere Regel für die Nacht.",
+            "en": "The special rule for the night.",
+            "es_mx": "La regla especial para la noche."
+        },
+        "distractors": ["am", "im", "um"]
+    },
+    {
+        "category": "Temporale Präpositionen",
+        "question": "Korrigiere den Satz: 'Am Nacht sehe ich viele Sterne.'",
+        "en_translation": "Correct the sentence: 'Am Nacht sehe ich viele Sterne.'",
+        "es_mx_translation": "Corrige la oración: 'Am Nacht sehe ich viele Sterne.'",
+        "answer": "In der Nacht sehe ich viele Sterne.",
+        "hint": {
+            "de": "'Nacht' ist die Ausnahme.",
+            "en": "'Nacht' is the exception.",
+            "es_mx": "'Nacht' es la excepción."
+        },
+        "distractors": ["Im Nacht sehe ich...", "Um die Nacht sehe ich...", "Der Satz ist richtig."]
+    },
+    {
+        "category": "Temporale Präpositionen",
+        "question": "Was bedeutet 'nach' in einem Satz wie 'nach der Schule'?",
+        "en_translation": "What does 'nach' mean in a sentence like 'nach der Schule'?",
+        "es_mx_translation": "¿Qué significa 'nach' en una oración como 'nach der Schule'?",
+        "answer": "after (después)",
+        "hint": {
+            "de": "Es beschreibt, was zeitlich später passiert.",
+            "en": "It describes what happens later in time.",
+            "es_mx": "Describe lo que sucede más tarde en el tiempo."
+        },
+        "distractors": ["before (antes)", "during (durante)", "from (de)"]
+    },
+    {
+        "category": "Temporale Präpositionen",
+        "question": "Fülle die Lücke: ___ dem Frühstück lese ich die Nachrichten.",
+        "en_translation": "Fill in the blank: ___ breakfast I read the news.",
+        "es_mx_translation": "Llena el espacio: ___ del desayuno leo las noticias.",
+        "answer": "Nach",
+        "hint": {
+            "de": "Zuerst Frühstück, dann Nachrichten.",
+            "en": "First breakfast, then news.",
+            "es_mx": "Primero el desayuno, luego las noticias."
+        },
+        "distractors": ["Vor", "Während", "Bis"]
+    },
+    {
+        "category": "Temporale Präpositionen",
+        "question": "Was ist das Gegenteil von 'vor'?",
+        "en_translation": "What is the opposite of 'vor' (before)?",
+        "es_mx_translation": "¿Cuál es el opuesto de 'vor' (antes)?",
+        "answer": "nach",
+        "hint": {
+            "de": "Wenn etwas nicht vorher passiert, passiert es...",
+            "en": "If something doesn't happen before, it happens...",
+            "es_mx": "Si algo no sucede antes, sucede..."
+        },
+        "distractors": ["von", "bis", "während"]
+    },
+    {
+        "category": "Temporale Präpositionen",
+        "question": "Was bedeutet 'vor' in einem Satz wie 'vor dem Spiel'?",
+        "en_translation": "What does 'vor' mean in a sentence like 'vor dem Spiel'?",
+        "es_mx_translation": "¿Qué significa 'vor' en una oración como 'vor dem Spiel'?",
+        "answer": "before (antes)",
+        "hint": {
+            "de": "Es beschreibt, was zeitlich früher passiert.",
+            "en": "It describes what happens earlier in time.",
+            "es_mx": "Describe lo que sucede antes en el tiempo."
+        },
+        "distractors": ["after (después)", "until (hasta)", "at (a las)"]
+    },
+    {
+        "category": "Temporale Präpositionen",
+        "question": "Fülle die Lücke: Bitte wasche dir ___ dem Essen die Hände.",
+        "en_translation": "Fill in the blank: Please wash your hands ___ the meal.",
+        "es_mx_translation": "Llena el espacio: Por favor, lávate las manos ___ de la comida.",
+        "answer": "vor",
+        "hint": {
+            "de": "Zuerst Hände waschen, dann essen.",
+            "en": "First wash hands, then eat.",
+            "es_mx": "Primero lavarse las manos, después comer."
+        },
+        "distractors": ["nach", "während", "von"]
+    },
+    {
+        "category": "Temporale Präpositionen",
+        "question": "Was ist das Gegenteil von 'nach'?",
+        "en_translation": "What is the opposite of 'nach' (after)?",
+        "es_mx_translation": "¿Cuál es el opuesto de 'nach' (después)?",
+        "answer": "vor",
+        "hint": {
+            "de": "Wenn etwas nicht danach passiert, passiert es...",
+            "en": "If something doesn't happen after, it happens...",
+            "es_mx": "Si algo no sucede después, sucede..."
+        },
+        "distractors": ["von", "bis", "seit"]
+    },
+    {
+        "category": "Temporale Präpositionen",
+        "question": "Welche Präpositionen benutzt man, um eine Zeitspanne zu beschreiben?",
+        "en_translation": "Which prepositions do you use to describe a time period?",
+        "es_mx_translation": "¿Qué preposiciones se usan para describir un período de tiempo?",
+        "answer": "von ... bis",
+        "hint": {
+            "de": "Von einem Startpunkt bis zu einem Endpunkt.",
+            "en": "From a starting point to an ending point.",
+            "es_mx": "Desde un punto de inicio hasta un punto final."
+        },
+        "distractors": ["vor ... nach", "am ... um", "in ... im"]
+    },
+    {
+        "category": "Temporale Präpositionen",
+        "question": "Fülle die Lücke: Ich arbeite ___ 9 Uhr bis 17 Uhr.",
+        "en_translation": "Fill in the blank: I work ___ 9 AM to 5 PM.",
+        "es_mx_translation": "Llena el espacio: Trabajo ___ las 9 AM a las 5 PM.",
+        "answer": "von",
+        "hint": {
+            "de": "Der Anfang der Zeitspanne.",
+            "en": "The beginning of the time period.",
+            "es_mx": "El inicio del período de tiempo."
+        },
+        "distractors": ["um", "am", "vor"]
+    },
+    {
+        "category": "Temporale Präpositionen",
+        "question": "Fülle die Lücke: Der Laden ist von Montag ___ Samstag geöffnet.",
+        "en_translation": "Fill in the blank: The store is open from Monday ___ Saturday.",
+        "es_mx_translation": "Llena el espacio: La tienda está abierta de lunes ___ sábado.",
+        "answer": "bis",
+        "hint": {
+            "de": "Das Ende der Zeitspanne.",
+            "en": "The end of the time period.",
+            "es_mx": "El final del período de tiempo."
+        },
+        "distractors": ["nach", "um", "am"]
     }
-    
 ]
