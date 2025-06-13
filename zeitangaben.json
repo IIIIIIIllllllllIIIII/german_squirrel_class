@@ -1012,5 +1012,317 @@
             "es_mx": "El final del período de tiempo."
         },
         "distractors": ["nach", "um", "am"]
+    },
+    {
+        "category": "Zeiteinheiten",
+        "question": "Was ist der korrekte Artikel für 'Stunde'?",
+        "en_translation": "What is the correct article for 'Stunde' (hour)?",
+        "es_mx_translation": "¿Cuál es el artículo correcto para 'Stunde' (hora)?",
+        "answer": "die",
+        "hint": {
+            "de": "Feminin.",
+            "en": "Feminine.",
+            "es_mx": "Femenino."
+        },
+        "distractors": ["der", "das", "dem"]
+    },
+    {
+        "category": "Zeiteinheiten",
+        "question": "Was ist der Plural von 'die Stunde'?",
+        "en_translation": "What is the plural of 'die Stunde'?",
+        "es_mx_translation": "¿Cuál es el plural de 'die Stunde'?",
+        "answer": "die Stunden",
+        "hint": {
+            "de": "Ein Tag hat 24 ...",
+            "en": "A day has 24 ...",
+            "es_mx": "Un día tiene 24 ..."
+        },
+        "distractors": ["die Stunde", "die Stünden", "die Stunder"]
+    },
+    {
+        "category": "Zeiteinheiten",
+        "question": "Fülle die Lücke: Der Film dauert zwei ___.",
+        "en_translation": "Fill in the blank: The movie is two ___ long.",
+        "es_mx_translation": "Llena el espacio: La película dura dos ___.",
+        "answer": "Stunden",
+        "hint": {
+            "de": "60 Minuten sind eine ...",
+            "en": "60 minutes are one ...",
+            "es_mx": "60 minutos son una ..."
+        },
+        "distractors": ["Minuten", "Tage", "Zeiten"]
+    },
+    {
+        "category": "Zeiteinheiten",
+        "question": "Was ist der korrekte Artikel für 'Minute'?",
+        "en_translation": "What is the correct article for 'Minute'?",
+        "es_mx_translation": "¿Cuál es el artículo correcto para 'minuto'?",
+        "answer": "die",
+        "hint": {
+            "de": "Feminin.",
+            "en": "Feminine.",
+            "es_mx": "Femenino."
+        },
+        "distractors": ["der", "das", "des"]
+    },
+    {
+        "category": "Zeiteinheiten",
+        "question": "Was ist der Plural von 'die Minute'?",
+        "en_translation": "What is the plural of 'die Minute'?",
+        "es_mx_translation": "¿Cuál es el plural de 'die Minute'?",
+        "answer": "die Minuten",
+        "hint": {
+            "de": "Eine Stunde hat 60 ...",
+            "en": "An hour has 60 ...",
+            "es_mx": "Una hora tiene 60 ..."
+        },
+        "distractors": ["die Minuter", "die Minüte", "die Minute"]
+    },
+    {
+        "category": "Zeiteinheiten",
+        "question": "Fülle die Lücke: Warte bitte eine ___!",
+        "en_translation": "Fill in the blank: Please wait a ___!",
+        "es_mx_translation": "Llena el espacio: ¡Espera un ___ por favor!",
+        "answer": "Minute",
+        "hint": {
+            "de": "Ein kurzer Moment.",
+            "en": "A short moment.",
+            "es_mx": "Un momento corto."
+        },
+        "distractors": ["Sekunde", "Stunde", "Woche"]
+    },
+    {
+        "category": "Zeiteinheiten",
+        "question": "Was ist der korrekte Artikel für 'Sekunde'?",
+        "en_translation": "What is the correct article for 'Sekunde' (second)?",
+        "es_mx_translation": "¿Cuál es el artículo correcto para 'Sekunde' (segundo)?",
+        "answer": "die",
+        "hint": {
+            "de": "Feminin.",
+            "en": "Feminine.",
+            "es_mx": "Femenino."
+        },
+        "distractors": ["der", "das", "die"]
+    },
+    {
+        "category": "Zeiteinheiten",
+        "question": "Was ist der Plural von 'die Sekunde'?",
+        "en_translation": "What is the plural of 'die Sekunde'?",
+        "es_mx_translation": "¿Cuál es el plural de 'die Sekunde'?",
+        "answer": "die Sekunden",
+        "hint": {
+            "de": "Eine Minute hat 60...",
+            "en": "A minute has 60...",
+            "es_mx": "Un minuto tiene 60..."
+        },
+        "distractors": ["die Sekunder", "die Sekunde", "die Sekünden"]
+    },
+    {
+        "category": "Zeiteinheiten",
+        "question": "Fülle die Lücke: Der Läufer war eine ___ schneller.",
+        "en_translation": "Fill in the blank: The runner was one ___ faster.",
+        "es_mx_translation": "Llena el espacio: El corredor fue un ___ más rápido.",
+        "answer": "Sekunde",
+        "hint": {
+            "de": "Die kleinste Einheit auf dieser Liste.",
+            "en": "The smallest unit on this list.",
+            "es_mx": "La unidad más pequeña en esta lista."
+        },
+        "distractors": ["Minute", "Stunde", "Tag"]
+    },
+    {
+        "category": "Zeiteinheiten",
+        "question": "Was ist der korrekte Artikel für 'Tag'?",
+        "en_translation": "What is the correct article for 'Tag' (day)?",
+        "es_mx_translation": "¿Cuál es el artículo correcto para 'Tag' (día)?",
+        "answer": "der",
+        "hint": {
+            "de": "Maskulin.",
+            "en": "Masculine.",
+            "es_mx": "Masculino."
+        },
+        "distractors": ["die", "das", "den"]
+    },
+    {
+        "category": "Zeiteinheiten",
+        "question": "Was ist der Plural von 'der Tag'?",
+        "en_translation": "What is the plural of 'der Tag'?",
+        "es_mx_translation": "¿Cuál es el plural de 'der Tag'?",
+        "answer": "die Tage",
+        "hint": {
+            "de": "Eine Woche hat sieben ...",
+            "en": "A week has seven ...",
+            "es_mx": "Una semana tiene siete ..."
+        },
+        "distractors": ["die Tager", "die Täge", "die Tag"]
+    },
+    {
+        "category": "Zeiteinheiten",
+        "question": "Fülle die Lücke: Heute ist ein schöner ___.",
+        "en_translation": "Fill in the blank: Today is a beautiful ___.",
+        "es_mx_translation": "Llena el espacio: Hoy es un ___ hermoso.",
+        "answer": "Tag",
+        "hint": {
+            "de": "Bezieht sich auf den Zeitraum von morgens bis abends.",
+            "en": "Refers to the period from morning to evening.",
+            "es_mx": "Se refiere al período de la mañana a la noche."
+        },
+        "distractors": ["Woche", "Zeit", "Jahr"]
+    },
+    {
+        "category": "Zeiteinheiten",
+        "question": "Was ist der korrekte Artikel für 'Wochenende'?",
+        "en_translation": "What is the correct article for 'Wochenende' (weekend)?",
+        "es_mx_translation": "¿Cuál es el artículo correcto para 'Wochenende' (fin de semana)?",
+        "answer": "das",
+        "hint": {
+            "de": "Neutrum. Zusammengesetzt aus 'Woche' und 'Ende'.",
+            "en": "Neuter. Composed of 'Woche' and 'Ende'.",
+            "es_mx": "Neutro. Compuesto de 'Woche' y 'Ende'."
+        },
+        "distractors": ["der", "die", "des"]
+    },
+    {
+        "category": "Zeiteinheiten",
+        "question": "Was ist der Plural von 'das Wochenende'?",
+        "en_translation": "What is the plural of 'das Wochenende'?",
+        "es_mx_translation": "¿Cuál es el plural de 'das Wochenende'?",
+        "answer": "die Wochenenden",
+        "hint": {
+            "de": "Ein Monat hat vier oder fünf ...",
+            "en": "A month has four or five ...",
+            "es_mx": "Un mes tiene cuatro o cinco ..."
+        },
+        "distractors": ["die Wochenende", "die Wochenender", "das Wochenende"]
+    },
+    {
+        "category": "Zeiteinheiten",
+        "question": "Fülle die Lücke: Samstag und Sonntag sind das ___.",
+        "en_translation": "Fill in the blank: Saturday and Sunday are the ___.",
+        "es_mx_translation": "Llena el espacio: Sábado y domingo son el ___.",
+        "answer": "Wochenende",
+        "hint": {
+            "de": "Die Zeit, in der man sich von der Arbeit erholt.",
+            "en": "The time to relax from work.",
+            "es_mx": "El tiempo para descansar del trabajo."
+        },
+        "distractors": ["Wochentag", "Feiertag", "Jahr"]
+    },
+    {
+        "category": "Zeiteinheiten",
+        "question": "Was ist der korrekte Artikel für 'Zeit'?",
+        "en_translation": "What is the correct article for 'Zeit' (time)?",
+        "es_mx_translation": "¿Cuál es el artículo correcto para 'Zeit' (tiempo)?",
+        "answer": "die",
+        "hint": {
+            "de": "Feminin.",
+            "en": "Feminine.",
+            "es_mx": "Femenino."
+        },
+        "distractors": ["der", "das", "der"]
+    },
+    {
+        "category": "Zeiteinheiten",
+        "question": "Fülle die Lücke: Ich habe leider keine ___.",
+        "en_translation": "Fill in the blank: Unfortunately, I have no ___.",
+        "es_mx_translation": "Llena el espacio: Desafortunadamente, no tengo ___.",
+        "answer": "Zeit",
+        "hint": {
+            "de": "Ein allgemeiner Begriff für Stunden, Minuten etc.",
+            "en": "A general term for hours, minutes, etc.",
+            "es_mx": "Un término general para horas, minutos, etc."
+        },
+        "distractors": ["Uhr", "Jahr", "Monat"]
+    },
+    {
+        "category": "Zeiteinheiten",
+        "question": "Was misst eine Uhr?",
+        "en_translation": "What does a clock measure?",
+        "es_mx_translation": "¿Qué mide un reloj?",
+        "answer": "die Zeit",
+        "hint": {
+            "de": "Der übergeordnete Begriff.",
+            "en": "The overarching concept.",
+            "es_mx": "El concepto general."
+        },
+        "distractors": ["die Uhrzeit", "die Geschwindigkeit", "die Temperatur"]
+    },
+    {
+        "category": "Zeiteinheiten",
+        "question": "Was ist der korrekte Artikel für 'Uhr'?",
+        "en_translation": "What is the correct article for 'Uhr' (clock)?",
+        "es_mx_translation": "¿Cuál es el artículo correcto para 'Uhr' (reloj)?",
+        "answer": "die",
+        "hint": {
+            "de": "Feminin.",
+            "en": "Feminine.",
+            "es_mx": "Femenino."
+        },
+        "distractors": ["der", "das", "des"]
+    },
+    {
+        "category": "Zeiteinheiten",
+        "question": "Was ist der Plural von 'die Uhr'?",
+        "en_translation": "What is the plural of 'die Uhr'?",
+        "es_mx_translation": "¿Cuál es el plural de 'die Uhr'?",
+        "answer": "die Uhren",
+        "hint": {
+            "de": "Viele an der Wand.",
+            "en": "Many on the wall.",
+            "es_mx": "Muchos en la pared."
+        },
+        "distractors": ["die Uhre", "die Ühre", "die Uhr"]
+    },
+    {
+        "category": "Zeiteinheiten",
+        "question": "Fülle die Lücke: Meine ___ geht falsch.",
+        "en_translation": "Fill in the blank: My ___ is wrong.",
+        "es_mx_translation": "Llena el espacio: Mi ___ está mal.",
+        "answer": "Uhr",
+        "hint": {
+            "de": "Das Gerät, das die Zeit anzeigt.",
+            "en": "The device that shows the time.",
+            "es_mx": "El aparato que muestra la hora."
+        },
+        "distractors": ["Zeit", "Uhrzeit", "Stunde"]
+    },
+    {
+        "category": "Zeiteinheiten",
+        "question": "Was ist der korrekte Artikel für 'Uhrzeit'?",
+        "en_translation": "What is the correct article for 'Uhrzeit' (time of day)?",
+        "es_mx_translation": "¿Cuál es el artículo correcto para 'Uhrzeit' (hora del día)?",
+        "answer": "die",
+        "hint": {
+            "de": "Zusammengesetzt aus 'Uhr' und 'Zeit'.",
+            "en": "Composed of 'Uhr' and 'Zeit'.",
+            "es_mx": "Compuesto de 'Uhr' y 'Zeit'."
+        },
+        "distractors": ["der", "das", "dem"]
+    },
+    {
+        "category": "Zeiteinheiten",
+        "question": "Was ist der Plural von 'die Uhrzeit'?",
+        "en_translation": "What is the plural of 'die Uhrzeit'?",
+        "es_mx_translation": "¿Cuál es el plural de 'die Uhrzeit'?",
+        "answer": "die Uhrzeiten",
+        "hint": {
+            "de": "Es gibt viele verschiedene ... am Tag.",
+            "en": "There are many different ... in a day.",
+            "es_mx": "Hay muchas ... diferentes en un día."
+        },
+        "distractors": ["die Uhrzeite", "die Uhrzeit", "die Uhrzeiter"]
+    },
+    {
+        "category": "Zeiteinheiten",
+        "question": "Fülle die Lücke: '14:30' ist eine ___.",
+        "en_translation": "Fill in the blank: '2:30 PM' is a ___.",
+        "es_mx_translation": "Llena el espacio: '2:30 PM' es una ___.",
+        "answer": "Uhrzeit",
+        "hint": {
+            "de": "Ein spezifischer Punkt am Tag.",
+            "en": "A specific point in the day.",
+            "es_mx": "Un punto específico del día."
+        },
+        "distractors": ["Stunde", "Zeit", "Uhr"]
     }
 ]
