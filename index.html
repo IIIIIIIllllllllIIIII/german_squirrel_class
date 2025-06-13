@@ -67,7 +67,7 @@
 
         .translation-lang {
             font-size: 0.8em; 
-            opacity: 0.9;  
+            opacity: 0.9;   
             display: block; 
             line-height: 1.3;
             font-weight: 400; 
@@ -88,8 +88,13 @@
         .quiz-link.quaternary { 
             background-color: #ca8a04; /* Amber */
         }
-        .quiz-link.quinary { /* New style for Akkusativ/Dativ link */
+        .quiz-link.quinary { /* Akkusativ/Dativ link */
             background-color: #16a34a; /* Green */
+        }
+        
+        /* Style for the new Trennbare Verben link */
+        .quiz-link.senary { 
+            background-color: #2563eb; /* Blue */
         }
         
         .quiz-link:hover {
@@ -114,6 +119,11 @@
         }
         .quiz-link.quinary:hover {
             background-color: #15803d; /* Darker Green */
+        }
+
+        /* Hover style for the new Trennbare Verben link */
+        .quiz-link.senary:hover {
+            background-color: #1d4ed8; /* Darker Blue */
         }
         
         @media (max-width: 640px) {
@@ -157,16 +167,23 @@
             </a>
 
             <a href="daily_routine_mode_lvl1.html" class="quiz-link quaternary">
-                <span class="main-title-lang">Satzbau Training (EASY MODE) / Estructura de Frases: Rutinas Diarias (Quiz LEGO)</span>
+                <span class="main-title-lang">Satzbau Training (EASY MODE)</span>
+                <span class="translation-lang">Sentence Structure: Daily Routines (LEGO Quiz) / Estructura de Frases: Rutinas (Quiz LEGO)</span>
             </a>
             <a href="daily_routine_mode_lvl2.html" class="quiz-link quaternary">
-                <span class="main-title-lang">Satzbau Training (PRO MODE) / Estructura de Frases: Rutinas Diarias (Quiz LEGO)</span>
+                <span class="main-title-lang">Satzbau Training (PRO MODE)</span>
+                <span class="translation-lang">Sentence Structure: Daily Routines (LEGO Quiz) / Estructura de Frases: Rutinas (Quiz LEGO)</span>
             </a>
-            <a href="akkusativ_nomativ.html" class="quiz-link quinary">
+             <a href="akkusativ_nomativ.html" class="quiz-link quinary">
                 <span class="main-title-lang">Akkusativ Trainer</span>
                 <span class="translation-lang">Accusative Trainer / Entrenador de Acusativo</span>
             </a>
-        </div>
+
+            <a href="trennbare_verben.html" class="quiz-link senary">
+                <span class="main-title-lang">Trennbare Verben (LEGO Quiz)</span>
+                <span class="translation-lang">Separable Verbs (LEGO Quiz) / Verbos Separables (Quiz LEGO)</span>
+            </a>
+            </div>
     </div>
 </body>
 </html>
