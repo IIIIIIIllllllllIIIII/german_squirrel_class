@@ -66,51 +66,10 @@
         .btn-danger:hover:not(:disabled) { background-color: #9f1239; }
         .btn-choice { background-color: #1d4ed8; }
         .btn-choice:hover:not(:disabled) { background-color: #1e40af; }
-
-        /* --- Settings Panel Styles --- */
-        #settings-btn {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            background: none;
-            border: none;
-            font-size: 1.75rem;
-            cursor: pointer;
-            color: #9ca3af;
-            transition: color 0.3s;
-            z-index: 10;
-        }
-        #settings-btn:hover { color: #4b5563; }
-        #settings-overlay {
-            position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px); display: flex; align-items: center;
-            justify-content: center; padding: 1rem; z-index: 50;
-        }
-        #settings-modal-content {
-            background-color: white; border-radius: 12px; padding: 24px;
-            width: 100%; max-width: 500px; max-height: 90vh;
-            display: flex; flex-direction: column; text-align: left;
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
-        }
-        .settings-title { font-size: 1.5rem; font-weight: 700; color: #4a044e; margin-bottom: 4px; }
-        .settings-subtitle { font-size: 0.875rem; color: #6b7280; margin-bottom: 24px; }
-        .settings-content-area { flex-grow: 1; overflow-y: auto; padding-right: 8px; }
-        .settings-section { margin-bottom: 24px; }
-        .settings-section h3 { font-size: 1.125rem; font-weight: 600; margin-bottom: 2px; color: #4a044e; }
-        .settings-section .translation { font-size: 0.8rem; color: #6b7280; margin-bottom: 12px;}
-        #category-checkboxes { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
-        .checkbox-label { display: flex; align-items: center; cursor: pointer; padding: 8px; border-radius: 6px; transition: background-color 0.2s; user-select: none; }
-        .checkbox-label:hover { background-color: #f3f4f6; }
-        .checkbox-label input { margin-right: 10px; width: 1.1em; height: 1.1em; accent-color: #6d28d9; }
-        .settings-footer { margin-top: auto; padding-top: 1rem; }
-        .settings-footer .translation { font-size: 0.8rem; color: #6b7280; margin-top: 4px; text-align: center; }
-
-        .speed-round-card{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;padding:30px;border-radius:20px;text-align:center;min-height:400px;display:flex;flex-direction:column;justify-content:center}.speed-round-word{font-size:3rem;font-weight:800;margin:20px 0;text-shadow:2px 2px 4px rgba(0,0,0,.3)}.speed-round-meaning{font-size:1.5rem;margin:10px 0;opacity:.9}.timer-bar{width:100%;height:8px;background-color:rgba(255,255,255,.3);border-radius:4px;overflow:hidden;margin:20px 0}.timer-fill{height:100%;background-color:#10b981;transition:width .1s linear;border-radius:4px}.feedback-area{font-size:.95rem;font-weight:500;padding:12px;border-radius:8px;min-height:60px;margin-bottom:1rem;text-align:center}.feedback-area.correct{color:#065f46;background-color:#dcfce7;border:1px solid #bbf7d0;display:block!important}.feedback-area.incorrect{color:#b91c1c;background-color:#fee2e2;border:1px solid #fecaca;display:block!important}.feedback-area .correct-answer-text,.feedback-area strong{font-weight:700}.detailed-results-list{margin-top:1rem;text-align:left;max-height:200px;overflow-y:auto;padding:.75rem;border:1px solid #e5e7eb;border-radius:8px;background-color:#f9fafb}.detailed-results-list h3{font-size:1.125rem;font-weight:600;margin-bottom:.75rem}.detailed-results-list ul{list-style:none;padding:0}.detailed-results-list li{margin-bottom:.75rem;padding:.5rem;border-radius:6px;font-size:.875rem}.result-correct{background-color:#ecfdf5;border-left:4px solid #10b981}.result-incorrect{background-color:#fff1f2;border-left:4px solid #f43f5e}.progress-text{margin-top:12px;font-size:.875rem;color:#6b7280}.hidden{display:none!important}
         #question-display{font-size:2rem;font-weight:700;color:#4a044e;margin-bottom:0.5rem;}
-        /* NEU: Styles für die mehrsprachige Anzeige */
         #multilang-translation-display {font-size: 1rem; color: #4b5563; font-style: italic; margin-top: 0.5rem; margin-bottom: 1rem; min-height: 40px; }
-        #hint-display{font-size:1rem;color:#6b7280;margin-bottom:2rem;min-height:20px}
-        #choices-container{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}.mode-selection{display:flex;gap:16px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}.mode-btn{padding:16px 24px;font-size:1.1rem;border-radius:12px;min-width:200px}kbd{font-family:monospace;background-color:#e2e8f0;color:#4a5568;padding:3px 6px;border-radius:4px;border:1px solid #cbd5e0;font-size:.85em;box-shadow:1px 1px 1px rgba(0,0,0,.1)}@media (max-width:768px){.speed-round-word{font-size:2.5rem}#question-display{font-size:1.8rem}}@media (max-width:640px){.card{padding:20px}.btn{padding:10px 16px;font-size:.9rem}#question-display{font-size:1.5rem}.feedback-area{font-size:.9rem;min-height:50px}.speed-round-word{font-size:2.2rem}.speed-round-meaning{font-size:1.2rem}}
+        #hint-display{font-size:0.9rem;color:#6b7280;margin-bottom:2rem;min-height:40px; line-height: 1.4;}
+        #choices-container{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}.mode-selection{display:flex;gap:16px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}.mode-btn{padding:16px 24px;font-size:1.1rem;border-radius:12px;min-width:200px}kbd{font-family:monospace;background-color:#e2e8f0;color:#4a5568;padding:3px 6px;border-radius:4px;border:1px solid #cbd5e0;font-size:.85em;box-shadow:1px 1px 1px rgba(0,0,0,.1)}@media (max-width:768px){#question-display{font-size:1.8rem}}@media (max-width:640px){.card{padding:20px}.btn{padding:10px 16px;font-size:.9rem}#question-display{font-size:1.5rem}}
     </style>
 </head>
 <body>
@@ -123,15 +82,8 @@
                     📝 Lern-Quiz
                     <div class="text-sm opacity-90 mt-1">Lerne Tage, Monate und Zeiten</div>
                 </button>
-                <button id="speed-mode-btn" class="btn btn-success mode-btn">
-                    ⚡ Speed Learning
-                    <div class="text-sm opacity-90 mt-1">Quiz auf Zeit</div>
-                </button>
             </div>
             <p id="quiz-summary" class="text-sm text-gray-500 mt-4"></p>
-            <p class="text-xs text-gray-400 mt-6 italic">
-                The number of questions and categories for the quizzes can be chosen in the settings (⚙️).
-            </p>
             <div class="mt-8 pt-6 border-t border-gray-200">
                 <a href="index.html" class="btn btn-secondary btn-link">← Zurück zum Hauptmenü</a>
             </div>
@@ -142,49 +94,18 @@
             <div id="question-area" class="mb-6">
                  <p id="question-display" class="text-center" style="min-height: 60px;"></p>
                  <div id="multilang-translation-display"></div>
-                 <p id="hint-display" class="text-center"></p>
+                 <div id="hint-display" class="text-center"></div>
             </div>
-            <div id="choices-container" class="mb-6">
-                </div>
+            <div id="choices-container" class="mb-6"></div>
             <div id="feedback-area" class="feedback-area hidden"></div>
             <div id="detailed-results-list" class="detailed-results-list hidden"></div>
             <div id="quiz-controls-area" class="text-center mt-4">
-                <button id="end-quiz-btn" class="btn btn-danger mr-2 hidden">Quiz beenden</button>
                 <button id="restart-quiz-btn" class="btn btn-secondary hidden">Quiz neu starten</button>
                 <button id="back-to-menu-btn" class="btn btn-secondary mr-2">Quiz-Menü</button>
                 <a href="index.html" class="btn btn-secondary btn-link">Hauptmenü</a>
             </div>
             <div id="progress-indicator" class="progress-text mt-4 text-center">Frage 0 / 0</div>
             <div id="score-indicator" class="progress-text mt-1 text-center">Punkte: 0 / 0</div>
-            <div id="hint-area" class="progress-text mt-3 text-center hidden"></div>
-        </div>
-
-        <div id="speed-mode-screen" class="hidden">
-             <div id="speed-round-container" class="speed-round-card">
-                 <div id="speed-question-text" class="text-xl mb-4 opacity-90">Was ist die richtige Antwort?</div>
-                 <div id="speed-word-de" class="speed-round-word text-yellow-200">Frage...</div>
-                 <div id="speed-word-trans" class="speed-round-meaning text-yellow-100"></div>
-                 <div class="timer-bar"><div id="timer-fill" class="timer-fill" style="width: 100%;"></div></div>
-                 <div id="speed-choices" class="grid grid-cols-2 gap-4 mt-6 mb-4"></div>
-                 <div id="speed-feedback" class="text-lg font-bold mb-4 hidden"></div>
-                 <div id="speed-progress" class="text-lg opacity-90">1 / 10</div>
-                 <div id="speed-controls" class="mt-6 flex justify-center items-center gap-2">
-                      <button id="speed-pause-btn" class="btn btn-secondary">⏸️ Pause</button>
-                      <button id="end-speed-btn" class="btn btn-danger">Runde beenden</button>
-                      <a href="index.html" class="btn btn-secondary btn-link">Hauptmenü</a>
-                 </div>
-             </div>
-             <div id="speed-complete" class="hidden text-center">
-                 <h2 class="text-2xl font-bold text-green-600 mb-4">🎉 Runde beendet!</h2>
-                 <p class="text-lg mb-2">Du hast <span id="speed-total-qs">0</span> Fragen beantwortet!</p>
-                 <p class="text-xl font-bold text-purple-600 mb-6">Endstand: <span id="speed-final-score">0</span> / <span id="speed-final-total">0</span></p>
-                 <div id="speed-detailed-results-list" class="detailed-results-list hidden text-left mx-auto max-w-md mb-4"></div>
-                 <div class="flex justify-center gap-2 flex-wrap">
-                    <button id="speed-restart-btn" class="btn btn-success">🔄 Neu starten</button>
-                    <button id="speed-back-to-menu-btn" class="btn btn-secondary">Quiz-Menü</button>
-                    <a href="index.html" class="btn btn-secondary btn-link">Hauptmenü</a>
-                 </div>
-             </div>
         </div>
     </div>
     
@@ -199,7 +120,7 @@
                     <h3>Anzahl der Fragen</h3>
                     <p class="translation">Number of Questions</p>
                     <div class="flex items-center gap-4">
-                        <input type="range" id="num-questions-slider" min="5" value="20" class="w-full">
+                        <input type="range" id="num-questions-slider" min="10" value="20" class="w-full">
                         <span id="num-questions-value" class="font-bold text-purple-700 w-12 text-center">20</span>
                          <label class="checkbox-label whitespace-nowrap"><input type="checkbox" id="all-questions-checkbox"> Alle <span class="text-sm text-gray-500 ml-1">/ All</span></label>
                     </div>
@@ -212,55 +133,30 @@
             </div>
             <div class="settings-footer">
                 <button id="save-settings-btn" class="btn btn-primary w-full">Speichern & Schließen</button>
-                <div class="translation">Save & Close</div>
             </div>
         </div>
     </div>
 
     <script>
-        // --- Global Variables & Data ---
         let allQuestions = [];
         let userAnswers = [];
         let quizSettings = {};
-
-        // --- Quiz State Variables ---
         let currentQuestionIndex, score, shuffledQuestions, answerSelected, autoAdvanceTimeout;
-        let speedCurrentIndex, speedInterval, speedPaused, speedQuestions, speedScore, speedAnswered;
-        const speedTimePerCard = 5000;
 
-        // --- Element Caching (HIER WURDEN ELEMENTE AKTUALISIERT) ---
         const elements = {
             mainContainer: document.getElementById("main-container"),
             backToMenuBtn: document.getElementById("back-to-menu-btn"),
             choicesContainerEl: document.getElementById("choices-container"),
             detailedResultsListEl: document.getElementById("detailed-results-list"),
             feedbackAreaEl: document.getElementById("feedback-area"),
-            hintAreaEl: document.getElementById("hint-area"),
-            modeSelectionScreen: document.getElementById("mode-selection-screen"),
-            questionDisplayEl: document.getElementById("question-display"), // Umbenannt
-            multilangTranslationDisplayEl: document.getElementById("multilang-translation-display"), // NEU
-            hintDisplayEl: document.getElementById("hint-display"), // Umbenannt
+            questionDisplayEl: document.getElementById("question-display"),
+            multilangTranslationDisplayEl: document.getElementById("multilang-translation-display"),
+            hintDisplayEl: document.getElementById("hint-display"),
             progressIndicatorEl: document.getElementById("progress-indicator"),
             quizModeBtn: document.getElementById("quiz-mode-btn"),
             quizModeScreen: document.getElementById("quiz-mode-screen"),
             restartQuizBtn: document.getElementById("restart-quiz-btn"),
             scoreIndicatorEl: document.getElementById("score-indicator"),
-            speedModeBtn: document.getElementById("speed-mode-btn"),
-            speedModeScreen: document.getElementById("speed-mode-screen"),
-            speedChoicesEl: document.getElementById("speed-choices"),
-            speedCompleteEl: document.getElementById("speed-complete"),
-            speedFeedbackEl: document.getElementById("speed-feedback"),
-            speedFinalScoreEl: document.getElementById("speed-final-score"),
-            speedFinalTotalEl: document.getElementById("speed-final-total"),
-            speedPauseBtn: document.getElementById("speed-pause-btn"),
-            speedProgressEl: document.getElementById("speed-progress"),
-            speedRestartBtn: document.getElementById("speed-restart-btn"),
-            speedRoundContainer: document.getElementById("speed-round-container"),
-            speedTotalQsEl: document.getElementById("speed-total-qs"),
-            speedWordDeEl: document.getElementById("speed-word-de"),
-            speedWordTransEl: document.getElementById("speed-word-trans"),
-            timerFillEl: document.getElementById("timer-fill"),
-            speedBackToMenuBtn: document.getElementById("speed-back-to-menu-btn"),
             settingsBtn: document.getElementById("settings-btn"),
             settingsOverlay: document.getElementById("settings-overlay"),
             saveSettingsBtn: document.getElementById("save-settings-btn"),
@@ -269,13 +165,9 @@
             allQuestionsCheckbox: document.getElementById("all-questions-checkbox"),
             categoryCheckboxesContainer: document.getElementById("category-checkboxes"),
             quizSummaryEl: document.getElementById("quiz-summary"),
-            endQuizBtn: document.getElementById("end-quiz-btn"),
-            endSpeedBtn: document.getElementById("end-speed-btn"),
-            speedDetailedResultsListEl: document.getElementById("speed-detailed-results-list"),
             questionArea: document.getElementById("question-area")
         };
         
-        // --- Utility Functions ---
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -283,19 +175,71 @@
             }
             return array;
         }
-        function triggerConfetti() { if (typeof confetti === 'function') confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } }); }
+
+        function triggerConfetti() { if (typeof confetti === 'function') confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } }); }
+        
         function clearAutoAdvance(timeoutVar) { clearTimeout(timeoutVar); }
 
-        // --- Settings Functions ---
-        // Unverändert
-        function loadSettings(){/*...*/}
-        function saveSettings(){/*...*/}
-        function openSettings(){/*...*/}
-        function handleSaveSettings(){/*...*/}
-        function populateCategoryCheckboxes(){/*...*/}
-        function updateQuizSummary(){/*...*/}
+        function loadSettings() {
+            const savedSettings = localStorage.getItem('timeQuizSettingsV2');
+            const defaultSettings = { numQuestions: 20, useAllQuestions: false, categories: ['Wochentage'] };
+            quizSettings = savedSettings ? JSON.parse(savedSettings) : defaultSettings;
+            updateQuizSummary();
+        }
+
+        function saveSettings() {
+            localStorage.setItem('timeQuizSettingsV2', JSON.stringify(quizSettings));
+            updateQuizSummary();
+        }
         
-        // --- Core Functions ---
+        function openSettings() {
+            elements.numQuestionsSlider.value = quizSettings.numQuestions;
+            elements.numQuestionsValue.textContent = quizSettings.numQuestions;
+            elements.allQuestionsCheckbox.checked = quizSettings.useAllQuestions;
+            elements.numQuestionsSlider.disabled = quizSettings.useAllQuestions;
+            
+            const availableCats = [...elements.categoryCheckboxesContainer.querySelectorAll('input[type="checkbox"]')];
+            availableCats.forEach(cb => {
+                cb.checked = quizSettings.categories.includes(cb.value);
+            });
+            elements.settingsOverlay.classList.remove('hidden');
+        }
+
+        function handleSaveSettings() {
+            quizSettings.useAllQuestions = elements.allQuestionsCheckbox.checked;
+            if (!quizSettings.useAllQuestions) {
+                quizSettings.numQuestions = parseInt(elements.numQuestionsSlider.value, 10);
+            }
+            
+            let selectedCategories = [...elements.categoryCheckboxesContainer.querySelectorAll('input:checked')].map(cb => cb.value);
+
+            if(selectedCategories.length === 0) {
+                alert("Bitte wähle mindestens eine Kategorie aus.");
+                return;
+            }
+            
+            quizSettings.categories = selectedCategories;
+            
+            saveSettings();
+            elements.settingsOverlay.classList.add('hidden');
+            showQuizMode(); // Quiz mit neuen Einstellungen neu starten
+        }
+
+        function populateCategoryCheckboxes() {
+            const categories = [...new Set(allQuestions.map(n => n.category))].sort();
+            let checkboxesHTML = '';
+            categories.forEach(cat => {
+                checkboxesHTML += `<label class="checkbox-label"><input type="checkbox" value="${cat}"> ${cat}</label>`;
+            });
+            elements.categoryCheckboxesContainer.innerHTML = checkboxesHTML;
+        }
+        
+        function updateQuizSummary() {
+            const numText = quizSettings.useAllQuestions ? `Alle (${getFilteredQuestions(false).length})` : quizSettings.numQuestions;
+            const catText = `${quizSettings.categories.length} Kategorien`;
+            elements.quizSummaryEl.textContent = `Aktuell: ${numText} Fragen aus ${catText}. Ändere dies in den Einstellungen (⚙️).`;
+        }
+
         async function loadQuizData() {
             try {
                 const response = await fetch('zeitangaben.json');
@@ -308,57 +252,38 @@
             }
         }
         
-        function getFilteredQuestions() {
-            let filtered = quizSettings.categories.includes('all')
-                ? [...allQuestions]
-                : allQuestions.filter(q => quizSettings.categories.includes(q.category));
-            shuffleArray(filtered);
-            const finalCount = quizSettings.useAllQuestions ? filtered.length : Math.min(quizSettings.numQuestions, filtered.length);
-            return filtered.slice(0, finalCount);
+        function getFilteredQuestions(shuffle = true) {
+            let filtered = allQuestions.filter(q => quizSettings.categories.includes(q.category));
+            if (shuffle) shuffleArray(filtered);
+            return quizSettings.useAllQuestions ? filtered : filtered.slice(0, quizSettings.numQuestions);
         }
 
         function showModeSelection() {
-            elements.modeSelectionScreen.classList.remove('hidden');
+            updateQuizSummary();
+            document.getElementById('mode-selection-screen').classList.remove('hidden');
             elements.quizModeScreen.classList.add('hidden');
-            elements.speedModeScreen.classList.add('hidden');
-            clearInterval(speedInterval);
-            clearAutoAdvance(autoAdvanceTimeout);
         }
         
         function showQuizMode() {
-            shuffledQuestions = getFilteredQuestions();
-            if (shuffledQuestions.length === 0) {
-                alert("Keine Fragen für die gewählten Einstellungen gefunden. Bitte ändere die Einstellungen.");
-                return;
-            }
-            elements.modeSelectionScreen.classList.add('hidden');
+            document.getElementById('mode-selection-screen').classList.add('hidden');
             elements.quizModeScreen.classList.remove('hidden');
             startQuiz();
         }
 
-        function showSpeedMode() {
-            speedQuestions = getFilteredQuestions();
-            if (speedQuestions.length === 0) {
-                alert("Keine Fragen für die gewählten Einstellungen gefunden. Bitte ändere die Einstellungen.");
+        function startQuiz() {
+            shuffledQuestions = getFilteredQuestions();
+            if (shuffledQuestions.length === 0) {
+                alert("Für die gewählten Kategorien wurden keine Fragen gefunden. Bitte wähle andere Kategorien in den Einstellungen.");
+                showModeSelection();
                 return;
             }
-            elements.modeSelectionScreen.classList.add('hidden');
-            elements.speedModeScreen.classList.remove('hidden');
-            startSpeedRound();
-        }
-        
-        // --- Standard Quiz Mode (HIER WURDE DIE LOGIK ERGÄNZT) ---
-        function startQuiz() {
             currentQuestionIndex = 0;
             score = 0;
-            answerSelected = false;
             userAnswers = [];
             elements.detailedResultsListEl.classList.add('hidden');
-            elements.endQuizBtn.classList.remove('hidden');
             clearAutoAdvance(autoAdvanceTimeout);
             elements.feedbackAreaEl.className = "feedback-area hidden";
             elements.restartQuizBtn.classList.add('hidden');
-            elements.hintAreaEl.classList.add('hidden');
             elements.questionArea.classList.remove("hidden");
             elements.choicesContainerEl.classList.remove("hidden");
             loadQuestion();
@@ -370,11 +295,10 @@
             if (currentQuestionIndex < shuffledQuestions.length) {
                 const question = shuffledQuestions[currentQuestionIndex];
                 elements.questionDisplayEl.textContent = question.question;
-                elements.hintDisplayEl.textContent = question.hint || '';
                 
-                // NEU: Logik zum Anzeigen der Übersetzungen
+                // HIER IST DIE NEUE LOGIK FÜR MEHRSPRACHIGE HINTS
                 const translationContainer = elements.multilangTranslationDisplayEl;
-                translationContainer.innerHTML = ''; // Vorherige Übersetzungen löschen
+                translationContainer.innerHTML = '';
                 if (question.en_translation || question.es_mx_translation) {
                     translationContainer.innerHTML = `
                         <span class="block">${question.en_translation || ''}</span>
@@ -382,9 +306,18 @@
                     `;
                 }
                 
+                const hintContainer = elements.hintDisplayEl;
+                hintContainer.innerHTML = '';
+                if (question.hint && question.hint.de) {
+                    hintContainer.innerHTML = `
+                        <span class="block font-semibold">${question.hint.de}</span>
+                        <span class="block text-xs text-gray-500">${question.hint.en}</span>
+                        <span class="block text-xs text-gray-500">${question.hint.es_mx}</span>
+                    `;
+                }
+                
                 elements.feedbackAreaEl.className = "feedback-area hidden";
 
-                // Create choice buttons
                 const choices = shuffleArray([...question.distractors, question.answer]);
                 elements.choicesContainerEl.innerHTML = '';
                 choices.forEach(choice => {
@@ -401,55 +334,103 @@
             }
         }
         
-        // Die folgenden Funktionen bleiben größtenteils unverändert
-        function handleAnswer(selectedAnswer){/*...*/}
-        function updateProgress(){/*...*/}
-        function showResults(){/*...*/}
-        function startSpeedRound(){/*...*/}
-        function showSpeedQuestion(){/*...*/}
-        function handleSpeedAnswer(selectedAnswer){/*...*/}
-        function startSpeedTimer(){/*...*/}
-        function toggleSpeedPause(){/*...*/}
-        function completeSpeedRound(){/*...*/}
-        function handleSpacebar(e){/*...*/}
-        async function initialSetup(){/*...*/}
+        function handleAnswer(selectedAnswer) {
+            if (answerSelected) return;
+            answerSelected = true;
+            const question = shuffledQuestions[currentQuestionIndex];
+            const isCorrect = selectedAnswer === question.answer; 
+            userAnswers.push({ question: JSON.parse(JSON.stringify(question)), userAnswer: selectedAnswer, isCorrect: isCorrect }); 
+            elements.feedbackAreaEl.classList.remove("hidden"); 
+            if (isCorrect) { 
+                score++; 
+                elements.feedbackAreaEl.innerHTML = `Richtig! <span class="correct-answer-text">${question.answer}</span>`; 
+                elements.feedbackAreaEl.className = "feedback-area correct"; 
+                triggerConfetti(); 
+            } else { 
+                elements.feedbackAreaEl.innerHTML = `Falsch. Richtig ist: <span class="correct-answer-text">${question.answer}</span>`; 
+                elements.feedbackAreaEl.className = "feedback-area incorrect"; 
+            } 
+            const buttons = elements.choicesContainerEl.querySelectorAll('button'); 
+            buttons.forEach(btn => { 
+                btn.disabled = true; 
+                const isSelectedButton = btn.textContent === selectedAnswer; 
+                const isCorrectButton = btn.textContent === question.answer; 
+                if (isSelectedButton) { 
+                    btn.classList.add(isCorrect ? "bg-green-600" : "bg-red-600"); 
+                } else if (isCorrectButton) { 
+                    btn.classList.add("bg-green-400"); 
+                } else { 
+                    btn.classList.add("opacity-50"); 
+                } 
+            }); 
+            updateProgress(); 
+            currentQuestionIndex++; 
+            autoAdvanceTimeout = setTimeout( currentQuestionIndex < shuffledQuestions.length ? loadQuestion : showResults, 2500 ); 
+        }
 
-        // --- Event Listeners ---
-        // ... unverändert
+        function updateProgress() {
+            elements.progressIndicatorEl.textContent = `Frage: ${Math.min(currentQuestionIndex + 1, shuffledQuestions.length)} / ${shuffledQuestions.length}`;
+            elements.scoreIndicatorEl.textContent = `Punkte: ${score} / ${userAnswers.length}`;
+        }
         
-        // Copy-Paste der unveränderten Funktionen
-        loadSettings = function() { const savedSettings = localStorage.getItem('timeQuizSettings'); const defaultSettings = { numQuestions: 20, useAllQuestions: false, categories: ['all'] }; quizSettings = savedSettings ? JSON.parse(savedSettings) : defaultSettings; updateQuizSummary(); };
-        saveSettings = function() { localStorage.setItem('timeQuizSettings', JSON.stringify(quizSettings)); updateQuizSummary(); };
-        openSettings = function() { elements.numQuestionsSlider.value = quizSettings.numQuestions; elements.numQuestionsValue.textContent = quizSettings.numQuestions; elements.allQuestionsCheckbox.checked = quizSettings.useAllQuestions; elements.numQuestionsSlider.disabled = quizSettings.useAllQuestions; const availableCats = [...elements.categoryCheckboxesContainer.querySelectorAll('input[type="checkbox"]')]; const allCatCheckbox = availableCats.find(cb => cb.value === 'all'); const specificCatCheckboxes = availableCats.filter(cb => cb.value !== 'all'); if (quizSettings.categories.includes('all')) { allCatCheckbox.checked = true; specificCatCheckboxes.forEach(cb => { cb.checked = false; }); } else { allCatCheckbox.checked = false; specificCatCheckboxes.forEach(cb => { cb.checked = quizSettings.categories.includes(cb.value); }); } elements.settingsOverlay.classList.remove('hidden'); };
-        handleSaveSettings = function() { quizSettings.useAllQuestions = elements.allQuestionsCheckbox.checked; quizSettings.numQuestions = parseInt(elements.numQuestionsSlider.value, 10); let selectedCategories = [...elements.categoryCheckboxesContainer.querySelectorAll('input:checked')].map(cb => cb.value); if(selectedCategories.length === 0) { selectedCategories = ['all']; } quizSettings.categories = selectedCategories.includes('all') ? ['all'] : selectedCategories; saveSettings(); elements.settingsOverlay.classList.add('hidden'); };
-        populateCategoryCheckboxes = function() { const categories = [...new Set(allQuestions.map(n => n.category))]; let checkboxesHTML = `<label class="checkbox-label font-semibold"><input type="checkbox" value="all"> Alle Kategorien <span class="text-sm text-gray-500 ml-1">/ All</span></label>`; categories.forEach(cat => { checkboxesHTML += `<label class="checkbox-label"><input type="checkbox" value="${cat}"> ${cat}</label>`; }); elements.categoryCheckboxesContainer.innerHTML = checkboxesHTML; const allCatCheckbox = elements.categoryCheckboxesContainer.querySelector('input[value="all"]'); const specificCatCheckboxes = [...elements.categoryCheckboxesContainer.querySelectorAll('input:not([value="all"])')]; allCatCheckbox.addEventListener('change', () => { if (allCatCheckbox.checked) { specificCatCheckboxes.forEach(cb => { cb.checked = false; }); } }); specificCatCheckboxes.forEach(cb => { cb.addEventListener('change', () => { if (cb.checked) allCatCheckbox.checked = false; if (specificCatCheckboxes.every(specific => !specific.checked)) allCatCheckbox.checked = true; }); }); };
-        updateQuizSummary = function() { const numText = quizSettings.useAllQuestions ? 'Alle' : quizSettings.numQuestions; const catText = quizSettings.categories.includes('all') ? 'allen Kategorien' : `${quizSettings.categories.length} Kategorien`; elements.quizSummaryEl.textContent = `Aktuell: ${numText} Fragen aus ${catText}.`; };
-        handleAnswer = function(selectedAnswer) { if (answerSelected) return; answerSelected = true; const question = shuffledQuestions[currentQuestionIndex]; const isCorrect = selectedAnswer === question.answer; userAnswers.push({ question: JSON.parse(JSON.stringify(question)), userAnswer: selectedAnswer, isCorrect: isCorrect }); elements.feedbackAreaEl.classList.remove("hidden"); if (isCorrect) { score++; elements.feedbackAreaEl.innerHTML = `Richtig! <span class="correct-answer-text">${question.answer}</span>`; elements.feedbackAreaEl.className = "feedback-area correct"; triggerConfetti(); } else { elements.feedbackAreaEl.innerHTML = `Falsch. Richtig ist: <span class="correct-answer-text">${question.answer}</span>`; elements.feedbackAreaEl.className = "feedback-area incorrect"; } const buttons = elements.choicesContainerEl.querySelectorAll('button'); buttons.forEach(btn => { btn.disabled = true; const isSelectedButton = btn.textContent === selectedAnswer; const isCorrectButton = btn.textContent === question.answer; if (isSelectedButton) { btn.classList.add(isCorrect ? "bg-green-600" : "bg-red-600"); } else if (isCorrectButton) { btn.classList.add("bg-green-400"); } else { btn.classList.add("opacity-50"); } }); updateProgress(); currentQuestionIndex++; autoAdvanceTimeout = setTimeout( currentQuestionIndex < shuffledQuestions.length ? loadQuestion : showResults, 2000 ); };
-        updateProgress = function() { elements.progressIndicatorEl.textContent = `Frage: ${currentQuestionIndex + 1} / ${shuffledQuestions.length}`; elements.scoreIndicatorEl.textContent = `Punkte: ${score} / ${userAnswers.length}`; };
-        showResults = function() { clearAutoAdvance(autoAdvanceTimeout); elements.questionArea.classList.add("hidden"); elements.choicesContainerEl.classList.add("hidden"); elements.endQuizBtn.classList.add("hidden"); elements.feedbackAreaEl.classList.remove("hidden"); elements.feedbackAreaEl.className = "feedback-area correct"; const questionsAnswered = userAnswers.length; elements.feedbackAreaEl.innerHTML = `Quiz beendet! Endergebnis: <strong class="text-2xl">${score}</strong> / ${questionsAnswered}`; let resultsHTML = `<h3>Deine Antworten im Detail:</h3><ul>`; userAnswers.forEach(ans => { resultsHTML += `<li class="${ans.isCorrect ? "result-correct" : "result-incorrect"}">`; resultsHTML += `<strong>Frage:</strong> "${ans.question.question}"<br>`; if (ans.isCorrect) { resultsHTML += `<span class="text-green-700 font-semibold">Richtig als "${ans.userAnswer}"</span>`; } else { resultsHTML += `<span class="text-red-700">Du: "${ans.userAnswer}". Richtig:</span> <strong class="text-blue-600">"${ans.question.answer}"</strong>.`; } resultsHTML += `</li>`; }); resultsHTML += "</ul>"; elements.detailedResultsListEl.innerHTML = resultsHTML; elements.detailedResultsListEl.classList.remove("hidden"); elements.progressIndicatorEl.textContent = "Quiz beendet!"; elements.scoreIndicatorEl.textContent = `Endstand: ${score} / ${questionsAnswered}`; elements.restartQuizBtn.classList.remove("hidden"); elements.hintAreaEl.innerHTML = "Drücke <kbd>Leertaste</kbd> zum Neustarten"; elements.hintAreaEl.classList.remove("hidden"); };
-        startSpeedRound = function() { speedCurrentIndex = 0; speedScore = 0; speedPaused = false; speedAnswered = false; userAnswers = []; elements.speedCompleteEl.classList.add('hidden'); elements.speedDetailedResultsListEl.classList.add('hidden'); elements.speedRoundContainer.classList.remove('hidden'); elements.speedPauseBtn.textContent = "⏸️ Pause"; showSpeedQuestion(); };
-        showSpeedQuestion = function() { if (speedCurrentIndex >= speedQuestions.length) { return completeSpeedRound(); } speedAnswered = false; const q = speedQuestions[speedCurrentIndex]; elements.speedWordDeEl.textContent = q.question; elements.speedWordTransEl.textContent = `${q.en_translation || ''} / ${q.es_mx_translation || ''}`; elements.speedProgressEl.textContent = `${speedCurrentIndex + 1} / ${speedQuestions.length}`; elements.speedFeedbackEl.classList.add('hidden'); elements.speedChoicesEl.innerHTML = ''; const choices = shuffleArray([...q.distractors, q.answer]); choices.forEach(choice => { const btn = document.createElement('button'); btn.className = 'btn btn-primary text-lg py-4 px-5'; btn.textContent = choice; btn.onclick = () => handleSpeedAnswer(choice); elements.speedChoicesEl.appendChild(btn); }); const bgColors = ['linear-gradient(135deg, #667eea 0%, #764ba2 100%)', 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)', 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)', 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)', 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)']; elements.speedRoundContainer.style.background = bgColors[speedCurrentIndex % bgColors.length]; startSpeedTimer(); };
-        handleSpeedAnswer = function(selectedAnswer) { if (speedAnswered) return; speedAnswered = true; clearInterval(speedInterval); const q = speedQuestions[speedCurrentIndex]; const isCorrect = selectedAnswer === q.answer; if (isCorrect) speedScore++; userAnswers.push({ question: JSON.parse(JSON.stringify(q)), userAnswer: selectedAnswer, isCorrect: isCorrect }); elements.speedFeedbackEl.textContent = isCorrect ? "✅ Richtig!" : `❌ Falsch! Richtig: ${q.answer}`; elements.speedFeedbackEl.className = `text-lg font-bold mb-4 ${isCorrect ? 'text-green-300' : 'text-red-300'}`; elements.speedFeedbackEl.classList.remove('hidden'); const buttons = elements.speedChoicesEl.querySelectorAll('button'); buttons.forEach(btn => { btn.disabled = true; const isSelectedButton = btn.textContent === selectedAnswer; const isCorrectButton = btn.textContent === q.answer; if (isSelectedButton) { btn.className = isCorrect ? 'btn bg-green-600 text-lg py-4 px-5' : 'btn bg-red-600 text-lg py-4 px-5'; } else if (isCorrectButton) { btn.className = 'btn bg-green-400 text-lg py-4 px-5'; } else { btn.className = 'btn bg-gray-500 text-lg py-4 px-5 opacity-50'; } }); speedCurrentIndex++; setTimeout(showSpeedQuestion, 1500); };
-        startSpeedTimer = function() { if (speedPaused || speedAnswered) return; clearInterval(speedInterval); elements.timerFillEl.style.transition = 'none'; elements.timerFillEl.style.width = '100%'; elements.timerFillEl.offsetHeight; elements.timerFillEl.style.transition = `width ${speedTimePerCard / 1000}s linear`; elements.timerFillEl.style.width = '0%'; speedInterval = setTimeout(() => { if (speedPaused || speedAnswered) return; handleSpeedAnswer("Keine Antwort"); }, speedTimePerCard); };
-        toggleSpeedPause = function() { speedPaused = !speedPaused; elements.speedPauseBtn.textContent = speedPaused ? "▶️ Weiter" : "⏸️ Pause"; if (speedPaused) { clearInterval(speedInterval); const compStyle = getComputedStyle(elements.timerFillEl); elements.timerFillEl.style.width = compStyle.width; elements.timerFillEl.style.transition = 'none'; } else { if (speedCurrentIndex < speedQuestions.length && !speedAnswered) { const currWidthPx = parseFloat(getComputedStyle(elements.timerFillEl).width); const parWidthPx = elements.timerFillEl.parentNode.offsetWidth; const remTime = (currWidthPx / parWidthPx) * speedTimePerCard; elements.timerFillEl.style.transition = `width ${remTime / 1000}s linear`; elements.timerFillEl.style.width = '0%'; speedInterval = setTimeout(() => handleSpeedAnswer("Keine Antwort"), remTime); } } };
-        completeSpeedRound = function() { clearInterval(speedInterval); elements.speedRoundContainer.classList.add("hidden"); elements.speedCompleteEl.classList.remove("hidden"); const questionsAnswered = userAnswers.length; elements.speedFinalScoreEl.textContent = speedScore; elements.speedTotalQsEl.textContent = questionsAnswered; elements.speedFinalTotalEl.textContent = questionsAnswered; let resultsHTML = `<h3>Deine Antworten im Detail:</h3><ul>`; userAnswers.forEach(ans => { resultsHTML += `<li class="${ans.isCorrect ? "result-correct" : "result-incorrect"}">`; resultsHTML += `<strong>Frage:</strong> "${ans.question.question}"<br>`; if (ans.isCorrect) { resultsHTML += `<span class="text-green-700 font-semibold">Richtig als "${ans.userAnswer}"</span>`; } else { resultsHTML += `<span class="text-red-700">Du: "${ans.userAnswer}". Richtig:</span> <strong class="text-blue-600">"${ans.question.answer}"</strong>.`; } resultsHTML += `</li>`; }); resultsHTML += "</ul>"; elements.speedDetailedResultsListEl.innerHTML = resultsHTML; elements.speedDetailedResultsListEl.classList.remove("hidden"); if (speedScore > 0) triggerConfetti(); };
-        handleSpacebar = function(e) { if (e.code !== "Space" && e.keyCode !== 32) return; if (document.activeElement && (document.activeElement.tagName === "BUTTON" || document.activeElement.tagName === "INPUT") && !["restart-quiz-btn"].includes(document.activeElement.id)) return; e.preventDefault(); if (!elements.quizModeScreen.classList.contains("hidden") && !elements.restartQuizBtn.classList.contains("hidden")) { elements.restartQuizBtn.click(); } };
-        initialSetup = async function() { elements.quizModeBtn.disabled = true; elements.speedModeBtn.disabled = true; elements.settingsBtn.disabled = true; const loadingMsg = document.createElement('p'); loadingMsg.id = 'loading-msg'; loadingMsg.textContent = "Lade Quizdaten..."; loadingMsg.className = 'text-lg text-gray-600 my-4'; elements.modeSelectionScreen.querySelector('.mode-selection').insertAdjacentElement('beforebegin', loadingMsg); loadSettings(); await loadQuizData(); elements.numQuestionsSlider.max = allQuestions.length; if (parseInt(elements.numQuestionsSlider.max, 10) < quizSettings.numQuestions) { quizSettings.numQuestions = parseInt(elements.numQuestionsSlider.max, 10); saveSettings(); } populateCategoryCheckboxes(); const msg = document.getElementById('loading-msg'); if (msg) msg.remove(); elements.quizModeBtn.disabled = false; elements.speedModeBtn.disabled = false; elements.settingsBtn.disabled = false; showModeSelection(); };
+        function showResults() {
+            clearAutoAdvance(autoAdvanceTimeout);
+            elements.questionArea.classList.add("hidden");
+            elements.choicesContainerEl.classList.add("hidden");
+            elements.feedbackAreaEl.classList.remove("hidden");
+            elements.feedbackAreaEl.className = "feedback-area correct";
+            const questionsAnswered = userAnswers.length;
+            elements.feedbackAreaEl.innerHTML = `Quiz beendet! Endergebnis: <strong class="text-2xl">${score}</strong> / ${questionsAnswered}`;
+            let resultsHTML = `<h3>Deine Antworten im Detail:</h3><ul>`;
+            userAnswers.forEach(ans => {
+                resultsHTML += `<li class="${ans.isCorrect ? "result-correct" : "result-incorrect"}">`;
+                resultsHTML += `<strong>Frage:</strong> "${ans.question.question}"<br>`;
+                if (ans.isCorrect) {
+                    resultsHTML += `<span class="text-green-700 font-semibold">Richtig als "${ans.userAnswer}"</span>`;
+                } else {
+                    resultsHTML += `<span class="text-red-700">Du: "${ans.userAnswer}". Richtig:</span> <strong class="text-blue-600">"${ans.question.answer}"</strong>.`;
+                }
+                resultsHTML += `</li>`;
+            });
+            resultsHTML += "</ul>";
+            elements.detailedResultsListEl.innerHTML = resultsHTML;
+            elements.detailedResultsListEl.classList.remove("hidden");
+            elements.progressIndicatorEl.textContent = "Quiz beendet!";
+            elements.scoreIndicatorEl.textContent = `Endstand: ${score} / ${questionsAnswered}`;
+            elements.restartQuizBtn.classList.remove("hidden");
+        }
+        
+        async function initialSetup() {
+            elements.quizModeBtn.disabled = true;
+            elements.settingsBtn.disabled = true;
+            const loadingMsg = document.createElement('p');
+            loadingMsg.id = 'loading-msg';
+            loadingMsg.textContent = "Lade Quizdaten...";
+            loadingMsg.className = 'text-lg text-gray-600 my-4';
+            document.getElementById('mode-selection-screen').querySelector('.mode-selection').insertAdjacentElement('beforebegin', loadingMsg);
+            
+            await loadQuizData();
+            
+            const msg = document.getElementById('loading-msg');
+            if (msg) msg.remove();
+            
+            elements.numQuestionsSlider.max = allQuestions.length;
+            populateCategoryCheckboxes();
+            loadSettings();
+
+            elements.quizModeBtn.disabled = false;
+            elements.settingsBtn.disabled = false;
+            showModeSelection();
+        }
+        
         elements.quizModeBtn.addEventListener("click", showQuizMode);
-        elements.speedModeBtn.addEventListener("click", showSpeedMode);
         elements.restartQuizBtn.addEventListener("click", startQuiz);
         elements.backToMenuBtn.addEventListener("click", showModeSelection);
-        elements.speedPauseBtn.addEventListener("click", toggleSpeedPause);
-        elements.speedRestartBtn.addEventListener("click", startSpeedRound);
-        elements.speedBackToMenuBtn.addEventListener("click", showModeSelection);
-        document.addEventListener("keydown", handleSpacebar);
         elements.settingsBtn.addEventListener("click", openSettings);
         elements.saveSettingsBtn.addEventListener("click", handleSaveSettings);
         elements.numQuestionsSlider.addEventListener("input", e => { elements.numQuestionsValue.textContent = e.target.value });
         elements.allQuestionsCheckbox.addEventListener("change", e => { elements.numQuestionsSlider.disabled = e.target.checked });
-        elements.endQuizBtn.addEventListener("click", showResults);
-        elements.endSpeedBtn.addEventListener("click", completeSpeedRound);
-
+        
         initialSetup();
     </script>
 </body>
