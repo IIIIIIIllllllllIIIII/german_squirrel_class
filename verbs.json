@@ -154,5 +154,174 @@
         "ihr": "gefallt",
         "sie/Sie": "gefallen"
     }
-}
+},
+    {
+        "id": "einkaufen",
+        "infinitive": "einkaufen",
+        "translation": "to shop",
+        "conjugations": {
+            "ich": "kaufe ein",
+            "du": "kaufst ein",
+            "er/sie/es": "kauft ein",
+            "wir": "kaufen ein",
+            "ihr": "kauft ein",
+            "sie/Sie": "kaufen ein"
+        }
+    },
+    {
+        "id": "spielen",
+        "infinitive": "spielen",
+        "translation": "to play",
+        "conjugations": {
+            "ich": "spiele",
+            "du": "spielst",
+            "er/sie/es": "spielt",
+            "wir": "spielen",
+            "ihr": "spielt",
+            "sie/Sie": "spielen"
+        }
+    },
+    {
+        "id": "arbeiten",
+        "infinitive": "arbeiten",
+        "translation": "to work",
+        "conjugations": {
+            "ich": "arbeite",
+            "du": "arbeitest",
+            "er/sie/es": "arbeitet",
+            "wir": "arbeiten",
+            "ihr": "arbeitet",
+            "sie/Sie": "arbeiten"
+        }
+    },
+    {
+        "id": "aufräumen",
+        "infinitive": "aufräumen",
+        "translation": "to clean up",
+        "conjugations": {
+            "ich": "räume auf",
+            "du": "räumst auf",
+            "er/sie/es": "räumt auf",
+            "wir": "räumen auf",
+            "ihr": "räumt auf",
+            "sie/Sie": "räumen auf"
+        }
+    },
+    {
+        "id": "fernsehen",
+        "infinitive": "fernsehen",
+        "translation": "to watch TV",
+        "conjugations": {
+            "ich": "sehe fern",
+            "du": "siehst fern",
+            "er/sie/es": "sieht fern",
+            "wir": "sehen fern",
+            "ihr": "seht fern",
+            "sie/Sie": "sehen fern"
+        }
+    },
+    {
+        "id": "aufstehen",
+        "infinitive": "aufstehen",
+        "translation": "to get up",
+        "conjugations": {
+            "ich": "stehe auf",
+            "du": "stehst auf",
+            "er/sie/es": "steht auf",
+            "wir": "stehen auf",
+            "ihr": "steht auf",
+            "sie/Sie": "stehen auf"
+        }
+    },
+    {
+        "id": "anrufen",
+        "infinitive": "anrufen",
+        "translation": "to call (on the phone)",
+        "conjugations": {
+            "ich": "rufe an",
+            "du": "rufst an",
+            "er/sie/es": "ruft an",
+            "wir": "rufen an",
+            "ihr": "ruft an",
+            "sie/Sie": "rufen an"
+        }
+    },
+    {
+        "id": "kochen",
+        "infinitive": "kochen",
+        "translation": "to cook",
+        "conjugations": {
+            "ich": "koche",
+            "du": "kochst",
+            "er/sie/es": "kocht",
+            "wir": "kochen",
+            "ihr": "kocht",
+            "sie/Sie": "kochen"
+        }
+    },
+    {
+        "id": "stehen",
+        "infinitive": "stehen",
+        "translation": "to stand",
+        "conjugations": {
+            "ich": "stehe",
+            "du": "stehst",
+            "er/sie/es": "steht",
+            "wir": "stehen",
+            "ihr": "steht",
+            "sie/Sie": "stehen"
+        }
+    },
+    {
+        "id": "schlafen",
+        "infinitive": "schlafen",
+        "translation": "to sleep",
+        "conjugations": {
+            "ich": "schlafe",
+            "du": "schläfst",
+            "er/sie/es": "schläft",
+            "wir": "schlafen",
+            "ihr": "schlaft",
+            "sie/Sie": "schlafen"
+        }
+    },
+    {
+        "id": "lesen",
+        "infinitive": "lesen",
+        "translation": "to read",
+        "conjugations": {
+            "ich": "lese",
+            "du": "liest",
+            "er/sie/es": "liest",
+            "wir": "lesen",
+            "ihr": "lest",
+            "sie/Sie": "lesen"
+        }
+    },
+    {
+        "id": "nehmen",
+        "infinitive": "nehmen",
+        "translation": "to take",
+        "conjugations": {
+            "ich": "nehme",
+            "du": "nimmst",
+            "er/sie/es": "nimmt",
+            "wir": "nehmen",
+            "ihr": "nehmt",
+            "sie/Sie": "nehmen"
+        }
+    },
+    {
+        "id": "frühstücken",
+        "infinitive": "frühstücken",
+        "translation": "to have breakfast",
+        "conjugations": {
+            "ich": "frühstücke",
+            "du": "frühstückst",
+            "er/sie/es": "frühstückt",
+            "wir": "frühstücken",
+            "ihr": "frühstückt",
+            "sie/Sie": "frühstücken"
+        }
+    }
 ]
