@@ -13,6 +13,38 @@
         @media (min-width: 768px) { .card { padding: 32px; } }
         .mode-title { font-size: 1.75rem; font-weight: 700; color: #1d4ed8; margin-bottom: 4px; } /* Blue-700 */
         .mode-title-subtitle { font-size: 1rem; color: #2563eb; margin-bottom: 24px; } /* Blue-600 */
+        
+        /* --- NEW STYLES FOR RULES BOX --- */
+        .rules-box {
+            background-color: #fffbeb; /* Amber-50 */
+            border: 1px solid #fde68a; /* Amber-200 */
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        .rules-box h3 {
+            font-weight: 600;
+            color: #b45309; /* Amber-700 */
+            margin-bottom: 0.5rem;
+        }
+        .rules-box p {
+            color: #d97706; /* Amber-600 */
+            margin-bottom: 0.25rem;
+            font-family: monospace, sans-serif; /* Monospace for formula */
+        }
+        .rules-box .example p {
+             font-family: 'Inter', sans-serif; /* Back to normal font for examples */
+             font-style: italic;
+             margin-left: 1rem;
+             color: #92400e; /* Amber-800 */
+             margin-bottom: 1rem;
+        }
+        .rules-box strong {
+            font-weight: 700;
+        }
+        /* --- END OF NEW STYLES --- */
+
         .reference-sentences { background-color: #eff6ff; padding: 1rem; border-radius: 0.75rem; margin-bottom: 1.5rem; border: 1px solid #dbeafe; text-align: left; }
         .reference-sentences p { margin-bottom: 0.5rem; color: #1e40af; }
         .reference-sentences strong { color: #1e3a8a; }
@@ -42,6 +74,19 @@
     <div class="card">
         <h1 class="mode-title">Trennbare Verben: Fragen Bauen</h1>
         <p class="mode-title-subtitle">Build Questions / Construir Preguntas (LEGO Quiz)</p>
+
+        <div class="rules-box">
+            <div>
+                <h3>W-Frage (Wh-Question)</h3>
+                <p><strong>W-Wort</strong> + <strong>Verb</strong> + Subjekt + ... + <strong>Präfix?</strong></p>
+                <div class="example"><p><strong>Wann</strong> kommst du <strong>an</strong>?</p></div>
+            </div>
+             <div>
+                <h3>Ja/Nein-Frage (Yes/No Question)</h3>
+                <p><strong>Verb</strong> + Subjekt + ... + <strong>Präfix?</strong></p>
+                <div class="example"><p><strong>Kommst</strong> du früh <strong>an</strong>?</p></div>
+            </div>
+        </div>
         <div id="reference-sentences-container" class="reference-sentences">
             <p><strong>EN:</strong> <span id="ref-en">English sentence will appear here.</span></p>
             <p><strong>ES:</strong> <span id="ref-es">La oración en español aparecerá aquí.</span></p>
@@ -57,8 +102,7 @@
         </div>
     </div>
     <script>
-        // The JavaScript logic is identical to the previous games.
-        // It's just pointed at a new JSON file.
+        // The JavaScript logic remains unchanged.
         let allTasks = []; let currentTask = null; let shuffledTasks = []; let draggedItem = null; let touchOffsetX = 0, touchOffsetY = 0; let activeTouchClone = null;
         const referenceEnEl = document.getElementById('ref-en'); const referenceEsEl = document.getElementById('ref-es'); const dropZoneContainerEl = document.getElementById('drop-zone-container'); const draggablePoolEl = document.getElementById('draggable-pool'); const checkAnswerBtn = document.getElementById('check-answer-btn'); const nextTaskBtn = document.getElementById('next-task-btn'); const feedbackMessageEl = document.getElementById('feedback-message'); const correctSentenceFeedbackEl = document.getElementById('correct-sentence-feedback');
         async function loadTasks() { try { const response = await fetch('trennbare_verben_fragen_tasks.json'); if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`); allTasks = await response.json(); if (allTasks.length === 0) throw new Error("JSON file is empty or not found."); shuffleArray(allTasks); shuffledTasks = [...allTasks]; loadNextTask(); } catch (error) { console.error("Could not load tasks:", error); dropZoneContainerEl.innerHTML = `<p class="text-red-500 font-semibold">Error: Could not load tasks. Details: ${error.message}</p>`; } }
