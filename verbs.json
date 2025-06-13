@@ -323,5 +323,31 @@
             "ihr": "frühstückt",
             "sie/Sie": "frühstücken"
         }
+    },
+     {
+        "id": "abholen",
+        "infinitive": "abholen",
+        "translation": "to pick up",
+        "conjugations": {
+            "ich": "hole ab",
+            "du": "holst ab",
+            "er/sie/es": "holt ab",
+            "wir": "holen ab",
+            "ihr": "holt ab",
+            "sie/Sie": "holen ab"
+        }
+    },
+    {
+        "id": "einladen",
+        "infinitive": "einladen",
+        "translation": "to invite",
+        "conjugations": {
+            "ich": "lade ein",
+            "du": "lädst ein",
+            "er/sie/es": "lädt ein",
+            "wir": "laden ein",
+            "ihr": "ladet ein",
+            "sie/Sie": "laden ein"
+        }
     }
 ]
