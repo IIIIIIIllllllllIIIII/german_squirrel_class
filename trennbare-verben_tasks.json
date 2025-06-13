@@ -1,0 +1,80 @@
+[
+  {
+    "full_sentence_de": "Ich stehe um 7 Uhr auf.",
+    "german_words": ["Ich", "stehe", "um 7 Uhr", "auf."],
+    "translation_en": "I get up at 7 o'clock.",
+    "full_sentence_es": "Me levanto a las 7 en punto."
+  },
+  {
+    "full_sentence_de": "Der Deutschkurs fängt um 9 Uhr an.",
+    "german_words": ["Der Deutschkurs", "fängt", "um 9 Uhr", "an."],
+    "translation_en": "The German course starts at 9 o'clock.",
+    "full_sentence_es": "El curso de alemán empieza a las 9."
+  },
+  {
+    "full_sentence_de": "Ich räume mein Zimmer auf.",
+    "german_words": ["Ich", "räume", "mein Zimmer", "auf."],
+    "translation_en": "I clean up my room.",
+    "full_sentence_es": "Ordeno mi habitación."
+  },
+  {
+    "full_sentence_de": "Ich kaufe im Supermarkt ein.",
+    "german_words": ["Ich", "kaufe", "im Supermarkt", "ein."],
+    "translation_en": "I shop at the supermarket.",
+    "full_sentence_es": "Hago la compra en el supermercado."
+  },
+  {
+    "full_sentence_de": "Ich sehe ein bisschen fern.",
+    "german_words": ["Ich", "sehe", "ein bisschen", "fern."],
+    "translation_en": "I watch a little bit of TV.",
+    "full_sentence_es": "Veo un poco la tele."
+  },
+  {
+    "full_sentence_de": "Ich rufe meine Familie an.",
+    "german_words": ["Ich", "rufe", "meine Familie", "an."],
+    "translation_en": "I call my family.",
+    "full_sentence_es": "Llamo a mi familia."
+  },
+  {
+    "full_sentence_de": "Ich sehe Netflix an.",
+    "german_words": ["Ich", "sehe", "Netflix", "an."],
+    "translation_en": "I watch Netflix.",
+    "full_sentence_es": "Veo Netflix."
+  },
+  {
+    "full_sentence_de": "Ich hole Lili am Bahnhof ab.",
+    "german_words": ["Ich", "hole", "Lili", "am Bahnhof", "ab."],
+    "translation_en": "I pick up Lili at the train station.",
+    "full_sentence_es": "Recojo a Lili en la estación de tren."
+  },
+  {
+    "full_sentence_de": "Ich höre mit dem Rauchen auf.",
+    "german_words": ["Ich", "höre", "mit dem Rauchen", "auf."],
+    "translation_en": "I am quitting smoking.",
+    "full_sentence_es": "Dejo de fumar."
+  },
+  {
+    "full_sentence_de": "Ich fahre nach Guadalajara zurück.",
+    "german_words": ["Ich", "fahre", "nach Guadalajara", "zurück."],
+    "translation_en": "I am traveling back to Guadalajara.",
+    "full_sentence_es": "Regreso a Guadalajara."
+  },
+  {
+    "full_sentence_de": "Meine Mutter bereitet das Frühstück vor.",
+    "german_words": ["Meine Mutter", "bereitet", "das Frühstück", "vor."],
+    "translation_en": "My mother prepares the breakfast.",
+    "full_sentence_es": "Mi madre prepara el desayuno."
+  },
+  {
+    "full_sentence_de": "Ich bereite mich für die Prüfung vor.",
+    "german_words": ["Ich", "bereite mich", "für die Prüfung", "vor."],
+    "translation_en": "I am preparing for the exam.",
+    "full_sentence_es": "Me preparo para el examen."
+  },
+  {
+    "full_sentence_de": "Ich gehe am Abend spazieren.",
+    "german_words": ["Ich", "gehe", "am Abend", "spazieren."],
+    "translation_en": "I go for a walk in the evening.",
+    "full_sentence_es": "Salgo a pasear por la noche."
+  }
+]
