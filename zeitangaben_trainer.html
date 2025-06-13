@@ -3,364 +3,736 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>German Trainer: Zeitangaben</title>
+    <title>Deutsche Zeitwörter Quiz (Tage, Monate, Zeiten)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
     <style>
-        body { font-family: 'Inter', sans-serif; background-image: linear-gradient(to right top, #6d28d9, #8b5cf6, #a78bfa, #c4b5fd, #ddd6fe); display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; margin: 0; padding: 24px; color: #374151; -webkit-tap-highlight-color: transparent; }
-        .card { background-color: white; padding: 24px; border-radius: 16px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); width: 100%; max-width: 800px; text-align: center; }
-        @media (min-width: 768px) { .card { padding: 32px; } }
-        .title { font-size: 1.75rem; font-weight: 700; color: #5b21b6; margin-bottom: 0.5rem; }
-        .subtitle { font-size: 1rem; color: #6b7280; margin-bottom: 2rem; }
-        .hidden { display: none !important; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3e8ff;
+            background-image: linear-gradient(to right top, #283cd9, #5c6cf6, #8b9bfa, #b9cafa, #e3f2fe);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 16px;
+            color: #374151;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .card {
+            background-color: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            text-align: center;
+            width: 100%;
+            max-width: 700px;
+            position: relative;
+        }
+        .btn {
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            margin-top: 8px;
+        }
+         .btn-link { /* For the back to menu button */
+            display: inline-block;
+            text-decoration: none;
+        }
+        .btn:disabled {
+            background-color: #d1d5db !important;
+            color: #6b7280 !important;
+            cursor: not-allowed;
+            box-shadow: none;
+            opacity: 0.7;
+        }
+        .btn:active:not(:disabled) { transform: translateY(1px); }
+        .btn-primary { background-color: #6d28d9; }
+        .btn-primary:hover:not(:disabled) { background-color: #5b21b6; }
+        .btn-secondary { background-color: #4f46e5; }
+        .btn-secondary:hover:not(:disabled) { background-color: #4338ca; }
+        .btn-success { background-color: #059669; }
+        .btn-success:hover:not(:disabled) { background-color: #047857; }
+        .btn-danger { background-color: #be123c; } 
+        .btn-danger:hover:not(:disabled) { background-color: #9f1239; }
+        .btn-choice { background-color: #1d4ed8; }
+        .btn-choice:hover:not(:disabled) { background-color: #1e40af; }
 
-        /* --- Menu Styles --- */
-        #menu-container .quiz-links { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        #menu-container .quiz-link { padding: 1.5rem 1rem; border-radius: 12px; color: white; cursor: pointer; text-decoration: none; transition: all 0.3s ease; display: flex; flex-direction: column; justify-content: center; align-items: center; line-height: 1.3; }
-        #menu-container .quiz-link:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); }
-        #menu-container .main-title-lang { font-size: 1.125rem; font-weight: 600; }
-        #menu-container .translation-lang { font-size: 0.8em; opacity: 0.9; font-weight: 400; margin-top: 0.25rem; }
-        @media (max-width: 640px) { #menu-container .quiz-links { grid-template-columns: 1fr; } }
+        /* --- Settings Panel Styles --- */
+        #settings-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 1.75rem;
+            cursor: pointer;
+            color: #9ca3af;
+            transition: color 0.3s;
+            z-index: 10;
+        }
+        #settings-btn:hover { color: #4b5563; }
+        #settings-overlay {
+            position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px); display: flex; align-items: center;
+            justify-content: center; padding: 1rem; z-index: 50;
+        }
+        #settings-modal-content {
+            background-color: white; border-radius: 12px; padding: 24px;
+            width: 100%; max-width: 500px; max-height: 90vh;
+            display: flex; flex-direction: column; text-align: left;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+        }
+        .settings-title { font-size: 1.5rem; font-weight: 700; color: #4a044e; margin-bottom: 4px; }
+        .settings-subtitle { font-size: 0.875rem; color: #6b7280; margin-bottom: 24px; }
+        .settings-content-area { flex-grow: 1; overflow-y: auto; padding-right: 8px; }
+        .settings-section { margin-bottom: 24px; }
+        .settings-section h3 { font-size: 1.125rem; font-weight: 600; margin-bottom: 2px; color: #4a044e; }
+        .settings-section .translation { font-size: 0.8rem; color: #6b7280; margin-bottom: 12px;}
+        #category-checkboxes { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+        .checkbox-label { display: flex; align-items: center; cursor: pointer; padding: 8px; border-radius: 6px; transition: background-color 0.2s; user-select: none; }
+        .checkbox-label:hover { background-color: #f3f4f6; }
+        .checkbox-label input { margin-right: 10px; width: 1.1em; height: 1.1em; accent-color: #6d28d9; }
+        .settings-footer { margin-top: auto; padding-top: 1rem; }
+        .settings-footer .translation { font-size: 0.8rem; color: #6b7280; margin-top: 4px; text-align: center; }
 
-        /* --- Quiz Area Styles --- */
-        .progress-bar-container { width: 100%; background-color: #e5e7eb; border-radius: 9999px; margin-bottom: 0.5rem; }
-        .progress-bar { height: 12px; border-radius: 9999px; transition: width 0.4s ease; }
-        .progress-text { font-size: 0.875rem; color: #4b5563; margin-bottom: 2rem; }
-        #mc-container, #scramble-container { min-height: 220px; }
-
-        /* Multiple Choice Styles */
-        #mc-question { font-size: 1.5rem; font-weight: 600; color: #1f2937; margin-bottom: 2rem; }
-        #mc-question .blank { color: #4f46e5; font-weight: 700; border-bottom: 3px dotted #a5b4fc; padding: 0 1.5rem; }
-        .options-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
-        @media (min-width: 640px) { .options-grid { grid-template-columns: 1fr 1fr; } }
-        .option-btn { background-color: white; border: 2px solid #d1d5db; color: #374151; padding: 1rem; border-radius: 0.75rem; font-size: 1.125rem; font-weight: 500; cursor: pointer; transition: all 0.2s ease; }
-        .option-btn:not(:disabled):hover { border-color: #4f46e5; background-color: #eef2ff; }
-        .option-btn.correct { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #166534 !important; }
-        .option-btn.incorrect { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; }
-        
-        /* Scramble Styles */
-        .scramble-ref-sentence { background-color: #f3f4f6; color: #374151; padding: 0.75rem; border-radius: 0.5rem; margin-bottom: 1rem; font-style: italic; }
-        .drop-zone-container { background-color: #eef2ff; border: 2px dashed #a5b4fc; border-radius: 0.75rem; padding: 1rem; min-height: 60px; display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-bottom: 1rem; }
-        .draggable-item-slot { min-width: 80px; height: 45px; background-color: #e0e7ff; border: 1px solid #c7d2fe; border-radius: 0.375rem; }
-        .draggable-pool { background-color: #f0f9ff; border: 2px dashed #7dd3fc; border-radius: 0.75rem; padding: 1rem; min-height: 80px; display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; align-items: center; }
-        .draggable-item { background-image: linear-gradient(to right, #7dd3fc 0%, #38bdf8 100%); color: #075985; padding: 10px 18px; border-radius: 9999px; cursor: grab; font-weight: 600; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); user-select: none; }
-        .draggable-item.dragging { opacity: 0.6; }
-
-        /* Common Feedback & Controls */
-        .feedback-container { min-height: 60px; padding-top: 1rem; }
-        .feedback-text { font-size: 1.25rem; font-weight: 600; }
-        .feedback-text.correct { color: #166534; }
-        .feedback-text.incorrect { color: #991b1b; }
-        .correct-answer-text { color: #4b5563; margin-top: 0.5rem; font-size: 1rem; }
-        .correct-answer-text strong { color: #4338ca; }
-        .bottom-controls { margin-top: 1rem; display: flex; justify-content: center; align-items: center; gap: 1rem; }
-        .btn { padding: 12px 24px; border-radius: 8px; font-size: 1rem; font-weight: 600; color: white; cursor: pointer; transition: all 0.3s ease; border: none; }
-        .btn-primary { background-color: #4f46e5; }
-        .btn-primary:hover:not(:disabled) { background-color: #4338ca; }
-        .btn-secondary { background-color: #64748b; }
-        .btn-secondary:hover { background-color: #475569; }
+        .speed-round-card{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;padding:30px;border-radius:20px;text-align:center;min-height:400px;display:flex;flex-direction:column;justify-content:center}.speed-round-word{font-size:3rem;font-weight:800;margin:20px 0;text-shadow:2px 2px 4px rgba(0,0,0,.3)}.speed-round-meaning{font-size:1.5rem;margin:10px 0;opacity:.9}.timer-bar{width:100%;height:8px;background-color:rgba(255,255,255,.3);border-radius:4px;overflow:hidden;margin:20px 0}.timer-fill{height:100%;background-color:#10b981;transition:width .1s linear;border-radius:4px}.feedback-area{font-size:.95rem;font-weight:500;padding:12px;border-radius:8px;min-height:60px;margin-bottom:1rem;text-align:center}.feedback-area.correct{color:#065f46;background-color:#dcfce7;border:1px solid #bbf7d0;display:block!important}.feedback-area.incorrect{color:#b91c1c;background-color:#fee2e2;border:1px solid #fecaca;display:block!important}.feedback-area .correct-answer-text,.feedback-area strong{font-weight:700}.detailed-results-list{margin-top:1rem;text-align:left;max-height:200px;overflow-y:auto;padding:.75rem;border:1px solid #e5e7eb;border-radius:8px;background-color:#f9fafb}.detailed-results-list h3{font-size:1.125rem;font-weight:600;margin-bottom:.75rem}.detailed-results-list ul{list-style:none;padding:0}.detailed-results-list li{margin-bottom:.75rem;padding:.5rem;border-radius:6px;font-size:.875rem}.result-correct{background-color:#ecfdf5;border-left:4px solid #10b981}.result-incorrect{background-color:#fff1f2;border-left:4px solid #f43f5e}.progress-text{margin-top:12px;font-size:.875rem;color:#6b7280}.hidden{display:none!important}#noun-display{font-size:2rem;font-weight:700;color:#4a044e;margin-bottom:.5rem}#translation-display{font-size:1rem;color:#6b7280;font-style:italic;margin-bottom:2rem;min-height:20px}#choices-container{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}.mode-selection{display:flex;gap:16px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}.mode-btn{padding:16px 24px;font-size:1.1rem;border-radius:12px;min-width:200px}kbd{font-family:monospace;background-color:#e2e8f0;color:#4a5568;padding:3px 6px;border-radius:4px;border:1px solid #cbd5e0;font-size:.85em;box-shadow:1px 1px 1px rgba(0,0,0,.1)}@media (max-width:768px){.speed-round-word{font-size:2.5rem}#noun-display{font-size:1.8rem}}@media (max-width:640px){.card{padding:20px}.btn{padding:10px 16px;font-size:.9rem}#noun-display{font-size:1.5rem}.feedback-area{font-size:.9rem;min-height:50px}.speed-round-word{font-size:2.2rem}.speed-round-meaning{font-size:1.2rem}}
     </style>
 </head>
 <body>
-    <div class="card">
-        <h1 id="main-title" class="title">Zeitangaben Trainer</h1>
-        <p id="main-subtitle" class="subtitle">Wähle einen Modus / Choose a mode</p>
-
-        <div id="menu-container">
-            <div class="quiz-links">
-                <div id="start-praepositionen" class="quiz-link" style="background-color: #059669;"><span class="main-title-lang">Präpositionen</span><span class="translation-lang">(am, im, um...)</span></div>
-                <div id="start-zeitwoerter" class="quiz-link" style="background-color: #2563eb;"><span class="main-title-lang">Zeitwörter</span><span class="translation-lang">(Stunde, Tag...)</span></div>
-                <div id="start-wochentage" class="quiz-link" style="background-color: #d97706;"><span class="main-title-lang">Wochentage</span><span class="translation-lang">(Montag, Dienstag...)</span></div>
-                <div id="start-monate" class="quiz-link" style="background-color: #be185d;"><span class="main-title-lang">Monate</span><span class="translation-lang">(Januar, Februar...)</span></div>
+    <div id="main-container" class="card">
+        <div id="mode-selection-screen" class="">
+            <button id="settings-btn" title="Einstellungen">⚙️</button>
+            <h1 class="text-2xl sm:text-3xl font-bold text-blue-700 mb-6 text-center">Deutsche Zeitwörter Quiz</h1>
+            <div class="mode-selection">
+                <button id="quiz-mode-btn" class="btn btn-primary mode-btn">
+                    📝 Lern-Quiz
+                    <div class="text-sm opacity-90 mt-1">Lerne Tage, Monate und Zeiten</div>
+                </button>
+                <button id="speed-mode-btn" class="btn btn-success mode-btn">
+                    ⚡ Speed Learning
+                    <div class="text-sm opacity-90 mt-1">Quiz auf Zeit</div>
+                </button>
             </div>
-             <div class="mt-8">
-                <a href="index.html" class="btn btn-secondary">Zurück zum Hauptmenü</a>
-            </div>
+            <p id="quiz-summary" class="text-sm text-gray-500 mt-4"></p>
+            <p class="text-xs text-gray-400 mt-6 italic">
+                The number of questions and categories for the quizzes can be chosen in the settings (⚙️).
+            </p>
         </div>
 
-        <div id="quiz-area" class="hidden">
-            <div class="progress-bar-container">
-                <div id="progress-bar" class="progress-bar" style="width: 0%; background-color: #4f46e5;"></div>
+        <div id="quiz-mode-screen" class="hidden">
+            <h1 class="text-2xl sm:text-3xl font-bold text-blue-700 mb-6 text-center">Frage</h1>
+            <div id="question-area" class="mb-6">
+                 <p id="noun-display" class="text-center" style="min-height: 60px;"></p>
+                 <p id="translation-display" class="text-center"></p>
             </div>
-            <p id="progress-text" class="progress-text"></p>
-            
-            <div id="mc-container" class="hidden">
-                <p id="mc-question"></p>
-                <div id="options-grid" class="options-grid"></div>
+            <div id="choices-container" class="mb-6">
+                </div>
+            <div id="feedback-area" class="feedback-area hidden"></div>
+            <div id="detailed-results-list" class="detailed-results-list hidden"></div>
+            <div id="quiz-controls-area" class="text-center mt-4">
+                <button id="end-quiz-btn" class="btn btn-danger mr-2 hidden">Quiz beenden</button>
+                <button id="restart-quiz-btn" class="btn btn-secondary hidden">Quiz neu starten</button>
+                <button id="back-to-menu-btn" class="btn btn-secondary">Zurück zum Menü</button>
             </div>
-
-            <div id="scramble-container" class="hidden">
-                <p class="scramble-ref-sentence"><strong>EN:</strong> <span id="scramble-ref-en"></span></p>
-                <div id="drop-zone-container" class="drop-zone-container"></div>
-                <div id="draggable-pool" class="draggable-pool"></div>
-                <button id="check-scramble-btn" class="btn btn-primary" style="margin-top: 1rem;">Check Answer</button>
-            </div>
-
-            <div id="feedback-container" class="feedback-container"></div>
-            <div class="bottom-controls">
-                <button id="change-mode-btn" class="btn btn-secondary">Change Mode</button>
-                <button id="next-btn" class="btn btn-primary hidden">Next / Siguiente</button>
-            </div>
+            <div id="progress-indicator" class="progress-text mt-4 text-center">Frage 0 / 0</div>
+            <div id="score-indicator" class="progress-text mt-1 text-center">Punkte: 0 / 0</div>
+            <div id="hint-area" class="progress-text mt-3 text-center hidden"></div>
         </div>
 
-        <div id="final-screen" class="hidden">
-            <h2 class="text-2xl font-bold">Quiz Complete!</h2>
-            <p id="final-score" class="text-xl mt-4 mb-8"></p>
-            <button id="restart-btn" class="btn btn-primary">Restart Quiz</button>
-            <button id="final-change-mode-btn" class="btn btn-secondary">Change Mode</button>
+        <div id="speed-mode-screen" class="hidden">
+             <div id="speed-round-container" class="speed-round-card">
+                 <div id="speed-question-text" class="text-xl mb-4 opacity-90">Was ist die richtige Antwort?</div>
+                 <div id="speed-word-de" class="speed-round-word text-yellow-200">Frage...</div>
+                 <div id="speed-word-trans" class="speed-round-meaning text-yellow-100"></div>
+                 <div class="timer-bar"><div id="timer-fill" class="timer-fill" style="width: 100%;"></div></div>
+                 <div id="speed-choices" class="grid grid-cols-2 gap-4 mt-6 mb-4"></div>
+                 <div id="speed-feedback" class="text-lg font-bold mb-4 hidden"></div>
+                 <div id="speed-progress" class="text-lg opacity-90">1 / 10</div>
+                 <div id="speed-controls" class="mt-6 flex justify-center items-center">
+                      <button id="speed-pause-btn" class="btn btn-secondary">⏸️ Pause</button>
+                      <button id="end-speed-btn" class="btn btn-danger mx-2">Runde beenden</button>
+                 </div>
+             </div>
+             <div id="speed-complete" class="hidden text-center">
+                 <h2 class="text-2xl font-bold text-green-600 mb-4">🎉 Runde beendet!</h2>
+                 <p class="text-lg mb-2">Du hast <span id="speed-total-qs">0</span> Fragen beantwortet!</p>
+                 <p class="text-xl font-bold text-purple-600 mb-6">Endstand: <span id="speed-final-score">0</span> / <span id="speed-final-total">0</span></p>
+                 <div id="speed-detailed-results-list" class="detailed-results-list hidden text-left mx-auto max-w-md mb-4"></div>
+                 <button id="speed-restart-btn" class="btn btn-success mr-4">🔄 Neu starten</button>
+                 <button id="speed-back-to-menu-btn" class="btn btn-secondary">Zurück zum Menü</button>
+             </div>
         </div>
     </div>
     
+    <div id="settings-overlay" class="hidden">
+        <div id="settings-modal-content">
+            <div>
+                <h2 class="settings-title">Einstellungen</h2>
+                <p class="settings-subtitle">Settings</p>
+            </div>
+            <div class="settings-content-area">
+                <div class="settings-section">
+                    <h3>Anzahl der Fragen</h3>
+                    <p class="translation">Number of Questions</p>
+                    <div class="flex items-center gap-4">
+                        <input type="range" id="num-questions-slider" min="5" value="20" class="w-full">
+                        <span id="num-questions-value" class="font-bold text-purple-700 w-12 text-center">20</span>
+                         <label class="checkbox-label whitespace-nowrap"><input type="checkbox" id="all-questions-checkbox"> Alle <span class="text-sm text-gray-500 ml-1">/ All</span></label>
+                    </div>
+                </div>
+                <div class="settings-section">
+                    <h3>Kategorien</h3>
+                    <p class="translation">Categories</p>
+                    <div id="category-checkboxes"></div>
+                </div>
+            </div>
+            <div class="settings-footer">
+                <button id="save-settings-btn" class="btn btn-primary w-full">Speichern & Schließen</button>
+                <div class="translation">Save & Close</div>
+            </div>
+        </div>
+    </div>
+
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
+        // --- Global Variables & Data ---
+        let allQuestions = [];
+        let userAnswers = [];
+        let quizSettings = {};
 
-        // --- EMBEDDED QUIZ DATA ---
-        const quizData = {
-            praepositionen: [
-                { type: 'preposition_mc', question: 'Ich gehe ___ dem Abendessen spazieren.', options: ['nach', 'vor', 'um', 'im'], correct_answer: 'nach' },
-                { type: 'preposition_mc', question: 'Wir treffen uns ___ 20 Uhr.', options: ['am', 'vor', 'um', 'in'], correct_answer: 'um' },
-                { type: 'preposition_mc', question: 'Mein Kurs ist ___ Montag ___ Freitag.', options: ['am - bis', 'von - bis', 'um - am', 'in - nach'], correct_answer: 'von - bis' },
-                { type: 'preposition_mc', question: '___ Sonntag schlafe ich lange.', options: ['Um', 'Im', 'Am', 'Nach'], correct_answer: 'Am' },
-                { type: 'preposition_mc', question: '___ Januar ist es sehr kalt.', options: ['Am', 'Um', 'Im', 'Vor'], correct_answer: 'Im' },
-                { type: 'preposition_mc', question: 'Ich muss ___ der Arbeit noch einkaufen.', options: ['nach', 'vor', 'um', 'am'], correct_answer: 'nach' },
-                { type: 'preposition_mc', question: 'Er putzt sich ___ dem Schlafen die Zähne.', options: ['von', 'vor', 'um', 'am'], correct_answer: 'vor' },
-                { type: 'preposition_mc', question: '___ Nacht sind alle Katzen grau.', options: ['Am', 'In der', 'Um', 'Im'], correct_answer: 'In der' },
-                { type: 'preposition_mc', question: 'Die Party ist ___ Samstag.', options: ['am', 'im', 'um', 'von'], correct_answer: 'am' },
-                { type: 'preposition_mc', question: 'Der Sommer ist ___ Juni bis August.', options: ['am - bis', 'von - bis', 'um - nach', 'vor - bis'], correct_answer: 'von - bis' }
-            ],
-            zeitwoerter: [
-                { word_de: 'die Stunde', translation_en: 'the hour', mc_options: ['the minute', 'the second', 'the day'], sentence_de: 'Eine Stunde hat sechzig Minuten.', sentence_words: ['Eine Stunde', 'hat', 'sechzig', 'Minuten.'], sentence_en: 'An hour has sixty minutes.' },
-                { word_de: 'der Tag', translation_en: 'the day', mc_options: ['the week', 'the month', 'the year'], sentence_de: 'Heute ist ein schöner Tag.', sentence_words: ['Heute', 'ist', 'ein schöner', 'Tag.'], sentence_en: 'Today is a beautiful day.' },
-                { word_de: 'das Wochenende', translation_en: 'the weekend', mc_options: ['the week', 'the workday', 'the holiday'], sentence_de: 'Am Wochenende schlafe ich lange.', sentence_words: ['Am Wochenende', 'schlafe', 'ich', 'lange.'], sentence_en: 'On the weekend I sleep in.' },
-                { word_de: 'der Monat', translation_en: 'the month', mc_options: ['the day', 'the year', 'the week'], sentence_de: 'Der Monat hat 30 Tage.', sentence_words: ['Der Monat', 'hat', '30', 'Tage.'], sentence_en: 'The month has 30 days.' },
-                { word_de: 'die Zeit', translation_en: 'the time', mc_options: ['the clock', 'the schedule', 'the hour'], sentence_de: 'Ich habe keine Zeit.', sentence_words: ['Ich', 'habe', 'keine', 'Zeit.'], sentence_en: 'I have no time.' },
-                { word_de: 'der Abend', translation_en: 'the evening', mc_options: ['the morning', 'the afternoon', 'the night'], sentence_de: 'Am Abend sehe ich fern.', sentence_words: ['Am Abend', 'sehe', 'ich', 'fern.'], sentence_en: 'In the evening I watch TV.' }
-            ],
-            wochentage: [
-                { word_de: 'der Montag', translation_en: 'Monday', mc_options: ['Tuesday', 'Sunday', 'Friday'], sentence_de: 'Am Montag beginnt die Woche.', sentence_words: ['Am Montag', 'beginnt', 'die Woche.'], sentence_en: 'The week begins on Monday.' },
-                { word_de: 'der Dienstag', translation_en: 'Tuesday', mc_options: ['Wednesday', 'Thursday', 'Saturday'], sentence_de: 'Ich habe am Dienstag einen Termin.', sentence_words: ['Ich habe', 'am Dienstag', 'einen Termin.'], sentence_en: 'I have an appointment on Tuesday.' },
-                { word_de: 'der Mittwoch', translation_en: 'Wednesday', mc_options: ['Monday', 'Friday', 'Sunday'], sentence_de: 'Der Mittwoch ist in der Mitte.', sentence_words: ['Der Mittwoch', 'ist', 'in der Mitte.'], sentence_en: 'Wednesday is in the middle.' },
-                { word_de: 'der Donnerstag', translation_en: 'Thursday', mc_options: ['Tuesday', 'Saturday', 'Friday'], sentence_de: 'Am Donnerstag gehe ich ins Kino.', sentence_words: ['Am Donnerstag', 'gehe', 'ich', 'ins Kino.'], sentence_en: 'On Thursday I go to the cinema.' },
-                { word_de: 'der Freitag', translation_en: 'Friday', mc_options: ['Saturday', 'Sunday', 'Monday'], sentence_de: 'Freitag ist der letzte Arbeitstag.', sentence_words: ['Freitag', 'ist', 'der letzte', 'Arbeitstag.'], sentence_en: 'Friday is the last workday.' }
-            ],
-            monate: [
-                { word_de: 'der Januar', translation_en: 'January', mc_options: ['February', 'June', 'December'], sentence_de: 'Im Januar ist es kalt.', sentence_words: ['Im Januar', 'ist', 'es', 'kalt.'], sentence_en: 'It is cold in January.' },
-                { word_de: 'der Mai', translation_en: 'May', mc_options: ['March', 'June', 'April'], sentence_de: 'Alles neu macht der Mai.', sentence_words: ['Alles', 'neu', 'macht', 'der Mai.'], sentence_en: 'May makes everything new.' },
-                { word_de: 'der Juli', translation_en: 'July', mc_options: ['June', 'August', 'September'], sentence_de: 'Im Juli ist es oft heiß.', sentence_words: ['Im Juli', 'ist', 'es', 'oft', 'heiß.'], sentence_en: 'In July it is often hot.' },
-                { word_de: 'der Oktober', translation_en: 'October', mc_options: ['September', 'November', 'December'], sentence_de: 'In München ist im Oktober das Oktoberfest.', sentence_words: ['In München', 'ist', 'im Oktober', 'das Oktoberfest.'], sentence_en: 'In Munich, Oktoberfest is in October.' },
-                { word_de: 'der Dezember', translation_en: 'December', mc_options: ['November', 'January', 'October'], sentence_de: 'Im Dezember ist Weihnachten.', sentence_words: ['Im Dezember', 'ist', 'Weihnachten.'], sentence_en: 'Christmas is in December.' }
-            ]
+        // --- Quiz State Variables ---
+        let currentQuestionIndex, score, shuffledQuestions, answerSelected, autoAdvanceTimeout;
+        let speedCurrentIndex, speedInterval, speedPaused, speedQuestions, speedScore, speedAnswered;
+        const speedTimePerCard = 5000;
+
+        // --- Element Caching ---
+        const elements = {
+            mainContainer: document.getElementById("main-container"),
+            backToMenuBtn: document.getElementById("back-to-menu-btn"),
+            choicesContainerEl: document.getElementById("choices-container"),
+            detailedResultsListEl: document.getElementById("detailed-results-list"),
+            feedbackAreaEl: document.getElementById("feedback-area"),
+            hintAreaEl: document.getElementById("hint-area"),
+            modeSelectionScreen: document.getElementById("mode-selection-screen"),
+            nounDisplayEl: document.getElementById("noun-display"),
+            progressIndicatorEl: document.getElementById("progress-indicator"),
+            quizModeBtn: document.getElementById("quiz-mode-btn"),
+            quizModeScreen: document.getElementById("quiz-mode-screen"),
+            restartQuizBtn: document.getElementById("restart-quiz-btn"),
+            scoreIndicatorEl: document.getElementById("score-indicator"),
+            speedModeBtn: document.getElementById("speed-mode-btn"),
+            speedModeScreen: document.getElementById("speed-mode-screen"),
+            translationDisplayEl: document.getElementById("translation-display"),
+            speedChoicesEl: document.getElementById("speed-choices"),
+            speedCompleteEl: document.getElementById("speed-complete"),
+            speedFeedbackEl: document.getElementById("speed-feedback"),
+            speedFinalScoreEl: document.getElementById("speed-final-score"),
+            speedFinalTotalEl: document.getElementById("speed-final-total"),
+            speedPauseBtn: document.getElementById("speed-pause-btn"),
+            speedProgressEl: document.getElementById("speed-progress"),
+            speedRestartBtn: document.getElementById("speed-restart-btn"),
+            speedRoundContainer: document.getElementById("speed-round-container"),
+            speedTotalQsEl: document.getElementById("speed-total-qs"),
+            speedWordDeEl: document.getElementById("speed-word-de"),
+            speedWordTransEl: document.getElementById("speed-word-trans"),
+            timerFillEl: document.getElementById("timer-fill"),
+            speedBackToMenuBtn: document.getElementById("speed-back-to-menu-btn"),
+            settingsBtn: document.getElementById("settings-btn"),
+            settingsOverlay: document.getElementById("settings-overlay"),
+            saveSettingsBtn: document.getElementById("save-settings-btn"),
+            numQuestionsSlider: document.getElementById("num-questions-slider"),
+            numQuestionsValue: document.getElementById("num-questions-value"),
+            allQuestionsCheckbox: document.getElementById("all-questions-checkbox"),
+            categoryCheckboxesContainer: document.getElementById("category-checkboxes"),
+            quizSummaryEl: document.getElementById("quiz-summary"),
+            endQuizBtn: document.getElementById("end-quiz-btn"),
+            endSpeedBtn: document.getElementById("end-speed-btn"),
+            speedDetailedResultsListEl: document.getElementById("speed-detailed-results-list"),
+            questionArea: document.getElementById("question-area")
         };
-
-        // DOM Elements
-        const menuContainer = document.getElementById('menu-container');
-        const quizArea = document.getElementById('quiz-area');
-        const finalScreen = document.getElementById('final-screen');
-        const mainTitle = document.getElementById('main-title');
-        const mainSubtitle = document.getElementById('main-subtitle');
-        const progressBar = document.getElementById('progress-bar');
-        const progressText = document.getElementById('progress-text');
-        const feedbackContainer = document.getElementById('feedback-container');
-        const nextBtn = document.getElementById('next-btn');
-        const changeModeBtn = document.getElementById('change-mode-btn');
-        const finalChangeModeBtn = document.getElementById('final-change-mode-btn');
-        const restartBtn = document.getElementById('restart-btn');
-
-        const mcContainer = document.getElementById('mc-container');
-        const mcQuestion = document.getElementById('mc-question');
-        const optionsGrid = document.getElementById('options-grid');
         
-        const scrambleContainer = document.getElementById('scramble-container');
-        const scrambleRefEn = document.getElementById('scramble-ref-en');
-        const dropZoneContainer = document.getElementById('drop-zone-container');
-        const draggablePool = document.getElementById('draggable-pool');
-        const checkScrambleBtn = document.getElementById('check-scramble-btn');
+        // --- Utility Functions ---
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        function triggerConfetti() { if (typeof confetti === 'function') confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } }); }
+        function clearAutoAdvance(timeoutVar) { clearTimeout(timeoutVar); }
 
-        // State
-        let allTasksForMode = [];
-        let shuffledTasks = [];
-        let currentTaskIndex = 0;
-        let score = 0;
-        let currentMode = '';
-        let draggedItem = null;
-
-        // --- Menu Logic ---
-        function setupMenuListeners() {
-            document.getElementById('start-praepositionen').addEventListener('click', () => startQuiz('praepositionen', 'Präpositionen'));
-            document.getElementById('start-zeitwoerter').addEventListener('click', () => startQuiz('zeitwoerter', 'Zeitwörter'));
-            document.getElementById('start-wochentage').addEventListener('click', () => startQuiz('wochentage', 'Wochentage'));
-            document.getElementById('start-monate').addEventListener('click', () => startQuiz('monate', 'Monate'));
+        // --- Settings Functions ---
+        function loadSettings() {
+            const savedSettings = localStorage.getItem('timeQuizSettings');
+            const defaultSettings = {
+                numQuestions: 20,
+                useAllQuestions: false,
+                categories: ['all']
+            };
+            quizSettings = savedSettings ? JSON.parse(savedSettings) : defaultSettings;
+            updateQuizSummary();
         }
 
-        function showMenu() {
-            menuContainer.classList.remove('hidden');
-            quizArea.classList.add('hidden');
-            finalScreen.classList.add('hidden');
-            mainTitle.textContent = 'Zeitangaben Trainer';
-            mainSubtitle.textContent = 'Wähle einen Modus / Choose a mode';
+        function saveSettings() {
+            localStorage.setItem('timeQuizSettings', JSON.stringify(quizSettings));
+            updateQuizSummary();
         }
-
-        // --- Quiz Logic ---
-        function startQuiz(mode, title) {
-            currentMode = mode;
-            allTasksForMode = quizData[mode];
-            shuffledTasks = [...allTasksForMode].sort(() => Math.random() - 0.5);
-            currentTaskIndex = 0;
-            score = 0;
+        
+        function openSettings() {
+            elements.numQuestionsSlider.value = quizSettings.numQuestions;
+            elements.numQuestionsValue.textContent = quizSettings.numQuestions;
+            elements.allQuestionsCheckbox.checked = quizSettings.useAllQuestions;
+            elements.numQuestionsSlider.disabled = quizSettings.useAllQuestions;
             
-            mainTitle.textContent = `Trainer: ${title}`;
-            mainSubtitle.textContent = 'Lass uns üben! / Let\'s practice!';
-            menuContainer.classList.add('hidden');
-            quizArea.classList.remove('hidden');
-            finalScreen.classList.add('hidden');
+            const availableCats = [...elements.categoryCheckboxesContainer.querySelectorAll('input[type="checkbox"]')];
+            const allCatCheckbox = availableCats.find(cb => cb.value === 'all');
+            const specificCatCheckboxes = availableCats.filter(cb => cb.value !== 'all');
 
-            loadNextTask();
+            if (quizSettings.categories.includes('all')) {
+                allCatCheckbox.checked = true;
+                specificCatCheckboxes.forEach(cb => { cb.checked = false; });
+            } else {
+                allCatCheckbox.checked = false;
+                specificCatCheckboxes.forEach(cb => {
+                    cb.checked = quizSettings.categories.includes(cb.value);
+                });
+            }
+            elements.settingsOverlay.classList.remove('hidden');
         }
 
-        function loadNextTask() {
-            if (currentTaskIndex >= shuffledTasks.length) {
-                showFinalScreen();
+        function handleSaveSettings() {
+            quizSettings.useAllQuestions = elements.allQuestionsCheckbox.checked;
+            quizSettings.numQuestions = parseInt(elements.numQuestionsSlider.value, 10);
+            
+            let selectedCategories = [...elements.categoryCheckboxesContainer.querySelectorAll('input:checked')]
+                .map(cb => cb.value);
+
+            if(selectedCategories.length === 0) {
+                selectedCategories = ['all'];
+            }
+            
+            quizSettings.categories = selectedCategories.includes('all') ? ['all'] : selectedCategories;
+            
+            saveSettings();
+            elements.settingsOverlay.classList.add('hidden');
+        }
+
+        function populateCategoryCheckboxes() {
+            const categories = [...new Set(allQuestions.map(n => n.category))];
+            let checkboxesHTML = `<label class="checkbox-label font-semibold"><input type="checkbox" value="all"> Alle Kategorien <span class="text-sm text-gray-500 ml-1">/ All</span></label>`;
+            categories.forEach(cat => {
+                checkboxesHTML += `<label class="checkbox-label"><input type="checkbox" value="${cat}"> ${cat}</label>`;
+            });
+            elements.categoryCheckboxesContainer.innerHTML = checkboxesHTML;
+            
+            const allCatCheckbox = elements.categoryCheckboxesContainer.querySelector('input[value="all"]');
+            const specificCatCheckboxes = [...elements.categoryCheckboxesContainer.querySelectorAll('input:not([value="all"])')];
+            
+            allCatCheckbox.addEventListener('change', () => {
+                if (allCatCheckbox.checked) {
+                    specificCatCheckboxes.forEach(cb => { cb.checked = false; });
+                }
+            });
+            
+            specificCatCheckboxes.forEach(cb => {
+                cb.addEventListener('change', () => {
+                    if (cb.checked) allCatCheckbox.checked = false;
+                    if (specificCatCheckboxes.every(specific => !specific.checked)) allCatCheckbox.checked = true;
+                });
+            });
+        }
+        
+        function updateQuizSummary() {
+            const numText = quizSettings.useAllQuestions ? 'Alle' : quizSettings.numQuestions;
+            const catText = quizSettings.categories.includes('all') ? 'allen Kategorien' : `${quizSettings.categories.length} Kategorien`;
+            elements.quizSummaryEl.textContent = `Aktuell: ${numText} Fragen aus ${catText}.`;
+        }
+
+        // --- Core Functions ---
+        async function loadQuizData() {
+            try {
+                const response = await fetch('zeiten.json');
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                allQuestions = await response.json();
+            } catch (error) {
+                console.error("Could not load quiz data:", error);
+                elements.mainContainer.innerHTML = `<div class="text-center"><h1 class="text-2xl font-bold text-red-600 mb-4">Fehler beim Laden</h1><p class="mb-2">Quizdaten (german_time.json) nicht gefunden oder fehlerhaft.</p><p class="text-sm text-gray-700 mb-4">Details: ${error.message}</p><p class="text-xs text-gray-500">Stellen Sie sicher, dass die Datei 'german_time.json' im selben Verzeichnis wie die HTML-Datei liegt.</p><button onclick="location.reload()" class="btn btn-primary mt-4">Neu laden</button></div>`;
+                throw new Error("Failed to load quiz data. Halting execution."); // Stop script execution
+            }
+        }
+        
+        function getFilteredQuestions() {
+            let filtered = quizSettings.categories.includes('all')
+                ? [...allQuestions]
+                : allQuestions.filter(q => quizSettings.categories.includes(q.category));
+            shuffleArray(filtered);
+            const finalCount = quizSettings.useAllQuestions ? filtered.length : Math.min(quizSettings.numQuestions, filtered.length);
+            return filtered.slice(0, finalCount);
+        }
+
+        function showModeSelection() {
+            elements.modeSelectionScreen.classList.remove('hidden');
+            elements.quizModeScreen.classList.add('hidden');
+            elements.speedModeScreen.classList.add('hidden');
+            clearInterval(speedInterval);
+            clearAutoAdvance(autoAdvanceTimeout);
+        }
+        
+        function showQuizMode() {
+            shuffledQuestions = getFilteredQuestions();
+            if (shuffledQuestions.length === 0) {
+                alert("Keine Fragen für die gewählten Einstellungen gefunden. Bitte ändere die Einstellungen.");
                 return;
             }
-            
-            feedbackContainer.innerHTML = '';
-            nextBtn.classList.add('hidden');
-            checkScrambleBtn.classList.remove('hidden');
-            checkScrambleBtn.disabled = false;
+            elements.modeSelectionScreen.classList.add('hidden');
+            elements.quizModeScreen.classList.remove('hidden');
+            startQuiz();
+        }
 
-            const task = shuffledTasks[currentTaskIndex];
-            
-            progressText.textContent = `Frage ${currentTaskIndex + 1} / ${shuffledTasks.length}`;
-            progressBar.style.width = `${((currentTaskIndex + 1) / shuffledTasks.length) * 100}%`;
-            
-            const randomMode = Math.random() < 0.5 ? 'mc' : 'scramble';
+        function showSpeedMode() {
+            speedQuestions = getFilteredQuestions();
+            if (speedQuestions.length === 0) {
+                alert("Keine Fragen für die gewählten Einstellungen gefunden. Bitte ändere die Einstellungen.");
+                return;
+            }
+            elements.modeSelectionScreen.classList.add('hidden');
+            elements.speedModeScreen.classList.remove('hidden');
+            startSpeedRound();
+        }
+        
+        // --- Standard Quiz Mode ---
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            answerSelected = false;
+            userAnswers = [];
+            elements.detailedResultsListEl.classList.add('hidden');
+            elements.endQuizBtn.classList.remove('hidden');
+            clearAutoAdvance(autoAdvanceTimeout);
+            elements.feedbackAreaEl.className = "feedback-area hidden";
+            elements.restartQuizBtn.classList.add('hidden');
+            elements.hintAreaEl.classList.add('hidden');
+            elements.questionArea.classList.remove("hidden");
+            elements.choicesContainerEl.classList.remove("hidden");
+            loadQuestion();
+        }
 
-            if (task.type === 'preposition_mc') {
-                loadMcTask(task, 'preposition');
-            } else if (randomMode === 'mc') {
-                loadMcTask(task, 'vocab');
+        function loadQuestion() {
+            answerSelected = false;
+            clearAutoAdvance(autoAdvanceTimeout);
+            if (currentQuestionIndex < shuffledQuestions.length) {
+                const question = shuffledQuestions[currentQuestionIndex];
+                elements.nounDisplayEl.textContent = question.question;
+                elements.translationDisplayEl.textContent = question.hint || '';
+                elements.feedbackAreaEl.className = "feedback-area hidden";
+
+                // Create choice buttons
+                const choices = shuffleArray([...question.distractors, question.answer]);
+                elements.choicesContainerEl.innerHTML = ''; // Clear old buttons
+                choices.forEach(choice => {
+                    const button = document.createElement('button');
+                    button.textContent = choice;
+                    button.className = 'btn btn-choice';
+                    button.onclick = () => handleAnswer(choice);
+                    elements.choicesContainerEl.appendChild(button);
+                });
+                
+                updateProgress();
             } else {
-                loadScrambleTask(task);
+                showResults();
             }
         }
-        
-        function loadMcTask(task, mcType) {
-            mcContainer.classList.remove('hidden');
-            scrambleContainer.classList.add('hidden');
-            
-            let questionHTML = '';
-            let options = [];
-            if (mcType === 'preposition') {
-                questionHTML = task.question.replace('___', '<span class="blank">___</span>');
-                options = [...task.options].sort(() => Math.random() - 0.5);
-            } else { // vocab
-                questionHTML = `What is the German for '${task.translation_en}'?`;
-                options = [...task.mc_options, task.word_de].sort(() => Math.random() - 0.5);
-            }
-            mcQuestion.innerHTML = questionHTML;
-            
-            optionsGrid.innerHTML = '';
-            options.forEach(option => {
-                const button = document.createElement('button');
-                button.textContent = option;
-                button.classList.add('option-btn');
-                button.addEventListener('click', () => handleMcAnswer(option, task, mcType));
-                optionsGrid.appendChild(button);
+
+        function handleAnswer(selectedAnswer) {
+            if (answerSelected) return;
+            answerSelected = true;
+            const question = shuffledQuestions[currentQuestionIndex];
+            const isCorrect = selectedAnswer === question.answer;
+
+            userAnswers.push({
+                question: JSON.parse(JSON.stringify(question)),
+                userAnswer: selectedAnswer,
+                isCorrect: isCorrect
             });
-        }
 
-        function handleMcAnswer(selectedOption, task, mcType) {
-            const correctAnswer = (mcType === 'preposition') ? task.correct_answer : task.word_de;
-            const isCorrect = selectedOption === correctAnswer;
-            if (isCorrect) score++;
-            
-            let feedbackAnswer = (mcType === 'preposition') 
-                ? task.question.replace('___', `<strong>${correctAnswer}</strong>`)
-                : `<strong>${correctAnswer}</strong> = ${task.translation_en}`;
+            elements.feedbackAreaEl.classList.remove("hidden");
+            if (isCorrect) {
+                score++;
+                elements.feedbackAreaEl.innerHTML = `Richtig! <span class="correct-answer-text">${question.answer}</span>`;
+                elements.feedbackAreaEl.className = "feedback-area correct";
+                triggerConfetti();
+            } else {
+                elements.feedbackAreaEl.innerHTML = `Falsch. Richtig ist: <span class="correct-answer-text">${question.answer}</span>`;
+                elements.feedbackAreaEl.className = "feedback-area incorrect";
+            }
 
-            showFeedback(isCorrect, `Correct: ${feedbackAnswer}`);
-            
-            Array.from(optionsGrid.children).forEach(btn => {
+            // Visually update buttons
+            const buttons = elements.choicesContainerEl.querySelectorAll('button');
+            buttons.forEach(btn => {
                 btn.disabled = true;
-                if (btn.textContent === correctAnswer) btn.classList.add('correct');
-                else if (btn.textContent === selectedOption) btn.classList.add('incorrect');
+                const isSelectedButton = btn.textContent === selectedAnswer;
+                const isCorrectButton = btn.textContent === question.answer;
+                if (isSelectedButton) {
+                    btn.classList.add(isCorrect ? "bg-green-600" : "bg-red-600");
+                } else if (isCorrectButton) {
+                    btn.classList.add("bg-green-400");
+                } else {
+                    btn.classList.add("opacity-50");
+                }
             });
-            nextBtn.classList.remove('hidden');
-            currentTaskIndex++;
+
+            updateProgress();
+            currentQuestionIndex++;
+            autoAdvanceTimeout = setTimeout(
+                currentQuestionIndex < shuffledQuestions.length ? loadQuestion : showResults, 
+                2000
+            );
         }
 
-        function loadScrambleTask(task) {
-            mcContainer.classList.add('hidden');
-            scrambleContainer.classList.remove('hidden');
+        function updateProgress() {
+            elements.progressIndicatorEl.textContent = `Frage: ${currentQuestionIndex + 1} / ${shuffledQuestions.length}`;
+            elements.scoreIndicatorEl.textContent = `Punkte: ${score} / ${userAnswers.length}`;
+        }
+        
+        function showResults() {
+            clearAutoAdvance(autoAdvanceTimeout);
+            elements.questionArea.classList.add("hidden");
+            elements.choicesContainerEl.classList.add("hidden");
+            elements.endQuizBtn.classList.add("hidden");
+            elements.feedbackAreaEl.classList.remove("hidden");
+            elements.feedbackAreaEl.className = "feedback-area correct";
+            const questionsAnswered = userAnswers.length;
+            elements.feedbackAreaEl.innerHTML = `Quiz beendet! Endergebnis: <strong class="text-2xl">${score}</strong> / ${questionsAnswered}`;
             
-            scrambleRefEn.textContent = task.sentence_en;
-            dropZoneContainer.innerHTML = '';
-            task.sentence_words.forEach(() => {
-                const slot = document.createElement('div');
-                slot.classList.add('draggable-item-slot');
-                dropZoneContainer.appendChild(slot);
+            let resultsHTML = `<h3>Deine Antworten im Detail:</h3><ul>`;
+            userAnswers.forEach(ans => {
+                resultsHTML += `<li class="${ans.isCorrect ? "result-correct" : "result-incorrect"}">`;
+                resultsHTML += `<strong>Frage:</strong> "${ans.question.question}"<br>`;
+                if (ans.isCorrect) {
+                    resultsHTML += `<span class="text-green-700 font-semibold">Richtig als "${ans.userAnswer}"</span>`;
+                } else {
+                    resultsHTML += `<span class="text-red-700">Du: "${ans.userAnswer}". Richtig:</span> <strong class="text-blue-600">"${ans.question.answer}"</strong>.`;
+                }
+                resultsHTML += `</li>`;
+            });
+            resultsHTML += "</ul>";
+            elements.detailedResultsListEl.innerHTML = resultsHTML;
+            elements.detailedResultsListEl.classList.remove("hidden");
+            
+            elements.progressIndicatorEl.textContent = "Quiz beendet!";
+            elements.scoreIndicatorEl.textContent = `Endstand: ${score} / ${questionsAnswered}`;
+            elements.restartQuizBtn.classList.remove("hidden");
+            elements.hintAreaEl.innerHTML = "Drücke <kbd>Leertaste</kbd> zum Neustarten";
+            elements.hintAreaEl.classList.remove("hidden");
+        }
+        
+        // --- Speed Learning Mode ---
+        function startSpeedRound() {
+            speedCurrentIndex = 0;
+            speedScore = 0;
+            speedPaused = false;
+            speedAnswered = false;
+            userAnswers = [];
+            elements.speedCompleteEl.classList.add('hidden');
+            elements.speedDetailedResultsListEl.classList.add('hidden');
+            elements.speedRoundContainer.classList.remove('hidden');
+            elements.speedPauseBtn.textContent = "⏸️ Pause";
+            showSpeedQuestion();
+        }
+
+        function showSpeedQuestion() {
+            if (speedCurrentIndex >= speedQuestions.length) {
+                return completeSpeedRound();
+            }
+            speedAnswered = false;
+            const q = speedQuestions[speedCurrentIndex];
+            elements.speedWordDeEl.textContent = q.question;
+            elements.speedWordTransEl.textContent = q.hint || '';
+            elements.speedProgressEl.textContent = `${speedCurrentIndex + 1} / ${speedQuestions.length}`;
+            elements.speedFeedbackEl.classList.add('hidden');
+            elements.speedChoicesEl.innerHTML = '';
+            
+            const choices = shuffleArray([...q.distractors, q.answer]);
+            choices.forEach(choice => {
+                const btn = document.createElement('button');
+                btn.className = 'btn btn-primary text-lg py-4 px-5';
+                btn.textContent = choice;
+                btn.onclick = () => handleSpeedAnswer(choice);
+                elements.speedChoicesEl.appendChild(btn);
             });
             
-            draggablePool.innerHTML = '';
-            [...task.sentence_words].sort(() => Math.random() - 0.5).forEach(word => {
-                const item = document.createElement('div');
-                item.textContent = word;
-                item.classList.add('draggable-item');
-                item.draggable = true;
-                item.addEventListener('dragstart', e => { draggedItem = e.target; });
-                draggablePool.appendChild(item);
+            const bgColors = ['linear-gradient(135deg, #667eea 0%, #764ba2 100%)', 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)', 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)', 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)', 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'];
+            elements.speedRoundContainer.style.background = bgColors[speedCurrentIndex % bgColors.length];
+            startSpeedTimer();
+        }
+
+        function handleSpeedAnswer(selectedAnswer) {
+            if (speedAnswered) return;
+            speedAnswered = true;
+            clearInterval(speedInterval);
+            const q = speedQuestions[speedCurrentIndex];
+            const isCorrect = selectedAnswer === q.answer;
+            if (isCorrect) speedScore++;
+            
+            userAnswers.push({
+                question: JSON.parse(JSON.stringify(q)),
+                userAnswer: selectedAnswer,
+                isCorrect: isCorrect
             });
-        }
-        
-        checkScrambleBtn.addEventListener('click', () => {
-            const task = shuffledTasks[currentTaskIndex];
-            const constructed = Array.from(dropZoneContainer.children).map(slot => slot.firstChild?.textContent || '').join(' ');
-            const correct = task.sentence_de;
-            const isCorrect = constructed.trim() === correct.trim();
             
-            if (isCorrect) score++;
-            showFeedback(isCorrect, `Correct sentence: <strong>${correct}</strong>`);
+            elements.speedFeedbackEl.textContent = isCorrect ? "✅ Richtig!" : `❌ Falsch! Richtig: ${q.answer}`;
+            elements.speedFeedbackEl.className = `text-lg font-bold mb-4 ${isCorrect ? 'text-green-300' : 'text-red-300'}`;
+            elements.speedFeedbackEl.classList.remove('hidden');
             
-            checkScrambleBtn.disabled = true;
-            nextBtn.classList.remove('hidden');
-            currentTaskIndex++;
-        });
-
-        // --- Common & Utility Functions ---
-        function showFeedback(isCorrect, correctAnswerText) {
-            feedbackContainer.innerHTML = `
-                <p class="feedback-text ${isCorrect ? 'correct' : 'incorrect'}">${isCorrect ? 'Richtig!' : 'Leider falsch.'}</p>
-                <p class="correct-answer-text">${correctAnswerText}</p>`;
-            if (isCorrect) confetti({ particleCount: 50, spread: 50, origin: { y: 0.6 } });
-        }
-        
-        function showFinalScreen() {
-            quizArea.classList.add('hidden');
-            finalScreen.classList.remove('hidden');
-            finalScoreEl.textContent = `Your final score: ${score} / ${shuffledTasks.length}`;
+            const buttons = elements.speedChoicesEl.querySelectorAll('button');
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                const isSelectedButton = btn.textContent === selectedAnswer;
+                const isCorrectButton = btn.textContent === q.answer;
+                if (isSelectedButton) {
+                    btn.className = isCorrect ? 'btn bg-green-600 text-lg py-4 px-5' : 'btn bg-red-600 text-lg py-4 px-5';
+                } else if (isCorrectButton) {
+                    btn.className = 'btn bg-green-400 text-lg py-4 px-5';
+                } else {
+                    btn.className = 'btn bg-gray-500 text-lg py-4 px-5 opacity-50';
+                }
+            });
+            
+            speedCurrentIndex++;
+            setTimeout(showSpeedQuestion, 1500);
         }
 
-        // --- Event Listeners ---
-        setupMenuListeners();
-        changeModeBtn.addEventListener('click', showMenu);
-        finalChangeModeBtn.addEventListener('click', showMenu);
-        nextBtn.addEventListener('click', loadNextTask);
-        restartBtn.addEventListener('click', () => startQuiz(currentMode, mainTitle.textContent.replace('Trainer: ', '')));
+        function startSpeedTimer() {
+            if (speedPaused || speedAnswered) return;
+            clearInterval(speedInterval);
+            elements.timerFillEl.style.transition = 'none';
+            elements.timerFillEl.style.width = '100%';
+            elements.timerFillEl.offsetHeight; // Trigger reflow
+            elements.timerFillEl.style.transition = `width ${speedTimePerCard / 1000}s linear`;
+            elements.timerFillEl.style.width = '0%';
+            speedInterval = setTimeout(() => {
+                if (speedPaused || speedAnswered) return;
+                handleSpeedAnswer("Keine Antwort"); // Timeout counts as wrong answer
+            }, speedTimePerCard);
+        }
         
-        // Drag and Drop Listeners
-        dropZoneContainer.addEventListener('dragover', e => e.preventDefault());
-        dropZoneContainer.addEventListener('drop', e => {
+        function toggleSpeedPause() {
+            speedPaused = !speedPaused;
+            elements.speedPauseBtn.textContent = speedPaused ? "▶️ Weiter" : "⏸️ Pause";
+            if (speedPaused) {
+                clearInterval(speedInterval);
+                const compStyle = getComputedStyle(elements.timerFillEl);
+                elements.timerFillEl.style.width = compStyle.width;
+                elements.timerFillEl.style.transition = 'none';
+            } else {
+                 if (speedCurrentIndex < speedQuestions.length && !speedAnswered) {
+                     const currWidthPx = parseFloat(getComputedStyle(elements.timerFillEl).width);
+                     const parWidthPx = elements.timerFillEl.parentNode.offsetWidth;
+                     const remTime = (currWidthPx / parWidthPx) * speedTimePerCard;
+                     elements.timerFillEl.style.transition = `width ${remTime / 1000}s linear`;
+                     elements.timerFillEl.style.width = '0%';
+                     speedInterval = setTimeout(() => handleSpeedAnswer("Keine Antwort"), remTime);
+                 }
+            }
+        }
+        
+        function completeSpeedRound() {
+            clearInterval(speedInterval);
+            elements.speedRoundContainer.classList.add("hidden");
+            elements.speedCompleteEl.classList.remove("hidden");
+            
+            const questionsAnswered = userAnswers.length;
+            elements.speedFinalScoreEl.textContent = speedScore;
+            elements.speedTotalQsEl.textContent = questionsAnswered;
+            elements.speedFinalTotalEl.textContent = questionsAnswered;
+            
+            // Build and display detailed results
+            let resultsHTML = `<h3>Deine Antworten im Detail:</h3><ul>`;
+            userAnswers.forEach(ans => {
+                resultsHTML += `<li class="${ans.isCorrect ? "result-correct" : "result-incorrect"}">`;
+                resultsHTML += `<strong>Frage:</strong> "${ans.question.question}"<br>`;
+                if (ans.isCorrect) {
+                     resultsHTML += `<span class="text-green-700 font-semibold">Richtig als "${ans.userAnswer}"</span>`;
+                } else {
+                     resultsHTML += `<span class="text-red-700">Du: "${ans.userAnswer}". Richtig:</span> <strong class="text-blue-600">"${ans.question.answer}"</strong>.`;
+                }
+                resultsHTML += `</li>`;
+            });
+            resultsHTML += "</ul>";
+            elements.speedDetailedResultsListEl.innerHTML = resultsHTML;
+            elements.speedDetailedResultsListEl.classList.remove("hidden");
+
+            if (speedScore > 0) triggerConfetti();
+        }
+
+        function handleSpacebar(e) {
+            if (e.code !== "Space" && e.keyCode !== 32) return;
+            if (document.activeElement && (document.activeElement.tagName === "BUTTON" || document.activeElement.tagName === "INPUT") && !["restart-quiz-btn"].includes(document.activeElement.id)) return;
             e.preventDefault();
-            const targetSlot = e.target.classList.contains('draggable-item-slot') ? e.target : null;
-            if (targetSlot && !targetSlot.firstChild && draggedItem) targetSlot.appendChild(draggedItem);
-        });
-        draggablePool.addEventListener('dragover', e => e.preventDefault());
-        draggablePool.addEventListener('drop', e => {
-             e.preventDefault();
-             if (draggedItem) draggablePool.appendChild(draggedItem);
-        });
-    });
+            if (!elements.quizModeScreen.classList.contains("hidden") && !elements.restartQuizBtn.classList.contains("hidden")) {
+                elements.restartQuizBtn.click();
+            }
+        }
+        
+        // --- App Start ---
+        async function initialSetup() {
+            elements.quizModeBtn.disabled = true;
+            elements.speedModeBtn.disabled = true;
+            elements.settingsBtn.disabled = true;
+
+            const loadingMsg = document.createElement('p');
+            loadingMsg.id = 'loading-msg';
+            loadingMsg.textContent = "Lade Quizdaten...";
+            loadingMsg.className = 'text-lg text-gray-600 my-4';
+            elements.modeSelectionScreen.querySelector('.mode-selection').insertAdjacentElement('beforebegin', loadingMsg);
+
+            loadSettings();
+            await loadQuizData(); // Await the data loading
+            
+            // This code runs only after data is successfully loaded
+            elements.numQuestionsSlider.max = allQuestions.length;
+            if (parseInt(elements.numQuestionsSlider.max, 10) < quizSettings.numQuestions) {
+                quizSettings.numQuestions = parseInt(elements.numQuestionsSlider.max, 10);
+                saveSettings();
+            }
+            populateCategoryCheckboxes();
+
+            const msg = document.getElementById('loading-msg');
+            if (msg) msg.remove();
+            elements.quizModeBtn.disabled = false;
+            elements.speedModeBtn.disabled = false;
+            elements.settingsBtn.disabled = false;
+            
+            showModeSelection();
+        }
+        
+        // --- Event Listeners ---
+        elements.quizModeBtn.addEventListener("click", showQuizMode);
+        elements.speedModeBtn.addEventListener("click", showSpeedMode);
+        elements.restartQuizBtn.addEventListener("click", startQuiz);
+        elements.backToMenuBtn.addEventListener("click", showModeSelection);
+        elements.speedPauseBtn.addEventListener("click", toggleSpeedPause);
+        elements.speedRestartBtn.addEventListener("click", startSpeedRound);
+        elements.speedBackToMenuBtn.addEventListener("click", showModeSelection);
+        document.addEventListener("keydown", handleSpacebar);
+        elements.settingsBtn.addEventListener("click", openSettings);
+        elements.saveSettingsBtn.addEventListener("click", handleSaveSettings);
+        elements.numQuestionsSlider.addEventListener("input", e => { elements.numQuestionsValue.textContent = e.target.value });
+        elements.allQuestionsCheckbox.addEventListener("change", e => { elements.numQuestionsSlider.disabled = e.target.checked });
+        elements.endQuizBtn.addEventListener("click", showResults);
+        elements.endSpeedBtn.addEventListener("click", completeSpeedRound);
+
+        initialSetup();
     </script>
 </body>
 </html>
