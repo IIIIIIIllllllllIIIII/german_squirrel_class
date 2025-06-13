@@ -349,5 +349,18 @@
             "ihr": "ladet ein",
             "sie/Sie": "laden ein"
         }
+    },
+    {
+        "id": "vorbereiten",
+        "infinitive": "vorbereiten",
+        "translation": "to prepare",
+        "conjugations": {
+            "ich": "bereite vor",
+            "du": "bereitest vor",
+            "er/sie/es": "bereitet vor",
+            "wir": "bereiten vor",
+            "ihr": "bereitet vor",
+            "sie/Sie": "bereiten vor"
+        }
     }
 ]
