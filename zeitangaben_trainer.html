@@ -127,6 +127,9 @@
             <p class="text-xs text-gray-400 mt-6 italic">
                 The number of questions and categories for the quizzes can be chosen in the settings (⚙️).
             </p>
+            <div class="mt-8 pt-6 border-t border-gray-200">
+                <a href="index.html" class="btn btn-secondary btn-link">← Zurück zum Hauptmenü</a>
+            </div>
         </div>
 
         <div id="quiz-mode-screen" class="hidden">
@@ -142,7 +145,8 @@
             <div id="quiz-controls-area" class="text-center mt-4">
                 <button id="end-quiz-btn" class="btn btn-danger mr-2 hidden">Quiz beenden</button>
                 <button id="restart-quiz-btn" class="btn btn-secondary hidden">Quiz neu starten</button>
-                <button id="back-to-menu-btn" class="btn btn-secondary">Zurück zum Menü</button>
+                <button id="back-to-menu-btn" class="btn btn-secondary mr-2">Quiz-Menü</button>
+                <a href="index.html" class="btn btn-secondary btn-link">Hauptmenü</a>
             </div>
             <div id="progress-indicator" class="progress-text mt-4 text-center">Frage 0 / 0</div>
             <div id="score-indicator" class="progress-text mt-1 text-center">Punkte: 0 / 0</div>
@@ -158,9 +162,10 @@
                  <div id="speed-choices" class="grid grid-cols-2 gap-4 mt-6 mb-4"></div>
                  <div id="speed-feedback" class="text-lg font-bold mb-4 hidden"></div>
                  <div id="speed-progress" class="text-lg opacity-90">1 / 10</div>
-                 <div id="speed-controls" class="mt-6 flex justify-center items-center">
+                 <div id="speed-controls" class="mt-6 flex justify-center items-center gap-2">
                       <button id="speed-pause-btn" class="btn btn-secondary">⏸️ Pause</button>
-                      <button id="end-speed-btn" class="btn btn-danger mx-2">Runde beenden</button>
+                      <button id="end-speed-btn" class="btn btn-danger">Runde beenden</button>
+                      <a href="index.html" class="btn btn-secondary btn-link">Hauptmenü</a>
                  </div>
              </div>
              <div id="speed-complete" class="hidden text-center">
@@ -168,8 +173,11 @@
                  <p class="text-lg mb-2">Du hast <span id="speed-total-qs">0</span> Fragen beantwortet!</p>
                  <p class="text-xl font-bold text-purple-600 mb-6">Endstand: <span id="speed-final-score">0</span> / <span id="speed-final-total">0</span></p>
                  <div id="speed-detailed-results-list" class="detailed-results-list hidden text-left mx-auto max-w-md mb-4"></div>
-                 <button id="speed-restart-btn" class="btn btn-success mr-4">🔄 Neu starten</button>
-                 <button id="speed-back-to-menu-btn" class="btn btn-secondary">Zurück zum Menü</button>
+                 <div class="flex justify-center gap-2 flex-wrap">
+                    <button id="speed-restart-btn" class="btn btn-success">🔄 Neu starten</button>
+                    <button id="speed-back-to-menu-btn" class="btn btn-secondary">Quiz-Menü</button>
+                    <a href="index.html" class="btn btn-secondary btn-link">Hauptmenü</a>
+                 </div>
              </div>
         </div>
     </div>
@@ -361,7 +369,7 @@
         // --- Core Functions ---
         async function loadQuizData() {
             try {
-                const response = await fetch('zeiten.json');
+                const response = await fetch('german_time.json');
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 allQuestions = await response.json();
             } catch (error) {
