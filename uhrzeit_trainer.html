@@ -35,6 +35,11 @@
         .mode-title { font-size: 1.75rem; font-weight: 700; color: #005c97; }
         .mode-title-subtitle { font-size: 1rem; color: #363795; margin-bottom: 24px; }
 
+        #mode-selection-container .mode-btn {
+            display: block; width: 100%; max-width: 400px; margin: 1rem auto;
+            padding: 1rem; font-size: 1.25rem;
+        }
+
         .clock-and-display {
             display: flex;
             flex-direction: column;
@@ -136,24 +141,40 @@
 </head>
 <body>
     <div class="card">
-        <h1 class="mode-title">Die Uhrzeit lernen</h1>
-        <p class="mode-title-subtitle">Telling Time / Decir la Hora</p>
-
-        <div class="clock-and-display">
-            <canvas id="clock-canvas" width="300" height="300"></canvas>
-            <div id="digital-time-display">00:00</div>
+        <!-- Mode Selection Screen -->
+        <div id="mode-selection-screen">
+            <h1 class="mode-title">Die Uhrzeit lernen</h1>
+            <p class="mode-title-subtitle">Choose a mode / Wähle einen Modus</p>
+            <div id="mode-selection-container">
+                <button class="btn btn-primary mode-btn" data-mode="formal">Formelle Uhrzeit (Formal)</button>
+                <button class="btn btn-primary mode-btn" data-mode="colloquial">Umgangssprachliche Uhrzeit (Colloquial)</button>
+            </div>
+             <div class="mt-8 pt-6 border-t border-gray-200">
+                <a href="index.html" class="btn btn-secondary">← Back to Main Menu</a>
+           </div>
         </div>
 
-        <div id="drop-zone-container" class="drop-zone-container"></div>
-        <div id="draggable-pool" class="draggable-pool"></div>
-        
-        <div id="feedback-message" class="feedback-area hidden"></div>
-        <div id="correct-sentence-feedback" class="text-green-700 font-semibold mt-2 hidden"></div>
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" class="hidden">
+            <h1 class="mode-title" id="quiz-mode-title">Clock Trainer</h1>
+            <p class="mode-title-subtitle">Build the sentence / Baue den Satz</p>
 
-        <div class="bottom-controls">
-            <button id="check-answer-btn" class="btn btn-primary">Check Answer / Verificar</button>
-            <button id="next-task-btn" class="btn btn-secondary hidden">Next Time / Siguiente</button>
-            <a href="index.html" class="btn btn-secondary">Menu / Menú</a>
+            <div class="clock-and-display">
+                <canvas id="clock-canvas" width="300" height="300"></canvas>
+                <div id="digital-time-display">00:00</div>
+            </div>
+
+            <div id="drop-zone-container" class="drop-zone-container"></div>
+            <div id="draggable-pool" class="draggable-pool"></div>
+            
+            <div id="feedback-message" class="feedback-area hidden"></div>
+            <div id="correct-sentence-feedback" class="text-green-700 font-semibold mt-2 hidden"></div>
+
+            <div class="bottom-controls">
+                <button id="check-answer-btn" class="btn btn-primary">Check Answer / Verificar</button>
+                <button id="next-task-btn" class="btn btn-secondary hidden">Next Time / Siguiente</button>
+                <button id="back-to-mode-selection-btn" class="btn btn-secondary">Change Mode / Modus wechseln</button>
+            </div>
         </div>
     </div>
 
@@ -162,12 +183,17 @@
         let currentTask = null;
         let shuffledTasks = [];
         let draggedItem = null;
+        let currentMode = 'formal'; // 'formal' or 'colloquial'
 
+        // --- DOM Elements ---
         const canvas = document.getElementById('clock-canvas');
         const ctx = canvas.getContext('2d');
         const radius = canvas.height / 2;
         ctx.translate(radius, radius);
 
+        const modeSelectionScreen = document.getElementById('mode-selection-screen');
+        const quizScreen = document.getElementById('quiz-screen');
+        const quizModeTitle = document.getElementById('quiz-mode-title');
         const digitalTimeDisplayEl = document.getElementById('digital-time-display');
         const dropZoneContainerEl = document.getElementById('drop-zone-container');
         const draggablePoolEl = document.getElementById('draggable-pool');
@@ -175,6 +201,7 @@
         const nextTaskBtn = document.getElementById('next-task-btn');
         const feedbackMessageEl = document.getElementById('feedback-message');
         const correctSentenceFeedbackEl = document.getElementById('correct-sentence-feedback');
+        const backToModeSelectionBtn = document.getElementById('back-to-mode-selection-btn');
 
         // --- Clock Drawing Functions ---
         function drawClock() {
@@ -218,12 +245,10 @@
         }
 
         function drawTime(hour, minute) {
-            drawClock(); // Redraw face and numbers
-            // Hour hand
+            drawClock();
             hour = hour % 12;
             hour = (hour * Math.PI / 6) + (minute * Math.PI / (6 * 60));
             drawHand(ctx, hour, radius * 0.5, radius * 0.07);
-            // Minute hand
             minute = (minute * Math.PI / 30);
             drawHand(ctx, minute, radius * 0.75, radius * 0.05);
         }
@@ -242,18 +267,29 @@
         // --- Quiz Logic ---
         async function loadTasks() {
             try {
-                // FIX: Use a simple relative path for fetch, which is more robust.
                 const response = await fetch('uhrzeit_tasks.json');
-                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
                 allTasks = await response.json();
-                if (allTasks.length === 0) throw new Error("uhrzeit_tasks.json is empty or not found.");
-                shuffleArray(allTasks);
-                shuffledTasks = [...allTasks];
-                loadNextTask();
+                if (!Array.isArray(allTasks) || allTasks.length === 0) {
+                    throw new Error("JSON file is empty or not a valid array.");
+                }
             } catch (error) {
-                console.error("Could not load tasks:", error);
-                dropZoneContainerEl.innerHTML = `<p class="text-red-500 font-semibold">Error: Could not load tasks. Details: ${error.message}</p>`;
+                console.error("Could not load or parse tasks:", error);
+                document.querySelector('.card').innerHTML = `<p class="text-red-500 font-semibold">Error loading tasks. Please check the console and the uhrzeit_tasks.json file. <br> Details: ${error.message}</p>`;
             }
+        }
+
+        function startQuiz(mode) {
+            currentMode = mode;
+            modeSelectionScreen.classList.add('hidden');
+            quizScreen.classList.remove('hidden');
+            quizModeTitle.textContent = mode === 'formal' ? 'Formelle Uhrzeit' : 'Umgangssprachliche Uhrzeit';
+
+            shuffleArray(allTasks);
+            shuffledTasks = [...allTasks];
+            loadNextTask();
         }
 
         function shuffleArray(array) {
@@ -271,7 +307,6 @@
             item.dataset.text = text;
             item.addEventListener('dragstart', handleDragStart);
             item.addEventListener('dragend', handleDragEnd);
-            item.addEventListener('touchstart', handleTouchStart, { passive: false });
             return item;
         }
 
@@ -289,8 +324,10 @@
             digitalTimeDisplayEl.textContent = currentTask.time;
             drawTime(currentTask.hour, currentTask.minute);
 
+            const correctWords = currentTask[currentMode + '_words'];
+            
             dropZoneContainerEl.innerHTML = '';
-            currentTask.german_words.forEach(() => {
+            correctWords.forEach(() => {
                 const slot = document.createElement('div');
                 slot.classList.add('draggable-item-slot');
                 slot.addEventListener('dragover', handleDragOver);
@@ -298,18 +335,19 @@
                 dropZoneContainerEl.appendChild(slot);
             });
 
-            draggablePoolEl.innerHTML = '';
-            const wordsToDrag = [...currentTask.german_words, ...currentTask.distractor_words];
+            const wordsToDrag = [...correctWords, ...currentTask.distractor_words];
             shuffleArray(wordsToDrag);
+            draggablePoolEl.innerHTML = '';
             wordsToDrag.forEach(word => draggablePoolEl.appendChild(createDraggableItem(word)));
 
             feedbackMessageEl.classList.add('hidden');
             correctSentenceFeedbackEl.classList.add('hidden');
+            checkAnswerBtn.disabled = false;
             checkAnswerBtn.classList.remove('hidden');
             nextTaskBtn.classList.add('hidden');
         }
 
-        // --- Drag and Drop Handlers ---
+        // --- Event Handlers & Drag/Drop ---
         function handleDragStart(e) {
             draggedItem = e.target;
             setTimeout(() => e.target.classList.add('dragging'), 0);
@@ -319,97 +357,26 @@
         }
         function handleDragOver(e) {
             e.preventDefault();
-            const slot = e.target.closest('.draggable-item-slot');
-            if (slot && !slot.hasChildNodes()) {
-                slot.classList.add('drag-over');
-            }
         }
-         dropZoneContainerEl.addEventListener('dragleave', (e) => {
-            if (e.target.classList.contains("draggable-item-slot")) {
-                 e.target.classList.remove("drag-over");
-            }
-        });
         function handleDrop(e) {
             e.preventDefault();
-            const slot = e.target.closest('.draggable-item-slot');
-            if (slot && !slot.hasChildNodes()) {
-                slot.appendChild(draggedItem);
-            }
-            slot.classList.remove('drag-over');
-        }
-         draggablePoolEl.addEventListener('dragover', e => e.preventDefault());
-         draggablePoolEl.addEventListener('drop', e => {
-            e.preventDefault();
-            draggablePoolEl.appendChild(draggedItem);
-        });
+            const target = e.target;
+            const isSlot = target.classList.contains('draggable-item-slot');
+            const isPool = target.classList.contains('draggable-pool');
 
-        // --- Touch Handlers for Mobile ---
-        let activeTouchClone = null;
-        let touchOffsetX = 0, touchOffsetY = 0;
-        
-        function handleTouchStart(e) {
-            draggedItem = e.target.closest('.draggable-item');
-            if (draggedItem && e.cancelable) {
-                e.preventDefault();
-                activeTouchClone = draggedItem.cloneNode(true);
-                activeTouchClone.classList.add('dragging');
-                activeTouchClone.style.position = 'fixed';
-                activeTouchClone.style.pointerEvents = 'none';
-                activeTouchClone.style.zIndex = '1000';
-                document.body.appendChild(activeTouchClone);
-
-                const rect = draggedItem.getBoundingClientRect();
-                touchOffsetX = e.touches[0].clientX - rect.left;
-                touchOffsetY = e.touches[0].clientY - rect.top;
-                
-                activeTouchClone.style.left = (e.touches[0].clientX - touchOffsetX) + 'px';
-                activeTouchClone.style.top = (e.touches[0].clientY - touchOffsetY) + 'px';
-                draggedItem.style.opacity = '0.4';
-
-                document.addEventListener('touchmove', handleTouchMove, { passive: false });
-                document.addEventListener('touchend', handleTouchEnd, { once: true });
+            if (isSlot && !target.hasChildNodes()) {
+                target.appendChild(draggedItem);
+            } else if (isPool) {
+                target.appendChild(draggedItem);
+            } else if (target.closest('.draggable-item-slot') && !target.closest('.draggable-item-slot').hasChildNodes()) {
+                 target.closest('.draggable-item-slot').appendChild(draggedItem);
+            } else {
+                draggablePoolEl.appendChild(draggedItem);
             }
         }
-        function handleTouchMove(e) {
-            if (activeTouchClone && e.cancelable) {
-                e.preventDefault();
-                let currentX = e.touches[0].clientX;
-                let currentY = e.touches[0].clientY;
-                activeTouchClone.style.left = (currentX - touchOffsetX) + 'px';
-                activeTouchClone.style.top = (currentY - touchOffsetY) + 'px';
-            }
-        }
-        function handleTouchEnd(e) {
-             document.querySelectorAll('.draggable-item-slot.drag-over').forEach(s => s.classList.remove('drag-over'));
-            if (activeTouchClone && draggedItem) {
-                activeTouchClone.style.display = 'none';
-                const elementBelow = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
-                activeTouchClone.style.display = '';
 
-                let droppedSuccessfully = false;
-                const slot = elementBelow ? elementBelow.closest('.draggable-item-slot') : null;
-
-                if (slot && !slot.hasChildNodes()) {
-                    slot.appendChild(draggedItem);
-                    droppedSuccessfully = true;
-                } else if (elementBelow && elementBelow.closest('.draggable-pool')) {
-                    draggablePoolEl.appendChild(draggedItem);
-                    droppedSuccessfully = true;
-                }
-                
-                if (!droppedSuccessfully) {
-                     draggablePoolEl.appendChild(draggedItem);
-                }
-
-                draggedItem.style.opacity = '1';
-                if(activeTouchClone.parentNode) document.body.removeChild(activeTouchClone);
-            }
-            activeTouchClone = null; draggedItem = null;
-            document.removeEventListener('touchmove', handleTouchMove);
-        }
-        
-        // --- Answer Checking ---
         checkAnswerBtn.addEventListener('click', () => {
+            checkAnswerBtn.disabled = true;
             const slots = dropZoneContainerEl.querySelectorAll('.draggable-item-slot');
             let constructedSentence = Array.from(slots).map(slot => slot.firstChild ? slot.firstChild.dataset.text : '').join(' ');
             let allSlotsFilled = Array.from(slots).every(slot => slot.firstChild);
@@ -418,10 +385,12 @@
                 feedbackMessageEl.textContent = "Please fill all blanks. / Por favor, llena todos los espacios.";
                 feedbackMessageEl.className = "feedback-area error";
                 feedbackMessageEl.classList.remove('hidden');
+                checkAnswerBtn.disabled = false;
                 return;
             }
 
-            const isCorrect = constructedSentence.trim() === currentTask.full_sentence_de.trim();
+            const correctSentence = currentTask[currentMode + '_sentence'];
+            const isCorrect = constructedSentence.trim() === correctSentence.trim();
             
             slots.forEach(slot => {
                 const item = slot.firstChild;
@@ -438,7 +407,7 @@
             } else {
                 feedbackMessageEl.textContent = "Leider nicht ganz richtig. / Not quite right.";
                 feedbackMessageEl.className = "feedback-area error";
-                correctSentenceFeedbackEl.textContent = `Correct Order: ${currentTask.full_sentence_de}`;
+                correctSentenceFeedbackEl.textContent = `Correct Order: ${correctSentence}`;
                 correctSentenceFeedbackEl.classList.remove('hidden');
             }
             
@@ -448,6 +417,18 @@
         });
 
         nextTaskBtn.addEventListener('click', loadNextTask);
+        
+        backToModeSelectionBtn.addEventListener('click', () => {
+            quizScreen.classList.add('hidden');
+            modeSelectionScreen.classList.remove('hidden');
+        });
+        
+        document.getElementById('mode-selection-container').addEventListener('click', (e) => {
+            if (e.target.matches('.mode-btn')) {
+                startQuiz(e.target.dataset.mode);
+            }
+        });
+
         function triggerConfetti() { if (typeof confetti === 'function') confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } }); }
 
         // --- Initial Load ---
