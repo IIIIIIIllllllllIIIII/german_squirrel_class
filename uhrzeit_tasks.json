@@ -1,100 +1,123 @@
-
+[
   {
-    "time": "08:00",
-    "hour": 8, "minute": 0,
-    "full_sentence_de": "Es ist acht Uhr.",
-    "german_words": ["Es", "ist", "acht", "Uhr."],
-    "distractor_words": ["genau", "vor", "nach"]
+    "id": "time1",
+    "time": "08:15",
+    "hour": 8,
+    "minute": 15,
+    "formal_sentence": "Es ist acht Uhr fünfzehn.",
+    "colloquial_sentence": "Es ist Viertel nach acht.",
+    "formal_words": ["Es", "ist", "acht", "Uhr", "fünfzehn."],
+    "colloquial_words": ["Es", "ist", "Viertel", "nach", "acht."],
+    "distractor_words": ["vor", "neun", "halb"]
   },
   {
-    "time": "07:45",
-    "hour": 7, "minute": 45,
-    "full_sentence_de": "Es ist Viertel vor acht.",
-    "german_words": ["Es", "ist", "Viertel", "vor", "acht."],
-    "distractor_words": ["nach", "sieben", "Uhr"]
+    "id": "time2",
+    "time": "09:30",
+    "hour": 9,
+    "minute": 30,
+    "formal_sentence": "Es ist neun Uhr dreißig.",
+    "colloquial_sentence": "Es ist halb zehn.",
+    "formal_words": ["Es", "ist", "neun", "Uhr", "dreißig."],
+    "colloquial_words": ["Es", "ist", "halb", "zehn."],
+    "distractor_words": ["Viertel", "vor", "neun"]
   },
   {
-    "time": "09:15",
-    "hour": 9, "minute": 15,
-    "full_sentence_de": "Es ist Viertel nach neun.",
-    "german_words": ["Es", "ist", "Viertel", "nach", "neun."],
-    "distractor_words": ["vor", "zehn", "Uhr"]
+    "id": "time3",
+    "time": "11:45",
+    "hour": 11,
+    "minute": 45,
+    "formal_sentence": "Es ist elf Uhr fünfundvierzig.",
+    "colloquial_sentence": "Es ist Viertel vor zwölf.",
+    "formal_words": ["Es", "ist", "elf", "Uhr", "fünfundvierzig."],
+    "colloquial_words": ["Es", "ist", "Viertel", "vor", "zwölf."],
+    "distractor_words": ["nach", "elf", "Uhr"]
   },
   {
-    "time": "10:30",
-    "hour": 10, "minute": 30,
-    "full_sentence_de": "Es ist halb elf.",
-    "german_words": ["Es", "ist", "halb", "elf."],
-    "distractor_words": ["zehn", "Uhr", "Viertel"]
-  },
-    {
-    "time": "02:30",
-    "hour": 2, "minute": 30,
-    "full_sentence_de": "Es ist halb drei.",
-    "german_words": ["Es", "ist", "halb", "drei."],
-    "distractor_words": ["zwei", "Uhr", "vor"]
-  },
-  {
-    "time": "05:05",
-    "hour": 5, "minute": 5,
-    "full_sentence_de": "Es ist fünf nach fünf.",
-    "german_words": ["Es", "ist", "fünf", "nach", "fünf."],
+    "id": "time4",
+    "time": "02:05",
+    "hour": 2,
+    "minute": 5,
+    "formal_sentence": "Es ist zwei Uhr fünf.",
+    "colloquial_sentence": "Es ist fünf nach zwei.",
+    "formal_words": ["Es", "ist", "zwei", "Uhr", "fünf."],
+    "colloquial_words": ["Es", "ist", "fünf", "nach", "zwei."],
     "distractor_words": ["vor", "Minuten", "kurz"]
   },
   {
-    "time": "06:55",
-    "hour": 6, "minute": 55,
-    "full_sentence_de": "Es ist fünf vor sieben.",
-    "german_words": ["Es", "ist", "fünf", "vor", "sieben."],
-    "distractor_words": ["nach", "sechs", "Minuten"]
+    "id": "time5",
+    "time": "06:50",
+    "hour": 6,
+    "minute": 50,
+    "formal_sentence": "Es ist sechs Uhr fünfzig.",
+    "colloquial_sentence": "Es ist zehn vor sieben.",
+    "formal_words": ["Es", "ist", "sechs", "Uhr", "fünfzig."],
+    "colloquial_words": ["Es", "ist", "zehn", "vor", "sieben."],
+    "distractor_words": ["nach", "sechs", "zwanzig"]
   },
   {
-    "time": "11:58",
-    "hour": 11, "minute": 58,
-    "full_sentence_de": "Es ist kurz vor zwölf.",
-    "german_words": ["Es", "ist", "kurz", "vor", "zwölf."],
-    "distractor_words": ["nach", "elf", "fast"]
-  },
-  {
-    "time": "01:02",
-    "hour": 1, "minute": 2,
-    "full_sentence_de": "Es ist kurz nach eins.",
-    "german_words": ["Es", "ist", "kurz", "nach", "eins."],
-    "distractor_words": ["vor", "zwei", "genau"]
-  },
-  {
-    "time": "03:20",
-    "hour": 3, "minute": 20,
-    "full_sentence_de": "Es ist zwanzig nach drei.",
-    "german_words": ["Es", "ist", "zwanzig", "nach", "drei."],
-    "distractor_words": ["zehn", "vor", "vier"]
+    "id": "time6",
+    "time": "04:20",
+    "hour": 4,
+    "minute": 20,
+    "formal_sentence": "Es ist vier Uhr zwanzig.",
+    "colloquial_sentence": "Es ist zwanzig nach vier.",
+    "formal_words": ["Es", "ist", "vier", "Uhr", "zwanzig."],
+    "colloquial_words": ["Es", "ist", "zwanzig", "nach", "vier."],
+    "distractor_words": ["zehn", "vor", "halb"]
   },
     {
-    "time": "03:40",
-    "hour": 3, "minute": 40,
-    "full_sentence_de": "Es ist zwanzig vor vier.",
-    "german_words": ["Es", "ist", "zwanzig", "vor", "vier."],
-    "distractor_words": ["nach", "drei", "zehn"]
+    "id": "time7",
+    "time": "07:40",
+    "hour": 7,
+    "minute": 40,
+    "formal_sentence": "Es ist sieben Uhr vierzig.",
+    "colloquial_sentence": "Es ist zwanzig vor acht.",
+    "formal_words": ["Es", "ist", "sieben", "Uhr", "vierzig."],
+    "colloquial_words": ["Es", "ist", "zwanzig", "vor", "acht."],
+    "distractor_words": ["nach", "sieben", "zehn"]
   },
   {
-    "time": "04:25",
-    "hour": 4, "minute": 25,
-    "full_sentence_de": "Es ist fünf vor halb fünf.",
-    "german_words": ["Es", "ist", "fünf", "vor", "halb", "fünf."],
-    "distractor_words": ["nach", "vier", "Uhr"]
+    "id": "time8",
+    "time": "01:25",
+    "hour": 1,
+    "minute": 25,
+    "formal_sentence": "Es ist ein Uhr fünfundzwanzig.",
+    "colloquial_sentence": "Es ist fünf vor halb zwei.",
+    "formal_words": ["Es", "ist", "ein", "Uhr", "fünfundzwanzig."],
+    "colloquial_words": ["Es", "ist", "fünf", "vor", "halb", "zwei."],
+    "distractor_words": ["nach", "eins", "Viertel"]
   },
   {
-    "time": "08:35",
-    "hour": 8, "minute": 35,
-    "full_sentence_de": "Es ist fünf nach halb neun.",
-    "german_words": ["Es", "ist", "fünf", "nach", "halb", "neun."],
-    "distractor_words": ["vor", "acht", "Minuten"]
+    "id": "time9",
+    "time": "05:35",
+    "hour": 5,
+    "minute": 35,
+    "formal_sentence": "Es ist fünf Uhr fünfunddreißig.",
+    "colloquial_sentence": "Es ist fünf nach halb sechs.",
+    "formal_words": ["Es", "ist", "fünf", "Uhr", "fünfunddreißig."],
+    "colloquial_words": ["Es", "ist", "fünf", "nach", "halb", "sechs."],
+    "distractor_words": ["vor", "fünf", "zehn"]
+  },
+  {
+    "id": "time10",
+    "time": "03:00",
+    "hour": 3,
+    "minute": 0,
+    "formal_sentence": "Es ist drei Uhr.",
+    "colloquial_sentence": "Es ist genau drei.",
+    "formal_words": ["Es", "ist", "drei", "Uhr."],
+    "colloquial_words": ["Es", "ist", "genau", "drei."],
+    "distractor_words": ["kurz", "vor", "nach"]
   },
     {
+    "id": "time11",
     "time": "12:00",
-    "hour": 12, "minute": 0,
-    "full_sentence_de": "Es ist zwölf Uhr.",
-    "german_words": ["Es", "ist", "zwölf", "Uhr."],
-    "distractor_words": ["Mittag", "genau", "kurz"]
+    "hour": 12,
+    "minute": 0,
+    "formal_sentence": "Es ist zwölf Uhr.",
+    "colloquial_sentence": "Es ist Mittag.",
+    "formal_words": ["Es", "ist", "zwölf", "Uhr."],
+    "colloquial_words": ["Es", "ist", "Mittag."],
+    "distractor_words": ["Mitternacht", "genau", "Viertel"]
   }
 ]
