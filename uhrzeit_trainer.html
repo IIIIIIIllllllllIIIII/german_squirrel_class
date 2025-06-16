@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>German Clock Trainer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: linear-gradient(to right top, #0575e6, #02b3e4, #00f2c1, #a8ff78, #f9f871);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; 
+            min-height: 100vh;
+            margin: 0;
+            padding: 24px; 
+            color: #374151; 
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent; 
+        }
+        .card {
+            background-color: white;
+            padding: 24px; 
+            border-radius: 20px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            text-align: center;
+            width: 100%;
+            max-width: 800px; 
+        }
+        @media (min-width: 768px) { .card { padding: 32px; } }
+
+        .mode-title { font-size: 1.75rem; font-weight: 700; color: #005c97; }
+        .mode-title-subtitle { font-size: 1rem; color: #363795; margin-bottom: 24px; }
+
+        .clock-and-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        #clock-canvas {
+            width: 100%;
+            max-width: 250px;
+            height: auto;
+            aspect-ratio: 1 / 1;
+        }
+
+        #digital-time-display {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #005c97;
+            background-color: #f0f9ff;
+            padding: 0.5rem 1.5rem;
+            border-radius: 12px;
+            border: 2px solid #e0f2fe;
+        }
+        
+        .drop-zone-container {
+            background-color: #eef2ff;
+            border: 2px dashed #a5b4fc;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            min-height: 60px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem; 
+            justify-content: flex-start;
+            align-items: center; 
+            margin-bottom: 1.5rem;
+        }
+        
+        .draggable-item-slot {
+            min-width: 80px;
+            height: 45px; 
+            background-color: #e0e7ff;
+            border: 1px solid #c7d2fe;
+            border-radius: 0.375rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.2s;
+        }
+        .draggable-item-slot.drag-over { background-color: #c7d2fe; border-color: #818cf8; }
+
+        .draggable-pool {
+            background-color: #f0f9ff;
+            border: 2px dashed #7dd3fc;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            min-height: 80px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem; 
+            justify-content: center;
+            align-items: center; 
+            margin-bottom: 1.5rem;
+        }
+
+        .draggable-item {
+            background-image: linear-gradient(to right, #6dd5ed 0%, #2193b0 100%);
+            color: white;
+            padding: 10px 18px; 
+            border-radius: 9999px; 
+            cursor: grab; 
+            font-weight: 600; 
+            font-size: 1rem; 
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); 
+            transition: all 0.2s ease-out; 
+            border: 2px solid #1c7c94; 
+            user-select: none;
+        }
+        .draggable-item:hover { transform: translateY(-2px) scale(1.05); }
+        .draggable-item.dragging { opacity: 0.6; transform: rotate(3deg); cursor: grabbing; }
+        .draggable-item.correct-in-slot { background-image: linear-gradient(to right, #86efac, #34d399); border-color: #10b981;}
+        .draggable-item.incorrect-in-slot { background-image: linear-gradient(to right, #fca5a5, #f87171); border-color: #ef4444;}
+        
+        .feedback-area { margin-top: 1.5rem; padding: 0.75rem; border-radius: 0.5rem; font-weight: 600; }
+        .feedback-area.success { background-color: #dcfce7; color: #166534; border: 1px solid #6ee7b7;} 
+        .feedback-area.error { background-color: #fee2e2; color: #991b1b; border: 1px solid #fca5a5;} 
+        
+        .btn { padding: 12px 24px; border-radius: 8px; font-size: 1rem; font-weight: 600; color: white; cursor: pointer; transition: all 0.3s ease; border: none; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); }
+        .btn:disabled { background-color: #d1d5db !important; color: #6b7280 !important; cursor: not-allowed; opacity: 0.7; }
+        .btn-primary { background-color: #0072ff; }
+        .btn-primary:hover:not(:disabled) { background-color: #005bb5; }
+        .btn-secondary { background-color: #64748b; } 
+        .btn-secondary:hover:not(:disabled) { background-color: #475569; } 
+        .hidden { display: none !important; }
+        .bottom-controls { margin-top: 1.5rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;}
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1 class="mode-title">Die Uhrzeit lernen</h1>
+        <p class="mode-title-subtitle">Telling Time / Decir la Hora</p>
+
+        <div class="clock-and-display">
+            <canvas id="clock-canvas" width="300" height="300"></canvas>
+            <div id="digital-time-display">00:00</div>
+        </div>
+
+        <div id="drop-zone-container" class="drop-zone-container"></div>
+        <div id="draggable-pool" class="draggable-pool"></div>
+        
+        <div id="feedback-message" class="feedback-area hidden"></div>
+        <div id="correct-sentence-feedback" class="text-green-700 font-semibold mt-2 hidden"></div>
+
+        <div class="bottom-controls">
+            <button id="check-answer-btn" class="btn btn-primary">Check Answer / Verificar</button>
+            <button id="next-task-btn" class="btn btn-secondary hidden">Next Time / Siguiente</button>
+            <a href="index.html" class="btn btn-secondary">Menu / Menú</a>
+        </div>
+    </div>
+
+    <script>
+        let allTasks = [];
+        let currentTask = null;
+        let shuffledTasks = [];
+        let draggedItem = null;
+
+        const canvas = document.getElementById('clock-canvas');
+        const ctx = canvas.getContext('2d');
+        const radius = canvas.height / 2;
+        ctx.translate(radius, radius);
+
+        const digitalTimeDisplayEl = document.getElementById('digital-time-display');
+        const dropZoneContainerEl = document.getElementById('drop-zone-container');
+        const draggablePoolEl = document.getElementById('draggable-pool');
+        const checkAnswerBtn = document.getElementById('check-answer-btn');
+        const nextTaskBtn = document.getElementById('next-task-btn');
+        const feedbackMessageEl = document.getElementById('feedback-message');
+        const correctSentenceFeedbackEl = document.getElementById('correct-sentence-feedback');
+
+        // --- Clock Drawing Functions ---
+        function drawClock() {
+            ctx.clearRect(-radius, -radius, canvas.width, canvas.height);
+            drawFace(ctx, radius);
+            drawNumbers(ctx, radius);
+        }
+
+        function drawFace(ctx, radius) {
+            ctx.beginPath();
+            ctx.arc(0, 0, radius * 0.95, 0, 2 * Math.PI);
+            ctx.fillStyle = 'white';
+            ctx.fill();
+            const grad = ctx.createRadialGradient(0, 0, radius * 0.85, 0, 0, radius * 1.05);
+            grad.addColorStop(0, '#e0f2fe');
+            grad.addColorStop(0.5, 'white');
+            grad.addColorStop(1, '#e0f2fe');
+            ctx.strokeStyle = grad;
+            ctx.lineWidth = radius * 0.1;
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(0, 0, radius * 0.05, 0, 2 * Math.PI);
+            ctx.fillStyle = '#333';
+            ctx.fill();
+        }
+
+        function drawNumbers(ctx, radius) {
+            ctx.font = radius * 0.15 + "px Inter, sans-serif";
+            ctx.textBaseline = "middle";
+            ctx.textAlign = "center";
+            for (let num = 1; num <= 12; num++) {
+                const ang = num * Math.PI / 6;
+                ctx.rotate(ang);
+                ctx.translate(0, -radius * 0.8);
+                ctx.rotate(-ang);
+                ctx.fillText(num.toString(), 0, 0);
+                ctx.rotate(ang);
+                ctx.translate(0, radius * 0.8);
+                ctx.rotate(-ang);
+            }
+        }
+
+        function drawTime(hour, minute) {
+            drawClock(); // Redraw face and numbers
+            // Hour hand
+            hour = hour % 12;
+            hour = (hour * Math.PI / 6) + (minute * Math.PI / (6 * 60));
+            drawHand(ctx, hour, radius * 0.5, radius * 0.07);
+            // Minute hand
+            minute = (minute * Math.PI / 30);
+            drawHand(ctx, minute, radius * 0.75, radius * 0.05);
+        }
+
+        function drawHand(ctx, pos, length, width) {
+            ctx.beginPath();
+            ctx.lineWidth = width;
+            ctx.lineCap = "round";
+            ctx.moveTo(0, 0);
+            ctx.rotate(pos);
+            ctx.lineTo(0, -length);
+            ctx.stroke();
+            ctx.rotate(-pos);
+        }
+
+        // --- Quiz Logic ---
+        async function loadTasks() {
+            try {
+                // FIX: Use a simple relative path for fetch, which is more robust.
+                const response = await fetch('uhrzeit_tasks.json');
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                allTasks = await response.json();
+                if (allTasks.length === 0) throw new Error("uhrzeit_tasks.json is empty or not found.");
+                shuffleArray(allTasks);
+                shuffledTasks = [...allTasks];
+                loadNextTask();
+            } catch (error) {
+                console.error("Could not load tasks:", error);
+                dropZoneContainerEl.innerHTML = `<p class="text-red-500 font-semibold">Error: Could not load tasks. Details: ${error.message}</p>`;
+            }
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function createDraggableItem(text) {
+            const item = document.createElement('div');
+            item.classList.add('draggable-item');
+            item.textContent = text;
+            item.draggable = true;
+            item.dataset.text = text;
+            item.addEventListener('dragstart', handleDragStart);
+            item.addEventListener('dragend', handleDragEnd);
+            item.addEventListener('touchstart', handleTouchStart, { passive: false });
+            return item;
+        }
+
+        function loadNextTask() {
+            if (shuffledTasks.length === 0) {
+                dropZoneContainerEl.innerHTML = `<p class="text-blue-700 font-semibold text-lg">Super! Alle Uhrzeiten geübt!</p>`;
+                draggablePoolEl.innerHTML = '';
+                digitalTimeDisplayEl.textContent = 'Done!';
+                checkAnswerBtn.classList.add('hidden');
+                nextTaskBtn.classList.add('hidden');
+                return;
+            }
+
+            currentTask = shuffledTasks.shift();
+            digitalTimeDisplayEl.textContent = currentTask.time;
+            drawTime(currentTask.hour, currentTask.minute);
+
+            dropZoneContainerEl.innerHTML = '';
+            currentTask.german_words.forEach(() => {
+                const slot = document.createElement('div');
+                slot.classList.add('draggable-item-slot');
+                slot.addEventListener('dragover', handleDragOver);
+                slot.addEventListener('drop', handleDrop);
+                dropZoneContainerEl.appendChild(slot);
+            });
+
+            draggablePoolEl.innerHTML = '';
+            const wordsToDrag = [...currentTask.german_words, ...currentTask.distractor_words];
+            shuffleArray(wordsToDrag);
+            wordsToDrag.forEach(word => draggablePoolEl.appendChild(createDraggableItem(word)));
+
+            feedbackMessageEl.classList.add('hidden');
+            correctSentenceFeedbackEl.classList.add('hidden');
+            checkAnswerBtn.classList.remove('hidden');
+            nextTaskBtn.classList.add('hidden');
+        }
+
+        // --- Drag and Drop Handlers ---
+        function handleDragStart(e) {
+            draggedItem = e.target;
+            setTimeout(() => e.target.classList.add('dragging'), 0);
+        }
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+        }
+        function handleDragOver(e) {
+            e.preventDefault();
+            const slot = e.target.closest('.draggable-item-slot');
+            if (slot && !slot.hasChildNodes()) {
+                slot.classList.add('drag-over');
+            }
+        }
+         dropZoneContainerEl.addEventListener('dragleave', (e) => {
+            if (e.target.classList.contains("draggable-item-slot")) {
+                 e.target.classList.remove("drag-over");
+            }
+        });
+        function handleDrop(e) {
+            e.preventDefault();
+            const slot = e.target.closest('.draggable-item-slot');
+            if (slot && !slot.hasChildNodes()) {
+                slot.appendChild(draggedItem);
+            }
+            slot.classList.remove('drag-over');
+        }
+         draggablePoolEl.addEventListener('dragover', e => e.preventDefault());
+         draggablePoolEl.addEventListener('drop', e => {
+            e.preventDefault();
+            draggablePoolEl.appendChild(draggedItem);
+        });
+
+        // --- Touch Handlers for Mobile ---
+        let activeTouchClone = null;
+        let touchOffsetX = 0, touchOffsetY = 0;
+        
+        function handleTouchStart(e) {
+            draggedItem = e.target.closest('.draggable-item');
+            if (draggedItem && e.cancelable) {
+                e.preventDefault();
+                activeTouchClone = draggedItem.cloneNode(true);
+                activeTouchClone.classList.add('dragging');
+                activeTouchClone.style.position = 'fixed';
+                activeTouchClone.style.pointerEvents = 'none';
+                activeTouchClone.style.zIndex = '1000';
+                document.body.appendChild(activeTouchClone);
+
+                const rect = draggedItem.getBoundingClientRect();
+                touchOffsetX = e.touches[0].clientX - rect.left;
+                touchOffsetY = e.touches[0].clientY - rect.top;
+                
+                activeTouchClone.style.left = (e.touches[0].clientX - touchOffsetX) + 'px';
+                activeTouchClone.style.top = (e.touches[0].clientY - touchOffsetY) + 'px';
+                draggedItem.style.opacity = '0.4';
+
+                document.addEventListener('touchmove', handleTouchMove, { passive: false });
+                document.addEventListener('touchend', handleTouchEnd, { once: true });
+            }
+        }
+        function handleTouchMove(e) {
+            if (activeTouchClone && e.cancelable) {
+                e.preventDefault();
+                let currentX = e.touches[0].clientX;
+                let currentY = e.touches[0].clientY;
+                activeTouchClone.style.left = (currentX - touchOffsetX) + 'px';
+                activeTouchClone.style.top = (currentY - touchOffsetY) + 'px';
+            }
+        }
+        function handleTouchEnd(e) {
+             document.querySelectorAll('.draggable-item-slot.drag-over').forEach(s => s.classList.remove('drag-over'));
+            if (activeTouchClone && draggedItem) {
+                activeTouchClone.style.display = 'none';
+                const elementBelow = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+                activeTouchClone.style.display = '';
+
+                let droppedSuccessfully = false;
+                const slot = elementBelow ? elementBelow.closest('.draggable-item-slot') : null;
+
+                if (slot && !slot.hasChildNodes()) {
+                    slot.appendChild(draggedItem);
+                    droppedSuccessfully = true;
+                } else if (elementBelow && elementBelow.closest('.draggable-pool')) {
+                    draggablePoolEl.appendChild(draggedItem);
+                    droppedSuccessfully = true;
+                }
+                
+                if (!droppedSuccessfully) {
+                     draggablePoolEl.appendChild(draggedItem);
+                }
+
+                draggedItem.style.opacity = '1';
+                if(activeTouchClone.parentNode) document.body.removeChild(activeTouchClone);
+            }
+            activeTouchClone = null; draggedItem = null;
+            document.removeEventListener('touchmove', handleTouchMove);
+        }
+        
+        // --- Answer Checking ---
+        checkAnswerBtn.addEventListener('click', () => {
+            const slots = dropZoneContainerEl.querySelectorAll('.draggable-item-slot');
+            let constructedSentence = Array.from(slots).map(slot => slot.firstChild ? slot.firstChild.dataset.text : '').join(' ');
+            let allSlotsFilled = Array.from(slots).every(slot => slot.firstChild);
+
+            if (!allSlotsFilled) {
+                feedbackMessageEl.textContent = "Please fill all blanks. / Por favor, llena todos los espacios.";
+                feedbackMessageEl.className = "feedback-area error";
+                feedbackMessageEl.classList.remove('hidden');
+                return;
+            }
+
+            const isCorrect = constructedSentence.trim() === currentTask.full_sentence_de.trim();
+            
+            slots.forEach(slot => {
+                const item = slot.firstChild;
+                if (item) {
+                    item.classList.toggle('correct-in-slot', isCorrect);
+                    item.classList.toggle('incorrect-in-slot', !isCorrect);
+                }
+            });
+
+            if (isCorrect) {
+                feedbackMessageEl.textContent = "Richtig! / Correct!";
+                feedbackMessageEl.className = "feedback-area success";
+                triggerConfetti();
+            } else {
+                feedbackMessageEl.textContent = "Leider nicht ganz richtig. / Not quite right.";
+                feedbackMessageEl.className = "feedback-area error";
+                correctSentenceFeedbackEl.textContent = `Correct Order: ${currentTask.full_sentence_de}`;
+                correctSentenceFeedbackEl.classList.remove('hidden');
+            }
+            
+            feedbackMessageEl.classList.remove('hidden');
+            checkAnswerBtn.classList.add('hidden');
+            nextTaskBtn.classList.remove('hidden');
+        });
+
+        nextTaskBtn.addEventListener('click', loadNextTask);
+        function triggerConfetti() { if (typeof confetti === 'function') confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } }); }
+
+        // --- Initial Load ---
+        loadTasks();
+
+    </script>
+</body>
+</html>
