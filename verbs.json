@@ -520,7 +520,7 @@
             "sie/Sie": "kaufen an"
         }
     },
-        {
+    {
         "id": "antworten",
         "infinitive": "antworten",
         "translation": "to answer",
@@ -780,5 +780,4 @@
             "sie/Sie": "zahlen"
         }
     }
-]
 ]
