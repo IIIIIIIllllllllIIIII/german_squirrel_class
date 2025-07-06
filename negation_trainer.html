@@ -112,6 +112,7 @@
             border-radius: 0.75rem;
             font-weight: 500;
             text-align: left;
+            line-height: 1.5;
         }
         .feedback-area.explanation {
             background-color: #fefce8; /* Yellow-50 */
@@ -119,6 +120,11 @@
             border: 1px solid #facc15; /* Yellow-400 */
         }
         .feedback-area strong { font-weight: 700; }
+        .feedback-area hr {
+            border-top: 1px solid #f59e0b; /* Amber-500 */
+            margin-top: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
 
         .btn {
             padding: 12px 24px; border-radius: 8px; font-size: 1rem; font-weight: 600;
@@ -266,8 +272,15 @@
                 selectedButton.classList.add('incorrect');
             }
 
-            // Show explanation
-            feedbackMessageEl.innerHTML = `<strong>Regel:</strong> ${currentTask.explanation}<br><strong>English:</strong> ${currentTask.translation_en}`;
+            // Show multilingual explanation
+            feedbackMessageEl.innerHTML = `
+                <strong>Regel:</strong> ${currentTask.explanation_de}<br>
+                <strong>Rule:</strong> ${currentTask.explanation_en}<br>
+                <strong>Regla:</strong> ${currentTask.explanation_es}
+                <hr>
+                <strong>EN:</strong> ${currentTask.translation_en}<br>
+                <strong>ES:</strong> ${currentTask.translation_es}
+            `;
             feedbackMessageEl.classList.remove('hidden');
             
             nextTaskBtn.classList.remove('hidden');
