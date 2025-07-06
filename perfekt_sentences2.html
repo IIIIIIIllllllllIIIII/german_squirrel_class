@@ -122,11 +122,15 @@
         .draggable-item-slot .draggable-item { 
             cursor: pointer; 
             position: relative;
+            pointer-events: auto;
         }
         .draggable-item-slot .draggable-item:hover { 
             transform: scale(1.1); 
             box-shadow: 0 0 0 3px #fbbf24, 0 10px 15px -3px rgba(0,0,0,0.1); /* Amber-400 border to indicate clickable */
-            background-image: linear-gradient(to right, #f59e0b 0%, #d97706 100%); /* Amber gradient on hover */
+            background-image: linear-gradient(to right, #f59e0b 0%, #d97706 100%) !important; /* Amber gradient on hover */
+        }
+        .draggable-item-slot .draggable-item:active {
+            transform: scale(0.95);
         }
 
         .feedback-area { margin-top: 1.5rem; padding: 1rem; border-radius: 0.75rem; font-weight: 600; }
@@ -337,8 +341,10 @@
                 return;
             }
 
-            // Normalize sentences for robust comparison
-            const normalize = (str) => str.replace(/\s+/g, ' ').trim().toLowerCase();
+            // Normalize sentences for robust comparison (ignore punctuation)
+            const normalize = (str) => str.replace(/\s+/g, ' ').trim().toLowerCase()
+                .replace(/[.!?]+\s*$/, '') // Remove trailing punctuation
+                .replace(/\s+([.!?])/g, '$1'); // Clean up spacing before punctuation
             const isCorrect = normalize(constructedSentence) === normalize(currentTask.full_sentence_de);
 
             // Provide visual feedback on each word
@@ -385,7 +391,7 @@
             item.addEventListener('dragstart', handleDragStart);
             item.addEventListener('dragend', handleDragEnd);
             item.addEventListener('touchstart', handleTouchStart, { passive: false });
-            item.addEventListener('click', handleItemClick);
+            item.addEventListener('click', handleItemClick, true); // Use capture phase
             return item;
         }
 
@@ -416,13 +422,15 @@
 
         // --- EVENT HANDLERS (DRAG & DROP + TOUCH) ---
         function handleItemClick(e) {
+            console.log('Item clicked!', e.currentTarget); // Debug log
             e.preventDefault();
             e.stopPropagation();
             
-            const item = e.target.closest('.draggable-item');
+            const item = e.currentTarget; // Use currentTarget instead of closest
             
             // If item is in a slot, move it back to the pool with animation
-            if (item && item.parentElement.classList.contains('draggable-item-slot')) {
+            if (item && item.parentElement && item.parentElement.classList.contains('draggable-item-slot')) {
+                console.log('Moving item back to pool'); // Debug log
                 const slot = item.parentElement;
                 
                 // Add a small animation effect
