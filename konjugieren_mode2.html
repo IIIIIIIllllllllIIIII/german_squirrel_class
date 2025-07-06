@@ -7,6 +7,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    
+    <script src="https://bernardo-castilho.github.io/DragDropTouch/DragDropTouch.js"></script>
+    
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -383,6 +386,14 @@
         }
 
         function handleClassicCheck() {
+            const actionButton = document.getElementById('action-button');
+            if (actionButton.textContent === "Next") {
+                currentIndex++;
+                displayClassicChallenge();
+                actionButton.onclick = handleClassicCheck; // Reset listener
+                return;
+            }
+
             const answerInputEl = document.getElementById('answer-input');
             const userAnswer = answerInputEl.value.trim();
             const isCorrect = userAnswer.toLowerCase() === currentCorrectAnswer.toLowerCase();
@@ -396,25 +407,20 @@
 
             if (isCorrect) {
                 triggerConfetti();
+                answerInputEl.disabled = true;
                 answerInputEl.classList.add('correct-flash');
                 setTimeout(() => {
                     currentIndex++;
                     displayClassicChallenge();
                     answerInputEl.classList.remove('correct-flash');
-                }, 1000);
+                }, 1200);
             } else {
                 answerInputEl.classList.add('incorrect-flash');
                 setTimeout(() => answerInputEl.classList.remove('incorrect-flash'), 500);
                 const answerRevealEl = document.getElementById('answer-reveal-container');
                 answerRevealEl.innerHTML = `Correct answer: <strong class="correct-form">${currentCorrectAnswer}</strong>`;
                 answerRevealEl.className = 'answer-reveal incorrect';
-                const actionButton = document.getElementById('action-button');
                 actionButton.textContent = "Next";
-                actionButton.onclick = () => {
-                    currentIndex++;
-                    displayClassicChallenge();
-                    actionButton.onclick = handleClassicCheck; // Reset listener
-                };
             }
         }
         
@@ -455,7 +461,6 @@
             }
 
             shuffleArray(formsToDrag);
-            // Remove duplicates
             new Set(formsToDrag).forEach(formText => {
                 const formDiv = document.createElement('div');
                 formDiv.className = 'lego-draggable-form';
@@ -478,7 +483,7 @@
                 const slotDiv = document.createElement('div');
                 slotDiv.className = 'lego-pronoun-slot';
                 if (quizSettings.tense === 'present') {
-                    slotDiv.innerHTML = `<span class="lego-pronoun-label">${pronounKey}</span><div class="lego-drop-box" data-pronoun="${pronounKey}" data-drop-type="verb"></div>`;
+                    slotDiv.innerHTML = `<span class="lego-pronoun-label">${pronounKey}</span><div class="lego-drop-box" data-pronoun="${pronounKey}"></div>`;
                 } else { // Perfekt
                     slotDiv.innerHTML = `
                         <span class="lego-pronoun-label">${pronounKey}</span>
@@ -489,12 +494,13 @@
                 container.appendChild(slotDiv);
             });
             container.querySelectorAll('.lego-drop-box').forEach(box => {
-                box.addEventListener('dragover', e => e.preventDefault());
+                box.addEventListener('dragover', e => { e.preventDefault(); e.target.classList.add('drag-over'); });
+                box.addEventListener('dragleave', e => e.target.classList.remove('drag-over'));
                 box.addEventListener('drop', handleLegoDrop);
-                // Allow items to be dragged back to the pool
-                box.addEventListener('click', e => {
+                box.addEventListener('click', e => { // Allow dragging back to pool
                     if (e.target.classList.contains('lego-draggable-form')) {
                         document.getElementById('forms-pool-lego').appendChild(e.target);
+                        e.target.parentElement.classList.remove('filled', 'correct', 'incorrect');
                     }
                 });
             });
@@ -503,9 +509,8 @@
         function handleLegoDrop(e) {
             e.preventDefault();
             const dropBox = e.target.closest('.lego-drop-box');
+            dropBox.classList.remove('drag-over');
             if (!dropBox || !lego_draggedFormElement) return;
-
-            // If box is already filled, swap items
             if (dropBox.hasChildNodes()) {
                 document.getElementById('forms-pool-lego').appendChild(dropBox.firstChild);
             }
@@ -517,21 +522,21 @@
             let allCorrect = true;
             document.querySelectorAll('.lego-drop-box').forEach(box => {
                 const droppedEl = box.firstChild;
+                let correctForm;
                 if (!droppedEl) {
                     allCorrect = false;
                     return;
                 }
+                
                 const targetPronoun = box.dataset.pronoun;
-                const dropType = box.dataset.dropType;
                 const droppedForm = droppedEl.dataset.formText;
-                let correctForm;
-
+                
                 if (quizSettings.tense === 'present') {
                     correctForm = verb.conjugations[targetPronoun];
                 } else {
+                    const dropType = box.dataset.dropType;
                     if (dropType === 'hilfsverb') {
-                        const hilfsverb = hilfsverbenData[verb.hilfsverb];
-                        correctForm = hilfsverb.conjugations[targetPronoun];
+                        correctForm = hilfsverbenData[verb.hilfsverb].conjugations[targetPronoun];
                     } else { // partizip
                         correctForm = verb.partizip_perfekt;
                     }
@@ -548,13 +553,15 @@
                 }
             });
 
-            userRoundData.push({ verb: verb.infinitive, isCorrect: allCorrect });
-
             if (allCorrect) {
                 triggerConfetti();
+                userRoundData.push({ verb: verb.infinitive, isCorrect: true });
+                document.getElementById('check-lego-btn').classList.add('hidden');
+                document.getElementById('next-verb-btn-lego').classList.remove('hidden');
+            } else {
+                userRoundData.push({ verb: verb.infinitive, isCorrect: false });
+                 // Allow user to try again or see the answer
             }
-            document.getElementById('check-lego-btn').classList.add('hidden');
-            document.getElementById('next-verb-btn-lego').classList.remove('hidden');
         }
 
         // --- Stats & Utility Functions ---
@@ -563,9 +570,8 @@
             legoModeCardEl.classList.add('hidden');
             statsDisplayCardEl.classList.remove('hidden');
             const correctCount = userRoundData.filter(r => r.isCorrect).length;
-            const total = userRoundData.length > 0 ? userRoundData.length : currentQuizData.length;
+            const total = userRoundData.length > 0 ? userRoundData.length : 0;
             document.getElementById('stats-summary').textContent = `You got ${correctCount} out of ${total} correct.`;
-            // Detailed review logic can be expanded here
         }
         function shuffleArray(array) { for (let i = array.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [array[i], array[j]] = [array[j], array[i]]; } }
         function triggerConfetti() { if (typeof confetti === 'function') { confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } }); } }
