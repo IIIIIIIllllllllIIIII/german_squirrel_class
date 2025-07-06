@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Erandi's Secret German Learning Cave</title>
+    <title>Erandis Secret German Squirrel Headquarters</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #252A34; /* Dark charcoal background from palette */
+            /* A dark, forest-like background */
+            background-color: #1a202c;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%232d3748' fill-opacity='0.4'%3E%3Cpath d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM40 1.41l-2.83 2.83-1.41-1.41L38.59 0H40v1.41z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -19,49 +21,49 @@
         }
         
         .main-card {
-            background-color: #2D333B; /* New dark card background */
-            padding: 3rem;
+            /* Styled to look like a dark wooden sign */
+            background-color: #4a3a2a;
+            background-image: linear-gradient(315deg, #4a3a2a 0%, #2c1e12 74%);
+            padding: 2rem;
             border-radius: 20px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border: 4px solid #6b4f34;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(0,0,0,0.5);
             text-align: center;
             width: 100%;
-            max-width: 900px; /* Adjusted width for columns */
-            position: relative; /* For positioning the background GIF */
-            overflow: hidden; /* To contain the GIF */
-        }
-
-        #background-gif {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.1; /* Makes the GIF a subtle background texture */
-            z-index: 1;
-        }
-
-        .card-content {
-            position: relative;
-            z-index: 2; /* Ensures content is on top of the GIF */
+            max-width: 1000px;
         }
         
+        .title-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
         .title {
+            font-family: 'Creepster', cursive;
             font-size: 2.5rem;
             font-weight: 700;
-            color: #FF2E63; /* Vibrant pink from palette */
-            margin-bottom: 1rem;
+            color: #fde68a; /* A gold/yellow color */
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .dancing-squirrel {
+            height: 60px;
+            width: auto;
         }
         
         .subtitle {
             font-size: 1.125rem;
-            color: #08D9D6; /* Bright cyan from palette */
+            color: #f7fafc;
             margin-bottom: 3rem;
+            text-shadow: 1px 1px 2px #000;
         }
 
         .columns-container {
             display: flex;
-            flex-direction: column; /* Default for mobile view */
+            flex-direction: column;
             gap: 2rem;
         }
 
@@ -70,246 +72,233 @@
             display: flex;
             flex-direction: column;
             gap: 1rem;
+            background: rgba(0,0,0,0.2);
+            padding: 1.5rem;
+            border-radius: 15px;
         }
         
         .level-title {
-            font-size: 2rem;
+            font-family: 'Creepster', cursive;
+            font-size: 2.5rem;
             font-weight: 600;
-            color: #EAEAEA; /* Changed to light gray for dark background */
+            color: #fde68a;
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
-            border-bottom: 2px solid #4A5568; /* Darker gray for the border */
+            border-bottom: 2px solid #6b4f34;
+            text-shadow: 2px 2px 4px #000;
         }
         
-        .quiz-link {
-            padding: 1rem 1.5rem;
+        .quiz-item-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background-color: rgba(255, 255, 255, 0.05);
             border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .quiz-item-container:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: scale(1.02);
+        }
+
+        .quiz-animation {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+
+        .quiz-link {
+            padding: 1rem;
             color: white;
             text-decoration: none;
-            transition: all 0.3s ease;
             display: block;
             line-height: 1.4;
             text-align: left;
-            position: relative;
-            overflow: hidden;
+            flex-grow: 1;
         }
 
         .main-title-lang {
             font-size: 1.125rem; 
             font-weight: 600;   
             display: block; 
-            margin-bottom: 0.3rem; 
+            margin-bottom: 0.3rem;
+            color: #fff;
         }
 
         .translation-lang {
             font-size: 0.8em; 
-            opacity: 0.9;   
+            opacity: 0.8;   
             display: block; 
             line-height: 1.3;
             font-weight: 400; 
-        }
-        
-        /* Thematic Colors */
-        .color-nouns { background-color: #9B59B6; } /* Purple */
-        .color-nouns:hover { background-color: #8E44AD; }
-
-        .color-verbs { background-color: #3498DB; } /* Blue */
-        .color-verbs:hover { background-color: #2980B9; }
-
-        .color-verbs-variant { background-color: #08D9D6; } /* Cyan from palette */
-        .color-verbs-variant:hover { background-color: #07C4C1; }
-
-        .color-sentences { background-color: #2ECC71; } /* Green */
-        .color-sentences:hover { background-color: #27AE60; }
-
-        .color-sentences-variant { background-color: #34495E; } /* Darker Blue/Gray */
-        .color-sentences-variant:hover { background-color: #2C3E50; }
-
-        .color-vocab { background-color: #F1C40F; } /* Yellow */
-        .color-vocab:hover { background-color: #F39C12; }
-
-        .color-vocab-variant { background-color: #E67E22; } /* Orange */
-        .color-vocab-variant:hover { background-color: #D35400; }
-
-        .color-special { background-color: #FF2E63; } /* Pink from palette */
-        .color-special:hover { background-color: #E82959; }
-
-        .quiz-link:hover {
-            transform: translateY(-3px); 
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); 
-        }
-
-        /* Styles for the animation on hover */
-        .quiz-link-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 0.4s ease-in-out;
-            z-index: 1;
-        }
-
-        .quiz-link:hover .quiz-link-bg {
-            opacity: 0.2;
-        }
-
-        .quiz-link-content {
-            position: relative;
-            z-index: 2;
-            text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.5);
         }
         
         @media (min-width: 768px) {
             .columns-container {
                 flex-direction: row;
             }
+            .title {
+                font-size: 3rem;
+            }
         }
         
         @media (max-width: 640px) {
-            .main-card { padding: 2rem; }
-            .title { font-size: 2rem; }
-            .level-title { font-size: 1.5rem; }
+            .main-card { padding: 1.5rem; }
+            .title { font-size: 1.8rem; }
+            .dancing-squirrel { height: 40px; }
+            .level-title { font-size: 2rem; }
             .main-title-lang { font-size: 1rem; }
             .translation-lang { font-size: 0.75em; }
-            .quiz-link { padding: 0.875rem 1rem; }
+            .quiz-link { padding: 0.875rem; }
+            .quiz-animation { width: 50px; height: 50px; }
         }
     </style>
 </head>
 <body>
     <div class="main-card">
-        <img id="background-gif" src="" alt="Dynamic background animation">
-        <div class="card-content">
-            <h1 class="title">German Learning Hub</h1>
-            <p class="subtitle">Choose a quiz to practice German / Elige un quiz para practicar alemán</p>
+        <div class="title-container">
+            <img src="animations/dance.webp" alt="Dancing Squirrel" class="dancing-squirrel">
+            <h1 class="title">Erandis Secret German Squirrel Headquarters</h1>
+            <img src="animations/dance.webp" alt="Dancing Squirrel" class="dancing-squirrel">
+        </div>
+        <p class="subtitle">Choose a quiz to practice German / Elige un quiz para practicar alemán</p>
+        
+        <div class="columns-container">
             
-            <div class="columns-container">
+            <div class="level-column">
+                <h2 class="level-title">A1.1</h2>
                 
-                <div class="level-column">
-                    <h2 class="level-title">A1.1</h2>
-                    
-                    <a href="artikel_mode.html" class="quiz-link color-nouns">
-                        <img src="animations/File 1.webp" alt="Animation for Article Quiz" class="quiz-link-bg">
-                        <div class="quiz-link-content">
-                            <span class="main-title-lang">Article Quiz (Der, Die, Das)</span>
-                            <span class="translation-lang">Learn the articles for different nouns / Aprende los artículos para diferentes sustantivos</span>
-                        </div>
-                    </a>
-                    <a href="akkusativ_nomativ.html" class="quiz-link color-nouns">
-                        <img src="animations/File 2.webp" alt="Animation for Accusative Trainer" class="quiz-link-bg">
-                        <div class="quiz-link-content">
-                            <span class="main-title-lang">Accusative Trainer</span>
-                            <span class="translation-lang">Learn and practice the accusative case / Aprende y practica el caso acusativo</span>
-                        </div>
-                    </a>
-                     <a href="negation_trainer.html" class="quiz-link color-special">
-                        <img src="animations/File 3.webp" alt="Animation for Negation Trainer" class="quiz-link-bg">
-                        <div class="quiz-link-content">
-                            <span class="main-title-lang">Negation Trainer (nicht/kein)</span>
-                            <span class="translation-lang">Learn to use 'nicht' and 'kein' correctly / Aprende a usar 'nicht' y 'kein' correctamente</span>
-                        </div>
-                    </a>
-                    <a href="konjugieren_mode.html" class="quiz-link color-verbs">
-                        <img src="animations/File 4.webp" alt="Animation for Verb Conjugation" class="quiz-link-bg">
-                        <div class="quiz-link-content">
-                            <span class="main-title-lang">Verb Conjugation</span>
-                            <span class="translation-lang">Learn how to conjugate important verbs / Aprende a conjugar verbos importantes</span>
-                        </div>
-                    </a>
-                    <a href="wfragen_mode.html" class="quiz-link color-sentences">
-                        <img src="animations/File 5.webp" alt="Animation for W-Questions" class="quiz-link-bg">
-                        <div class="quiz-link-content">
-                            <span class="main-title-lang">Building W-Questions</span>
-                            <span class="translation-lang">Get to know the W-Questions and build sentences / Conoce las Preguntas W y construye oraciones</span>
-                        </div>
-                    </a>
-                </div>
+                <a href="artikel_mode.html" class="quiz-item-container">
+                    <img class="quiz-animation" src="" alt="Quiz Animation">
+                    <div class="quiz-link">
+                        <span class="main-title-lang">Article Quiz (Der, Die, Das)</span>
+                        <span class="translation-lang">Learn the articles for different nouns / Aprende los artículos para diferentes sustantivos</span>
+                    </div>
+                </a>
+                <a href="akkusativ_nomativ.html" class="quiz-item-container">
+                    <img class="quiz-animation" src="" alt="Quiz Animation">
+                    <div class="quiz-link">
+                        <span class="main-title-lang">Accusative Trainer</span>
+                        <span class="translation-lang">Learn and practice the accusative case / Aprende y practica el caso acusativo</span>
+                    </div>
+                </a>
+                 <a href="negation_trainer.html" class="quiz-item-container">
+                    <img class="quiz-animation" src="" alt="Quiz Animation">
+                    <div class="quiz-link">
+                        <span class="main-title-lang">Negation Trainer (nicht/kein)</span>
+                        <span class="translation-lang">Learn to use 'nicht' and 'kein' correctly / Aprende a usar 'nicht' y 'kein' correctamente</span>
+                    </div>
+                </a>
+                <a href="konjugieren_mode.html" class="quiz-item-container">
+                    <img class="quiz-animation" src="" alt="Quiz Animation">
+                    <div class="quiz-link">
+                        <span class="main-title-lang">Verb Conjugation</span>
+                        <span class="translation-lang">Learn how to conjugate important verbs / Aprende a conjugar verbos importantes</span>
+                    </div>
+                </a>
+                <a href="wfragen_mode.html" class="quiz-item-container">
+                    <img class="quiz-animation" src="" alt="Quiz Animation">
+                    <div class="quiz-link">
+                        <span class="main-title-lang">Building W-Questions</span>
+                        <span class="translation-lang">Get to know the W-Questions and build sentences / Conoce las Preguntas W y construye oraciones</span>
+                    </div>
+                </a>
+            </div>
 
-                <div class="level-column">
-                    <h2 class="level-title">A1.2</h2>
+            <div class="level-column">
+                <h2 class="level-title">A1.2</h2>
 
-                    <a href="daily_routine_mode_lvl1.html" class="quiz-link color-sentences-variant">
-                        <img src="animations/File 6.webp" alt="Animation for Sentence Structure Easy" class="quiz-link-bg">
-                        <div class="quiz-link-content">
-                            <span class="main-title-lang">Sentence Structure (EASY MODE)</span>
-                            <span class="translation-lang">Practice the correct sentence structure (easy) / Practica la estructura correcta de las oraciones (fácil)</span>
-                        </div>
-                    </a>
-                    <a href="daily_routine_mode_lvl2.html" class="quiz-link color-sentences-variant">
-                        <img src="animations/File 7.webp" alt="Animation for Sentence Structure Pro" class="quiz-link-bg">
-                        <div class="quiz-link-content">
-                            <span class="main-title-lang">Sentence Structure (PRO MODE)</span>
-                            <span class="translation-lang">Practice the correct sentence structure (difficult) / Practica la estructura correcta de las oraciones (difícil)</span>
-                        </div>
-                    </a>
-                     <a href="perfekt_sentences.html" class="quiz-link color-sentences">
-                        <img src="animations/File 8.webp" alt="Animation for Perfekt Trainer Drag & Drop" class="quiz-link-bg">
-                        <div class="quiz-link-content">
-                            <span class="main-title-lang">Perfekt Trainer - DRAG & DROP</span>
-                            <span class="translation-lang">Build sentences with perfect tense / Construye frases con tiempo perfecto</span>
-                        </div>
-                    </a>
-                    <a href="perfekt_sentences_typing.html" class="quiz-link color-sentences">
-                        <img src="animations/File 9.webp" alt="Animation for Perfekt Trainer Typing" class="quiz-link-bg">
-                        <div class="quiz-link-content">
-                            <span class="main-title-lang">Perfekt Trainer - TYPING</span>
-                            <span class="translation-lang">Build sentences with perfect tense / Construye frases con tiempo perfecto</span>
-                        </div>
-                    </a>
-                    <a href="trennbare_verben_menu.html" class="quiz-link color-verbs-variant">
-                        <img src="animations/File 10.webp" alt="Animation for Separable Verbs" class="quiz-link-bg">
-                        <div class="quiz-link-content">
-                            <span class="main-title-lang">Separable Verbs / Verbos Separables</span>
-                            <span class="translation-lang">Learn and practice separable verbs / Aprende y practica los verbos separables</span>
-                        </div>
-                    </a>
-                    <a href="modalverb_trainer.html" class="quiz-link color-verbs">
-                        <img src="animations/File 11.webp" alt="Animation for Modalverb Trainer" class="quiz-link-bg">
-                        <div class="quiz-link-content">
-                            <span class="main-title-lang">Modalverb Trainer</span>
-                            <span class="translation-lang">Learn to use Modalverben with this trainer/ Aprenda a utilizar verbos modales con este entrenador</span>
-                        </div>
-                    </a>
-                    <a href="zeitangaben_trainer.html" class="quiz-link color-vocab">
-                        <img src="animations/File 12.webp" alt="Animation for Times, Days, Months" class="quiz-link-bg">
-                        <div class="quiz-link-content">
-                            <span class="main-title-lang">Times, Days, Months</span>
-                            <span class="translation-lang">Learn and practice times, days, and months / Aprende y practica tiempos, días y meses</span>
-                        </div>
-                    </a>
-                     <a href="uhrzeit_trainer.html" class="quiz-link color-vocab-variant">
-                        <img src="animations/File 13.webp" alt="Animation for Clock Trainer" class="quiz-link-bg">
-                        <div class="quiz-link-content">
-                            <span class="main-title-lang">Clock Trainer / Entrenador de Reloj</span>
-                            <span class="translation-lang">Learn to tell time with an interactive clock / Aprende a decir la hora con un reloj interactivo</span>
-                        </div>
-                    </a>
-                </div>
-
+                <a href="daily_routine_mode_lvl1.html" class="quiz-item-container">
+                    <img class="quiz-animation" src="" alt="Quiz Animation">
+                    <div class="quiz-link">
+                        <span class="main-title-lang">Sentence Structure (EASY MODE)</span>
+                        <span class="translation-lang">Practice the correct sentence structure (easy) / Practica la estructura correcta de las oraciones (fácil)</span>
+                    </div>
+                </a>
+                <a href="daily_routine_mode_lvl2.html" class="quiz-item-container">
+                    <img class="quiz-animation" src="" alt="Quiz Animation">
+                    <div class="quiz-link">
+                        <span class="main-title-lang">Sentence Structure (PRO MODE)</span>
+                        <span class="translation-lang">Practice the correct sentence structure (difficult) / Practica la estructura correcta de las oraciones (difícil)</span>
+                    </div>
+                </a>
+                 <a href="perfekt_sentences.html" class="quiz-item-container">
+                    <img class="quiz-animation" src="" alt="Quiz Animation">
+                    <div class="quiz-link">
+                        <span class="main-title-lang">Perfekt Trainer - DRAG & DROP</span>
+                        <span class="translation-lang">Build sentences with perfect tense / Construye frases con tiempo perfecto</span>
+                    </div>
+                </a>
+                <a href="perfekt_sentences_typing.html" class="quiz-item-container">
+                    <img class="quiz-animation" src="" alt="Quiz Animation">
+                    <div class="quiz-link">
+                        <span class="main-title-lang">Perfekt Trainer - TYPING</span>
+                        <span class="translation-lang">Build sentences with perfect tense / Construye frases con tiempo perfecto</span>
+                    </div>
+                </a>
+                <a href="trennbare_verben_menu.html" class="quiz-item-container">
+                    <img class="quiz-animation" src="" alt="Quiz Animation">
+                    <div class="quiz-link">
+                        <span class="main-title-lang">Separable Verbs / Verbos Separables</span>
+                        <span class="translation-lang">Learn and practice separable verbs / Aprende y practica los verbos separables</span>
+                    </div>
+                </a>
+                <a href="modalverb_trainer.html" class="quiz-item-container">
+                    <img class="quiz-animation" src="" alt="Quiz Animation">
+                    <div class="quiz-link">
+                        <span class="main-title-lang">Modalverb Trainer</span>
+                        <span class="translation-lang">Learn to use Modalverben with this trainer/ Aprenda a utilizar verbos modales con este entrenador</span>
+                    </div>
+                </a>
+                <a href="zeitangaben_trainer.html" class="quiz-item-container">
+                    <img class="quiz-animation" src="" alt="Quiz Animation">
+                    <div class="quiz-link">
+                        <span class="main-title-lang">Times, Days, Months</span>
+                        <span class="translation-lang">Learn and practice times, days, and months / Aprende y practica tiempos, días y meses</span>
+                    </div>
+                </a>
+                 <a href="uhrzeit_trainer.html" class="quiz-item-container">
+                    <img class="quiz-animation" src="" alt="Quiz Animation">
+                    <div class="quiz-link">
+                        <span class="main-title-lang">Clock Trainer / Entrenador de Reloj</span>
+                        <span class="translation-lang">Learn to tell time with an interactive clock / Aprende a decir la hora con un reloj interactivo</span>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // --- Array of background GIFs ---
-            // --- Make sure these GIFs are in a 'backgrounds' folder ---
-            const backgroundGifs = [
-                'bg1.gif',
-                'bg2.gif',
-                'bg3.gif',
-                'bg4.gif',
-                'bg5.gif'
+            // --- Array of all your squirrel animations ---
+            const squirrelAnimations = [
+                'File 1.webp', 'File 2.webp', 'File 3.webp', 'File 4.webp', 'File 5.webp',
+                'File 6.webp', 'File 7.webp', 'File 8.webp', 'File 9.webp', 'File 10.webp',
+                'File 11.webp', 'File 12.webp', 'File 13.webp', 'File 14.webp', 'File 15.webp',
+                'File 16.webp', 'File 17.webp', 'File 18.webp', 'File 19.webp', 'File 20.webp',
+                'File 21.webp', 'File 22.webp', 'File 23.webp', 'File 24.webp', 'File 25.webp'
             ];
 
-            // --- Select a random GIF and set it as the source ---
-            const gifElement = document.getElementById('background-gif');
-            if (gifElement) {
-                const randomGif = backgroundGifs[Math.floor(Math.random() * backgroundGifs.length)];
-                gifElement.src = 'backgrounds/' + randomGif;
+            // --- Shuffle the animation array for randomness ---
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
             }
+
+            shuffleArray(squirrelAnimations);
+
+            // --- Assign a unique random animation to each quiz item ---
+            const quizAnimationElements = document.querySelectorAll('.quiz-animation');
+            quizAnimationElements.forEach((imgElement, index) => {
+                // Loop through the shuffled array if there are more items than animations
+                const animationFile = squirrelAnimations[index % squirrelAnimations.length];
+                imgElement.src = 'animations/' + animationFile;
+            });
         });
     </script>
 </body>
