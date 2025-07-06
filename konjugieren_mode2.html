@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
     
+    <!-- Polyfill for iPad 1 and other old touch devices -->
     <script src="https://bernardo-castilho.github.io/DragDropTouch/DragDropTouch.js"></script>
     
     <style>
@@ -455,13 +456,22 @@
                 legoTitleEl.textContent = "LEGO Mode: Perfekt";
                 const correctHilfsverb = hilfsverbenData[verb.hilfsverb];
                 const incorrectHilfsverb = verb.hilfsverb === 'haben' ? hilfsverbenData.sein : hilfsverbenData.haben;
-                formsToDrag.push(...Object.values(correctHilfsverb.conjugations));
-                formsToDrag.push(...Object.values(incorrectHilfsverb.conjugations)); // Add distractors
-                formsToDrag.push(verb.partizip_perfekt);
+                
+                // Get unique auxiliary verbs
+                const auxVerbs = new Set([
+                    ...Object.values(correctHilfsverb.conjugations),
+                    ...Object.values(incorrectHilfsverb.conjugations)
+                ]);
+                formsToDrag.push(...auxVerbs);
+
+                // Add one participle for each pronoun slot
+                for (let i = 0; i < pronouns.length; i++) {
+                    formsToDrag.push(verb.partizip_perfekt);
+                }
             }
 
             shuffleArray(formsToDrag);
-            new Set(formsToDrag).forEach(formText => {
+            formsToDrag.forEach(formText => {
                 const formDiv = document.createElement('div');
                 formDiv.className = 'lego-draggable-form';
                 formDiv.textContent = formText;
