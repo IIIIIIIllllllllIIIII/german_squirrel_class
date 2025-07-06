@@ -63,10 +63,11 @@
         }
         
         .subtitle {
-            font-size: 1.125rem;
+            font-size: 1.25rem; /* Slightly larger for better readability */
             color: #FFE3BB; /* Light orange from palette */
             margin-bottom: 3rem;
             text-shadow: 1px 1px 2px #000;
+            line-height: 1.6;
         }
 
         .columns-container {
@@ -178,7 +179,7 @@
             <h1 class="title">Erandis Secret German Squirrel Headquarters</h1>
         </div>
 
-        <p class="subtitle">Choose a quiz to practice German / Elige un quiz para practicar alemán</p>
+        <p id="welcome-message" class="subtitle"></p>
         
         <div class="columns-container">
             
@@ -286,6 +287,33 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // --- Welcome Messages ---
+            const welcomeMessages = [
+                "Welcome back, Erandi! The squirrels have gathered your lessons for the day!",
+                "Hello, Erandi! Ready to gather knowledge like a squirrel gathers nuts?",
+                "Erandi, the Chief Squirrel, has returned! Let's get learning!",
+                "It's a beautiful day to learn German, Erandi! The squirrels are excited to see you.",
+                "Welcome, Erandi! Let's go nuts for German grammar!",
+                "The Secret Squirrel Headquarters welcomes its leader, Erandi!",
+                "Hi Erandi! Your secret agents have prepared new German missions for you.",
+                "Glad you're here, Erandi! Time to climb the great tree of knowledge.",
+                "Welcome back to the squirrel den, Erandi! Let's crack these grammar nuts together.",
+                "Erandi, your squirrel squad is ready for today's German lesson!",
+                "A very nutty welcome to you, Erandi! Let the learning begin.",
+                "The squirrels missed you, Erandi! Welcome back to your headquarters.",
+                "Hello, Agent Erandi! Your next mission, should you choose to accept it, is to master German.",
+                "Welcome, Erandi! May your German skills grow as fast as a squirrel in a nut factory.",
+                "The council of squirrels has been awaiting your return, Erandi. Welcome!"
+            ];
+
+            const welcomeEl = document.getElementById('welcome-message');
+            if (welcomeEl) {
+                const randomMessage = welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)];
+                welcomeEl.innerHTML = randomMessage + "<br><span class='opacity-70'>Elige un quiz para practicar alemán</span>";
+            }
+
+
+            // --- Animations ---
             const squirrelAnimations = [
                 'File 1.webp', 'File 2.webp', 'File 3.webp', 'File 4.webp', 'File 5.webp',
                 'File 6.webp', 'File 7.webp', 'File 8.webp', 'File 9.webp', 'File 10.webp',
