@@ -112,26 +112,7 @@
         .draggable-item-slot .draggable-item:hover { 
             transform: scale(1.1); 
             box-shadow: 0 0 0 3px #fbbf24, 0 10px 15px -3px rgba(0,0,0,0.1); /* Amber-400 border to indicate clickable */
-        }
-        .draggable-item-slot .draggable-item:before {
-            content: "✕";
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #ef4444;
-            color: white;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-        .draggable-item-slot .draggable-item:hover:before {
-            opacity: 1;
+            background-image: linear-gradient(to right, #f59e0b 0%, #d97706 100%); /* Amber gradient on hover */
         }
 
         .feedback-area { margin-top: 1.5rem; padding: 0.75rem; border-radius: 0.5rem; font-weight: 600; }
@@ -181,7 +162,7 @@
         
         <div class="help-tip">
             <span>💡</span>
-            <span><strong>Tip:</strong> Click on any word in the sentence above to remove it and try again!</span>
+            <span><strong>Tip:</strong> Click on any word bubble in the sentence above to remove it and try again!</span>
         </div>
 
         <div id="draggable-pool" class="draggable-pool">
