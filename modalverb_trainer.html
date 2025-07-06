@@ -293,8 +293,10 @@
                 return;
             }
 
-            // Normalize sentences for robust comparison
-            const normalize = (str) => str.replace(/\s+/g, ' ').trim().toLowerCase().replace(' ?', '?');
+            // Normalize sentences for robust comparison (ignore punctuation)
+            const normalize = (str) => str.replace(/\s+/g, ' ').trim().toLowerCase()
+                .replace(/[.!?]+\s*$/, '') // Remove trailing punctuation
+                .replace(/\s+([.!?])/g, '$1'); // Clean up spacing before punctuation
             const isCorrect = normalize(constructedSentence) === normalize(currentTask.full_sentence_de);
 
             // Provide visual feedback on each word
