@@ -52,7 +52,7 @@
         .radio-group label { margin-left: 8px; font-size: 1rem; color: #374151; cursor:pointer;}
         .radio-group input[type="radio"] { accent-color: #6d28d9; cursor:pointer;}
         
-        .verb-selection-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .verb-selection-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;}
         .verb-selection-controls button { font-size: 0.8rem; padding: 6px 10px; margin-top: 0;}
 
         #verb-box-selection-area {
@@ -138,7 +138,19 @@
         .correct-answer-stats { color: #059669; font-weight: bold; }
         .message { margin-top: 1rem; color: #ef4444; font-weight: 500; }
         #lego-mode-card h1 {font-size: 1.75rem; }
-        .lego-draggable-form { background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 100%); color: #374151; padding: 10px 20px; border-radius: 9999px; cursor: grab; font-weight: 600; font-size: 1.125rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); transition: all 0.2s ease-out; border: 2px solid transparent; user-select: none; -webkit-user-select: none; -ms-user-select: none;}
+        .lego-draggable-form { 
+            background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 100%); 
+            color: #374151; 
+            padding: 8px 16px;
+            border-radius: 9999px; 
+            cursor: grab; 
+            font-weight: 600; 
+            font-size: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); 
+            transition: all 0.2s ease-out; 
+            border: 2px solid transparent; 
+            user-select: none; -webkit-user-select: none; -ms-user-select: none;
+        }
         .lego-draggable-form.dragging { opacity: 0.6; transform: rotate(3deg) scale(0.95); cursor: grabbing; }
         .lego-pronoun-slot { background-color: #f9fafb; border-radius: 0.75rem; padding: 1rem; display: flex; align-items: center; border: 1px solid #e5e7eb; transition: box-shadow 0.3s; gap: 0.5rem; }
         .lego-pronoun-label { font-size: 1.125rem; font-weight: 600; color: #4b5563; margin-right: 1rem; min-width: 90px; text-align: right; }
@@ -184,6 +196,10 @@
                 <button id="select-all-verbs-btn" class="btn btn-sm btn-secondary">Select All</button>
                 <button id="deselect-all-verbs-btn" class="btn btn-sm btn-secondary">Deselect All</button>
             </div>
+            <div id="hilfsverb-filter-container" class="mt-2 hidden">
+                 <button id="select-haben-verbs-btn" class="btn btn-sm btn-primary">Only 'haben' Verbs</button>
+                 <button id="select-sein-verbs-btn" class="btn btn-sm btn-primary ml-2">Only 'sein' Verbs</button>
+            </div>
             <div id="verb-box-selection-area"></div>
         </div>
 
@@ -196,7 +212,6 @@
 
     <div id="trainer-card" class="card trainer-card-base hidden">
         <h1 id="trainer-title" class="text-2xl sm:text-3xl font-bold text-violet-700 mb-4">Verb Practice</h1>
-        <p id="trainer-instructions" class="text-gray-600 mb-6">Instructions</p>
         <div id="verb-container">
             <div class="verb-display" id="verb-infinitive">Verb</div>
             <div class="hilfsverb-display hidden" id="hilfsverb-display"></div>
@@ -257,6 +272,7 @@
         const trainerCardEl = document.getElementById('trainer-card');
         const legoModeCardEl = document.getElementById('lego-mode-card');
         const statsDisplayCardEl = document.getElementById('stats-display-card');
+        const hilfsverbFilterContainer = document.getElementById('hilfsverb-filter-container');
 
         // --- App Initialization ---
         async function loadAppData() {
@@ -355,17 +371,14 @@
             }
             const { verb, pronoun } = currentQuizData[currentIndex];
             const trainerTitleEl = document.getElementById('trainer-title');
-            const trainerInstructionsEl = document.getElementById('trainer-instructions');
             const hilfsverbDisplay = document.getElementById('hilfsverb-display');
             
             if (quizSettings.tense === 'present') {
                 trainerTitleEl.textContent = "Präsens Practice";
-                trainerInstructionsEl.textContent = "Type the correct present tense form.";
                 currentCorrectAnswer = verb.conjugations[pronoun];
                 hilfsverbDisplay.classList.add('hidden');
             } else { // Perfekt
                 trainerTitleEl.textContent = "Perfekt Tense Practice";
-                trainerInstructionsEl.textContent = "Type auxiliary verb + participle.";
                 const hilfsverb = hilfsverbenData[verb.hilfsverb];
                 const conjugatedHilfsverb = hilfsverb.conjugations[pronoun];
                 currentCorrectAnswer = `${conjugatedHilfsverb} ${verb.partizip_perfekt}`;
@@ -382,29 +395,18 @@
             answerInputEl.focus();
 
             document.getElementById('answer-reveal-container').classList.add('hidden');
-            document.getElementById('action-button').textContent = "Check Answer";
+            const actionButton = document.getElementById('action-button');
+            actionButton.textContent = "Check Answer";
+            actionButton.onclick = handleClassicCheck;
             document.getElementById('progress-indicator').textContent = `Question: ${currentIndex + 1} / ${currentQuizData.length}`;
         }
 
         function handleClassicCheck() {
-            const actionButton = document.getElementById('action-button');
-            if (actionButton.textContent === "Next") {
-                currentIndex++;
-                displayClassicChallenge();
-                actionButton.onclick = handleClassicCheck; // Reset listener
-                return;
-            }
-
             const answerInputEl = document.getElementById('answer-input');
             const userAnswer = answerInputEl.value.trim();
             const isCorrect = userAnswer.toLowerCase() === currentCorrectAnswer.toLowerCase();
 
-            userRoundData.push({
-                question: currentQuizData[currentIndex],
-                answer: userAnswer,
-                correctAnswer: currentCorrectAnswer,
-                isCorrect: isCorrect
-            });
+            userRoundData.push({ question: currentQuizData[currentIndex], answer: userAnswer, correctAnswer: currentCorrectAnswer, isCorrect: isCorrect });
 
             if (isCorrect) {
                 triggerConfetti();
@@ -421,7 +423,9 @@
                 const answerRevealEl = document.getElementById('answer-reveal-container');
                 answerRevealEl.innerHTML = `Correct answer: <strong class="correct-form">${currentCorrectAnswer}</strong>`;
                 answerRevealEl.className = 'answer-reveal incorrect';
+                const actionButton = document.getElementById('action-button');
                 actionButton.textContent = "Next";
+                actionButton.onclick = () => { currentIndex++; displayClassicChallenge(); };
             }
         }
         
@@ -455,16 +459,9 @@
             } else { // Perfekt
                 legoTitleEl.textContent = "LEGO Mode: Perfekt";
                 const correctHilfsverb = hilfsverbenData[verb.hilfsverb];
-                const incorrectHilfsverb = verb.hilfsverb === 'haben' ? hilfsverbenData.sein : hilfsverbenData.haben;
                 
-                // Get unique auxiliary verbs
-                const auxVerbs = new Set([
-                    ...Object.values(correctHilfsverb.conjugations),
-                    ...Object.values(incorrectHilfsverb.conjugations)
-                ]);
-                formsToDrag.push(...auxVerbs);
+                formsToDrag.push(...Object.values(correctHilfsverb.conjugations));
 
-                // Add one participle for each pronoun slot
                 for (let i = 0; i < pronouns.length; i++) {
                     formsToDrag.push(verb.partizip_perfekt);
                 }
@@ -478,6 +475,7 @@
                 formDiv.draggable = true;
                 formDiv.dataset.formText = formText;
                 formDiv.addEventListener('dragstart', e => { lego_draggedFormElement = e.target; });
+                formDiv.addEventListener('click', handleLegoClick);
                 formsPoolEl.appendChild(formDiv);
             });
             
@@ -503,28 +501,32 @@
                 }
                 container.appendChild(slotDiv);
             });
-            container.querySelectorAll('.lego-drop-box').forEach(box => {
-                box.addEventListener('dragover', e => { e.preventDefault(); e.target.classList.add('drag-over'); });
-                box.addEventListener('dragleave', e => e.target.classList.remove('drag-over'));
-                box.addEventListener('drop', handleLegoDrop);
-                box.addEventListener('click', e => { // Allow dragging back to pool
-                    if (e.target.classList.contains('lego-draggable-form')) {
-                        document.getElementById('forms-pool-lego').appendChild(e.target);
-                        e.target.parentElement.classList.remove('filled', 'correct', 'incorrect');
-                    }
-                });
+            container.querySelectorAll('.lego-drop-box, #forms-pool-lego').forEach(area => {
+                area.addEventListener('dragover', e => { e.preventDefault(); if(area.classList.contains('lego-drop-box')) area.classList.add('drag-over'); });
+                area.addEventListener('dragleave', e => { if(area.classList.contains('lego-drop-box')) area.classList.remove('drag-over'); });
+                area.addEventListener('drop', handleLegoDrop);
             });
         }
         
         function handleLegoDrop(e) {
             e.preventDefault();
-            const dropBox = e.target.closest('.lego-drop-box');
-            dropBox.classList.remove('drag-over');
-            if (!dropBox || !lego_draggedFormElement) return;
-            if (dropBox.hasChildNodes()) {
-                document.getElementById('forms-pool-lego').appendChild(dropBox.firstChild);
+            const dropTarget = e.target.closest('.lego-drop-box, #forms-pool-lego');
+            if (!dropTarget || !lego_draggedFormElement) return;
+            
+            if(dropTarget.classList.contains('lego-drop-box')) dropTarget.classList.remove('drag-over');
+            
+            if (dropTarget.hasChildNodes() && dropTarget.classList.contains('lego-drop-box')) {
+                document.getElementById('forms-pool-lego').appendChild(dropTarget.firstChild);
             }
-            dropBox.appendChild(lego_draggedFormElement);
+            dropTarget.appendChild(lego_draggedFormElement);
+        }
+
+        function handleLegoClick(e) {
+            const item = e.target.closest('.lego-draggable-form');
+            if (item && item.parentElement.classList.contains('lego-drop-box')) {
+                document.getElementById('forms-pool-lego').appendChild(item);
+                item.parentElement.classList.remove('filled', 'correct', 'incorrect');
+            }
         }
 
         function checkLegoAnswers() {
@@ -569,8 +571,7 @@
                 document.getElementById('check-lego-btn').classList.add('hidden');
                 document.getElementById('next-verb-btn-lego').classList.remove('hidden');
             } else {
-                userRoundData.push({ verb: verb.infinitive, isCorrect: false });
-                 // Allow user to try again or see the answer
+                // Do nothing, let user see mistakes and try again
             }
         }
 
@@ -580,7 +581,7 @@
             legoModeCardEl.classList.add('hidden');
             statsDisplayCardEl.classList.remove('hidden');
             const correctCount = userRoundData.filter(r => r.isCorrect).length;
-            const total = userRoundData.length > 0 ? userRoundData.length : 0;
+            const total = userRoundData.length;
             document.getElementById('stats-summary').textContent = `You got ${correctCount} out of ${total} correct.`;
         }
         function shuffleArray(array) { for (let i = array.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [array[i], array[j]] = [array[j], array[i]]; } }
@@ -595,13 +596,38 @@
             document.getElementById('deselect-all-verbs-btn').addEventListener('click', () => {
                 verbBoxSelectionAreaEl.querySelectorAll('.verb-select-box').forEach(box => box.classList.remove('selected'));
             });
+
+            document.querySelectorAll('input[name="tense-type"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    hilfsverbFilterContainer.classList.toggle('hidden', e.target.value !== 'perfekt');
+                });
+            });
+            document.getElementById('select-haben-verbs-btn').addEventListener('click', () => selectVerbsByHilfsverb('haben'));
+            document.getElementById('select-sein-verbs-btn').addEventListener('click', () => selectVerbsByHilfsverb('sein'));
+
+
             document.getElementById('action-button').addEventListener('click', handleClassicCheck);
-            document.getElementById('answer-input').addEventListener('keypress', e => { if (e.key === 'Enter') handleClassicCheck(); });
+            document.getElementById('answer-input').addEventListener('keypress', e => { if (e.key === 'Enter' && quizSettings.type === 'classic') handleClassicCheck(); });
             document.getElementById('stop-quiz-btn').addEventListener('click', showStats);
+            
             document.getElementById('check-lego-btn').addEventListener('click', checkLegoAnswers);
             document.getElementById('next-verb-btn-lego').addEventListener('click', () => { currentIndex++; displayLegoChallenge(); });
             document.getElementById('new-round-button').addEventListener('click', resetUI);
             document.getElementById('back-to-menu-lego').addEventListener('click', resetUI);
+        }
+
+        function selectVerbsByHilfsverb(hilfsverbToSelect) {
+            const allVerbBoxes = verbBoxSelectionAreaEl.querySelectorAll('.verb-select-box');
+            allVerbBoxes.forEach(box => box.classList.remove('selected')); 
+
+            const verbsToSelect = globalVerbsList.filter(verb => verb.hilfsverb === hilfsverbToSelect);
+            
+            verbsToSelect.forEach(verb => {
+                const boxToSelect = verbBoxSelectionAreaEl.querySelector(`[data-verb-id="${verb.id}"]`);
+                if (boxToSelect) {
+                    boxToSelect.classList.add('selected');
+                }
+            });
         }
         
         // --- Initial Application Start ---
