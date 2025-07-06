@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>German Time Words Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3e8ff;
+            background-image: linear-gradient(to right top, #283cd9, #5c6cf6, #8b9bfa, #b9cafa, #e3f2fe);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 16px;
+            color: #374151;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .card {
+            background-color: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            text-align: center;
+            width: 100%;
+            max-width: 700px;
+            position: relative;
+        }
+        .btn {
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            margin-top: 8px;
+        }
+        .btn-link { display: inline-block; text-decoration: none; }
+        .btn:disabled { background-color: #d1d5db !important; color: #6b7280 !important; cursor: not-allowed; box-shadow: none; opacity: 0.7; }
+        .btn:active:not(:disabled) { transform: translateY(1px); }
+        .btn-primary { background-color: #059669; }
+        .btn-primary:hover:not(:disabled) { background-color: #047857; }
+        .btn-secondary { background-color: #4f46e5; }
+        .btn-secondary:hover:not(:disabled) { background-color: #4338ca; }
+        .btn-choice { background-color: #1d4ed8; }
+        .btn-choice:hover:not(:disabled) { background-color: #1e40af; }
+        
+        .category-btn {
+            background-color: #f3f4f6;
+            color: #374151;
+            border: 2px solid #e5e7eb;
+            font-weight: 500;
+        }
+        .category-btn.selected {
+            background-color: #dbeafe;
+            color: #1e40af;
+            border-color: #3b82f6;
+            font-weight: 600;
+        }
+        .category-btn:hover:not(.selected) {
+            background-color: #e5e7eb;
+        }
+
+        #question-display{font-size:2rem;font-weight:700;color:#4a044e;margin-bottom:0.5rem;}
+        #multilang-translation-display {font-size: 1rem; color: #4b5563; font-style: italic; margin-top: 0.5rem; margin-bottom: 1rem; min-height: 40px; }
+        #hint-display{font-size:0.9rem;color:#6b7280;margin-bottom:2rem;min-height:40px; line-height: 1.4;}
+        .feedback-area{font-size:.95rem;font-weight:500;padding:12px;border-radius:8px;min-height:60px;margin-bottom:1rem;text-align:center}.feedback-area.correct{color:#065f46;background-color:#dcfce7;border:1px solid #bbf7d0;display:block!important}.feedback-area.incorrect{color:#b91c1c;background-color:#fee2e2;border:1px solid #fecaca;display:block!important}.feedback-area .correct-answer-text{font-weight:700}.detailed-results-list{margin-top:1rem;text-align:left;max-height:200px;overflow-y:auto;padding:.75rem;border:1px solid #e5e7eb;border-radius:8px;background-color:#f9fafb}.detailed-results-list h3{font-size:1.125rem;font-weight:600;margin-bottom:.75rem}.detailed-results-list ul{list-style:none;padding:0}.detailed-results-list li{margin-bottom:.75rem;padding:.5rem;border-radius:6px;font-size:.875rem}.result-correct{background-color:#ecfdf5;border-left:4px solid #10b981}.result-incorrect{background-color:#fff1f2;border-left:4px solid #f43f5e}.progress-text{margin-top:12px;font-size:.875rem;color:#6b7280}.hidden{display:none!important}
+        @media (max-width:640px){.card{padding:20px}.btn{padding:10px 16px;font-size:.9rem}#question-display{font-size:1.5rem}}
+    </style>
+</head>
+<body>
+    <div id="main-container" class="card">
+        <div id="mode-selection-screen" class="">
+            <h1 class="text-2xl sm:text-3xl font-bold text-blue-700 mb-4 text-center">German Time Words Quiz <br><span class="text-xl">Quiz de Palabras de Tiempo en Alemán</span></h1>
+            
+            <div class="mb-6">
+                <h2 class="text-lg font-semibold mb-3 text-gray-800">1. Choose your categories: <br><span class="font-medium">1. Elige tus categorías:</span></h2>
+                <div id="category-button-container" class="flex flex-wrap justify-center gap-3">
+                    </div>
+            </div>
+
+            <div class="pt-6 border-t border-gray-200">
+                <h2 class="text-lg font-semibold mb-2 text-gray-800">2. Start the Quiz: <br><span class="font-medium">2. Inicia el Quiz:</span></h2>
+                <button id="quiz-mode-btn" class="btn btn-primary text-lg w-full max-w-sm mx-auto">
+                    📝 Start Learning Quiz <br><span class="font-normal text-base">Iniciar Quiz de Aprendizaje</span>
+                </button>
+                <p id="quiz-summary" class="text-sm text-gray-500 mt-2 leading-tight"></p>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-gray-200">
+                <a href="index.html" class="btn btn-secondary btn-link">← Back to Main Menu <br><span class="font-normal">Volver al Menú Principal</span></a>
+            </div>
+        </div>
+
+        <div id="quiz-mode-screen" class="hidden">
+            <h1 class="text-2xl sm:text-3xl font-bold text-blue-700 mb-6 text-center">Question / Pregunta</h1>
+            <div id="question-area" class="mb-6">
+                 <p id="question-display" class="text-center" style="min-height: 60px;"></p>
+                 <div id="multilang-translation-display"></div>
+                 <div id="hint-display" class="text-center"></div>
+            </div>
+            <div id="choices-container" class="flex flex-wrap justify-center gap-4 mb-6"></div>
+            <div id="feedback-area" class="feedback-area hidden"></div>
+            <div id="detailed-results-list" class="detailed-results-list hidden"></div>
+            <div id="quiz-controls-area" class="text-center mt-4">
+                <button id="restart-quiz-btn" class="btn btn-secondary hidden">Start New Quiz / Empezar Nuevo Quiz</button>
+                <button id="back-to-menu-btn" class="btn btn-secondary mr-2">Quiz Menu / Menú del Quiz</button>
+                <a href="index.html" class="btn btn-secondary btn-link">Main Menu / Menú Principal</a>
+            </div>
+            <div id="progress-indicator" class="progress-text mt-4 text-center"></div>
+            <div id="score-indicator" class="progress-text mt-1 text-center"></div>
+        </div>
+    </div>
+    
+    <script>
+        let allQuestions = [];
+        let quizSettings = {};
+        let currentQuestionIndex, score, shuffledQuestions, answerSelected, autoAdvanceTimeout, userAnswers;
+
+        const elements = {
+            mainContainer: document.getElementById("main-container"),
+            backToMenuBtn: document.getElementById("back-to-menu-btn"),
+            choicesContainerEl: document.getElementById("choices-container"),
+            detailedResultsListEl: document.getElementById("detailed-results-list"),
+            feedbackAreaEl: document.getElementById("feedback-area"),
+            questionDisplayEl: document.getElementById("question-display"),
+            multilangTranslationDisplayEl: document.getElementById("multilang-translation-display"),
+            hintDisplayEl: document.getElementById("hint-display"),
+            progressIndicatorEl: document.getElementById("progress-indicator"),
+            quizModeBtn: document.getElementById("quiz-mode-btn"),
+            quizModeScreen: document.getElementById("quiz-mode-screen"),
+            restartQuizBtn: document.getElementById("restart-quiz-btn"),
+            scoreIndicatorEl: document.getElementById("score-indicator"),
+            categoryButtonContainer: document.getElementById("category-button-container"),
+            quizSummaryEl: document.getElementById("quiz-summary"),
+            questionArea: document.getElementById("question-area")
+        };
+        
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function triggerConfetti() { if (typeof confetti === 'function') confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } }); }
+        
+        function clearAutoAdvance(timeoutVar) { clearTimeout(timeoutVar); }
+
+        function loadSettings() {
+            const savedSettings = localStorage.getItem('timeQuizSettingsV4');
+            const defaultSettings = { categories: ['Wochentage', 'Monate'] };
+            quizSettings = savedSettings ? JSON.parse(savedSettings) : defaultSettings;
+        }
+
+        function saveSettings() {
+            localStorage.setItem('timeQuizSettingsV4', JSON.stringify(quizSettings));
+        }
+        
+        function populateCategoryButtons() {
+            const categories = [...new Set(allQuestions.map(q => q.category))].sort();
+            elements.categoryButtonContainer.innerHTML = '';
+            categories.forEach(cat => {
+                const button = document.createElement('button');
+                button.textContent = cat;
+                button.className = 'btn category-btn';
+                button.dataset.category = cat;
+                if (quizSettings.categories.includes(cat)) {
+                    button.classList.add('selected');
+                }
+                button.addEventListener('click', () => toggleCategorySelection(cat, button));
+                elements.categoryButtonContainer.appendChild(button);
+            });
+            updateQuizSummary();
+        }
+
+        function toggleCategorySelection(categoryName, buttonElement) {
+            const index = quizSettings.categories.indexOf(categoryName);
+            if (index > -1) {
+                if (quizSettings.categories.length > 1) {
+                    quizSettings.categories.splice(index, 1);
+                    buttonElement.classList.remove('selected');
+                } else {
+                    alert("Please keep at least one category selected.\nPor favor, mantén al menos una categoría seleccionada.");
+                }
+            } else {
+                quizSettings.categories.push(categoryName);
+                buttonElement.classList.add('selected');
+            }
+            saveSettings();
+            updateQuizSummary();
+        }
+        
+        // HIER WURDE DIE FUNKTION ÜBERSETZT
+        function updateQuizSummary() {
+            const questionCount = getFilteredQuestions().length;
+            const catCount = quizSettings.categories.length;
+            const catStringEn = catCount === 1 ? "category" : "categories";
+            const catStringEs = catCount === 1 ? "categoría" : "categorías";
+
+            const summaryText = `
+                Start the quiz with ${questionCount} questions from ${catCount} ${catStringEn}.
+                <br>
+                Inicia el quiz con ${questionCount} preguntas de ${catCount} ${catStringEs}.
+            `;
+            elements.quizSummaryEl.innerHTML = summaryText;
+        }
+
+        async function loadQuizData() {
+            try {
+                const response = await fetch('zeitangaben.json');
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                allQuestions = await response.json();
+            } catch (error) {
+                console.error("Could not load quiz data:", error);
+                elements.mainContainer.innerHTML = `<div class="text-center"><h1 class="text-2xl font-bold text-red-600 mb-4">Error Loading Data</h1><p class="mb-2">Quiz data (german_time.json) not found or corrupted.</p><p class="text-sm text-gray-700 mb-4">Details: ${error.message}</p><p class="text-xs text-gray-500">Please ensure 'german_time.json' is in the same directory as the HTML file.</p><button onclick="location.reload()" class="btn btn-primary mt-4">Reload</button></div>`;
+                throw new Error("Failed to load quiz data. Halting execution.");
+            }
+        }
+        
+        function getFilteredQuestions() {
+            return allQuestions.filter(q => quizSettings.categories.includes(q.category));
+        }
+
+        function showModeSelection() {
+            updateQuizSummary();
+            document.getElementById('mode-selection-screen').classList.remove('hidden');
+            elements.quizModeScreen.classList.add('hidden');
+        }
+        
+        function showQuizMode() {
+            shuffledQuestions = getFilteredQuestions();
+            if (shuffledQuestions.length === 0) {
+                alert("Please select at least one category to start the quiz.\nPor favor, selecciona al menos una categoría para iniciar el quiz.");
+                return;
+            }
+            shuffleArray(shuffledQuestions);
+            document.getElementById('mode-selection-screen').classList.add('hidden');
+            elements.quizModeScreen.classList.remove('hidden');
+            startQuiz();
+        }
+
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            userAnswers = [];
+            elements.detailedResultsListEl.classList.add('hidden');
+            clearAutoAdvance(autoAdvanceTimeout);
+            elements.feedbackAreaEl.className = "feedback-area hidden";
+            elements.restartQuizBtn.classList.add('hidden');
+            elements.questionArea.classList.remove("hidden");
+            elements.choicesContainerEl.classList.remove("hidden");
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            answerSelected = false;
+            clearAutoAdvance(autoAdvanceTimeout);
+            if (currentQuestionIndex < shuffledQuestions.length) {
+                const question = shuffledQuestions[currentQuestionIndex];
+                elements.questionDisplayEl.textContent = question.question;
+                
+                const translationContainer = elements.multilangTranslationDisplayEl;
+                translationContainer.innerHTML = '';
+                if (question.en_translation || question.es_mx_translation) {
+                    translationContainer.innerHTML = `
+                        <span class="block">${question.en_translation || ''}</span>
+                        <span class="block">${question.es_mx_translation || ''}</span>
+                    `;
+                }
+                
+                const hintContainer = elements.hintDisplayEl;
+                hintContainer.innerHTML = '';
+                if (question.hint && question.hint.de) {
+                    hintContainer.innerHTML = `
+                        <span class="block font-semibold">${question.hint.de}</span>
+                        <span class="block text-xs text-gray-500">${question.hint.en || ''}</span>
+                        <span class="block text-xs text-gray-500">${question.hint.es_mx || ''}</span>
+                    `;
+                }
+                
+                elements.feedbackAreaEl.className = "feedback-area hidden";
+
+                const choices = shuffleArray([...question.distractors, question.answer]);
+                elements.choicesContainerEl.innerHTML = '';
+                choices.forEach(choice => {
+                    const button = document.createElement('button');
+                    button.textContent = choice;
+                    button.className = 'btn btn-choice';
+                    button.onclick = () => handleAnswer(choice);
+                    elements.choicesContainerEl.appendChild(button);
+                });
+                
+                updateProgress();
+            } else {
+                showResults();
+            }
+        }
+        
+        function handleAnswer(selectedAnswer) {
+            if (answerSelected) return;
+            answerSelected = true;
+            const question = shuffledQuestions[currentQuestionIndex];
+            const isCorrect = selectedAnswer === question.answer; 
+            userAnswers.push({ question: JSON.parse(JSON.stringify(question)), userAnswer: selectedAnswer, isCorrect: isCorrect }); 
+            elements.feedbackAreaEl.classList.remove("hidden"); 
+            if (isCorrect) { 
+                score++; 
+                elements.feedbackAreaEl.innerHTML = `Correct! <span class="correct-answer-text">${question.answer}</span><br>¡Correcto!`; 
+                elements.feedbackAreaEl.className = "feedback-area correct"; 
+                triggerConfetti(); 
+            } else { 
+                elements.feedbackAreaEl.innerHTML = `Incorrect. The right answer is: <span class="correct-answer-text">${question.answer}</span><br>Incorrecto. La respuesta correcta es: <span class="correct-answer-text">${question.answer}</span>`; 
+                elements.feedbackAreaEl.className = "feedback-area incorrect"; 
+            } 
+            const buttons = elements.choicesContainerEl.querySelectorAll('button'); 
+            buttons.forEach(btn => { 
+                btn.disabled = true; 
+                const isSelectedButton = btn.textContent === selectedAnswer; 
+                const isCorrectButton = btn.textContent === question.answer; 
+                if (isSelectedButton) { 
+                    btn.classList.add(isCorrect ? "bg-green-600" : "bg-red-600"); 
+                } else if (isCorrectButton) { 
+                    btn.classList.add("bg-green-400"); 
+                } else { 
+                    btn.classList.add("opacity-50"); 
+                } 
+            }); 
+            updateProgress(); 
+            currentQuestionIndex++; 
+            autoAdvanceTimeout = setTimeout( currentQuestionIndex < shuffledQuestions.length ? loadQuestion : showResults, 2500 ); 
+        }
+
+        function updateProgress() {
+            const q_en = "Question", q_es = "Pregunta";
+            const s_en = "Score", s_es = "Puntos";
+            elements.progressIndicatorEl.innerHTML = `${q_en}: ${Math.min(currentQuestionIndex + 1, shuffledQuestions.length)} / ${shuffledQuestions.length}<br>${q_es}: ${Math.min(currentQuestionIndex + 1, shuffledQuestions.length)} / ${shuffledQuestions.length}`;
+            elements.scoreIndicatorEl.innerHTML = `${s_en}: ${score} / ${userAnswers.length}<br>${s_es}: ${score} / ${userAnswers.length}`;
+        }
+        
+        function showResults() {
+            clearAutoAdvance(autoAdvanceTimeout);
+            elements.questionArea.classList.add("hidden");
+            elements.choicesContainerEl.classList.add("hidden");
+            elements.feedbackAreaEl.classList.remove("hidden");
+            elements.feedbackAreaEl.className = "feedback-area correct";
+            const questionsAnswered = userAnswers.length;
+            elements.feedbackAreaEl.innerHTML = `Quiz finished! Final score: <strong class="text-2xl">${score}</strong> / ${questionsAnswered}<br>¡Quiz terminado! Resultado final: <strong class="text-2xl">${score}</strong> / ${questionsAnswered}`;
+            let resultsHTML = `<h3>Your Answers in Detail / Tus Respuestas en Detalle:</h3><ul>`;
+            userAnswers.forEach(ans => {
+                resultsHTML += `<li class="${ans.isCorrect ? "result-correct" : "result-incorrect"}">`;
+                resultsHTML += `<strong>Q:</strong> "${ans.question.question}"<br>`;
+                if (ans.isCorrect) {
+                    resultsHTML += `<span class="text-green-700 font-semibold">Correct as "${ans.userAnswer}" / Correcto como "${ans.userAnswer}"</span>`;
+                } else {
+                    resultsHTML += `<span class="text-red-700">You: "${ans.userAnswer}". Correct:</span> <strong class="text-blue-600">"${ans.question.answer}"</strong>.<br><span class="text-red-700">Tú: "${ans.userAnswer}". Correcto:</span> <strong class="text-blue-600">"${ans.question.answer}"</strong>.`;
+                }
+                resultsHTML += `</li>`;
+            });
+            resultsHTML += "</ul>";
+            elements.detailedResultsListEl.innerHTML = resultsHTML;
+            elements.detailedResultsListEl.classList.remove("hidden");
+            elements.progressIndicatorEl.textContent = "Quiz Finished / Quiz Terminado";
+            elements.scoreIndicatorEl.textContent = `Final Score: ${score} / ${questionsAnswered} / Puntuación Final: ${score} / ${questionsAnswered}`;
+            elements.restartQuizBtn.classList.remove("hidden");
+        }
+        
+        async function initialSetup() {
+            elements.quizModeBtn.disabled = true;
+            const loadingMsg = document.createElement('p');
+            loadingMsg.id = 'loading-msg';
+            loadingMsg.textContent = "Loading Quiz Data... / Cargando Datos del Quiz...";
+            loadingMsg.className = 'text-lg text-gray-600 my-4';
+            document.getElementById('mode-selection-screen').querySelector('#category-button-container').insertAdjacentElement('beforebegin', loadingMsg);
+            
+            await loadQuizData();
+            
+            const msg = document.getElementById('loading-msg');
+            if (msg) msg.remove();
+            
+            loadSettings();
+            populateCategoryButtons();
+
+            elements.quizModeBtn.disabled = false;
+            showModeSelection();
+        }
+        
+        elements.quizModeBtn.addEventListener("click", showQuizMode);
+        elements.restartQuizBtn.addEventListener("click", startQuiz);
+        elements.backToMenuBtn.addEventListener("click", showModeSelection);
+        
+        initialSetup();
+    </script>
+</body>
+</html>

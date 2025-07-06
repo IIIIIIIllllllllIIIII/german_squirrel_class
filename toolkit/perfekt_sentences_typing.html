@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Perfekt Sentence Practice (Typing)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: linear-gradient(to right top, #dbeafe, #a5b4fc, #a78bfa, #a7f3d0, #fde68a); /* Blue to Purple to Green to Yellow */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 24px;
+            color: #374151;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .card {
+            background-color: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            text-align: center;
+            width: 100%;
+            max-width: 900px;
+        }
+        @media (min-width: 768px) { .card { padding: 32px; } }
+
+        .mode-title { font-size: 1.875rem; font-weight: 700; color: #4338ca; margin-bottom: 4px; } /* Indigo-700 */
+        .mode-title-subtitle { font-size: 1.125rem; color: #4f46e5; margin-bottom: 24px; } /* Indigo-600 */
+
+        .reference-sentences {
+            background-color: #eef2ff; /* Indigo-50 */
+            padding: 1.25rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #e0e7ff; /* Indigo-100 */
+            text-align: left;
+        }
+        .reference-sentences p { margin-bottom: 0.5rem; color: #3730a3; /* Indigo-800 */ }
+        .reference-sentences strong { color: #312e81; /* Indigo-900 */ }
+
+        .progress-indicator {
+            background-color: #e0e7ff; /* Indigo-100 */
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: #4f46e5; /* Indigo-600 */
+            border: 1px solid #c7d2fe; /* Indigo-200 */
+        }
+
+        .typing-area-container {
+            margin-bottom: 1.5rem;
+        }
+        #sentence-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1.125rem;
+            border-radius: 0.5rem;
+            border: 2px solid #c7d2fe; /* Indigo-200 */
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        #sentence-input:focus {
+            outline: none;
+            border-color: #6366f1; /* Indigo-500 */
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+        }
+        #sentence-input.correct {
+             border-color: #22c55e; /* Green-500 */
+             background-color: #f0fdf4; /* Green-50 */
+        }
+        #sentence-input.incorrect {
+            border-color: #ef4444; /* Red-500 */
+            background-color: #fef2f2; /* Red-50 */
+        }
+
+
+        .word-pool-reference {
+            background-color: #faf5ff; /* Purple-50 */
+            border: 2px dashed #e9d5ff; /* Purple-200 */
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            min-height: 100px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .word-item {
+            background-image: linear-gradient(to right, #c084fc 0%, #a855f7 100%); /* Purple shades */
+            color: #faf5ff; /* Purple-25 */
+            padding: 8px 14px;
+            border-radius: 9999px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            user-select: none; -webkit-user-select: none; -ms-user-select: none;
+            text-align: center;
+            min-width: 45px;
+        }
+        
+        .help-tip {
+            background-color: #fefce8; /* Yellow-50 */
+            border: 1px solid #facc15; /* Yellow-400 */
+            color: #854d0e; /* Yellow-800 */
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feedback-area { margin-top: 1.5rem; padding: 1rem; border-radius: 0.75rem; font-weight: 600; }
+        .feedback-area.success { background-color: #dcfce7; color: #166534; border: 1px solid #6ee7b7;}
+        .feedback-area.error { background-color: #fee2e2; color: #991b1b; border: 1px solid #fca5a5;}
+
+        .btn {
+            padding: 12px 24px; border-radius: 8px; font-size: 1rem; font-weight: 600;
+            color: white; cursor: pointer; transition: all 0.3s ease;
+            border: none; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            margin-top: 16px;
+        }
+        .btn:disabled { background-color: #d1d5db !important; color: #6b7280 !important; cursor: not-allowed; opacity: 0.7; }
+        .btn-primary { background-color: #4f46e5; } /* Indigo-600 */
+        .btn-primary:hover:not(:disabled) { background-color: #4338ca; } /* Indigo-700 */
+        .btn-secondary { background-color: #64748b; }
+        .btn-secondary:hover:not(:disabled) { background-color: #475569; }
+        .btn-success { background-color: #059669; }
+        .btn-success:hover:not(:disabled) { background-color: #047857; }
+        .hidden { display: none !important; }
+        .bottom-controls { margin-top: 1.5rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;}
+
+        .completion-message {
+            background-color: #ecfdf5; /* Green-50 */
+            border: 2px solid #6ee7b7; /* Green-300 */
+            color: #047857; /* Green-800 */
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 640px) {
+            .card { padding: 16px; }
+            .mode-title { font-size: 1.5rem; }
+            .mode-title-subtitle { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1 class="mode-title">Perfekt Sentence Practice (Typing)</h1>
+        <p class="mode-title-subtitle">Type the German sentence in Perfekt tense</p>
+
+        <div id="progress-container" class="progress-indicator">
+            <span id="progress-text">Sentence 1 of 20</span>
+        </div>
+
+        <div id="reference-sentences-container" class="reference-sentences">
+            <p><strong>English:</strong> <span id="ref-en">English sentence will appear here.</span></p>
+            <p><strong>Type the German Perfekt sentence below:</strong></p>
+        </div>
+
+        <div id="typing-area-container" class="typing-area-container">
+            <input type="text" id="sentence-input" placeholder="Type your sentence here..." autocomplete="off">
+        </div>
+
+        <div class="help-tip">
+            <span>💡</span>
+            <span><strong>Tip:</strong> Use the words below as a reference. Remember to include punctuation!</span>
+        </div>
+
+        <div id="word-pool-reference" class="word-pool-reference">
+            </div>
+
+        <div id="feedback-message" class="feedback-area hidden"></div>
+        <div id="correct-sentence-feedback" class="text-green-700 font-semibold mt-2 hidden"></div>
+
+        <div class="bottom-controls">
+            <button id="check-answer-btn" class="btn btn-primary">Check Answer</button>
+            <button id="next-task-btn" class="btn btn-success hidden">Next Sentence</button>
+            <button id="restart-btn" class="btn btn-secondary hidden">Start Over</button>
+            <a href="index.html" class="btn btn-secondary">Menu</a>
+        </div>
+    </div>
+
+    <script>
+        // --- STATE MANAGEMENT ---
+        let allTasks = [];
+        let currentTask = null;
+        let shuffledTasks = [];
+        let currentTaskIndex = 0;
+        let totalTasks = 0;
+
+        // --- DOM ELEMENTS ---
+        const progressTextEl = document.getElementById('progress-text');
+        const referenceEnEl = document.getElementById('ref-en');
+        let sentenceInputEl = document.getElementById('sentence-input'); // Changed to let
+        const wordPoolReferenceEl = document.getElementById('word-pool-reference');
+        const checkAnswerBtn = document.getElementById('check-answer-btn');
+        const nextTaskBtn = document.getElementById('next-task-btn');
+        const restartBtn = document.getElementById('restart-btn');
+        const feedbackMessageEl = document.getElementById('feedback-message');
+        const correctSentenceFeedbackEl = document.getElementById('correct-sentence-feedback');
+        const typingAreaContainerEl = document.getElementById('typing-area-container');
+
+        // --- INITIALIZATION ---
+        async function loadTasks() {
+            try {
+                const response = await fetch('perfekt_sentences.json');
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                allTasks = await response.json();
+                if (allTasks.length === 0) throw new Error("perfekt_sentences.json is empty or not found.");
+                
+                shuffleArray(allTasks);
+                shuffledTasks = [...allTasks];
+                totalTasks = shuffledTasks.length;
+                currentTaskIndex = 0;
+                loadNextTask();
+            } catch (error) {
+                console.error("Could not load tasks:", error);
+                typingAreaContainerEl.innerHTML = `<p class="text-red-500 font-semibold">Error: Could not load sentences. Details: ${error.message}</p>`;
+            }
+        }
+
+        // --- TASK LOGIC ---
+        function loadNextTask() {
+            if (shuffledTasks.length === 0) {
+                showCompletionScreen();
+                return;
+            }
+
+            currentTask = shuffledTasks.shift();
+            currentTaskIndex++;
+            progressTextEl.textContent = `Sentence ${currentTaskIndex} of ${totalTasks}`;
+            referenceEnEl.textContent = currentTask.translation_en;
+
+            // Create and shuffle reference words
+            wordPoolReferenceEl.innerHTML = '';
+            const wordsToShow = [...currentTask.german_words, ...currentTask.distractor_words];
+            shuffleArray(wordsToShow);
+            wordsToShow.forEach(word => {
+                wordPoolReferenceEl.appendChild(createWordItem(word));
+            });
+
+            resetUIForNextTask();
+        }
+
+        function showCompletionScreen() {
+            typingAreaContainerEl.innerHTML = `
+                <div class="completion-message">
+                    <h2 class="text-2xl font-bold mb-4">🎉 Fantastisch!</h2>
+                    <p class="mb-2">You've completed all ${totalTasks} typing exercises!</p>
+                    <p class="text-lg">Your German Perfekt skills are improving! 🇩🇪✨</p>
+                </div>`;
+            wordPoolReferenceEl.innerHTML = '';
+            referenceEnEl.textContent = 'All sentences completed!';
+            checkAnswerBtn.classList.add('hidden');
+            nextTaskBtn.classList.add('hidden');
+            restartBtn.classList.remove('hidden');
+            feedbackMessageEl.classList.add('hidden');
+            correctSentenceFeedbackEl.classList.add('hidden');
+            document.getElementById('progress-container').classList.add('hidden');
+            document.querySelector('.help-tip').classList.add('hidden');
+        }
+
+        function checkAnswer() {
+            const userAnswer = sentenceInputEl.value;
+            feedbackMessageEl.classList.remove('hidden', 'success', 'error');
+            correctSentenceFeedbackEl.classList.add('hidden');
+            sentenceInputEl.classList.remove('correct', 'incorrect');
+
+            if (!userAnswer.trim()) {
+                showFeedback("Please type your answer in the text field.", 'error');
+                return;
+            }
+
+            // Normalize for a more forgiving comparison
+            const normalize = (str) => str.trim().replace(/\s+/g, ' ').toLowerCase();
+
+            const isCorrect = normalize(userAnswer) === normalize(currentTask.full_sentence_de);
+
+            if (isCorrect) {
+                showFeedback("Ausgezeichnet! That's correct! ✨", 'success');
+                sentenceInputEl.classList.add('correct');
+                triggerConfetti();
+            } else {
+                showFeedback("Not quite right. Check your spelling and word order.", 'error');
+                sentenceInputEl.classList.add('incorrect');
+                correctSentenceFeedbackEl.innerHTML = `<strong>Correct answer:</strong> ${currentTask.full_sentence_de}`;
+                correctSentenceFeedbackEl.classList.remove('hidden');
+            }
+            
+            checkAnswerBtn.classList.add('hidden');
+            nextTaskBtn.classList.remove('hidden');
+            sentenceInputEl.disabled = true;
+        }
+
+        function restartPractice() {
+            shuffleArray(allTasks);
+            shuffledTasks = [...allTasks];
+            currentTaskIndex = 0;
+            restartBtn.classList.add('hidden');
+            document.getElementById('progress-container').classList.remove('hidden');
+            document.querySelector('.help-tip').classList.remove('hidden');
+            // Restore typing area if it was replaced by completion message
+            if (!document.getElementById('sentence-input')) {
+                typingAreaContainerEl.innerHTML = `<input type="text" id="sentence-input" placeholder="Type your sentence here..." autocomplete="off">`;
+                // Re-assign the DOM element reference and add the event listener back
+                sentenceInputEl = document.getElementById('sentence-input');
+                sentenceInputEl.addEventListener('keydown', handleEnterKey);
+            }
+            loadNextTask();
+        }
+
+        // --- UI & ELEMENT CREATION ---
+        function createWordItem(text) {
+            const item = document.createElement('div');
+            item.className = 'word-item';
+            item.textContent = text;
+            return item;
+        }
+
+        function resetUIForNextTask() {
+            feedbackMessageEl.classList.add('hidden');
+            correctSentenceFeedbackEl.classList.add('hidden');
+            correctSentenceFeedbackEl.textContent = '';
+            checkAnswerBtn.classList.remove('hidden');
+            nextTaskBtn.classList.add('hidden');
+            sentenceInputEl.value = '';
+            sentenceInputEl.disabled = false;
+            sentenceInputEl.classList.remove('correct', 'incorrect');
+            sentenceInputEl.focus();
+        }
+        
+        function showFeedback(message, type) {
+            feedbackMessageEl.textContent = message;
+            feedbackMessageEl.className = `feedback-area ${type}`;
+        }
+
+        // --- UTILITIES ---
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+        
+        function triggerConfetti() {
+            if (typeof confetti === 'function') {
+                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+            }
+        }
+        
+        function handleEnterKey(e) {
+            if (e.key === 'Enter') {
+                // Trigger the button that is currently visible
+                if (!checkAnswerBtn.classList.contains('hidden')) {
+                    checkAnswerBtn.click();
+                } else if (!nextTaskBtn.classList.contains('hidden')) {
+                    nextTaskBtn.click();
+                }
+            }
+        }
+
+        // --- EVENT LISTENERS ---
+        checkAnswerBtn.addEventListener('click', checkAnswer);
+        nextTaskBtn.addEventListener('click', loadNextTask);
+        restartBtn.addEventListener('click', restartPractice);
+        sentenceInputEl.addEventListener('keydown', handleEnterKey);
+
+        // --- START THE APP ---
+        document.addEventListener('DOMContentLoaded', loadTasks);
+    </script>
+</body>
+</html>
+```

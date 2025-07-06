@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>German: Trennbare Verben</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: linear-gradient(to right top, #fdba74, #fbcfe8, #a5b4fc, #86efac, #fde68a); /* Pastel Rainbow */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; 
+            min-height: 100vh;
+            margin: 0;
+            padding: 24px; 
+            color: #374151; 
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent; 
+        }
+        .card {
+            background-color: white;
+            padding: 24px; 
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            text-align: center;
+            width: 100%;
+            max-width: 800px; 
+        }
+        @media (min-width: 768px) { .card { padding: 32px; } }
+
+        .mode-title { font-size: 1.75rem; font-weight: 700; color: #7c3aed; margin-bottom: 4px; } /* Violet-600 */
+        .mode-title-subtitle { font-size: 1rem; color: #6d28d9; margin-bottom: 24px; } /* Violet-700 */
+
+        .reference-sentences {
+            background-color: #f5f3ff; /* Violet-50 */
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #ede9fe; /* Violet-100 */
+            text-align: left;
+        }
+        .reference-sentences p { margin-bottom: 0.5rem; color: #5b21b6; /* Violet-700 */ }
+        .reference-sentences strong { color: #4c1d95; /* Violet-800 */ }
+
+        .drop-zone-container {
+            background-color: #eef2ff; /* Indigo-50 */
+            border: 2px dashed #a5b4fc; /* Indigo-300 */
+            border-radius: 0.75rem;
+            padding: 1rem;
+            min-height: 60px; /* Min height for drop zone */
+            display: flex;
+            flex-wrap: wrap; /* Allow words to wrap */
+            gap: 0.5rem; 
+            justify-content: flex-start; /* Align items to the start */
+            align-items: center; 
+            margin-bottom: 1.5rem;
+        }
+        .drop-zone.drag-over { background-color: #c7d2fe; border-color: #818cf8; } /* Indigo-200, Indigo-400 */
+        
+        .draggable-item-slot { /* Individual slot for a word */
+            min-width: 80px; /* Min width for a word slot */
+            height: 45px; 
+            background-color: #e0e7ff; /* Indigo-100 */
+            border: 1px solid #c7d2fe; /* Indigo-200 */
+            border-radius: 0.375rem; /* rounded-md */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.2s;
+        }
+        .draggable-item-slot.drag-over { background-color: #c7d2fe; border-color: #818cf8; }
+
+
+        .draggable-pool {
+            background-color: #f0f9ff; /* Sky-50 */
+            border: 2px dashed #7dd3fc; /* Sky-300 */
+            border-radius: 0.75rem;
+            padding: 1rem;
+            min-height: 80px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem; 
+            justify-content: center;
+            align-items: center; 
+            margin-bottom: 1.5rem;
+        }
+        .draggable-item {
+            background-image: linear-gradient(to right, #7dd3fc 0%, #38bdf8 100%); /* Sky shades */
+            color: #075985; /* Sky-800 */
+            padding: 10px 18px; 
+            border-radius: 9999px; 
+            cursor: grab; 
+            font-weight: 600; 
+            font-size: 1rem; 
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); 
+            transition: all 0.2s ease-out; 
+            border: 2px solid transparent; 
+            user-select: none; -webkit-user-select: none; -ms-user-select: none;
+        }
+        .draggable-item:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); }
+        .draggable-item.dragging { opacity: 0.6; transform: rotate(3deg) scale(0.95); cursor: grabbing; }
+        .draggable-item.correct-in-slot { background-image: linear-gradient(to right, #86efac, #34d399); color: white; border-color: #10b981;}
+        .draggable-item.incorrect-in-slot { background-image: linear-gradient(to right, #fca5a5, #f87171); color: white; border-color: #ef4444;}
+
+
+        .feedback-area { margin-top: 1.5rem; padding: 0.75rem; border-radius: 0.5rem; font-weight: 600; }
+        .feedback-area.success { background-color: #dcfce7; color: #166534; border: 1px solid #6ee7b7;} 
+        .feedback-area.error { background-color: #fee2e2; color: #991b1b; border: 1px solid #fca5a5;} 
+        
+        .btn {
+            padding: 12px 24px; border-radius: 8px; font-size: 1rem; font-weight: 600;
+            color: white; cursor: pointer; transition: all 0.3s ease;
+            border: none; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            margin-top: 16px;
+        }
+        .btn:disabled { background-color: #d1d5db !important; color: #6b7280 !important; cursor: not-allowed; opacity: 0.7; }
+        .btn-primary { background-color: #6366f1; } /* Indigo-500 */
+        .btn-primary:hover:not(:disabled) { background-color: #4f46e5; } /* Indigo-600 */
+        .btn-secondary { background-color: #64748b; } 
+        .btn-secondary:hover:not(:disabled) { background-color: #475569; } 
+        .hidden { display: none !important; }
+        .bottom-controls { margin-top: 1.5rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;}
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1 class="mode-title">Trennbare Verben</h1>
+        <p class="mode-title-subtitle">Separable Verbs / Verbos Separables</p>
+
+        <div id="reference-sentences-container" class="reference-sentences">
+            <p><strong>EN:</strong> <span id="ref-en">English sentence will appear here.</span></p>
+            <p><strong>ES:</strong> <span id="ref-es">La oración en español aparecerá aquí.</span></p>
+        </div>
+
+        <div id="drop-zone-container" class="drop-zone-container">
+            </div>
+
+        <div id="draggable-pool" class="draggable-pool">
+            </div>
+        
+        <div id="feedback-message" class="feedback-area hidden"></div>
+        <div id="correct-sentence-feedback" class="text-green-700 font-semibold mt-2 hidden"></div>
+
+        <div class="bottom-controls">
+            <button id="check-answer-btn" class="btn btn-primary">Check Answer / Verificar Respuesta</button>
+            <button id="next-task-btn" class="btn btn-secondary hidden">Next Task / Siguiente Tarea</button>
+            <a href="index.html" class="btn btn-secondary">Menu / Menú</a>
+        </div>
+    </div>
+
+    <script>
+        let allTasks = [];
+        let currentTask = null;
+        let shuffledTasks = [];
+
+        let draggedItem = null;
+        let touchOffsetX = 0, touchOffsetY = 0;
+        let activeTouchClone = null;
+
+        const referenceEnEl = document.getElementById('ref-en');
+        const referenceEsEl = document.getElementById('ref-es');
+        const dropZoneContainerEl = document.getElementById('drop-zone-container');
+        const draggablePoolEl = document.getElementById('draggable-pool');
+        const checkAnswerBtn = document.getElementById('check-answer-btn');
+        const nextTaskBtn = document.getElementById('next-task-btn');
+        const feedbackMessageEl = document.getElementById('feedback-message');
+        const correctSentenceFeedbackEl = document.getElementById('correct-sentence-feedback');
+
+        async function loadTasks() {
+            try {
+                // *** CHANGED: Fetches the new JSON file ***
+                const response = await fetch('trennbare_verben_tasks.json');
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                allTasks = await response.json();
+                if (allTasks.length === 0) throw new Error("trennbare_verben_tasks.json is empty or not found.");
+                shuffleArray(allTasks);
+                shuffledTasks = [...allTasks];
+                loadNextTask();
+            } catch (error) {
+                console.error("Could not load tasks:", error);
+                dropZoneContainerEl.innerHTML = `<p class="text-red-500 font-semibold">Error: Could not load tasks. Details: ${error.message}</p>`;
+            }
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function createDraggableItem(text) {
+            const item = document.createElement('div');
+            item.classList.add('draggable-item');
+            item.textContent = text;
+            item.draggable = true;
+            item.dataset.text = text;
+            item.addEventListener('dragstart', handleDragStart);
+            item.addEventListener('dragend', handleDragEnd);
+            item.addEventListener('touchstart', handleTouchStart, { passive: false });
+            item.addEventListener('click', handleClickOnPlacedItem);
+            return item;
+        }
+        
+        function handleClickOnPlacedItem(e) {
+            const item = e.target.closest('.draggable-item');
+            if (item && item.parentElement && item.parentElement.classList.contains('draggable-item-slot')) {
+                const slot = item.parentElement;
+                slot.classList.remove('filled');
+                draggablePoolEl.appendChild(item); 
+                item.draggable = true; 
+                item.classList.remove('correct-in-slot', 'incorrect-in-slot');
+                if (nextTaskBtn.classList.contains('hidden')) {
+                    checkAnswerBtn.disabled = false;
+                }
+            }
+        }
+
+        function loadNextTask() {
+            if (shuffledTasks.length === 0) {
+                dropZoneContainerEl.innerHTML = `<p class="text-indigo-700 font-semibold text-lg">Super! Alle Verben geübt!</p><p class="text-indigo-600">¡Genial! ¡Todos los verbos practicados!</p>`;
+                draggablePoolEl.innerHTML = '';
+                referenceEnEl.textContent = 'All tasks completed!';
+                referenceEsEl.textContent = '¡Todas las tareas completadas!';
+                checkAnswerBtn.classList.add('hidden');
+                nextTaskBtn.classList.add('hidden');
+                feedbackMessageEl.classList.add('hidden');
+                correctSentenceFeedbackEl.classList.add('hidden');
+                return;
+            }
+
+            currentTask = shuffledTasks.shift();
+
+            referenceEnEl.textContent = currentTask.translation_en;
+            referenceEsEl.textContent = currentTask.full_sentence_es; 
+
+            dropZoneContainerEl.innerHTML = '';
+            currentTask.german_words.forEach(() => {
+                const slot = document.createElement('div');
+                slot.classList.add('draggable-item-slot');
+                slot.addEventListener('dragover', handleDragOver);
+                slot.addEventListener('dragenter', handleDragEnter);
+                slot.addEventListener('dragleave', handleDragLeave);
+                slot.addEventListener('drop', handleDrop);
+                dropZoneContainerEl.appendChild(slot);
+            });
+
+            draggablePoolEl.innerHTML = '';
+            const wordsToDrag = [...currentTask.german_words];
+            shuffleArray(wordsToDrag);
+            wordsToDrag.forEach(word => {
+                draggablePoolEl.appendChild(createDraggableItem(word));
+            });
+
+            feedbackMessageEl.classList.add('hidden');
+            correctSentenceFeedbackEl.classList.add('hidden');
+            correctSentenceFeedbackEl.textContent = '';
+            checkAnswerBtn.classList.remove('hidden');
+            checkAnswerBtn.disabled = false;
+            nextTaskBtn.classList.add('hidden');
+        }
+
+        function handleDragStart(e) {
+            draggedItem = e.target.closest('.draggable-item');
+            e.dataTransfer.setData('text/plain', draggedItem.dataset.text);
+            e.dataTransfer.effectAllowed = 'move';
+            setTimeout(() => draggedItem.classList.add('dragging'), 0);
+        }
+        function handleDragEnd() { if (draggedItem) draggedItem.classList.remove('dragging'); draggedItem = null; document.querySelectorAll('.draggable-item-slot.drag-over').forEach(el => el.classList.remove('drag-over')); }
+        function handleDragOver(e) { e.preventDefault(); }
+        function handleDragEnter(e) {
+            e.preventDefault();
+            const dropTarget = e.target.closest('.draggable-item-slot');
+            if (draggedItem && dropTarget && !dropTarget.firstChild) {
+                dropTarget.classList.add('drag-over');
+            }
+        }
+        function handleDragLeave(e) { const dropTarget = e.target.closest('.draggable-item-slot'); if (dropTarget) dropTarget.classList.remove('drag-over'); }
+        
+        function handleDrop(e) {
+            e.preventDefault();
+            const dropTarget = e.target.closest('.draggable-item-slot');
+            if (dropTarget && draggedItem) {
+                if (!dropTarget.firstChild) { 
+                    dropTarget.appendChild(draggedItem);
+                    dropTarget.classList.add('filled'); // Mark slot as filled
+                    draggedItem.classList.remove('dragging');
+                } else { 
+                    draggablePoolEl.appendChild(draggedItem); // Return to pool if slot is full
+                }
+            }
+            if (dropTarget) dropTarget.classList.remove('drag-over');
+            draggedItem = null;
+        }
+
+        function handleTouchStart(e) {
+            draggedItem = e.target.closest('.draggable-item');
+            if (draggedItem) {
+                if (e.cancelable) e.preventDefault();
+                activeTouchClone = draggedItem.cloneNode(true);
+                activeTouchClone.classList.add('dragging');
+                activeTouchClone.style.position = 'fixed'; activeTouchClone.style.pointerEvents = 'none'; 
+                activeTouchClone.style.zIndex = '1000';
+                activeTouchClone.style.width = draggedItem.offsetWidth + 'px'; activeTouchClone.style.height = draggedItem.offsetHeight + 'px';
+                document.body.appendChild(activeTouchClone);
+                const rect = draggedItem.getBoundingClientRect();
+                touchOffsetX = e.touches[0].clientX - rect.left; touchOffsetY = e.touches[0].clientY - rect.top;
+                activeTouchClone.style.left = (e.touches[0].clientX - touchOffsetX) + 'px';
+                activeTouchClone.style.top = (e.touches[0].clientY - touchOffsetY) + 'px';
+                draggedItem.style.opacity = '0.4';
+                document.addEventListener('touchmove', handleTouchMove, { passive: false });
+                document.addEventListener('touchend', handleTouchEnd, { once: true });
+            }
+        }
+        function handleTouchMove(e) {
+            if (activeTouchClone) {
+                if (e.cancelable) e.preventDefault();
+                let currentX = e.touches[0].clientX; let currentY = e.touches[0].clientY;
+                activeTouchClone.style.left = (currentX - touchOffsetX) + 'px';
+                activeTouchClone.style.top = (currentY - touchOffsetY) + 'px';
+                document.querySelectorAll('.draggable-item-slot.drag-over').forEach(box => box.classList.remove('drag-over'));
+                activeTouchClone.style.display = 'none'; 
+                const elementBelow = document.elementFromPoint(currentX, currentY);
+                activeTouchClone.style.display = ''; 
+                if (elementBelow) {
+                    const dropBoxBelow = elementBelow.closest('.draggable-item-slot');
+                    if (dropBoxBelow && !dropBoxBelow.firstChild) { dropBoxBelow.classList.add('drag-over'); }
+                }
+            }
+        }
+        function handleTouchEnd(e) {
+            document.removeEventListener('touchmove', handleTouchMove);
+            if (activeTouchClone && draggedItem) {
+                activeTouchClone.style.display = 'none';
+                const dropTargetElement = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+                let droppedSuccessfully = false;
+                if (dropTargetElement) {
+                    const dropBox = dropTargetElement.closest('.draggable-item-slot');
+                    if (dropBox && !dropBox.firstChild) {
+                        dropBox.appendChild(draggedItem);
+                        dropBox.classList.add('filled');
+                        droppedSuccessfully = true;
+                    }
+                }
+                if (!droppedSuccessfully) { draggablePoolEl.appendChild(draggedItem); }
+                draggedItem.style.opacity = '1';
+                draggedItem.classList.remove('dragging');
+                if(activeTouchClone.parentNode) document.body.removeChild(activeTouchClone);
+            }
+            activeTouchClone = null; draggedItem = null; touchOffsetX = 0; touchOffsetY = 0;
+            document.querySelectorAll('.draggable-item-slot.drag-over').forEach(box => box.classList.remove('drag-over'));
+        }
+
+        checkAnswerBtn.addEventListener('click', () => {
+            const slots = dropZoneContainerEl.querySelectorAll('.draggable-item-slot');
+            let constructedSentence = "";
+            let allSlotsFilled = true;
+            slots.forEach(slot => {
+                const item = slot.querySelector('.draggable-item');
+                if (item) {
+                    constructedSentence += item.dataset.text + " ";
+                } else {
+                    allSlotsFilled = false;
+                }
+            });
+            constructedSentence = constructedSentence.trim();
+
+            feedbackMessageEl.classList.remove('hidden', 'success', 'error');
+            correctSentenceFeedbackEl.classList.add('hidden');
+
+            if (!allSlotsFilled) {
+                feedbackMessageEl.textContent = "Please fill all blanks. / Por favor, llena todos los espacios.";
+                feedbackMessageEl.classList.add('error');
+                return;
+            }
+
+            const normalize = (str) => str.replace(/\s+/g, ' ').trim().toLowerCase();
+            const isCorrect = normalize(constructedSentence) === normalize(currentTask.full_sentence_de);
+
+            slots.forEach((slot, index) => {
+                const item = slot.querySelector('.draggable-item');
+                if (item) {
+                    item.classList.toggle('correct-in-slot', isCorrect);
+                    item.classList.toggle('incorrect-in-slot', !isCorrect);
+                }
+            });
+
+            if (isCorrect) {
+                feedbackMessageEl.textContent = "Richtig! / Correct!";
+                feedbackMessageEl.classList.add('success');
+                triggerConfetti();
+            } else {
+                feedbackMessageEl.textContent = "Leider nicht ganz richtig. / Not quite right.";
+                feedbackMessageEl.classList.add('error');
+                correctSentenceFeedbackEl.textContent = `Richtige Reihenfolge / Correct Order: ${currentTask.full_sentence_de}`;
+                correctSentenceFeedbackEl.classList.remove('hidden');
+            }
+            
+            checkAnswerBtn.classList.add('hidden');
+            nextTaskBtn.classList.remove('hidden');
+        });
+
+        nextTaskBtn.addEventListener('click', loadNextTask);
+        
+        function triggerConfetti() { if (typeof confetti === 'function') { confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } }); } }
+
+        loadTasks();
+    </script>
+</body>
+</html>
