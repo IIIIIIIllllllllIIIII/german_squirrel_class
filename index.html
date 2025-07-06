@@ -26,7 +26,7 @@
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             text-align: center;
             width: 100%;
-            max-width: 900px; /* Breite für Spalten angepasst */
+            max-width: 900px; /* Adjusted width for columns */
         }
         
         .title {
@@ -42,10 +42,10 @@
             margin-bottom: 3rem;
         }
 
-        /* NEUE STYLES FÜR DAS SPALTENLAYOUT */
+        /* Styles for the column layout */
         .columns-container {
             display: flex;
-            flex-direction: column; /* Standard für mobile Ansicht */
+            flex-direction: column; /* Default for mobile view */
             gap: 2rem;
         }
 
@@ -73,6 +73,7 @@
             transition: all 0.3s ease;
             display: block;
             line-height: 1.4;
+            text-align: left; /* Align text to the left */
         }
 
         .main-title-lang {
@@ -90,29 +91,31 @@
             font-weight: 400; 
         }
         
-        .quiz-link.primary { background-color: #6d28d9; }
-        .quiz-link.secondary { background-color: #4f46e5; }
-        .quiz-link.tertiary { background-color: #0d9488; }
-        .quiz-link.quaternary { background-color: #ca8a04; }
-        .quiz-link.quinary { background-color: #16a34a; }
-        .quiz-link.senary { background-color: #2563eb; }
+        /* New Thematic Colors */
+        .color-nouns { background-color: #8b5cf6; }      /* Noun/Case Grammar - violet-500 */
+        .color-nouns:hover { background-color: #7c3aed; } /* violet-600 */
         
+        .color-verbs { background-color: #38bdf8; }      /* Verb Grammar - sky-400 */
+        .color-verbs:hover { background-color: #0ea5e9; } /* sky-500 */
+
+        .color-sentences { background-color: #2dd4bf; }  /* Sentence Structure - teal-400 */
+        .color-sentences:hover { background-color: #14b8a6; } /* teal-500 */
+        
+        .color-vocab { background-color: #fb923c; }      /* Time/Vocabulary - orange-400 */
+        .color-vocab:hover { background-color: #f97316; } /* orange-500 */
+
+        .color-special { background-color: #ec4899; }    /* Special Topics - pink-500 */
+        .color-special:hover { background-color: #db2777; } /* pink-600 */
+
         .quiz-link:hover {
             transform: translateY(-3px); 
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); 
         }
         
-        .quiz-link.primary:hover { background-color: #5b21b6; }
-        .quiz-link.secondary:hover { background-color: #4338ca; }
-        .quiz-link.tertiary:hover { background-color: #0f766e; }
-        .quiz-link.quaternary:hover { background-color: #a16207; }
-        .quiz-link.quinary:hover { background-color: #15803d; }
-        .quiz-link.senary:hover { background-color: #1d4ed8; }
-        
-        /* Media Query für größere Bildschirme, um Spalten nebeneinander anzuzeigen */
+        /* Media Query for larger screens to display columns side-by-side */
         @media (min-width: 768px) {
             .columns-container {
-                flex-direction: row; /* Spalten nebeneinander */
+                flex-direction: row; /* Columns side-by-side */
             }
         }
         
@@ -136,62 +139,75 @@
             <div class="level-column">
                 <h2 class="level-title">A1.1</h2>
                 
-                <a href="konjugieren_mode.html" class="quiz-link primary">
-                    <span class="main-title-lang">Verb Conjugation / Conjugación de Verbos</span>
-                    <span class="translation-lang">Learn how to conjugate important verbs correctly / Aprende a conjugar correctamente los verbos importantes</span>
-                </a>
-            
-                <a href="artikel_mode.html" class="quiz-link secondary">
-                    <span class="main-title-lang">Article Quiz (Der, Die, Das) / Quiz de Artículos (Der, Die, Das)</span>
+                <!-- Noun & Case Grammar -->
+                <a href="artikel_mode.html" class="quiz-link color-nouns">
+                    <span class="main-title-lang">Article Quiz (Der, Die, Das)</span>
                     <span class="translation-lang">Learn the articles for different nouns / Aprende los artículos para diferentes sustantivos</span>
                 </a>
-
-                <a href="wfragen_mode.html" class="quiz-link tertiary">
-                    <span class="main-title-lang">Building W-Questions / Construir Preguntas W </span>
-                    <span class="translation-lang">Get to know the W-Questions and build sentences / Conoce las Preguntas W y construye oraciones</span>
-                </a>
-
-                <a href="daily_routine_mode_lvl1.html" class="quiz-link quaternary">
-                    <span class="main-title-lang">Sentence Structure (EASY MODE) / Estructura de Oraciones (MODO FÁCIL)</span>
-                    <span class="translation-lang">Practice the correct sentence structure (easy) / Practica la estructura correcta de las oraciones (fácil)</span>
-                </a>
-                <a href="daily_routine_mode_lvl2.html" class="quiz-link quaternary">
-                    <span class="main-title-lang">Sentence Structure (PRO MODE) / Estructura de Oraciones (MODO PRO)</span>
-                    <span class="translation-lang">Practice the correct sentence structure (difficult) / Practica la estructura correcta de las oraciones (difícil)</span>
-                </a>
-                 <a href="akkusativ_nomativ.html" class="quiz-link quinary">
-                    <span class="main-title-lang">Accusative Trainer / Entrenador de Acusativo</span>
+                <a href="akkusativ_nomativ.html" class="quiz-link color-nouns">
+                    <span class="main-title-lang">Accusative Trainer</span>
                     <span class="translation-lang">Learn and practice the accusative case / Aprende y practica el caso acusativo</span>
+                </a>
+
+                <!-- Special Topic -->
+                 <a href="negation_trainer.html" class="quiz-link color-special">
+                    <span class="main-title-lang">Negation Trainer (nicht/kein)</span>
+                    <span class="translation-lang">Learn to use 'nicht' and 'kein' correctly / Aprende a usar 'nicht' y 'kein' correctamente</span>
+                </a>
+                
+                <!-- Verb Grammar -->
+                <a href="konjugieren_mode.html" class="quiz-link color-verbs">
+                    <span class="main-title-lang">Verb Conjugation</span>
+                    <span class="translation-lang">Learn how to conjugate important verbs / Aprende a conjugar verbos importantes</span>
+                </a>
+
+                <!-- Sentence Structure -->
+                <a href="wfragen_mode.html" class="quiz-link color-sentences">
+                    <span class="main-title-lang">Building W-Questions</span>
+                    <span class="translation-lang">Get to know the W-Questions and build sentences / Conoce las Preguntas W y construye oraciones</span>
                 </a>
             </div>
 
             <div class="level-column">
                 <h2 class="level-title">A1.2</h2>
 
-                <a href="trennbare_verben_menu.html" class="quiz-link senary">
+                <!-- Sentence Structure -->
+                <a href="daily_routine_mode_lvl1.html" class="quiz-link color-sentences">
+                    <span class="main-title-lang">Sentence Structure (EASY MODE)</span>
+                    <span class="translation-lang">Practice the correct sentence structure (easy) / Practica la estructura correcta de las oraciones (fácil)</span>
+                </a>
+                <a href="daily_routine_mode_lvl2.html" class="quiz-link color-sentences">
+                    <span class="main-title-lang">Sentence Structure (PRO MODE)</span>
+                    <span class="translation-lang">Practice the correct sentence structure (difficult) / Practica la estructura correcta de las oraciones (difícil)</span>
+                </a>
+                 <a href="perfekt_sentences.html" class="quiz-link color-sentences">
+                    <span class="main-title-lang">Perfekt Trainer - DRAG & DROP</span>
+                    <span class="translation-lang">Build sentences with perfect tense / Construye frases con tiempo perfecto</span>
+                </a>
+                <a href="perfekt_sentences_typing.html" class="quiz-link color-sentences">
+                    <span class="main-title-lang">Perfekt Trainer - TYPING</span>
+                    <span class="translation-lang">Build sentences with perfect tense / Construye frases con tiempo perfecto</span>
+                </a>
+
+                <!-- Verb Grammar -->
+                <a href="trennbare_verben_menu.html" class="quiz-link color-verbs">
                     <span class="main-title-lang">Separable Verbs / Verbos Separables</span>
                     <span class="translation-lang">Learn and practice separable verbs / Aprende y practica los verbos separables</span>
                 </a>
-                <a href="zeitangaben_trainer.html" class="quiz-link secondary">
-                    <span class="main-title-lang">Times, Days, Months / Tiempos, Días, Meses</span>
+                <a href="modalverb_trainer.html" class="quiz-link color-verbs">
+                    <span class="main-title-lang">Modalverb Trainer</span>
+                    <span class="translation-lang">Learn to use Modalverben with this trainer/ Aprenda a utilizar verbos modales con este entrenador</span>
+                </a>
+                
+                <!-- Time & Vocabulary -->
+                <a href="zeitangaben_trainer.html" class="quiz-link color-vocab">
+                    <span class="main-title-lang">Times, Days, Months</span>
                     <span class="translation-lang">Learn and practice times, days, and months / Aprende y practica tiempos, días y meses</span>
                 </a>
-                 <a href="uhrzeit_trainer.html" class="quiz-link tertiary">
+                 <a href="uhrzeit_trainer.html" class="quiz-link color-vocab">
                     <span class="main-title-lang">Clock Trainer / Entrenador de Reloj</span>
                     <span class="translation-lang">Learn to tell time with an interactive clock / Aprende a decir la hora con un reloj interactivo</span>
                 </a>
-                <a href="modalverb_trainer.html" class="quiz-link senary">
-                    <span class="main-title-lang">Modalverb Trainer / Entrenador de verbos modales</span>
-                    <span class="translation-lang">Learn to use Modalverben with this trainer/ Aprenda a utilizar verbos modales con este entrenador</span>
-                </a>
-                <a href="perfekt_sentences.html" class="quiz-link primary">
-                    <span class="main-title-lang">Perfekt Sentence Trainer - DRAG AND DROP</span>
-                    <span class="translation-lang">Build sentences with perfect tense / Construye frases con tiempo perfecto</span>
-                </a>
-                <a href=" perfekt_sentences_typing.html" class="quiz-link primary">
-                    <span class="main-title-lang">Perfekt Sentence Trainer - TYPING </span>
-                    <span class="translation-lang">Build sentences with perfect tense / Construye frases con tiempo perfecto</span>
-                </a>            
             </div>
 
         </div>
