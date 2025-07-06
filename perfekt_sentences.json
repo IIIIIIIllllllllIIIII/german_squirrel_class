@@ -460,5 +460,305 @@
         "german_words": ["Wir", "haben", "jeden", "Sonntag", "zusammen", "gefrühstückt", "."],
         "distractor_words": ["sind", "jeder", "Samstag", "allein"],
         "full_sentence_de": "Wir haben jeden Sonntag zusammen gefrühstückt."
+    },
+    {
+        "translation_en": "I haven't gotten up early this morning.",
+        "german_words": ["Ich", "bin", "heute", "Morgen", "nicht", "früh", "aufgestanden", "."],
+        "distractor_words": ["habe", "kein", "spät", "gestern"],
+        "full_sentence_de": "Ich bin heute Morgen nicht früh aufgestanden."
+    },
+    {
+        "translation_en": "She hasn't cooked dinner for us.",
+        "german_words": ["Sie", "hat", "das", "Abendessen", "nicht", "für", "uns", "gekocht", "."],
+        "distractor_words": ["ist", "kein", "Mittagessen", "gemacht"],
+        "full_sentence_de": "Sie hat das Abendessen nicht für uns gekocht."
+    },
+    {
+        "translation_en": "We haven't invited our friends to the party.",
+        "german_words": ["Wir", "haben", "unsere", "Freunde", "nicht", "zur", "Party", "eingeladen", "."],
+        "distractor_words": ["sind", "keine", "von", "abgeholt"],
+        "full_sentence_de": "Wir haben unsere Freunde nicht zur Party eingeladen."
+    },
+    {
+        "translation_en": "He hasn't called his mother.",
+        "german_words": ["Er", "hat", "seine", "Mutter", "nicht", "angerufen", "."],
+        "distractor_words": ["ist", "keine", "ihre", "besucht"],
+        "full_sentence_de": "Er hat seine Mutter nicht angerufen."
+    },
+    {
+        "translation_en": "I haven't watched TV.",
+        "german_words": ["Ich", "habe", "nicht", "ferngesehen", "."],
+        "distractor_words": ["bin", "kein", "gegessen", "oder"],
+        "full_sentence_de": "Ich habe nicht ferngesehen."
+    },
+    {
+        "translation_en": "They haven't gone shopping together.",
+        "german_words": ["Sie", "sind", "nicht", "zusammen", "einkaufen", "gegangen", "."],
+        "distractor_words": ["haben", "kein", "allein", "gekommen"],
+        "full_sentence_de": "Sie sind nicht zusammen einkaufen gegangen."
+    },
+    {
+        "translation_en": "My sister hasn't cleaned up her room.",
+        "german_words": ["Meine", "Schwester", "hat", "ihr", "Zimmer", "nicht", "aufgeräumt", "."],
+        "distractor_words": ["ist", "kein", "sein", "geputzt"],
+        "full_sentence_de": "Meine Schwester hat ihr Zimmer nicht aufgeräumt."
+    },
+    {
+        "translation_en": "We haven't found the keys in the kitchen.",
+        "german_words": ["Wir", "haben", "die", "Schlüssel", "nicht", "in", "der", "Küche", "gefunden", "."],
+        "distractor_words": ["sind", "keine", "im", "verloren"],
+        "full_sentence_de": "Wir haben die Schlüssel nicht in der Küche gefunden."
+    },
+    {
+        "translation_en": "I haven't learned German for two years.",
+        "german_words": ["Ich", "habe", "keine", "zwei", "Jahre", "Deutsch", "gelernt", "."],
+        "distractor_words": ["bin", "nicht", "drei", "studiert"],
+        "full_sentence_de": "Ich habe keine zwei Jahre Deutsch gelernt."
+    },
+    {
+        "translation_en": "The children haven't played in the garden.",
+        "german_words": ["Die", "Kinder", "haben", "nicht", "im", "Garten", "gespielt", "."],
+        "distractor_words": ["sind", "kein", "in", "gelaufen"],
+        "full_sentence_de": "Die Kinder haben nicht im Garten gespielt."
+    },
+    {
+        "translation_en": "She hasn't brought any fresh bread.",
+        "german_words": ["Sie", "hat", "kein", "frisches", "Brot", "gebracht", "."],
+        "distractor_words": ["ist", "nicht", "altes", "gekauft"],
+        "full_sentence_de": "Sie hat kein frisches Brot gebracht."
+    },
+    {
+        "translation_en": "We haven't turned off the lights.",
+        "german_words": ["Wir", "haben", "das", "Licht", "nicht", "ausgemacht", "."],
+        "distractor_words": ["sind", "kein", "die", "zugemacht"],
+        "full_sentence_de": "Wir haben das Licht nicht ausgemacht."
+    },
+    {
+        "translation_en": "He hasn't answered the questions correctly.",
+        "german_words": ["Er", "hat", "die", "Fragen", "nicht", "richtig", "beantwortet", "."],
+        "distractor_words": ["ist", "keine", "falsch", "gestellt"],
+        "full_sentence_de": "Er hat die Fragen nicht richtig beantwortet."
+    },
+    {
+        "translation_en": "I haven't drunk any coffee.",
+        "german_words": ["Ich", "habe", "keinen", "Kaffee", "getrunken", "."],
+        "distractor_words": ["bin", "nicht", "Tee", "gelesen"],
+        "full_sentence_de": "Ich habe keinen Kaffee getrunken."
+    },
+    {
+        "translation_en": "They haven't lived in Berlin.",
+        "german_words": ["Sie", "haben", "nicht", "in", "Berlin", "gelebt", "."],
+        "distractor_words": ["sind", "kein", "fünf", "gewohnt"],
+        "full_sentence_de": "Sie haben nicht in Berlin gelebt."
+    },
+    {
+        "translation_en": "My father hasn't paid the bill.",
+        "german_words": ["Mein", "Vater", "hat", "die", "Rechnung", "nicht", "bezahlt", "."],
+        "distractor_words": ["ist", "keine", "im", "bekommen"],
+        "full_sentence_de": "Mein Vater hat die Rechnung nicht bezahlt."
+    },
+    {
+        "translation_en": "She hasn't gotten off the bus.",
+        "german_words": ["Sie", "ist", "nicht", "aus", "dem", "Bus", "ausgestiegen", "."],
+        "distractor_words": ["hat", "kein", "in", "gelaufen"],
+        "full_sentence_de": "Sie ist nicht aus dem Bus ausgestiegen."
+    },
+    {
+        "translation_en": "We haven't had breakfast together.",
+        "german_words": ["Wir", "haben", "nicht", "zusammen", "gefrühstückt", "."],
+        "distractor_words": ["sind", "kein", "heute", "allein"],
+        "full_sentence_de": "Wir haben nicht zusammen gefrühstückt."
+    },
+    {
+        "translation_en": "He hasn't seen the movie.",
+        "german_words": ["Er", "hat", "den", "Film", "nicht", "gesehen", "."],
+        "distractor_words": ["ist", "keinen", "die", "gemocht"],
+        "full_sentence_de": "Er hat den Film nicht gesehen."
+    },
+    {
+        "translation_en": "I haven't prepared dinner.",
+        "german_words": ["Ich", "habe", "das", "Abendessen", "nicht", "vorbereitet", "."],
+        "distractor_words": ["bin", "kein", "den", "gedeckt"],
+        "full_sentence_de": "Ich habe das Abendessen nicht vorbereitet."
+    },
+    {
+        "translation_en": "They haven't picked up their children.",
+        "german_words": ["Sie", "haben", "ihre", "Kinder", "nicht", "abgeholt", "."],
+        "distractor_words": ["sind", "keine", "von", "gebracht"],
+        "full_sentence_de": "Sie haben ihre Kinder nicht abgeholt."
+    },
+    {
+        "translation_en": "The meeting hasn't started yet.",
+        "german_words": ["Das", "Meeting", "hat", "noch", "nicht", "angefangen", "."],
+        "distractor_words": ["ist", "kein", "um", "aufgehört"],
+        "full_sentence_de": "Das Meeting hat noch nicht angefangen."
+    },
+    {
+        "translation_en": "We haven't turned on the heating.",
+        "german_words": ["Wir", "haben", "die", "Heizung", "nicht", "angemacht", "."],
+        "distractor_words": ["sind", "keine", "weil", "ausgemacht"],
+        "full_sentence_de": "Wir haben die Heizung nicht angemacht."
+    },
+    {
+        "translation_en": "My grandmother hasn't worked in a hospital.",
+        "german_words": ["Meine", "Großmutter", "hat", "nicht", "in", "einem", "Krankenhaus", "gearbeitet", "."],
+        "distractor_words": ["ist", "keine", "viele", "studiert"],
+        "full_sentence_de": "Meine Großmutter hat nicht in einem Krankenhaus gearbeitet."
+    },
+    {
+        "translation_en": "The rain hasn't stopped.",
+        "german_words": ["Der", "Regen", "hat", "nicht", "aufgehört", "."],
+        "distractor_words": ["ist", "kein", "die", "scheint"],
+        "full_sentence_de": "Der Regen hat nicht aufgehört."
+    },
+    {
+        "translation_en": "Have you gotten up early today?",
+        "german_words": ["Bist", "du", "heute", "früh", "aufgestanden", "?"],
+        "distractor_words": ["Hast", "Ich", "spät", "gestern"],
+        "full_sentence_de": "Bist du heute früh aufgestanden?"
+    },
+    {
+        "translation_en": "Has she cooked dinner for us?",
+        "german_words": ["Hat", "sie", "das", "Abendessen", "für", "uns", "gekocht", "?"],
+        "distractor_words": ["Ist", "er", "Mittagessen", "gemacht"],
+        "full_sentence_de": "Hat sie das Abendessen für uns gekocht?"
+    },
+    {
+        "translation_en": "Have we invited our friends to the party?",
+        "german_words": ["Haben", "wir", "unsere", "Freunde", "zur", "Party", "eingeladen", "?"],
+        "distractor_words": ["Sind", "ihr", "seine", "abgeholt"],
+        "full_sentence_de": "Haben wir unsere Freunde zur Party eingeladen?"
+    },
+    {
+        "translation_en": "Has he called his mother?",
+        "german_words": ["Hat", "er", "seine", "Mutter", "angerufen", "?"],
+        "distractor_words": ["Ist", "sie", "ihre", "besucht"],
+        "full_sentence_de": "Hat er seine Mutter angerufen?"
+    },
+    {
+        "translation_en": "Have you watched TV and eaten pizza?",
+        "german_words": ["Hast", "du", "ferngesehen", "und", "Pizza", "gegessen", "?"],
+        "distractor_words": ["Bist", "ich", "oder", "getrunken"],
+        "full_sentence_de": "Hast du ferngesehen und Pizza gegessen?"
+    },
+    {
+        "translation_en": "Have they gone shopping together?",
+        "german_words": ["Sind", "sie", "zusammen", "einkaufen", "gegangen", "?"],
+        "distractor_words": ["Haben", "wir", "allein", "gekommen"],
+        "full_sentence_de": "Sind sie zusammen einkaufen gegangen?"
+    },
+    {
+        "translation_en": "Has your sister cleaned up her room?",
+        "german_words": ["Hat", "deine", "Schwester", "ihr", "Zimmer", "aufgeräumt", "?"],
+        "distractor_words": ["Ist", "Meine", "sein", "geputzt"],
+        "full_sentence_de": "Hat deine Schwester ihr Zimmer aufgeräumt?"
+    },
+    {
+        "translation_en": "Where have we found the keys?",
+        "german_words": ["Wo", "haben", "wir", "die", "Schlüssel", "gefunden", "?"],
+        "distractor_words": ["Wann", "sind", "ihr", "verloren"],
+        "full_sentence_de": "Wo haben wir die Schlüssel gefunden?"
+    },
+    {
+        "translation_en": "How long have you learned German?",
+        "german_words": ["Wie", "lange", "hast", "du", "Deutsch", "gelernt", "?"],
+        "distractor_words": ["Was", "bist", "ich", "studiert"],
+        "full_sentence_de": "Wie lange hast du Deutsch gelernt?"
+    },
+    {
+        "translation_en": "Have the children played in the garden?",
+        "german_words": ["Haben", "die", "Kinder", "im", "Garten", "gespielt", "?"],
+        "distractor_words": ["Sind", "eure", "in", "gelaufen"],
+        "full_sentence_de": "Haben die Kinder im Garten gespielt?"
+    },
+    {
+        "translation_en": "What has she brought from the bakery?",
+        "german_words": ["Was", "hat", "sie", "aus", "der", "Bäckerei", "gebracht", "?"],
+        "distractor_words": ["Wer", "ist", "er", "gekauft"],
+        "full_sentence_de": "Was hat sie aus der Bäckerei gebracht?"
+    },
+    {
+        "translation_en": "Have we turned off the lights?",
+        "german_words": ["Haben", "wir", "das", "Licht", "ausgemacht", "?"],
+        "distractor_words": ["Sind", "ihr", "die", "zugemacht"],
+        "full_sentence_de": "Haben wir das Licht ausgemacht?"
+    },
+    {
+        "translation_en": "Has he answered all questions correctly?",
+        "german_words": ["Hat", "er", "alle", "Fragen", "richtig", "beantwortet", "?"],
+        "distractor_words": ["Ist", "sie", "einige", "gestellt"],
+        "full_sentence_de": "Hat er alle Fragen richtig beantwortet?"
+    },
+    {
+        "translation_en": "Have you drunk coffee?",
+        "german_words": ["Hast", "du", "Kaffee", "getrunken", "?"],
+        "distractor_words": ["Bist", "ich", "Tee", "gelesen"],
+        "full_sentence_de": "Hast du Kaffee getrunken?"
+    },
+    {
+        "translation_en": "Why have they lived in Berlin?",
+        "german_words": ["Warum", "haben", "sie", "in", "Berlin", "gelebt", "?"],
+        "distractor_words": ["Wo", "sind", "wir", "gewohnt"],
+        "full_sentence_de": "Warum haben sie in Berlin gelebt?"
+    },
+    {
+        "translation_en": "Has your father paid the bill?",
+        "german_words": ["Hat", "dein", "Vater", "die", "Rechnung", "bezahlt", "?"],
+        "distractor_words": ["Ist", "Mein", "den", "bekommen"],
+        "full_sentence_de": "Hat dein Vater die Rechnung bezahlt?"
+    },
+    {
+        "translation_en": "Has she gotten off the bus?",
+        "german_words": ["Ist", "sie", "aus", "dem", "Bus", "ausgestiegen", "?"],
+        "distractor_words": ["Hat", "er", "in", "gelaufen"],
+        "full_sentence_de": "Ist sie aus dem Bus ausgestiegen?"
+    },
+    {
+        "translation_en": "When have we had breakfast?",
+        "german_words": ["Wann", "haben", "wir", "gefrühstückt", "?"],
+        "distractor_words": ["Wo", "sind", "ihr", "allein"],
+        "full_sentence_de": "Wann haben wir gefrühstückt?"
+    },
+    {
+        "translation_en": "Has he seen the movie?",
+        "german_words": ["Hat", "er", "den", "Film", "gesehen", "?"],
+        "distractor_words": ["Ist", "sie", "die", "gemocht"],
+        "full_sentence_de": "Hat er den Film gesehen?"
+    },
+    {
+        "translation_en": "Have you prepared dinner?",
+        "german_words": ["Hast", "du", "das", "Abendessen", "vorbereitet", "?"],
+        "distractor_words": ["Bist", "ich", "den", "gedeckt"],
+        "full_sentence_de": "Hast du das Abendessen vorbereitet?"
+    },
+    {
+        "translation_en": "Have they picked up their children?",
+        "german_words": ["Haben", "sie", "ihre", "Kinder", "abgeholt", "?"],
+        "distractor_words": ["Sind", "wir", "seine", "gebracht"],
+        "full_sentence_de": "Haben sie ihre Kinder abgeholt?"
+    },
+    {
+        "translation_en": "When has the meeting started?",
+        "german_words": ["Wann", "hat", "das", "Meeting", "angefangen", "?"],
+        "distractor_words": ["Wo", "ist", "es", "aufgehört"],
+        "full_sentence_de": "Wann hat das Meeting angefangen?"
+    },
+    {
+        "translation_en": "Why have we turned on the heating?",
+        "german_words": ["Warum", "haben", "wir", "die", "Heizung", "angemacht", "?"],
+        "distractor_words": ["Was", "sind", "ihr", "ausgemacht"],
+        "full_sentence_de": "Warum haben wir die Heizung angemacht?"
+    },
+    {
+        "translation_en": "Has your grandmother worked in a hospital?",
+        "german_words": ["Hat", "deine", "Großmutter", "in", "einem", "Krankenhaus", "gearbeitet", "?"],
+        "distractor_words": ["Ist", "Meine", "viele", "studiert"],
+        "full_sentence_de": "Hat deine Großmutter in einem Krankenhaus gearbeitet?"
+    },
+    {
+        "translation_en": "Has the rain stopped?",
+        "german_words": ["Hat", "der", "Regen", "aufgehört", "?"],
+        "distractor_words": ["Ist", "die", "Sonne", "angefangen"],
+        "full_sentence_de": "Hat der Regen aufgehört?"
     }
 ]
