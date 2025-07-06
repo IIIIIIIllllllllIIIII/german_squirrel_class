@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>German Learning Hub - Konjugieren</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: linear-gradient(to right top, #6d28d9, #8b5cf6, #a78bfa, #c4b5fd, #ddd6fe);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 16px;
+            color: #374151; 
+            overflow-x: hidden;
+             -webkit-tap-highlight-color: transparent; 
+        }
+        .card {
+            background-color: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            text-align: center;
+            width: 100%;
+            position: relative;
+        }
+        #mode-selection-card { max-width: 650px; }
+        .trainer-card-base { max-width: 500px; }
+        .stats-card { max-width: 650px; }
+        #lego-mode-card { max-width: 900px; }
+
+        .mode-title { font-size: 1.75rem; font-weight: 700; color: #6d28d9; margin-bottom: 4px; }
+        .mode-title-subtitle { font-size: 1rem; color: #4f46e5; margin-bottom: 24px; }
+
+        .mode-subtitle {
+            font-size: 1.125rem; font-weight: 600; color: #4f46e5; 
+            margin-top: 20px; margin-bottom: 12px; text-align: left;
+            border-bottom: 1px solid #e5e7eb; padding-bottom: 8px;
+        }
+        .radio-group { text-align: left; margin-bottom: 16px; padding-left: 8px; }
+        .radio-group label { margin-left: 8px; font-size: 1rem; color: #374151; cursor:pointer;}
+        .radio-group input[type="radio"] { accent-color: #6d28d9; cursor:pointer;}
+        .radio-label-description { font-size: 0.8rem; color: #6b7280; margin-left: 28px; margin-top: 2px; }
+        
+        .verb-selection-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .verb-selection-controls button { font-size: 0.8rem; padding: 6px 10px; margin-top: 0;}
+
+        #verb-box-selection-area {
+            display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+            margin-top: 8px; margin-bottom: 20px; padding: 10px;
+            background-color: #f9fafb; border-radius: 8px;
+            border: 1px solid #e5e7eb; max-height: 180px; overflow-y: auto;
+        }
+        .verb-select-box {
+            padding: 6px 10px; border: 2px solid #cbd5e1; border-radius: 8px;
+            font-weight: 500; color: #374151; cursor: pointer;
+            transition: all 0.2s ease; text-transform: capitalize; font-size: 0.875rem;
+        }
+        .verb-select-box:hover { border-color: #a78bfa; background-color: #f3f4f6; }
+        .verb-select-box.selected {
+            background-color: #6d28d9; border-color: #5b21b6; color: white; font-weight: 600;
+        }
+
+        .verb-display { font-size: 1.875rem; font-weight: 700; color: #4f46e5; margin-bottom: 16px; }
+        .pronoun-display {
+            font-size: 1.5rem; font-weight: 600; margin-bottom: 16px;
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
+        }
+        .answer-input-field {
+            font-size: 1.25rem; padding: 10px 12px; border: 2px solid #cbd5e1; 
+            border-radius: 8px; text-align: center; width: 100%; max-width: 280px;
+            margin-top: 8px; transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .answer-input-field:focus { outline: none; border-color: #6d28d9; box-shadow: 0 0 0 3px rgba(109, 40, 217, 0.2); }
+        
+        .btn {
+            padding: 12px 24px; border-radius: 8px; font-size: 1rem; font-weight: 600;
+            color: white; cursor: pointer; transition: all 0.3s ease;
+            border: none; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            margin-top: 16px;
+        }
+        .btn:disabled { background-color: #d1d5db !important; color: #6b7280 !important; cursor: not-allowed; opacity: 0.7; }
+        .btn-primary { background-color: #6d28d9; } 
+        .btn-primary:hover:not(:disabled) { background-color: #5b21b6; }
+        .btn-secondary { background-color: #4f46e5; } 
+        .btn-secondary:hover:not(:disabled) { background-color: #4338ca; }
+        .btn-success { background-color: #22c55e; } 
+        .btn-success:hover:not(:disabled) { background-color: #16a34a; }
+        .btn-danger { background-color: #ef4444; } 
+        .btn-danger:hover:not(:disabled) { background-color: #dc2626; }
+
+        .answer-reveal {
+            font-size: 1.125rem; font-weight: 600; margin-top: 16px; padding: 12px;
+            border-radius: 8px; min-height: 40px;
+        }
+        .answer-reveal.correct { color: #059669; background-color: #ecfdf5; border: 1px solid #a7f3d0; display: block;}
+        .answer-reveal.incorrect { color: #dc2626; background-color: #fee2e2; border: 1px solid #fecaca; display: block;}
+        
+        #lego-mode-card .partizip-display {
+            font-size: 1.5rem; font-weight: 700; color: #1d4ed8; margin-top: -1rem; margin-bottom: 1rem;
+            padding: 0.5rem 1rem; background-color: #dbeafe; border-radius: 0.5rem; display: inline-block;
+        }
+        .hidden { display: none !important; }
+
+        /* Other styles from original file are preserved but omitted for brevity */
+        .btn-sm { padding: 8px 16px; font-size: 0.875rem; }
+        .btn-link { display: inline-block; text-decoration: none; }
+        .btn:active:not(:disabled) { transform: translateY(1px); }
+        .btn-warning { background-color: #f59e0b; } 
+        .btn-warning:hover:not(:disabled) { background-color: #d97706; }
+        .feedback-buttons-container { display: flex; justify-content: center; gap: 16px; margin-top: 16px; }
+        .answer-reveal .correct-form { font-weight: 700; }
+        .progress-text { margin-top: 20px; font-size: 0.875rem; color: #6b7280; }
+        .stats-title { font-size: 2rem; font-weight: 700; color: #6d28d9; margin-bottom: 16px; }
+        .stats-summary { font-size: 1.25rem; margin-bottom: 24px; }
+        .stats-buttons-container { display: flex; justify-content: center; gap: 16px; margin-top: 24px; flex-wrap: wrap; }
+        .round-review-container { text-align: left; margin-top: 20px; max-height: 300px; overflow-y: auto; padding: 16px; background-color: #f9fafb; border-radius: 8px; border: 1px solid #e5e7eb; }
+        .round-review-container h3 { font-size: 1.25rem; font-weight: 600; color: #4f46e5; margin-bottom: 12px; text-align: center; }
+        .round-review-container ul { list-style-type: none; padding-left: 0; }
+        .verb-review-title { font-size: 1.1rem; font-weight: 700; color: #6d28d9; margin-top: 12px; margin-bottom: 6px; padding-bottom: 4px; border-bottom: 1px solid #ddd6fe; }
+        .verb-review-title:first-child { margin-top: 0; }
+        .pronoun-review-item { padding: 8px 4px; border-bottom: 1px dashed #e5e7eb; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; margin-left: 16px; }
+        .pronoun-review-item:last-child { border-bottom: none; }
+        .pronoun-review-item .pronoun-name { font-style: italic; color: #374151; min-width: 70px; }
+        .pronoun-review-item .attempt-details { text-align: right; flex-grow: 1; }
+        .user-answer-correct { color: #16a34a; font-weight: bold; }
+        .user-answer-incorrect { color: #ef4444; text-decoration: line-through; }
+        .skipped-text { color: #f59e0b; font-style: italic; }
+        .correct-answer-stats { color: #059669; font-weight: bold; }
+        .mental-mark-correct { color: #16a34a; }
+        .mental-mark-incorrect { color: #ef4444; }
+        .message { margin-top: 1rem; color: #ef4444; font-weight: 500; }
+        #lego-mode-card h1 {font-size: 1.75rem; }
+        .lego-draggable-form { background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 100%); color: #374151; padding: 10px 20px; border-radius: 9999px; cursor: grab; font-weight: 600; font-size: 1.125rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); transition: all 0.2s ease-out; border: 2px solid transparent; user-select: none; -webkit-user-select: none; -ms-user-select: none;}
+        .lego-draggable-form:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); }
+        .lego-draggable-form.dragging { opacity: 0.6; transform: rotate(3deg) scale(0.95); cursor: grabbing; }
+        .lego-pronoun-slot { background-color: #f9fafb; border-radius: 0.75rem; padding: 1rem; display: flex; align-items: center; border: 1px solid #e5e7eb; transition: box-shadow 0.3s; }
+        .lego-pronoun-slot:hover { box-shadow: 0 4px 10px rgba(0,0,0,0.07); }
+        .lego-pronoun-label { font-size: 1.125rem; font-weight: 600; color: #4b5563; margin-right: 1rem; min-width: 90px; text-align: right; }
+        .lego-drop-box { flex-grow: 1; min-height: 50px; background-color: #e5e7eb; border-radius: 0.5rem; border: 2px dashed #9ca3af; display: flex; justify-content: center; align-items: center; transition: all 0.25s ease-in-out; }
+        .lego-drop-box.drag-over { background-color: #ccfbf1; border-color: #5eead4; transform: scale(1.02); }
+        .lego-drop-box.filled.correct { border-style: solid; border-color: #22c55e; background-color: #dcfce7; }
+        .lego-drop-box.filled.correct .lego-draggable-form { cursor: default; background-image: linear-gradient(to right, #86efac 0%, #34d399 100%); color: white; border-color: #10b981; box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.06); }
+        .lego-drop-box.incorrect-flash { animation: lego-flash-red 0.5s; }
+        @keyframes lego-flash-red { 0%, 100% { background-color: #e5e7eb; border-color: #9ca3af;} 50% { background-color: #fee2e2; border-color: #fca5a5;} }
+        #feedback-lego.success { background-color: #d1fae5; color: #065f46; display: block; border: 1px solid #6ee7b7; }
+        #feedback-lego.error { background-color: #fee2e2; color: #991b1b; display: block; border: 1px solid #fca5a5; }
+        #lego-buttons-container {display: flex; justify-content: space-between; align-items: center; margin-top: 24px; flex-wrap: wrap; gap: 10px;}
+    </style>
+</head>
+<body>
+    <div id="mode-selection-card" class="card">
+        <h2 class="mode-title">Verb Practice Setup</h2>
+        <p class="mode-title-subtitle">Configuración de Práctica de Verbos</p>
+
+        <!-- NEW: Tense Selection -->
+        <h3 class="mode-subtitle">1. Choose Tense / Elige la Forma Verbal:</h3>
+        <div class="radio-group">
+            <div> 
+                <input type="radio" id="tense-type-present" name="tense-type" value="present" checked> 
+                <label for="tense-type-present">Präsens / Present Tense</label> 
+            </div>
+            <div class="mt-2"> 
+                <input type="radio" id="tense-type-perfekt" name="tense-type" value="perfekt"> 
+                <label for="tense-type-perfekt">Perfekt / Past Tense</label> 
+            </div>
+        </div>
+
+        <!-- UPDATED: Mode Selection -->
+        <h3 class="mode-subtitle">2. Choose Quiz Type / Elige el Tipo de Práctica:</h3>
+        <div class="radio-group">
+            <div> 
+                <input type="radio" id="quiz-type-classic" name="quiz-type" value="classic" checked> 
+                <label for="quiz-type-classic">Classic Quiz / Práctica Clásica (Formas Verbales)</label> 
+            </div>
+            <div class="mt-2"> 
+                <input type="radio" id="quiz-type-lego" name="quiz-type" value="lego"> 
+                <label for="quiz-type-lego">LEGO Mode / Modo LEGO (Arrastrar y Soltar)</label> 
+            </div>
+        </div>
+
+        <div id="verb-selection-options"> 
+            <h3 class="mode-subtitle">3. Choose Verbs / Elige los Verbos:</h3>
+            <div class="verb-selection-controls">
+                <button id="select-all-verbs-btn" class="btn btn-sm btn-secondary">Select All</button>
+                <button id="deselect-all-verbs-btn" class="btn btn-sm btn-secondary">Deselect All</button>
+            </div>
+            <div id="verb-box-selection-area"></div>
+        </div>
+
+        <div id="classic-quiz-specific-options">
+            <h3 class="mode-subtitle" id="classic-input-method-title">4. Input Method (Classic Quiz):</h3>
+            <div class="radio-group" id="classic-input-method-group">
+                <div> 
+                    <input type="radio" id="input-mode-typing" name="input-method-mode" value="typing" checked> 
+                    <label for="input-mode-typing">Typing Mode</label> 
+                </div>
+                <div class="mt-2"> 
+                    <input type="radio" id="input-mode-mental" name="input-method-mode" value="mental"> 
+                    <label for="input-mode-mental">Mental Mode</label> 
+                </div>
+            </div>
+        </div>
+
+        <button id="start-quiz-button" class="btn btn-primary w-full sm:w-auto mt-6">Start Practice</button>
+        <p id="mode-selection-message" class="message hidden"></p>
+        <div class="mt-10 pt-6 border-t border-gray-200">
+             <a href="index.html" class="btn btn-secondary btn-sm btn-link">← Back to Main Menu</a>
+        </div>
+    </div>
+
+    <!-- Trainer and Stats cards remain the same as original file but are omitted for brevity -->
+    <div id="trainer-card" class="card trainer-card-base hidden">
+        <h1 id="trainer-title" class="text-2xl sm:text-3xl font-bold text-violet-700 mb-4">Verb Practice</h1>
+        <p id="trainer-instructions" class="text-gray-600 mb-6">Instructions</p>
+        <div id="verb-container">
+            <div class="verb-display" id="verb-infinitive">Verb</div>
+            <div class="pronoun-display"> <span id="pronoun">Pronoun</span> <input type="text" id="answer-input" class="answer-input-field" placeholder="Type here..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"> </div>
+        </div>
+        <div id="answer-reveal-container" class="answer-reveal hidden">Reveal</div>
+        <button id="action-button" class="btn btn-warning w-full sm:w-auto">Show Answer / Skip</button>
+        <div id="feedback-buttons-container" class="feedback-buttons-container hidden">
+            <button id="correct-button" class="btn btn-success">👍 Correct</button>
+            <button id="incorrect-button" class="btn btn-danger">👎 Incorrect</button>
+        </div>
+        <div id="progress-indicator" class="progress-text">Progress</div>
+        <div class="mt-4"> <button id="stop-classic-quiz-btn" class="btn btn-danger btn-sm">End & Stats</button> </div>
+    </div>
+
+    <div id="stats-display-card" class="card stats-card hidden">
+        <h2 id="stats-title" class="stats-title">Round Complete!</h2>
+        <p id="stats-summary" class="stats-summary">Summary</p>
+        <div id="round-review-container" class="round-review-container hidden"> <h3>Round Review:</h3> <ul id="review-ul"></ul> </div>
+        <div class="stats-buttons-container">
+            <button id="repeat-round-button" class="btn btn-secondary w-full sm:w-auto">Repeat Round</button>
+            <button id="new-round-button" class="btn btn-primary w-full sm:w-auto">New Round (Setup)</button>
+        </div>
+    </div>
+
+    <div id="lego-mode-card" class="card hidden">
+        <div class="flex justify-between items-center mb-6"> <h1 id="lego-title" class="text-xl sm:text-2xl font-bold text-violet-700">LEGO Mode</h1> <button id="back-to-menu-lego" class="btn btn-secondary btn-sm py-2 px-4">Menu</button> </div>
+        <div id="verb-task-area-lego" class="text-center mb-6 p-4 bg-indigo-50 rounded-lg border border-indigo-200"> 
+            <h2 id="current-verb-infinitive-lego" class="text-2xl sm:text-3xl font-bold text-indigo-700 mb-1">Verb</h2> 
+            <p id="current-verb-translation-lego" class="text-md text-indigo-500 italic">(Übersetzung)</p> 
+            <div id="partizip-display-container-lego" class="hidden mt-2">
+                 <span id="partizip-display-lego" class="partizip-display"></span>
+            </div>
+        </div>
+        <div id="forms-pool-lego" class="mb-8 p-4 bg-slate-100 rounded-lg min-h-[80px] flex flex-wrap gap-4 justify-center items-center border-2 border-dashed border-slate-300"></div>
+        <div id="pronoun-slots-lego" class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 mb-6"> </div>
+        <div id="feedback-lego" class="text-center font-semibold p-3 rounded-md min-h-[24px] mb-6"></div>
+        <div id="lego-buttons-container"> 
+            <button id="stop-lego-round-btn" class="btn btn-danger btn-sm">End & Stats</button>
+            <button id="next-verb-btn-lego" class="btn btn-primary" disabled>Next Verb</button> 
+        </div>
+    </div>
+
+    <script>
+        // --- Global Data & State ---
+        let globalVerbsList = [];
+        let dataLoaded = false;
+        const pronouns = ["ich", "du", "er/sie/es", "wir", "ihr", "sie/Sie"]; 
+        let hilfsverbenData = {};
+
+        // --- DOM Elements ---
+        const modeSelectionCardEl = document.getElementById('mode-selection-card');
+        const tensePresentRadio = document.getElementById('tense-type-present');
+        const tensePerfektRadio = document.getElementById('tense-type-perfekt');
+        const quizTypeClassicRadio = document.getElementById('quiz-type-classic');
+        const quizTypeLegoRadio = document.getElementById('quiz-type-lego');
+        const verbBoxSelectionAreaEl = document.getElementById('verb-box-selection-area'); 
+        const classicQuizSpecificOptionsEl = document.getElementById('classic-quiz-specific-options');
+        const startQuizButton = document.getElementById('start-quiz-button');
+        const modeSelectionMessageEl = document.getElementById('mode-selection-message');
+        
+        // (Other DOM elements are referenced as needed)
+
+        // --- State Variables ---
+        let currentTense = 'present';
+        let currentQuizType = 'classic'; 
+        let currentInputMethod = 'typing';
+        let activeVerbsForQuiz = []; 
+        let allPossiblePairs = []; 
+        let shuffledPairs = [];
+        let userRoundData = []; 
+        let currentIndex = 0;
+        
+        // --- App Initialization ---
+        async function loadAppData() {
+            try {
+                // IMPORTANT: Fetching from the new JSON file with Perfekt data
+                const verbsResponse = await fetch('verbs_with_perfekt.json');
+                if (!verbsResponse.ok) throw new Error(`HTTP error! Status: ${verbsResponse.status} for verbs_with_perfekt.json`);
+                globalVerbsList = await verbsResponse.json();
+                
+                // Extract auxiliary verbs (haben/sein) for later use
+                hilfsverbenData.haben = globalVerbsList.find(v => v.id === 'haben');
+                hilfsverbenData.sein = globalVerbsList.find(v => v.id === 'sein');
+
+                if (!hilfsverbenData.haben || !hilfsverbenData.sein) {
+                    throw new Error("'haben' and/or 'sein' are missing from the verbs JSON, which are required for Perfekt tense.");
+                }
+
+                dataLoaded = true;
+                initializeAppUI(); 
+            } catch (error) {
+                console.error("Could not load application data:", error);
+                modeSelectionCardEl.innerHTML = `<h2 class="mode-title text-red-500">Error Loading Data</h2><p class="text-gray-700">${error.message}</p><button onclick="location.reload()" class="btn btn-primary mt-4">Try Reloading</button>`;
+            }
+        }
+        
+        function initializeAppUI() {
+            populateVerbSelectionBoxes(); 
+            handleQuizTypeChange(); 
+            startQuizButton.disabled = false;
+            startQuizButton.textContent = "Start Practice";
+        }
+
+        function showModeSelectionScreen() {
+            modeSelectionCardEl.classList.remove('hidden');
+            document.getElementById('trainer-card').classList.add('hidden');
+            document.getElementById('stats-display-card').classList.add('hidden');
+            document.getElementById('lego-mode-card').classList.add('hidden');
+            
+            // Reset state
+            activeVerbsForQuiz = []; 
+            userRoundData = []; 
+            currentIndex = 0;
+            
+            if (dataLoaded) { populateVerbSelectionBoxes(); } 
+            modeSelectionMessageEl.classList.add('hidden');
+        }
+
+        function populateVerbSelectionBoxes() {
+            verbBoxSelectionAreaEl.innerHTML = '';
+            // Filter out auxiliary verbs from being selectable options themselves
+            const selectableVerbs = globalVerbsList.filter(v => v.id !== 'haben' && v.id !== 'sein');
+            selectableVerbs.forEach(verb => {
+                const box = document.createElement('div');
+                box.className = 'verb-select-box selected';
+                box.textContent = verb.infinitive;
+                box.dataset.verbId = verb.id;
+                box.addEventListener('click', () => box.classList.toggle('selected'));
+                verbBoxSelectionAreaEl.appendChild(box);
+            });
+        }
+
+        function handleQuizTypeChange() {
+            currentQuizType = document.querySelector('input[name="quiz-type"]:checked').value;
+            classicQuizSpecificOptionsEl.classList.toggle('hidden', currentQuizType !== 'classic');
+        }
+
+        function handleStartQuiz() {
+            const selectedBoxes = verbBoxSelectionAreaEl.querySelectorAll('.verb-select-box.selected');
+            activeVerbsForQuiz = Array.from(selectedBoxes)
+                .map(box => globalVerbsList.find(v => v.id === box.dataset.verbId))
+                .filter(v => v); 
+            
+            if (activeVerbsForQuiz.length === 0) {
+                modeSelectionMessageEl.textContent = "Please select at least one verb.";
+                modeSelectionMessageEl.classList.remove('hidden');
+                return;
+            }
+
+            currentTense = document.querySelector('input[name="tense-type"]:checked').value;
+            currentQuizType = document.querySelector('input[name="quiz-type"]:checked').value;
+            currentInputMethod = document.querySelector('input[name="input-method-mode"]:checked').value;
+
+            modeSelectionCardEl.classList.add('hidden');
+
+            if (currentQuizType === 'classic') {
+                prepareAndStartClassicQuiz();
+            } else if (currentQuizType === 'lego') {
+                initializeLegoMode();
+            }
+        }
+
+        // --- Classic Quiz Logic (Handles both Tenses) ---
+        function prepareAndStartClassicQuiz() {
+            allPossiblePairs = [];
+            activeVerbsForQuiz.forEach(verb => {
+                pronouns.forEach(pronoun => {
+                    allPossiblePairs.push({ verb, pronoun });
+                });
+            });
+            
+            shuffledPairs = [...allPossiblePairs];
+            shuffleArray(shuffledPairs);
+            
+            userRoundData = []; 
+            currentIndex = 0; 
+            document.getElementById('trainer-card').classList.remove('hidden');
+            displayClassicChallenge();
+        }
+
+        function displayClassicChallenge() {
+            if (currentIndex >= shuffledPairs.length) {
+                showRoundStatistics();
+                return;
+            }
+            const { verb, pronoun } = shuffledPairs[currentIndex];
+            let correctAnswerForm;
+            const trainerTitleEl = document.getElementById('trainer-title');
+            const trainerInstructionsEl = document.getElementById('trainer-instructions');
+            
+            if (currentTense === 'present') {
+                trainerTitleEl.textContent = "Präsens Practice";
+                trainerInstructionsEl.textContent = "Type the correct present tense form.";
+                correctAnswerForm = verb.conjugations[pronoun];
+            } else { // Perfekt
+                trainerTitleEl.textContent = "Perfekt Tense Practice";
+                trainerInstructionsEl.textContent = "Type the auxiliary verb + participle (e.g., habe gehört).";
+                const hilfsverbData = hilfsverbenData[verb.hilfsverb];
+                const conjugatedHilfsverb = hilfsverbData.conjugations[pronoun];
+                correctAnswerForm = `${conjugatedHilfsverb} ${verb.partizip_perfekt}`;
+            }
+
+            // Store correct answer globally for the current question
+            window.currentCorrectAnswer = correctAnswerForm;
+
+            document.getElementById('verb-infinitive').textContent = `Verb: ${verb.infinitive.toUpperCase()}`;
+            document.getElementById('pronoun').textContent = pronoun;
+            
+            // Reset UI for the new question
+            const answerInputEl = document.getElementById('answer-input');
+            answerInputEl.value = '';
+            answerInputEl.disabled = false;
+            answerInputEl.classList.toggle('hidden', currentInputMethod === 'mental');
+            
+            const actionButton = document.getElementById('action-button');
+            actionButton.classList.remove('hidden');
+            actionButton.textContent = currentInputMethod === 'typing' ? "Show / Skip" : "Show Answer";
+
+            document.getElementById('answer-reveal-container').classList.add('hidden');
+            document.getElementById('feedback-buttons-container').classList.add('hidden');
+            
+            if (currentInputMethod === 'typing') answerInputEl.focus();
+            document.getElementById('progress-indicator').textContent = `Question: ${currentIndex + 1} / ${shuffledPairs.length}`;
+        }
+        
+        // --- LEGO Mode Logic (Handles both Tenses) ---
+        function initializeLegoMode() {
+            document.getElementById('lego-mode-card').classList.remove('hidden');
+            window.lego_currentQuizVerbs = [...activeVerbsForQuiz];
+            shuffleArray(window.lego_currentQuizVerbs);
+            window.lego_completedVerbsData = [];
+            lego_loadNextVerb();
+        }
+
+        function lego_loadNextVerb() {
+            const legoFeedbackEl = document.getElementById('feedback-lego');
+            const legoNextVerbBtn = document.getElementById('next-verb-btn-lego');
+            legoFeedbackEl.classList.add('hidden');
+            legoNextVerbBtn.disabled = true;
+
+            if (window.lego_currentQuizVerbs.length === 0) {
+                lego_showLegoStats();
+                return;
+            }
+            
+            const verb = window.lego_currentQuizVerbs.shift();
+            window.lego_currentVerbData = verb; // Store current verb data
+            
+            const legoTitleEl = document.getElementById('lego-title');
+            const infinitiveEl = document.getElementById('current-verb-infinitive-lego');
+            const translationEl = document.getElementById('current-verb-translation-lego');
+            const partizipContainer = document.getElementById('partizip-display-container-lego');
+            const partizipEl = document.getElementById('partizip-display-lego');
+            const formsPoolEl = document.getElementById('forms-pool-lego');
+
+            infinitiveEl.textContent = verb.infinitive.toUpperCase();
+            translationEl.textContent = `(${verb.translation})`;
+            formsPoolEl.innerHTML = '';
+            
+            let formsToDrag = [];
+            if (currentTense === 'present') {
+                legoTitleEl.textContent = "LEGO Mode: Präsens";
+                partizipContainer.classList.add('hidden');
+                formsToDrag = Object.values(verb.conjugations);
+            } else { // Perfekt
+                legoTitleEl.textContent = "LEGO Mode: Perfekt";
+                partizipContainer.classList.remove('hidden');
+                partizipEl.textContent = verb.partizip_perfekt;
+                const hilfsverbData = hilfsverbenData[verb.hilfsverb];
+                formsToDrag = Object.values(hilfsverbData.conjugations);
+            }
+
+            shuffleArray(formsToDrag);
+            formsToDrag.forEach(formText => {
+                const formDiv = document.createElement('div');
+                formDiv.className = 'lego-draggable-form';
+                formDiv.textContent = formText;
+                formDiv.draggable = true;
+                formDiv.dataset.formText = formText;
+                // Add drag/touch listeners
+                formDiv.addEventListener('dragstart', (e) => { window.lego_draggedFormElement = e.target; e.target.classList.add('dragging'); });
+                formDiv.addEventListener('dragend', (e) => { if(window.lego_draggedFormElement) window.lego_draggedFormElement.classList.remove('dragging'); });
+                formsPoolEl.appendChild(formDiv);
+            });
+            
+            lego_setupPronounSlots();
+        }
+
+        function lego_setupPronounSlots() {
+            const container = document.getElementById('pronoun-slots-lego');
+            container.innerHTML = '';
+            window.lego_correctlyPlacedCount = 0;
+            pronouns.forEach(pronounKey => {
+                const slotDiv = document.createElement('div');
+                slotDiv.className = 'lego-pronoun-slot';
+                slotDiv.innerHTML = `
+                    <span class="lego-pronoun-label">${pronounKey}</span>
+                    <div class="lego-drop-box" data-pronoun="${pronounKey}"></div>
+                `;
+                container.appendChild(slotDiv);
+            });
+            // Re-add drop listeners after creating slots
+            container.querySelectorAll('.lego-drop-box').forEach(box => {
+                box.addEventListener('dragover', (e) => e.preventDefault());
+                box.addEventListener('dragenter', (e) => e.target.classList.add('drag-over'));
+                box.addEventListener('dragleave', (e) => e.target.classList.remove('drag-over'));
+                box.addEventListener('drop', lego_handleDrop);
+            });
+        }
+        
+        function lego_handleDrop(e) {
+            e.preventDefault();
+            const dropBox = e.target.closest('.lego-drop-box');
+            const draggedEl = window.lego_draggedFormElement;
+            if (!dropBox || dropBox.hasChildNodes() || !draggedEl) return;
+
+            dropBox.classList.remove('drag-over');
+            const targetPronoun = dropBox.dataset.pronoun;
+            const droppedForm = draggedEl.dataset.formText;
+            
+            const verb = window.lego_currentVerbData;
+            let correctForm;
+
+            if (currentTense === 'present') {
+                correctForm = verb.conjugations[targetPronoun];
+            } else { // Perfekt
+                const hilfsverbData = hilfsverbenData[verb.hilfsverb];
+                correctForm = hilfsverbData.conjugations[targetPronoun];
+            }
+
+            if (correctForm === droppedForm) {
+                dropBox.appendChild(draggedEl);
+                draggedEl.draggable = false;
+                draggedEl.classList.remove('dragging');
+                dropBox.classList.add('filled', 'correct');
+                window.lego_correctlyPlacedCount++;
+                if (window.lego_correctlyPlacedCount === pronouns.length) {
+                    document.getElementById('next-verb-btn-lego').disabled = false;
+                    triggerConfetti();
+                }
+            } else {
+                dropBox.classList.add('lego-incorrect-flash');
+                setTimeout(() => dropBox.classList.remove('lego-incorrect-flash'), 500);
+            }
+        }
+
+        // Placeholder for stats functions to be filled
+        function showRoundStatistics() { 
+            console.log("Showing stats for Classic mode...");
+            document.getElementById('trainer-card').classList.add('hidden');
+            document.getElementById('stats-display-card').classList.remove('hidden');
+        }
+        function lego_showLegoStats() { 
+            console.log("Showing stats for LEGO mode...");
+            document.getElementById('lego-mode-card').classList.add('hidden');
+            document.getElementById('stats-display-card').classList.remove('hidden');
+        }
+
+        // --- Event Listeners ---
+        function setupEventListeners() {
+            tensePresentRadio.addEventListener('change', handleQuizTypeChange);
+            tensePerfektRadio.addEventListener('change', handleQuizTypeChange);
+            quizTypeClassicRadio.addEventListener('change', handleQuizTypeChange);
+            quizTypeLegoRadio.addEventListener('change', handleQuizTypeChange);
+            startQuizButton.addEventListener('click', handleStartQuiz);
+            document.getElementById('new-round-button').addEventListener('click', showModeSelectionScreen);
+            document.getElementById('back-to-menu-lego').addEventListener('click', showModeSelectionScreen);
+            document.getElementById('next-verb-btn-lego').addEventListener('click', lego_loadNextVerb);
+            
+            // Simplified action button handler
+            document.getElementById('action-button').addEventListener('click', () => {
+                // Logic for skip/show answer
+                console.log("Action button clicked");
+                // For now, just proceed to next question
+                currentIndex++;
+                displayClassicChallenge();
+            });
+        }
+        
+        // --- Initial Application Start ---
+        document.addEventListener('DOMContentLoaded', () => {
+            setupEventListeners();
+            showModeSelectionScreen();
+            startQuizButton.disabled = true;
+            startQuizButton.textContent = "Loading Data...";
+            loadAppData(); 
+        });
+    </script>
+</body>
+</html>
