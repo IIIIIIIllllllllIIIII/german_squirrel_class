@@ -1,0 +1,86 @@
+[
+    {
+        "id": "mv1",
+        "full_sentence_de": "Ich kann Deutsch sprechen",
+        "translation_en": "I can speak German.",
+        "german_words": ["Ich", "kann", "Deutsch", "sprechen"],
+        "distractor_words": ["will", "können", "willst", "spricht"]
+    },
+    {
+        "id": "mv2",
+        "full_sentence_de": "Willst du Pizza essen?",
+        "translation_en": "Do you want to eat pizza?",
+        "german_words": ["Willst", "du", "Pizza", "essen?"],
+        "distractor_words": ["Kannst", "wollen", "will", "isst"]
+    },
+    {
+        "id": "mv3",
+        "full_sentence_de": "Er will heute nicht arbeiten",
+        "translation_en": "He doesn't want to work today.",
+        "german_words": ["Er", "will", "heute", "nicht", "arbeiten"],
+        "distractor_words": ["kann", "wollen", "willst", "arbeitet"]
+    },
+    {
+        "id": "mv4",
+        "full_sentence_de": "Wir können am Abend kochen",
+        "translation_en": "We can cook in the evening.",
+        "german_words": ["Wir", "können", "am", "Abend", "kochen"],
+        "distractor_words": ["wollen", "kann", "wollt", "kocht"]
+    },
+    {
+        "id": "mv5",
+        "full_sentence_de": "Sie kann nicht schlafen",
+        "translation_en": "She can't sleep.",
+        "german_words": ["Sie", "kann", "nicht", "schlafen"],
+        "distractor_words": ["will", "können", "könnt", "schläft"]
+    },
+    {
+        "id": "mv6",
+        "full_sentence_de": "Ich will ein Buch lesen",
+        "translation_en": "I want to read a book.",
+        "german_words": ["Ich", "will", "ein", "Buch", "lesen"],
+        "distractor_words": ["kann", "wollen", "wollt", "liest"]
+    },
+    {
+        "id": "mv7",
+        "full_sentence_de": "Könnt ihr das Fenster aufmachen?",
+        "translation_en": "Can you (plural) open the window?",
+        "german_words": ["Könnt", "ihr", "das", "Fenster", "aufmachen?"],
+        "distractor_words": ["Wollt", "kann", "wollen", "macht auf"]
+    },
+    {
+        "id": "mv8",
+        "full_sentence_de": "Sie wollen Musik hören",
+        "translation_en": "They want to listen to music.",
+        "german_words": ["Sie", "wollen", "Musik", "hören"],
+        "distractor_words": ["können", "will", "willst", "hört"]
+    },
+    {
+        "id": "mv9",
+        "full_sentence_de": "Du kannst das Auto fahren",
+        "translation_en": "You can drive the car.",
+        "german_words": ["Du", "kannst", "das", "Auto", "fahren"],
+        "distractor_words": ["willst", "kann", "können", "fährst"]
+    },
+    {
+        "id": "mv10",
+        "full_sentence_de": "Ich will nicht aufräumen",
+        "translation_en": "I don't want to clean up.",
+        "german_words": ["Ich", "will", "nicht", "aufräumen"],
+        "distractor_words": ["kann", "wollen", "willst", "räume auf"]
+    },
+    {
+        "id": "mv11",
+        "full_sentence_de": "Kann er schwimmen?",
+        "translation_en": "Can he swim? (Note: 'schwimmen' may be a new verb)",
+        "german_words": ["Kann", "er", "schwimmen?"],
+        "distractor_words": ["Will", "können", "kannst", "schwimmt"]
+    },
+    {
+        "id": "mv12",
+        "full_sentence_de": "Wir wollen einen Film sehen",
+        "translation_en": "We want to see a movie.",
+        "german_words": ["Wir", "wollen", "einen", "Film", "sehen"],
+        "distractor_words": ["können", "will", "wollt", "seht"]
+    }
+]
