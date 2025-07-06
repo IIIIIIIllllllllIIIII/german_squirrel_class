@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Erandis Secret German Squirrel Headquarters</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Unkempt:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -13,37 +13,12 @@
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23437057' fill-opacity='0.2'%3E%3Cpath d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM40 1.41l-2.83 2.83-1.41-1.41L38.59 0H40v1.41z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             min-height: 100vh;
             display: flex;
-            flex-direction: column; /* Allow header and main card to stack */
-            justify-content: flex-start;
+            justify-content: center;
             align-items: center;
             margin: 0;
             padding: 2rem 1rem;
         }
         
-        .header-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 2rem;
-            width: 100%;
-            margin-bottom: 2rem;
-        }
-
-        .title {
-            font-family: 'Creepster', cursive;
-            font-size: 6rem; /* Increased font size */
-            font-weight: 700;
-            color: #E3DE61; /* Yellow from palette */
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
-            text-align: center;
-        }
-
-        .dancing-squirrel {
-            height: 150px; /* Increased size */
-            width: auto;
-            flex-shrink: 0;
-        }
-
         .main-card {
             background-color: rgba(0,0,0,0.2);
             padding: 2rem;
@@ -53,6 +28,38 @@
             text-align: center;
             width: 100%;
             max-width: 1100px;
+        }
+
+        .title-card {
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            border: 2px solid #E3DE61;
+            background-color: rgba(0,0,0,0.3);
+        }
+
+        #title-background-gif {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .title {
+            font-family: 'Unkempt', cursive;
+            font-size: 4rem;
+            font-weight: 700;
+            color: #E3DE61; /* Yellow from palette */
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            text-align: center;
+            position: relative;
+            z-index: 2;
         }
         
         .subtitle {
@@ -76,9 +83,9 @@
         }
         
         .level-title {
-            font-family: 'Creepster', cursive;
+            font-family: 'Unkempt', cursive;
             font-size: 3rem;
-            font-weight: 600;
+            font-weight: 700;
             color: #E3DE61;
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
@@ -145,17 +152,17 @@
             .columns-container {
                 flex-direction: row;
             }
+            .title {
+                font-size: 5rem;
+            }
         }
         
         @media (max-width: 768px) {
             .title { font-size: 3rem; }
-            .dancing-squirrel { height: 100px; }
         }
 
         @media (max-width: 640px) {
-            .header-container { flex-direction: column; gap: 1rem; }
             .title { font-size: 2.5rem; }
-            .dancing-squirrel { height: 80px; }
             .level-title { font-size: 2.5rem; }
             .main-title-lang { font-size: 1rem; }
             .translation-lang { font-size: 0.75em; }
@@ -165,12 +172,12 @@
     </style>
 </head>
 <body>
-    <div class="header-container">
-        <h1 class="title">Erandis Secret German Squirrel Headquarters</h1>
-        <img src="animations/dance.webp" alt="Dancing Squirrel" class="dancing-squirrel">
-    </div>
-
     <div class="main-card">
+        <div class="title-card">
+            <img id="title-background-gif" src="" alt="Dynamic title background">
+            <h1 class="title">Erandis Secret German Squirrel Headquarters</h1>
+        </div>
+
         <p class="subtitle">Choose a quiz to practice German / Elige un quiz para practicar alemán</p>
         
         <div class="columns-container">
@@ -288,17 +295,26 @@
             ];
 
             function shuffleArray(array) {
-                for (let i = array.length - 1; i > 0; i--) {
+                const shuffled = [...array];
+                for (let i = shuffled.length - 1; i > 0; i--) {
                     const j = Math.floor(Math.random() * (i + 1));
-                    [array[i], array[j]] = [array[j], array[i]];
+                    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
                 }
+                return shuffled;
             }
 
-            shuffleArray(squirrelAnimations);
+            // --- Assign random animation to title card background ---
+            const titleBgElement = document.getElementById('title-background-gif');
+            if (titleBgElement) {
+                const randomTitleAnimation = squirrelAnimations[Math.floor(Math.random() * squirrelAnimations.length)];
+                titleBgElement.src = 'animations/' + randomTitleAnimation;
+            }
 
+            // --- Assign a unique random animation to each quiz item ---
+            const shuffledAnimations = shuffleArray(squirrelAnimations);
             const quizAnimationElements = document.querySelectorAll('.quiz-animation');
             quizAnimationElements.forEach((imgElement, index) => {
-                const animationFile = squirrelAnimations[index % squirrelAnimations.length];
+                const animationFile = shuffledAnimations[index % shuffledAnimations.length];
                 imgElement.src = 'animations/' + animationFile;
             });
         });
