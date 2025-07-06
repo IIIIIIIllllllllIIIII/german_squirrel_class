@@ -10,7 +10,7 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-image: linear-gradient(to right top, #ddd6fe, #c7d2fe, #bfdbfe, #a7f3d0, #fed7aa); /* Purple to blue to green to orange gradient */
+            background-image: linear-gradient(to right top, #ddd6fe, #c7d2fe, #bfdbfe, #a7f3d0, #fed7aa); /* Purple to blue to green to orange */
             display: flex;
             justify-content: center;
             align-items: flex-start; 
@@ -201,7 +201,8 @@
         </div>
 
         <div id="drop-zone-container" class="drop-zone-container">
-            </div>
+            <!-- Word slots will be generated here -->
+        </div>
        
         <div class="help-tip">
             <span>💡</span>
@@ -209,7 +210,8 @@
         </div>
 
         <div id="draggable-pool" class="draggable-pool">
-            </div>
+            <!-- Draggable words will be generated here -->
+        </div>
        
         <div id="feedback-message" class="feedback-area hidden"></div>
         <div id="correct-sentence-feedback" class="text-green-700 font-semibold mt-2 hidden"></div>
@@ -392,7 +394,9 @@
             item.addEventListener('dragstart', handleDragStart);
             item.addEventListener('dragend', handleDragEnd);
             item.addEventListener('touchstart', handleTouchStart, { passive: false });
-            item.addEventListener('click', handleItemClick, true); // Use capture phase
+            item.addEventListener('touchend', handleTouchEnd);
+            item.addEventListener('touchcancel', handleTouchEnd);
+            item.addEventListener('click', handleItemClick);
             return item;
         }
 
@@ -422,41 +426,44 @@
         }
 
         // --- EVENT HANDLERS (DRAG & DROP + TOUCH) ---
-        function handleItemClick(e) {
-            console.log('Item clicked!', e.currentTarget); // Debug log
-            e.preventDefault();
-            e.stopPropagation();
-           
-            const item = e.currentTarget; // Use currentTarget instead of closest
-           
-            // If item is in a slot, move it back to the pool with animation
-            if (item && item.parentElement && item.parentElement.classList.contains('draggable-item-slot')) {
-                console.log('Moving item back to pool'); // Debug log
-                const slot = item.parentElement;
-               
-                // Add a small animation effect
-                item.style.transform = 'scale(0.8)';
-                item.style.transition = 'transform 0.15s ease';
-               
-                setTimeout(() => {
-                    slot.classList.remove('filled');
-                    draggablePoolEl.appendChild(item); 
-                    item.classList.remove('correct-in-slot', 'incorrect-in-slot');
-                    item.style.transform = ''; // Reset transform
-                    item.style.transition = ''; // Reset transition
-                   
-                    // Re-enable check button if we're not in results mode
-                    if (nextTaskBtn.classList.contains('hidden')) {
-                        checkAnswerBtn.disabled = false;
-                    }
-                   
-                    // Clear any error feedback since user is making changes
-                    if (feedbackMessageEl.classList.contains('error')) {
-                        feedbackMessageEl.classList.add('hidden');
-                        correctSentenceFeedbackEl.classList.add('hidden');
-                    }
-                }, 150);
+        function returnItemToPool(item) {
+            if (!item) return;
+            const slot = item.parentElement;
+            if (!slot || !slot.classList.contains('draggable-item-slot')) return;
+
+            // If the answer was already marked correct, do nothing.
+            if (feedbackMessageEl.classList.contains('success')) {
+                return;
             }
+            
+            // Add a small animation effect
+            item.style.transform = 'scale(0.8)';
+            item.style.transition = 'transform 0.15s ease';
+            
+            setTimeout(() => {
+                slot.classList.remove('filled');
+                draggablePoolEl.appendChild(item); 
+                item.classList.remove('correct-in-slot', 'incorrect-in-slot');
+                item.style.transform = ''; // Reset transform
+                item.style.transition = ''; // Reset transition
+                
+                // If we are in the "results" state, revert to the "answering" state.
+                if (!nextTaskBtn.classList.contains('hidden')) {
+                    nextTaskBtn.classList.add('hidden');
+                    checkAnswerBtn.classList.remove('hidden');
+                    checkAnswerBtn.disabled = false;
+                    feedbackMessageEl.classList.add('hidden');
+                    correctSentenceFeedbackEl.classList.add('hidden');
+                    dropZoneContainerEl.querySelectorAll('.draggable-item').forEach(otherItem => {
+                        otherItem.classList.remove('correct-in-slot', 'incorrect-in-slot');
+                    });
+                }
+            }, 150);
+        }
+
+        function handleItemClick(e) {
+            e.preventDefault();
+            returnItemToPool(e.currentTarget);
         }
 
         function handleDragStart(e) {
@@ -496,82 +503,108 @@
             dropTarget?.classList.remove('drag-over');
         }
 
-        // Touch event handlers for mobile support
+        // --- Touch event handlers for mobile support ---
+        let touchStartItem = null;
+        let touchStartTime = 0;
+        let touchStartPos = { x: 0, y: 0 };
+        let isDragging = false;
         let activeTouchClone = null;
         let touchOffsetX = 0, touchOffsetY = 0;
 
         function handleTouchStart(e) {
-            draggedItem = e.target.closest('.draggable-item');
-            if (!draggedItem) return;
-
             if (e.cancelable) e.preventDefault();
-           
-            // Create a visual clone for dragging
-            activeTouchClone = draggedItem.cloneNode(true);
-            activeTouchClone.classList.add('dragging');
-            Object.assign(activeTouchClone.style, {
-                position: 'fixed',
-                pointerEvents: 'none',
-                zIndex: '1000',
-                width: `${draggedItem.offsetWidth}px`,
-                height: `${draggedItem.offsetHeight}px`
-            });
-            document.body.appendChild(activeTouchClone);
+            
+            touchStartItem = e.currentTarget;
+            touchStartTime = Date.now();
+            touchStartPos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+            isDragging = false; // Reset dragging state on new touch
 
-            const rect = draggedItem.getBoundingClientRect();
-            touchOffsetX = e.touches[0].clientX - rect.left;
-            touchOffsetY = e.touches[0].clientY - rect.top;
-           
-            // Position the clone
-            activeTouchClone.style.left = `${e.touches[0].clientX - touchOffsetX}px`;
-            activeTouchClone.style.top = `${e.touches[0].clientY - touchOffsetY}px`;
-           
-            draggedItem.style.opacity = '0.4';
-           
+            // Don't create clone immediately, wait for move to confirm drag
             document.addEventListener('touchmove', handleTouchMove, { passive: false });
-            document.addEventListener('touchend', handleTouchEnd, { once: true });
         }
 
         function handleTouchMove(e) {
-            if (!activeTouchClone) return;
+            if (!touchStartItem) return;
             if (e.cancelable) e.preventDefault();
 
-            let currentX = e.touches[0].clientX;
-            let currentY = e.touches[0].clientY;
-           
-            activeTouchClone.style.left = `${currentX - touchOffsetX}px`;
-            activeTouchClone.style.top = `${currentY - touchOffsetY}px`;
-           
-            // Highlight potential drop zone
-            document.querySelectorAll('.drag-over').forEach(box => box.classList.remove('drag-over'));
-            activeTouchClone.style.display = 'none'; 
-            const elementBelow = document.elementFromPoint(currentX, currentY);
-            activeTouchClone.style.display = ''; 
-           
-            const dropBoxBelow = elementBelow?.closest('.draggable-item-slot');
-            if (dropBoxBelow && !dropBoxBelow.firstChild) {
-                dropBoxBelow.classList.add('drag-over');
+            const currentPos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+            const deltaX = Math.abs(currentPos.x - touchStartPos.x);
+            const deltaY = Math.abs(currentPos.y - touchStartPos.y);
+
+            // If not already dragging and moved more than a threshold, start drag
+            if (!isDragging && (deltaX > 10 || deltaY > 10)) {
+                isDragging = true;
+                draggedItem = touchStartItem; // Set the global draggedItem
+
+                // Create a visual clone for dragging
+                activeTouchClone = draggedItem.cloneNode(true);
+                activeTouchClone.classList.add('dragging');
+                Object.assign(activeTouchClone.style, {
+                    position: 'fixed',
+                    pointerEvents: 'none',
+                    zIndex: '1000',
+                    width: `${draggedItem.offsetWidth}px`,
+                    height: `${draggedItem.offsetHeight}px`
+                });
+                document.body.appendChild(activeTouchClone);
+
+                const rect = draggedItem.getBoundingClientRect();
+                touchOffsetX = touchStartPos.x - rect.left;
+                touchOffsetY = touchStartPos.y - rect.top;
+                
+                draggedItem.style.opacity = '0.4';
+            }
+
+            if (isDragging && activeTouchClone) {
+                activeTouchClone.style.left = `${currentPos.x - touchOffsetX}px`;
+                activeTouchClone.style.top = `${currentPos.y - touchOffsetY}px`;
+                
+                // Highlight potential drop zone
+                document.querySelectorAll('.drag-over').forEach(box => box.classList.remove('drag-over'));
+                activeTouchClone.style.display = 'none'; 
+                const elementBelow = document.elementFromPoint(currentPos.x, currentPos.y);
+                activeTouchClone.style.display = ''; 
+                
+                const dropBoxBelow = elementBelow?.closest('.draggable-item-slot');
+                if (dropBoxBelow && !dropBoxBelow.firstChild) {
+                    dropBoxBelow.classList.add('drag-over');
+                }
             }
         }
 
         function handleTouchEnd(e) {
             document.removeEventListener('touchmove', handleTouchMove);
-            if (!activeTouchClone || !draggedItem) return;
-           
-            // Find drop target
-            activeTouchClone.style.display = 'none';
-            const dropTargetElement = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
-            activeTouchClone.remove(); // Clean up clone
+            
+            const touchDuration = Date.now() - touchStartTime;
 
-            const dropBox = dropTargetElement?.closest('.draggable-item-slot');
-            if (dropBox && !dropBox.firstChild) {
-                dropBox.appendChild(draggedItem);
-                dropBox.classList.add('filled');
+            if (isDragging) {
+                // --- Handle drop logic ---
+                if (activeTouchClone) {
+                    activeTouchClone.style.display = 'none';
+                    const dropTargetElement = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+                    activeTouchClone.remove();
+
+                    const dropBox = dropTargetElement?.closest('.draggable-item-slot');
+                    if (dropBox && !dropBox.firstChild) {
+                        dropBox.appendChild(draggedItem);
+                        dropBox.classList.add('filled');
+                    }
+                }
+                if (draggedItem) {
+                    draggedItem.style.opacity = '1';
+                }
+                document.querySelectorAll('.drag-over').forEach(box => box.classList.remove('drag-over'));
+
+            } else if (touchDuration < 200) {
+                // --- Handle tap logic ---
+                returnItemToPool(touchStartItem);
             }
-           
-            draggedItem.style.opacity = '1';
+
+            // --- Cleanup ---
+            isDragging = false;
+            touchStartItem = null;
             draggedItem = null;
-            document.querySelectorAll('.drag-over').forEach(box => box.classList.remove('drag-over'));
+            activeTouchClone = null;
         }
 
         // --- UTILITIES ---
@@ -598,4 +631,3 @@
     </script>
 </body>
 </html>
-```
