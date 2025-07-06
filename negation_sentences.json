@@ -1,0 +1,122 @@
+[
+    {
+        "sentence_start": "Ich habe",
+        "sentence_end": "Geschwister.",
+        "correct_answer": "keine",
+        "distractors": ["nicht", "kein"],
+        "explanation": "Wir benutzen 'kein/keine', um ein Nomen ohne Artikel zu verneinen (to negate a noun without an article). 'Geschwister' ist Plural, also brauchen wir 'keine'.",
+        "translation_en": "I have no siblings."
+    },
+    {
+        "sentence_start": "Er möchte heute",
+        "sentence_end": "fernsehen.",
+        "correct_answer": "nicht",
+        "distractors": ["kein", "keine"],
+        "explanation": "Wir benutzen 'nicht', um ein Verb zu verneinen (to negate a verb).",
+        "translation_en": "He doesn't want to watch TV today."
+    },
+    {
+        "sentence_start": "Wir finden den Schlüssel",
+        "sentence_end": ".",
+        "correct_answer": "nicht",
+        "distractors": ["kein", "keinen"],
+        "explanation": "Wir benutzen 'nicht', um ein Nomen mit einem bestimmten Artikel (den) zu verneinen (to negate a noun with a definite article).",
+        "translation_en": "We don't find the key."
+    },
+    {
+        "sentence_start": "Ich trinke",
+        "sentence_end": "Kaffee, sondern Tee.",
+        "correct_answer": "keinen",
+        "distractors": ["nicht", "keine"],
+        "explanation": "Wir benutzen 'kein/keine/keinen', um ein Nomen zu verneinen. 'Kaffee' ist maskulin im Akkusativ, also brauchen wir 'keinen'.",
+        "translation_en": "I am not drinking coffee, but rather tea."
+    },
+    {
+        "sentence_start": "Sie kocht die Suppe",
+        "sentence_end": ".",
+        "correct_answer": "nicht",
+        "distractors": ["kein", "keine"],
+        "explanation": "Wir benutzen 'nicht', um ein Nomen mit einem bestimmten Artikel (die) zu verneinen.",
+        "translation_en": "She is not cooking the soup."
+    },
+    {
+        "sentence_start": "Das ist",
+        "sentence_end": "Problem.",
+        "correct_answer": "kein",
+        "distractors": ["nicht", "keine"],
+        "explanation": "Wir benutzen 'kein', um ein neutrales Nomen (das Problem) zu verneinen.",
+        "translation_en": "That is not a problem."
+    },
+    {
+        "sentence_start": "Ich kenne diesen Mann",
+        "sentence_end": ".",
+        "correct_answer": "nicht",
+        "distractors": ["kein", "keinen"],
+        "explanation": "Wir benutzen 'nicht', um ein Nomen mit einem Demonstrativpronomen (diesen) zu verneinen.",
+        "translation_en": "I don't know this man."
+    },
+    {
+        "sentence_start": "Er spricht",
+        "sentence_end": "Deutsch.",
+        "correct_answer": "kein",
+        "distractors": ["nicht", "keine"],
+        "explanation": "Obwohl es wie eine Ausnahme aussieht, wird 'kein' oft bei Sprachen und Nationalitäten mit dem Verb 'sprechen' verwendet.",
+        "translation_en": "He doesn't speak German."
+    },
+    {
+        "sentence_start": "Wir gehen heute",
+        "sentence_end": "ins Kino.",
+        "correct_answer": "nicht",
+        "distractors": ["kein", "keine"],
+        "explanation": "Wir benutzen 'nicht', um eine Ortsangabe (ins Kino) zu verneinen.",
+        "translation_en": "We are not going to the cinema today."
+    },
+    {
+        "sentence_start": "Ich sehe",
+        "sentence_end": "Auto auf der Straße.",
+        "correct_answer": "kein",
+        "distractors": ["nicht", "keine"],
+        "explanation": "Wir benutzen 'kein', um ein neutrales Nomen (das Auto) zu verneinen.",
+        "translation_en": "I see no car on the street."
+    },
+    {
+        "sentence_start": "Sie mag Pizza",
+        "sentence_end": ".",
+        "correct_answer": "nicht",
+        "distractors": ["kein", "keine"],
+        "explanation": "Hier verneinen wir das Verb 'mögen'. Was mag sie nicht? Pizza. Aber die Verneinung bezieht sich auf die Aktion.",
+        "translation_en": "She doesn't like pizza."
+    },
+    {
+        "sentence_start": "Er hat",
+        "sentence_end": "Zeit.",
+        "correct_answer": "keine",
+        "distractors": ["nicht", "kein"],
+        "explanation": "Wir benutzen 'keine', um ein feminines Nomen (die Zeit) zu verneinen.",
+        "translation_en": "He has no time."
+    },
+    {
+        "sentence_start": "Das Essen schmeckt mir",
+        "sentence_end": ".",
+        "correct_answer": "nicht",
+        "distractors": ["kein", "keine"],
+        "explanation": "Wir benutzen 'nicht', um ein Verb (schmeckt) zu verneinen. Das Gefühl des 'Schmeckens' wird verneint.",
+        "translation_en": "The food doesn't taste good to me."
+    },
+    {
+        "sentence_start": "Ich wohne",
+        "sentence_end": "in Berlin.",
+        "correct_answer": "nicht",
+        "distractors": ["kein", "keine"],
+        "explanation": "Wir benutzen 'nicht', um eine Präpositionalphrase (in Berlin) zu verneinen.",
+        "translation_en": "I don't live in Berlin."
+    },
+    {
+        "sentence_start": "Er schreibt",
+        "sentence_end": "Briefe.",
+        "correct_answer": "keine",
+        "distractors": ["nicht", "kein"],
+        "explanation": "Wir benutzen 'keine', um ein Nomen im Plural (Briefe) zu verneinen.",
+        "translation_en": "He doesn't write letters."
+    }
+]
