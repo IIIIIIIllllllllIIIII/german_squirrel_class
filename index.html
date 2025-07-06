@@ -9,54 +9,54 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            /* A dark, forest-like background */
-            background-color: #1a202c;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%232d3748' fill-opacity='0.4'%3E%3Cpath d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM40 1.41l-2.83 2.83-1.41-1.41L38.59 0H40v1.41z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-color: #2F5249; /* Dark green from palette */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23437057' fill-opacity='0.2'%3E%3Cpath d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM40 1.41l-2.83 2.83-1.41-1.41L38.59 0H40v1.41z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column; /* Allow header and main card to stack */
+            justify-content: flex-start;
             align-items: center;
             margin: 0;
-            padding: 16px;
+            padding: 2rem 1rem;
         }
         
-        .main-card {
-            /* New green, leafy background */
-            background-color: #2f4858;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%233c5a6d' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0h1v5h5v1H6v5H5V6H0V5h5z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            padding: 2rem;
-            border-radius: 20px;
-            border: 4px solid #4a7c59; /* A fitting green border */
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(0,0,0,0.5);
-            text-align: center;
-            width: 100%;
-            max-width: 1000px;
-        }
-        
-        .title-container {
+        .header-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
+            gap: 2rem;
+            width: 100%;
+            margin-bottom: 2rem;
         }
 
         .title {
             font-family: 'Creepster', cursive;
-            font-size: 2.5rem;
+            font-size: 4rem;
             font-weight: 700;
-            color: #fde68a; /* A gold/yellow color */
-            text-shadow: 2px 2px 4px #000;
+            color: #E3DE61; /* Yellow from palette */
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            text-align: center;
         }
 
         .dancing-squirrel {
-            height: 400px; /* 400% bigger */
+            height: 120px; /* Big squirrel */
             width: auto;
+        }
+
+        .main-card {
+            background-color: rgba(0,0,0,0.2);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 2px solid #97B067; /* Light green from palette */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            width: 100%;
+            max-width: 1100px;
         }
         
         .subtitle {
             font-size: 1.125rem;
-            color: #f7fafc;
+            color: #FFE3BB; /* Light orange from palette */
             margin-bottom: 3rem;
             text-shadow: 1px 1px 2px #000;
         }
@@ -72,19 +72,16 @@
             display: flex;
             flex-direction: column;
             gap: 1rem;
-            background: rgba(0,0,0,0.2);
-            padding: 1.5rem;
-            border-radius: 15px;
         }
         
         .level-title {
             font-family: 'Creepster', cursive;
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 600;
-            color: #fde68a;
+            color: #E3DE61;
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
-            border-bottom: 2px solid #4a7c59;
+            border-bottom: 2px solid #97B067;
             text-shadow: 2px 2px 4px #000;
         }
         
@@ -92,14 +89,15 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-            background-color: rgba(255, 255, 255, 0.05);
             border-radius: 12px;
             transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
         }
         
         .quiz-item-container:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: scale(1.02);
+            transform: scale(1.03);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
 
         .quiz-animation {
@@ -108,14 +106,11 @@
             object-fit: cover;
             border-radius: 8px;
             flex-shrink: 0;
+            background-color: rgba(0,0,0,0.2);
         }
 
         .quiz-link {
             padding: 1rem;
-            color: white;
-            text-decoration: none;
-            display: block;
-            line-height: 1.4;
             text-align: left;
             flex-grow: 1;
         }
@@ -125,7 +120,6 @@
             font-weight: 600;   
             display: block; 
             margin-bottom: 0.3rem;
-            color: #fff;
         }
 
         .translation-lang {
@@ -135,21 +129,31 @@
             line-height: 1.3;
             font-weight: 400; 
         }
+
+        /* New Tool Colors */
+        .color-1 { background-color: #03A6A1; }
+        .color-2 { background-color: #FFA673; color: #1a202c !important; } /* Dark text for light background */
+        .color-3 { background-color: #FF4F0F; }
+        .color-4 { background-color: #028480; } /* Darker teal */
+        .color-5 { background-color: #437057; } /* Dark green from palette */
         
         @media (min-width: 768px) {
             .columns-container {
                 flex-direction: row;
             }
             .title {
-                font-size: 3rem;
+                font-size: 5rem;
+            }
+            .dancing-squirrel {
+                height: 150px;
             }
         }
         
         @media (max-width: 640px) {
-            .main-card { padding: 1.5rem; }
-            .title { font-size: 1.8rem; }
-            .dancing-squirrel { height: 280px; } /* Adjusted for mobile */
-            .level-title { font-size: 2rem; }
+            .header-container { flex-direction: column; gap: 1rem; }
+            .title { font-size: 2.5rem; }
+            .dancing-squirrel { height: 80px; }
+            .level-title { font-size: 2.5rem; }
             .main-title-lang { font-size: 1rem; }
             .translation-lang { font-size: 0.75em; }
             .quiz-link { padding: 0.875rem; }
@@ -158,12 +162,12 @@
     </style>
 </head>
 <body>
+    <div class="header-container">
+        <h1 class="title">Erandis Secret German Squirrel Headquarters</h1>
+        <img src="animations/dance.webp" alt="Dancing Squirrel" class="dancing-squirrel">
+    </div>
+
     <div class="main-card">
-        <div class="title-container">
-            <img src="animations/dance.webp" alt="Dancing Squirrel" class="dancing-squirrel">
-            <h1 class="title">Erandis Secret German Squirrel Headquarters</h1>
-            <img src="animations/dance.webp" alt="Dancing Squirrel" class="dancing-squirrel">
-        </div>
         <p class="subtitle">Choose a quiz to practice German / Elige un quiz para practicar alemán</p>
         
         <div class="columns-container">
@@ -171,36 +175,36 @@
             <div class="level-column">
                 <h2 class="level-title">A1.1</h2>
                 
-                <a href="artikel_mode.html" class="quiz-item-container">
-                    <img class="quiz-animation" src="" alt="Quiz Animation">
+                <a href="artikel_mode.html" class="quiz-item-container color-1">
+                    <img class="quiz-animation" src="animations/File 1.webp" alt="Quiz Animation">
                     <div class="quiz-link">
                         <span class="main-title-lang">Article Quiz (Der, Die, Das)</span>
                         <span class="translation-lang">Learn the articles for different nouns / Aprende los artículos para diferentes sustantivos</span>
                     </div>
                 </a>
-                <a href="akkusativ_nomativ.html" class="quiz-item-container">
-                    <img class="quiz-animation" src="" alt="Quiz Animation">
+                <a href="akkusativ_nomativ.html" class="quiz-item-container color-1">
+                    <img class="quiz-animation" src="animations/File 2.webp" alt="Quiz Animation">
                     <div class="quiz-link">
                         <span class="main-title-lang">Accusative Trainer</span>
                         <span class="translation-lang">Learn and practice the accusative case / Aprende y practica el caso acusativo</span>
                     </div>
                 </a>
-                 <a href="negation_trainer.html" class="quiz-item-container">
-                    <img class="quiz-animation" src="" alt="Quiz Animation">
+                 <a href="negation_trainer.html" class="quiz-item-container color-3">
+                    <img class="quiz-animation" src="animations/File 3.webp" alt="Quiz Animation">
                     <div class="quiz-link">
                         <span class="main-title-lang">Negation Trainer (nicht/kein)</span>
                         <span class="translation-lang">Learn to use 'nicht' and 'kein' correctly / Aprende a usar 'nicht' y 'kein' correctamente</span>
                     </div>
                 </a>
-                <a href="konjugieren_mode.html" class="quiz-item-container">
-                    <img class="quiz-animation" src="" alt="Quiz Animation">
+                <a href="konjugieren_mode.html" class="quiz-item-container color-4">
+                    <img class="quiz-animation" src="animations/File 4.webp" alt="Quiz Animation">
                     <div class="quiz-link">
                         <span class="main-title-lang">Verb Conjugation</span>
                         <span class="translation-lang">Learn how to conjugate important verbs / Aprende a conjugar verbos importantes</span>
                     </div>
                 </a>
-                <a href="wfragen_mode.html" class="quiz-item-container">
-                    <img class="quiz-animation" src="" alt="Quiz Animation">
+                <a href="wfragen_mode.html" class="quiz-item-container color-5">
+                    <img class="quiz-animation" src="animations/File 5.webp" alt="Quiz Animation">
                     <div class="quiz-link">
                         <span class="main-title-lang">Building W-Questions</span>
                         <span class="translation-lang">Get to know the W-Questions and build sentences / Conoce las Preguntas W y construye oraciones</span>
@@ -211,57 +215,57 @@
             <div class="level-column">
                 <h2 class="level-title">A1.2</h2>
 
-                <a href="daily_routine_mode_lvl1.html" class="quiz-item-container">
-                    <img class="quiz-animation" src="" alt="Quiz Animation">
+                <a href="daily_routine_mode_lvl1.html" class="quiz-item-container color-5">
+                    <img class="quiz-animation" src="animations/File 6.webp" alt="Quiz Animation">
                     <div class="quiz-link">
                         <span class="main-title-lang">Sentence Structure (EASY MODE)</span>
                         <span class="translation-lang">Practice the correct sentence structure (easy) / Practica la estructura correcta de las oraciones (fácil)</span>
                     </div>
                 </a>
-                <a href="daily_routine_mode_lvl2.html" class="quiz-item-container">
-                    <img class="quiz-animation" src="" alt="Quiz Animation">
+                <a href="daily_routine_mode_lvl2.html" class="quiz-item-container color-5">
+                    <img class="quiz-animation" src="animations/File 7.webp" alt="Quiz Animation">
                     <div class="quiz-link">
                         <span class="main-title-lang">Sentence Structure (PRO MODE)</span>
                         <span class="translation-lang">Practice the correct sentence structure (difficult) / Practica la estructura correcta de las oraciones (difícil)</span>
                     </div>
                 </a>
-                 <a href="perfekt_sentences.html" class="quiz-item-container">
-                    <img class="quiz-animation" src="" alt="Quiz Animation">
+                 <a href="perfekt_sentences.html" class="quiz-item-container color-5">
+                    <img class="quiz-animation" src="animations/File 8.webp" alt="Quiz Animation">
                     <div class="quiz-link">
                         <span class="main-title-lang">Perfekt Trainer - DRAG & DROP</span>
                         <span class="translation-lang">Build sentences with perfect tense / Construye frases con tiempo perfecto</span>
                     </div>
                 </a>
-                <a href="perfekt_sentences_typing.html" class="quiz-item-container">
-                    <img class="quiz-animation" src="" alt="Quiz Animation">
+                <a href="perfekt_sentences_typing.html" class="quiz-item-container color-5">
+                    <img class="quiz-animation" src="animations/File 9.webp" alt="Quiz Animation">
                     <div class="quiz-link">
                         <span class="main-title-lang">Perfekt Trainer - TYPING</span>
                         <span class="translation-lang">Build sentences with perfect tense / Construye frases con tiempo perfecto</span>
                     </div>
                 </a>
-                <a href="trennbare_verben_menu.html" class="quiz-item-container">
-                    <img class="quiz-animation" src="" alt="Quiz Animation">
+                <a href="trennbare_verben_menu.html" class="quiz-item-container color-4">
+                    <img class="quiz-animation" src="animations/File 10.webp" alt="Quiz Animation">
                     <div class="quiz-link">
                         <span class="main-title-lang">Separable Verbs / Verbos Separables</span>
                         <span class="translation-lang">Learn and practice separable verbs / Aprende y practica los verbos separables</span>
                     </div>
                 </a>
-                <a href="modalverb_trainer.html" class="quiz-item-container">
-                    <img class="quiz-animation" src="" alt="Quiz Animation">
+                <a href="modalverb_trainer.html" class="quiz-item-container color-4">
+                    <img class="quiz-animation" src="animations/File 11.webp" alt="Quiz Animation">
                     <div class="quiz-link">
                         <span class="main-title-lang">Modalverb Trainer</span>
                         <span class="translation-lang">Learn to use Modalverben with this trainer/ Aprenda a utilizar verbos modales con este entrenador</span>
                     </div>
                 </a>
-                <a href="zeitangaben_trainer.html" class="quiz-item-container">
-                    <img class="quiz-animation" src="" alt="Quiz Animation">
+                <a href="zeitangaben_trainer.html" class="quiz-item-container color-2">
+                    <img class="quiz-animation" src="animations/File 12.webp" alt="Quiz Animation">
                     <div class="quiz-link">
                         <span class="main-title-lang">Times, Days, Months</span>
                         <span class="translation-lang">Learn and practice times, days, and months / Aprende y practica tiempos, días y meses</span>
                     </div>
                 </a>
-                 <a href="uhrzeit_trainer.html" class="quiz-item-container">
-                    <img class="quiz-animation" src="" alt="Quiz Animation">
+                 <a href="uhrzeit_trainer.html" class="quiz-item-container color-2">
+                    <img class="quiz-animation" src="animations/File 13.webp" alt="Quiz Animation">
                     <div class="quiz-link">
                         <span class="main-title-lang">Clock Trainer / Entrenador de Reloj</span>
                         <span class="translation-lang">Learn to tell time with an interactive clock / Aprende a decir la hora con un reloj interactivo</span>
@@ -270,36 +274,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // --- Array of all your squirrel animations ---
-            const squirrelAnimations = [
-                'File 1.webp', 'File 2.webp', 'File 3.webp', 'File 4.webp', 'File 5.webp',
-                'File 6.webp', 'File 7.webp', 'File 8.webp', 'File 9.webp', 'File 10.webp',
-                'File 11.webp', 'File 12.webp', 'File 13.webp', 'File 14.webp', 'File 15.webp',
-                'File 16.webp', 'File 17.webp', 'File 18.webp', 'File 19.webp', 'File 20.webp',
-                'File 21.webp', 'File 22.webp', 'File 23.webp', 'File 24.webp', 'File 25.webp'
-            ];
-
-            // --- Shuffle the animation array for randomness ---
-            function shuffleArray(array) {
-                for (let i = array.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [array[i], array[j]] = [array[j], array[i]];
-                }
-            }
-
-            shuffleArray(squirrelAnimations);
-
-            // --- Assign a unique random animation to each quiz item ---
-            const quizAnimationElements = document.querySelectorAll('.quiz-animation');
-            quizAnimationElements.forEach((imgElement, index) => {
-                // Loop through the shuffled array if there are more items than animations
-                const animationFile = squirrelAnimations[index % squirrelAnimations.length];
-                imgElement.src = 'animations/' + animationFile;
-            });
-        });
-    </script>
 </body>
 </html>
