@@ -188,10 +188,6 @@
                 <input type="radio" id="quiz-type-lego" name="quiz-type" value="lego"> 
                 <label for="quiz-type-lego">LEGO Mode (Drag & Drop)</label> 
             </div>
-            <div class="mt-2"> 
-                <input type="radio" id="quiz-type-mental" name="quiz-type" value="mental"> 
-                <label for="quiz-type-mental">Mental Mode (Self-Assessment)</label> 
-            </div>
         </div>
 
         <div id="verb-selection-options"> 
@@ -223,10 +219,6 @@
         </div>
         <div id="answer-reveal-container" class="answer-reveal hidden"></div>
         <button id="action-button" class="btn btn-primary w-full sm:w-auto">Check Answer</button>
-        <div id="mental-feedback-buttons" class="feedback-buttons-container hidden">
-             <button id="correct-button" class="btn btn-success">I was Right</button>
-             <button id="incorrect-button" class="btn btn-danger">I was Wrong</button>
-        </div>
         <div id="progress-indicator" class="progress-text">Progress</div>
         <div class="mt-4"> <button id="stop-quiz-btn" class="btn btn-danger btn-sm">End & Stats</button> </div>
     </div>
@@ -347,23 +339,19 @@
                 verbs: activeVerbs
             };
 
-            // FIX: Explicitly hide all main cards before showing the correct one.
             modeSelectionCardEl.classList.add('hidden');
-            trainerCardEl.classList.add('hidden');
-            legoModeCardEl.classList.add('hidden');
-            statsDisplayCardEl.classList.add('hidden');
             
             currentIndex = 0;
             userRoundData = [];
 
-            if (quizSettings.type === 'classic' || quizSettings.type === 'mental') {
+            if (quizSettings.type === 'classic') {
                 prepareAndStartClassicQuiz();
             } else if (quizSettings.type === 'lego') {
                 prepareAndStartLegoQuiz();
             }
         }
 
-        // --- Classic & Mental Quiz Logic ---
+        // --- Classic Quiz Logic ---
         function prepareAndStartClassicQuiz() {
             currentQuizData = [];
             quizSettings.verbs.forEach(verb => {
@@ -384,9 +372,6 @@
             const { verb, pronoun } = currentQuizData[currentIndex];
             const trainerTitleEl = document.getElementById('trainer-title');
             const hilfsverbDisplay = document.getElementById('hilfsverb-display');
-            const answerInputEl = document.getElementById('answer-input');
-            const actionButton = document.getElementById('action-button');
-            const mentalFeedbackButtons = document.getElementById('mental-feedback-buttons');
             
             if (quizSettings.tense === 'present') {
                 trainerTitleEl.textContent = "Präsens Practice";
@@ -403,25 +388,17 @@
 
             document.getElementById('verb-infinitive').textContent = `Verb: ${verb.infinitive.toUpperCase()}`;
             document.getElementById('pronoun').textContent = pronoun;
-            document.getElementById('answer-reveal-container').classList.add('hidden');
-            document.getElementById('progress-indicator').textContent = `Question: ${currentIndex + 1} / ${currentQuizData.length}`;
+            
+            const answerInputEl = document.getElementById('answer-input');
+            answerInputEl.value = '';
+            answerInputEl.disabled = false;
+            answerInputEl.focus();
 
-            if (quizSettings.type === 'classic') {
-                answerInputEl.classList.remove('hidden');
-                answerInputEl.value = '';
-                answerInputEl.disabled = false;
-                answerInputEl.focus();
-                actionButton.textContent = "Check Answer";
-                actionButton.classList.remove('hidden');
-                actionButton.onclick = handleClassicCheck;
-                mentalFeedbackButtons.classList.add('hidden');
-            } else { // Mental Mode
-                answerInputEl.classList.add('hidden');
-                actionButton.textContent = "Show Answer";
-                actionButton.classList.remove('hidden');
-                actionButton.onclick = handleMentalShow;
-                mentalFeedbackButtons.classList.add('hidden');
-            }
+            document.getElementById('answer-reveal-container').classList.add('hidden');
+            const actionButton = document.getElementById('action-button');
+            actionButton.textContent = "Check Answer";
+            actionButton.onclick = handleClassicCheck;
+            document.getElementById('progress-indicator').textContent = `Question: ${currentIndex + 1} / ${currentQuizData.length}`;
         }
 
         function handleClassicCheck() {
@@ -450,20 +427,6 @@
                 actionButton.textContent = "Next";
                 actionButton.onclick = () => { currentIndex++; displayClassicChallenge(); };
             }
-        }
-        
-        function handleMentalShow() {
-            const answerRevealEl = document.getElementById('answer-reveal-container');
-            answerRevealEl.innerHTML = `The answer is: <strong class="correct-form">${currentCorrectAnswer}</strong>`;
-            answerRevealEl.className = 'answer-reveal correct';
-            document.getElementById('action-button').classList.add('hidden');
-            document.getElementById('mental-feedback-buttons').classList.remove('hidden');
-        }
-
-        function handleMentalFeedback(wasCorrect) {
-            userRoundData.push({ question: currentQuizData[currentIndex], answer: '(mental)', correctAnswer: currentCorrectAnswer, isCorrect: wasCorrect });
-            currentIndex++;
-            displayClassicChallenge();
         }
         
         // --- LEGO Mode Logic ---
@@ -497,10 +460,8 @@
                 legoTitleEl.textContent = "LEGO Mode: Perfekt";
                 const correctHilfsverb = hilfsverbenData[verb.hilfsverb];
                 
-                // Add all conjugations of the CORRECT auxiliary verb
                 formsToDrag.push(...Object.values(correctHilfsverb.conjugations));
 
-                // Add one participle for each pronoun slot
                 for (let i = 0; i < pronouns.length; i++) {
                     formsToDrag.push(verb.partizip_perfekt);
                 }
@@ -627,7 +588,6 @@
                 verbBoxSelectionAreaEl.querySelectorAll('.verb-select-box').forEach(box => box.classList.remove('selected'));
             });
 
-            // NEW: Hilfsverb filter listeners
             document.querySelectorAll('input[name="tense-type"]').forEach(radio => {
                 radio.addEventListener('change', (e) => {
                     hilfsverbFilterContainer.classList.toggle('hidden', e.target.value !== 'perfekt');
@@ -640,18 +600,16 @@
             document.getElementById('action-button').addEventListener('click', handleClassicCheck);
             document.getElementById('answer-input').addEventListener('keypress', e => { if (e.key === 'Enter' && quizSettings.type === 'classic') handleClassicCheck(); });
             document.getElementById('stop-quiz-btn').addEventListener('click', showStats);
-            document.getElementById('correct-button').addEventListener('click', () => handleMentalFeedback(true));
-            document.getElementById('incorrect-button').addEventListener('click', () => handleMentalFeedback(false));
+            
             document.getElementById('check-lego-btn').addEventListener('click', checkLegoAnswers);
             document.getElementById('next-verb-btn-lego').addEventListener('click', () => { currentIndex++; displayLegoChallenge(); });
             document.getElementById('new-round-button').addEventListener('click', resetUI);
             document.getElementById('back-to-menu-lego').addEventListener('click', resetUI);
         }
 
-        // NEW: Function to filter verbs
         function selectVerbsByHilfsverb(hilfsverbToSelect) {
             const allVerbBoxes = verbBoxSelectionAreaEl.querySelectorAll('.verb-select-box');
-            allVerbBoxes.forEach(box => box.classList.remove('selected')); // Deselect all first
+            allVerbBoxes.forEach(box => box.classList.remove('selected')); 
 
             const verbsToSelect = globalVerbsList.filter(verb => verb.hilfsverb === hilfsverbToSelect);
             
