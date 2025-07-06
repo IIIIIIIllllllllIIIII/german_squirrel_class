@@ -1,0 +1,122 @@
+[
+    {
+        "translation_en": "I got up early this morning.",
+        "german_words": ["Ich", "bin", "heute", "Morgen", "früh", "aufgestanden", "."],
+        "distractor_words": ["habe", "war", "spät", "gestern"],
+        "full_sentence_de": "Ich bin heute Morgen früh aufgestanden."
+    },
+    {
+        "translation_en": "She has cooked dinner for us.",
+        "german_words": ["Sie", "hat", "das", "Abendessen", "für", "uns", "gekocht", "."],
+        "distractor_words": ["ist", "haben", "Mittagessen", "gemacht"],
+        "full_sentence_de": "Sie hat das Abendessen für uns gekocht."
+    },
+    {
+        "translation_en": "We have invited our friends to the party.",
+        "german_words": ["Wir", "haben", "unsere", "Freunde", "zur", "Party", "eingeladen", "."],
+        "distractor_words": ["sind", "seine", "von", "abgeholt"],
+        "full_sentence_de": "Wir haben unsere Freunde zur Party eingeladen."
+    },
+    {
+        "translation_en": "He has called his mother.",
+        "german_words": ["Er", "hat", "seine", "Mutter", "angerufen", "."],
+        "distractor_words": ["ist", "haben", "ihre", "besucht"],
+        "full_sentence_de": "Er hat seine Mutter angerufen."
+    },
+    {
+        "translation_en": "I have watched TV and eaten pizza.",
+        "german_words": ["Ich", "habe", "ferngesehen", "und", "Pizza", "gegessen", "."],
+        "distractor_words": ["bin", "ist", "oder", "getrunken"],
+        "full_sentence_de": "Ich habe ferngesehen und Pizza gegessen."
+    },
+    {
+        "translation_en": "They have gone shopping together.",
+        "german_words": ["Sie", "sind", "zusammen", "einkaufen", "gegangen", "."],
+        "distractor_words": ["haben", "allein", "arbeiten", "gekommen"],
+        "full_sentence_de": "Sie sind zusammen einkaufen gegangen."
+    },
+    {
+        "translation_en": "My sister has cleaned up her room.",
+        "german_words": ["Meine", "Schwester", "hat", "ihr", "Zimmer", "aufgeräumt", "."],
+        "distractor_words": ["ist", "sein", "Haus", "geputzt"],
+        "full_sentence_de": "Meine Schwester hat ihr Zimmer aufgeräumt."
+    },
+    {
+        "translation_en": "We have found the keys in the kitchen.",
+        "german_words": ["Wir", "haben", "die", "Schlüssel", "in", "der", "Küche", "gefunden", "."],
+        "distractor_words": ["sind", "den", "im", "verloren"],
+        "full_sentence_de": "Wir haben die Schlüssel in der Küche gefunden."
+    },
+    {
+        "translation_en": "I have learned German for two years.",
+        "german_words": ["Ich", "habe", "zwei", "Jahre", "Deutsch", "gelernt", "."],
+        "distractor_words": ["bin", "drei", "Monate", "studiert"],
+        "full_sentence_de": "Ich habe zwei Jahre Deutsch gelernt."
+    },
+    {
+        "translation_en": "The children have played in the garden.",
+        "german_words": ["Die", "Kinder", "haben", "im", "Garten", "gespielt", "."],
+        "distractor_words": ["sind", "in", "Park", "gelaufen"],
+        "full_sentence_de": "Die Kinder haben im Garten gespielt."
+    },
+    {
+        "translation_en": "She has brought fresh bread from the bakery.",
+        "german_words": ["Sie", "hat", "frisches", "Brot", "aus", "der", "Bäckerei", "gebracht", "."],
+        "distractor_words": ["ist", "altes", "von", "gekauft"],
+        "full_sentence_de": "Sie hat frisches Brot aus der Bäckerei gebracht."
+    },
+    {
+        "translation_en": "We have turned off the lights and closed the door.",
+        "german_words": ["Wir", "haben", "das", "Licht", "ausgemacht", "und", "die", "Tür", "zugemacht", "."],
+        "distractor_words": ["sind", "angemacht", "oder", "aufgemacht"],
+        "full_sentence_de": "Wir haben das Licht ausgemacht und die Tür zugemacht."
+    },
+    {
+        "translation_en": "He has answered all the questions correctly.",
+        "german_words": ["Er", "hat", "alle", "Fragen", "richtig", "beantwortet", "."],
+        "distractor_words": ["ist", "einige", "falsch", "gestellt"],
+        "full_sentence_de": "Er hat alle Fragen richtig beantwortet."
+    },
+    {
+        "translation_en": "I have drunk coffee and read the newspaper.",
+        "german_words": ["Ich", "habe", "Kaffee", "getrunken", "und", "die", "Zeitung", "gelesen", "."],
+        "distractor_words": ["bin", "Tee", "oder", "geschrieben"],
+        "full_sentence_de": "Ich habe Kaffee getrunken und die Zeitung gelesen."
+    },
+    {
+        "translation_en": "They have lived in Berlin for five years.",
+        "german_words": ["Sie", "haben", "fünf", "Jahre", "in", "Berlin", "gelebt", "."],
+        "distractor_words": ["sind", "vier", "Monate", "gewohnt"],
+        "full_sentence_de": "Sie haben fünf Jahre in Berlin gelebt."
+    },
+    {
+        "translation_en": "My father has paid the bill at the restaurant.",
+        "german_words": ["Mein", "Vater", "hat", "die", "Rechnung", "im", "Restaurant", "bezahlt", "."],
+        "distractor_words": ["ist", "den", "in", "bekommen"],
+        "full_sentence_de": "Mein Vater hat die Rechnung im Restaurant bezahlt."
+    },
+    {
+        "translation_en": "She has gotten off the bus and walked home.",
+        "german_words": ["Sie", "ist", "aus", "dem", "Bus", "ausgestiegen", "und", "nach", "Hause", "gelaufen", "."],
+        "distractor_words": ["hat", "in", "eingestiegen", "oder", "gefahren"],
+        "full_sentence_de": "Sie ist aus dem Bus ausgestiegen und nach Hause gelaufen."
+    },
+    {
+        "translation_en": "We have had breakfast together this morning.",
+        "german_words": ["Wir", "haben", "heute", "Morgen", "zusammen", "gefrühstückt", "."],
+        "distractor_words": ["sind", "gestern", "Abend", "allein"],
+        "full_sentence_de": "Wir haben heute Morgen zusammen gefrühstückt."
+    },
+    {
+        "translation_en": "He has seen the movie and liked it very much.",
+        "german_words": ["Er", "hat", "den", "Film", "gesehen", "und", "ihn", "sehr", "gemocht", "."],
+        "distractor_words": ["ist", "die", "gehört", "oder", "gehasst"],
+        "full_sentence_de": "Er hat den Film gesehen und ihn sehr gemocht."
+    },
+    {
+        "translation_en": "I have prepared dinner and set the table.",
+        "german_words": ["Ich", "habe", "das", "Abendessen", "vorbereitet", "und", "den", "Tisch", "gedeckt", "."],
+        "distractor_words": ["bin", "die", "gekocht", "oder", "aufgeräumt"],
+        "full_sentence_de": "Ich habe das Abendessen vorbereitet und den Tisch gedeckt."
+    }
+]
