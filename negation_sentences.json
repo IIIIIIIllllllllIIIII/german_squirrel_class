@@ -4,119 +4,164 @@
         "sentence_end": "Geschwister.",
         "correct_answer": "keine",
         "distractors": ["nicht", "kein"],
-        "explanation": "Wir benutzen 'kein/keine', um ein Nomen ohne Artikel zu verneinen (to negate a noun without an article). 'Geschwister' ist Plural, also brauchen wir 'keine'.",
-        "translation_en": "I have no siblings."
+        "explanation_de": "Wir benutzen 'kein/keine', um ein Nomen ohne Artikel zu verneinen. 'Geschwister' ist Plural, also brauchen wir 'keine'.",
+        "explanation_en": "We use 'kein/keine' to negate a noun without an article. 'Geschwister' is plural, so we need 'keine'.",
+        "explanation_es": "Usamos 'kein/keine' para negar un sustantivo sin artículo. 'Geschwister' es plural, así que necesitamos 'keine'.",
+        "translation_en": "I have no siblings.",
+        "translation_es": "No tengo hermanos."
     },
     {
         "sentence_start": "Er möchte heute",
         "sentence_end": "fernsehen.",
         "correct_answer": "nicht",
         "distractors": ["kein", "keine"],
-        "explanation": "Wir benutzen 'nicht', um ein Verb zu verneinen (to negate a verb).",
-        "translation_en": "He doesn't want to watch TV today."
+        "explanation_de": "Wir benutzen 'nicht', um ein Verb zu verneinen.",
+        "explanation_en": "We use 'nicht' to negate a verb.",
+        "explanation_es": "Usamos 'nicht' para negar un verbo.",
+        "translation_en": "He doesn't want to watch TV today.",
+        "translation_es": "Él no quiere ver la televisión hoy."
     },
     {
         "sentence_start": "Wir finden den Schlüssel",
         "sentence_end": ".",
         "correct_answer": "nicht",
         "distractors": ["kein", "keinen"],
-        "explanation": "Wir benutzen 'nicht', um ein Nomen mit einem bestimmten Artikel (den) zu verneinen (to negate a noun with a definite article).",
-        "translation_en": "We don't find the key."
+        "explanation_de": "Wir benutzen 'nicht', um ein Nomen mit einem bestimmten Artikel (den) zu verneinen.",
+        "explanation_en": "We use 'nicht' to negate a noun with a definite article (den).",
+        "explanation_es": "Usamos 'nicht' para negar un sustantivo con un artículo determinado (den).",
+        "translation_en": "We don't find the key.",
+        "translation_es": "No encontramos la llave."
     },
     {
         "sentence_start": "Ich trinke",
         "sentence_end": "Kaffee, sondern Tee.",
         "correct_answer": "keinen",
         "distractors": ["nicht", "keine"],
-        "explanation": "Wir benutzen 'kein/keine/keinen', um ein Nomen zu verneinen. 'Kaffee' ist maskulin im Akkusativ, also brauchen wir 'keinen'.",
-        "translation_en": "I am not drinking coffee, but rather tea."
+        "explanation_de": "Wir benutzen 'kein/keine/keinen', um ein Nomen zu verneinen. 'Kaffee' ist maskulin im Akkusativ, also brauchen wir 'keinen'.",
+        "explanation_en": "We use 'kein/keine/keinen' to negate a noun. 'Kaffee' is masculine in the accusative case, so we need 'keinen'.",
+        "explanation_es": "Usamos 'kein/keine/keinen' para negar un sustantivo. 'Kaffee' es masculino en acusativo, así que necesitamos 'keinen'.",
+        "translation_en": "I am not drinking coffee, but rather tea.",
+        "translation_es": "No estoy bebiendo café, sino té."
     },
     {
         "sentence_start": "Sie kocht die Suppe",
         "sentence_end": ".",
         "correct_answer": "nicht",
         "distractors": ["kein", "keine"],
-        "explanation": "Wir benutzen 'nicht', um ein Nomen mit einem bestimmten Artikel (die) zu verneinen.",
-        "translation_en": "She is not cooking the soup."
+        "explanation_de": "Wir benutzen 'nicht', um ein Nomen mit einem bestimmten Artikel (die) zu verneinen.",
+        "explanation_en": "We use 'nicht' to negate a noun with a definite article (die).",
+        "explanation_es": "Usamos 'nicht' para negar un sustantivo con un artículo determinado (die).",
+        "translation_en": "She is not cooking the soup.",
+        "translation_es": "Ella no está cocinando la sopa."
     },
     {
         "sentence_start": "Das ist",
         "sentence_end": "Problem.",
         "correct_answer": "kein",
         "distractors": ["nicht", "keine"],
-        "explanation": "Wir benutzen 'kein', um ein neutrales Nomen (das Problem) zu verneinen.",
-        "translation_en": "That is not a problem."
+        "explanation_de": "Wir benutzen 'kein', um ein neutrales Nomen (das Problem) zu verneinen.",
+        "explanation_en": "We use 'kein' to negate a neuter noun (das Problem).",
+        "explanation_es": "Usamos 'kein' para negar un sustantivo neutro (das Problem).",
+        "translation_en": "That is not a problem.",
+        "translation_es": "Eso no es un problema."
     },
     {
         "sentence_start": "Ich kenne diesen Mann",
         "sentence_end": ".",
         "correct_answer": "nicht",
         "distractors": ["kein", "keinen"],
-        "explanation": "Wir benutzen 'nicht', um ein Nomen mit einem Demonstrativpronomen (diesen) zu verneinen.",
-        "translation_en": "I don't know this man."
+        "explanation_de": "Wir benutzen 'nicht', um ein Nomen mit einem Demonstrativpronomen (diesen) zu verneinen.",
+        "explanation_en": "We use 'nicht' to negate a noun with a demonstrative pronoun (diesen).",
+        "explanation_es": "Usamos 'nicht' para negar un sustantivo con un pronombre demostrativo (diesen).",
+        "translation_en": "I don't know this man.",
+        "translation_es": "No conozco a este hombre."
     },
     {
         "sentence_start": "Er spricht",
         "sentence_end": "Deutsch.",
         "correct_answer": "kein",
         "distractors": ["nicht", "keine"],
-        "explanation": "Obwohl es wie eine Ausnahme aussieht, wird 'kein' oft bei Sprachen und Nationalitäten mit dem Verb 'sprechen' verwendet.",
-        "translation_en": "He doesn't speak German."
+        "explanation_de": "Obwohl es wie eine Ausnahme aussieht, wird 'kein' oft bei Sprachen und Nationalitäten mit dem Verb 'sprechen' verwendet.",
+        "explanation_en": "Although it seems like an exception, 'kein' is often used with languages and nationalities with the verb 'sprechen'.",
+        "explanation_es": "Aunque parezca una excepción, 'kein' se usa a menudo con idiomas y nacionalidades con el verbo 'sprechen'.",
+        "translation_en": "He doesn't speak German.",
+        "translation_es": "Él no habla alemán."
     },
     {
         "sentence_start": "Wir gehen heute",
         "sentence_end": "ins Kino.",
         "correct_answer": "nicht",
         "distractors": ["kein", "keine"],
-        "explanation": "Wir benutzen 'nicht', um eine Ortsangabe (ins Kino) zu verneinen.",
-        "translation_en": "We are not going to the cinema today."
+        "explanation_de": "Wir benutzen 'nicht', um eine Ortsangabe (ins Kino) zu verneinen.",
+        "explanation_en": "We use 'nicht' to negate a place/location (ins Kino).",
+        "explanation_es": "Usamos 'nicht' para negar una indicación de lugar (ins Kino).",
+        "translation_en": "We are not going to the cinema today.",
+        "translation_es": "No vamos al cine hoy."
     },
     {
         "sentence_start": "Ich sehe",
         "sentence_end": "Auto auf der Straße.",
         "correct_answer": "kein",
         "distractors": ["nicht", "keine"],
-        "explanation": "Wir benutzen 'kein', um ein neutrales Nomen (das Auto) zu verneinen.",
-        "translation_en": "I see no car on the street."
+        "explanation_de": "Wir benutzen 'kein', um ein neutrales Nomen (das Auto) zu verneinen.",
+        "explanation_en": "We use 'kein' to negate a neuter noun (das Auto).",
+        "explanation_es": "Usamos 'kein' para negar un sustantivo neutro (das Auto).",
+        "translation_en": "I see no car on the street.",
+        "translation_es": "No veo ningún coche en la calle."
     },
     {
         "sentence_start": "Sie mag Pizza",
         "sentence_end": ".",
         "correct_answer": "nicht",
         "distractors": ["kein", "keine"],
-        "explanation": "Hier verneinen wir das Verb 'mögen'. Was mag sie nicht? Pizza. Aber die Verneinung bezieht sich auf die Aktion.",
-        "translation_en": "She doesn't like pizza."
+        "explanation_de": "Hier verneinen wir das Verb 'mögen'. Was mag sie nicht? Pizza. Aber die Verneinung bezieht sich auf die Aktion.",
+        "explanation_en": "Here we negate the verb 'mögen'. What does she not like? Pizza. But the negation refers to the action.",
+        "explanation_es": "Aquí negamos el verbo 'mögen'. ¿Qué no le gusta? La pizza. Pero la negación se refiere a la acción.",
+        "translation_en": "She doesn't like pizza.",
+        "translation_es": "A ella no le gusta la pizza."
     },
     {
         "sentence_start": "Er hat",
         "sentence_end": "Zeit.",
         "correct_answer": "keine",
         "distractors": ["nicht", "kein"],
-        "explanation": "Wir benutzen 'keine', um ein feminines Nomen (die Zeit) zu verneinen.",
-        "translation_en": "He has no time."
+        "explanation_de": "Wir benutzen 'keine', um ein feminines Nomen (die Zeit) zu verneinen.",
+        "explanation_en": "We use 'keine' to negate a feminine noun (die Zeit).",
+        "explanation_es": "Usamos 'keine' para negar un sustantivo femenino (die Zeit).",
+        "translation_en": "He has no time.",
+        "translation_es": "Él no tiene tiempo."
     },
     {
         "sentence_start": "Das Essen schmeckt mir",
         "sentence_end": ".",
         "correct_answer": "nicht",
         "distractors": ["kein", "keine"],
-        "explanation": "Wir benutzen 'nicht', um ein Verb (schmeckt) zu verneinen. Das Gefühl des 'Schmeckens' wird verneint.",
-        "translation_en": "The food doesn't taste good to me."
+        "explanation_de": "Wir benutzen 'nicht', um ein Verb (schmeckt) zu verneinen. Das Gefühl des 'Schmeckens' wird verneint.",
+        "explanation_en": "We use 'nicht' to negate a verb (schmeckt). The feeling of 'tasting' is negated.",
+        "explanation_es": "Usamos 'nicht' para negar un verbo (schmeckt). Se niega la sensación de 'sabor'.",
+        "translation_en": "The food doesn't taste good to me.",
+        "translation_es": "La comida no me sabe bien."
     },
     {
         "sentence_start": "Ich wohne",
         "sentence_end": "in Berlin.",
         "correct_answer": "nicht",
         "distractors": ["kein", "keine"],
-        "explanation": "Wir benutzen 'nicht', um eine Präpositionalphrase (in Berlin) zu verneinen.",
-        "translation_en": "I don't live in Berlin."
+        "explanation_de": "Wir benutzen 'nicht', um eine Präpositionalphrase (in Berlin) zu verneinen.",
+        "explanation_en": "We use 'nicht' to negate a prepositional phrase (in Berlin).",
+        "explanation_es": "Usamos 'nicht' para negar una frase preposicional (in Berlin).",
+        "translation_en": "I don't live in Berlin.",
+        "translation_es": "No vivo en Berlín."
     },
     {
         "sentence_start": "Er schreibt",
         "sentence_end": "Briefe.",
         "correct_answer": "keine",
         "distractors": ["nicht", "kein"],
-        "explanation": "Wir benutzen 'keine', um ein Nomen im Plural (Briefe) zu verneinen.",
-        "translation_en": "He doesn't write letters."
+        "explanation_de": "Wir benutzen 'keine', um ein Nomen im Plural (Briefe) zu verneinen.",
+        "explanation_en": "We use 'keine' to negate a plural noun (Briefe).",
+        "explanation_es": "Usamos 'keine' para negar un sustantivo en plural (Briefe).",
+        "translation_en": "He doesn't write letters.",
+        "translation_es": "Él no escribe cartas."
     }
 ]
