@@ -76,24 +76,26 @@
             color: #495057;
         }
 
-        .verb-compact.status-changed {
-            animation: statusChange 0.8s ease;
+        .verb-compact .verb-status-compact {
+            font-size: 1.3em;
         }
 
-        @keyframes statusChange {
-            0% { 
-                transform: scale(1); 
-                background: #f8f9fa;
-            }
-            50% { 
-                transform: scale(1.1); 
-                background: #fff3cd;
-                box-shadow: 0 0 15px rgba(255, 193, 7, 0.5);
-            }
-            100% { 
-                transform: scale(1); 
-                background: #f8f9fa;
-            }
+        .stats-sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .stats-sidebar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .stats-sidebar::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+
+        .stats-sidebar::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
         }
 
         .quiz-container {
@@ -262,56 +264,63 @@
             animation: bounce 0.6s;
         }
 
-        .stats-footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-top: 2px solid #e9ecef;
-            padding: 10px 20px;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-            z-index: 1000;
+        .verb-compact.status-changed {
+            animation: statusChange 0.8s ease;
         }
 
-        .stats-compact {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 6px;
-            max-width: 1200px;
-            margin: 0 auto;
+        @keyframes statusChange {
+            0% { 
+                transform: scale(1); 
+                background: #f8f9fa;
+            }
+            50% { 
+                transform: scale(1.1); 
+                background: #fff3cd;
+                box-shadow: 0 0 15px rgba(255, 193, 7, 0.5);
+            }
+            100% { 
+                transform: scale(1); 
+                background: #f8f9fa;
+            }
         }
 
-        .verb-compact {
-            display: inline-flex;
-            align-items: center;
-            padding: 4px 8px;
-            background: white;
-            border-radius: 20px;
-            font-size: 0.85em;
-            border: 1px solid #dee2e6;
-            transition: all 0.2s ease;
-        }
-
-        .verb-compact:hover {
-            transform: scale(1.05);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-        }
-
-        .verb-compact .verb-name-compact {
-            font-weight: 500;
-            color: #495057;
-            margin-right: 4px;
-        }
-
-        .verb-compact .verb-status-compact {
+        .loading {
+            text-align: center;
+            color: #666;
             font-size: 1.1em;
         }
 
-        body {
-            padding-bottom: 60px;
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stats-sidebar {
+                width: 100%;
+                max-width: 500px;
+                max-height: 200px;
+                margin-bottom: 20px;
+            }
+            
+            .stats-compact {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 3px;
+            }
+            
+            .verb-compact {
+                padding: 4px 6px;
+                font-size: 0.8em;
+            }
         }
     </style>
 </head>
@@ -320,7 +329,7 @@
         <div class="stats-sidebar">
             <h3>📊 Live Status</h3>
             <div class="stats-compact" id="stats-compact">
-                <!-- Compact stats will be populated here -->
+                <div class="loading">Lade Verben...</div>
             </div>
         </div>
         
@@ -339,168 +348,263 @@
             </div>
 
             <div class="answer-buttons">
-                <button class="answer-btn haben-btn" onclick="checkAnswer('haben')">HABEN</button>
-                <button class="answer-btn sein-btn" onclick="checkAnswer('sein')">SEIN</button>
+                <button class="answer-btn haben-btn" onclick="checkAnswer('haben')" disabled>HABEN</button>
+                <button class="answer-btn sein-btn" onclick="checkAnswer('sein')" disabled>SEIN</button>
             </div>
 
             <div class="result" id="result"></div>
 
             <div class="control-buttons">
-                <button class="control-btn" onclick="revealAnswer()">Antwort zeigen</button>
-                <button class="control-btn" onclick="nextQuestion()">Nächste Frage</button>
-                <button class="control-btn" onclick="resetStats()" style="background: #ff6b6b; color: white; border-color: #ff6b6b;">Reset Stats</button>
+                <button class="control-btn" onclick="revealAnswer()" disabled>Antwort zeigen</button>
+                <button class="control-btn" onclick="nextQuestion()" disabled>Nächste Frage</button>
+                <button class="control-btn" onclick="resetStats()" disabled style="background: #ff6b6b; color: white; border-color: #ff6b6b;">Reset Stats</button>
             </div>
         </div>
     </div>
 
     <script>
         // ============================================
-        // VERB DATA - Easy to update and maintain
-        // ============================================
-        const verbData = {
-            "fahren": { auxiliary: "sein", perfect: "ich bin gefahren" },
-            "fernsehen": { auxiliary: "haben", perfect: "ich habe ferngesehen" },
-            "finden": { auxiliary: "haben", perfect: "ich habe gefunden" },
-            "fragen": { auxiliary: "haben", perfect: "ich habe gefragt" },
-            "frühstücken": { auxiliary: "haben", perfect: "ich habe gefrühstückt" },
-            "geben": { auxiliary: "haben", perfect: "ich habe gegeben" },
-            "gefallen": { auxiliary: "haben", perfect: "ich habe gefallen" },
-            "gehen": { auxiliary: "sein", perfect: "ich bin gegangen" },
-            "haben": { auxiliary: "haben", perfect: "ich habe gehabt" },
-            "heißen": { auxiliary: "haben", perfect: "ich habe geheißen" },
-            "hören": { auxiliary: "haben", perfect: "ich habe gehört" },
-            "kennen": { auxiliary: "haben", perfect: "ich habe gekannt" },
-            "kochen": { auxiliary: "haben", perfect: "ich habe gekocht" },
-            "kommen": { auxiliary: "sein", perfect: "ich bin gekommen" },
-            "leben": { auxiliary: "haben", perfect: "ich habe gelebt" },
-            "lernen": { auxiliary: "haben", perfect: "ich habe gelernt" },
-            "lesen": { auxiliary: "haben", perfect: "ich habe gelesen" },
-            "liegen": { auxiliary: "haben", perfect: "ich habe gelegen" },
-            "machen": { auxiliary: "haben", perfect: "ich habe gemacht" },
-            "möchten": { auxiliary: "haben", perfect: "ich habe gemocht" },
-            "mögen": { auxiliary: "haben", perfect: "ich habe gemocht" },
-            "nehmen": { auxiliary: "haben", perfect: "ich habe genommen" },
-            "rufen": { auxiliary: "haben", perfect: "ich habe gerufen" },
-            "sagen": { auxiliary: "haben", perfect: "ich habe gesagt" },
-            "schlafen": { auxiliary: "haben", perfect: "ich habe geschlafen" },
-            "schreiben": { auxiliary: "haben", perfect: "ich habe geschrieben" },
-            "sehen": { auxiliary: "haben", perfect: "ich habe gesehen" },
-            "sein": { auxiliary: "sein", perfect: "ich bin gewesen" },
-            "spielen": { auxiliary: "haben", perfect: "ich habe gespielt" },
-            "sprechen": { auxiliary: "haben", perfect: "ich habe gesprochen" },
-            "stehen": { auxiliary: "haben", perfect: "ich habe gestanden" },
-            "studieren": { auxiliary: "haben", perfect: "ich habe studiert" },
-            "trinken": { auxiliary: "haben", perfect: "ich habe getrunken" },
-            "umsteigen": { auxiliary: "sein", perfect: "ich bin umgestiegen" },
-            "vorbereiten": { auxiliary: "haben", perfect: "ich habe vorbereitet" },
-            "wissen": { auxiliary: "haben", perfect: "ich habe gewusst" },
-            "wohnen": { auxiliary: "haben", perfect: "ich habe gewohnt" },
-            "zahlen": { auxiliary: "haben", perfect: "ich habe gezahlt" },
-            "zumachen": { auxiliary: "haben", perfect: "ich habe zugemacht" },
-            "zurückgeben": { auxiliary: "haben", perfect: "ich habe zurückgegeben" },
-            "zurückkommen": { auxiliary: "sein", perfect: "ich bin zurückgekommen" }
-        };
-
-        // ============================================
-        // QUIZ TRAINER LOGIC - Separated from data
+        // DATA LOADING - Loads from external JSON file ONLY
         // ============================================
         
-        // Helper functions to extract data from JSON
-        function getVerbs() {
-            return Object.keys(verbData);
-        }
-        
-        function getAuxiliary(verb) {
-            return verbData[verb].auxiliary;
-        }
-        
-        function getPerfectForm(verb) {
-            return verbData[verb].perfect;
-        } 'haben',
-            'wohnen': 'haben',
-            'zahlen': 'haben',
-            'zumachen': 'haben',
-            'zurückgeben': 'haben',
-            'zurückkommen': 'sein'
-        };
-
-        const perfectForms = {
-            'fahren': 'ich bin gefahren',
-            'fernsehen': 'ich habe ferngesehen',
-            'finden': 'ich habe gefunden',
-            'fragen': 'ich habe gefragt',
-            'frühstücken': 'ich habe gefrühstückt',
-            'geben': 'ich habe gegeben',
-            'gefallen': 'ich habe gefallen',
-            'gehen': 'ich bin gegangen',
-            'haben': 'ich habe gehabt',
-            'heißen': 'ich habe geheißen',
-            'hören': 'ich habe gehört',
-            'kennen': 'ich habe gekannt',
-            'kochen': 'ich habe gekocht',
-            'kommen': 'ich bin gekommen',
-            'leben': 'ich habe gelebt',
-            'lernen': 'ich habe gelernt',
-            'lesen': 'ich habe gelesen',
-            'liegen': 'ich habe gelegen',
-            'machen': 'ich habe gemacht',
-            'möchten': 'ich habe gemocht',
-            'mögen': 'ich habe gemocht',
-            'nehmen': 'ich habe genommen',
-            'rufen': 'ich habe gerufen',
-            'sagen': 'ich habe gesagt',
-            'schlafen': 'ich habe geschlafen',
-            'schreiben': 'ich habe geschrieben',
-            'sehen': 'ich habe gesehen',
-            'sein': 'ich bin gewesen',
-            'spielen': 'ich habe gespielt',
-            'sprechen': 'ich habe gesprochen',
-            'stehen': 'ich habe gestanden',
-            'studieren': 'ich habe studiert',
-            'trinken': 'ich habe getrunken',
-            'umsteigen': 'ich bin umgestiegen',
-            'vorbereiten': 'ich habe vorbereitet',
-            'wissen': 'ich habe gewusst',
-            'wohnen': 'ich habe gewohnt',
-            'zahlen': 'ich habe gezahlt',
-            'zumachen': 'ich habe zugemacht',
-            'zurückgeben': 'ich habe zurückgegeben',
-            'zurückkommen': 'ich bin zurückgekommen'
-        };
-
+        let verbData = null;
         let currentVerb = '';
         let correctCount = 0;
         let incorrectCount = 0;
         let answered = false;
-        let verbStats = {}; // Track individual verb performance
-        let previousStats = {}; // Track previous states to detect changes
+        let verbStats = {};
+        let previousStats = {};
+
+        // Quiz configuration
+        const quizConfig = {
+            title: "🇩🇪 Perfekt Quiz",
+            auto_advance_delay: 1500,
+            question: "Welches Hilfsverb verwendet dieses Verb im Perfekt?",
+            buttons: { haben: "HABEN", sein: "SEIN" },
+            controls: { reveal: "Antwort zeigen", next: "Nächste Frage", reset: "Reset Stats" },
+            messages: { correct: "✅ Richtig!", incorrect: "❌ Falsch!", revealed: "💡", reset_confirm: "Möchten Sie wirklich alle Statistiken zurücksetzen?" },
+            stats: { title: "📊 Live Status", emojis: { not_attempted: "⚪", correct: "✅", incorrect: "❌" } }
+        };
+
+        // Load verb data from external JSON file
+        fetch('verbs_with_perfekt.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                verbData = data;
+                console.log(`Loaded ${verbData.length} verbs from JSON`);
+                initializeQuiz();
+            })
+            .catch(error => {
+                console.error('Error loading verb data:', error);
+                showError(error.message);
+            });
+
+        function showError(message) {
+            document.querySelector('.quiz-container').innerHTML = `
+                <h1>❌ Fehler beim Laden</h1>
+                <div class="error">
+                    <p><strong>Verb-Daten konnten nicht geladen werden.</strong></p>
+                    <p>Stellen Sie sicher, dass "verbs_with_perfekt.json" im gleichen Ordner liegt.</p>
+                    <p style="margin-top: 15px; font-size: 0.9em; color: #666;">Fehlerdetails: ${message}</p>
+                </div>
+            `;
+            document.querySelector('.stats-compact').innerHTML = '<div class="error" style="text-align: center;">❌ Fehler</div>';
+        }
+
+        // Helper functions to extract data from JSON
+        function getVerbs() {
+            return verbData ? verbData.map(verb => verb.infinitive) : [];
+        }
+        
+        function findVerbData(infinitive) {
+            return verbData ? verbData.find(verb => verb.infinitive === infinitive) : null;
+        }
+        
+        function getAuxiliary(infinitive) {
+            const verb = findVerbData(infinitive);
+            return verb ? verb.hilfsverb : null;
+        }
+        
+        function getPerfectForm(infinitive) {
+            const verb = findVerbData(infinitive);
+            if (!verb) return null;
+            const auxiliary = verb.hilfsverb === 'sein' ? 'bin' : 'habe';
+            return `ich ${auxiliary} ${verb.partizip_perfekt}`;
+        }
+        
+        function getTranslation(infinitive) {
+            const verb = findVerbData(infinitive);
+            return verb ? verb.translation : null;
+        }
+
+        function initializeQuiz() {
+            if (!verbData || verbData.length === 0) {
+                showError('No verb data available');
+                return;
+            }
+
+            // Enable all buttons
+            document.querySelectorAll('button').forEach(btn => btn.disabled = false);
+            
+            // Initialize stats
+            initializeStats();
+            displayQuestion();
+            updateScore();
+            
+            console.log(`Quiz initialized with ${verbData.length} verbs`);
+        }
 
         function initializeStats() {
-            // Initialize all verbs as not attempted
-            Object.keys(verbs).forEach(verb => {
-                verbStats[verb] = null; // null = not attempted, true = correct, false = incorrect
+            getVerbs().forEach(verb => {
+                verbStats[verb] = null;
                 previousStats[verb] = null;
             });
             updateStatsDisplay();
         }
 
+        function getRandomVerb() {
+            const verbList = getVerbs();
+            return verbList[Math.floor(Math.random() * verbList.length)];
+        }
+
+        function displayQuestion() {
+            currentVerb = getRandomVerb();
+            document.getElementById('current-verb').textContent = currentVerb;
+            document.getElementById('result').className = 'result';
+            answered = false;
+            
+            document.querySelectorAll('.answer-btn').forEach(btn => {
+                btn.disabled = false;
+                btn.style.opacity = '1';
+            });
+        }
+
+        function checkAnswer(selectedAnswer) {
+            if (answered) return;
+            
+            answered = true;
+            const correctAnswer = getAuxiliary(currentVerb);
+            const resultDiv = document.getElementById('result');
+            
+            previousStats[currentVerb] = verbStats[currentVerb];
+            
+            document.querySelectorAll('.answer-btn').forEach(btn => {
+                btn.disabled = true;
+            });
+            
+            if (selectedAnswer === correctAnswer) {
+                correctCount++;
+                verbStats[currentVerb] = true;
+                resultDiv.className = 'result correct show';
+                resultDiv.innerHTML = `
+                    ${quizConfig.messages.correct} "${currentVerb}" (${getTranslation(currentVerb)}) verwendet "${correctAnswer}"
+                    <div class="perfect-form">${getPerfectForm(currentVerb)}</div>
+                `;
+                document.querySelector('.quiz-container').classList.add('bounce');
+                setTimeout(() => document.querySelector('.quiz-container').classList.remove('bounce'), 600);
+                
+                setTimeout(() => {
+                    displayQuestion();
+                }, quizConfig.auto_advance_delay);
+                
+            } else {
+                incorrectCount++;
+                verbStats[currentVerb] = false;
+                resultDiv.className = 'result incorrect show';
+                resultDiv.innerHTML = `
+                    ${quizConfig.messages.incorrect} "${currentVerb}" (${getTranslation(currentVerb)}) verwendet "${correctAnswer}", nicht "${selectedAnswer}"
+                    <div class="perfect-form">${getPerfectForm(currentVerb)}</div>
+                `;
+            }
+            
+            updateScore();
+            updateStatsDisplay();
+        }
+
+        function revealAnswer() {
+            if (answered) return;
+            
+            answered = true;
+            const correctAnswer = getAuxiliary(currentVerb);
+            const resultDiv = document.getElementById('result');
+            
+            document.querySelectorAll('.answer-btn').forEach(btn => {
+                btn.disabled = true;
+                btn.style.opacity = '0.6';
+            });
+            
+            resultDiv.className = 'result show';
+            resultDiv.style.background = '#e2e3e5';
+            resultDiv.style.color = '#383d41';
+            resultDiv.style.border = '1px solid #d6d8db';
+            resultDiv.innerHTML = `
+                ${quizConfig.messages.revealed} "${currentVerb}" (${getTranslation(currentVerb)}) verwendet "${correctAnswer}"
+                <div class="perfect-form">${getPerfectForm(currentVerb)}</div>
+            `;
+        }
+
+        function nextQuestion() {
+            displayQuestion();
+        }
+
+        function updateScore() {
+            document.getElementById('correct-count').textContent = correctCount;
+            document.getElementById('incorrect-count').textContent = incorrectCount;
+            
+            const totalAnswered = correctCount + incorrectCount;
+            let percentage = 0;
+            if (totalAnswered > 0) {
+                percentage = Math.round((correctCount / totalAnswered) * 100);
+            }
+            
+            const percentageDisplay = document.getElementById('percentage-display');
+            percentageDisplay.textContent = `${percentage}% richtig`;
+            
+            if (percentage >= 80) {
+                percentageDisplay.style.color = '#28a745';
+                percentageDisplay.style.fontWeight = 'bold';
+            } else if (percentage >= 60) {
+                percentageDisplay.style.color = '#ffc107';
+                percentageDisplay.style.fontWeight = 'bold';
+            } else if (totalAnswered > 0) {
+                percentageDisplay.style.color = '#dc3545';
+                percentageDisplay.style.fontWeight = 'bold';
+            } else {
+                percentageDisplay.style.color = '#666';
+                percentageDisplay.style.fontWeight = 'normal';
+            }
+        }
+
+        function resetStats() {
+            if (confirm(quizConfig.messages.reset_confirm)) {
+                correctCount = 0;
+                incorrectCount = 0;
+                verbStats = {};
+                previousStats = {};
+                initializeStats();
+                updateScore();
+                displayQuestion();
+            }
+        }
+
         function updateStatsDisplay() {
-            // Update compact sidebar stats
             const statsCompact = document.getElementById('stats-compact');
             statsCompact.innerHTML = '';
             
-            // Sort verbs alphabetically
-            const sortedVerbs = Object.keys(verbs).sort();
+            const sortedVerbs = getVerbs().sort();
             
             sortedVerbs.forEach(verb => {
-                // Compact stats item
                 const verbCompact = document.createElement('div');
                 verbCompact.className = 'verb-compact';
+                verbCompact.title = `${verb} (${getTranslation(verb)})`;
                 
-                // Check if status changed to add animation
                 if (previousStats[verb] !== null && previousStats[verb] !== verbStats[verb]) {
                     verbCompact.classList.add('status-changed');
-                    // Remove animation class after animation completes
                     setTimeout(() => {
                         verbCompact.classList.remove('status-changed');
                     }, 800);
@@ -513,159 +617,20 @@
                 const verbStatusCompact = document.createElement('span');
                 verbStatusCompact.className = 'verb-status-compact';
                 
-                // Set status emoji
-                let emoji = '⚪'; // Not attempted
+                let emoji = quizConfig.stats.emojis.not_attempted;
                 if (verbStats[verb] === true) {
-                    emoji = '✅'; // Correct
+                    emoji = quizConfig.stats.emojis.correct;
                 } else if (verbStats[verb] === false) {
-                    emoji = '❌'; // Incorrect
+                    emoji = quizConfig.stats.emojis.incorrect;
                 }
                 
                 verbStatusCompact.textContent = emoji;
                 
-                // Append to compact view
                 verbCompact.appendChild(verbNameCompact);
                 verbCompact.appendChild(verbStatusCompact);
                 statsCompact.appendChild(verbCompact);
             });
         }
-
-        function getRandomVerb() {
-            const verbList = Object.keys(verbs);
-            return verbList[Math.floor(Math.random() * verbList.length)];
-        }
-
-        function displayQuestion() {
-            currentVerb = getRandomVerb();
-            document.getElementById('current-verb').textContent = currentVerb;
-            document.getElementById('result').className = 'result';
-            answered = false;
-            
-            // Enable answer buttons
-            document.querySelectorAll('.answer-btn').forEach(btn => {
-                btn.disabled = false;
-                btn.style.opacity = '1';
-            });
-        }
-
-        function checkAnswer(selectedAnswer) {
-            if (answered) return;
-            
-            answered = true;
-            const correctAnswer = verbs[currentVerb];
-            const resultDiv = document.getElementById('result');
-            
-            // Store previous state to detect changes
-            previousStats[currentVerb] = verbStats[currentVerb];
-            
-            // Disable answer buttons
-            document.querySelectorAll('.answer-btn').forEach(btn => {
-                btn.disabled = true;
-            });
-            
-            if (selectedAnswer === correctAnswer) {
-                correctCount++;
-                verbStats[currentVerb] = true; // Always update to most recent result
-                resultDiv.className = 'result correct show';
-                resultDiv.innerHTML = `
-                    ✅ Richtig! "${currentVerb}" verwendet "${correctAnswer}"
-                    <div class="perfect-form">${perfectForms[currentVerb]}</div>
-                `;
-                document.querySelector('.quiz-container').classList.add('bounce');
-                setTimeout(() => document.querySelector('.quiz-container').classList.remove('bounce'), 600);
-                
-                // Auto-advance to next question after correct answer
-                setTimeout(() => {
-                    displayQuestion();
-                }, 1500);
-                
-            } else {
-                incorrectCount++;
-                verbStats[currentVerb] = false; // Always update to most recent result
-                resultDiv.className = 'result incorrect show';
-                resultDiv.innerHTML = `
-                    ❌ Falsch! "${currentVerb}" verwendet "${correctAnswer}", nicht "${selectedAnswer}"
-                    <div class="perfect-form">${perfectForms[currentVerb]}</div>
-                `;
-            }
-            
-            updateScore();
-            updateStatsDisplay(); // Update the stats display with new result
-        }
-
-        function revealAnswer() {
-            if (answered) return;
-            
-            answered = true;
-            const correctAnswer = verbs[currentVerb];
-            const resultDiv = document.getElementById('result');
-            
-            // Disable answer buttons
-            document.querySelectorAll('.answer-btn').forEach(btn => {
-                btn.disabled = true;
-                btn.style.opacity = '0.6';
-            });
-            
-            resultDiv.className = 'result show';
-            resultDiv.style.background = '#e2e3e5';
-            resultDiv.style.color = '#383d41';
-            resultDiv.style.border = '1px solid #d6d8db';
-            resultDiv.innerHTML = `
-                💡 "${currentVerb}" verwendet "${correctAnswer}"
-                <div class="perfect-form">${perfectForms[currentVerb]}</div>
-            `;
-        }
-
-        function nextQuestion() {
-            displayQuestion();
-        }
-
-        function updateScore() {
-            document.getElementById('correct-count').textContent = correctCount;
-            document.getElementById('incorrect-count').textContent = incorrectCount;
-            
-            // Calculate and display percentage
-            const totalAnswered = correctCount + incorrectCount;
-            let percentage = 0;
-            if (totalAnswered > 0) {
-                percentage = Math.round((correctCount / totalAnswered) * 100);
-            }
-            
-            const percentageDisplay = document.getElementById('percentage-display');
-            percentageDisplay.textContent = `${percentage}% richtig`;
-            
-            // Color the percentage based on performance
-            if (percentage >= 80) {
-                percentageDisplay.style.color = '#28a745'; // Green
-                percentageDisplay.style.fontWeight = 'bold';
-            } else if (percentage >= 60) {
-                percentageDisplay.style.color = '#ffc107'; // Yellow
-                percentageDisplay.style.fontWeight = 'bold';
-            } else if (totalAnswered > 0) {
-                percentageDisplay.style.color = '#dc3545'; // Red
-                percentageDisplay.style.fontWeight = 'bold';
-            } else {
-                percentageDisplay.style.color = '#666'; // Default gray
-                percentageDisplay.style.fontWeight = 'normal';
-            }
-        }
-
-        function resetStats() {
-            if (confirm('Möchten Sie wirklich alle Statistiken zurücksetzen?')) {
-                correctCount = 0;
-                incorrectCount = 0;
-                verbStats = {};
-                previousStats = {};
-                initializeStats();
-                updateScore();
-                displayQuestion();
-            }
-        }
-
-        // Initialize quiz
-        initializeStats();
-        displayQuestion();
-        updateScore();
     </script>
 </body>
-</html>
+</html> 
