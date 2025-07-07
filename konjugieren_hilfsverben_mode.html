@@ -50,7 +50,7 @@
 
         .stats-compact {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 4px;
         }
 
@@ -58,26 +58,30 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 6px 10px;
+            padding: 4px 6px;
             background: #f8f9fa;
-            border-radius: 8px;
-            font-size: 0.9em;
+            border-radius: 6px;
+            font-size: 0.8em;
             border: 1px solid #e9ecef;
             transition: all 0.2s ease;
         }
 
         .verb-compact:hover {
             background: #e9ecef;
-            transform: translateX(3px);
+            transform: translateX(2px);
         }
 
         .verb-compact .verb-name-compact {
             font-weight: 500;
             color: #495057;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .verb-compact .verb-status-compact {
-            font-size: 1.3em;
+            font-size: 1.1em;
+            margin-left: 4px;
         }
 
         .stats-sidebar::-webkit-scrollbar {
@@ -313,13 +317,13 @@
             }
             
             .stats-compact {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-                gap: 3px;
+                grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+                gap: 2px;
             }
             
             .verb-compact {
-                padding: 4px 6px;
-                font-size: 0.8em;
+                padding: 3px 4px;
+                font-size: 0.7em;
             }
         }
     </style>
@@ -358,6 +362,10 @@
                 <button class="control-btn" onclick="revealAnswer()" disabled>Antwort zeigen</button>
                 <button class="control-btn" onclick="nextQuestion()" disabled>Nächste Frage</button>
                 <button class="control-btn" onclick="resetStats()" disabled style="background: #ff6b6b; color: white; border-color: #ff6b6b;">Reset Stats</button>
+            </div>
+            
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e9ecef;">
+                <button class="control-btn" onclick="window.location.href='index.html'" style="background: #6c757d; color: white; border-color: #6c757d;">← Zurück zum Menü</button>
             </div>
         </div>
     </div>
@@ -633,4 +641,4 @@
         }
     </script>
 </body>
-</html> 
+</html>
