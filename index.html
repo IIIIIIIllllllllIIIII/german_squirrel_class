@@ -62,12 +62,78 @@
             z-index: 2;
         }
         
+        .subtitle-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
         .subtitle {
             font-size: 1.75rem; /* Slightly larger for better readability */
             color: #FFE3BB; /* Light orange from palette */
-            margin-bottom: 3rem;
             text-shadow: 1px 1px 2px #000;
             line-height: 1.6;
+            flex: 1;
+            max-width: 600px;
+            min-width: 300px;
+        }
+
+        .dancing-squirrel {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #E3DE61;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            animation: bounce 2s infinite;
+            background-color: rgba(0,0,0,0.2);
+        }
+
+        .dancing-squirrel.left {
+            animation: bounceLeft 2s infinite;
+        }
+
+        .dancing-squirrel.right {
+            animation: bounceRight 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes bounceLeft {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) rotate(-5deg);
+            }
+            40% {
+                transform: translateY(-10px) rotate(-10deg);
+            }
+            60% {
+                transform: translateY(-5px) rotate(-7deg);
+            }
+        }
+
+        @keyframes bounceRight {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) rotate(5deg);
+            }
+            40% {
+                transform: translateY(-10px) rotate(10deg);
+            }
+            60% {
+                transform: translateY(-5px) rotate(7deg);
+            }
         }
 
         .columns-container {
@@ -160,6 +226,14 @@
         
         @media (max-width: 768px) {
             .title { font-size: 3rem; }
+            .subtitle-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .dancing-squirrel {
+                width: 60px;
+                height: 60px;
+            }
         }
 
         @media (max-width: 640px) {
@@ -169,6 +243,14 @@
             .translation-lang { font-size: 0.75em; }
             .quiz-link { padding: 0.5rem; }
             .quiz-animation { width: 70px; height: 70px; }
+            .dancing-squirrel {
+                width: 50px;
+                height: 50px;
+            }
+            .subtitle {
+                font-size: 1.4rem;
+                min-width: 250px;
+            }
         }
     </style>
 </head>
@@ -179,7 +261,11 @@
             <h1 class="title">Erandis Secret German Squirrel Headquarters</h1>
         </div>
 
-        <p id="welcome-message" class="subtitle"></p>
+        <div class="subtitle-container">
+            <img id="left-dancing-squirrel" class="dancing-squirrel left" src="" alt="Dancing squirrel">
+            <p id="welcome-message" class="subtitle"></p>
+            <img id="right-dancing-squirrel" class="dancing-squirrel right" src="" alt="Dancing squirrel">
+        </div>
         
         <div class="columns-container">
             
@@ -312,7 +398,6 @@
                 welcomeEl.innerHTML = randomMessage + "<br><span class='opacity-70'>🐿️</span>";
             }
 
-
             // --- Animations ---
             const squirrelAnimations = [
                 'File 1.webp', 'File 2.webp', 'File 3.webp', 'File 4.webp', 'File 5.webp',
@@ -336,6 +421,18 @@
             if (titleBgElement) {
                 const randomTitleAnimation = squirrelAnimations[Math.floor(Math.random() * squirrelAnimations.length)];
                 titleBgElement.src = 'animations/' + randomTitleAnimation;
+            }
+
+            // --- Assign specific animations to dancing squirrels ---
+            const leftSquirrel = document.getElementById('left-dancing-squirrel');
+            const rightSquirrel = document.getElementById('right-dancing-squirrel');
+
+            if (leftSquirrel) {
+                leftSquirrel.src = 'animations/dance1.gif'; // Change this to your preferred gif
+            }
+
+            if (rightSquirrel) {
+                rightSquirrel.src = 'animations/dance2.gif'; // Change this to your preferred gif
             }
 
             // --- Assign a unique random animation to each quiz item ---
