@@ -85,25 +85,6 @@
             min-width: 300px;
         }
 
-        .dancing-squirrel {
-            width: 180px;
-            height: 180px;
-            object-fit: cover;
-            background-color: rgba(0,0,0,0.2);
-        }
-
-        .dancing-squirrel.left {
-            align-items: center;
-            width: 60%;
-            height: 60%;
-        }
-
-        .dancing-squirrel.right {
-            align-items: center;
-            width: 60%;
-            height: 60%;
-        }
-
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {
                 transform: translateY(0);
@@ -288,7 +269,6 @@
             
             <div class="level-column">
                 <h2 class="level-title">A1.1</h2>
-                <img id="left-dancing-squirrel" class="dancing-squirrel left" src="" alt="Dancing squirrel">
                 <a href="artikel_mode.html" class="quiz-item-container color-1">
                     <img class="quiz-animation" src="" alt="Quiz Animation">
                     <div class="quiz-link light-text">
@@ -342,7 +322,6 @@
 
             <div class="level-column">
                 <h2 class="level-title">A1.2</h2>
-                <img id="right-dancing-squirrel" class="dancing-squirrel right" src="" alt="Dancing squirrel">
                 <a href="daily_routine_mode_lvl1.html" class="quiz-item-container color-8">
                     <img class="quiz-animation" src="" alt="Quiz Animation">
                     <div class="quiz-link light-text">
@@ -445,18 +424,6 @@
             if (titleBgElement) {
                 const randomTitleAnimation = squirrelAnimations[Math.floor(Math.random() * squirrelAnimations.length)];
                 titleBgElement.src = 'animations/' + randomTitleAnimation;
-            }
-
-            // --- Assign specific animations to dancing squirrels ---
-            const leftSquirrel = document.getElementById('left-dancing-squirrel');
-            const rightSquirrel = document.getElementById('right-dancing-squirrel');
-
-            if (leftSquirrel) {
-                leftSquirrel.src = 'animations/dance2.gif'; // Change this to your preferred gif
-            }
-
-            if (rightSquirrel) {
-                rightSquirrel.src = 'animations/dance1.gif'; // Change this to your preferred gif
             }
 
             // --- Assign a unique random animation to each quiz item ---
