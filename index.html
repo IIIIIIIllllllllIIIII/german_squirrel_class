@@ -275,16 +275,14 @@
         </div>
 
         <div class="subtitle-container">
-            <img id="left-dancing-squirrel" class="dancing-squirrel left" src="" alt="Dancing squirrel">
             <p id="welcome-message" class="subtitle"></p>
-            <img id="right-dancing-squirrel" class="dancing-squirrel right" src="" alt="Dancing squirrel">
         </div>
         
         <div class="columns-container">
             
             <div class="level-column">
                 <h2 class="level-title">A1.1</h2>
-                
+                <img id="left-dancing-squirrel" class="dancing-squirrel left" src="" alt="Dancing squirrel">
                 <a href="artikel_mode.html" class="quiz-item-container color-1">
                     <img class="quiz-animation" src="" alt="Quiz Animation">
                     <div class="quiz-link light-text">
@@ -338,7 +336,7 @@
 
             <div class="level-column">
                 <h2 class="level-title">A1.2</h2>
-
+                <img id="right-dancing-squirrel" class="dancing-squirrel right" src="" alt="Dancing squirrel">
                 <a href="daily_routine_mode_lvl1.html" class="quiz-item-container color-8">
                     <img class="quiz-animation" src="" alt="Quiz Animation">
                     <div class="quiz-link light-text">
@@ -448,11 +446,11 @@
             const rightSquirrel = document.getElementById('right-dancing-squirrel');
 
             if (leftSquirrel) {
-                leftSquirrel.src = 'animations/dance.gif'; // Change this to your preferred gif
+                leftSquirrel.src = 'animations/dance2.gif'; // Change this to your preferred gif
             }
 
             if (rightSquirrel) {
-                rightSquirrel.src = 'animations/dance.gif'; // Change this to your preferred gif
+                rightSquirrel.src = 'animations/dance1.gif'; // Change this to your preferred gif
             }
 
             // --- Assign a unique random animation to each quiz item ---
