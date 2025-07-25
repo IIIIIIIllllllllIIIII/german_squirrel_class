@@ -46,7 +46,6 @@
             max-width: 550px;
         }
         
-        /* ✨ New Stats Section Styling */
         #stats-container {
             display: flex;
             justify-content: space-around;
@@ -178,12 +177,10 @@
             const audioPlayer = document.getElementById('audio-player');
             const quizContainer = document.getElementById('quiz-container');
             const mainQuizArea = document.getElementById('main-quiz-area');
-
             const revealBtn = document.getElementById('reveal-btn');
             const gradingButtons = document.getElementById('grading-buttons');
             const correctBtn = document.getElementById('correct-btn');
             const wrongBtn = document.getElementById('wrong-btn');
-
             const wordsSeenEl = document.getElementById('words-seen');
             const totalWordsEl = document.getElementById('total-words');
             const correctValueEl = document.getElementById('correct-value');
@@ -234,8 +231,9 @@
 
             function shuffleArray(array) {
                 for (let i = array.length - 1; i > 0; i--) {
-                    [array[i], array[j]] = [array[j], array[i]];
+                    // BUG FIX: The next two lines were swapped. This is the corrected order.
                     const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
                 }
             }
             
@@ -247,7 +245,7 @@
             }
 
             function displayNextCard() {
-                if (stats.seen >= stats.total) {
+                if (stats.seen >= stats.total && stats.total > 0) {
                     showQuizSummary();
                     return;
                 }
