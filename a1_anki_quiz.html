@@ -26,7 +26,6 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 600px;
-            text-align: center;
         }
 
         .card {
@@ -34,13 +33,12 @@
             border-radius: 8px;
             padding: 1.5rem;
             margin-bottom: 1rem;
-            min-height: 120px;
+            min-height: 140px;
             display: flex;
-            align-items: center;
-            justify-content: center;
             flex-direction: column;
-            font-size: 1.2rem;
-            position: relative; /* For positioning the audio button */
+            align-items: flex-start;
+            text-align: left;
+            position: relative;
         }
         
         #front-card {
@@ -54,15 +52,32 @@
         #back-card.hidden {
             display: none;
         }
+
+        .label {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #6c757d;
+            margin-bottom: 0.25rem;
+        }
+        .content {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        .content i {
+            font-size: 1.1rem;
+            color: #333;
+        }
         
         .audio-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
             background: none;
             border: none;
             font-size: 1.8rem;
             cursor: pointer;
             color: #007bff;
             padding: 5px;
-            margin-left: 15px;
             transition: transform 0.2s;
         }
 
@@ -84,25 +99,23 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.2s, transform 0.2s;
-        }
-
-        #reveal-btn {
-            background-color: #007bff;
-            color: white;
-        }
-
-        #reveal-btn:hover {
-            background-color: #0056b3;
         }
         
-        #next-btn {
-            background-color: #28a745;
-            color: white;
+        .center-text {
+            text-align: center;
+            width: 100%;
+        }
+
+        h1 {
+            color: #444;
+            margin-bottom: 0.5rem;
+            text-align: center;
         }
         
-        #next-btn:hover {
-            background-color: #218838;
+        #instructions {
+            color: #555;
+            margin-bottom: 2rem;
+            text-align: center;
         }
         
         .menu-button {
@@ -110,29 +123,17 @@
             background-color: #6c757d;
             color: white;
         }
-        
-        .menu-button:hover {
-            background-color: #5a6268;
-        }
-        
-        h1 {
-            color: #444;
-            margin-bottom: 2rem;
-        }
-        
-        i {
-            color: #555;
-            font-size: 1rem;
-        }
     </style>
 </head>
 <body>
 
     <div id="quiz-container">
         <h1>A1 German Vocabulary Quiz 🇩🇪</h1>
-        <p>Click the card or the button below to reveal the answer.</p>
+        <p id="instructions">Click the card or the button below to reveal the answer.</p>
         
-        <div id="front-card" class="card">Loading vocabulary...</div>
+        <div id="front-card" class="card">
+            <div class="center-text">Loading vocabulary...</div>
+        </div>
         
         <div id="back-card" class="card hidden"></div>
 
@@ -160,66 +161,52 @@
             let vocabulary = [];
             let currentCardIndex = -1;
 
-            // --- 1. Fetch and Parse the Vocabulary File ---
             async function loadVocabulary() {
                 try {
                     const response = await fetch('a1wordlist.txt');
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok. Make sure a1wordlist.txt is in the same directory.');
-                    }
+                    if (!response.ok) throw new Error('Network response was not ok.');
                     const text = await response.text();
                     parseAnkiTxt(text);
-                    if (vocabulary.length === 0) {
-                        throw new Error('No valid vocabulary entries were parsed from the file.');
-                    }
+                    if (vocabulary.length === 0) throw new Error('No valid vocabulary entries were parsed.');
                     shuffleArray(vocabulary);
                     displayNextCard();
                 } catch (error) {
-                    frontCard.innerHTML = `<strong>Error:</strong> Could not load vocabulary. <br><small>${error.message}</small>`;
-                    console.error('Failed to load vocabulary:', error);
+                    frontCard.innerHTML = `<div class="center-text"><strong>Error:</strong> Could not load vocabulary. <br><small>${error.message}</small></div>`;
                 }
             }
             
-            // ✨ This parser is improved to handle audio files
+            // ✨ This is the new parser for your new, better file format.
             function parseAnkiTxt(text) {
                 const lines = text.split('\n');
-                const uniqueEntries = {}; 
+                const loadedVocabulary = [];
 
                 lines.forEach(line => {
-                    if (line.startsWith('#') || line.trim() === '') return;
-                    
-                    const parts = line.split('\t');
-                    if (parts.length < 2) return;
+                    if (line.trim() === '') return;
 
-                    let rawGerman, rawEnglish;
+                    const fields = line.split('\t');
+                    if (fields.length < 8) return; // Ensure the line has enough columns
 
-                    if (parts[0].includes('[sound:')) {
-                        rawGerman = parts[0];
-                        rawEnglish = parts[1];
-                    } else if (parts[1].includes('[sound:')) {
-                        rawGerman = parts[1];
-                        rawEnglish = parts[0];
-                    } else {
-                        return; // Skip if format doesn't match
+                    // Directly map columns to our data structure
+                    const entry = {
+                        germanWord: fields[1].trim(),
+                        germanSentence: fields[2].trim(),
+                        englishWord: fields[3].trim(),
+                        englishSentence: fields[4].trim(),
+                        soundFile: null
+                    };
+
+                    // Extract sound file from the last column
+                    const soundField = fields[7].trim();
+                    const soundMatch = soundField.match(/\[sound:(.*?)\]/);
+                    if (soundMatch) {
+                        entry.soundFile = soundMatch[1];
                     }
-
-                    // Extract the sound file name
-                    const soundMatch = rawGerman.match(/\[sound:(.*?)\]/);
-                    const soundFile = soundMatch ? soundMatch[1] : null;
                     
-                    // Clean the text for display
-                    const german = rawGerman.slice(1, -1).replace(/\[sound:.*?\]/g, '').trim();
-                    const english = rawEnglish.slice(1, -1).trim();
-
-                    if (german && english) {
-                        const key = english.split('<br>')[0].trim();
-                        if (!uniqueEntries[key]) {
-                           uniqueEntries[key] = { german, english, soundFile };
-                        }
+                    if (entry.germanWord && entry.englishWord) {
+                        loadedVocabulary.push(entry);
                     }
                 });
-
-                vocabulary = Object.values(uniqueEntries);
+                vocabulary = loadedVocabulary;
             }
 
             function shuffleArray(array) {
@@ -231,21 +218,27 @@
 
             function displayNextCard() {
                 if (vocabulary.length === 0) return;
-                
                 currentCardIndex = (currentCardIndex + 1) % vocabulary.length;
-                
                 const card = vocabulary[currentCardIndex];
 
-                frontCard.innerHTML = card.english;
+                frontCard.innerHTML = `
+                    <div class="label">Word:</div>
+                    <div class="content">${card.englishWord}</div>
+                    <div class="label">Sentence:</div>
+                    <div class="content"><i>${card.englishSentence || '...'}</i></div>
+                `;
                 
-                // Build the German card content, adding an audio button if a sound file exists
-                let germanHtml = `<div>${card.german}</div>`;
+                let germanHtml = `
+                    <div class="label">Wort:</div>
+                    <div class="content">${card.germanWord}</div>
+                    <div class="label">Satz:</div>
+                    <div class="content"><i>${card.germanSentence || '...'}</i></div>
+                `;
                 if (card.soundFile) {
                     germanHtml += `<button class="audio-button" data-sound="${card.soundFile}">🔊</button>`;
                 }
                 backCard.innerHTML = germanHtml;
                 
-                // Reset the view
                 backCard.classList.add('hidden');
                 revealBtn.style.display = 'inline-block';
             }
@@ -256,7 +249,6 @@
             }
             
             function playSound(soundFile) {
-                // IMPORTANT: Assumes audio files are in a 'media' subfolder
                 audioPlayer.src = `media/${soundFile}`;
                 audioPlayer.play().catch(e => console.error("Error playing audio:", e));
             }
@@ -265,21 +257,14 @@
             revealBtn.addEventListener('click', revealAnswer);
             frontCard.addEventListener('click', revealAnswer);
             nextBtn.addEventListener('click', displayNextCard);
-            
-            // Event delegation for dynamically created audio buttons
             quizContainer.addEventListener('click', (event) => {
-                if (event.target.classList.contains('audio-button')) {
-                    const soundFile = event.target.dataset.sound;
-                    if (soundFile) {
-                        playSound(soundFile);
-                    }
+                if (event.target.matches('.audio-button')) {
+                    playSound(event.target.dataset.sound);
                 }
             });
 
-            // Start the quiz
             loadVocabulary();
         });
     </script>
-
 </body>
 </html>
