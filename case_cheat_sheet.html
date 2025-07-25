@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deutsche Fälle / Casos Alemanes / German Cases</title>
+    <title>Finaler Vergleich der Fälle / Final Case Comparison</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -12,261 +12,171 @@
             background-color: #fcfcfc;
         }
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
         }
-        h1, p.intro {
+        h1 {
             text-align: center;
-            padding: 0 10px;
         }
-        table {
+        .vertical-comparison {
             width: 100%;
             border-collapse: collapse;
             margin: 25px 0;
             font-size: 16px;
         }
-        th, td {
+        .vertical-comparison th, .vertical-comparison td {
             border: 1px solid #d0d0d0;
             padding: 15px;
             text-align: left;
             vertical-align: top;
         }
-        th {
-            background-color: #f2f2f2;
-            font-weight: bold;
+        .vertical-comparison thead th {
+            font-size: 1.5em;
+            padding: 20px;
         }
-        .fall-header {
-            font-size: 1.2em;
+        .vertical-comparison tbody th {
+            background-color: #f8f9fa;
             font-weight: bold;
-            vertical-align: middle;
+            width: 15%;
+            text-align: right;
+            padding-right: 20px;
         }
-        .nickname {
-            display: block;
-            font-size: 1.1em;
-            font-weight: bold;
-            margin-top: 5px;
-            text-align: center;
-        }
-        /* Row Colors */
-        .fall-nominativ { background-color: #eaf3fa; }
-        .fall-dativ { background-color: #fef6e8; }
-        .fall-akkusativ { background-color: #eaf7ea; }
+        /* Case Column Colors */
+        .col-nominativ { background-color: #eaf3fa; }
+        .col-dativ { background-color: #fef6e8; }
+        .col-akkusativ { background-color: #eaf7ea; }
         
-        /* Language Styles */
-        .lang-de, .lang-es, .lang-en {
-            display: block;
-        }
+        /* Language Styles & Spacing */
+        .lang-de, .lang-en { display: block; }
         .lang-de { font-weight: 500; color: #0056b3; }
-        .lang-es { font-style: italic; color: #c9302c; }
-        .lang-en { font-style: italic; color: #28a745; }
+        .lang-en { font-style: italic; color: #28a745; margin-top: 4px; } /* Reduced Margin */
+        
+        .nickname { font-size: 1.1em; font-weight: bold; text-align: center; }
+        
+        .beispiel-artikel, .beispiel-adjektiv { 
+            padding-bottom: 12px; 
+            margin-bottom: 12px;
+            border-bottom: 1px dashed #ccc;
+        }
+        
+        .red-mark { color: #d9534f; font-weight: bold; }
 
-        .lang-de:not(:first-child), 
-        .lang-es:not(:first-child), 
-        .lang-en:not(:first-child) {
-            margin-top: 8px;
-        }
-
-        .erklaerung-lang { font-size: 0.95em; }
-        .erklaerung-lang .erkl-teil {
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px dashed #ccc;
-        }
-        .erklaerung-lang .erkl-teil:first-child {
-            margin-top: 0;
-            padding-top: 0;
-            border-top: none;
-        }
-        .darstellung-titel { font-weight: bold; }
-        code {
-            background-color: #e9ecef;
-            padding: 2px 5px;
-            border-radius: 4px;
-            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
-        }
+        ul { padding-left: 20px; margin-top: 10px; margin-bottom: 0; }
+        code { background-color: #e9ecef; padding: 2px 5px; border-radius: 4px; font-weight: bold; }
     </style>
 </head>
 <body>
 <div class="container">
 
     <h1>
-        <span class="lang-de">Vergleich der deutschen Fälle</span>
-        <span class="lang-es">Comparación de los Casos Alemanes</span>
-        <span class="lang-en">Comparison of the German Cases</span>
+        <span class="lang-de">Finaler Vergleich der deutschen Fälle</span>
+        <span class="lang-en">Final Comparison of the German Cases</span>
     </h1>
-    <p class="intro">
-        <span class="lang-de">Eine einfache Tabelle (A1) mit Nicknames, Erklärungen und Darstellungen zum Vergleich der deutschen Grammatik mit Spanisch und Englisch.</span>
-        <span class="lang-es">Una tabla simple (A1) con apodos, explicaciones y demostraciones para comparar la gramática alemana con el español y el inglés.</span>
-        <span class="lang-en">A simple table (A1) with nicknames, explanations, and demonstrations to compare German grammar with Spanish and English.</span>
-    </p>
 
-    <table>
+    <table class="vertical-comparison">
         <thead>
             <tr>
-                <th>
-                    <span class="lang-de">Fall</span><span class="lang-es">Caso</span><span class="lang-en">Case</span>
-                </th>
-                <th>
-                    <span class="lang-de">Frage</span><span class="lang-es">Pregunta</span><span class="lang-en">Question</span>
-                </th>
-                <th>
-                    <span class="lang-de">Maskulin</span><span class="lang-es">Masculino</span><span class="lang-en">Masculine</span>
-                </th>
-                <th>
-                    <span class="lang-de">Feminin</span><span class="lang-es">Femenino</span><span class="lang-en">Feminine</span>
-                </th>
-                <th>
-                    <span class="lang-de">Neutrum</span><span class="lang-es">Neutro</span><span class="lang-en">Neuter</span>
-                </th>
-                <th>
-                    <span class="lang-de">Plural</span><span class="lang-es">Plural</span><span class="lang-en">Plural</span>
-                </th>
+                <th></th>
+                <th class="col-nominativ"><span class="lang-de">Nominativ</span><span class="lang-en">Nominative</span></th>
+                <th class="col-dativ"><span class="lang-de">Dativ</span><span class="lang-en">Dative</span></th>
+                <th class="col-akkusativ"><span class="lang-de">Akkusativ</span><span class="lang-en">Accusative</span></th>
             </tr>
         </thead>
         <tbody>
-            <tr class="fall-nominativ">
-                <td class="fall-header" rowspan="3">
-                    <span class="lang-de">Nominativ</span><span class="lang-es">Nominativo</span><span class="lang-en">Nominative</span>
-                    <span class="nickname">
-                        <span class="lang-de">DER TÄTER</span>
-                        <span class="lang-es">EL ACTOR</span>
-                        <span class="lang-en">THE DOER</span>
-                    </span>
-                </td>
-                <td>
-                    <span class="lang-de">Wer? / Was?</span><span class="lang-es">¿Quién? / ¿Qué?</span><span class="lang-en">Who? / What?</span>
-                </td>
-                <td><span class="lang-de"><b>der</b> Mann</span><span class="lang-es">el hombre</span><span class="lang-en">the man</span></td>
-                <td><span class="lang-de"><b>die</b> Frau</span><span class="lang-es">la mujer</span><span class="lang-en">the woman</span></td>
-                <td><span class="lang-de"><b>das</b> Kind</span><span class="lang-es">el niño</span><span class="lang-en">the child</span></td>
-                <td><span class="lang-de"><b>die</b> Kinder</span><span class="lang-es">los niños</span><span class="lang-en">the children</span></td>
+            <tr>
+                <th><span class="lang-de">Nickname</span><span class="lang-en">Nickname</span></th>
+                <td class="col-nominativ nickname"><span class="lang-de">DER TÄTER</span><span class="lang-en">THE DOER</span></td>
+                <td class="col-dativ nickname"><span class="lang-de">DER EMPFÄNGER</span><span class="lang-en">THE RECEIVER</span></td>
+                <td class="col-akkusativ nickname"><span class="lang-de">DAS OPFER</span><span class="lang-en">THE VICTIM</span></td>
             </tr>
-            <tr class="fall-nominativ">
-                <td>
-                    <span class="lang-de">Beispiele</span><span class="lang-es">Ejemplos</span><span class="lang-en">Examples</span>
+            <tr>
+                <th><span class="lang-de">Beispiele: Maskulin</span><span class="lang-en">Examples: Masculine</span></th>
+                <td class="col-nominativ">
+                    <div class="beispiel-artikel"><span class="lang-de"><b>Artikel:</b> <b>Der</b> Mann lacht.</span><span class="lang-en"><b>Article:</b> <b>The</b> man laughs.</span></div>
+                    <div class="beispiel-adjektiv"><span class="lang-de"><b>Adjektiv:</b> Der <b>gut<span class="red-mark">e</span></b> Mann lacht.</span><span class="lang-en"><b>Adjective:</b> The good man laughs.</span></div>
+                    <div class="beispiel-pronomen"><span class="lang-de"><b>Pronomen:</b> <span class="red-mark"><b>Er</b></span> lacht.</span><span class="lang-en"><b>Pronoun:</b> <b>He</b> laughs.</span></div>
                 </td>
-                <td><span class="lang-de"><b>Der Mann</b> lacht.</span><span class="lang-es"><b>El hombre</b> ríe.</span><span class="lang-en"><b>The man</b> laughs.</span></td>
-                <td><span class="lang-de"><b>Die Frau</b> singt.</span><span class="lang-es"><b>La mujer</b> canta.</span><span class="lang-en"><b>The woman</b> sings.</span></td>
-                <td><span class="lang-de"><b>Das Kind</b> spielt.</span><span class="lang-es"><b>El niño</b> juega.</span><span class="lang-en"><b>The child</b> plays.</span></td>
-                <td><span class="lang-de"><b>Die Kinder</b> lernen.</span><span class="lang-es"><b>Los niños</b> aprenden.</span><span class="lang-en"><b>The children</b> learn.</span></td>
-            </tr>
-            <tr class="fall-nominativ">
-                <td>
-                    <span class="lang-de">Erklärung</span><span class="lang-es">Explicación</span><span class="lang-en">Explanation</span>
+                <td class="col-dativ">
+                    <div class="beispiel-artikel"><span class="lang-de"><b>Artikel:</b> Ich helfe <span class="red-mark"><b>dem</b></span> Mann.</span><span class="lang-en"><b>Article:</b> I help <b>the</b> man.</span></div>
+                    <div class="beispiel-adjektiv"><span class="lang-de"><b>Adjektiv:</b> Ich helfe <span class="red-mark"><b>dem</b></span> <b>gut<span class="red-mark">en</span></b> Mann.</span><span class="lang-en"><b>Adjective:</b> I help <b>the</b> good man.</span></div>
+                    <div class="beispiel-pronomen"><span class="lang-de"><b>Pronomen:</b> Ich helfe <span class="red-mark"><b>ihm</b></span>.</span><span class="lang-en"><b>Pronoun:</b> I help <b>him</b>.</span></div>
                 </td>
-                <td colspan="4" class="erklaerung-lang">
-                    <div class="erkl-teil">
-                        <span class="lang-de"><b>Erklärung:</b> Das Subjekt. Die Person/Sache, die die Handlung ausführt.</span>
-                        <span class="lang-es"><b>Explicación:</b> El Sujeto. La persona/cosa que realiza la acción.</span>
-                        <span class="lang-en"><b>Explanation:</b> The Subject. The person/thing that does the action.</span>
-                    </div>
-                    <div class="erkl-teil">
-                        <span class="lang-de darstellung-titel">Darstellung im Detail:</span>
-                        <span class="lang-de">Satz: <code>Der Mann lacht.</code> → Frage: Wer lacht? → Antwort: <b>Der Mann</b>. → Rolle: Er ist der "Täter", der die Handlung (lachen) ausführt.</span>
-                        <span class="lang-es darstellung-titel">Demostración en detalle:</span>
-                        <span class="lang-es">Oración: <code>El hombre ríe.</code> → Pregunta: ¿Quién ríe? → Respuesta: <b>El hombre</b>. → Rol: Es el "actor" que realiza la acción (reír).</span>
-                        <span class="lang-en darstellung-titel">Demonstration in detail:</span>
-                        <span class="lang-en">Sentence: <code>The man laughs.</code> → Question: Who laughs? → Answer: <b>The man</b>. → Role: He is the "doer" who performs the action (laughing).</span>
-                    </div>
+                <td class="col-akkusativ">
+                    <div class="beispiel-artikel"><span class="lang-de"><b>Artikel:</b> Ich sehe <span class="red-mark"><b>den</b></span> Mann.</span><span class="lang-en"><b>Article:</b> I see <b>the</b> man.</span></div>
+                    <div class="beispiel-adjektiv"><span class="lang-de"><b>Adjektiv:</b> Ich sehe <span class="red-mark"><b>den</b></span> <b>gut<span class="red-mark">en</span></b> Mann.</span><span class="lang-en"><b>Adjective:</b> I see <b>the</b> good man.</span></div>
+                    <div class="beispiel-pronomen"><span class="lang-de"><b>Pronomen:</b> Ich sehe <span class="red-mark"><b>ihn</b></span>.</span><span class="lang-en"><b>Pronoun:</b> I see <b>him</b>.</span></div>
                 </td>
             </tr>
-
-            <tr class="fall-dativ">
-                <td class="fall-header" rowspan="3">
-                    <span class="lang-de">Dativ</span><span class="lang-es">Dativo</span><span class="lang-en">Dative</span>
-                    <span class="nickname">
-                        <span class="lang-de">DER EMPFÄNGER</span>
-                        <span class="lang-es">EL RECEPTOR</span>
-                        <span class="lang-en">THE RECEIVER</span>
-                    </span>
+            <tr>
+                <th><span class="lang-de">Beispiele: Feminin</span><span class="lang-en">Examples: Feminine</span></th>
+                <td class="col-nominativ">
+                    <div class="beispiel-artikel"><span class="lang-de"><b>Artikel:</b> <b>Die</b> Frau singt.</span><span class="lang-en"><b>Article:</b> <b>The</b> woman sings.</span></div>
+                    <div class="beispiel-adjektiv"><span class="lang-de"><b>Adjektiv:</b> Die <b>nett<span class="red-mark">e</span></b> Frau singt.</span><span class="lang-en"><b>Adjective:</b> The nice woman sings.</span></div>
+                    <div class="beispiel-pronomen"><span class="lang-de"><b>Pronomen:</b> <span class="red-mark"><b>Sie</b></span> singt.</span><span class="lang-en"><b>Pronoun:</b> <b>She</b> sings.</span></div>
                 </td>
-                <td>
-                    <span class="lang-de">Wem?</span><span class="lang-es">¿A quién?</span><span class="lang-en">To whom?</span>
+                <td class="col-dativ">
+                    <div class="beispiel-artikel"><span class="lang-de"><b>Artikel:</b> Ich danke <span class="red-mark"><b>der</b></span> Frau.</span><span class="lang-en"><b>Article:</b> I thank <b>the</b> woman.</span></div>
+                    <div class="beispiel-adjektiv"><span class="lang-de"><b>Adjektiv:</b> Ich danke <span class="red-mark"><b>der</b></span> <b>nett<span class="red-mark">en</span></b> Frau.</span><span class="lang-en"><b>Adjective:</b> I thank <b>the</b> nice woman.</span></div>
+                    <div class="beispiel-pronomen"><span class="lang-de"><b>Pronomen:</b> Ich danke <span class="red-mark"><b>ihr</b></span>.</span><span class="lang-en"><b>Pronoun:</b> I thank <b>her</b>.</span></div>
                 </td>
-                <td><span class="lang-de"><b>dem</b> Mann</span><span class="lang-es">(a el/al) hombre</span><span class="lang-en">(to the) man</span></td>
-                <td><span class="lang-de"><b>der</b> Frau</span><span class="lang-es">a la mujer</span><span class="lang-en">(to the) woman</span></td>
-                <td><span class="lang-de"><b>dem</b> Kind</span><span class="lang-es">(al) niño</span><span class="lang-en">(to the) child</span></td>
-                <td><span class="lang-de"><b>den</b> Kindern</span><span class="lang-es">a los niños</span><span class="lang-en">(to the) children</span></td>
-            </tr>
-            <tr class="fall-dativ">
-                <td>
-                    <span class="lang-de">Beispiele</span><span class="lang-es">Ejemplos</span><span class="lang-en">Examples</span>
-                </td>
-                <td><span class="lang-de">Ich helfe <b>dem Mann</b>.</span><span class="lang-es">Yo ayudo <b>al hombre</b>.</span><span class="lang-en">I help <b>the man</b>.</span></td>
-                <td><span class="lang-de">Ich antworte <b>der Frau</b>.</span><span class="lang-es">Yo le respondo <b>a la mujer</b>.</span><span class="lang-en">I answer <b>the woman</b>.</span></td>
-                <td><span class="lang-de">Ich gebe <b>dem Kind</b> den Ball.</span><span class="lang-es">Yo le doy la pelota <b>al niño</b>.</span><span class="lang-en">I give the ball <b>to the child</b>.</span></td>
-                <td><span class="lang-de">Ich danke <b>den Kindern</b>.</span><span class="lang-es">Yo les agradezco <b>a los niños</b>.</span><span class="lang-en">I thank <b>the children</b>.</span></td>
-            </tr>
-             <tr class="fall-dativ">
-                <td>
-                    <span class="lang-de">Erklärung</span><span class="lang-es">Explicación</span><span class="lang-en">Explanation</span>
-                </td>
-                <td colspan="4" class="erklaerung-lang">
-                    <div class="erkl-teil">
-                        <span class="lang-de"><b>Erklärung:</b> Das indirekte Objekt. Die Person/Sache, die etwas empfängt.</span>
-                        <span class="lang-es"><b>Explicación:</b> El Objeto Indirecto. La persona/cosa que recibe algo.</span>
-                        <span class="lang-en"><b>Explanation:</b> The Indirect Object. The person/thing that receives something.</span>
-                    </div>
-                    <div class="erkl-teil">
-                        <span class="lang-de darstellung-titel">Darstellung im Detail:</span>
-                        <span class="lang-de">Satz: <code>Ich gebe dem Kind den Ball.</code> → Frage: Wem gebe ich den Ball? → Antwort: <b>dem Kind</b>. → Rolle: Es ist der "Empfänger" des Balls.</span>
-                        <span class="lang-es darstellung-titel">Demostración en detalle:</span>
-                        <span class="lang-es">Oración: <code>Yo le doy la pelota al niño.</code> → Pregunta: ¿A quién le doy la pelota? → Respuesta: <b>al niño</b>. → Rol: Es el "receptor" de la pelota.</span>
-                        <span class="lang-en darstellung-titel">Demonstration in detail:</span>
-                        <span class="lang-en">Sentence: <code>I give the ball to the child.</code> → Question: To whom do I give the ball? → Answer: <b>to the child</b>. → Role: It is the "receiver" of the ball.</span>
-                    </div>
+                <td class="col-akkusativ">
+                    <div class="beispiel-artikel"><span class="lang-de"><b>Artikel:</b> Er kennt <b>die</b> Frau.</span><span class="lang-en"><b>Article:</b> He knows <b>the</b> woman.</span></div>
+                    <div class="beispiel-adjektiv"><span class="lang-de"><b>Adjektiv:</b> Er kennt <b>die</b> <b>nett<span class="red-mark">e</span></b> Frau.</span><span class="lang-en"><b>Adjective:</b> He knows <b>the</b> nice woman.</span></div>
+                    <div class="beispiel-pronomen"><span class="lang-de"><b>Pronomen:</b> Er kennt <span class="red-mark"><b>sie</b></span>.</span><span class="lang-en"><b>Pronoun:</b> He knows <b>her</b>.</span></div>
                 </td>
             </tr>
-
-            <tr class="fall-akkusativ">
-                <td class="fall-header" rowspan="3">
-                    <span class="lang-de">Akkusativ</span><span class="lang-es">Acusativo</span><span class="lang-en">Accusative</span>
-                    <span class="nickname">
-                        <span class="lang-de">DAS OPFER</span>
-                        <span class="lang-es">LA VÍCTIMA</span>
-                        <span class="lang-en">THE VICTIM</span>
-                    </span>
+            <tr>
+                <th><span class="lang-de">Beispiele: Neutrum</span><span class="lang-en">Examples: Neuter</span></th>
+                <td class="col-nominativ">
+                    <div class="beispiel-artikel"><span class="lang-de"><b>Artikel:</b> <b>Das</b> Kind spielt.</span><span class="lang-en"><b>Article:</b> <b>The</b> child plays.</span></div>
+                    <div class="beispiel-adjektiv"><span class="lang-de"><b>Adjektiv:</b> Das <b>klein<span class="red-mark">e</span></b> Kind spielt.</span><span class="lang-en"><b>Adjective:</b> The small child plays.</span></div>
+                    <div class="beispiel-pronomen"><span class="lang-de"><b>Pronomen:</b> <span class="red-mark"><b>Es</b></span> spielt.</span><span class="lang-en"><b>Pronoun:</b> <b>It</b> plays.</span></div>
                 </td>
-                <td>
-                    <span class="lang-de">Wen? / Was?</span><span class="lang-es">¿A quién? / ¿Qué?</span><span class="lang-en">Whom? / What?</span>
+                <td class="col-dativ">
+                    <div class="beispiel-artikel"><span class="lang-de"><b>Artikel:</b> Der Ball gehört <span class="red-mark"><b>dem</b></span> Kind.</span><span class="lang-en"><b>Article:</b> The ball belongs to <b>the</b> child.</span></div>
+                    <div class="beispiel-adjektiv"><span class="lang-de"><b>Adjektiv:</b> Der Ball gehört <span class="red-mark"><b>dem</b></span> <b>klein<span class="red-mark">en</span></b> Kind.</span><span class="lang-en"><b>Adjective:</b> The ball belongs to <b>the</b> small child.</span></div>
+                    <div class="beispiel-pronomen"><span class="lang-de"><b>Pronomen:</b> Der Ball gehört <span class="red-mark"><b>ihm</b></span>.</span><span class="lang-en"><b>Pronoun:</b> The ball belongs to <b>him</b> (the child).</span></div>
                 </td>
-                <td><span class="lang-de"><b>den</b> Mann</span><span class="lang-es">(a el/al) hombre</span><span class="lang-en">the man</span></td>
-                <td><span class="lang-de"><b>die</b> Frau</span><span class="lang-es">a la mujer</span><span class="lang-en">the woman</span></td>
-                <td><span class="lang-de"><b>das</b> Buch</span><span class="lang-es">el libro</span><span class="lang-en">the book</span></td>
-                <td><span class="lang-de"><b>die</b> Kinder</span><span class="lang-es">a los niños</span><span class="lang-en">the children</span></td>
+                <td class="col-akkusativ">
+                    <div class="beispiel-artikel"><span class="lang-de"><b>Artikel:</b> Sie sieht <b>das</b> Kind.</span><span class="lang-en"><b>Article:</b> She sees <b>the</b> child.</span></div>
+                    <div class="beispiel-adjektiv"><span class="lang-de"><b>Adjektiv:</b> Sie sieht <b>das</b> <b>klein<span class="red-mark">e</span></b> Kind.</span><span class="lang-en"><b>Adjective:</b> She sees <b>the</b> small child.</span></div>
+                    <div class="beispiel-pronomen"><span class="lang-de"><b>Pronomen:</b> Sie sieht <span class="red-mark"><b>es</b></span>.</span><span class="lang-en"><b>Pronoun:</b> She sees <b>it</b>.</span></div>
+                </td>
             </tr>
-            <tr class="fall-akkusativ">
-                <td>
-                    <span class="lang-de">Beispiele</span><span class="lang-es">Ejemplos</span><span class="lang-en">Examples</span>
+            <tr>
+                <th><span class="lang-de">Beispiele: Plural</span><span class="lang-en">Examples: Plural</span></th>
+                <td class="col-nominativ">
+                    <div class="beispiel-artikel"><span class="lang-de"><b>Artikel:</b> <b>Die</b> Kinder lernen.</span><span class="lang-en"><b>Article:</b> <b>The</b> children learn.</span></div>
+                    <div class="beispiel-adjektiv"><span class="lang-de"><b>Adjektiv:</b> Die <b>nett<span class="red-mark">en</span></b> Kinder lernen.</span><span class="lang-en"><b>Adjective:</b> The nice children learn.</span></div>
+                    <div class="beispiel-pronomen"><span class="lang-de"><b>Pronomen:</b> <span class="red-mark"><b>Sie</b></span> lernen.</span><span class="lang-en"><b>Pronoun:</b> <b>They</b> learn.</span></div>
                 </td>
-                <td><span class="lang-de">Ich sehe <b>den Mann</b>.</span><span class="lang-es">Yo veo <b>al hombre</b>.</span><span class="lang-en">I see <b>the man</b>.</span></td>
-                <td><span class="lang-de">Er kennt <b>die Frau</b>.</span><span class="lang-es">Él conoce <b>a la mujer</b>.</span><span class="lang-en">He knows <b>the woman</b>.</span></td>
-                <td><span class="lang-de">Sie liest <b>das Buch</b>.</span><span class="lang-es">Ella lee <b>el libro</b>.</span><span class="lang-en">She reads <b>the book</b>.</span></td>
-                <td><span class="lang-de">Wir besuchen <b>die Kinder</b>.</span><span class="lang-es">Nosotros visitamos <b>a los niños</b>.</span><span class="lang-en">We visit <b>the children</b>.</span></td>
+                <td class="col-dativ">
+                    <div class="beispiel-artikel"><span class="lang-de"><b>Artikel:</b> Wir helfen <span class="red-mark"><b>den</b></span> Kinder<span class="red-mark"><b>n</b></span>.</span><span class="lang-en"><b>Article:</b> We help <b>the</b> children.</span></div>
+                    <div class="beispiel-adjektiv"><span class="lang-de"><b>Adjektiv:</b> Wir helfen <span class="red-mark"><b>den</b></span> <b>nett<span class="red-mark">en</span></b> Kinder<span class="red-mark"><b>n</b></span>.</span><span class="lang-en"><b>Adjective:</b> We help <b>the</b> nice children.</span></div>
+                    <div class="beispiel-pronomen"><span class="lang-de"><b>Pronomen:</b> Wir helfen <span class="red-mark"><b>ihnen</b></span>.</span><span class="lang-en"><b>Pronoun:</b> We help <b>them</b>.</span></div>
+                </td>
+                <td class="col-akkusativ">
+                    <div class="beispiel-artikel"><span class="lang-de"><b>Artikel:</b> Wir besuchen <b>die</b> Kinder.</span><span class="lang-en"><b>Article:</b> We visit <b>the</b> children.</span></div>
+                    <div class="beispiel-adjektiv"><span class="lang-de"><b>Adjektiv:</b> Wir besuchen <b>die</b> <b>nett<span class="red-mark">en</span></b> Kinder.</span><span class="lang-en"><b>Adjective:</b> We visit <b>the</b> nice children.</span></div>
+                    <div class="beispiel-pronomen"><span class="lang-de"><b>Pronomen:</b> Wir besuchen <span class="red-mark"><b>sie</b></span>.</span><span class="lang-en"><b>Pronoun:</b> We visit <b>them</b>.</span></div>
+                </td>
             </tr>
-             <tr class="fall-akkusativ">
-                <td>
-                    <span class="lang-de">Erklärung</span><span class="lang-es">Explicación</span><span class="lang-en">Explanation</span>
-                </td>
-                <td colspan="4" class="erklaerung-lang">
-                    <div class="erkl-teil">
-                        <span class="lang-de"><b>Erklärung:</b> Das direkte Objekt. Die Person/Sache, mit der etwas direkt gemacht wird.</span>
-                        <span class="lang-es"><b>Explicación:</b> El Objeto Directo. La persona/cosa que es afectada directamente por la acción.</span>
-                        <span class="lang-en"><b>Explanation:</b> The Direct Object. The person/thing that is directly affected by the action.</span>
-                    </div>
-                    <div class="erkl-teil">
-                        <span class="lang-de darstellung-titel">Darstellung im Detail:</span>
-                        <span class="lang-de">Satz: <code>Sie liest das Buch.</code> → Frage: Was liest sie? → Antwort: <b>das Buch</b>. → Rolle: Es ist das "Opfer" der Handlung, es wird gelesen.</span>
-                        <span class="lang-es darstellung-titel">Demostración en detalle:</span>
-                        <span class="lang-es">Oración: <code>Ella lee el libro.</code> → Pregunta: ¿Qué lee ella? → Respuesta: <b>el libro</b>. → Rol: Es la "víctima" de la acción, está siendo leído.</span>
-                        <span class="lang-en darstellung-titel">Demonstration in detail:</span>
-                        <span class="lang-en">Sentence: <code>She reads the book.</code> → Question: What does she read? → Answer: <b>the book</b>. → Role: It is the "victim" of the action, it is being read.</span>
-                    </div>
-                </td>
+            <tr style="border-top: 3px solid #555;">
+                <th><span class="lang-de">Was ändert sich?</span><span class="lang-en">What changes?</span></th>
+                <td class="col-nominativ"><span class="lang-de">Die <b>Grundform</b> der Nomengruppe. Nichts wird verändert.</span><span class="lang-en">The <b>basic form</b> of the noun phrase. Nothing is changed.</span></td>
+                <td class="col-dativ"><span class="lang-de"><b>Starke Änderung</b> bei allen Geschlechtern:<ul><li>Artikel: z.B. <code>der → dem</code></li><li>Adjektiv-Endung: meist <code>-en</code></li><li>Plural-Nomen: oft <code>-n</code></li></ul></span><span class="lang-en"><b>Strong change</b> for all genders:<ul><li>Article: e.g. <code>der → dem</code></li><li>Adjective ending: mostly <code>-en</code></li><li>Plural nouns: often get <code>-n</code></li></ul></span></td>
+                <td class="col-akkusativ"><span class="lang-de">Änderung <b>nur bei Maskulin</b>:<ul><li>Artikel: <code>der → den</code></li><li>Adjektiv-Endung: <code>-en</code></li></ul></span><span class="lang-en">Change <b>only for masculine</b>:<ul><li>Article: <code>der → den</code></li><li>Adjective ending: <code>-en</code></li></ul></span></td>
+            </tr>
+            <tr>
+                <th><span class="lang-de">Erklärung</span><span class="lang-en">Explanation</span></th>
+                <td class="col-nominativ"><span class="lang-de">Markiert das <b>Subjekt</b>. Zeigt, wer/was die Handlung ausführt.</span><span class="lang-en">Marks the <b>subject</b>. Indicates who/what performs the action.</span></td>
+                <td class="col-dativ"><span class="lang-de">Markiert das <b>indirekte Objekt</b> („Empfänger“). Verben wie `helfen`, `danken`, `gehören` brauchen immer Dativ.</span><span class="lang-en">Marks the <b>indirect object</b> ("receiver"). Verbs like `helfen`, `danken`, `gehören` always need dataive.</span></td>
+                <td class="col-akkusativ"><span class="lang-de">Markiert das <b>direkte Objekt</b> („Opfer“). Zeigt, wer/was direkt von der Handlung betroffen ist.</span><span class="lang-en">Marks the <b>direct object</b> ("victim"). Indicates who/what is directly affected by the action.</span></td>
             </tr>
         </tbody>
     </table>
+
 </div>
 </body>
 </html>
