@@ -74,8 +74,8 @@
         #back-card.hidden {
             opacity: 0;
             transform: scale(0.95);
-            pointer-events: none; /* Make it unclickable when hidden */
-            height: 0; /* Collapse space */
+            pointer-events: none;
+            height: 0;
             padding: 0;
             margin: 0;
             border: none;
@@ -107,14 +107,16 @@
             right: 1rem;
             background: none;
             border: none;
-            font-size: 1.8rem;
+            /* ✨ Icon is now 100% bigger */
+            font-size: 3.6rem; 
             cursor: pointer;
             color: var(--accent);
             padding: 5px;
             transition: transform 0.2s;
+            line-height: 1; /* Prevents large icon from adding extra space */
         }
         .audio-button:hover {
-            transform: scale(1.2);
+            transform: scale(1.1);
         }
 
         .buttons-container {
@@ -193,7 +195,7 @@
         <div id="back-card" class="card hidden"></div>
 
         <div class="buttons-container">
-            <button id="reveal-btn">Reveal</button>
+            <button id="reveal-btn">Reveal Answer</button>
             <button id="next-btn">Next Word</button>
         </div>
     </div>
@@ -268,13 +270,19 @@
                 currentCardIndex = (currentCardIndex + 1) % vocabulary.length;
                 const card = vocabulary[currentCardIndex];
 
-                frontCard.innerHTML = `
+                // ✨ Build English card with audio hint
+                let englishHtml = `
                     <div class="label">Word:</div>
                     <div class="content">${card.englishWord}</div>
                     <div class="label">Sentence:</div>
                     <div class="content"><i>${card.englishSentence || '...'}</i></div>
                 `;
+                if (card.soundFile) {
+                    englishHtml += `<button class="audio-button" data-sound="${card.soundFile}">🔊</button>`;
+                }
+                frontCard.innerHTML = englishHtml;
                 
+                // Build German card
                 let germanHtml = `
                     <div class="label">Wort:</div>
                     <div class="content">${card.germanWord}</div>
@@ -302,8 +310,14 @@
 
             // Event Listeners
             revealBtn.addEventListener('click', revealAnswer);
-            frontCard.addEventListener('click', revealAnswer);
+            frontCard.addEventListener('click', (event) => {
+                // Only reveal if not clicking the audio button
+                if (!event.target.matches('.audio-button')) {
+                    revealAnswer();
+                }
+            });
             nextBtn.addEventListener('click', displayNextCard);
+            // Combined listener for audio buttons on both cards
             quizContainer.addEventListener('click', (event) => {
                 if (event.target.matches('.audio-button')) {
                     playSound(event.target.dataset.sound);
