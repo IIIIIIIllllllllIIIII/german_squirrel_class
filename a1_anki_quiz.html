@@ -40,6 +40,7 @@
             justify-content: center;
             flex-direction: column;
             font-size: 1.2rem;
+            position: relative; /* For positioning the audio button */
         }
         
         #front-card {
@@ -52,6 +53,21 @@
         
         #back-card.hidden {
             display: none;
+        }
+        
+        .audio-button {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #007bff;
+            padding: 5px;
+            margin-left: 15px;
+            transition: transform 0.2s;
+        }
+
+        .audio-button:hover {
+            transform: scale(1.2);
         }
 
         .buttons-container {
@@ -129,6 +145,8 @@
     <a href="index.html">
         <button class="menu-button">Back to Menu</button>
     </a>
+    
+    <audio id="audio-player"></audio>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -136,6 +154,8 @@
             const backCard = document.getElementById('back-card');
             const revealBtn = document.getElementById('reveal-btn');
             const nextBtn = document.getElementById('next-btn');
+            const audioPlayer = document.getElementById('audio-player');
+            const quizContainer = document.getElementById('quiz-container');
 
             let vocabulary = [];
             let currentCardIndex = -1;
@@ -149,58 +169,59 @@
                     }
                     const text = await response.text();
                     parseAnkiTxt(text);
+                    if (vocabulary.length === 0) {
+                        throw new Error('No valid vocabulary entries were parsed from the file.');
+                    }
                     shuffleArray(vocabulary);
                     displayNextCard();
                 } catch (error) {
-                    frontCard.innerHTML = `<strong>Error:</strong> Could not load the vocabulary file. <br><small>${error.message}</small>`;
+                    frontCard.innerHTML = `<strong>Error:</strong> Could not load vocabulary. <br><small>${error.message}</small>`;
                     console.error('Failed to load vocabulary:', error);
                 }
             }
-
+            
+            // ✨ This parser is improved to handle audio files
             function parseAnkiTxt(text) {
                 const lines = text.split('\n');
-                const uniqueEntries = new Set(); // Use a Set to easily handle duplicates
+                const uniqueEntries = {}; 
 
                 lines.forEach(line => {
-                    // Ignore comments and empty lines
-                    if (line.startsWith('#') || line.trim() === '') {
-                        return;
-                    }
+                    if (line.startsWith('#') || line.trim() === '') return;
                     
                     const parts = line.split('\t');
                     if (parts.length < 2) return;
 
-                    // Clean up fields by removing surrounding quotes
-                    let field1 = parts[0].slice(1, -1);
-                    let field2 = parts[1].slice(1, -1);
+                    let rawGerman, rawEnglish;
 
-                    let german, english;
-
-                    // Anki exports both DE->EN and EN->DE. We only need one.
-                    // We identify the German part by the [sound:] tag.
-                    if (field1.includes('[sound:')) {
-                        german = field1;
-                        english = field2;
+                    if (parts[0].includes('[sound:')) {
+                        rawGerman = parts[0];
+                        rawEnglish = parts[1];
+                    } else if (parts[1].includes('[sound:')) {
+                        rawGerman = parts[1];
+                        rawEnglish = parts[0];
                     } else {
-                        german = field2;
-                        english = field1;
+                        return; // Skip if format doesn't match
                     }
 
-                    // Remove the sound tag for display purposes
-                    german = german.replace(/\[sound:.*?\]/g, '').trim();
+                    // Extract the sound file name
+                    const soundMatch = rawGerman.match(/\[sound:(.*?)\]/);
+                    const soundFile = soundMatch ? soundMatch[1] : null;
+                    
+                    // Clean the text for display
+                    const german = rawGerman.slice(1, -1).replace(/\[sound:.*?\]/g, '').trim();
+                    const english = rawEnglish.slice(1, -1).trim();
 
-                    // Add to vocab list if it's a new entry
-                    const entryKey = german.split('<br>')[0] + english.split('<br>')[0];
-                    if (!uniqueEntries.has(entryKey)) {
-                        vocabulary.push({ german, english });
-                        uniqueEntries.add(entryKey);
+                    if (german && english) {
+                        const key = english.split('<br>')[0].trim();
+                        if (!uniqueEntries[key]) {
+                           uniqueEntries[key] = { german, english, soundFile };
+                        }
                     }
                 });
+
+                vocabulary = Object.values(uniqueEntries);
             }
 
-            // --- 2. Quiz Logic ---
-
-            // Shuffle the array for a random quiz order (Fisher-Yates shuffle)
             function shuffleArray(array) {
                 for (let i = array.length - 1; i > 0; i--) {
                     const j = Math.floor(Math.random() * (i + 1));
@@ -209,18 +230,20 @@
             }
 
             function displayNextCard() {
-                if (vocabulary.length === 0) {
-                    frontCard.innerHTML = "No vocabulary loaded.";
-                    return;
-                }
+                if (vocabulary.length === 0) return;
                 
-                // Go to the next card, or loop to the beginning
                 currentCardIndex = (currentCardIndex + 1) % vocabulary.length;
                 
                 const card = vocabulary[currentCardIndex];
 
                 frontCard.innerHTML = card.english;
-                backCard.innerHTML = card.german;
+                
+                // Build the German card content, adding an audio button if a sound file exists
+                let germanHtml = `<div>${card.german}</div>`;
+                if (card.soundFile) {
+                    germanHtml += `<button class="audio-button" data-sound="${card.soundFile}">🔊</button>`;
+                }
+                backCard.innerHTML = germanHtml;
                 
                 // Reset the view
                 backCard.classList.add('hidden');
@@ -231,13 +254,29 @@
                 backCard.classList.remove('hidden');
                 revealBtn.style.display = 'none';
             }
+            
+            function playSound(soundFile) {
+                // IMPORTANT: Assumes audio files are in a 'media' subfolder
+                audioPlayer.src = `media/${soundFile}`;
+                audioPlayer.play().catch(e => console.error("Error playing audio:", e));
+            }
 
-            // --- 3. Event Listeners ---
+            // --- Event Listeners ---
             revealBtn.addEventListener('click', revealAnswer);
-            frontCard.addEventListener('click', revealAnswer); // Allow clicking card to reveal
+            frontCard.addEventListener('click', revealAnswer);
             nextBtn.addEventListener('click', displayNextCard);
+            
+            // Event delegation for dynamically created audio buttons
+            quizContainer.addEventListener('click', (event) => {
+                if (event.target.classList.contains('audio-button')) {
+                    const soundFile = event.target.dataset.sound;
+                    if (soundFile) {
+                        playSound(soundFile);
+                    }
+                }
+            });
 
-            // --- 4. Start the Quiz ---
+            // Start the quiz
             loadVocabulary();
         });
     </script>
