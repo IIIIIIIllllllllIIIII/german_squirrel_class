@@ -1,14 +1,65 @@
+Of course\! Here’s how you can find your Anki sound files and a new version of the quiz with a more modern and polished design.
+
+-----
+
+### How to Find Your Anki Sound Files on a Mac 🔊
+
+Your Anki media files are stored in a specific folder on your Mac. However, the Library folder where they reside is hidden by default.
+
+Here's the easiest way to get to them:
+
+1.  **Open Finder**.
+
+2.  Click on **"Go"** in the menu bar at the top of the screen.
+
+3.  Hold down the **Option (⌥)** key on your keyboard. You will see a "Library" option appear in the menu. Click on it.
+
+4.  Once inside the Library, navigate to this path: `Application Support` -\> `Anki2` -\> `User 1` -\> `collection.media`.
+
+      * *Direct Path*: You can also click "Go" -\> "Go to Folder..." and paste this path directly: `~/Library/Application Support/Anki2/User 1/collection.media`
+
+5.  The **`collection.media` folder** contains all your sound files and images. Simply copy the `.mp3` files from here into the `media` folder you created for the quiz.
+
+-----
+
+### A Prettier Version of the Quiz ✨
+
+This updated version includes a modern font, a refreshed color palette, and smooth animations for a cleaner look and feel.
+
+**What's new:**
+
+  * **Font:** Uses the clean 'Poppins' font from Google Fonts.
+  * **Colors:** A new, softer color scheme.
+  * **Animations:** Cards and buttons now have smooth transitions. The answer card now fades and scales in instead of just appearing.
+
+#### Full HTML Code (Prettier Version)
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A1 German Vocabulary Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --background: #f4f7f9;
+            --card-bg: #ffffff;
+            --text-primary: #2d3748;
+            --text-secondary: #718096;
+            --accent: #4299e1;
+            --accent-dark: #2b6cb0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --border-radius: 12px;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f0f2f5;
-            color: #333;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--background);
+            color: var(--text-primary);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -20,52 +71,71 @@
         }
 
         #quiz-container {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background-color: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
             width: 100%;
-            max-width: 600px;
+            max-width: 550px;
         }
 
         .card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--border-radius);
             padding: 1.5rem;
             margin-bottom: 1rem;
-            min-height: 140px;
+            min-height: 150px;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             text-align: left;
             position: relative;
+            transition: all 0.3s ease-in-out;
         }
         
         #front-card {
             cursor: pointer;
         }
+        #front-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
 
         #back-card {
-            background-color: #f9f9f9;
+            background-color: #fcfdff;
+            opacity: 1;
+            transform: scale(1);
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
         
         #back-card.hidden {
-            display: none;
+            opacity: 0;
+            transform: scale(0.95);
+            pointer-events: none; /* Make it unclickable when hidden */
+            height: 0; /* Collapse space */
+            padding: 0;
+            margin: 0;
+            border: none;
+            overflow: hidden;
         }
 
         .label {
             font-size: 0.9rem;
-            font-weight: bold;
-            color: #6c757d;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             margin-bottom: 0.25rem;
         }
         .content {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
+            font-weight: 400;
             margin-bottom: 1rem;
         }
         .content i {
             font-size: 1.1rem;
-            color: #333;
+            color: var(--text-primary);
+            font-style: normal;
         }
         
         .audio-button {
@@ -76,11 +146,10 @@
             border: none;
             font-size: 1.8rem;
             cursor: pointer;
-            color: #007bff;
+            color: var(--accent);
             padding: 5px;
             transition: transform 0.2s;
         }
-
         .audio-button:hover {
             transform: scale(1.2);
         }
@@ -95,10 +164,30 @@
         button {
             padding: 12px 24px;
             font-size: 1rem;
-            font-weight: bold;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
             border: none;
             border-radius: 8px;
             cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        #reveal-btn {
+            background-color: var(--accent);
+            color: white;
+        }
+        #reveal-btn:hover {
+            background-color: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+        
+        #next-btn {
+            background-color: #38a169;
+            color: white;
+        }
+        #next-btn:hover {
+            background-color: #2f855a;
+            transform: translateY(-2px);
         }
         
         .center-text {
@@ -107,21 +196,24 @@
         }
 
         h1 {
-            color: #444;
+            font-weight: 700;
             margin-bottom: 0.5rem;
             text-align: center;
         }
         
         #instructions {
-            color: #555;
+            color: var(--text-secondary);
             margin-bottom: 2rem;
             text-align: center;
         }
         
         .menu-button {
             margin-top: 2rem;
-            background-color: #6c757d;
+            background-color: var(--text-secondary);
             color: white;
+        }
+        .menu-button:hover {
+            background-color: var(--text-primary);
         }
     </style>
 </head>
@@ -129,7 +221,7 @@
 
     <div id="quiz-container">
         <h1>A1 German Vocabulary Quiz 🇩🇪</h1>
-        <p id="instructions">Click the card or the button below to reveal the answer.</p>
+        <p id="instructions">Click the card to reveal the answer.</p>
         
         <div id="front-card" class="card">
             <div class="center-text">Loading vocabulary...</div>
@@ -138,7 +230,7 @@
         <div id="back-card" class="card hidden"></div>
 
         <div class="buttons-container">
-            <button id="reveal-btn">Reveal Answer</button>
+            <button id="reveal-btn">Reveal</button>
             <button id="next-btn">Next Word</button>
         </div>
     </div>
@@ -174,19 +266,14 @@
                     frontCard.innerHTML = `<div class="center-text"><strong>Error:</strong> Could not load vocabulary. <br><small>${error.message}</small></div>`;
                 }
             }
-            
-            // ✨ This is the new parser for your new, better file format.
+
             function parseAnkiTxt(text) {
                 const lines = text.split('\n');
                 const loadedVocabulary = [];
-
                 lines.forEach(line => {
                     if (line.trim() === '') return;
-
                     const fields = line.split('\t');
-                    if (fields.length < 8) return; // Ensure the line has enough columns
-
-                    // Directly map columns to our data structure
+                    if (fields.length < 8) return;
                     const entry = {
                         germanWord: fields[1].trim(),
                         germanSentence: fields[2].trim(),
@@ -194,14 +281,11 @@
                         englishSentence: fields[4].trim(),
                         soundFile: null
                     };
-
-                    // Extract sound file from the last column
                     const soundField = fields[7].trim();
                     const soundMatch = soundField.match(/\[sound:(.*?)\]/);
                     if (soundMatch) {
                         entry.soundFile = soundMatch[1];
                     }
-                    
                     if (entry.germanWord && entry.englishWord) {
                         loadedVocabulary.push(entry);
                     }
@@ -253,7 +337,7 @@
                 audioPlayer.play().catch(e => console.error("Error playing audio:", e));
             }
 
-            // --- Event Listeners ---
+            // Event Listeners
             revealBtn.addEventListener('click', revealAnswer);
             frontCard.addEventListener('click', revealAnswer);
             nextBtn.addEventListener('click', displayNextCard);
@@ -268,3 +352,4 @@
     </script>
 </body>
 </html>
+```
