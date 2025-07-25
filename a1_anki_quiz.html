@@ -15,12 +15,16 @@
             --text-secondary: #718096;
             --accent: #4299e1;
             --accent-dark: #2b6cb0;
+            --correct: #38a169;
+            --correct-dark: #2f855a;
+            --wrong: #e53e3e;
+            --wrong-dark: #c53030;
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --border-radius: 12px;
         }
 
         body {
-            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             background-color: var(--background);
             color: var(--text-primary);
             display: flex;
@@ -41,6 +45,33 @@
             width: 100%;
             max-width: 550px;
         }
+        
+        /* ✨ New Stats Section Styling */
+        #stats-container {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        .stat-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+        #correct-value { color: var(--correct); }
+        #wrong-value { color: var(--wrong); }
+
 
         .card {
             border: 1px solid #e2e8f0;
@@ -56,13 +87,8 @@
             transition: all 0.3s ease-in-out;
         }
         
-        #front-card {
-            cursor: pointer;
-        }
-        #front-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
-        }
+        #front-card { cursor: pointer; }
+        #front-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
 
         #back-card {
             background-color: #fcfdff;
@@ -70,134 +96,72 @@
             transform: scale(1);
             transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
-        
         #back-card.hidden {
-            opacity: 0;
-            transform: scale(0.95);
-            pointer-events: none;
-            height: 0;
-            padding: 0;
-            margin: 0;
-            border: none;
-            overflow: hidden;
+            opacity: 0; transform: scale(0.95); pointer-events: none;
+            height: 0; padding: 0; margin: 0; border: none; overflow: hidden;
         }
 
-        .label {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.25rem;
-        }
-        .content {
-            font-size: 1.2rem;
-            font-weight: 400;
-            margin-bottom: 1rem;
-        }
-        .content i {
-            font-size: 1.1rem;
-            color: var(--text-primary);
-            font-style: normal;
-        }
+        .label { font-size: 0.9rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem; }
+        .content { font-size: 1.2rem; font-weight: 400; margin-bottom: 1rem; }
+        .content i { font-size: 1.1rem; color: var(--text-primary); font-style: normal; }
         
-        .audio-button {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            /* ✨ Icon is now 100% bigger */
-            font-size: 3.6rem; 
-            cursor: pointer;
-            color: var(--accent);
-            padding: 5px;
-            transition: transform 0.2s;
-            line-height: 1; /* Prevents large icon from adding extra space */
-        }
-        .audio-button:hover {
-            transform: scale(1.1);
-        }
+        .audio-button { position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 3.6rem; cursor: pointer; color: var(--accent); padding: 5px; transition: transform 0.2s; line-height: 1; }
+        .audio-button:hover { transform: scale(1.1); }
 
-        .buttons-container {
-            margin-top: 1.5rem;
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-        }
+        .buttons-container { margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center; }
+        button { padding: 12px 24px; font-size: 1rem; font-weight: 600; font-family: 'Poppins', sans-serif; border: none; border-radius: 8px; cursor: pointer; transition: all 0.2s ease-in-out; }
+        .hidden { display: none; }
+        
+        #reveal-btn { background-color: var(--accent); color: white; }
+        #reveal-btn:hover { background-color: var(--accent-dark); transform: translateY(-2px); }
+        
+        #correct-btn { background-color: var(--correct); color: white; }
+        #correct-btn:hover { background-color: var(--correct-dark); transform: translateY(-2px); }
+        
+        #wrong-btn { background-color: var(--wrong); color: white; }
+        #wrong-btn:hover { background-color: var(--wrong-dark); transform: translateY(-2px); }
+        
+        h1 { font-weight: 700; margin-bottom: 2rem; text-align: center; }
+        .menu-button { margin-top: 2rem; background-color: var(--text-secondary); color: white; }
+        .menu-button:hover { background-color: var(--text-primary); }
 
-        button {
-            padding: 12px 24px;
-            font-size: 1rem;
-            font-weight: 600;
-            font-family: 'Poppins', sans-serif;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-        }
-        
-        #reveal-btn {
-            background-color: var(--accent);
-            color: white;
-        }
-        #reveal-btn:hover {
-            background-color: var(--accent-dark);
-            transform: translateY(-2px);
-        }
-        
-        #next-btn {
-            background-color: #38a169;
-            color: white;
-        }
-        #next-btn:hover {
-            background-color: #2f855a;
-            transform: translateY(-2px);
-        }
-        
-        .center-text {
-            text-align: center;
-            width: 100%;
-        }
-
-        h1 {
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-        
-        #instructions {
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-        
-        .menu-button {
-            margin-top: 2rem;
-            background-color: var(--text-secondary);
-            color: white;
-        }
-        .menu-button:hover {
-            background-color: var(--text-primary);
-        }
     </style>
 </head>
 <body>
 
     <div id="quiz-container">
         <h1>A1 German Vocabulary Quiz 🇩🇪</h1>
-        <p id="instructions">Click the card to reveal the answer.</p>
         
-        <div id="front-card" class="card">
-            <div class="center-text">Loading vocabulary...</div>
+        <div id="stats-container">
+            <div class="stat-item">
+                <span class="stat-value"><span id="words-seen">0</span> / <span id="total-words">0</span></span>
+                <span class="stat-label">Words</span>
+            </div>
+            <div class="stat-item">
+                <span id="correct-value" class="stat-value">0</span>
+                <span class="stat-label">Correct</span>
+            </div>
+            <div class="stat-item">
+                <span id="wrong-value" class="stat-value">0</span>
+                <span class="stat-label">Wrong</span>
+            </div>
         </div>
-        
-        <div id="back-card" class="card hidden"></div>
 
-        <div class="buttons-container">
-            <button id="reveal-btn">Reveal Answer</button>
-            <button id="next-btn">Next Word</button>
+        <div id="main-quiz-area">
+            <div id="front-card" class="card">
+                <div class="center-text" style="text-align:center; width: 100%;">Loading vocabulary...</div>
+            </div>
+            <div id="back-card" class="card hidden"></div>
+
+            <div class="buttons-container">
+                <button id="reveal-btn">Reveal Answer</button>
+                <div id="grading-buttons" class="buttons-container hidden">
+                    <button id="wrong-btn">❌ Wrong</button>
+                    <button id="correct-btn">✅ Correct</button>
+                </div>
+            </div>
         </div>
+
     </div>
 
     <a href="index.html">
@@ -208,16 +172,29 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // DOM Elements
             const frontCard = document.getElementById('front-card');
             const backCard = document.getElementById('back-card');
-            const revealBtn = document.getElementById('reveal-btn');
-            const nextBtn = document.getElementById('next-btn');
             const audioPlayer = document.getElementById('audio-player');
             const quizContainer = document.getElementById('quiz-container');
+            const mainQuizArea = document.getElementById('main-quiz-area');
 
+            const revealBtn = document.getElementById('reveal-btn');
+            const gradingButtons = document.getElementById('grading-buttons');
+            const correctBtn = document.getElementById('correct-btn');
+            const wrongBtn = document.getElementById('wrong-btn');
+
+            const wordsSeenEl = document.getElementById('words-seen');
+            const totalWordsEl = document.getElementById('total-words');
+            const correctValueEl = document.getElementById('correct-value');
+            const wrongValueEl = document.getElementById('wrong-value');
+
+            // State
             let vocabulary = [];
             let currentCardIndex = -1;
+            let stats = { seen: 0, correct: 0, wrong: 0, total: 0 };
 
+            // Functions
             async function loadVocabulary() {
                 try {
                     const response = await fetch('a1wordlist.txt');
@@ -225,10 +202,13 @@
                     const text = await response.text();
                     parseAnkiTxt(text);
                     if (vocabulary.length === 0) throw new Error('No valid vocabulary entries were parsed.');
+                    
+                    stats.total = vocabulary.length;
                     shuffleArray(vocabulary);
+                    updateStatsDisplay();
                     displayNextCard();
                 } catch (error) {
-                    frontCard.innerHTML = `<div class="center-text"><strong>Error:</strong> Could not load vocabulary. <br><small>${error.message}</small></div>`;
+                    frontCard.innerHTML = `<div class="center-text" style="text-align:center; width: 100%;"><strong>Error:</strong> ${error.message}</div>`;
                 }
             }
 
@@ -240,67 +220,87 @@
                     const fields = line.split('\t');
                     if (fields.length < 8) return;
                     const entry = {
-                        germanWord: fields[1].trim(),
-                        germanSentence: fields[2].trim(),
-                        englishWord: fields[3].trim(),
-                        englishSentence: fields[4].trim(),
+                        germanWord: fields[1].trim(), germanSentence: fields[2].trim(),
+                        englishWord: fields[3].trim(), englishSentence: fields[4].trim(),
                         soundFile: null
                     };
                     const soundField = fields[7].trim();
                     const soundMatch = soundField.match(/\[sound:(.*?)\]/);
-                    if (soundMatch) {
-                        entry.soundFile = soundMatch[1];
-                    }
-                    if (entry.germanWord && entry.englishWord) {
-                        loadedVocabulary.push(entry);
-                    }
+                    if (soundMatch) entry.soundFile = soundMatch[1];
+                    if (entry.germanWord && entry.englishWord) loadedVocabulary.push(entry);
                 });
                 vocabulary = loadedVocabulary;
             }
 
             function shuffleArray(array) {
                 for (let i = array.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
                     [array[i], array[j]] = [array[j], array[i]];
+                    const j = Math.floor(Math.random() * (i + 1));
                 }
+            }
+            
+            function updateStatsDisplay() {
+                wordsSeenEl.textContent = stats.seen;
+                totalWordsEl.textContent = stats.total;
+                correctValueEl.textContent = stats.correct;
+                wrongValueEl.textContent = stats.wrong;
             }
 
             function displayNextCard() {
-                if (vocabulary.length === 0) return;
-                currentCardIndex = (currentCardIndex + 1) % vocabulary.length;
+                if (stats.seen >= stats.total) {
+                    showQuizSummary();
+                    return;
+                }
+
+                currentCardIndex++;
+                stats.seen++;
                 const card = vocabulary[currentCardIndex];
 
-                // ✨ Build English card with audio hint
                 let englishHtml = `
-                    <div class="label">Word:</div>
-                    <div class="content">${card.englishWord}</div>
-                    <div class="label">Sentence:</div>
-                    <div class="content"><i>${card.englishSentence || '...'}</i></div>
+                    <div class="label">Word:</div><div class="content">${card.englishWord}</div>
+                    <div class="label">Sentence:</div><div class="content"><i>${card.englishSentence || '...'}</i></div>
                 `;
-                if (card.soundFile) {
-                    englishHtml += `<button class="audio-button" data-sound="${card.soundFile}">🔊</button>`;
-                }
+                if (card.soundFile) englishHtml += `<button class="audio-button" data-sound="${card.soundFile}">🔊</button>`;
                 frontCard.innerHTML = englishHtml;
                 
-                // Build German card
                 let germanHtml = `
-                    <div class="label">Wort:</div>
-                    <div class="content">${card.germanWord}</div>
-                    <div class="label">Satz:</div>
-                    <div class="content"><i>${card.germanSentence || '...'}</i></div>
+                    <div class="label">Wort:</div><div class="content">${card.germanWord}</div>
+                    <div class="label">Satz:</div><div class="content"><i>${card.germanSentence || '...'}</i></div>
                 `;
-                if (card.soundFile) {
-                    germanHtml += `<button class="audio-button" data-sound="${card.soundFile}">🔊</button>`;
-                }
+                if (card.soundFile) germanHtml += `<button class="audio-button" data-sound="${card.soundFile}">🔊</button>`;
                 backCard.innerHTML = germanHtml;
                 
+                // Reset view
                 backCard.classList.add('hidden');
-                revealBtn.style.display = 'inline-block';
+                revealBtn.classList.remove('hidden');
+                gradingButtons.classList.add('hidden');
+                updateStatsDisplay();
             }
             
             function revealAnswer() {
                 backCard.classList.remove('hidden');
-                revealBtn.style.display = 'none';
+                revealBtn.classList.add('hidden');
+                gradingButtons.classList.remove('hidden');
+            }
+
+            function gradeAnswer(isCorrect) {
+                if (isCorrect) {
+                    stats.correct++;
+                } else {
+                    stats.wrong++;
+                }
+                displayNextCard();
+            }
+
+            function showQuizSummary() {
+                let percentage = (stats.total > 0) ? Math.round((stats.correct / stats.total) * 100) : 0;
+                mainQuizArea.innerHTML = `
+                    <div style="text-align: center;">
+                        <h2>Session Complete!</h2>
+                        <p style="font-size: 1.2rem;">You scored ${stats.correct} out of ${stats.total} (${percentage}%).</p>
+                        <p>Reload the page to start a new session.</p>
+                    </div>
+                `;
             }
             
             function playSound(soundFile) {
@@ -310,18 +310,13 @@
 
             // Event Listeners
             revealBtn.addEventListener('click', revealAnswer);
-            frontCard.addEventListener('click', (event) => {
-                // Only reveal if not clicking the audio button
-                if (!event.target.matches('.audio-button')) {
-                    revealAnswer();
-                }
+            frontCard.addEventListener('click', (e) => {
+                if (!e.target.matches('.audio-button')) revealAnswer();
             });
-            nextBtn.addEventListener('click', displayNextCard);
-            // Combined listener for audio buttons on both cards
-            quizContainer.addEventListener('click', (event) => {
-                if (event.target.matches('.audio-button')) {
-                    playSound(event.target.dataset.sound);
-                }
+            correctBtn.addEventListener('click', () => gradeAnswer(true));
+            wrongBtn.addEventListener('click', () => gradeAnswer(false));
+            quizContainer.addEventListener('click', (e) => {
+                if (e.target.matches('.audio-button')) playSound(e.target.dataset.sound);
             });
 
             loadVocabulary();
