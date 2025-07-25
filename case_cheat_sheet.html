@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finaler Vergleich der Fälle / Final Case Comparison</title>
+    <title>Einsteiger-Vergleich der Fälle / Beginner's Case Comparison</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -29,7 +29,7 @@
             border: 1px solid #d0d0d0;
             padding: 15px;
             text-align: left;
-            vertical-align: top;
+            vertical-align: middle; /* Centered vertically for cleaner look */
         }
         .vertical-comparison thead th {
             font-size: 1.5em;
@@ -50,28 +50,41 @@
         /* Language Styles & Spacing */
         .lang-de, .lang-en { display: block; }
         .lang-de { font-weight: 500; color: #0056b3; }
-        .lang-en { font-style: italic; color: #28a745; margin-top: 4px; } /* Reduced Margin */
+        .lang-en { font-style: italic; color: #28a745; margin-top: 4px; }
         
         .nickname { font-size: 1.1em; font-weight: bold; text-align: center; }
         
-        .beispiel-artikel, .beispiel-adjektiv { 
-            padding-bottom: 12px; 
-            margin-bottom: 12px;
-            border-bottom: 1px dashed #ccc;
-        }
-        
         .red-mark { color: #d9534f; font-weight: bold; }
 
-        ul { padding-left: 20px; margin-top: 10px; margin-bottom: 0; }
         code { background-color: #e9ecef; padding: 2px 5px; border-radius: 4px; font-weight: bold; }
+
+        .button-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .back-button {
+            display: inline-block;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #6c757d;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .back-button:hover {
+            background-color: #5a6268;
+        }
     </style>
 </head>
 <body>
 <div class="container">
 
     <h1>
-        <span class="lang-de">Finaler Vergleich der deutschen Fälle</span>
-        <span class="lang-en">Final Comparison of the German Cases</span>
+        <span class="lang-de">Einsteiger-Vergleich: Nur die Artikel</span>
+        <span class="lang-en">Beginner's Comparison: Just the Articles</span>
     </h1>
 
     <table class="vertical-comparison">
@@ -90,92 +103,54 @@
                 <td class="col-dativ nickname"><span class="lang-de">DER EMPFÄNGER</span><span class="lang-en">THE RECEIVER</span></td>
                 <td class="col-akkusativ nickname"><span class="lang-de">DAS OPFER</span><span class="lang-en">THE VICTIM</span></td>
             </tr>
-            <tr>
-                <th><span class="lang-de">Beispiele: Maskulin</span><span class="lang-en">Examples: Masculine</span></th>
-                <td class="col-nominativ">
-                    <div class="beispiel-artikel"><span class="lang-de"><b>Artikel:</b> <b>Der</b> Mann lacht.</span><span class="lang-en"><b>Article:</b> <b>The</b> man laughs.</span></div>
-                    <div class="beispiel-adjektiv"><span class="lang-de"><b>Adjektiv:</b> Der <b>gut<span class="red-mark">e</span></b> Mann lacht.</span><span class="lang-en"><b>Adjective:</b> The good man laughs.</span></div>
-                    <div class="beispiel-pronomen"><span class="lang-de"><b>Pronomen:</b> <span class="red-mark"><b>Er</b></span> lacht.</span><span class="lang-en"><b>Pronoun:</b> <b>He</b> laughs.</span></div>
-                </td>
-                <td class="col-dativ">
-                    <div class="beispiel-artikel"><span class="lang-de"><b>Artikel:</b> Ich helfe <span class="red-mark"><b>dem</b></span> Mann.</span><span class="lang-en"><b>Article:</b> I help <b>the</b> man.</span></div>
-                    <div class="beispiel-adjektiv"><span class="lang-de"><b>Adjektiv:</b> Ich helfe <span class="red-mark"><b>dem</b></span> <b>gut<span class="red-mark">en</span></b> Mann.</span><span class="lang-en"><b>Adjective:</b> I help <b>the</b> good man.</span></div>
-                    <div class="beispiel-pronomen"><span class="lang-de"><b>Pronomen:</b> Ich helfe <span class="red-mark"><b>ihm</b></span>.</span><span class="lang-en"><b>Pronoun:</b> I help <b>him</b>.</span></div>
-                </td>
-                <td class="col-akkusativ">
-                    <div class="beispiel-artikel"><span class="lang-de"><b>Artikel:</b> Ich sehe <span class="red-mark"><b>den</b></span> Mann.</span><span class="lang-en"><b>Article:</b> I see <b>the</b> man.</span></div>
-                    <div class="beispiel-adjektiv"><span class="lang-de"><b>Adjektiv:</b> Ich sehe <span class="red-mark"><b>den</b></span> <b>gut<span class="red-mark">en</span></b> Mann.</span><span class="lang-en"><b>Adjective:</b> I see <b>the</b> good man.</span></div>
-                    <div class="beispiel-pronomen"><span class="lang-de"><b>Pronomen:</b> Ich sehe <span class="red-mark"><b>ihn</b></span>.</span><span class="lang-en"><b>Pronoun:</b> I see <b>him</b>.</span></div>
-                </td>
+             <tr>
+                <th><span class="lang-de">Frage</span><span class="lang-en">Question</span></th>
+                <td class="col-nominativ"><span class="lang-de">Wer? / Was?</span><span class="lang-en">Who? / What?</span></td>
+                <td class="col-dativ"><span class="lang-de">Wem?</span><span class="lang-en">To whom?</span></td>
+                <td class="col-akkusativ"><span class="lang-de">Wen? / Was?</span><span class="lang-en">Whom? / What?</span></td>
             </tr>
             <tr>
-                <th><span class="lang-de">Beispiele: Feminin</span><span class="lang-en">Examples: Feminine</span></th>
-                <td class="col-nominativ">
-                    <div class="beispiel-artikel"><span class="lang-de"><b>Artikel:</b> <b>Die</b> Frau singt.</span><span class="lang-en"><b>Article:</b> <b>The</b> woman sings.</span></div>
-                    <div class="beispiel-adjektiv"><span class="lang-de"><b>Adjektiv:</b> Die <b>nett<span class="red-mark">e</span></b> Frau singt.</span><span class="lang-en"><b>Adjective:</b> The nice woman sings.</span></div>
-                    <div class="beispiel-pronomen"><span class="lang-de"><b>Pronomen:</b> <span class="red-mark"><b>Sie</b></span> singt.</span><span class="lang-en"><b>Pronoun:</b> <b>She</b> sings.</span></div>
-                </td>
-                <td class="col-dativ">
-                    <div class="beispiel-artikel"><span class="lang-de"><b>Artikel:</b> Ich danke <span class="red-mark"><b>der</b></span> Frau.</span><span class="lang-en"><b>Article:</b> I thank <b>the</b> woman.</span></div>
-                    <div class="beispiel-adjektiv"><span class="lang-de"><b>Adjektiv:</b> Ich danke <span class="red-mark"><b>der</b></span> <b>nett<span class="red-mark">en</span></b> Frau.</span><span class="lang-en"><b>Adjective:</b> I thank <b>the</b> nice woman.</span></div>
-                    <div class="beispiel-pronomen"><span class="lang-de"><b>Pronomen:</b> Ich danke <span class="red-mark"><b>ihr</b></span>.</span><span class="lang-en"><b>Pronoun:</b> I thank <b>her</b>.</span></div>
-                </td>
-                <td class="col-akkusativ">
-                    <div class="beispiel-artikel"><span class="lang-de"><b>Artikel:</b> Er kennt <b>die</b> Frau.</span><span class="lang-en"><b>Article:</b> He knows <b>the</b> woman.</span></div>
-                    <div class="beispiel-adjektiv"><span class="lang-de"><b>Adjektiv:</b> Er kennt <b>die</b> <b>nett<span class="red-mark">e</span></b> Frau.</span><span class="lang-en"><b>Adjective:</b> He knows <b>the</b> nice woman.</span></div>
-                    <div class="beispiel-pronomen"><span class="lang-de"><b>Pronomen:</b> Er kennt <span class="red-mark"><b>sie</b></span>.</span><span class="lang-en"><b>Pronoun:</b> He knows <b>her</b>.</span></div>
-                </td>
+                <th><span class="lang-de">Maskulin</span><span class="lang-en">Masculine</span></th>
+                <td class="col-nominativ"><span class="lang-de"><span class="red-mark"><b>Der</b></span> Mann lacht.</span><span class="lang-en">The man laughs.</span></td>
+                <td class="col-dativ"><span class="lang-de">Ich helfe <span class="red-mark"><b>dem</b></span> Mann.</span><span class="lang-en">I help the man.</span></td>
+                <td class="col-akkusativ"><span class="lang-de">Ich sehe <span class="red-mark"><b>den</b></span> Mann.</span><span class="lang-en">I see the man.</span></td>
             </tr>
             <tr>
-                <th><span class="lang-de">Beispiele: Neutrum</span><span class="lang-en">Examples: Neuter</span></th>
-                <td class="col-nominativ">
-                    <div class="beispiel-artikel"><span class="lang-de"><b>Artikel:</b> <b>Das</b> Kind spielt.</span><span class="lang-en"><b>Article:</b> <b>The</b> child plays.</span></div>
-                    <div class="beispiel-adjektiv"><span class="lang-de"><b>Adjektiv:</b> Das <b>klein<span class="red-mark">e</span></b> Kind spielt.</span><span class="lang-en"><b>Adjective:</b> The small child plays.</span></div>
-                    <div class="beispiel-pronomen"><span class="lang-de"><b>Pronomen:</b> <span class="red-mark"><b>Es</b></span> spielt.</span><span class="lang-en"><b>Pronoun:</b> <b>It</b> plays.</span></div>
-                </td>
-                <td class="col-dativ">
-                    <div class="beispiel-artikel"><span class="lang-de"><b>Artikel:</b> Der Ball gehört <span class="red-mark"><b>dem</b></span> Kind.</span><span class="lang-en"><b>Article:</b> The ball belongs to <b>the</b> child.</span></div>
-                    <div class="beispiel-adjektiv"><span class="lang-de"><b>Adjektiv:</b> Der Ball gehört <span class="red-mark"><b>dem</b></span> <b>klein<span class="red-mark">en</span></b> Kind.</span><span class="lang-en"><b>Adjective:</b> The ball belongs to <b>the</b> small child.</span></div>
-                    <div class="beispiel-pronomen"><span class="lang-de"><b>Pronomen:</b> Der Ball gehört <span class="red-mark"><b>ihm</b></span>.</span><span class="lang-en"><b>Pronoun:</b> The ball belongs to <b>him</b> (the child).</span></div>
-                </td>
-                <td class="col-akkusativ">
-                    <div class="beispiel-artikel"><span class="lang-de"><b>Artikel:</b> Sie sieht <b>das</b> Kind.</span><span class="lang-en"><b>Article:</b> She sees <b>the</b> child.</span></div>
-                    <div class="beispiel-adjektiv"><span class="lang-de"><b>Adjektiv:</b> Sie sieht <b>das</b> <b>klein<span class="red-mark">e</span></b> Kind.</span><span class="lang-en"><b>Adjective:</b> She sees <b>the</b> small child.</span></div>
-                    <div class="beispiel-pronomen"><span class="lang-de"><b>Pronomen:</b> Sie sieht <span class="red-mark"><b>es</b></span>.</span><span class="lang-en"><b>Pronoun:</b> She sees <b>it</b>.</span></div>
-                </td>
+                <th><span class="lang-de">Feminin</span><span class="lang-en">Feminine</span></th>
+                <td class="col-nominativ"><span class="lang-de"><span class="red-mark"><b>Die</b></span> Frau singt.</span><span class="lang-en">The woman sings.</span></td>
+                <td class="col-dativ"><span class="lang-de">Ich danke <span class="red-mark"><b>der</b></span> Frau.</span><span class="lang-en">I thank the woman.</span></td>
+                <td class="col-akkusativ"><span class="lang-de">Er kennt <span class="red-mark"><b>die</b></span> Frau.</span><span class="lang-en">He knows the woman.</span></td>
             </tr>
             <tr>
-                <th><span class="lang-de">Beispiele: Plural</span><span class="lang-en">Examples: Plural</span></th>
-                <td class="col-nominativ">
-                    <div class="beispiel-artikel"><span class="lang-de"><b>Artikel:</b> <b>Die</b> Kinder lernen.</span><span class="lang-en"><b>Article:</b> <b>The</b> children learn.</span></div>
-                    <div class="beispiel-adjektiv"><span class="lang-de"><b>Adjektiv:</b> Die <b>nett<span class="red-mark">en</span></b> Kinder lernen.</span><span class="lang-en"><b>Adjective:</b> The nice children learn.</span></div>
-                    <div class="beispiel-pronomen"><span class="lang-de"><b>Pronomen:</b> <span class="red-mark"><b>Sie</b></span> lernen.</span><span class="lang-en"><b>Pronoun:</b> <b>They</b> learn.</span></div>
-                </td>
-                <td class="col-dativ">
-                    <div class="beispiel-artikel"><span class="lang-de"><b>Artikel:</b> Wir helfen <span class="red-mark"><b>den</b></span> Kinder<span class="red-mark"><b>n</b></span>.</span><span class="lang-en"><b>Article:</b> We help <b>the</b> children.</span></div>
-                    <div class="beispiel-adjektiv"><span class="lang-de"><b>Adjektiv:</b> Wir helfen <span class="red-mark"><b>den</b></span> <b>nett<span class="red-mark">en</span></b> Kinder<span class="red-mark"><b>n</b></span>.</span><span class="lang-en"><b>Adjective:</b> We help <b>the</b> nice children.</span></div>
-                    <div class="beispiel-pronomen"><span class="lang-de"><b>Pronomen:</b> Wir helfen <span class="red-mark"><b>ihnen</b></span>.</span><span class="lang-en"><b>Pronoun:</b> We help <b>them</b>.</span></div>
-                </td>
-                <td class="col-akkusativ">
-                    <div class="beispiel-artikel"><span class="lang-de"><b>Artikel:</b> Wir besuchen <b>die</b> Kinder.</span><span class="lang-en"><b>Article:</b> We visit <b>the</b> children.</span></div>
-                    <div class="beispiel-adjektiv"><span class="lang-de"><b>Adjektiv:</b> Wir besuchen <b>die</b> <b>nett<span class="red-mark">en</span></b> Kinder.</span><span class="lang-en"><b>Adjective:</b> We visit <b>the</b> nice children.</span></div>
-                    <div class="beispiel-pronomen"><span class="lang-de"><b>Pronomen:</b> Wir besuchen <span class="red-mark"><b>sie</b></span>.</span><span class="lang-en"><b>Pronoun:</b> We visit <b>them</b>.</span></div>
-                </td>
+                <th><span class="lang-de">Neutrum</span><span class="lang-en">Neuter</span></th>
+                <td class="col-nominativ"><span class="lang-de"><span class="red-mark"><b>Das</b></span> Kind spielt.</span><span class="lang-en">The child plays.</span></td>
+                <td class="col-dativ"><span class="lang-de">Der Ball gehört <span class="red-mark"><b>dem</b></span> Kind.</span><span class="lang-en">The ball belongs to the child.</span></td>
+                <td class="col-akkusativ"><span class="lang-de">Sie sieht <span class="red-mark"><b>das</b></span> Kind.</span><span class="lang-en">She sees the child.</span></td>
+            </tr>
+            <tr>
+                <th><span class="lang-de">Plural</span><span class="lang-en">Plural</span></th>
+                <td class="col-nominativ"><span class="lang-de"><span class="red-mark"><b>Die</b></span> Kinder lernen.</span><span class="lang-en">The children learn.</span></td>
+                <td class="col-dativ"><span class="lang-de">Wir helfen <span class="red-mark"><b>den</b></span> Kinder<span class="red-mark"><b>n</b></span>.</span><span class="lang-en">We help the children.</span></td>
+                <td class="col-akkusativ"><span class="lang-de">Wir besuchen <span class="red-mark"><b>die</b></span> Kinder.</span><span class="lang-en">We visit the children.</span></td>
             </tr>
             <tr style="border-top: 3px solid #555;">
-                <th><span class="lang-de">Was ändert sich?</span><span class="lang-en">What changes?</span></th>
-                <td class="col-nominativ"><span class="lang-de">Die <b>Grundform</b> der Nomengruppe. Nichts wird verändert.</span><span class="lang-en">The <b>basic form</b> of the noun phrase. Nothing is changed.</span></td>
-                <td class="col-dativ"><span class="lang-de"><b>Starke Änderung</b> bei allen Geschlechtern:<ul><li>Artikel: z.B. <code>der → dem</code></li><li>Adjektiv-Endung: meist <code>-en</code></li><li>Plural-Nomen: oft <code>-n</code></li></ul></span><span class="lang-en"><b>Strong change</b> for all genders:<ul><li>Article: e.g. <code>der → dem</code></li><li>Adjective ending: mostly <code>-en</code></li><li>Plural nouns: often get <code>-n</code></li></ul></span></td>
-                <td class="col-akkusativ"><span class="lang-de">Änderung <b>nur bei Maskulin</b>:<ul><li>Artikel: <code>der → den</code></li><li>Adjektiv-Endung: <code>-en</code></li></ul></span><span class="lang-en">Change <b>only for masculine</b>:<ul><li>Article: <code>der → den</code></li><li>Adjective ending: <code>-en</code></li></ul></span></td>
-            </tr>
-            <tr>
                 <th><span class="lang-de">Erklärung</span><span class="lang-en">Explanation</span></th>
                 <td class="col-nominativ"><span class="lang-de">Markiert das <b>Subjekt</b>. Zeigt, wer/was die Handlung ausführt.</span><span class="lang-en">Marks the <b>subject</b>. Indicates who/what performs the action.</span></td>
-                <td class="col-dativ"><span class="lang-de">Markiert das <b>indirekte Objekt</b> („Empfänger“). Verben wie `helfen`, `danken`, `gehören` brauchen immer Dativ.</span><span class="lang-en">Marks the <b>indirect object</b> ("receiver"). Verbs like `helfen`, `danken`, `gehören` always need dataive.</span></td>
+                <td class="col-dativ"><span class="lang-de">Markiert das <b>indirekte Objekt</b> („Empfänger“). Verben wie `helfen`, `danken`, `gehören` brauchen immer Dativ.</span><span class="lang-en">Marks the <b>indirect object</b> ("receiver"). Verbs like `helfen`, `danken`, `gehören` always need dative.</span></td>
                 <td class="col-akkusativ"><span class="lang-de">Markiert das <b>direkte Objekt</b> („Opfer“). Zeigt, wer/was direkt von der Handlung betroffen ist.</span><span class="lang-en">Marks the <b>direct object</b> ("victim"). Indicates who/what is directly affected by the action.</span></td>
+            </tr>
+            <tr>
+                <th><span class="lang-de">Analyse</span><span class="lang-en">Analysis</span></th>
+                <td class="col-nominativ"><span class="lang-de">Satz: <code>Der Mann lacht.</code> → **Wer** lacht? → <b>Der Mann</b>.</span><span class="lang-en">Sentence: <code>The man laughs.</code> → **Who** laughs? → <b>The man</b>.</span></td>
+                <td class="col-dativ"><span class="lang-de">Satz: <code>Ich helfe dem Mann.</code> → **Wem** hilfst du? → <b>dem Mann</b>.</span><span class="lang-en">Sentence: <code>I help the man.</code> → **To whom** do you help? → <b>the man</b>.</span></td>
+                <td class="col-akkusativ"><span class="lang-de">Satz: <code>Ich sehe den Mann.</code> → **Wen** siehst du? → <b>den Mann</b>.</span><span class="lang-en">Sentence: <code>I see the man.</code> → **Whom** do you see? → <b>the man</b>.</span></td>
             </tr>
         </tbody>
     </table>
+
+    <div class="button-container">
+        <a href="index.html" class="back-button"><span class="lang-de">Zurück zur Startseite</span><span class="lang-en">Back to Home</span></a>
+    </div>
 
 </div>
 </body>
