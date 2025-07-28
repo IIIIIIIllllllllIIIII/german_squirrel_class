@@ -629,8 +629,6 @@
         "german_words": ["Sie", "muss", "ihre", "Schlüssel", "suchen"],
         "distractor_words": ["soll", "müssen", "sucht", "musst"]
     },
-    JSON
-[
     {
         "id": "mv91",
         "full_sentence_de": "Ich darf heute Abend ausgehen.",
