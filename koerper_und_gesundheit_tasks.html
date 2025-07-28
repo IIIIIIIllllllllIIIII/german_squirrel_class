@@ -185,6 +185,11 @@
         let currentTask = null;
         let shuffledTasks = [];
         let draggedItem = null;
+        // Additions for robust touch handling
+        let touchStartTime = 0;
+        let touchStartX = 0;
+        let touchStartY = 0;
+
 
         // --- DOM ELEMENTS ---
         const referenceEnEl = document.getElementById('ref-en');
@@ -424,6 +429,11 @@
             draggedItem = e.target.closest('.draggable-item');
             if (!draggedItem) return;
 
+            // Record start time and position for tap vs. drag detection
+            touchStartTime = Date.now();
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+
             if (e.cancelable) e.preventDefault();
             
             // Create a visual clone for dragging
@@ -476,7 +486,32 @@
 
         function handleTouchEnd(e) {
             document.removeEventListener('touchmove', handleTouchMove);
-            if (!activeTouchClone || !draggedItem) return;
+            if (!draggedItem) return;
+
+            const touchDuration = Date.now() - touchStartTime;
+            const touchEndX = e.changedTouches[0].clientX;
+            const touchEndY = e.changedTouches[0].clientY;
+            const distance = Math.sqrt(Math.pow(touchEndX - touchStartX, 2) + Math.pow(touchEndY - touchStartY, 2));
+
+            // --- Tap vs. Drag Logic ---
+            // If the touch was very short and didn't move much, treat it as a tap.
+            if (touchDuration < 200 && distance < 10) {
+                // It's a TAP.
+                // Clean up any drag artifacts that were created in touchstart
+                if (activeTouchClone) activeTouchClone.remove();
+                draggedItem.style.opacity = '1';
+                
+                // Manually trigger the click logic, passing a synthetic event
+                handleItemClick({ target: draggedItem, preventDefault: () => {}, stopPropagation: () => {} });
+
+                // Reset for next interaction
+                draggedItem = null;
+                activeTouchClone = null;
+                return; // Stop further execution for a tap
+            }
+
+            // --- It's a DRAG, proceed with original drop logic ---
+            if (!activeTouchClone) return; 
             
             // Find drop target
             activeTouchClone.style.display = 'none';
