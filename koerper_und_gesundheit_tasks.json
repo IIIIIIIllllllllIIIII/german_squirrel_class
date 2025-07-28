@@ -1,0 +1,422 @@
+[
+  {
+    "id": "kg1",
+    "full_sentence_de": "Ich habe Kopfschmerzen.",
+    "translation_en": "I have a headache.",
+    "german_words": ["Ich", "habe", "Kopfschmerzen"],
+    "distractor_words": ["hast", "tut", "Kopf", "weh"]
+  },
+  {
+    "id": "kg2",
+    "full_sentence_de": "Mein Bauch tut weh.",
+    "translation_en": "My stomach hurts.",
+    "german_words": ["Mein", "Bauch", "tut", "weh"],
+    "distractor_words": ["Meine", "Bauchschmerzen", "ist", "schmerzt"]
+  },
+  {
+    "id": "kg3",
+    "full_sentence_de": "Ich brauche einen Termin.",
+    "translation_en": "I need an appointment.",
+    "german_words": ["Ich", "brauche", "einen", "Termin"],
+    "distractor_words": ["braucht", "eine", "Arzt", "habe"]
+  },
+  {
+    "id": "kg4",
+    "full_sentence_de": "Der Arzt ist in der Praxis.",
+    "translation_en": "The doctor is in the office.",
+    "german_words": ["Der", "Arzt", "ist", "in", "der", "Praxis"],
+    "distractor_words": ["Die", "Ärztin", "sind", "im", "dem"]
+  },
+  {
+    "id": "kg5",
+    "full_sentence_de": "Haben Sie Fieber?",
+    "translation_en": "Do you have a fever?",
+    "german_words": ["Haben", "Sie", "Fieber"],
+    "distractor_words": ["Hast", "du", "Schmerzen", "Krankheit"]
+  },
+  {
+    "id": "kg6",
+    "full_sentence_de": "Mein Hals tut weh.",
+    "translation_en": "My throat hurts.",
+    "german_words": ["Mein", "Hals", "tut", "weh"],
+    "distractor_words": ["Meine", "Kopf", "sind", "schmerzt"]
+  },
+  {
+    "id": "kg7",
+    "full_sentence_de": "Ich habe Schmerzen im Rücken.",
+    "translation_en": "I have pain in my back.",
+    "german_words": ["Ich", "habe", "Schmerzen", "im", "Rücken"],
+    "distractor_words": ["bin", "Schmerz", "in", "Bein"]
+  },
+  {
+    "id": "kg8",
+    "full_sentence_de": "Sie braucht eine Tablette.",
+    "translation_en": "She needs a pill.",
+    "german_words": ["Sie", "braucht", "eine", "Tablette"],
+    "distractor_words": ["Er", "brauchen", "einen", "Rezept"]
+  },
+  {
+    "id": "kg9",
+    "full_sentence_de": "Hier ist Ihr Rezept.",
+    "translation_en": "Here is your prescription.",
+    "german_words": ["Hier", "ist", "Ihr", "Rezept"],
+    "distractor_words": ["Das", "sind", "Ihre", "Apotheke"]
+  },
+  {
+    "id": "kg10",
+    "full_sentence_de": "Die Apotheke ist dort.",
+    "translation_en": "The pharmacy is there.",
+    "german_words": ["Die", "Apotheke", "ist", "dort"],
+    "distractor_words": ["Der", "Praxis", "sind", "hier"]
+  },
+  {
+    "id": "kg11",
+    "full_sentence_de": "Mein Arm ist gebrochen.",
+    "translation_en": "My arm is broken.",
+    "german_words": ["Mein", "Arm", "ist", "gebrochen"],
+    "distractor_words": ["Meine", "Hand", "sind", "tut weh"]
+  },
+  {
+    "id": "kg12",
+    "full_sentence_de": "Ich muss zum Arzt gehen.",
+    "translation_en": "I have to go to the doctor.",
+    "german_words": ["Ich", "muss", "zum", "Arzt", "gehen"],
+    "distractor_words": ["kann", "zur", "Ärztin", "fahren"]
+  },
+  {
+    "id": "kg13",
+    "full_sentence_de": "Was fehlt Ihnen?",
+    "translation_en": "What's wrong with you? (formal)",
+    "german_words": ["Was", "fehlt", "Ihnen"],
+    "distractor_words": ["Wie", "fehlen", "dir", "ist"]
+  },
+  {
+    "id": "kg14",
+    "full_sentence_de": "Mein Zahn tut sehr weh.",
+    "translation_en": "My tooth hurts a lot.",
+    "german_words": ["Mein", "Zahn", "tut", "sehr", "weh"],
+    "distractor_words": ["Meine", "Zähne", "sind", "schmerzt"]
+  },
+  {
+    "id": "kg15",
+    "full_sentence_de": "Ich habe Schnupfen.",
+    "translation_en": "I have a cold/runny nose.",
+    "german_words": ["Ich", "habe", "Schnupfen"],
+    "distractor_words": ["hast", "Fieber", "bin", "krank"]
+  },
+  {
+    "id": "kg16",
+    "full_sentence_de": "Sein Bein ist verletzt.",
+    "translation_en": "His leg is injured.",
+    "german_words": ["Sein", "Bein", "ist", "verletzt"],
+    "distractor_words": ["Ihr", "Fuß", "sind", "gebrochen"]
+  },
+  {
+    "id": "kg17",
+    "full_sentence_de": "Meine Augen sind müde.",
+    "translation_en": "My eyes are tired.",
+    "german_words": ["Meine", "Augen", "sind", "müde"],
+    "distractor_words": ["Mein", "Auge", "ist", "rot"]
+  },
+  {
+    "id": "kg18",
+    "full_sentence_de": "Er ist im Krankenhaus.",
+    "translation_en": "He is in the hospital.",
+    "german_words": ["Er", "ist", "im", "Krankenhaus"],
+    "distractor_words": ["Sie", "sind", "in der", "Praxis"]
+  },
+  {
+    "id": "kg19",
+    "full_sentence_de": "Die Untersuchung dauert lange.",
+    "translation_en": "The examination takes a long time.",
+    "german_words": ["Die", "Untersuchung", "dauert", "lange"],
+    "distractor_words": ["Der", "Termin", "ist", "kurz"]
+  },
+  {
+    "id": "kg20",
+    "full_sentence_de": "Ihre Hand ist kalt.",
+    "translation_en": "Her hand is cold.",
+    "german_words": ["Ihre", "Hand", "ist", "kalt"],
+    "distractor_words": ["Sein", "Hände", "sind", "warm"]
+  },
+  {
+    "id": "kg21",
+    "full_sentence_de": "Der Schmerz ist stark.",
+    "translation_en": "The pain is strong.",
+    "german_words": ["Der", "Schmerz", "ist", "stark"],
+    "distractor_words": ["Die", "Schmerzen", "sind", "schwach"]
+  },
+  {
+    "id": "kg22",
+    "full_sentence_de": "Ich habe Ohrenschmerzen.",
+    "translation_en": "I have an earache.",
+    "german_words": ["Ich", "habe", "Ohrenschmerzen"],
+    "distractor_words": ["hast", "Ohr", "tut", "weh"]
+  },
+  {
+    "id": "kg23",
+    "full_sentence_de": "Ihr Fuß ist geschwollen.",
+    "translation_en": "Your (plural) foot is swollen.",
+    "german_words": ["Euer", "Fuß", "ist", "geschwollen"],
+    "distractor_words": ["Eure", "Füße", "sind", "verletzt"]
+  },
+  {
+    "id": "kg24",
+    "full_sentence_de": "Bitte gehen Sie zur Anmeldung.",
+    "translation_en": "Please go to the registration.",
+    "german_words": ["Bitte", "gehen", "Sie", "zur", "Anmeldung"],
+    "distractor_words": ["Geh", "du", "zum", "Arzt"]
+  },
+  {
+    "id": "kg25",
+    "full_sentence_de": "Meine Nase ist verstopft.",
+    "translation_en": "My nose is blocked.",
+    "german_words": ["Meine", "Nase", "ist", "verstopft"],
+    "distractor_words": ["Mein", "Hals", "sind", "trocken"]
+  },
+  {
+    "id": "kg26",
+    "full_sentence_de": "Der Arzt hat heute Sprechstunde.",
+    "translation_en": "The doctor has consultation hours today.",
+    "german_words": ["Der", "Arzt", "hat", "heute", "Sprechstunde"],
+    "distractor_words": ["Die", "Ärztin", "haben", "morgen", "Termine"]
+  },
+  {
+    "id": "kg27",
+    "full_sentence_de": "Mein Finger tut weh.",
+    "translation_en": "My finger hurts.",
+    "german_words": ["Mein", "Finger", "tut", "weh"],
+    "distractor_words": ["Meine", "Hand", "sind", "schmerzt"]
+  },
+  {
+    "id": "kg28",
+    "full_sentence_de": "Ich fühle mich krank.",
+    "translation_en": "I feel sick.",
+    "german_words": ["Ich", "fühle", "mich", "krank"],
+    "distractor_words": ["bin", "habe", "eine", "Krankheit"]
+  },
+  {
+    "id": "kg29",
+    "full_sentence_de": "Sein Mund ist offen.",
+    "translation_en": "His mouth is open.",
+    "german_words": ["Sein", "Mund", "ist", "offen"],
+    "distractor_words": ["Ihre", "Augen", "sind", "zu"]
+  },
+  {
+    "id": "kg30",
+    "full_sentence_de": "Nehmen Sie diese Tabletten.",
+    "translation_en": "Take these pills.",
+    "german_words": ["Nehmen", "Sie", "diese", "Tabletten"],
+    "distractor_words": ["Nimm", "du", "dieses", "Rezept"]
+  },
+  {
+    "id": "kg31",
+    "full_sentence_de": "Mein Rücken schmerzt.",
+    "translation_en": "My back hurts.",
+    "german_words": ["Mein", "Rücken", "schmerzt"],
+    "distractor_words": ["Meine", "Arm", "tut", "weh"]
+  },
+  {
+    "id": "kg32",
+    "full_sentence_de": "Ich habe einen Termin um 10 Uhr.",
+    "translation_en": "I have an appointment at 10 o'clock.",
+    "german_words": ["Ich", "habe", "einen", "Termin", "um", "10", "Uhr"],
+    "distractor_words": ["brauche", "eine", "Praxis", "morgen"]
+  },
+  {
+    "id": "kg33",
+    "full_sentence_de": "Das ist eine schlimme Krankheit.",
+    "translation_en": "That is a bad illness.",
+    "german_words": ["Das", "ist", "eine", "schlimme", "Krankheit"],
+    "distractor_words": ["Es", "sind", "ein", "starker", "Schmerz"]
+  },
+  {
+    "id": "kg34",
+    "full_sentence_de": "Ihr Kopf ist heiß.",
+    "translation_en": "Her head is hot.",
+    "german_words": ["Ihr", "Kopf", "ist", "heiß"],
+    "distractor_words": ["Sein", "Kopfschmerzen", "sind", "kalt"]
+  },
+  {
+    "id": "kg35",
+    "full_sentence_de": "Die Ärztin schreibt ein Rezept.",
+    "translation_en": "The doctor (female) writes a prescription.",
+    "german_words": ["Die", "Ärztin", "schreibt", "ein", "Rezept"],
+    "distractor_words": ["Der", "Arzt", "schreiben", "einen", "Termin"]
+  },
+  {
+    "id": "kg36",
+    "full_sentence_de": "Meine Füße sind kalt.",
+    "translation_en": "My feet are cold.",
+    "german_words": ["Meine", "Füße", "sind", "kalt"],
+    "distractor_words": ["Mein", "Fuß", "ist", "warm"]
+  },
+  {
+    "id": "kg37",
+    "full_sentence_de": "Er hat Schmerzen im Bein.",
+    "translation_en": "He has pain in his leg.",
+    "german_words": ["Er", "hat", "Schmerzen", "im", "Bein"],
+    "distractor_words": ["Sie", "habe", "Schmerz", "in der", "Hand"]
+  },
+  {
+    "id": "kg38",
+    "full_sentence_de": "Ich kann mein Auge nicht öffnen.",
+    "translation_en": "I can't open my eye.",
+    "german_words": ["Ich", "kann", "mein", "Auge", "nicht", "öffnen"],
+    "distractor_words": ["muss", "meine", "Augen", "schließen"]
+  },
+  {
+    "id": "kg39",
+    "full_sentence_de": "Die Praxis ist am Montag geschlossen.",
+    "translation_en": "The doctor's office is closed on Monday.",
+    "german_words": ["Die", "Praxis", "ist", "am", "Montag", "geschlossen"],
+    "distractor_words": ["Das", "Krankenhaus", "hat", "heute", "offen"]
+  },
+  {
+    "id": "kg40",
+    "full_sentence_de": "Haben Sie Halsschmerzen?",
+    "translation_en": "Do you have a sore throat?",
+    "german_words": ["Haben", "Sie", "Halsschmerzen"],
+    "distractor_words": ["Hast", "du", "Hals", "weh"]
+  },
+  {
+    "id": "kg41",
+    "full_sentence_de": "Wo ist der Schmerz?",
+    "translation_en": "Where is the pain?",
+    "german_words": ["Wo", "ist", "der", "Schmerz"],
+    "distractor_words": ["Was", "sind", "die", "Schmerzen", "tut"]
+  },
+  {
+    "id": "kg42",
+    "full_sentence_de": "Mein Arm tut weh.",
+    "translation_en": "My arm hurts.",
+    "german_words": ["Mein", "Arm", "tut", "weh"],
+    "distractor_words": ["Meine", "Bein", "schmerzt"]
+  },
+  {
+    "id": "kg43",
+    "full_sentence_de": "Sie hat Bauchschmerzen.",
+    "translation_en": "She has a stomach ache.",
+    "german_words": ["Sie", "hat", "Bauchschmerzen"],
+    "distractor_words": ["Er", "habe", "Bauch", "weh"]
+  },
+  {
+    "id": "kg44",
+    "full_sentence_de": "Ich gehe in die Apotheke.",
+    "translation_en": "I'm going to the pharmacy.",
+    "german_words": ["Ich", "gehe", "in", "die", "Apotheke"],
+    "distractor_words": ["muss", "zur", "dem", "Praxis"]
+  },
+  {
+    "id": "kg45",
+    "full_sentence_de": "Deine Zähne sind weiß.",
+    "translation_en": "Your teeth are white.",
+    "german_words": ["Deine", "Zähne", "sind", "weiß"],
+    "distractor_words": ["Dein", "Zahn", "ist", "gelb"]
+  },
+  {
+    "id": "kg46",
+    "full_sentence_de": "Er braucht eine Untersuchung.",
+    "translation_en": "He needs an examination.",
+    "german_words": ["Er", "braucht", "eine", "Untersuchung"],
+    "distractor_words": ["Sie", "brauchen", "einen", "Termin"]
+  },
+  {
+    "id": "kg47",
+    "full_sentence_de": "Meine Ohren sind klein.",
+    "translation_en": "My ears are small.",
+    "german_words": ["Meine", "Ohren", "sind", "klein"],
+    "distractor_words": ["Mein", "Ohr", "ist", "groß"]
+  },
+  {
+    "id": "kg48",
+    "full_sentence_de": "Die Anmeldung ist im Erdgeschoss.",
+    "translation_en": "The registration is on the ground floor.",
+    "german_words": ["Die", "Anmeldung", "ist", "im", "Erdgeschoss"],
+    "distractor_words": ["Der", "Arzt", "sind", "in der", "ersten Etage"]
+  },
+  {
+    "id": "kg49",
+    "full_sentence_de": "Ich habe Schmerzen in der Hand.",
+    "translation_en": "I have pain in my hand.",
+    "german_words": ["Ich", "habe", "Schmerzen", "in", "der", "Hand"],
+    "distractor_words": ["hast", "Schmerz", "im", "Arm"]
+  },
+  {
+    "id": "kg50",
+    "full_sentence_de": "Der Mund ist zum Sprechen da.",
+    "translation_en": "The mouth is for speaking.",
+    "german_words": ["Der", "Mund", "ist", "zum", "Sprechen", "da"],
+    "distractor_words": ["Die", "Nase", "sind", "für", "Riechen"]
+  },
+  {
+    "id": "kg51",
+    "full_sentence_de": "Ich habe einen Termin bei der Ärztin.",
+    "translation_en": "I have an appointment with the doctor (female).",
+    "german_words": ["Ich", "habe", "einen", "Termin", "bei", "der", "Ärztin"],
+    "distractor_words": ["brauche", "eine", "Praxis", "mit", "dem", "Arzt"]
+  },
+  {
+    "id": "kg52",
+    "full_sentence_de": "Sein ganzer Körper tut weh.",
+    "translation_en": "His whole body hurts.",
+    "german_words": ["Sein", "ganzer", "Körper", "tut", "weh"],
+    "distractor_words": ["Ihr", "alle", "Körperteile", "tun", "schmerzen"]
+  },
+  {
+    "id": "kg53",
+    "full_sentence_de": "Diese Krankheit ist nicht schlimm.",
+    "translation_en": "This illness is not serious.",
+    "german_words": ["Diese", "Krankheit", "ist", "nicht", "schlimm"],
+    "distractor_words": ["Dieser", "Schmerz", "sind", "sehr", "stark"]
+  },
+  {
+    "id": "kg54",
+    "full_sentence_de": "Er muss im Krankenhaus bleiben.",
+    "translation_en": "He has to stay in the hospital.",
+    "german_words": ["Er", "muss", "im", "Krankenhaus", "bleiben"],
+    "distractor_words": ["Sie", "kann", "in der", "Praxis", "warten"]
+  },
+  {
+    "id": "kg55",
+    "full_sentence_de": "Meine Finger sind steif.",
+    "translation_en": "My fingers are stiff.",
+    "german_words": ["Meine", "Finger", "sind", "steif"],
+    "distractor_words": ["Mein", "Daumen", "ist", "beweglich"]
+  },
+  {
+    "id": "kg56",
+    "full_sentence_de": "Ich habe Zahnschmerzen.",
+    "translation_en": "I have a toothache.",
+    "german_words": ["Ich", "habe", "Zahnschmerzen"],
+    "distractor_words": ["hast", "Zahn", "tut", "weh"]
+  },
+  {
+    "id": "kg57",
+    "full_sentence_de": "Die Sprechstunde beginnt um 8 Uhr.",
+    "translation_en": "The consultation hours begin at 8 o'clock.",
+    "german_words": ["Die", "Sprechstunde", "beginnt", "um", "8", "Uhr"],
+    "distractor_words": ["Der", "Termin", "endet", "um", "9", "Uhr"]
+  },
+  {
+    "id": "kg58",
+    "full_sentence_de": "Ihr Auge ist rot.",
+    "translation_en": "Your eye is red.",
+    "german_words": ["Ihr", "Auge", "ist", "rot"],
+    "distractor_words": ["Deine", "Augen", "sind", "blau"]
+  },
+  {
+    "id": "kg59",
+    "full_sentence_de": "Das Rezept ist für die Apotheke.",
+    "translation_en": "The prescription is for the pharmacy.",
+    "german_words": ["Das", "Rezept", "ist", "für", "die", "Apotheke"],
+    "distractor_words": ["Die", "Tablette", "sind", "von", "dem", "Arzt"]
+  },
+  {
+    "id": "kg60",
+    "full_sentence_de": "Es tut hier weh.",
+    "translation_en": "It hurts here.",
+    "german_words": ["Es", "tut", "hier", "weh"],
+    "distractor_words": ["Das", "schmerzt", "dort", "ist"]
+  }
+]

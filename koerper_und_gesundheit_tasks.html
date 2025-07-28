@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Körper & Gesundheit Modus</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: linear-gradient(to right top, #a5b4fc, #86efac, #fde68a, #fdba74, #fbcfe8); /* Pastel Rainbow Shifted */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; 
+            min-height: 100vh;
+            margin: 0;
+            padding: 24px; 
+            color: #374151; 
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent; 
+        }
+        .card {
+            background-color: white;
+            padding: 24px; 
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            text-align: center;
+            width: 100%;
+            max-width: 800px; 
+        }
+        @media (min-width: 768px) { .card { padding: 32px; } }
+
+        .mode-title { font-size: 1.75rem; font-weight: 700; color: #4f46e5; margin-bottom: 4px; } /* Indigo-600 */
+        .mode-title-subtitle { font-size: 1rem; color: #4338ca; margin-bottom: 24px; } /* Indigo-700 */
+
+        .reference-sentences {
+            background-color: #eef2ff; /* Indigo-50 */
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #e0e7ff; /* Indigo-100 */
+            text-align: left;
+        }
+        .reference-sentences p { margin-bottom: 0.5rem; color: #3730a3; /* Indigo-800 */ }
+        .reference-sentences strong { color: #312e81; /* Indigo-900 */ }
+
+        .drop-zone-container {
+            background-color: #f0f9ff; /* Sky-50 */
+            border: 2px dashed #bae6fd; /* Sky-200 */
+            border-radius: 0.75rem;
+            padding: 1rem;
+            min-height: 60px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem; 
+            justify-content: flex-start;
+            align-items: center; 
+            margin-bottom: 1rem;
+        }
+        
+        .draggable-item-slot {
+            min-width: 80px;
+            height: 45px; 
+            background-color: #e0f2fe; /* Sky-100 */
+            border: 1px solid #bae6fd; /* Sky-200 */
+            border-radius: 0.375rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.2s;
+        }
+        .draggable-item-slot.drag-over { background-color: #7dd3fc; border-color: #38bdf8; } /* Sky-300, Sky-400 */
+
+        .draggable-pool {
+            background-color: #f5f3ff; /* Violet-50 */
+            border: 2px dashed #c4b5fd; /* Violet-300 */
+            border-radius: 0.75rem;
+            padding: 1rem;
+            min-height: 80px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem; 
+            justify-content: center;
+            align-items: center; 
+            margin-bottom: 1.5rem;
+        }
+        .draggable-item {
+            background-image: linear-gradient(to right, #a78bfa 0%, #8b5cf6 100%); /* Violet shades */
+            color: #f5f3ff; /* Violet-50 */
+            padding: 10px 18px; 
+            border-radius: 9999px; 
+            cursor: grab; 
+            font-weight: 600; 
+            font-size: 1rem; 
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); 
+            transition: all 0.2s ease-out; 
+            border: 2px solid transparent; 
+            user-select: none; -webkit-user-select: none; -ms-user-select: none;
+        }
+        .draggable-item:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); }
+        .draggable-item.dragging { opacity: 0.6; transform: rotate(3deg) scale(0.95); cursor: grabbing; }
+        .draggable-item.correct-in-slot { background-image: linear-gradient(to right, #86efac, #34d399); color: white; border-color: #10b981;}
+        .draggable-item.incorrect-in-slot { background-image: linear-gradient(to right, #fca5a5, #f87171); color: white; border-color: #ef4444;}
+        
+        /* Enhanced clickable styling for items in slots */
+        .draggable-item-slot .draggable-item { 
+            cursor: pointer; 
+            position: relative;
+        }
+        .draggable-item-slot .draggable-item:hover { 
+            transform: scale(1.1); 
+            box-shadow: 0 0 0 3px #fbbf24, 0 10px 15px -3px rgba(0,0,0,0.1); /* Amber-400 border to indicate clickable */
+            background-image: linear-gradient(to right, #f59e0b 0%, #d97706 100%); /* Amber gradient on hover */
+        }
+
+        .feedback-area { margin-top: 1.5rem; padding: 0.75rem; border-radius: 0.5rem; font-weight: 600; }
+        .feedback-area.success { background-color: #dcfce7; color: #166534; border: 1px solid #6ee7b7;} 
+        .feedback-area.error { background-color: #fee2e2; color: #991b1b; border: 1px solid #fca5a5;} 
+        
+        .btn {
+            padding: 12px 24px; border-radius: 8px; font-size: 1rem; font-weight: 600;
+            color: white; cursor: pointer; transition: all 0.3s ease;
+            border: none; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            margin-top: 16px;
+        }
+        .btn:disabled { background-color: #d1d5db !important; color: #6b7280 !important; cursor: not-allowed; opacity: 0.7; }
+        .btn-primary { background-color: #6366f1; } /* Indigo-500 */
+        .btn-primary:hover:not(:disabled) { background-color: #4f46e5; } /* Indigo-600 */
+        .btn-secondary { background-color: #64748b; } 
+        .btn-secondary:hover:not(:disabled) { background-color: #475569; } 
+        .hidden { display: none !important; }
+        .bottom-controls { margin-top: 1.5rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;}
+
+        .help-tip {
+            background-color: #fef3c7; /* Amber-100 */
+            border: 1px solid #f59e0b; /* Amber-500 */
+            color: #92400e; /* Amber-800 */
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1 class="mode-title">Körper & Gesundheit Modus</h1>
+        <p class="mode-title-subtitle">Sätze zum Thema Arztbesuch und Krankheiten</p>
+
+        <div id="reference-sentences-container" class="reference-sentences">
+            <p><strong>EN:</strong> <span id="ref-en">English sentence will appear here.</span></p>
+        </div>
+
+        <div id="drop-zone-container" class="drop-zone-container">
+            <!-- Word slots will be generated here -->
+        </div>
+        
+        <div class="help-tip">
+            <span>💡</span>
+            <span><strong>Tip:</strong> Click on any word bubble in the sentence above to remove it and try again!</span>
+        </div>
+
+        <div id="draggable-pool" class="draggable-pool">
+            <!-- Draggable words will be generated here -->
+        </div>
+        
+        <div id="feedback-message" class="feedback-area hidden"></div>
+        <div id="correct-sentence-feedback" class="text-green-700 font-semibold mt-2 hidden"></div>
+
+        <div class="bottom-controls">
+            <button id="check-answer-btn" class="btn btn-primary">Check Answer</button>
+            <button id="next-task-btn" class="btn btn-secondary hidden">Next Task</button>
+            <a href="index.html" class="btn btn-secondary">Menu</a>
+        </div>
+    </div>
+
+    <script>
+        // --- STATE MANAGEMENT ---
+        let allTasks = [];
+        let currentTask = null;
+        let shuffledTasks = [];
+        let draggedItem = null;
+
+        // --- DOM ELEMENTS ---
+        const referenceEnEl = document.getElementById('ref-en');
+        const dropZoneContainerEl = document.getElementById('drop-zone-container');
+        const draggablePoolEl = document.getElementById('draggable-pool');
+        const checkAnswerBtn = document.getElementById('check-answer-btn');
+        const nextTaskBtn = document.getElementById('next-task-btn');
+        const feedbackMessageEl = document.getElementById('feedback-message');
+        const correctSentenceFeedbackEl = document.getElementById('correct-sentence-feedback');
+
+        // --- INITIALIZATION ---
+        async function loadTasks() {
+            try {
+                // Fetch data from the new JSON file
+                const response = await fetch('koerper_und_gesundheit_tasks.json');
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                allTasks = await response.json();
+                if (allTasks.length === 0) throw new Error("koerper_und_gesundheit_tasks.json is empty or not found.");
+                
+                shuffleArray(allTasks);
+                shuffledTasks = [...allTasks];
+                loadNextTask();
+            } catch (error) {
+                console.error("Could not load tasks:", error);
+                dropZoneContainerEl.innerHTML = `<p class="text-red-500 font-semibold">Error: Could not load tasks. Details: ${error.message}</p>`;
+            }
+        }
+
+        // --- TASK LOGIC ---
+        function loadNextTask() {
+            if (shuffledTasks.length === 0) {
+                // Handle completion of all tasks
+                dropZoneContainerEl.innerHTML = `<p class="text-indigo-700 font-semibold text-lg">Super! Alle Sätze geübt!</p>`;
+                draggablePoolEl.innerHTML = '';
+                referenceEnEl.textContent = 'All tasks completed!';
+                checkAnswerBtn.classList.add('hidden');
+                nextTaskBtn.classList.add('hidden');
+                feedbackMessageEl.classList.add('hidden');
+                correctSentenceFeedbackEl.classList.add('hidden');
+                return;
+            }
+
+            currentTask = shuffledTasks.shift();
+
+            // Update UI with new task data
+            referenceEnEl.textContent = currentTask.translation_en;
+
+            // Create empty slots for the words
+            dropZoneContainerEl.innerHTML = '';
+            currentTask.german_words.forEach(() => {
+                const slot = createEmptySlot();
+                dropZoneContainerEl.appendChild(slot);
+            });
+
+            // Create and shuffle draggable words
+            draggablePoolEl.innerHTML = '';
+            const wordsToDrag = [...currentTask.german_words, ...currentTask.distractor_words];
+            shuffleArray(wordsToDrag);
+            wordsToDrag.forEach(word => {
+                draggablePoolEl.appendChild(createDraggableItem(word));
+            });
+
+            // Reset UI state for the new task
+            resetUIForNextTask();
+        }
+        
+        function checkAnswer() {
+            const slots = dropZoneContainerEl.querySelectorAll('.draggable-item-slot');
+            let constructedSentence = "";
+            let allSlotsFilled = true;
+            
+            slots.forEach(slot => {
+                const item = slot.querySelector('.draggable-item');
+                if (item) {
+                    constructedSentence += item.dataset.text + " ";
+                } else {
+                    allSlotsFilled = false;
+                }
+            });
+            constructedSentence = constructedSentence.trim().replace(/\?$/, ' ?'); // Handle question marks
+
+            feedbackMessageEl.classList.remove('hidden', 'success', 'error');
+            correctSentenceFeedbackEl.classList.add('hidden');
+
+            if (!allSlotsFilled) {
+                showFeedback("Please fill all blanks.", 'error');
+                return;
+            }
+
+            // Normalize sentences for robust comparison (ignore punctuation)
+            const normalize = (str) => str.replace(/\s+/g, ' ').trim().toLowerCase()
+                .replace(/[.!?]+\s*$/, '') // Remove trailing punctuation
+                .replace(/\s+([.!?])/g, '$1'); // Clean up spacing before punctuation
+            const isCorrect = normalize(constructedSentence) === normalize(currentTask.full_sentence_de);
+
+            // Provide visual feedback on each word
+            slots.forEach(slot => {
+                const item = slot.querySelector('.draggable-item');
+                if (item) {
+                    item.classList.toggle('correct-in-slot', isCorrect);
+                    item.classList.toggle('incorrect-in-slot', !isCorrect);
+                }
+            });
+
+            if (isCorrect) {
+                showFeedback("Richtig! / Correct!", 'success');
+                triggerConfetti();
+            } else {
+                showFeedback("Leider nicht ganz richtig. / Not quite right.", 'error');
+                correctSentenceFeedbackEl.textContent = `Richtige Reihenfolge: ${currentTask.full_sentence_de}`;
+                correctSentenceFeedbackEl.classList.remove('hidden');
+            }
+            
+            // Toggle control buttons
+            checkAnswerBtn.classList.add('hidden');
+            nextTaskBtn.classList.remove('hidden');
+        }
+
+        // --- UI & ELEMENT CREATION ---
+        function createDraggableItem(text) {
+            const item = document.createElement('div');
+            item.className = 'draggable-item';
+            item.textContent = text.replace('?', ' ?');
+            item.draggable = true;
+            item.dataset.text = text;
+            // Add event listeners for both mouse and touch
+            item.addEventListener('dragstart', handleDragStart);
+            item.addEventListener('dragend', handleDragEnd);
+            item.addEventListener('touchstart', handleTouchStart, { passive: false });
+            item.addEventListener('click', handleItemClick);
+            return item;
+        }
+
+        function createEmptySlot() {
+            const slot = document.createElement('div');
+            slot.className = 'draggable-item-slot';
+            // Add listeners for drop events
+            slot.addEventListener('dragover', handleDragOver);
+            slot.addEventListener('dragenter', handleDragEnter);
+            slot.addEventListener('dragleave', handleDragLeave);
+            slot.addEventListener('drop', handleDrop);
+            return slot;
+        }
+
+        function resetUIForNextTask() {
+            feedbackMessageEl.classList.add('hidden');
+            correctSentenceFeedbackEl.classList.add('hidden');
+            correctSentenceFeedbackEl.textContent = '';
+            checkAnswerBtn.classList.remove('hidden');
+            checkAnswerBtn.disabled = false;
+            nextTaskBtn.classList.add('hidden');
+        }
+        
+        function showFeedback(message, type) {
+            feedbackMessageEl.textContent = message;
+            feedbackMessageEl.className = `feedback-area ${type}`;
+        }
+
+        // --- EVENT HANDLERS (DRAG & DROP + TOUCH) ---
+        function handleItemClick(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const item = e.target.closest('.draggable-item');
+            
+            // If item is in a slot, move it back to the pool with animation
+            if (item && item.parentElement.classList.contains('draggable-item-slot')) {
+                const slot = item.parentElement;
+                
+                // Add a small animation effect
+                item.style.transform = 'scale(0.8)';
+                item.style.transition = 'transform 0.15s ease';
+                
+                setTimeout(() => {
+                    slot.classList.remove('filled');
+                    draggablePoolEl.appendChild(item); 
+                    item.classList.remove('correct-in-slot', 'incorrect-in-slot');
+                    item.style.transform = ''; // Reset transform
+                    item.style.transition = ''; // Reset transition
+                    
+                    // Re-enable check button if we're not in results mode
+                    if (nextTaskBtn.classList.contains('hidden')) {
+                        checkAnswerBtn.disabled = false;
+                    }
+                    
+                    // Clear any error feedback since user is making changes
+                    if (feedbackMessageEl.classList.contains('error')) {
+                        feedbackMessageEl.classList.add('hidden');
+                        correctSentenceFeedbackEl.classList.add('hidden');
+                    }
+                }, 150);
+            }
+        }
+
+        function handleDragStart(e) {
+            draggedItem = e.target;
+            e.dataTransfer.setData('text/plain', draggedItem.dataset.text);
+            e.dataTransfer.effectAllowed = 'move';
+            setTimeout(() => draggedItem.classList.add('dragging'), 0);
+        }
+
+        function handleDragEnd() {
+            if (draggedItem) draggedItem.classList.remove('dragging');
+            draggedItem = null;
+            document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+        }
+
+        function handleDragOver(e) { e.preventDefault(); }
+
+        function handleDragEnter(e) {
+            e.preventDefault();
+            const dropTarget = e.target.closest('.draggable-item-slot');
+            if (draggedItem && dropTarget && !dropTarget.firstChild) {
+                dropTarget.classList.add('drag-over');
+            }
+        }
+
+        function handleDragLeave(e) {
+            e.target.closest('.draggable-item-slot')?.classList.remove('drag-over');
+        }
+        
+        function handleDrop(e) {
+            e.preventDefault();
+            const dropTarget = e.target.closest('.draggable-item-slot');
+            if (dropTarget && draggedItem && !dropTarget.firstChild) {
+                dropTarget.appendChild(draggedItem);
+                dropTarget.classList.add('filled');
+            }
+            dropTarget?.classList.remove('drag-over');
+        }
+
+        // Touch event handlers
+        let activeTouchClone = null;
+        let touchOffsetX = 0, touchOffsetY = 0;
+
+        function handleTouchStart(e) {
+            draggedItem = e.target.closest('.draggable-item');
+            if (!draggedItem) return;
+
+            if (e.cancelable) e.preventDefault();
+            
+            // Create a visual clone for dragging
+            activeTouchClone = draggedItem.cloneNode(true);
+            activeTouchClone.classList.add('dragging');
+            Object.assign(activeTouchClone.style, {
+                position: 'fixed',
+                pointerEvents: 'none',
+                zIndex: '1000',
+                width: `${draggedItem.offsetWidth}px`,
+                height: `${draggedItem.offsetHeight}px`
+            });
+            document.body.appendChild(activeTouchClone);
+
+            const rect = draggedItem.getBoundingClientRect();
+            touchOffsetX = e.touches[0].clientX - rect.left;
+            touchOffsetY = e.touches[0].clientY - rect.top;
+            
+            // Position the clone
+            activeTouchClone.style.left = `${e.touches[0].clientX - touchOffsetX}px`;
+            activeTouchClone.style.top = `${e.touches[0].clientY - touchOffsetY}px`;
+            
+            draggedItem.style.opacity = '0.4';
+            
+            document.addEventListener('touchmove', handleTouchMove, { passive: false });
+            document.addEventListener('touchend', handleTouchEnd, { once: true });
+        }
+
+        function handleTouchMove(e) {
+            if (!activeTouchClone) return;
+            if (e.cancelable) e.preventDefault();
+
+            let currentX = e.touches[0].clientX;
+            let currentY = e.touches[0].clientY;
+            
+            activeTouchClone.style.left = `${currentX - touchOffsetX}px`;
+            activeTouchClone.style.top = `${currentY - touchOffsetY}px`;
+            
+            // Highlight potential drop zone
+            document.querySelectorAll('.drag-over').forEach(box => box.classList.remove('drag-over'));
+            activeTouchClone.style.display = 'none'; 
+            const elementBelow = document.elementFromPoint(currentX, currentY);
+            activeTouchClone.style.display = ''; 
+            
+            const dropBoxBelow = elementBelow?.closest('.draggable-item-slot');
+            if (dropBoxBelow && !dropBoxBelow.firstChild) {
+                dropBoxBelow.classList.add('drag-over');
+            }
+        }
+
+        function handleTouchEnd(e) {
+            document.removeEventListener('touchmove', handleTouchMove);
+            if (!activeTouchClone || !draggedItem) return;
+            
+            // Find drop target
+            activeTouchClone.style.display = 'none';
+            const dropTargetElement = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+            activeTouchClone.remove(); // Clean up clone
+
+            const dropBox = dropTargetElement?.closest('.draggable-item-slot');
+            if (dropBox && !dropBox.firstChild) {
+                dropBox.appendChild(draggedItem);
+                dropBox.classList.add('filled');
+            }
+            
+            draggedItem.style.opacity = '1';
+            draggedItem = null;
+            document.querySelectorAll('.drag-over').forEach(box => box.classList.remove('drag-over'));
+        }
+
+        // --- UTILITIES ---
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+        
+        function triggerConfetti() {
+            if (typeof confetti === 'function') {
+                confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
+            }
+        }
+
+        // --- EVENT LISTENERS ---
+        checkAnswerBtn.addEventListener('click', checkAnswer);
+        nextTaskBtn.addEventListener('click', loadNextTask);
+
+        // --- START THE APP ---
+        document.addEventListener('DOMContentLoaded', loadTasks);
+    </script>
+</body>
+</html>
