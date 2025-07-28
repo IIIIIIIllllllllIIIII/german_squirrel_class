@@ -292,5 +292,764 @@
         "translation_en": "We want to change trains at the station.",
         "german_words": ["Wir", "wollen", "am", "Bahnhof", "umsteigen"],
         "distractor_words": ["können", "will", "steigt um", "Könnt", "kann", "Wollt"]
+    },
+    {
+        "id": "mv43",
+        "full_sentence_de": "Wir können schwimmen gehen.",
+        "translation_en": "We can go swimming.",
+        "german_words": ["Wir", "können", "schwimmen", "gehen"],
+        "distractor_words": ["wollen", "kann", "könnt", "gehen schwimmen"]
+    },
+    {
+        "id": "mv44",
+        "full_sentence_de": "Er kann sehr gut tanzen.",
+        "translation_en": "He can dance very well.",
+        "german_words": ["Er", "kann", "sehr", "gut", "tanzen"],
+        "distractor_words": ["will", "können", "tanzt", "kannst"]
+    },
+    {
+        "id": "mv45",
+        "full_sentence_de": "Könnt ihr bitte leise sein?",
+        "translation_en": "Can you (plural) please be quiet?",
+        "german_words": ["Könnt", "ihr", "bitte", "leise", "sein"],
+        "distractor_words": ["Wollt", "können", "seid", "Kann"]
+    },
+    {
+        "id": "mv46",
+        "full_sentence_de": "Sie können hier warten.",
+        "translation_en": "You (formal) can wait here.",
+        "german_words": ["Sie", "können", "hier", "warten"],
+        "distractor_words": ["wollen", "kann", "wartet", "Könnt"]
+    },
+    {
+        "id": "mv47",
+        "full_sentence_de": "Ich kann das Fahrrad reparieren.",
+        "translation_en": "I can repair the bicycle.",
+        "german_words": ["Ich", "kann", "das", "Fahrrad", "reparieren"],
+        "distractor_words": ["will", "können", "repariert", "kannst"]
+    },
+    {
+        "id": "mv48",
+        "full_sentence_de": "Du kannst morgen ausschlafen.",
+        "translation_en": "You can sleep in tomorrow.",
+        "german_words": ["Du", "kannst", "morgen", "ausschlafen"],
+        "distractor_words": ["willst", "kann", "schläfst aus", "Können"]
+    },
+    {
+        "id": "mv49",
+        "full_sentence_de": "Sie kann die E-Mail nicht senden.",
+        "translation_en": "She can't send the email.",
+        "german_words": ["Sie", "kann", "die", "E-Mail", "nicht", "senden"],
+        "distractor_words": ["will", "können", "sendet", "kannst"]
+    },
+    {
+        "id": "mv50",
+        "full_sentence_de": "Können Sie das wiederholen?",
+        "translation_en": "Can you (formal) repeat that?",
+        "german_words": ["Können", "Sie", "das", "wiederholen"],
+        "distractor_words": ["Wollen", "kann", "wiederholt", "Kannst"]
+    },
+    {
+        "id": "mv51",
+        "full_sentence_de": "Er kann drei Sprachen sprechen.",
+        "translation_en": "He can speak three languages.",
+        "german_words": ["Er", "kann", "drei", "Sprachen", "sprechen"],
+        "distractor_words": ["will", "können", "spricht", "kannst"]
+    },
+    {
+        "id": "mv52",
+        "full_sentence_de": "Wir können den Zug nehmen.",
+        "translation_en": "We can take the train.",
+        "german_words": ["Wir", "können", "den", "Zug", "nehmen"],
+        "distractor_words": ["wollen", "kann", "nehmt", "Könnt"]
+    },
+    {
+        "id": "mv53",
+        "full_sentence_de": "Ihr könnt die Hausaufgaben später machen.",
+        "translation_en": "You (plural) can do the homework later.",
+        "german_words": ["Ihr", "könnt", "die", "Hausaufgaben", "später", "machen"],
+        "distractor_words": ["wollt", "können", "macht", "kann"]
+    },
+    {
+        "id": "mv54",
+        "full_sentence_de": "Ich will einen Kaffee bestellen.",
+        "translation_en": "I want to order a coffee.",
+        "german_words": ["Ich", "will", "einen", "Kaffee", "bestellen"],
+        "distractor_words": ["kann", "wollen", "bestellst", "willst"]
+    },
+    {
+        "id": "mv55",
+        "full_sentence_de": "Willst du am Projekt teilnehmen?",
+        "translation_en": "Do you want to participate in the project?",
+        "german_words": ["Willst", "du", "am", "Projekt", "teilnehmen"],
+        "distractor_words": ["Kannst", "will", "nimmst teil", "Wollen"]
+    },
+    {
+        "id": "mv56",
+        "full_sentence_de": "Sie will die Welt bereisen.",
+        "translation_en": "She wants to travel the world.",
+        "german_words": ["Sie", "will", "die", "Welt", "bereisen"],
+        "distractor_words": ["kann", "wollen", "bereist", "willst"]
+    },
+    {
+        "id": "mv57",
+        "full_sentence_de": "Wollen Sie eine Pause machen?",
+        "translation_en": "Do you (formal) want to take a break?",
+        "german_words": ["Wollen", "Sie", "eine", "Pause", "machen"],
+        "distractor_words": ["Können", "will", "macht", "Wollt"]
+    },
+    {
+        "id": "mv58",
+        "full_sentence_de": "Wir wollen am Wochenende wandern gehen.",
+        "translation_en": "We want to go hiking on the weekend.",
+        "german_words": ["Wir", "wollen", "am", "Wochenende", "wandern", "gehen"],
+        "distractor_words": ["können", "will", "geht wandern", "wollt"]
+    },
+    {
+        "id": "mv59",
+        "full_sentence_de": "Wollt ihr den Hund mitbringen?",
+        "translation_en": "Do you (plural) want to bring the dog?",
+        "german_words": ["Wollt", "ihr", "den", "Hund", "mitbringen"],
+        "distractor_words": ["Könnt", "wollen", "bringt mit", "Will"]
+    },
+    {
+        "id": "mv60",
+        "full_sentence_de": "Sie wollen das Spiel gewinnen.",
+        "translation_en": "They want to win the game.",
+        "german_words": ["Sie", "wollen", "das", "Spiel", "gewinnen"],
+        "distractor_words": ["können", "will", "gewinnt", "wollt"]
+    },
+    {
+        "id": "mv61",
+        "full_sentence_de": "Ich muss jetzt gehen.",
+        "translation_en": "I must go now.",
+        "german_words": ["Ich", "muss", "jetzt", "gehen"],
+        "distractor_words": ["soll", "müssen", "gehe", "musst"]
+    },
+    {
+        "id": "mv62",
+        "full_sentence_de": "Du musst deine Hausaufgaben machen.",
+        "translation_en": "You must do your homework.",
+        "german_words": ["Du", "musst", "deine", "Hausaufgaben", "machen"],
+        "distractor_words": ["sollst", "muss", "machst", "müssen"]
+    },
+    {
+        "id": "mv63",
+        "full_sentence_de": "Er muss den Müll rausbringen.",
+        "translation_en": "He must take out the trash.",
+        "german_words": ["Er", "muss", "den", "Müll", "rausbringen"],
+        "distractor_words": ["soll", "müssen", "bringt raus", "musst"]
+    },
+    {
+        "id": "mv64",
+        "full_sentence_de": "Sie muss heute länger arbeiten.",
+        "translation_en": "She must work longer today.",
+        "german_words": ["Sie", "muss", "heute", "länger", "arbeiten"],
+        "distractor_words": ["soll", "müssen", "arbeitet", "musst"]
+    },
+    {
+        "id": "mv65",
+        "full_sentence_de": "Wir müssen den Bus nehmen.",
+        "translation_en": "We must take the bus.",
+        "german_words": ["Wir", "müssen", "den", "Bus", "nehmen"],
+        "distractor_words": ["sollen", "muss", "nehmt", "müsst"]
+    },
+    {
+        "id": "mv66",
+        "full_sentence_de": "Ihr müsst leise sein.",
+        "translation_en": "You (plural) must be quiet.",
+        "german_words": ["Ihr", "müsst", "leise", "sein"],
+        "distractor_words": ["sollt", "müssen", "seid", "muss"]
+    },
+    {
+        "id": "mv67",
+        "full_sentence_de": "Sie müssen das Formular ausfüllen.",
+        "translation_en": "They/You (formal) must fill out the form.",
+        "german_words": ["Sie", "müssen", "das", "Formular", "ausfüllen"],
+        "distractor_words": ["sollen", "muss", "füllt aus", "müsst"]
+    },
+    {
+        "id": "mv68",
+        "full_sentence_de": "Muss ich das wirklich tun?",
+        "translation_en": "Do I really have to do that?",
+        "german_words": ["Muss", "ich", "das", "wirklich", "tun"],
+        "distractor_words": ["Soll", "müssen", "tue", "Musst"]
+    },
+    {
+        "id": "mv69",
+        "full_sentence_de": "Musst du schon nach Hause gehen?",
+        "translation_en": "Do you have to go home already?",
+        "german_words": ["Musst", "du", "schon", "nach", "Hause", "gehen"],
+        "distractor_words": ["Sollst", "muss", "gehst", "Müssen"]
+    },
+    {
+        "id": "mv70",
+        "full_sentence_de": "Er muss nicht alles wissen.",
+        "translation_en": "He doesn't have to know everything.",
+        "german_words": ["Er", "muss", "nicht", "alles", "wissen"],
+        "distractor_words": ["soll", "müssen", "weiß", "musst"]
+    },
+    {
+        "id": "mv71",
+        "full_sentence_de": "Wir müssen uns beeilen.",
+        "translation_en": "We must hurry.",
+        "german_words": ["Wir", "müssen", "uns", "beeilen"],
+        "distractor_words": ["sollen", "muss", "beeilt", "müsst"]
+    },
+    {
+        "id": "mv72",
+        "full_sentence_de": "Sie muss ihre Medizin nehmen.",
+        "translation_en": "She must take her medicine.",
+        "german_words": ["Sie", "muss", "ihre", "Medizin", "nehmen"],
+        "distractor_words": ["soll", "müssen", "nimmt", "musst"]
+    },
+    {
+        "id": "mv73",
+        "full_sentence_de": "Ihr müsst die Regeln befolgen.",
+        "translation_en": "You (plural) must follow the rules.",
+        "german_words": ["Ihr", "müsst", "die", "Regeln", "befolgen"],
+        "distractor_words": ["sollt", "müssen", "befolgt", "muss"]
+    },
+    {
+        "id": "mv74",
+        "full_sentence_de": "Ich muss mein Zimmer aufräumen.",
+        "translation_en": "I must clean my room.",
+        "german_words": ["Ich", "muss", "mein", "Zimmer", "aufräumen"],
+        "distractor_words": ["soll", "müssen", "räume auf", "musst"]
+    },
+    {
+        "id": "mv75",
+        "full_sentence_de": "Du musst den Lehrer fragen.",
+        "translation_en": "You must ask the teacher.",
+        "german_words": ["Du", "musst", "den", "Lehrer", "fragen"],
+        "distractor_words": ["sollst", "muss", "fragst", "müssen"]
+    },
+    {
+        "id": "mv76",
+        "full_sentence_de": "Müssen wir das Projekt heute beenden?",
+        "translation_en": "Do we have to finish the project today?",
+        "german_words": ["Müssen", "wir", "das", "Projekt", "heute", "beenden"],
+        "distractor_words": ["Sollen", "muss", "beendet", "Müsst"]
+    },
+    {
+        "id": "mv77",
+        "full_sentence_de": "Sie müssen pünktlich sein.",
+        "translation_en": "They/You (formal) must be on time.",
+        "german_words": ["Sie", "müssen", "pünktlich", "sein"],
+        "distractor_words": ["sollen", "muss", "sind", "müsst"]
+    },
+    {
+        "id": "mv78",
+        "full_sentence_de": "Er muss seinen Pass finden.",
+        "translation_en": "He must find his passport.",
+        "german_words": ["Er", "muss", "seinen", "Pass", "finden"],
+        "distractor_words": ["soll", "müssen", "findet", "musst"]
+    },
+    {
+        "id": "mv79",
+        "full_sentence_de": "Ich muss eine E-Mail schreiben.",
+        "translation_en": "I must write an email.",
+        "german_words": ["Ich", "muss", "eine", "E-Mail", "schreiben"],
+        "distractor_words": ["soll", "müssen", "schreibe", "musst"]
+    },
+    {
+        "id": "mv80",
+        "full_sentence_de": "Ihr müsst vorsichtig sein.",
+        "translation_en": "You (plural) must be careful.",
+        "german_words": ["Ihr", "müsst", "vorsichtig", "sein"],
+        "distractor_words": ["sollt", "müssen", "seid", "muss"]
+    },
+    {
+        "id": "mv81",
+        "full_sentence_de": "Du musst nicht warten.",
+        "translation_en": "You don't have to wait.",
+        "german_words": ["Du", "musst", "nicht", "warten"],
+        "distractor_words": ["sollst", "muss", "wartest", "müssen"]
+    },
+    {
+        "id": "mv82",
+        "full_sentence_de": "Sie muss die Wäsche waschen.",
+        "translation_en": "She has to do the laundry.",
+        "german_words": ["Sie", "muss", "die", "Wäsche", "waschen"],
+        "distractor_words": ["soll", "müssen", "wäscht", "musst"]
+    },
+    {
+        "id": "mv83",
+        "full_sentence_de": "Wir müssen eine Lösung finden.",
+        "translation_en": "We must find a solution.",
+        "german_words": ["Wir", "müssen", "eine", "Lösung", "finden"],
+        "distractor_words": ["sollen", "muss", "findet", "müsst"]
+    },
+    {
+        "id": "mv84",
+        "full_sentence_de": "Muss er das Auto reparieren?",
+        "translation_en": "Does he have to repair the car?",
+        "german_words": ["Muss", "er", "das", "Auto", "reparieren"],
+        "distractor_words": ["Soll", "müssen", "repariert", "Musst"]
+    },
+    {
+        "id": "mv85",
+        "full_sentence_de": "Sie müssen die Rechnung bezahlen.",
+        "translation_en": "They/You (formal) must pay the bill.",
+        "german_words": ["Sie", "müssen", "die", "Rechnung", "bezahlen"],
+        "distractor_words": ["sollen", "muss", "bezahlt", "müsst"]
+    },
+    {
+        "id": "mv86",
+        "full_sentence_de": "Ich muss früh aufstehen.",
+        "translation_en": "I must get up early.",
+        "german_words": ["Ich", "muss", "früh", "aufstehen"],
+        "distractor_words": ["soll", "müssen", "stehe auf", "musst"]
+    },
+    {
+        "id": "mv87",
+        "full_sentence_de": "Du musst dein Versprechen halten.",
+        "translation_en": "You must keep your promise.",
+        "german_words": ["Du", "musst", "dein", "Versprechen", "halten"],
+        "distractor_words": ["sollst", "muss", "hältst", "müssen"]
+    },
+    {
+        "id": "mv88",
+        "full_sentence_de": "Wir müssen den Termin absagen.",
+        "translation_en": "We must cancel the appointment.",
+        "german_words": ["Wir", "müssen", "den", "Termin", "absagen"],
+        "distractor_words": ["sollen", "muss", "sagt ab", "müsst"]
+    },
+    {
+        "id": "mv89",
+        "full_sentence_de": "Ihr müsst eure Jacken anziehen.",
+        "translation_en": "You (plural) must put on your jackets.",
+        "german_words": ["Ihr", "müsst", "eure", "Jacken", "anziehen"],
+        "distractor_words": ["sollt", "müssen", "zieht an", "muss"]
+    },
+    {
+        "id": "mv90",
+        "full_sentence_de": "Sie muss ihre Schlüssel suchen.",
+        "translation_en": "She must look for her keys.",
+        "german_words": ["Sie", "muss", "ihre", "Schlüssel", "suchen"],
+        "distractor_words": ["soll", "müssen", "sucht", "musst"]
+    },
+    JSON
+[
+    {
+        "id": "mv91",
+        "full_sentence_de": "Ich darf heute Abend ausgehen.",
+        "translation_en": "I am allowed to go out tonight.",
+        "german_words": ["Ich", "darf", "heute", "Abend", "ausgehen"],
+        "distractor_words": ["muss", "dürfen", "gehe aus", "darfst"]
+    },
+    {
+        "id": "mv92",
+        "full_sentence_de": "Darf ich dich etwas fragen?",
+        "translation_en": "May I ask you something?",
+        "german_words": ["Darf", "ich", "dich", "etwas", "fragen"],
+        "distractor_words": ["Muss", "dürfen", "frage", "Darfst"]
+    },
+    {
+        "id": "mv93",
+        "full_sentence_de": "Du darfst hier nicht rauchen.",
+        "translation_en": "You are not allowed to smoke here.",
+        "german_words": ["Du", "darfst", "hier", "nicht", "rauchen"],
+        "distractor_words": ["musst", "darf", "rauchst", "dürfen"]
+    },
+    {
+        "id": "mv94",
+        "full_sentence_de": "Er darf das Auto seines Vaters fahren.",
+        "translation_en": "He is allowed to drive his father's car.",
+        "german_words": ["Er", "darf", "das", "Auto", "seines", "Vaters", "fahren"],
+        "distractor_words": ["muss", "dürfen", "fährt", "darfst"]
+    },
+    {
+        "id": "mv95",
+        "full_sentence_de": "Sie darf ein Stück Kuchen essen.",
+        "translation_en": "She is allowed to eat a piece of cake.",
+        "german_words": ["Sie", "darf", "ein", "Stück", "Kuchen", "essen"],
+        "distractor_words": ["muss", "dürfen", "isst", "darfst"]
+    },
+    {
+        "id": "mv96",
+        "full_sentence_de": "Wir dürfen den neuen Film sehen.",
+        "translation_en": "We are allowed to see the new movie.",
+        "german_words": ["Wir", "dürfen", "den", "neuen", "Film", "sehen"],
+        "distractor_words": ["müssen", "darf", "seht", "dürft"]
+    },
+    {
+        "id": "mv97",
+        "full_sentence_de": "Ihr dürft im Garten spielen.",
+        "translation_en": "You (plural) are allowed to play in the garden.",
+        "german_words": ["Ihr", "dürft", "im", "Garten", "spielen"],
+        "distractor_words": ["müsst", "dürfen", "spielt", "darf"]
+    },
+    {
+        "id": "mv98",
+        "full_sentence_de": "Sie dürfen hier parken.",
+        "translation_en": "They/You (formal) are allowed to park here.",
+        "german_words": ["Sie", "dürfen", "hier", "parken"],
+        "distractor_words": ["müssen", "darf", "parkt", "dürft"]
+    },
+    {
+        "id": "mv99",
+        "full_sentence_de": "Man darf das nicht vergessen.",
+        "translation_en": "One must not forget that.",
+        "german_words": ["Man", "darf", "das", "nicht", "vergessen"],
+        "distractor_words": ["muss", "dürfen", "vergisst", "darfst"]
+    },
+    {
+        "id": "mv100",
+        "full_sentence_de": "Dürfen wir jetzt anfangen?",
+        "translation_en": "Are we allowed to start now?",
+        "german_words": ["Dürfen", "wir", "jetzt", "anfangen"],
+        "distractor_words": ["Müssen", "darf", "fangt an", "Dürft"]
+    },
+    {
+        "id": "mv101",
+        "full_sentence_de": "Du darfst meinen Computer benutzen.",
+        "translation_en": "You may use my computer.",
+        "german_words": ["Du", "darfst", "meinen", "Computer", "benutzen"],
+        "distractor_words": ["musst", "darf", "benutzt", "dürfen"]
+    },
+    {
+        "id": "mv102",
+        "full_sentence_de": "Er darf nicht mit uns ins Kino kommen.",
+        "translation_en": "He is not allowed to come to the cinema with us.",
+        "german_words": ["Er", "darf", "nicht", "mit", "uns", "ins", "Kino", "kommen"],
+        "distractor_words": ["muss", "dürfen", "kommt", "darfst"]
+    },
+    {
+        "id": "mv103",
+        "full_sentence_de": "Ihr dürft die Geschenke öffnen.",
+        "translation_en": "You (plural) may open the gifts.",
+        "german_words": ["Ihr", "dürft", "die", "Geschenke", "öffnen"],
+        "distractor_words": ["müsst", "dürfen", "öffnet", "darf"]
+    },
+    {
+        "id": "mv104",
+        "full_sentence_de": "Ich darf leider nicht mitkommen.",
+        "translation_en": "Unfortunately, I am not allowed to come along.",
+        "german_words": ["Ich", "darf", "leider", "nicht", "mitkommen"],
+        "distractor_words": ["muss", "dürfen", "komme mit", "darfst"]
+    },
+    {
+        "id": "mv105",
+        "full_sentence_de": "Darf man hier fotografieren?",
+        "translation_en": "Is one allowed to take pictures here?",
+        "german_words": ["Darf", "man", "hier", "fotografieren"],
+        "distractor_words": ["Muss", "dürfen", "fotografiert", "Darfst"]
+    },
+    {
+        "id": "mv106",
+        "full_sentence_de": "Sie darf ihre Freunde einladen.",
+        "translation_en": "She is allowed to invite her friends.",
+        "german_words": ["Sie", "darf", "ihre", "Freunde", "einladen"],
+        "distractor_words": ["muss", "dürfen", "lädt ein", "darfst"]
+    },
+    {
+        "id": "mv107",
+        "full_sentence_de": "Wir dürfen länger aufbleiben.",
+        "translation_en": "We are allowed to stay up later.",
+        "german_words": ["Wir", "dürfen", "länger", "aufbleiben"],
+        "distractor_words": ["müssen", "darf", "bleibt auf", "dürft"]
+    },
+    {
+        "id": "mv108",
+        "full_sentence_de": "Du darfst das Geheimnis nicht verraten.",
+        "translation_en": "You must not reveal the secret.",
+        "german_words": ["Du", "darfst", "das", "Geheimnis", "nicht", "verraten"],
+        "distractor_words": ["musst", "darf", "verrätst", "dürfen"]
+    },
+    {
+        "id": "mv109",
+        "full_sentence_de": "Dürft ihr so laut sein?",
+        "translation_en": "Are you (plural) allowed to be so loud?",
+        "german_words": ["Dürft", "ihr", "so", "laut", "sein"],
+        "distractor_words": ["Müsst", "dürfen", "seid", "Darf"]
+    },
+    {
+        "id": "mv110",
+        "full_sentence_de": "Sie dürfen den Raum betreten.",
+        "translation_en": "They/You (formal) may enter the room.",
+        "german_words": ["Sie", "dürfen", "den", "Raum", "betreten"],
+        "distractor_words": ["müssen", "darf", "betretet", "dürft"]
+    },
+    {
+        "id": "mv111",
+        "full_sentence_de": "Er darf nur Wasser trinken.",
+        "translation_en": "He is only allowed to drink water.",
+        "german_words": ["Er", "darf", "nur", "Wasser", "trinken"],
+        "distractor_words": ["muss", "dürfen", "trinkt", "darfst"]
+    },
+    {
+        "id": "mv112",
+        "full_sentence_de": "Ich darf heute früher nach Hause gehen.",
+        "translation_en": "I am allowed to go home earlier today.",
+        "german_words": ["Ich", "darf", "heute", "früher", "nach", "Hause", "gehen"],
+        "distractor_words": ["muss", "dürfen", "gehe", "darfst"]
+    },
+    {
+        "id": "mv113",
+        "full_sentence_de": "Darf ich Ihnen helfen?",
+        "translation_en": "May I help you? (formal)",
+        "german_words": ["Darf", "ich", "Ihnen", "helfen"],
+        "distractor_words": ["Muss", "dürfen", "helfe", "Darfst"]
+    },
+    {
+        "id": "mv114",
+        "full_sentence_de": "Wir dürfen den Hund nicht füttern.",
+        "translation_en": "We are not allowed to feed the dog.",
+        "german_words": ["Wir", "dürfen", "den", "Hund", "nicht", "füttern"],
+        "distractor_words": ["müssen", "darf", "füttert", "dürft"]
+    },
+    {
+        "id": "mv115",
+        "full_sentence_de": "Ihr dürft das Spielzeug ausprobieren.",
+        "translation_en": "You (plural) may try out the toy.",
+        "german_words": ["Ihr", "dürft", "das", "Spielzeug", "ausprobieren"],
+        "distractor_words": ["müsst", "dürfen", "probiert aus", "darf"]
+    },
+    {
+        "id": "mv116",
+        "full_sentence_de": "Du darfst nur eine Frage stellen.",
+        "translation_en": "You are only allowed to ask one question.",
+        "german_words": ["Du", "darfst", "nur", "eine", "Frage", "stellen"],
+        "distractor_words": ["musst", "darf", "stellst", "dürfen"]
+    },
+    {
+        "id": "mv117",
+        "full_sentence_de": "Sie darf das Telefon benutzen.",
+        "translation_en": "She may use the telephone.",
+        "german_words": ["Sie", "darf", "das", "Telefon", "benutzen"],
+        "distractor_words": ["muss", "dürfen", "benutzt", "darfst"]
+    },
+    {
+        "id": "mv118",
+        "full_sentence_de": "Dürfen die Kinder fernsehen?",
+        "translation_en": "Are the children allowed to watch TV?",
+        "german_words": ["Dürfen", "die", "Kinder", "fernsehen"],
+        "distractor_words": ["Müssen", "darf", "sehen fern", "Dürft"]
+    },
+    {
+        "id": "mv119",
+        "full_sentence_de": "Man darf die Hoffnung nicht aufgeben.",
+        "translation_en": "One must not give up hope.",
+        "german_words": ["Man", "darf", "die", "Hoffnung", "nicht", "aufgeben"],
+        "distractor_words": ["muss", "dürfen", "gibt auf", "darfst"]
+    },
+    {
+        "id": "mv120",
+        "full_sentence_de": "Wir dürfen das Museum kostenlos besuchen.",
+        "translation_en": "We are allowed to visit the museum for free.",
+        "german_words": ["Wir", "dürfen", "das", "Museum", "kostenlos", "besuchen"],
+        "distractor_words": ["müssen", "darf", "besucht", "dürft"]
+    },
+    {
+        "id": "mv121",
+        "full_sentence_de": "Ich soll meine Hausaufgaben machen.",
+        "translation_en": "I should do my homework.",
+        "german_words": ["Ich", "soll", "meine", "Hausaufgaben", "machen"],
+        "distractor_words": ["muss", "sollen", "mache", "sollst"]
+    },
+    {
+        "id": "mv122",
+        "full_sentence_de": "Du sollst dein Zimmer aufräumen.",
+        "translation_en": "You should clean your room.",
+        "german_words": ["Du", "sollst", "dein", "Zimmer", "aufräumen"],
+        "distractor_words": ["musst", "soll", "räumst auf", "sollen"]
+    },
+    {
+        "id": "mv123",
+        "full_sentence_de": "Er soll mehr Wasser trinken.",
+        "translation_en": "He should drink more water.",
+        "german_words": ["Er", "soll", "mehr", "Wasser", "trinken"],
+        "distractor_words": ["muss", "sollen", "trinkt", "sollst"]
+    },
+    {
+        "id": "mv124",
+        "full_sentence_de": "Sie soll ihre Großeltern anrufen.",
+        "translation_en": "She is supposed to call her grandparents.",
+        "german_words": ["Sie", "soll", "ihre", "Großeltern", "anrufen"],
+        "distractor_words": ["muss", "sollen", "ruft an", "sollst"]
+    },
+    {
+        "id": "mv125",
+        "full_sentence_de": "Wir sollen pünktlich sein.",
+        "translation_en": "We should be on time.",
+        "german_words": ["Wir", "sollen", "pünktlich", "sein"],
+        "distractor_words": ["müssen", "soll", "sind", "sollt"]
+    },
+    {
+        "id": "mv126",
+        "full_sentence_de": "Ihr sollt nicht so laut sein.",
+        "translation_en": "You (plural) shouldn't be so loud.",
+        "german_words": ["Ihr", "sollt", "nicht", "so", "laut", "sein"],
+        "distractor_words": ["müsst", "sollen", "seid", "soll"]
+    },
+    {
+        "id": "mv127",
+        "full_sentence_de": "Sie sollen den Bericht bis morgen fertigstellen.",
+        "translation_en": "They/You (formal) are supposed to finish the report by tomorrow.",
+        "german_words": ["Sie", "sollen", "den", "Bericht", "bis", "morgen", "fertigstellen"],
+        "distractor_words": ["müssen", "soll", "stellt fertig", "sollt"]
+    },
+    {
+        "id": "mv128",
+        "full_sentence_de": "Soll ich das Fenster öffnen?",
+        "translation_en": "Should I open the window?",
+        "german_words": ["Soll", "ich", "das", "Fenster", "öffnen"],
+        "distractor_words": ["Muss", "sollen", "öffne", "Sollst"]
+    },
+    {
+        "id": "mv129",
+        "full_sentence_de": "Was soll ich jetzt tun?",
+        "translation_en": "What should I do now?",
+        "german_words": ["Was", "soll", "ich", "jetzt", "tun"],
+        "distractor_words": ["muss", "sollen", "tue", "sollst"]
+    },
+    {
+        "id": "mv130",
+        "full_sentence_de": "Du sollst nicht lügen.",
+        "translation_en": "You should not lie.",
+        "german_words": ["Du", "sollst", "nicht", "lügen"],
+        "distractor_words": ["musst", "soll", "lügst", "sollen"]
+    },
+    {
+        "id": "mv131",
+        "full_sentence_de": "Er soll die Medikamente regelmäßig nehmen.",
+        "translation_en": "He is supposed to take the medication regularly.",
+        "german_words": ["Er", "soll", "die", "Medikamente", "regelmäßig", "nehmen"],
+        "distractor_words": ["muss", "sollen", "nimmt", "sollst"]
+    },
+    {
+        "id": "mv132",
+        "full_sentence_de": "Wir sollen unsere Nachbarn einladen.",
+        "translation_en": "We are supposed to invite our neighbors.",
+        "german_words": ["Wir", "sollen", "unsere", "Nachbarn", "einladen"],
+        "distractor_words": ["müssen", "soll", "ladet ein", "sollt"]
+    },
+    {
+        "id": "mv133",
+        "full_sentence_de": "Ihr sollt eure Hände waschen.",
+        "translation_en": "You (plural) should wash your hands.",
+        "german_words": ["Ihr", "sollt", "eure", "Hände", "waschen"],
+        "distractor_words": ["müsst", "sollen", "wascht", "soll"]
+    },
+    {
+        "id": "mv134",
+        "full_sentence_de": "Soll ich dir helfen?",
+        "translation_en": "Should I help you?",
+        "german_words": ["Soll", "ich", "dir", "helfen"],
+        "distractor_words": ["Muss", "sollen", "helfe", "Sollst"]
+    },
+    {
+        "id": "mv135",
+        "full_sentence_de": "Sie soll sich wärmer anziehen.",
+        "translation_en": "She should dress more warmly.",
+        "german_words": ["Sie", "soll", "sich", "wärmer", "anziehen"],
+        "distractor_words": ["muss", "sollen", "zieht an", "sollst"]
+    },
+    {
+        "id": "mv136",
+        "full_sentence_de": "Man soll nicht stehlen.",
+        "translation_en": "One should not steal.",
+        "german_words": ["Man", "soll", "nicht", "stehlen"],
+        "distractor_words": ["muss", "sollen", "stiehlt", "sollst"]
+    },
+    {
+        "id": "mv137",
+        "full_sentence_de": "Sollen wir einen Tisch reservieren?",
+        "translation_en": "Should we reserve a table?",
+        "german_words": ["Sollen", "wir", "einen", "Tisch", "reservieren"],
+        "distractor_words": ["Müssen", "soll", "reserviert", "Sollt"]
+    },
+    {
+        "id": "mv138",
+        "full_sentence_de": "Du sollst den Arzt fragen.",
+        "translation_en": "You are supposed to ask the doctor.",
+        "german_words": ["Du", "sollst", "den", "Arzt", "fragen"],
+        "distractor_words": ["musst", "soll", "fragst", "sollen"]
+    },
+    {
+        "id": "mv139",
+        "full_sentence_de": "Er soll sich bei dir entschuldigen.",
+        "translation_en": "He is supposed to apologize to you.",
+        "german_words": ["Er", "soll", "sich", "bei", "dir", "entschuldigen"],
+        "distractor_words": ["muss", "sollen", "entschuldigt", "sollst"]
+    },
+    {
+        "id": "mv140",
+        "full_sentence_de": "Sie sollen die Anweisungen lesen.",
+        "translation_en": "They/You (formal) should read the instructions.",
+        "german_words": ["Sie", "sollen", "die", "Anweisungen", "lesen"],
+        "distractor_words": ["müssen", "soll", "lest", "sollt"]
+    },
+    {
+        "id": "mv141",
+        "full_sentence_de": "Ich soll die Blumen gießen.",
+        "translation_en": "I am supposed to water the flowers.",
+        "german_words": ["Ich", "soll", "die", "Blumen", "gießen"],
+        "distractor_words": ["muss", "sollen", "gieße", "sollst"]
+    },
+    {
+        "id": "mv142",
+        "full_sentence_de": "Ihr sollt mehr Obst essen.",
+        "translation_en": "You (plural) should eat more fruit.",
+        "german_words": ["Ihr", "sollt", "mehr", "Obst", "essen"],
+        "distractor_words": ["müsst", "sollen", "esst", "soll"]
+    },
+    {
+        "id": "mv143",
+        "full_sentence_de": "Was soll das bedeuten?",
+        "translation_en": "What is that supposed to mean?",
+        "german_words": ["Was", "soll", "das", "bedeuten"],
+        "distractor_words": ["muss", "sollen", "bedeutet", "sollst"]
+    },
+    {
+        "id": "mv144",
+        "full_sentence_de": "Wir sollen das Auto waschen.",
+        "translation_en": "We are supposed to wash the car.",
+        "german_words": ["Wir", "sollen", "das", "Auto", "waschen"],
+        "distractor_words": ["müssen", "soll", "wascht", "sollt"]
+    },
+    {
+        "id": "mv145",
+        "full_sentence_de": "Du sollst höflich sein.",
+        "translation_en": "You should be polite.",
+        "german_words": ["Du", "sollst", "höflich", "sein"],
+        "distractor_words": ["musst", "soll", "bist", "sollen"]
+    },
+    {
+        "id": "mv146",
+        "full_sentence_de": "Soll ich etwas mitbringen?",
+        "translation_en": "Should I bring something?",
+        "german_words": ["Soll", "ich", "etwas", "mitbringen"],
+        "distractor_words": ["Muss", "sollen", "bringe mit", "Sollst"]
+    },
+    {
+        "id": "mv147",
+        "full_sentence_de": "Er soll das Licht ausmachen, wenn er geht.",
+        "translation_en": "He should turn off the light when he leaves.",
+        "german_words": ["Er", "soll", "das", "Licht", "ausmachen,", "wenn", "er", "geht"],
+        "distractor_words": ["muss", "sollen", "macht aus", "sollst"]
+    },
+    {
+        "id": "mv148",
+        "full_sentence_de": "Sie soll nicht so viel Geld ausgeben.",
+        "translation_en": "She shouldn't spend so much money.",
+        "german_words": ["Sie", "soll", "nicht", "so", "viel", "Geld", "ausgeben"],
+        "distractor_words": ["muss", "sollen", "gibt aus", "sollst"]
+    },
+    {
+        "id": "mv149",
+        "full_sentence_de": "Ihr sollt eure Bücher mitbringen.",
+        "translation_en": "You (plural) are supposed to bring your books.",
+        "german_words": ["Ihr", "sollt", "eure", "Bücher", "mitbringen"],
+        "distractor_words": ["müsst", "sollen", "bringt mit", "soll"]
+    },
+    {
+        "id": "mv150",
+        "full_sentence_de": "Sollen wir jetzt gehen?",
+        "translation_en": "Should we go now?",
+        "german_words": ["Sollen", "wir", "jetzt", "gehen"],
+        "distractor_words": ["Müssen", "soll", "geht", "Sollt"]
     }
+
 ]
