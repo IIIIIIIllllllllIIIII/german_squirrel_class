@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schengen Stay Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #d1d5db;
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1f2937;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4b5563;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6b7280;
+        }
+        /* Style for the date input placeholder */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(0.8);
+            cursor: pointer;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+        .day-cell {
+            aspect-ratio: 1 / 1;
+        }
+        .card {
+            background-color: #111827;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+    <div class="max-w-7xl mx-auto">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-white">Schengen Stay Calculator</h1>
+            <p class="text-gray-400 mt-2">Visualize your 90/180 day Schengen rule compliance.</p>
+        </header>
+
+        <main class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column: Controls and Trips -->
+            <div class="lg:col-span-1 space-y-6">
+                <!-- Status Display -->
+                <div class="card p-6 rounded-lg shadow-lg">
+                    <h2 class="text-xl font-bold text-white mb-4">Status for <span id="control-date-display">Today</span></h2>
+                    <div class="flex justify-around text-center">
+                        <div>
+                            <p class="text-3xl font-bold text-blue-400" id="days-used">0</p>
+                            <p class="text-sm text-gray-400">Days Used</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-green-400" id="days-remaining">90</p>
+                            <p class="text-sm text-gray-400">Days Remaining</p>
+                        </div>
+                    </div>
+                    <div id="message-box" class="mt-4 text-center font-semibold p-3 rounded-md hidden"></div>
+                    <div class="mt-4 pt-4 border-t border-gray-700">
+                        <label for="simulation-date" class="block text-sm font-medium text-gray-300">Set Simulation Date</label>
+                        <input type="date" id="simulation-date" class="mt-1 block w-full bg-gray-700 border-gray-600 text-white rounded-md shadow-sm p-2 focus:ring-cyan-500 focus:border-cyan-500">
+                    </div>
+                </div>
+                
+                <!-- Add Trip Form -->
+                <div class="card p-6 rounded-lg shadow-lg">
+                    <h2 class="text-xl font-bold text-white mb-4">Add a New Trip</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="start-date" class="block text-sm font-medium text-gray-300">Start Date</label>
+                            <input type="date" id="start-date" class="mt-1 block w-full bg-gray-700 border-gray-600 text-white rounded-md shadow-sm p-2 focus:ring-cyan-500 focus:border-cyan-500">
+                        </div>
+                        <div>
+                            <label for="end-date" class="block text-sm font-medium text-gray-300">End Date</label>
+                            <input type="date" id="end-date" class="mt-1 block w-full bg-gray-700 border-gray-600 text-white rounded-md shadow-sm p-2 focus:ring-cyan-500 focus:border-cyan-500">
+                        </div>
+                        <button id="add-trip-btn" class="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-md transition duration-300">
+                            Add Trip
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Trips List -->
+                <div class="card p-6 rounded-lg shadow-lg">
+                    <h2 class="text-xl font-bold text-white mb-4">Recorded Trips</h2>
+                    <div id="trips-list" class="space-y-3 max-h-60 overflow-y-auto pr-2">
+                        <!-- Trips will be dynamically inserted here -->
+                        <p class="text-gray-400">No trips added yet.</p>
+                    </div>
+                </div>
+                 <!-- Legend -->
+                <div class="card p-6 rounded-lg shadow-lg">
+                    <h2 class="text-xl font-bold text-white mb-4">Legend</h2>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-center"><div class="w-4 h-4 rounded-full bg-blue-600 mr-2"></div>Stay (in window)</div>
+                        <div class="flex items-center"><div class="w-4 h-4 rounded-full bg-green-600 mr-2"></div>Stay (out of window)</div>
+                        <div class="flex items-center"><div class="w-4 h-4 rounded-full bg-yellow-400 mr-2"></div>Simulated Date</div>
+                        <div class="flex items-center"><div class="w-4 h-4 rounded-full bg-purple-700 mr-2"></div>Control Date</div>
+                        <div class="flex items-center"><div class="w-4 h-4 rounded-full bg-gray-400 mr-2"></div>180-Day Window</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Calendar View -->
+            <div class="card lg:col-span-2 p-4 md:p-6 rounded-lg shadow-lg">
+                <div class="flex justify-between items-center mb-4">
+                    <button id="prev-year" class="p-2 rounded-md hover:bg-gray-700 transition"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                    <h2 id="calendar-year" class="text-2xl font-bold text-white">2025</h2>
+                    <button id="next-year" class="p-2 rounded-md hover:bg-gray-700 transition"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg></button>
+                </div>
+                <div id="calendar-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+                    <!-- Calendars will be dynamically inserted here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- STATE MANAGEMENT ---
+            let currentYear = new Date().getFullYear();
+            let trips = JSON.parse(localStorage.getItem('schengenTrips')) || [];
+            
+            let controlDate = new Date();
+            controlDate.setHours(0, 0, 0, 0); // Normalize to start of the day
+
+            let simulationDate = new Date();
+            simulationDate.setHours(0, 0, 0, 0);
+
+            // --- DOM ELEMENTS ---
+            const calendarContainer = document.getElementById('calendar-container');
+            const calendarYearEl = document.getElementById('calendar-year');
+            const prevYearBtn = document.getElementById('prev-year');
+            const nextYearBtn = document.getElementById('next-year');
+            const addTripBtn = document.getElementById('add-trip-btn');
+            const startDateInput = document.getElementById('start-date');
+            const endDateInput = document.getElementById('end-date');
+            const tripsListEl = document.getElementById('trips-list');
+            const daysUsedEl = document.getElementById('days-used');
+            const daysRemainingEl = document.getElementById('days-remaining');
+            const controlDateDisplay = document.getElementById('control-date-display');
+            const messageBox = document.getElementById('message-box');
+            const simulationDateInput = document.getElementById('simulation-date');
+
+            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            const dayNames = ["M", "T", "W", "T", "F", "S", "S"];
+
+            // --- CORE FUNCTIONS ---
+
+            const normalizeDate = (date) => {
+                const newDate = new Date(date);
+                newDate.setHours(0, 0, 0, 0);
+                return newDate;
+            };
+
+            const isStayDay = (date) => {
+                const normalizedDate = normalizeDate(date);
+                return trips.some(trip => {
+                    const start = normalizeDate(new Date(trip.start));
+                    const end = normalizeDate(new Date(trip.end));
+                    return normalizedDate >= start && normalizedDate <= end;
+                });
+            };
+
+            const calculateStay = (ctrlDate) => {
+                const normalizedControlDate = normalizeDate(ctrlDate);
+                const windowStart = new Date(normalizedControlDate);
+                windowStart.setDate(windowStart.getDate() - 179);
+                const normalizedWindowStart = normalizeDate(windowStart);
+
+                let daysUsedInWindow = 0;
+                trips.forEach(trip => {
+                    const tripStart = normalizeDate(new Date(trip.start));
+                    const tripEnd = normalizeDate(new Date(trip.end));
+
+                    let currentDate = new Date(tripStart);
+                    while (currentDate <= tripEnd) {
+                        if (currentDate >= normalizedWindowStart && currentDate <= normalizedControlDate) {
+                            daysUsedInWindow++;
+                        }
+                        currentDate.setDate(currentDate.getDate() + 1);
+                    }
+                });
+
+                const daysRemaining = 90 - daysUsedInWindow;
+                const isOverstay = daysRemaining < 0;
+
+                return {
+                    daysUsed: daysUsedInWindow,
+                    daysRemaining: Math.max(0, daysRemaining),
+                    isOverstay: isOverstay,
+                    overstayDays: isOverstay ? Math.abs(daysRemaining) : 0,
+                    windowStart: normalizedWindowStart,
+                    windowEnd: normalizedControlDate
+                };
+            };
+            
+            // --- UI RENDERING ---
+
+            const renderCalendars = () => {
+                calendarContainer.innerHTML = '';
+                calendarYearEl.textContent = currentYear;
+                const calculation = calculateStay(controlDate);
+
+                for (let month = 0; month < 12; month++) {
+                    const monthContainer = document.createElement('div');
+                    monthContainer.className = 'bg-gray-900 p-4 rounded-lg';
+
+                    const firstDayOfMonth = new Date(currentYear, month, 1);
+                    const dayOfWeek = (firstDayOfMonth.getDay() + 6) % 7; 
+                    const daysInMonth = new Date(currentYear, month + 1, 0).getDate();
+
+                    let monthHTML = `
+                        <h3 class="font-bold text-center text-white mb-3">${monthNames[month]}</h3>
+                        <div class="grid grid-cols-7 gap-1 text-center text-xs text-gray-400 mb-2">
+                            ${dayNames.map(d => `<div>${d}</div>`).join('')}
+                        </div>
+                        <div class="calendar-grid">
+                    `;
+                    
+                    for (let i = 0; i < dayOfWeek; i++) {
+                        monthHTML += `<div></div>`;
+                    }
+
+                    for (let day = 1; day <= daysInMonth; day++) {
+                        const date = new Date(currentYear, month, day);
+                        date.setHours(0,0,0,0);
+                        
+                        let bgClass = '';
+                        let textClass = 'text-gray-500'; // Default for non-window days
+                        let ringClass = '';
+                        let fontWeight = '';
+
+                        const isSimDate = date.getTime() === simulationDate.getTime();
+                        const isCtrlDate = date.getTime() === controlDate.getTime();
+                        const isDayOfStay = isStayDay(date);
+                        const isInWindow = date >= calculation.windowStart && date <= calculation.windowEnd;
+
+                        // Base layer: Window vs Non-window
+                        if (isInWindow) {
+                            bgClass = 'bg-gray-400'; // Light grey for window
+                            textClass = 'text-black';   // Dark text for readability
+                        }
+
+                        // Second layer: Stay days
+                        if (isDayOfStay) {
+                            bgClass = isInWindow ? 'bg-blue-600' : 'bg-green-600';
+                            textClass = 'text-white';
+                            fontWeight = 'font-semibold';
+                        }
+
+                        // Third layer: Simulation date
+                        if (isSimDate) {
+                            bgClass = 'bg-yellow-400';
+                            textClass = 'text-black';
+                            fontWeight = 'font-bold';
+                        }
+
+                        // Top layer: Control date
+                        if (isCtrlDate) {
+                            bgClass = 'bg-purple-700';
+                            textClass = 'text-white';
+                            fontWeight = 'font-bold';
+                            ringClass = 'ring-2 ring-white';
+                        }
+
+                        const classes = `day-cell flex items-center justify-center text-xs rounded-full cursor-pointer transition-colors duration-200 hover:opacity-80 ${bgClass} ${textClass} ${fontWeight} ${ringClass}`;
+
+                        monthHTML += `<div class="${classes.trim()}" data-date="${date.toISOString().split('T')[0]}">${day}</div>`;
+                    }
+
+                    monthHTML += `</div>`;
+                    monthContainer.innerHTML = monthHTML;
+                    calendarContainer.appendChild(monthContainer);
+                }
+                
+                document.querySelectorAll('.day-cell[data-date]').forEach(cell => {
+                    cell.addEventListener('click', (e) => {
+                        const newDate = new Date(e.target.dataset.date);
+                        const timezoneOffset = newDate.getTimezoneOffset() * 60000;
+                        controlDate = new Date(newDate.getTime() + timezoneOffset);
+                        updateAllUI();
+                    });
+                });
+            };
+
+            const renderTripsList = () => {
+                tripsListEl.innerHTML = '';
+                if (trips.length === 0) {
+                    tripsListEl.innerHTML = '<p class="text-gray-400">No trips added yet.</p>';
+                    return;
+                }
+                const sortedTrips = [...trips].sort((a, b) => new Date(a.start) - new Date(b.start));
+
+                sortedTrips.forEach((trip, index) => {
+                    const start = new Date(trip.start);
+                    const end = new Date(trip.end);
+                    const duration = (normalizeDate(end) - normalizeDate(start)) / (1000 * 60 * 60 * 24) + 1;
+
+                    const tripEl = document.createElement('div');
+                    tripEl.className = 'flex justify-between items-center bg-gray-700 p-2 rounded-md';
+                    tripEl.innerHTML = `
+                        <div class="text-sm">
+                            <p class="font-semibold text-white">${normalizeDate(start).toLocaleDateString()} - ${normalizeDate(end).toLocaleDateString()}</p>
+                            <p class="text-gray-400">${duration} days</p>
+                        </div>
+                        <button data-index="${index}" class="delete-trip-btn p-1 text-gray-400 hover:text-red-500 transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                        </button>
+                    `;
+                    tripsListEl.appendChild(tripEl);
+                });
+                
+                document.querySelectorAll('.delete-trip-btn').forEach(btn => {
+                    btn.addEventListener('click', handleDeleteTrip);
+                });
+            };
+            
+            const updateSummary = () => {
+                const calculation = calculateStay(controlDate);
+                daysUsedEl.textContent = calculation.daysUsed;
+                daysUsedEl.className = `text-3xl font-bold ${calculation.isOverstay ? 'text-red-500' : 'text-blue-400'}`;
+                daysRemainingEl.textContent = calculation.daysRemaining;
+                
+                controlDateDisplay.textContent = controlDate.toLocaleDateString();
+
+                messageBox.classList.remove('hidden', 'bg-green-900', 'text-green-200', 'bg-red-900', 'text-red-200');
+                if (calculation.isOverstay) {
+                    messageBox.classList.add('bg-red-900', 'text-red-200');
+                    messageBox.textContent = `Warning: Overstay by ${calculation.overstayDays} day(s)!`;
+                } else {
+                    messageBox.classList.add('bg-green-900', 'text-green-200');
+                    messageBox.textContent = 'You are compliant with the 90/180 day rule.';
+                }
+            };
+            
+            const updateAllUI = () => {
+                updateSummary();
+                renderTripsList();
+                renderCalendars();
+            };
+
+            // --- EVENT HANDLERS ---
+            
+            const handleAddTrip = () => {
+                const start = startDateInput.value;
+                const end = endDateInput.value;
+
+                if (!start || !end) {
+                    alert("Please select both a start and end date.");
+                    return;
+                }
+                if (new Date(end) < new Date(start)) {
+                    alert("End date cannot be before the start date.");
+                    return;
+                }
+
+                const startDate = new Date(start);
+                const endDate = new Date(end);
+                const tzOffsetStart = startDate.getTimezoneOffset() * 60000;
+                const tzOffsetEnd = endDate.getTimezoneOffset() * 60000;
+
+                trips.push({ 
+                    start: new Date(startDate.getTime() + tzOffsetStart).toISOString().split('T')[0], 
+                    end: new Date(endDate.getTime() + tzOffsetEnd).toISOString().split('T')[0]
+                });
+                localStorage.setItem('schengenTrips', JSON.stringify(trips));
+                
+                startDateInput.value = '';
+                endDateInput.value = '';
+                
+                updateAllUI();
+            };
+
+            const handleDeleteTrip = (e) => {
+                const index = parseInt(e.currentTarget.dataset.index, 10);
+                const sortedTrips = [...trips].sort((a, b) => new Date(a.start) - new Date(b.start));
+                const tripToDelete = sortedTrips[index];
+                const originalIndex = trips.findIndex(t => t.start === tripToDelete.start && t.end === tripToDelete.end);
+
+                if (originalIndex > -1) {
+                    trips.splice(originalIndex, 1);
+                    localStorage.setItem('schengenTrips', JSON.stringify(trips));
+                    updateAllUI();
+                }
+            };
+
+            simulationDateInput.addEventListener('input', () => {
+                const newDate = new Date(simulationDateInput.value);
+                if (!isNaN(newDate)) {
+                    const timezoneOffset = newDate.getTimezoneOffset() * 60000;
+                    simulationDate = new Date(newDate.getTime() + timezoneOffset);
+                    updateAllUI();
+                }
+            });
+
+            prevYearBtn.addEventListener('click', () => {
+                currentYear--;
+                updateAllUI();
+            });
+
+            nextYearBtn.addEventListener('click', () => {
+                currentYear++;
+                updateAllUI();
+            });
+
+            addTripBtn.addEventListener('click', handleAddTrip);
+
+            // --- INITIALIZATION ---
+            simulationDateInput.value = simulationDate.toISOString().split('T')[0];
+            updateAllUI();
+        });
+    </script>
+</body>
+</html>
