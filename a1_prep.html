@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Goethe A1 Mündlich Trainer FINAL</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -303,7 +304,17 @@
             }, 100);
         }
 
-        nextCardButton.addEventListener('click', loadNewCard);
+        nextCardButton.addEventListener('click', () => {
+            // Trigger confetti
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+            // Load the new card
+            loadNewCard();
+        });
+
         showSolutionButton.addEventListener('click', showSolution);
 
         document.addEventListener('DOMContentLoaded', loadNewCard);
