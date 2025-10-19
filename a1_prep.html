@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goethe A1 Mündlich Trainer FINAL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .card-container {
+            min-height: 150px;
+        }
+        .solution {
+            transition: opacity 0.5s ease-in-out, max-height 0.5s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .solution.visible {
+            max-height: 200px;
+            opacity: 1;
+        }
+        #task-display {
+            -webkit-user-select: none; /* Safari */
+            -ms-user-select: none; /* IE 10 and IE 11 */
+            user-select: none; /* Standard syntax */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+
+    <div class="bg-white w-full max-w-2xl rounded-2xl shadow-lg p-6 md:p-8 text-center">
+        
+        <header class="mb-4">
+            <h1 class="text-3xl font-bold text-gray-800">Goethe A1 Mündlich Trainer</h1>
+            <p class="text-gray-600 mt-2" id="theme-display">Thema wird geladen...</p>
+        </header>
+
+        <main>
+            <!-- Task Instruction Area -->
+            <div id="task-display" class="mb-4 p-4 rounded-lg font-bold text-2xl text-white">
+                <!-- Task will be injected here -->
+            </div>
+
+            <!-- Card Display Area -->
+            <div id="card-display" class="bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl p-6 mb-4">
+                <div class="card-container flex items-center justify-center" id="card-content">
+                    <!-- Card content will be injected here -->
+                </div>
+            </div>
+
+            <!-- Question Area (only for ANTWORT GEBEN task) -->
+            <div id="question-area" class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 rounded-lg mb-6 text-center shadow-sm hidden">
+                <p class="font-bold">Frage an dich:</p>
+                <p id="question-text" class="mt-1 text-lg"></p>
+            </div>
+
+
+            <!-- User Action Button -->
+            <div id="action-buttons" class="flex justify-center mb-6">
+                <button id="show-solution-button" class="w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 shadow-md">
+                    Lösung anzeigen
+                </button>
+            </div>
+
+            <!-- Solution Display Area -->
+            <div id="solution-container" class="bg-slate-100 rounded-lg p-4 text-left">
+                <p class="font-semibold text-gray-700 mb-2" id="solution-title"></p>
+                <div id="solution-box" class="solution">
+                    <p class="text-gray-800" id="solution-text"></p>
+                </div>
+            </div>
+            
+            <!-- Next Card Button -->
+            <div class="mt-8">
+                 <button id="next-card-button" class="w-full sm:w-auto bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 px-10 rounded-lg transition duration-300 shadow-lg">Nächste Karte</button>
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        const cardData = {
+            "Teil 2": {
+                "Wochenende": [
+                    { word: "Sonntag", qa_pairs: [{ question: "Was machst du am Sonntag?", answer: ["Ich schlafe lange.", "Ich treffe meine Familie.", "Ich gehe spazieren."] }] },
+                    { word: "Frühstück", qa_pairs: [{ question: "Was isst du zum Frühstück?", answer: ["Ich esse Brötchen mit Marmelade.", "Normalerweise esse ich Müsli.", "Ich trinke nur einen Kaffee."] }] },
+                    { word: "Sport", qa_pairs: [{ question: "Machst du am Wochenende Sport?", answer: ["Ja, ich spiele Fußball.", "Nein, am Wochenende bin ich faul.", "Manchmal gehe ich schwimmen."] }] },
+                    { word: "Familie", qa_pairs: [{ question: "Triffst du deine Familie am Wochenende?", answer: ["Ja, wir essen zusammen.", "Nein, meine Familie wohnt weit weg.", "Ja, ich besuche meine Eltern."] }] },
+                    { word: "Ausflug", qa_pairs: [{ question: "Machen Sie am Wochenende einen Ausflug?", answer: ["Ja, wir fahren an einen See.", "Nein, wir bleiben zu Hause.", "Vielleicht, wenn das Wetter gut ist."] }] },
+                    { word: "Bücher", qa_pairs: [{ question: "Liest du am Wochenende Bücher?", answer: ["Ja, ich lese sehr gerne.", "Nein, ich sehe lieber fern.", "Manchmal, wenn ich Zeit habe."] }] },
+                ],
+                "Schule": [
+                    { word: "Freunde", qa_pairs: [{ question: "Hast du viele Freunde in der Schule?", answer: ["Ja, ich habe viele Freunde.", "Nein, nur zwei oder drei.", "Ja, wir lernen zusammen."] }] },
+                    { word: "Lehrer", qa_pairs: [{ question: "Wie heißt Ihr Deutschlehrer?", answer: ["Er heißt Herr Schmidt.", "Meine Lehrerin heißt Frau Meier.", "Ich weiß es nicht."] }] },
+                    { word: "Computer", qa_pairs: [{ question: "Benutzt du einen Computer in der Schule?", answer: ["Ja, im Computerraum.", "Nein, wir schreiben alles mit der Hand.", "Manchmal für Präsentationen."] }] },
+                    { word: "Sprachen", qa_pairs: [{ question: "Welche Sprachen lernst du in der Schule?", answer: ["Ich lerne Deutsch und Englisch.", "Nur Deutsch.", "Ich lerne auch Spanisch."] }] },
+                    { word: "Essen", qa_pairs: [{ question: "Was isst du in der Schulpause?", answer: ["Ich esse ein Pausenbrot.", "Ich kaufe mir etwas in der Cafeteria.", "Ich esse einen Apfel."] }] },
+                    { word: "Hausaufgaben", qa_pairs: [{ question: "Machst du deine Hausaufgaben immer?", answer: ["Ja, natürlich.", "Manchmal vergesse ich sie.", "Ja, aber ich brauche oft Hilfe."] }] }
+                ],
+                 "Beruf": [
+                    { word: "Arbeitszeit", qa_pairs: [{ question: "Wie sind Ihre Arbeitszeiten?", answer: ["Ich arbeite von 9 bis 17 Uhr.", "Ich habe flexible Arbeitszeiten.", "Ich arbeite nur am Vormittag."] }] },
+                    { word: "Kollegen", qa_pairs: [{ question: "Haben Sie nette Kollegen?", answer: ["Ja, meine Kollegen sind sehr nett.", "Ja, wir sind ein gutes Team.", "Die meisten sind nett, ja."] }] },
+                    { word: "Arbeitsplatz", qa_pairs: [{ question: "Wie ist Ihr Arbeitsplatz?", answer: ["Ich arbeite in einem Büro.", "Mein Arbeitsplatz ist sehr modern.", "Ich habe einen Schreibtisch am Fenster."] }] },
+                    { word: "Arbeitskleidung", qa_pairs: [{ question: "Tragen Sie Arbeitskleidung?", answer: ["Ja, ich trage ein Hemd.", "Nein, ich kann anziehen, was ich will.", "Ja, eine Uniform."] }] },
+                    { word: "Aufgaben", qa_pairs: [{ question: "Was sind Ihre Aufgaben bei der Arbeit?", answer: ["Ich schreibe E-Mails und telefoniere.", "Ich helfe den Kunden.", "Ich organisiere Termine."] }] },
+                ],
+                "Sport": [
+                    { word: "Lieblingssport", qa_pairs: [{ question: "Was ist dein Lieblingssport?", answer: ["Mein Lieblingssport ist Fußball.", "Ich schwimme sehr gerne.", "Ich mag keinen Sport."] }] },
+                    { word: "schwimmen", qa_pairs: [{ question: "Gehst du oft schwimmen?", answer: ["Ja, jeden Mittwoch.", "Nein, ich kann nicht gut schwimmen.", "Im Sommer gehe ich oft schwimmen."] }] },
+                    { word: "Wochenende", qa_pairs: [{ question: "Machst du am Wochenende Sport?", answer: ["Ja, ich spiele Tennis.", "Nein, am Wochenende entspanne ich mich.", "Ja, ich gehe joggen."] }] },
+                    { word: "Abend", qa_pairs: [{ question: "Machst du abends Sport?", answer: ["Nein, abends bin ich zu müde.", "Ja, ich gehe ins Fitnessstudio.", "Manchmal gehe ich spazieren."] }] },
+                    { word: "Ball", qa_pairs: [{ question: "Spielst du gern mit dem Ball?", answer: ["Ja, ich spiele gern Volleyball.", "Nein, ich mag keine Ballspiele.", "Ja, mit meinen Kindern im Park."] }] },
+                    { word: "Fahrrad", qa_pairs: [{ question: "Fährst du oft Fahrrad?", answer: ["Ja, ich fahre jeden Tag zur Arbeit.", "Nein, ich habe kein Fahrrad.", "Nur am Wochenende, wenn das Wetter schön ist."] }] }
+                ],
+            },
+            "Teil 3": {
+                "Alltag & Bitten": [
+                    { type: 'emoji', content: '🔑', qa_pairs: [{ question: "Gibst du mir bitte den Schlüssel?", answer: ["Ja, hier ist er.", "Einen Moment, ich suche ihn.", "Welchen Schlüssel brauchst du?"] }] },
+                    { type: 'emoji', content: '💐', qa_pairs: [{ question: "Kannst du bitte die Blumen kaufen?", answer: ["Ja, mache ich.", "Welche Blumen soll ich kaufen?", "Nein, ich habe keine Zeit."] }] },
+                    { type: 'emoji', content: '🍺', qa_pairs: [{ question: "Bestellen wir noch ein Bier?", answer: ["Ja, gerne.", "Nein, danke, ich möchte nichts mehr.", "Für mich bitte ein Wasser."] }] },
+                    { type: 'emoji', content: '🍳', qa_pairs: [{ question: "Was kochst du heute Abend?", answer: ["Ich mache Nudeln mit Tomatensoße.", "Ich weiß noch nicht.", "Ich habe keine Lust zu kochen, bestellen wir eine Pizza?"] }] },
+                    { type: 'emoji', content: '✍️', qa_pairs: [{ question: "Unterschreiben Sie hier, bitte.", answer: ["Ja, natürlich.", "Wo genau?", "Mit meinem vollen Namen?"] }] },
+                    { type: 'emoji', content: '🍎', qa_pairs: [{ question: "Möchtest du einen Apfel?", answer: ["Ja, danke!", "Nein, danke, ich bin satt.", "Lieber eine Banane, hast du eine?"] }] },
+                    { type: 'emoji', content: '🥛', qa_pairs: [{ question: "Kann ich bitte ein Glas Wasser haben?", answer: ["Ja, sofort.", "Mit oder ohne Kohlensäure?", "Hier, bitte schön."] }] },
+                    { type: 'emoji', content: '📻', qa_pairs: [{ question: "Kannst du das Radio bitte leiser machen?", answer: ["Ja, klar.", "Stört dich die Musik?", "Mache ich sofort."] }] },
+                    { type: 'emoji', content: '💼', qa_pairs: [{ question: "Ist das Ihre Tasche?", answer: ["Ja, das ist meine.", "Nein, meine Tasche ist schwarz.", "Oh danke, ich habe sie gesucht."] }] },
+                    { type: 'emoji', content: '👟', qa_pairs: [{ question: "Zieh bitte deine Schuhe aus.", answer: ["Okay, mache ich.", "Wo soll ich sie hinstellen?", "Ja, kein Problem."] }] },
+                    { type: 'emoji', content: '🥐', qa_pairs: [{ question: "Kaufen wir Brötchen zum Frühstück?", answer: ["Ja, gute Idee.", "Was kostet ein Brötchen?", "Ich hätte gerne zwei Mohnbrötchen."] }] },
+                    { type: 'emoji', content: '🥤', qa_pairs: [{ question: "Was möchten Sie trinken?", answer: ["Einen Orangensaft, bitte.", "Ich nehme eine Cola.", "Für mich nur ein Wasser, bitte."] }] },
+                    { type: 'emoji', content: '💰', qa_pairs: [{ question: "Kannst du mir bitte Geld wechseln?", answer: ["Ja, wie viel brauchen Sie?", "Nein, tut mir leid, ich habe kein Kleingeld.", "Ja, kein Problem."] }] }
+                ],
+                "Orte & Termine": [
+                    { type: 'emoji', content: '🏤', qa_pairs: [{ question: "Wo ist die Post?", answer: ["Sie ist neben der Bank.", "Gehen Sie hier geradeaus, dann links.", "Ich bin nicht von hier, tut mir leid."] }] },
+                    { type: 'emoji', content: '🚕', qa_pairs: [{ question: "Rufen Sie mir bitte ein Taxi?", answer: ["Ja, mache ich sofort.", "Wohin möchten Sie fahren?", "Der Taxistand ist dort vorne."] }] },
+                    { type: 'emoji', content: '🧾', qa_pairs: [{ question: "Die Rechnung, bitte.", answer: ["Zusammen oder getrennt?", "Das macht 25,50 Euro.", "Einen Moment, bitte."] }] },
+                    { type: 'emoji', content: '🗓️', qa_pairs: [{ question: "Wann haben Sie einen Termin frei?", answer: ["Nächsten Montag um 10 Uhr.", "Leider erst in zwei Wochen.", "Passt es Ihnen morgen um 15 Uhr?"] }] },
+                    { type: 'emoji', content: '🚉', qa_pairs: [{ question: "Wann fährt der nächste Zug nach München?", answer: ["Er fährt in 10 Minuten auf Gleis 5.", "Der nächste Zug hat Verspätung.", "Sie müssen umsteigen."] }] }
+                ],
+                "Verbote": [
+                    { type: 'emoji', content: '🚭', qa_pairs: [{ question: "Ist Rauchen hier erlaubt?", answer: ["Nein, schauen Sie, da ist ein Schild.", "Ja, im Raucherbereich ist es erlaubt.", "Nein, das ist ein Nichtraucher-Restaurant."] }] },
+                    { type: 'emoji', content: '🚫🏊', qa_pairs: [{ question: "Dürfen wir hier schwimmen?", answer: ["Nein, das ist gefährlich.", "Nein, Schwimmen ist hier verboten.", "Schauen Sie, das Schild sagt nein."] }] },
+                    { type: 'emoji', content: '🚫🍔', qa_pairs: [{ question: "Darf ich hier mein Essen essen?", answer: ["Nein, Essen und Trinken ist hier verboten.", "Nein, bitte gehen Sie nach draußen.", "Leider nicht."] }] }
+                ]
+            }
+        };
+
+        const themeDisplay = document.getElementById('theme-display');
+        const cardContent = document.getElementById('card-content');
+        const taskDisplay = document.getElementById('task-display');
+        const questionArea = document.getElementById('question-area');
+        const questionText = document.getElementById('question-text');
+        const nextCardButton = document.getElementById('next-card-button');
+        const showSolutionButton = document.getElementById('show-solution-button');
+        const solutionBox = document.getElementById('solution-box');
+        const solutionTitle = document.getElementById('solution-title');
+        const solutionText = document.getElementById('solution-text');
+        
+        let currentCard = null;
+        let currentTaskType = null; // 'ask' or 'answer'
+        let currentQaPair = null;
+
+        function getRandomElement(arr) {
+            if (!arr || arr.length === 0) return "";
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        function loadNewCard() {
+            solutionBox.classList.remove('visible');
+            solutionTitle.textContent = '';
+            questionArea.classList.add('hidden');
+            currentQaPair = null;
+            solutionText.textContent = ''; // Reset solution text for the new card
+            
+            const parts = Object.keys(cardData);
+            const randomPartName = getRandomElement(parts);
+            const partData = cardData[randomPartName];
+
+            const themes = Object.keys(partData);
+            const randomThemeName = getRandomElement(themes);
+            const themeCards = partData[randomThemeName];
+            
+            currentCard = getRandomElement(themeCards);
+            currentTaskType = Math.random() < 0.5 ? 'ask' : 'answer';
+
+            themeDisplay.textContent = `${randomPartName} | Thema: ${randomThemeName}`;
+
+            cardContent.innerHTML = '';
+            if (currentCard.word) {
+                const wordElement = document.createElement('h2');
+                wordElement.className = 'text-5xl font-bold text-gray-800';
+                wordElement.textContent = currentCard.word;
+                cardContent.appendChild(wordElement);
+            } else if (currentCard.type === 'emoji') {
+                 const emojiElement = document.createElement('span');
+                 emojiElement.className = 'text-7xl md:text-8xl';
+                 emojiElement.textContent = currentCard.content;
+                 cardContent.appendChild(emojiElement);
+            }
+
+            if (currentTaskType === 'ask') {
+                taskDisplay.textContent = 'FRAGE STELLEN';
+                taskDisplay.className = 'mb-4 p-4 rounded-lg font-bold text-2xl text-white bg-blue-500';
+            } else { // 'answer'
+                taskDisplay.textContent = 'ANTWORT GEBEN';
+                taskDisplay.className = 'mb-4 p-4 rounded-lg font-bold text-2xl text-white bg-orange-500';
+                currentQaPair = getRandomElement(currentCard.qa_pairs);
+                questionText.textContent = currentQaPair.question;
+                questionArea.classList.remove('hidden');
+            }
+        }
+
+        function showSolution() {
+             if (!currentCard || !currentTaskType) return;
+            
+            solutionBox.classList.remove('visible');
+            
+            setTimeout(() => {
+                if (currentTaskType === 'ask') {
+                    solutionTitle.textContent = 'Beispiel-Frage / Beispiel-Bitte:';
+                    let newQuestion;
+                    const possibleQuestions = currentCard.qa_pairs.map(p => p.question);
+                    if (possibleQuestions.length > 1) {
+                        do {
+                            newQuestion = getRandomElement(possibleQuestions);
+                        } while (newQuestion === solutionText.textContent);
+                    } else {
+                        newQuestion = getRandomElement(possibleQuestions);
+                    }
+                    solutionText.textContent = newQuestion;
+                } else { // 'answer'
+                    solutionTitle.textContent = 'Beispiel-Antwort:';
+                    if (currentQaPair && currentQaPair.answer && currentQaPair.answer.length > 0) {
+                        let newAnswer;
+                        const possibleAnswers = currentQaPair.answer;
+                        if (possibleAnswers.length > 1) {
+                            do {
+                                newAnswer = getRandomElement(possibleAnswers);
+                            } while (newAnswer === solutionText.textContent); // Loop until a different answer is found
+                        } else {
+                            newAnswer = getRandomElement(possibleAnswers);
+                        }
+                        solutionText.textContent = newAnswer;
+                    } else {
+                         solutionText.textContent = "Fehler: Keine Antwort gefunden.";
+                    }
+                }
+                solutionBox.classList.add('visible');
+            }, 100);
+        }
+
+        nextCardButton.addEventListener('click', loadNewCard);
+        showSolutionButton.addEventListener('click', showSolution);
+
+        document.addEventListener('DOMContentLoaded', loadNewCard);
+
+    </script>
+
+</body>
+</html>
+
