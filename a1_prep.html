@@ -31,7 +31,7 @@
             user-select: none; /* Standard syntax */
         }
         /* Verbesserung für Touch-Geräte */
-        button {
+        button, a {
             -webkit-tap-highlight-color: transparent;
         }
     </style>
@@ -80,9 +80,14 @@
                 </div>
             </div>
             
-            <!-- Next Card Button -->
-            <div class="mt-8">
-                 <button id="next-card-button" class="w-full sm:w-auto bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 px-10 rounded-lg transition duration-300 shadow-lg">Nächste Karte</button>
+            <!-- Navigation Buttons -->
+            <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+                 <a href="index.html" class="w-full sm:w-auto bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-10 rounded-lg transition duration-300 shadow-lg text-center">
+                    Zurück zum Menü
+                 </a>
+                 <button id="next-card-button" class="w-full sm:w-auto bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 px-10 rounded-lg transition duration-300 shadow-lg">
+                    Nächste Karte
+                 </button>
             </div>
         </main>
 
