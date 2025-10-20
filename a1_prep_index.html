@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goethe A1 Mündlich - Menü</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .theme-button {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .theme-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen p-4 md:p-8">
+
+    <div class="bg-white w-full max-w-4xl mx-auto rounded-2xl shadow-lg p-6 md:p-10">
+        
+        <header class="text-center border-b border-gray-200 pb-6 mb-8">
+            <h1 class="text-4xl font-bold text-gray-800">Goethe A1 Mündlich Trainer</h1>
+            <p class="text-lg text-gray-600 mt-2">Wähle einen Prüfungsteil zum Üben aus.</p>
+        </header>
+
+        <main id="menu-container">
+            </main>
+
+    </div>
+
+    <script src="a1_prep_data.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('menu-container');
+            
+            // Check if cardData is loaded
+            if (typeof cardData === 'undefined') {
+                container.innerHTML = '<p class="text-red-500 text-center">Fehler: data.js konnte nicht geladen werden.</p>';
+                return;
+            }
+
+            // --- NEW "FULL QUIZ" BUTTON ---
+            const fullQuizSection = document.createElement('section');
+            fullQuizSection.className = 'mb-10';
+            fullQuizSection.innerHTML = `
+                <h2 class="text-2xl font-bold text-gray-800 mb-5">Gesamt-Quiz</h2>
+                <a href="a1_prep_trainer.html" class="theme-button block bg-purple-600 hover:bg-purple-700 text-white p-5 rounded-lg font-semibold text-center shadow-md">
+                    <div>Alle Teile (1, 2 & 3)</div>
+                    <span class="text-sm font-normal text-purple-200">Starte ein zufälliges Quiz aus allen Kategorien</span>
+                </a>
+            `;
+            container.appendChild(fullQuizSection);
+            // --- END OF NEW BUTTON ---
+
+
+            const parts = Object.keys(cardData);
+
+            parts.forEach(partName => {
+                const partData = cardData[partName];
+                const themes = Object.keys(partData);
+
+                // Create section for the Part
+                const partSection = document.createElement('section');
+                partSection.className = 'mb-10';
+
+                let partTitle = partName;
+                if(partName === 'Teil 1') partTitle = 'Teil 1: Sich vorstellen';
+                if(partName === 'Teil 2') partTitle = 'Teil 2: Um Informationen bitten & antworten';
+                if(partName === 'Teil 3') partTitle = 'Teil 3: Bitten formulieren & reagieren';
+
+                partSection.innerHTML = `
+                    <h2 class="text-2xl font-bold text-gray-800 mb-5">${partTitle}</h2>
+                `;
+                
+                const grid = document.createElement('div');
+                grid.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4';
+
+                // --- Special "All Themes" Button for Part 2 & 3 ---
+                if (partName === 'Teil 2' || partName === 'Teil 3') {
+                    const allThemesButton = document.createElement('a');
+                    allThemesButton.href = `a1_prep_trainer.html?part=${encodeURIComponent(partName)}`;
+                    allThemesButton.className = 'theme-button block bg-gray-800 text-white p-5 rounded-lg font-semibold text-center shadow-md';
+                    allThemesButton.innerHTML = `
+                        <div>Alle Themen (${partName})</div>
+                        <span class="text-sm font-normal text-gray-300">Zufällige Karten aus allen Themen</span>
+                    `;
+                    grid.appendChild(allThemesButton);
+                }
+
+                // --- Buttons for each specific theme ---
+                themes.forEach(themeName => {
+                    const themeButton = document.createElement('a');
+                    let url = `a1_prep_trainer.html?part=${encodeURIComponent(partName)}&theme=${encodeURIComponent(themeName)}`;
+                    
+                    // Part 1 doesn't need an "All Themes" button, just one link.
+                    if (partName === 'Teil 1') {
+                         url = `a1_prep_trainer.html?part=${encodeURIComponent(partName)}`;
+                         themeButton.className = 'theme-button block bg-blue-600 hover:bg-blue-700 text-white p-5 rounded-lg font-semibold text-center shadow-md';
+                    } else {
+                        themeButton.className = 'theme-button block bg-white hover:bg-gray-50 border border-gray-200 p-5 rounded-lg font-semibold text-gray-700 text-center';
+                    }
+                    
+                    themeButton.href = url;
+                    themeButton.textContent = themeName;
+                    
+                    grid.appendChild(themeButton);
+
+                    // For Part 1, we only need one button, so we stop.
+                    if (partName === 'Teil 1') return;
+                });
+
+                partSection.appendChild(grid);
+                container.appendChild(partSection);
+            });
+        });
+    </script>
+
+</body>
+</html>

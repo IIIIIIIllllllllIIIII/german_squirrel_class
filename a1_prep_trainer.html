@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goethe A1 Mündlich Trainer (Official List)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .card-container {
+            min-height: 150px;
+        }
+        .solution {
+            transition: opacity 0.5s ease-in-out, max-height 0.5s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .solution.visible {
+            max-height: 200px;
+            opacity: 1;
+        }
+        #task-display {
+            -webkit-user-select: none; /* Safari */
+            -ms-user-select: none; /* IE 10 and IE 11 */
+            user-select: none; /* Standard syntax */
+        }
+        /* Verbesserung für Touch-Geräte */
+        button, a {
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+
+    <div class="bg-white w-full max-w-2xl rounded-2xl shadow-lg p-6 md:p-8 text-center">
+        
+        <header class="mb-4">
+            <h1 class="text-3xl font-bold text-gray-800">Goethe A1 Mündlich Trainer</h1>
+            <p class="text-gray-600 mt-2" id="theme-display">Thema wird geladen...</p>
+        </header>
+
+        <main>
+            <div id="task-display" class="mb-4 p-4 rounded-lg font-bold text-2xl text-white">
+                </div>
+
+            <div id="card-display" class="bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl p-6 mb-4">
+                <div class="card-container flex items-center justify-center" id="card-content">
+                    </div>
+            </div>
+
+            <div id="question-area" class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 rounded-lg mb-6 text-center shadow-sm hidden">
+                <p class="font-bold">Frage an dich:</p>
+                <p id="question-text" class="mt-1 text-lg"></p>
+            </div>
+
+
+            <div id="action-buttons" class="flex justify-center mb-6">
+                <button id="show-solution-button" class="w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 shadow-md">
+                    Lösung anzeigen
+                </button>
+            </div>
+
+            <div id="solution-container" class="bg-slate-100 rounded-lg p-4 text-left">
+                <p class="font-semibold text-gray-700 mb-2" id="solution-title"></p>
+                <div id="solution-box" class="solution">
+                    <p class="text-gray-800" id="solution-text"></p>
+                </div>
+            </div>
+            
+            <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+                 <a href="a1_prep_index.html" class="w-full sm:w-auto bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-10 rounded-lg transition duration-300 shadow-lg text-center">
+                    Zurück zum Menü
+                 </a>
+                 <button id="next-card-button" class="w-full sm:w-auto bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 px-10 rounded-lg transition duration-300 shadow-lg">
+                    Nächste Karte
+                 </button>
+            </div>
+        </main>
+
+    </div>
+
+    <script src="a1_prep_data.js"></script>
+
+    <script>
+        // DELETED: The giant 'cardData' object was removed from here
+        // and placed in data.js
+
+        const themeDisplay = document.getElementById('theme-display');
+        const cardContent = document.getElementById('card-content');
+        const taskDisplay = document.getElementById('task-display');
+        const questionArea = document.getElementById('question-area');
+        const questionText = document.getElementById('question-text');
+        const nextCardButton = document.getElementById('next-card-button');
+        const showSolutionButton = document.getElementById('show-solution-button');
+        const solutionBox = document.getElementById('solution-box');
+        const solutionTitle = document.getElementById('solution-title');
+        const solutionText = document.getElementById('solution-text');
+        
+        let currentCard = null;
+        let currentTaskType = null; // 'ask' or 'answer'
+        let currentQaPair = null;
+
+        function getRandomElement(arr) {
+            if (!arr || arr.length === 0) return "";
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        /**
+         * UPDATED loadNewCard Function
+         * This function now reads URL parameters to filter the cards.
+         * It falls back to fully random if no parameters are found.
+         */
+        function loadNewCard() {
+            solutionBox.classList.remove('visible');
+            solutionTitle.textContent = '';
+            questionArea.classList.add('hidden');
+            currentQaPair = null;
+            solutionText.textContent = ''; // Reset solution text for the new card
+            
+            // Get URL parameters from the menu
+            const urlParams = new URLSearchParams(window.location.search);
+            const partParam = urlParams.get('part');
+            const themeParam = urlParams.get('theme');
+
+            let partName, themeName, themeCards, partData;
+
+            if (partParam && cardData[partParam]) {
+                // A specific part was chosen
+                partName = partParam;
+                partData = cardData[partName];
+                
+                if (themeParam && partData[themeParam]) {
+                    // A specific theme was also chosen
+                    themeName = themeParam;
+                    themeCards = partData[themeName];
+                } else {
+                    // "All Themes" for a specific part was chosen
+                    const themes = Object.keys(partData);
+                    themeName = getRandomElement(themes);
+                    themeCards = partData[themeName];
+                }
+            } else {
+                // No parameters found (e.g., visiting trainer.html directly)
+                // Fallback to fully random mode
+                partName = getRandomElement(Object.keys(cardData));
+                partData = cardData[partName];
+                const themes = Object.keys(partData);
+                themeName = getRandomElement(themes);
+                themeCards = partData[themeName];
+            }
+            
+            currentCard = getRandomElement(themeCards);
+            
+            // Special handling for Part 1: Task is always "ask" or "answer", not 50/50
+            if (partName === 'Teil 1') {
+                currentTaskType = Math.random() < 0.5 ? 'ask' : 'answer'; // Still 50/50 for now
+                // You could change this. For example, 20% ask, 80% answer:
+                // currentTaskType = Math.random() < 0.2 ? 'ask' : 'answer';
+            } else {
+                 currentTaskType = Math.random() < 0.5 ? 'ask' : 'answer';
+            }
+
+            // Update UI
+            themeDisplay.textContent = `${partName} | Thema: ${themeName}`;
+
+            cardContent.innerHTML = '';
+            if (currentCard.word) {
+                const wordElement = document.createElement('h2');
+                wordElement.className = 'text-5xl font-bold text-gray-800';
+                wordElement.textContent = currentCard.word;
+                cardContent.appendChild(wordElement);
+                if(currentCard.word_en) {
+                    const translationElement = document.createElement('p');
+                    translationElement.className = 'text-gray-500 text-lg mt-2';
+                    translationElement.textContent = currentCard.word_en;
+                    cardContent.appendChild(translationElement);
+                }
+            } else if (currentCard.type === 'emoji') {
+                 const emojiElement = document.createElement('span');
+                 emojiElement.className = 'text-7xl md:text-8xl';
+                 emojiElement.textContent = currentCard.content;
+                 cardContent.appendChild(emojiElement);
+            }
+
+            if (currentTaskType === 'ask') {
+                taskDisplay.textContent = 'FRAGE STELLEN';
+                taskDisplay.className = 'mb-4 p-4 rounded-lg font-bold text-2xl text-white bg-blue-500';
+            } else { // 'answer'
+                taskDisplay.textContent = 'ANTWORT GEBEN';
+                taskDisplay.className = 'mb-4 p-4 rounded-lg font-bold text-2xl text-white bg-orange-500';
+                currentQaPair = getRandomElement(currentCard.qa_pairs);
+                questionText.innerHTML = `${currentQaPair.question.de}<br><span class="text-gray-500 text-sm font-normal">${currentQaPair.question.en}</span>`;
+                questionArea.classList.remove('hidden');
+            }
+        }
+
+        function showSolution() {
+             if (!currentCard || !currentTaskType) return;
+            
+            solutionBox.classList.remove('visible');
+            
+            setTimeout(() => {
+                if (currentTaskType === 'ask') {
+                    solutionTitle.textContent = 'Beispiel-Frage / Beispiel-Bitte:';
+                    let newQuestionPair;
+                    if (currentCard.qa_pairs.length > 1) {
+                        do {
+                            newQuestionPair = getRandomElement(currentCard.qa_pairs);
+                        } while (newQuestionPair.question.de === solutionText.textContent.split('<br>')[0]);
+                    } else {
+                        newQuestionPair = getRandomElement(currentCard.qa_pairs);
+                    }
+                    solutionText.innerHTML = `${newQuestionPair.question.de}<br><span class="text-gray-500 text-sm font-normal">${newQuestionPair.question.en}</span>`;
+                } else { // 'answer'
+                    solutionTitle.textContent = 'Beispiel-Antwort:';
+                    if (currentQaPair && currentQaPair.answer && currentQaPair.answer.length > 0) {
+                        let newAnswer;
+                        const possibleAnswers = currentQaPair.answer;
+                        if (possibleAnswers.length > 1) {
+                            do {
+                                newAnswer = getRandomElement(possibleAnswers);
+                            } while (newAnswer.de === solutionText.textContent.split('<br>')[0]); // Loop until a different answer is found
+                        } else {
+                            newAnswer = getRandomElement(possibleAnswers);
+                        }
+                        solutionText.innerHTML = `${newAnswer.de}<br><span class="text-gray-500 text-sm font-normal">${newAnswer.en}</span>`;
+                    } else {
+                         solutionText.textContent = "Fehler: Keine Antwort gefunden.";
+                    }
+                }
+                solutionBox.classList.add('visible');
+            }, 100);
+        }
+
+        nextCardButton.addEventListener('click', () => {
+            // Trigger confetti
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+            // Load the new card
+            loadNewCard();
+        });
+
+        showSolutionButton.addEventListener('click', showSolution);
+
+        document.addEventListener('DOMContentLoaded', loadNewCard);
+
+    </script>
+
+</body>
+</html>
